@@ -4,7 +4,7 @@ title: "资治通鉴 无德而富贵谓之不幸"
 published: true
 created:  2013 Jul 21 11:16:41 AM
 tags: [资治通鉴]
-categories: [reading, life]
+categories: [reading]
 ---
 
 
