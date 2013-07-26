@@ -33,13 +33,13 @@ published: true
 
 
 ![million](/images/million-dollar-baby/million-1.PNG)
-![million](/images/million-dollar-baby/mmillion-2.PNG)
-![million](/images/million-dollar-baby/mmillion-3.PNG)
-![million](/images/million-dollar-baby/mmillion-4.PNG)
-![million](/images/million-dollar-baby/mmillion-5.PNG)
-![million](/images/million-dollar-baby/mmillion-6.PNG)
-![million](/images/million-dollar-baby/mmillion-7.PNG)
-![million](/images/million-dollar-baby/mmillion-8.PNG)
-![million](/images/million-dollar-baby/mmillion-9.PNG)
-![million](/images/million-dollar-baby/mmillion-10.PNG)
+![million](/images/million-dollar-baby/million-2.PNG)
+![million](/images/million-dollar-baby/million-3.PNG)
+![million](/images/million-dollar-baby/million-4.PNG)
+![million](/images/million-dollar-baby/million-5.PNG)
+![million](/images/million-dollar-baby/million-6.PNG)
+![million](/images/million-dollar-baby/million-7.PNG)
+![million](/images/million-dollar-baby/million-8.PNG)
+![million](/images/million-dollar-baby/million-9.PNG)
+![million](/images/million-dollar-baby/million-10.PNG)
 
