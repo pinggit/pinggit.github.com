@@ -32,14 +32,14 @@ published: true
 
 
 
-![million](/images/million1.PNG)
-![million](/images/million2.PNG)
-![million](/images/million3.PNG)
-![million](/images/million4.PNG)
-![million](/images/million5.PNG)
-![million](/images/million6.PNG)
-![million](/images/million7.PNG)
-![million](/images/million8.PNG)
-![million](/images/million9.PNG)
-![million](/images/million10.PNG)
+![million](/images/million-dollar-baby/million-1.PNG)
+![million](/images/million-dollar-baby/mmillion-2.PNG)
+![million](/images/million-dollar-baby/mmillion-3.PNG)
+![million](/images/million-dollar-baby/mmillion-4.PNG)
+![million](/images/million-dollar-baby/mmillion-5.PNG)
+![million](/images/million-dollar-baby/mmillion-6.PNG)
+![million](/images/million-dollar-baby/mmillion-7.PNG)
+![million](/images/million-dollar-baby/mmillion-8.PNG)
+![million](/images/million-dollar-baby/mmillion-9.PNG)
+![million](/images/million-dollar-baby/mmillion-10.PNG)
 
