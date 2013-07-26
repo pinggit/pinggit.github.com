@@ -1,0 +1,2488 @@
+<!--
+
+---
+layout: post
+title: "RLI-12720"
+created:  2013 Apr 03 01:23:33 PM
+tags: [mx, rli, qos]
+categories: [tech]
+published: true
+---
+
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>RLI 12720</title>
+<style type="text/css">
+/*
+ * AsciiDoc 'volnitsky' theme for xhtml11 and html5 backends.
+ * Based on css from http://volnitsky.com, which was in turn based on default
+ * theme from AsciiDoc
+ *
+ * FIXME: The styling is still a bit rough in places.
+ *
+ */
+
+/* Default font. */
+body {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Candara,Arial,sans-serif;
+}
+
+
+#toc a {
+    border-bottom: 1px dotted #999999;
+    color: #3A3A4D !important;
+    text-decoration: none !important;
+}
+#toc a:hover {
+    border-bottom: 1px solid #6D4100;
+    color: #6D4100 !important;
+    text-decoration: none !important;
+}
+a { color: #666688; text-decoration: none; border-bottom: 1px dotted #666688; }
+a:visited { color: #615FA0; border-bottom: 1px dotted #615FA0; }
+a:hover { color: #6D4100; border-bottom: 1px solid #6D4100; }
+
+em {
+  font-style: italic;
+  color: #444466;
+}
+
+strong {
+  font-weight: bold;
+  color: #444466;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #666688;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  letter-spacing:+0.15em;
+}
+
+h1, h2, h3 { border-bottom: 2px solid #ccd; }
+h2 { padding-top: 0.5em; }
+h3 { float: left; }
+h3 + * { clear: left; }
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid #444466;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #444466;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #444466;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.verseblock > pre.content {
+  font-family: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #444466;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: #444466;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #444466;
+}
+thead {
+  font-weight: bold;
+  color: #444466;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: #444466;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toctitle {
+  color: #666688;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 { margin-top: 0; margin-bottom: 0; }
+div.toclevel1 { margin-top: 0.3em; margin-left: 0; font-size: 1.0em; }
+div.toclevel2 { margin-top: 0.25em; margin-left: 2em; font-size: 0.9em; }
+div.toclevel3 { margin-left: 4em; font-size: 0.8em; }
+div.toclevel4 { margin-left: 6em; font-size: 0.8em; }
+
+body {
+  margin: 1em 5%;
+  max-width:  55em;
+  padding-left: 0;
+
+}
+
+.monospaced, tt, div.listingblock > div.content {
+  font-family:  Consolas, "Andale Mono", "Courier New", monospace;
+  color: #004400;
+  background: #f4f4f4;
+  max-width: 80em;
+  line-height: 1.2em;
+}
+
+.paragraph p  {
+  line-height: 1.5em;
+  margin-top: 1em;
+}
+
+.paragraph p, li, dd, .content { max-width: 45em; }
+.admonitionblock               { max-width: 35em; }
+
+div.sectionbody div.ulist > ul > li {
+  list-style-type: square;
+  color: #aaa;
+}
+  div.sectionbody div.ulist >  ul > li > * {
+    color: black;
+    /*font-size: 50%;*/
+  }
+
+
+div.sectionbody div.ulist > ul > li div.ulist > ul > li {
+  color: #ccd ;
+}
+  div.sectionbody div.ulist > ul > li div.ulist > ul > li > * {
+    color: black ;
+  }
+
+em {
+  font-style: normal ! important;
+  font-weight: bold ! important;
+  color: #662222   ! important;
+  letter-spacing:+0.08em ! important;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #666688;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #444466;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #444466;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(4);
+/*]]>*/
+</script>
+</head>
+<body class="article" style="max-width:85em">
+<div id="header">
+<h1>RLI 12720</h1>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">1. INTRODUCTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This RLI is a step towards subscriber oriented JUNOS model.</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Traditionally:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+the QoS configs are defined in different hierarchies of the JUNOS config
+</p>
+</li>
+<li>
+<p>
+viewing the QoS config parameters needs the user to<br />
+    execute a sequence of multiple JUNOS commands corresponding to the different
+    hierarchies.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+In the subscriber model:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+typically a customer/subscriber is represented by a logical-interface
+</p>
+</li>
+<li>
+<p>
+it is desirable to :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+have JUNOS configs for the logical interface grouped together in a single
+    hierarchy
+</p>
+</li>
+<li>
+<p>
+have a single command that allows viewing parameters specific
+    to a customer.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+This RLI, as an initial step:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+providing a unified operational command that<br />
+  displays all QoS parameters and counters/statistics<br />
+  for a specific physical or logical interface.
+</p>
+</li>
+<li>
+<p>
+a requirement from BT for:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+easy verification &amp; debuggability of CoS features
+</p>
+</li>
+<li>
+<p>
+our competitors provide something like this.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ref <a href="#1">[1]</a> provides more details about the bigger picture in terms of QoS
+  container and the longer term goals.
+</p>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_existing_qos_display_commands_a_id_2_a">2. Existing QoS display commands<a id="2"></a></h2>
+<div class="sectionbody">
+<div class="paragraph"><p>At the moment getting QoS specific details for an interface ge-x/y/z.0 involves
+running the following set of commands-</p></div>
+<div class="olist arabic"><div class="title">CLI group list:</div><ol class="arabic">
+<li>
+<p>
+(provided by <strong>ifinfo</strong>)
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>1. show interface ge-x/y/z.0 extensive
+2. show interface queue ge-x/y/z.0
+   show interface filters ge-x/y/z.0
+   show interface policers ge-x/y/z.0</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+(provided by <strong>dfwinfo</strong>)
+</p>
+<div class="paragraph"><p>The above commands display details about the multi-field classifiers &amp; the
+policers(single rate/two-rate discard/two/three-color colorblind/color-aware)</p></div>
+<div class="paragraph"><p>Based on the filters/policers attached to the interface from output of (1),
+display the counters-</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>3.  show firewall filter &lt;filter-name&gt;
+4.  show policer &lt;policer-name&gt;</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+(provided by <strong>cosd</strong>)
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+This prints out all the different constructs attached to the interface.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>5.  show class-of-service interface ge-x/y/z.0</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Based on the above output, get more details about each construct attached-
+</p>
+<p><span class="comment">[subs="quotes"]</span></p>
+<div class="listingblock">
+<div class="content">
+<pre><code>7.  show class-of-service classifier &lt;classifier-name&gt;          <img alt="1" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" />
+8.  show class-of-service translation-table &lt;trans-table-name&gt;  <img alt="1" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" />
+9.  show class-of-service forwarding-class &lt;fc-q-map&gt;
+10. show class-of-service traffic-control-profile &lt;tcp-name&gt;</code></pre>
+</div></div>
+<div class="colist arabic"><table>
+<tr><td><img alt="1" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" /></td><td>
+for different families
+</td></tr>
+</table></div>
+</li>
+<li>
+<p>
+Based on the tc-profile in (10) or a directly attached sched-map in (5)
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>11. show class-of-service scheduler-map &lt;smap-name&gt;
+    [ingress &amp; egress schedulers. chassis scheduler and pic scheduler for queuing pic]</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Based on different schedulers listed in the sched-maps
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>12. show class-of-service scheduler &lt;sched-name&gt; [from (11)] [for each queue]</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Based on the drop-profiles listed in (12) above,
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>13. show class-of-service drop-profile &lt;dp-name&gt; [from (12)] [for each PLP]
+14. show class-of-service rewrite-rule &lt;rw-name&gt; [From (5)] [for each family]
+15. show class-of-service fragmentation-map &lt;fragmap-name&gt; [from (5)]</code></pre>
+</div></div>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_existing_qos_display_commands">3. example:existing QoS display commands</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_show_subscribers">3.1. show subscribers</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show subscribers
+    Interface           IP Address/VLAN ID                      User Name                      LS:RI
+    <strong><em>demux0.11152014</em></strong>     108.73.175.96                                                     default:vol-voip</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_ifinfo">3.2. ifinfo</h3>
+<div class="sect3">
+<h4 id="_show_interfaces_demux0_11152014_brief">3.2.1. show interfaces demux0.11152014 brief</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>z427047@PRVDRI-VFTTP-301_RE0# run show interfaces demux0.11152014 brief
+  Logical interface demux0.11152014
+    Description: 01/SIPX/068382/ /VZRI
+    Flags: 0x104000 VLAN-Tag [ 0x8100.115 0x8100.2014 ]  Encapsulation: ENET2
+    Demux:
+      Underlying interface: ae1 (Index 129)
+    inet</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_demux0_11152014">3.2.2. show interfaces demux0.11152014</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>z427047@PRVDRI-VFTTP-301_RE0# run show interfaces demux0.11152014
+  Logical interface demux0.11152014 (Index 582) (SNMP ifIndex 1428)
+    Description: 01/SIPX/068382/ /VZRI
+    Flags: 0x104000 VLAN-Tag [ 0x8100.115 0x8100.2014 ]  Encapsulation: ENET2
+    Demux:
+      Underlying interface: ae1 (Index 129)
+
+    ----
+
+    Link:
+      ge-0/0/0
+      ge-1/0/0
+    Input packets : 601257
+    Output packets: 625008
+    Protocol inet, MTU: 1500
+      Flags: Sendbcast-pkt-to-re, uRPF, Unnumbered
+      Donor interface: lo0.200 (Index 83)
+      Preferred source address: 108.73.160.1</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_demux0_11152014_detail">3.2.3. show interfaces demux0.11152014 detail</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>z427047@PRVDRI-VFTTP-301_RE0# run show interfaces demux0.11152014 detail
+  Logical interface demux0.11152014 (Index 582) (SNMP ifIndex 1428) (Generation 861)
+    Description: 01/SIPX/068382/ /VZRI
+    Flags: 0x104000 VLAN-Tag [ 0x8100.115 0x8100.2014 ]  Encapsulation: ENET2
+    Demux:
+      Underlying interface: ae1 (Index 129)
+    Link:
+      ge-0/0/0
+      ge-1/0/0
+    Traffic statistics:
+     Input  bytes  :            125977334
+     Output bytes  :            125726160
+     Input  packets:               601257
+     Output packets:               625008
+    Local statistics:
+     Input  bytes  :               690724
+     Output bytes  :              1083034
+     Input  packets:                 7687
+     Output packets:                15374
+    Transit statistics:
+     Input  bytes  :            125286610                    0 bps
+     Output bytes  :            124643126                    0 bps
+     Input  packets:               593570                    0 pps
+     Output packets:               609634                    0 pps
+    Protocol inet, MTU: 1500, Generation: 986, Route table: 5
+      Flags: Sendbcast-pkt-to-re, uRPF, Unnumbered
+      Donor interface: lo0.200 (Index 83)
+      Preferred source address: 108.73.160.1
+      RPF Failures: Packets: 2, Bytes: 668
+      Input Filters: <strong><em>FILTER-SUB-VOICE-IN-demux0.11152014-i</em></strong></code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_demux0_11152014_extensive">3.2.4. show interfaces demux0.11152014 extensive</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show interfaces demux0.11152014 extensive
+  Logical interface demux0.11152014 (Index 582) (SNMP ifIndex 1428) (Generation 861)
+    Description: 01/SIPX/068382/ /VZRI
+    Flags: 0x104000 VLAN-Tag [ 0x8100.115 0x8100.2014 ]  Encapsulation: ENET2
+    Demux:
+      Underlying interface: ae1 (Index 129)
+    Link:
+      ge-0/0/0
+      ge-1/0/0
+    Traffic statistics:
+     Input  bytes  :            125841909
+     Output bytes  :            125610130
+     Input  packets:               601027
+     Output packets:               624554
+    Local statistics:
+     Input  bytes  :               679796
+     Output bytes  :              1065910
+     Input  packets:                 7565
+     Output packets:                15130
+    Transit statistics:
+     Input  bytes  :            125162113                    0 bps
+     Output bytes  :            124544220                    0 bps
+     Input  packets:               593462                    0 pps
+     Output packets:               609424                    0 pps
+    Protocol inet, MTU: 1500, Generation: 986, Route table: 5
+      Flags: Sendbcast-pkt-to-re, uRPF, Unnumbered
+      Donor interface: lo0.200 (Index 83)
+      Preferred source address: 108.73.160.1
+      RPF Failures: Packets: 2, Bytes: 668
+      Input Filters: <strong><em>FILTER-SUB-VOICE-IN-demux0.11152014-i</em></strong></code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_queue_demux0_11152014">3.2.5. show interfaces queue demux0.11152014</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show interfaces queue demux0.11152014
+  Logical interface demux0.11152014 (Index 582) (SNMP ifIndex 1428)
+Forwarding classes: 16 supported, 6 in use
+Egress queues: 8 supported, 4 in use
+Burst size: 0
+<strong><em>Queue: 0</em></strong>, Forwarding classes: RADIUS, BEST-EFFORT
+  Queued:
+    Packets              :                  7066                     0 pps
+    Bytes                :                622025                     0 bps
+  Transmitted:
+    Packets              :                  7066                      0 pps
+    Bytes                :                622025                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  :                     0                     0 pps
+     Low                 :                     0                     0 pps
+     Medium-low          :                     0                     0 pps
+     Medium-high         :                     0                     0 pps
+     High                :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+     Low                 :                     0                     0 bps
+     Medium-low          :                     0                     0 bps
+     Medium-high         :                     0                     0 bps
+     High                :                     0                     0 bps
+<strong><em>Queue: 1</em></strong>, Forwarding classes: RT-VIDEO, IPTV
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  :                     0                     0 pps
+     Low                 :                     0                     0 pps
+     Medium-low          :                     0                     0 pps
+     Medium-high         :                     0                     0 pps
+     High                :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+     Low                 :                     0                     0 bps
+     Medium-low          :                     0                     0 bps
+     Medium-high         :                     0                     0 bps
+     High                :                     0                     0 bps
+<strong><em>Queue: 2</em></strong>, Forwarding classes: PR-VOICE
+  Queued:
+    Packets              :                609412                     0 pps
+    Bytes                :             152581084                     0 bps
+  Transmitted:
+    Packets              :                609412                      0 pps
+    Bytes                :             152581084                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  :                     0                     0 pps
+     Low                 :                     0                     0 pps
+     Medium-low          :                     0                     0 pps
+     Medium-high         :                     0                     0 pps
+     High                :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+     Low                 :                     0                     0 bps
+     Medium-low          :                     0                     0 bps
+     Medium-high         :                     0                     0 bps
+     High                :                     0                     0 bps
+<strong><em>Queue: 3</em></strong>, Forwarding classes: network-control
+  Queued:
+    Packets              :                   630                     0 pps
+    Bytes                :                232470                     0 bps
+  Transmitted:
+    Packets              :                   630                      0 pps
+    Bytes                :                232470                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  :                     0                     0 pps
+     Low                 :                     0                     0 pps
+     Medium-low          :                     0                     0 pps
+     Medium-high         :                     0                     0 pps
+     High                :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+     Low                 :                     0                     0 bps
+     Medium-low          :                     0                     0 bps
+     Medium-high         :                     0                     0 bps
+     High                :                     0                     0 bps</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_filters_demux0_11152014">3.2.6. show interfaces filters demux0.11152014</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show interfaces filters demux0.11152014
+Interface       Admin Link Proto Input Filter         Output Filter
+demux0.11152014 up    up   inet  <strong><em>FILTER-SUB-VOICE-IN-demux0.11152014-i</em></strong></code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_interfaces_policers_demux0_11152014">3.2.7. show interfaces policers demux0.11152014</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show interfaces policers demux0.11152014
+Interface       Admin Link Proto Input Policer         Output Policer
+demux0.11152014 up    up
+                           inet</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dfwinfo">3.3. dfwinfo</h3>
+<div class="sect3">
+<h4 id="_show_firewall_filter_filter_sub_voice_in_demux0_11152014_i">3.3.1. show firewall filter FILTER-SUB-VOICE-IN-demux0.11152014-i</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show firewall filter FILTER-SUB-VOICE-IN-demux0.11152014-i
+Filter: FILTER-SUB-VOICE-IN-demux0.11152014-i
+Counters:
+Name                                                     Bytes  Packets
+<strong><em>COUNT-ALLOW_DST_DHCP-demux0.11152014-i</em></strong>               206980 631
+Policers:
+Name                                                     Bytes  Packets
+<strong><em>POLICER-20K-ALLOW-DST-DHCP-demux0.11152014-i</em></strong>             0      0
+<strong><em>POLICER-VOIP-5M-ALLOW-ANY-SET_VOICE_FC-demux0.11152014-i</em></strong> 0      0</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_policer_policer_20k_allow_dst_dhcp_demux0_11152014_i_logical_system_all">3.3.2. show policer POLICER-20K-ALLOW-DST-DHCP-demux0.11152014-i logical-system all</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>{master}[edit]
+RE0# run show policer POLICER-20K-ALLOW-DST-DHCP-demux0.11152014-i logical-system all</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_policer_policer_voip_5m_allow_any_set_voice_fc_demux0_11152014_i">3.3.3. show policer POLICER-VOIP-5M-ALLOW-ANY-SET_VOICE_FC-demux0.11152014-i</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>{master}[edit]
+RE0# run show policer POLICER-VOIP-5M-ALLOW-ANY-SET_VOICE_FC-demux0.11152014-i</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cosd">3.4. cosd</h3>
+<div class="sect3">
+<h4 id="_show_class_of_service_interface_demux0_11152014">3.4.1. show class-of-service interface demux0.11152014</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show class-of-service interface demux0.11152014
+  Logical interface: demux0.11152014, Index: 582
+    Object                  Name                   Type                    Index
+    <strong><em>Traffic-control-profile TCP-VOICE-SUB</em></strong>          Output                  36879
+    <strong><em>Rewrite                 REWRITE-IEEE-SET-PBIT-SUB</em></strong> ieee8021p (outer)     28917
+    <strong><em>Rewrite                 REWRITE-IEEE-SET-PBIT-SUB</em></strong> ieee8021p (both)     28917
+    <strong><em>Classifier              CLASS-INET-SUB-DEFAULT ip</em></strong>                      25133</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_class_of_service_classifier_name_class_inet_sub_default">3.4.2. show class-of-service classifier name CLASS-INET-SUB-DEFAULT</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show class-of-service classifier name CLASS-INET-SUB-DEFAULT
+<strong><em>Classifier: CLASS-INET-SUB-DEFAULT</em></strong>, Code point type: inet-precedence, Index: 25133
+  Code point         Forwarding class                    Loss priority
+  000                BEST-EFFORT                         low
+  001                BEST-EFFORT                         low
+  010                BEST-EFFORT                         low
+  011                BEST-EFFORT                         low
+  100                BEST-EFFORT                         low
+  101                BEST-EFFORT                         low
+  110                BEST-EFFORT                         low
+  111                BEST-EFFORT                         low</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_class_of_service_rewrite_rule_name_rewrite_ieee_set_pbit_sub">3.4.3. show class-of-service rewrite-rule name REWRITE-IEEE-SET-PBIT-SUB</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show class-of-service rewrite-rule name REWRITE-IEEE-SET-PBIT-SUB
+Rewrite rule: <strong><em>REWRITE-IEEE-SET-PBIT-SUB</em></strong>, Code point type: ieee-802.1, Index: 28917
+  Forwarding class                    Loss priority       Code point
+  RT-VIDEO                            low                 100
+  RT-VIDEO                            high                100
+  PR-VOICE                            low                 101
+  PR-VOICE                            high                101
+  network-control                     low                 110
+  network-control                     high                111
+  IPTV                                low                 100
+  IPTV                                high                100
+  BEST-EFFORT                         low                 000
+  BEST-EFFORT                         high                000</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_class_of_service_traffic_control_profile_tcp_voice_sub">3.4.4. show class-of-service traffic-control-profile TCP-VOICE-SUB</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show class-of-service traffic-control-profile TCP-VOICE-SUB
+Traffic control profile: TCP-VOICE-SUB, Index: 36879
+  Shaping rate: 5000000
+  Scheduler map: <strong><em>SM-VOICE-SUB</em></strong>
+  Delay Buffer rate: 2500000
+  Guaranteed rate: 1000
+  Excess rate: proportion 10</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_class_of_service_scheduler_map_sm_voice_sub">3.4.5. show class-of-service scheduler-map SM-VOICE-SUB</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>RE0# run show class-of-service scheduler-map SM-VOICE-SUB
+Scheduler map: SM-VOICE-SUB, Index: 55422
+  Scheduler: <strong><em>SCHED-VOICE-SUB</em></strong>, Forwarding class: PR-VOICE, Index: 18200
+    Transmit rate: 5000000 bps, Rate Limit: rate-limit, Buffer size: remainder, Buffer Limit: exact, Priority: strict-high
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+
+  Scheduler: <strong><em>SCHED-SUB-NETWORK_CONTROL-01</em></strong>, Forwarding class: network-control, Index: 49013
+    Transmit rate: 30000 bps, Rate Limit: none, Buffer size: remainder, Buffer Limit: none, Priority: high
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_show_class_of_service_drop_profile_default_drop_profile">3.4.6. show class-of-service drop-profile default-drop-profile</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>{master}[edit]
+RE0# run show class-of-service drop-profile default-drop-profile</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_existing_show_class_of_service_interface_command_a_id_1_a">4. existing "show class-of-service interface" command <a id="1"></a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><code>show class-of-service interface &lt;intf-name&gt;</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Presently, when the argument is an <strong>IFD</strong>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+class-of-service objects attached to the IFD are printed in brief,
+</p>
+</li>
+<li>
+<p>
+followed by the class-of-service objects for all the IFLs on the IFD.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+When the argument is an <strong>IFL</strong>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+only the cos information for IFL is printed.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+The argument IFD, IFL or wildcard string given to the command is passed
+  directly to the daemon<br />
+  which does the required expansion(e.g in case of
+  wildcard).
+</p>
+</li>
+<li>
+<p>
+Existing output of the command:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+"show class-of-service interface &lt;IFD&gt;" :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+cos info for IFD<br />
+</p>
+</li>
+<li>
+<p>
+cos info for IFLs
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+"show class-of-service interface &lt;IFL&gt;" :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+cos info for IFL
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+This RLI does not plan to change the above behavior of the existing command.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_example_existing_output_when_the_argument_is_an_ifd">4.1. Example:existing output when the argument is an IFD:</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code> cli> show class-of-service interface ge-0/3/0
+ Physical interface: ge-0/3/0, Index: 138  Queues supported: 4, Queues in use: 5
+  Shaping rate: 50000 bps
+  Scheduler map: interface-schedular-map, Index: 58414
+  Input shaping rate: 10000 bps
+  Input scheduler map: schedular-map, Index: 15103
+  Chassis scheduler map: &lt;default-chassis&gt;, Index: 4
+  Congestion-notification: Disabled
+
+  <span class="red">Logical interface: ge-0/3/0.0, Index: 68</span>
+    Object                  Name                   Type                    Index
+    <span class="red">Rewrite</span>                 exp-default            exp (mpls-any)             33
+    <span class="red">Classifier</span>              exp-default            exp                        10
+    <span class="red">Classifier</span>              ipprec-compatibility   ip                         13
+
+  <span class="red">Logical interface: ge-0/3/0.1, Index: 69</span>
+    Object                  Name                   Type                    Index
+    <span class="red">Classifier</span>              ipprec-compatibility   ip                         13</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_existing_output_when_the_argument_is_an_ifl">4.2. Example:existing output when the argument is an IFL:</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code> cli> show class-of-service interface ge-0/3/0.0
+ <span class="red">Logical interface: ge-0/3/0.0, Index: 70</span>
+   Object                  Name                   Type                    Index
+   <span class="red">Rewrite</span>                 exp-default            exp (mpls-any)             33
+   <span class="red">Classifier</span>              exp-default            exp                        10
+   <span class="red">Classifier</span>              ipprec-compatibility   ip                         13</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_proposed_commands">5. Proposed commands</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This RLI plans to introduce <strong>new options</strong> to the following existing
+command to print out the QoS specific details also.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>    "show class-of-service interface"</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+This RLI will keep the existing output as before but introduce a set of new
+  options to the command
+</p>
+</li>
+<li>
+<p>
+a single operational command will combine the outputs of the previous
+  commands in in different ways depending on the qualifier.
+</p>
+</li>
+<li>
+<p>
+The new options are-
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>    cli&gt; show class-of-service interface &lt;intf-name&gt; [ detail | comprehensive ]</code></pre>
+</div></div>
+<div class="sect2">
+<h3 id="_show_class_of_service_interface_lt_intf_name_gt_strong_detail_strong">5.1. show class-of-service interface &lt;intf-name&gt; <strong>detail</strong></h3>
+<div class="paragraph"><p>the display shall provide the class-of-service information by combining the
+outputs of:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code> show interface &lt;intf-name&gt; brief
+ show interface filters &lt;intf-name&gt;
+ show interface policers &lt;intf-name&gt;
+ show class-of-service interface &lt;intf-name&gt;</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+This option allows users to view the quality-of-service information by a single command for:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+an <strong>IFD</strong>
+</p>
+</li>
+<li>
+<p>
+<strong>all the IFLs</strong> on the IFD
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+The argument given to the command would now be first passed to <strong>ifinfo</strong>.
+</p>
+</li>
+<li>
+<p>
+<strong>ifinfo</strong> shall
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+provide the expanded list of names (a list of matching IFD or IFL names)
+</p>
+</li>
+<li>
+<p>
+for each item in the list, interface, firewall and cos information shall be printed.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+the <strong>cosd</strong> will <strong>not</strong> do the wildcard expansion anymore
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>ifinfo</strong> shall do it( ifinfo and cos both use <strong>fnmatch</strong> for matching).
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+If <strong>&lt;intf-name&gt;</strong> is a physical interface (an ifd):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+the QoS information shall be printed for this ifd as well as
+    for the logical interfaces (ifls) on the ifd;
+</p>
+</li>
+<li>
+<p>
+the above commands shall be executed for the ifd, then each command shall
+    be executed for the IFLs one by one.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+If <strong>&lt;intf-name&gt;</strong> is logical interface (an ifl), the QoS information shall be printed
+  for this ifl only.
+</p>
+</li>
+</ul></div>
+<div class="sect3">
+<h4 id="_output_of_the_command_with_detail_option">5.1.1. Output of the command with detail option:</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+"show class-of-service interface &lt;IFD&gt; detail" :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+brief interface info for IFD<br />
+</p>
+</li>
+<li>
+<p>
+cos info for IFD<br />
+</p>
+</li>
+<li>
+<p>
+brief interface info for IFL
+</p>
+</li>
+<li>
+<p>
+cos info for IFL
+</p>
+</li>
+<li>
+<p>
+filters/policers for IFL<br />
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+"show class-of-service interface &lt;IFL&gt; detail" :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+brief interface info for IFL<br />
+</p>
+</li>
+<li>
+<p>
+filters/policers for IFL<br />
+</p>
+</li>
+<li>
+<p>
+cos info for IFL
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+This option shows the configured QoS parameters without expanding them.<br />
+</p>
+</li>
+<li>
+<p>
+so it :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>doesn&#8217;t display</strong> extensive queue stats or
+</p>
+</li>
+<li>
+<p>
+<strong>doesn&#8217;t display</strong> the filter counters or
+</p>
+</li>
+<li>
+<p>
+<strong>doesn&#8217;t expand</strong> the different CoS constructs like schedulers etc.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>An example output (when the argument is IFD) is given below</p></div>
+</div>
+<div class="sect3">
+<h4 id="_example_of_show_class_of_service_interface_lt_intf_name_gt_detail_command">5.1.2. example of "show class-of-service interface &lt;intf-name&gt; detail" command</h4>
+<div class="paragraph"><p>For example: if ge-0/3/0 has two IFLs:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>ge-0/3/0.0 and
+ge-0/3/0.1:</code></pre>
+</div></div>
+<div class="paragraph"><p>"show class-of-service interface ge-0/3/0 detail" shall give the following output:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>   cli> show class-of-service interface ge-0/3/0 detail
+
+  <span class="red">Physical interface: ge-0/3/0, Enabled, Physical link is Up</span>
+  Link-level type: Ethernet, MTU: 1518, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+
+  <span class="red">Physical interface: ge-0/3/0, Index: 138</span>
+  Queues supported: 4, Queues in use: 5
+  Shaping rate: 50000 bps
+  Scheduler map: interface-schedular-map, Index: 58414
+  Input shaping rate: 10000 bps
+  Input scheduler map: schedular-map, Index: 15103
+  Chassis scheduler map: &lt;default-chassis&gt;, Index: 4
+  Congestion-notification: Disabled
+
+  <span class="red">Logical interface ge-0/3/0.0</span>
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.1 ]  Encapsulation: ENET2
+    inet
+    mpls
+Interface       Admin Link Proto Input Filter         Output Filter
+ge-0/3/0.0      up    up   inet
+                           mpls
+Interface       Admin Link Proto Input Policer         Output Policer
+ge-0/3/0.0      up    up
+                           inet
+                           mpls
+
+  <span class="red">Logical interface: ge-0/3/0.0, Index: 68</span>
+    Object                  Name                   Type                    Index
+    Rewrite                 exp-default            exp (mpls-any)             33
+    Classifier              exp-default            exp                        10
+    Classifier              ipprec-compatibility   ip                         13
+
+
+  <span class="red">Logical interface ge-0/3/0.1</span>
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.2 ]  Encapsulation: ENET2
+    inet
+Interface       Admin Link Proto Input Filter         Output Filter
+ge-0/3/0.1      up    up   inet
+Interface       Admin Link Proto Input Policer         Output Policer
+ge-0/3/0.1      up    up
+                           inet
+
+  <span class="red">Logical interface: ge-0/3/0.1, Index: 69</span>
+    Object                  Name                   Type                    Index
+    Classifier              ipprec-compatibility   ip                         13</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_show_class_of_service_interface_lt_intf_name_gt_strong_comprehensive_strong">5.2. show class-of-service interface &lt;intf-name&gt; <strong>comprehensive</strong></h3>
+<div class="ulist"><div class="title">The "comprehensive" option will:</div><ul>
+<li>
+<p>
+combine the output of all the QoS commands in section <a href="#2">[2]</a>
+</p>
+</li>
+<li>
+<p>
+print the info for the IFD as well as all IFLs under that IFD.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><div class="title">pros:</div><ul>
+<li>
+<p>
+useful specifically for the case where:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+the IFD has either one or a few IFLs under it and/or
+</p>
+</li>
+<li>
+<p>
+no per-unit scheduling
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+some constructs like scheduler-map would be attached to the IFD and
+</p>
+</li>
+<li>
+<p>
+stuff like classifiers &amp; rewrite rules are attached to the IFL.
+</p>
+</li>
+<li>
+<p>
+conveniently view the configured constructs comprehensively coupled with the
+  physical or logical interface level where they hold significance.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><div class="title">cons:</div><ul>
+<li>
+<p>
+with a scaled scenario, the output of this command might become quite unmanageable when invoked on an IFD.
+</p>
+</li>
+</ul></div>
+<div class="sect3">
+<h4 id="_an_example_output">5.2.1. An example output</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>cli> show class-of-service interface ge-0/3/0 comprehensive
+
+<span class="red">Physical interface: ge-0/3/0</span>, Enabled, Physical link is Up
+  Interface index: 138, SNMP ifIndex: 601, Generation: 141
+  Link-level type: Ethernet, MTU: 1518, Speed: 1000mbps, BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled, Source filtering: Disabled, Flow control: Enabled,
+  Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  CoS queues     : 4 supported, 4 maximum usable queues
+  Schedulers     : 256
+  Hold-times     : Up 0 ms, Down 0 ms
+  Current address: 00:14:f6:f4:b4:5d, Hardware address: 00:14:f6:f4:b4:5d
+  Last flapped   : 2010-09-07 06:35:22 PDT (15:14:42 ago)
+  Statistics last cleared: Never
+  Traffic statistics:
+   Input  bytes  :                    0                    0 bps
+   Output bytes  :                    0                    0 bps
+   Input  packets:                    0                    0 pps
+   Output packets:                    0                    0 pps
+   IPv6 total statistics:
+    Input  bytes  :                   0
+    Output bytes  :                   0
+    Input  packets:                   0
+    Output packets:                   0
+  Ingress traffic statistics at Packet Forwarding Engine:
+   Input  bytes  :                    0                    0 bps
+   Input  packets:                    0                    0 pps
+   Drop   bytes  :                    0                    0 bps
+   Drop   packets:                    0                    0 pps
+  Label-switched interface (LSI) traffic statistics:
+   Input  bytes  :                    0                    0 bps
+   Input  packets:                    0                    0 pps
+  Input errors:
+    Errors: 0, Drops: 0, Framing errors: 0, Runts: 0, Policed discards: 0, L3 incompletes: 0, L2 channel errors: 0, L2 mismatch timeouts: 0, FIFO errors: 0, Resource errors: 0
+  Output errors:
+    Carrier transitions: 5, Errors: 0, Drops: 0, Collisions: 0, Aged packets: 0, FIFO errors: 0, HS link CRC errors: 0, MTU errors: 0, Resource errors: 0
+        ----    ----    ----    ----    ----    ----
+  Ingress queues: 4 supported, 5 in use
+  Queue counters:       Queued packets  Transmitted packets      Dropped packets
+    0 af3                            0                    0                    0
+    1 af2                            0                    0                    0
+    2 ef2                            0                    0                    0
+    3 ef1                            0                    0                    0
+  Egress queues: 4 supported, 5 in use
+  Queue counters:       Queued packets  Transmitted packets      Dropped packets
+    0 af3                            0                    0                    0
+    1 af2                            0                    0                    0
+    2 ef2                            0                    0                    0
+    3 ef1                            0                    0                    0
+  Active alarms  : None
+  Active defects : None
+  MAC statistics:                      Receive         Transmit
+    Total octets                             0                0
+    Total packets                            0                0
+    Unicast packets                          0                0
+    Broadcast packets                        0                0
+    Multicast packets                        0                0
+    CRC/Align errors                         0                0
+    FIFO errors                              0                0
+    MAC control frames                       0                0
+    MAC pause frames                         0                0
+    Oversized frames                         0
+    Jabber frames                            0
+    Fragment frames                          0
+    VLAN tagged frames                       0
+    Code violations                          0
+  Filter statistics:
+    Input packet count                       0
+    Input packet rejects                     0
+    Input DA rejects                         0
+    Input SA rejects                         0
+    Output packet count                                       0
+    Output packet pad count                                   0
+    Output packet error count                                 0
+    CAM destination filters: 0, CAM source filters: 0
+  Autonegotiation information:
+    Negotiation status: Complete
+    Link partner:
+        Link mode: Full-duplex, Flow control: Symmetric/Asymmetric, Remote fault: OK
+    Local resolution:
+        Flow control: Symmetric, Remote fault: Link OK
+  Packet Forwarding Engine configuration:
+    Destination slot: 0
+        ----    ----    ----    ----    ----    ----
+  CoS information:
+    Direction : Output
+    CoS transmit queue               Bandwidth               Buffer Priority   Limit
+                              %            bps     %           usec
+    2 ef2                    39          19500     0            120     high    none
+    Direction : Input
+    CoS transmit queue               Bandwidth               Buffer Priority   Limit
+                              %            bps     %           usec
+    0 af3                    30           3000    45              0      low    none
+        ----    ----    ----    ----    ----    ----
+<span class="red">Physical interface: ge-0/3/0</span>, Enabled, Physical link is Up
+  Interface index: 138, SNMP ifIndex: 601
+Forwarding classes: 16 supported, 5 in use
+        ----    ----    ----    ----    ----    ----
+Ingress queues: 4 supported, 5 in use
+Queue: 0, Forwarding classes: af3
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 1, Forwarding classes: af2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 2, Forwarding classes: ef2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 3, Forwarding classes: ef1
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Forwarding classes: 16 supported, 5 in use
+Egress queues: 4 supported, 5 in use
+Queue: 0, Forwarding classes: af3
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RL-dropped packets   :                     0                     0 pps
+    RL-dropped bytes     :                     0                     0 bps
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 1, Forwarding classes: af2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RL-dropped packets   :                     0                     0 pps
+    RL-dropped bytes     :                     0                     0 bps
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 2, Forwarding classes: ef2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RL-dropped packets   :                     0                     0 pps
+    RL-dropped bytes     :                     0                     0 bps
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+Queue: 3, Forwarding classes: ef1
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets : Not Available
+    RL-dropped packets   :                     0                     0 pps
+    RL-dropped bytes     :                     0                     0 bps
+    RED-dropped packets  :                     0                     0 pps
+    RED-dropped bytes    :                     0                     0 bps
+
+Packet Forwarding Engine Chassis Queues:
+Queues: 4 supported, 5 in use
+Queue: 0, Forwarding classes: af3
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  : Not Available
+    RED-dropped bytes    : Not Available
+Queue: 1, Forwarding classes: af2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  : Not Available
+    RED-dropped bytes    : Not Available
+Queue: 2, Forwarding classes: ef2
+  Queued:
+    Packets              :                     0                     0 pps
+    Bytes                :                     0                     0 bps
+  Transmitted:
+    Packets              :                     0                      0 pps
+    Bytes                :                     0                     0 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  : Not Available
+    RED-dropped bytes    : Not Available
+Queue: 3, Forwarding classes: ef1
+  Queued:
+    Packets              :                108546                     0 pps
+    Bytes                :              12754752                   376 bps
+  Transmitted:
+    Packets              :                108546                      0 pps
+    Bytes                :              12754752                   376 bps
+    Tail-dropped packets :                     0                     0 pps
+    RED-dropped packets  : Not Available
+    RED-dropped bytes    : Not Available
+
+<span class="red">Physical interface: ge-0/3/0</span>, Index: 138
+Queues supported: 4, Queues in use: 5
+  Shaping rate: 50000 bps
+
+<strong><em>Scheduler map: interface-schedular-map</em></strong>, Index: 58414
+
+  Scheduler: ef2, Forwarding class: ef2, Index: 39155
+    Transmit rate: 39 percent, Rate Limit: none, Buffer size: 120 us, Buffer Limit: none, Priority: high
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+  Input shaping rate: 10000 bps
+  Input scheduler map: schedular-map
+
+Scheduler map: schedular-map, Index: 15103
+
+  Scheduler: af3, Forwarding class: af3, Index: 35058
+    Transmit rate: 30 percent, Rate Limit: none, Buffer size: 45 percent, Buffer Limit: none, Priority: low
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any         40582    green
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any         18928    yellow
+Drop profile: green, Type: discrete, Index: 40582
+  Fill level    Drop probability
+          50                   0
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: yellow, Type: discrete, Index: 18928
+  Fill level    Drop probability
+          50                   0
+         100                 100
+  Chassis scheduler map: &lt;default-chassis&gt;
+
+Scheduler map: &lt;default-chassis&gt;, Index: 4
+
+  Scheduler: &lt;default-ch-scheduler&gt;, Forwarding class: af3, Index: 25
+    Transmit rate: 25 percent, Rate Limit: none, Buffer size: 25 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+
+  Scheduler: &lt;default-ch-scheduler&gt;, Forwarding class: af2, Index: 25
+    Transmit rate: 25 percent, Rate Limit: none, Buffer size: 25 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+
+  Scheduler: &lt;default-ch-scheduler&gt;, Forwarding class: ef2, Index: 25
+    Transmit rate: 25 percent, Rate Limit: none, Buffer size: 25 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+
+  Scheduler: &lt;default-ch-scheduler&gt;, Forwarding class: ef1, Index: 25
+    Transmit rate: 25 percent, Rate Limit: none, Buffer size: 25 percent, Buffer Limit: none, Priority: low
+    Excess Priority: low
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    &lt;default-drop-profile&gt;
+      Medium low      any             1    &lt;default-drop-profile&gt;
+      Medium high     any             1    &lt;default-drop-profile&gt;
+      High            any             1    &lt;default-drop-profile&gt;
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+Drop profile: &lt;default-drop-profile&gt;, Type: discrete, Index: 1
+  Fill level    Drop probability
+         100                 100
+  Congestion-notification: Disabled
+Forwarding class                       ID      Queue  Restricted queue  Fabric priority  Policing priority
+  af3                                   0       0          0             low                normal
+  af2                                   1       1          1             low                normal
+  ef2                                   2       2          2             high               normal
+  ef1                                   3       3          3             high               normal
+  af1                                   4       4          0             low                normal
+
+  Logical interface ge-0/3/0.0 (Index 68) (SNMP ifIndex 152) (Generation 159)
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.1 ]  Encapsulation: ENET2
+    Traffic statistics:
+     Input  bytes  :                    0
+     Output bytes  :                    0
+     Input  packets:                    0
+     Output packets:                    0
+    Local statistics:
+     Input  bytes  :                    0
+     Output bytes  :                    0
+     Input  packets:                    0
+     Output packets:                    0
+    Transit statistics:
+     Input  bytes  :                    0                    0 bps
+     Output bytes  :                    0                    0 bps
+     Input  packets:                    0                    0 pps
+     Output packets:                    0                    0 pps
+    Protocol inet, MTU: 1500, Generation: 172, Route table: 0
+      Flags: Sendbcast-pkt-to-re
+      Input Filters: filter-in-ge-0/3/0.0-i,
+      Policer: Input: p1-ge-0/3/0.0-inet-i
+    Protocol mpls, MTU: 1488, Maximum labels: 3, Generation: 173, Route table: 0
+      Flags: Is-Primary
+      Output Filters: exp-filter,,,,,
+
+  Logical interface ge-0/3/0.0 (Index 68) (SNMP ifIndex 152)
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.1 ]  Encapsulation: ENET2
+    Input packets : 0
+    Output packets: 0
+
+Interface       Admin Link Proto Input Filter         Output Filter
+ge-0/3/0.0      up    up   inet  filter-in-ge-0/3/0.0-i
+                           mpls                       exp-filter
+Interface       Admin Link Proto Input Policer         Output Policer
+ge-0/3/0.0      up    up
+                           inet  p1-ge-0/3/0.0-inet-i
+                           mpls
+
+Filter: filter-in-ge-0/3/0.0-i
+Counters:
+Name                                                Bytes              Packets
+count-filter-in-ge-0/3/0.0-i                            0                    0
+
+Filter: exp-filter
+Counters:
+Name                                                Bytes              Packets
+count-exp-seven-match                                   0                    0
+count-exp-zero-match                                    0                    0
+Policers:
+Name                                              Packets
+p1-ge-0/3/0.0-inet-i                                    0
+
+
+  Logical interface: ge-0/3/0.0, Index: 68
+    Object                  Name                   Type                    Index
+    Rewrite                 exp-default            exp (mpls-any)             33
+
+Rewrite rule: exp-default, Code point type: exp, Index: 33
+  Forwarding class                    Loss priority       Code point
+  af3                                 low                 000
+  af3                                 high                001
+  af2                                 low                 010
+  af2                                 high                011
+  ef2                                 low                 100
+  ef2                                 high                101
+  ef1                                 low                 110
+  ef1                                 high                111
+    Object                  Name                   Type                    Index
+    Classifier              exp-default            exp                        10
+
+Classifier: exp-default, Code point type: exp, Index: 10
+  Code point         Forwarding class                    Loss priority
+  000                af3                                 low
+  001                af3                                 high
+  010                af2                                 low
+  011                af2                                 high
+  100                ef2                                 low
+  101                ef2                                 high
+  110                ef1                                 low
+  111                ef1                                 high
+    Object                  Name                   Type                    Index
+    Classifier              ipprec-compatibility   ip                         13
+
+Classifier: ipprec-compatibility, Code point type: inet-precedence, Index: 13
+  Code point         Forwarding class                    Loss priority
+  000                af3                                 low
+  001                af3                                 high
+  010                af3                                 low
+  011                af3                                 high
+  100                af3                                 low
+  101                af3                                 high
+  110                ef1                                 low
+  111                ef1                                 high
+Forwarding class                       ID      Queue  Restricted queue  Fabric priority  Policing priority
+  af3                                   0       0          0             low                normal
+  af2                                   1       1          1             low                normal
+  ef2                                   2       2          2             high               normal
+  ef1                                   3       3          3             high               normal
+  af1                                   4       4          0             low                normal
+
+  Logical interface ge-0/3/0.1 (Index 69) (SNMP ifIndex 154) (Generation 160)
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.2 ]  Encapsulation: ENET2
+    Traffic statistics:
+     Input  bytes  :                    0
+     Output bytes  :                    0
+     Input  packets:                    0
+     Output packets:                    0
+    Local statistics:
+     Input  bytes  :                    0
+     Output bytes  :                    0
+     Input  packets:                    0
+     Output packets:                    0
+    Transit statistics:
+     Input  bytes  :                    0                    0 bps
+     Output bytes  :                    0                    0 bps
+     Input  packets:                    0                    0 pps
+     Output packets:                    0                    0 pps
+    Protocol inet, MTU: 1500, Generation: 174, Route table: 0
+      Flags: Sendbcast-pkt-to-re
+
+  Logical interface ge-0/3/0.1 (Index 69) (SNMP ifIndex 154)
+    Flags: SNMP-Traps 0x4000 VLAN-Tag [ 0x8100.2 ]  Encapsulation: ENET2
+    Input packets : 0
+    Output packets: 0
+
+
+Interface       Admin Link Proto Input Filter         Output Filter
+ge-0/3/0.1      up    up   mpls
+Interface       Admin Link Proto Input Policer         Output Policer
+ge-0/3/0.1      up    up
+                           mpls
+
+  Logical interface: ge-0/3/0.1, Index: 69
+    Object                  Name                   Type                    Index
+    Classifier              ipprec-compatibility   ip                         13
+
+Classifier: ipprec-compatibility, Code point type: inet-precedence, Index: 13
+  Code point         Forwarding class                    Loss priority
+  000                af3                                 low
+  001                af3                                 high
+  010                af3                                 low
+  011                af3                                 high
+  100                af3                                 low
+  101                af3                                 high
+  110                ef1                                 low
+  111                ef1                                 high
+Forwarding class                       ID      Queue  Restricted queue  Fabric priority  Policing priority
+  af3                                   0       0          0             low                normal
+  af2                                   1       1          1             low                normal
+  ef2                                   2       2          2             high               normal
+  ef1                                   3       3          3             high               normal
+  af1                                   4       4          0             low                normal</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_caveats">6. CAVEATS</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+This RLI does not try to add any new output that is not available through
+  other existing commands. For e.g.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+there might be stuff that might be missing like displaying q-pic-large-buffer or
+</p>
+</li>
+<li>
+<p>
+some counters that are present in the h/w but not available in any RE cli or
+</p>
+</li>
+<li>
+<p>
+stuff that doesn&#8217;t work today like queue counters for logical/tunnel
+      interfaces or
+</p>
+</li>
+<li>
+<p>
+desirable stuff that the h/w doesn&#8217;t support like counters for
+      BA-classification/rewrites
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+This RLI provides only an operational command <strong>combining only QoS related
+  parameters</strong>.<br />
+  It does not print out any other interface specific info that
+  might need to be pulled out from daemons, say, rpd.
+</p>
+</li>
+<li>
+<p>
+No support for:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+interface-set/routing-instance stats or
+</p>
+</li>
+<li>
+<p>
+any other thing that doesn&#8217;t show up as an interface for the first cut.
+</p>
+</li>
+<li>
+<p>
+Same for ATM-cos, services cos, CoS-Based Forwarding.
+</p>
+</li>
+<li>
+<p>
+This might be done in a best-effort mode if time permits.
+</p>
+</li>
+<li>
+<p>
+The RLI doesn&#8217;t try to re-format the output into more readable forms
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+say for instance:by combining output from multiple commands into a single table.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+The existing "show class-of-service" commands display the configured rather
+  than the actually applied cos parameters in some cases
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+like when a wildcard is used to apply a config on pics but all of the pics don¿t support it.
+</p>
+</li>
+<li>
+<p>
+Since the RLI implementation reuses the functionality provided by the existing
+  class-of-service commands, it would also behave in the same way.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Support for range match in interface argument is not included.
+</p>
+</li>
+<li>
+<p>
+While displaying the qos information there are certain unavoidable repetitions
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+e.g:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+same scheduler attached to different scheduler maps gets printed more than once,
+</p>
+</li>
+<li>
+<p>
+drop profiles get repeated.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Logic for avoiding repetition in this case and elsewhere would add to undue
+    complexity in implementation and maybe undermine the actual customer
+    requirement of visualizing all config constructs at one place, so it hasn¿t
+    been taken up.
+</p>
+</li>
+<li>
+<p>
+Avoiding repetition would be a best effort scenario to be taken up if time permits.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+For firewall qos option display, only following objects are covered:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+classical,
+</p>
+</li>
+<li>
+<p>
+interface-specific and
+</p>
+</li>
+<li>
+<p>
+layer2 policers
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+This RLI does not plan to address performance issues arising as a result of the ui
+  infrastructure on which it is built up.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+There may be issues like CLI taking long time to return back on quitting
+    command immediately arising due to underlying ui infrastructure.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related_resources">7. related resources</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Tracking PR: 533029<br />
+<a href="https://gnats.juniper.net/web/default/533029">https://gnats.juniper.net/web/default/533029</a></p></div>
+<div class="paragraph"><p>Functional specification:<br />
+<a href="http://cvs.juniper.net/cgi-bin/viewcvs.cgi/sw-projects/core/cos/infrastructure/12720_qos_container_interface_stats.txt?rev=1.6&amp;view=markup">http://cvs.juniper.net/cgi-bin/viewcvs.cgi/sw-projects/core/cos/infrastructure/12720_qos_container_interface_stats.txt?rev=1.6&amp;view=markup</a></p></div>
+<div class="paragraph"><p>manual:<br />
+<a href="http://www.juniper.net/techpubs/en_US/junos11.4/topics/reference/command-summary/show-class-of-service-interface.html">http://www.juniper.net/techpubs/en_US/junos11.4/topics/reference/command-summary/show-class-of-service-interface.html</a></p></div>
+<div class="paragraph"><p>systest:<br />
+<a href="http://systest.juniper.net/feature_testplan/ViewTab/ViewTabPrint.php?tpi_id=14526">http://systest.juniper.net/feature_testplan/ViewTab/ViewTabPrint.php?tpi_id=14526</a></p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-04-03 13:22:31 EDT
+</div>
+</div>
+</body>
+</html>
+
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'pingit'; // required: replace example with your forum shortname
+
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>

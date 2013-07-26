@@ -1,0 +1,3596 @@
+---
+layout: post
+title: "vim jtac (blogger theme)"
+created:  2013 Apr 07 12:13:01 PM
+tags: [vim]
+categories: [tech]
+published: false
+---
+
+<div style="color: #484848; font-family: 'Trebuchet MS', Helvetica, sans-serif">
+<p>ping song &lt;<a href="mailto:pings@juniper.net">pings@juniper.net</a>&gt;
+v0.91, Aug 2012:
+presentation in JTAC meeting
+<br><span style="background:yellow;">:leveloffset: 2</span><br>
+:Author Initials: PS
+:icons:
+<br><span style="background:yellow;">this dosn&#8217;t work, how to escape <code>~</code> ?</span><br>
+<br><span style="background:yellow;">:iconsdir: \~/bin/asciidoc-8.6.8/images/icons</span><br>
+:iconsdir: /home/ping/bin/asciidoc-8.6.8/images/icons
+:numbered:
+:toc:
+:toc-placement: manual
+<br><span style="background:yellow;">change toc name from "table of content" to "agenda"</span><br>
+:toc-title: agenda
+:revision: 0.8
+:revision: 0.91
+<br><span style="background:yellow;">this seems not an recognized attr.</span><br>
+:revisiondate: Aug 2012
+<br><span style="background:yellow;">pygments looks much better at least for vim code highlight</span><br>
+:source-highlighter: pygments
+<br><span style="background:yellow;">highlight author send me a file to highlight vim, also works, but currently</span><br>
+<br><span style="background:yellow;">its a bit too simple</span><br>
+<br><span style="background:yellow;">:source-highlighter: highlight</span><br>
+:pinghome: <a href="http://www-in.juniper.net/~pings/">http://www-in.juniper.net/~pings/</a>
+:two-decades-vim: <a href="http://arstechnica.com/information-technology/2011/11/two-decades-of-productivity-vims-20th-anniversary/">http://arstechnica.com/information-technology/2011/11/two-decades-of-productivity-vims-20th-anniversary/</a>
+<br><span style="background:yellow;">:case2012-0619-0971: http://www-in.juniper.net/\~pings/casedata/2012-0619-0971/2012-0619-0971.log</span><br>
+<br><span style="background:yellow;">:case2012-0619-0971html: http://www-in.juniper.net/\~pings/casedata/2012-0619-0971/2012-0619-0971-info.html</span><br></p>
+<div style="page-break-after:always"></div>
+<p><span style="background:yellow;">a "manual" rev-history</span></p>
+<div>
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption><b>Table 1. </b>Revision History</caption>
+<thead>
+<tr>
+<th align="left" width="25%" valign="top">NUMBER </th>
+<th align="left" width="25%" valign="top">DATE         </th>
+<th align="left" width="25%" valign="top">DESCRIPTION                          </th>
+<th align="left" width="25%" valign="top">NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" width="25%" valign="top"><p>0.9</p></td>
+<td align="left" width="25%" valign="top"><p>2012-09-10</p></td>
+<td align="left" width="25%" valign="top"><p>initial draft</p></td>
+<td align="left" width="25%" valign="top"><p>PS</p></td>
+</tr>
+<tr>
+<td align="left" width="25%" valign="top"><p>0.91</p></td>
+<td align="left" width="25%" valign="top"><p>2012-09-21</p></td>
+<td align="left" width="25%" valign="top"><p>add examples of:using your own script/apps, search
+multiple files,revision history,etc</p></td>
+<td align="left" width="25%" valign="top"><p>PS</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="page-break-after:always"></div>
+<p><span style="background:yellow;">disable numbering from here</span></p>
+<p><span style="background:yellow;">this doesn't work [abstract,float]</span></p>
+<p><span style="background:yellow;">[float,abstract]</span></p>
+<p><span style="background:yellow;">== Abstract</span></p>
+<blockquote>
+<p>This is a quick demonstration about the functionality of VIM editor from a JTAC
+standpoint, This document provide a lot of text &#8220;screenshot&#8221; to demonstrate
+what the editor looks like when used in different scenarios. This document will
+not provide much details about the basic usage/commands/operations stuff - for
+that <a href="#vimtutor"><em>vimtutor</em></a> command line tool that comes with VIM has done a
+great job.</p>
+<p align="right">
+</p>
+</blockquote>
+<div style="page-break-after:always"></div>
+<h><a name="X1"></a>overview</h>
+<p><b>(some) highlights of VIM editor</b></p><ul>
+<li>
+<p>
+feature rich
+</p>
+<ul>
+<li>
+<p>
+it&#8217;s very rare that one job can be done only in other text editor but not in
+    VIM, On the other hand, VIM has a lot of UNIQUE features that few other
+    editors have
+    <br><i>[although this is almost true, it is only based on experience of
+    the authors. In theory,  although the chances are slim, it is still possible
+    that  there exists a <strong>3rd</strong> editor ("that 2nd editor" should be vi&#8217;s good
+    company:
+    <a href="http://www.gnu.org/software/emacs/"><strong>emacs</strong></a>) that brings a new
+    feature currently not yet supported by the two]</i><br>.
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+portability
+</p>
+<ul>
+<li>
+<p>
+available in all major platforms
+</p>
+</li>
+<li>
+<p>
+*nix, MAC, Win
+    <br><i>[again per my own experiences, I&#8217;ll rate linux/unix-like version
+    the top, then macOS version. Windows version are as good as releases in
+    other platforms in terms of features, but not as "nature" as unix/mac
+    version (just think about its strange <code>C:\</code> file system notation&#8230;)
+    personally I prefer to stick to vim-over-
+    <a href="http://www.cygwin.com/">cygwin</a> whenever I have to use windows]</i><br>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+"modal" editing, keyboard oriented
+   <br><i>[believe it or not, keyboard <strong>IS</strong> more efficient , but that
+   efficiency only comes after you (intentionally) stick to it to train your
+   muscle memory and finally get used to it. otherwise mouse is still
+   faster/easier for most people]</i><br>
+</p>
+<ul>
+<li>
+<p>
+insert/normal/visual/replace/commandline/&#8230; mode
+</p>
+</li>
+<li>
+<p>
+EVERYTHING can be done efficiently with keyboard
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+highly program(script)-able, customizable, flexible, extensible
+</p>
+<ul>
+<li>
+<p>
+easily compose new operator/operations per your own demand
+</p>
+</li>
+<li>
+<p>
+vimL: programming language:
+    <br><i>[vim Language, built-in ability to combine vim command together to
+    make a script. personally I think vimL is the essential/unique power of vim
+    comparing with other editors]</i><br>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Here is a good article introducing VIM for its "20 years anniversary" :</p>
+<p></p>
+<div style="page-break-after:always"></div>
+<p><span style="background:yellow;">starting from this section, re-enable the numbering again</span></p>
+<p><span style="background:yellow;">generate toc in here</span></p>
+<hr>
+<h1><a name="X2"></a>vim as an text editor</h1>
+<hr>
+<h2><a name="_editor_e_g_notepad_ultraedit"></a>1. editor(e.g: notepad, ULTRAEDIT)</h2>
+<p><b>modal editor</b></p><ul>
+<li>
+<p>
+Vim has 6 basic modes and 6 additional modes.
+</p>
+</li>
+<li>
+<p>
+4 of them are most commonly used
+</p>
+<ul>
+<li>
+<p>
+insert
+</p>
+<p>like notepad, whatever you typed in will be inserted as file content</p>
+<p>some of the frequently used <br><i>[this really depends on your personal
+favorite/habit - since there are always multiple ways to do the same thing in
+vim, different person might have quite different &#8220;musal memories&#8221;]</i><br>
+<a href="#insert-mode-commands">insert-mode commands</a></p>
+</li>
+<li>
+<p>
+normal mode
+</p>
+<p>every keystroke is a "command".For navigation and manipulation of text.</p>
+<p>some of the frequently used <a href="#normal-mode-commands">normal-mode commands</a></p>
+</li>
+<li>
+<p>
+visual mode
+</p>
+<p>visually select text in characters-wise, line-wise, or block-wise
+For navigation and manipulation of text selections, this mode allows you
+to perform most normal commands, and a few extra commands, on selected
+text.</p>
+<p>some of the frequently used <a href="#visual-mode-commands">visual-mode commands</a></p>
+</li>
+<li>
+<p>
+command-line mode
+</p>
+<p>jump into the bottom of the editor, and type in vim command</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+vim help
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>:help vim-modes-info
+:help Normal-mode
+:help visual-mode
+:help Insert-mode
+:help Command-line-mode</code></pre>
+</td></tr></table>
+</li>
+<li>
+<p>
+<strong>vimtutor</strong> - a (very intuitive) program to learn vim program:
+</p>
+<a name="vimtutor"></a><ul>
+<li>
+<p>
+vimtutor: a shell command to teach you how to use vim
+</p>
+<p><b>vimtutor</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>===============================================================================
+=    W e l c o m e   t o   t h e   V I M   T u t o r    -    Version 1.7      =
+===============================================================================
+
+     Vim is a very powerful editor that has many commands, too many to
+     explain in a tutor such as this.  This tutor is designed to describe
+     enough of the commands that you will be able to easily use Vim as
+     an all-purpose editor.
+
+     The approximate time required to complete the tutor is 25-30 minutes,
+     depending upon how much time is spent with experimentation.
+
+     ATTENTION:
+     The commands in the lessons will modify the text.  Make a copy of this
+     file to practise on (if you started "vimtutor" this is already a copy).
+
+     It is important to remember that this tutor is set up to teach by
+     use.  That means that you need to execute the commands to learn them
+     properly.  If you only read the text, you will forget the commands!
+
+     Now, make sure that your Shift-Lock key is NOT depressed and press
+     the   j   key enough times to move the cursor so that Lesson 1.1
+     completely fills the screen.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                        Lesson 1.1:  MOVING THE CURSOR
+
+
+   ** To move the cursor, press the h,j,k,l keys as indicated. **
+             ^
+             k              Hint:  The h key is at the left and moves left.
+       &lt; h       l &gt;               The l key is at the right and moves right.
+             j                     The j key looks like a down arrow.
+             v
+  1. Move the cursor around the screen until you are comfortable.
+
+  2. Hold down the down key (j) until it repeats.
+     Now you know how to move to the next lesson.
+
+  3. Using the down key, move to Lesson 1.2.
+
+NOTE: If you are ever unsure about something you typed, press &lt;ESC&gt; to place
+      you in Normal mode.  Then retype the command you wanted.
+
+NOTE: The cursor keys should also work.  But using hjkl you will be able to
+      move around much faster, once you get used to it.  Really!
+
+"/tmp/tutorunYxYO" 970 lines, 33256 characters</code></pre>
+</td></tr></table>
+</li>
+</ul>
+</li>
+</ul>
+<p><b>basic text editing operations(under normal mode)</b></p><ul>
+<li>
+<p>
+moving around(motions)
+</p>
+<ul>
+<li>
+<p>
+h/l/j/k/ctrl-f/ctrl-b/&#8230;
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+insert/delete/change/replace/etc
+</p>
+<ul>
+<li>
+<p>
+i/I/x/X/d../c../C/r/R
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+undo/redo
+</p>
+<ul>
+<li>
+<p>
+u/c-r
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+charactor/line/block-wise text selection
+</p>
+<ul>
+<li>
+<p>
+v/V/ctrl-v + motion keys
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+search (real-time, incremental)
+</p>
+<ul>
+<li>
+<p>
+keystroke: / ? # g# * g* n N
+</p>
+</li>
+<li>
+<p>
+/&lt;UP&gt; /&lt;DOWN&gt; ?&lt;UP&gt; ?&lt;DOWN&gt;&#8230;
+</p>
+</li>
+<li>
+<p>
+options: set hls is nows
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+search and replace - substitution
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+more resources
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+<hr>
+<h2><a name="_search_with_more_weapons"></a>2. search with more weapons</h2>
+<p><b>more weapons</b></p><ul>
+<li>
+<p>
+regex(<strong>re</strong>gular <strong>ex</strong>pression or "pattern"):
+</p>
+<ul>
+<li>
+<p>
+search for portion of data that we care most
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+range:
+</p>
+<ul>
+<li>
+<p>
+A range permits a command to be applied to a group of lines
+</p>
+</li>
+<li>
+<p>
+many way to define a range:
+</p>
+<ul>
+<li>
+<p>
+visual select
+      <br><i>[this is done by press v,V or ctrl-v from normal
+      mode, then move the cursor by motion keys(e.g, h,l,j,k). Pressing &#8216;:&#8217;
+      after that will bring (nicely) your cursor into the bottom command line
+      area with the visual selection range marks <em>:'&lt;,'&gt;</em> that you can start
+      your command with.]</i><br>
+</p>
+<p><b>delete visual selected texts</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+mark
+      <br><i>[this is done by pressing mN, where N is a letter a to z,
+      to generate a mark, say mark &#8216;a&#8217;, to mark a position for later use]</i><br>
+</p>
+<p><b>search for keyword &#8216;abc&#8217; from mark &#8216;a&#8217; to mark &#8216;b&#8217;</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+line numbers
+</p>
+<p><b>indent from line 1 to line 20</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+search back and forth
+</p>
+<p><b>search for &#8220;abc&#8221;, but only from last occurrence of &#8216;`#show '&#8217; to the next occurrence of it</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>
+global: search and perform other useful actions:
+</p>
+<ul>
+<li>
+<p>
+default action on search is "jump to the matches" (to have a look)
+</p>
+</li>
+<li>
+<p>
+there can be other actions triggered on (a) match(es)
+      <br><i>[this is extremely powerful&#8201;&#8212;&#8201;ANY vim command can act
+      on the matched texts, see :help global]</i><br>
+</p>
+<ul>
+<li>
+<p>
+replace(substitution),
+</p>
+</li>
+<li>
+<p>
+print,
+</p>
+</li>
+<li>
+<p>
+delete,
+</p>
+</li>
+<li>
+<p>
+copy(&#8216;yank&#8217; in vi/vim term),
+</p>
+</li>
+<li>
+<p>
+sort
+</p>
+</li>
+<li>
+<p>
+etc
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+vim :global command syntax
+</p>
+<p><b>search for &#8220;matches&#8221;</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>search for &#8220;non-matches&#8221;</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+how it works
+</p>
+<blockquote>
+<pre style="font-family: inherit;">The global commands work by first scanning through the [range] lines and
+marking each line where a match occurs (for a multi-line pattern, only the
+start of the match matters).
+In a second scan the [cmd] is executed for each marked line with its line
+number prepended.  For ":v" and ":g!" the command is executed for each not
+marked line.  If a line is deleted its mark disappears.</pre>
+<p align="left">
+&#8212; :help global
+</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2><a name="_search_example_regex_jtac_may_like"></a>3. search example: regex (JTAC may like)</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>what will this match?</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 1. </b>vim regex: a &#8220;complex one&#8221;<br><i>[this is useful for the device log <strong>syntax folding</strong> that will be demonstrated in later sections, which requires using regex to recognize each command line and its output]</i><br></p>
+<p><b>this long regex is trying its hard to match to a line that :</b></p><ul>
+<li>
+<p>
+must contain at least one of following as a PS var
+<br><i>[Prompt String Variable]</i><br>:
+</p>
+<pre><code>'#'          : cisco,juniper...priviledge mode, unix root
+'&gt;'          : cisco,juniper...exec mode,some unix shell
+'%' '$'      : some unix shell prompt
+'-&gt;'         : junos-e vxworks shell
+'*-*-*-*-*-' : junos-e show-tech</code></pre>
+</li>
+<li>
+<p>
+<strong>and</strong> ,
+</p>
+<ul>
+<li>
+<p>
+for PS <strong>#</strong>,<strong>&gt;</strong> or <strong>%</strong>:
+</p>
+<ul>
+<li>
+<p>
+at least 2 charactors before <span class="underline">#</span>,e.g.: R1<strong>#</strong>blabla
+</p>
+</li>
+<li>
+<p>
+leading spaces are ok in CMD                    : R1<strong>#</strong> blabla
+</p>
+</li>
+<li>
+<p>
+no space preceding <strong><span class="underline"></span></strong>               : R1 <strong></strong>blabla (not ok)
+</p>
+</li>
+<li>
+<p>
+must has at least 2 non-blank chars in beginning of the line, <strong>and</strong>
+</p>
+</li>
+<li>
+<p>
+must NOT contain any of following chars before the PS var,
+</p>
+<pre><code>  : blank
+&lt; : a literal '&lt;' charactor
+( : a literal '(' charactor
+] : a literal ']' charactor</code></pre>
+</li>
+<li>
+<p>
+must has no more than 40 chars in total before a <strong>#</strong> or <strong>&gt;</strong> or <strong>%</strong> char, <strong>and</strong>
+</p>
+</li>
+<li>
+<p>
+must has at least 1 non-blank (space, tab) charactor as a command, <strong>and</strong>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>or</strong> , for PS &#8216;-&gt;&#8217; (junoe "shell" mode): different flavors are supported
+</p>
+<ul>
+<li>
+<p>
+this can be the ERX LM line card shell mode
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>slot NN-&gt;CMD</code></pre>
+</td></tr></table>
+<p>where N can be 1 or 2 digits (e.g. LM line card number),</p>
+</li>
+<li>
+<p>
+this can be ERX LM serial shell mode
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>-&gt;CMD</code></pre>
+</td></tr></table>
+<p>where CMD can be 1 (like an <em>t</em>, means <em>task</em>) or more CHs ,</p>
+</li>
+<li>
+<p>
+this can be the ERX SRP shell mode ,w/ a preceding space,
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>-&gt; CMD</code></pre>
+</td></tr></table>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>or</strong> , for &#8216;*-*-*-*-*-&#8217;
+</p>
+<ul>
+<li>
+<p>
+no any other contition modifier (there must be no other charactors),
+</p>
+</li>
+<li>
+<p>
+this is simply ERX tech-support command delimitor
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>
+overall, basically it matches a command line in logs generated by:
+</p>
+<ul>
+<li>
+<p>
+JUNOS based product (M/T/MX)
+</p>
+</li>
+<li>
+<p>
+JUNOSe(ERX)
+</p>
+</li>
+<li>
+<p>
+CISCO
+</p>
+</li>
+<li>
+<p>
+UNIX/LINUX
+</p>
+</li>
+<li>
+<p>
+any other devices that use # , &gt; or % as a prompt (can be changed per demand)
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2><a name="_search_example_global"></a>4. search example: global</h2>
+<p><b>THE ISSUE:</b><br>sometime one single CLI print long long outputs(600+ lines)
+you need a way to <em>collect</em> only some lines based on a desired criterials.
+for example in the following long (600+ lines) outputs of a &#8216;show&#8217; command:</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>     1  NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
+     2  lag OLT01.2570039 line protocol VlanSub is up, ip is up
+
+    ...&lt;snipped&gt;...
+
+    42    IP policy input jnpr-VIDEO:ONLY
+    43      classifier-group dhcp entry 1
+    44        0 packets, 0 bytes
+    45        rate-limit-profile dhcplimit
+    46          committed rate: 1280 bps, committed burst: 8192 bytes
+    47          excess burst: 0 bytes
+    48          committed: 0 packets, 0 bytes, action: transmit
+    49          conformed: 0 packets, 0 bytes, action: drop
+    50          exceeded:  0 packets, 0 bytes, action: drop
+
+    51      classifier-group jnpr-VIDEO-TRAFFIC entry 1
+
+    ...&lt;snipped&gt;...
+
+    62      classifier-group jnpr-VIDEO-TRAFFIC entry 2
+
+    ...&lt;snipped&gt;...
+
+   535      classifier-group jnpr-VIDEO-TRAFFIC entry 45
+
+    ...&lt;snipped&gt;...
+
+   644      Dropped exceeded packets 0, bytes 0
+   645
+   <strong>647</strong> NWRKNJ-VFTTP-138:vol#</code></pre>
+</td></tr></table>
+<p>So, the issue here is: how to collect ACL entries with <strong><span class="blue">NON ZERO counters
+only</span></strong> in the following line ?</p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>print all ACL entries that match our criteria(s)</b></p><ul>
+<li>
+<p>
+regex
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>result:found 3 ACL entries (out of 50+) with non-zero counters in the following line</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+<p><b>also print the line containing non-zero counters following the matches</b></p><ul>
+<li>
+<p>
+regex
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>result:ACL entries along with following non-zero value counters</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+a short version
+</p>
+<p><b>"empty" pattern will call the _previous applied pattern: really handy!</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+</td></tr></table>
+<p><b>Example 2. </b>vim &#8216;:global&#8217;</p>
+<hr>
+<h2><a name="_search_example_global_with_range_good_for_large_files"></a>5. search example: global with range (good for large files)</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>only search from current command capture down (to the EOF)</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>only search output of current command(where my cursor is current in)</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 3. </b>better to search in a (flexible) range</p>
+<hr>
+<h2><a name="_search_example_spanning_files"></a>6. search example: spanning files</h2>
+<p><b>solutions</b><br>there are many ways to search across files/folders. Here are 2 way that is
+commonly used:</p>
+<ul>
+<li>
+<p>
+use vim&#8217;s built-in grep: vimgrep
+</p>
+<p>search "error" or "fail", case insensitive, in all log files under curr cursor
+and call the search result,edit,modi,save..as usual</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+use external grep tool
+</p>
+<p><b>use external grep tool</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+<p><b>&#8220;quickfix&#8221; window</b><br>Vim&#8217;s quickfix window was originally designed as a special mode to speedup the edit-compile-edit cycle.
+The idea is to save the error messages from the compiler in a file and use Vim
+to jump to the errors one by one.  You can examine each problem and fix it,
+without having to remember all the error messages.</p>
+<p>but in practice, regardless of code developing, &#8220;quickfix&#8221; window can also be
+used to quickly locate the target matching result.</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>:cw or :copen</code></pre>
+</td></tr></table>
+<p><b>for more info:</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>:help quickfix</code></pre>
+</td></tr></table>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>&#8220;quickfix&#8221; window and the search result</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code><b>&lt;3&gt;</b>
++ 55305 +--645 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
++ 55950 +--646 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
++ 56596 +--645 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
++ 57241 +--645 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
++ 57886 +--646 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
++ 58532 +--648 lines: NWRKNJ-VFTTP-138:vol#show ip int lag OLT01.2570039
+  59180 NWRKNJ-VFTTP-138:vol#show resou
+- 59181 NWRKNJ-VFTTP-138:vol#show resource  <b>&lt;4&gt;</b>
+| 59182 Resource Threshold Trap: enabled
+| 59183                                            max      current    rising      falling    hold-down
+| 59184            type               location   capacity    value    threshold   threshold     time
+| 59185 ---------------------------   --------   --------   -------   ---------   ---------   ---------
+| 59186 ip interface                  system        96001     13439       86401         960         300
+| 59187 ip interface                  slot 1        16383         1       14745         164         300
+| 59188 ip interface                  slot 2        16383         0       14745         164         300
+| 59189 ip interface                  slot 3        16383         0       14745         164         300
+./vzlogs/2012-0807-0813.log [utf-8] [jel] [59181/76232,22] [77%]   [-----------------------------------0-
+<b>&lt;1&gt;</b>
+    3 ./vzlogs/2012-0611-0858.log|20240 col 23| ^MPHLAPA-VFTTP-113:vol#show resource
+    4 ./vzlogs/2012-0711-0022.log|343 col 18| ^MCMDNNJ-VFTTP-27#show resource
+    5 ./vzlogs/2012-0807-0813-info.log|442 col 22| NWRKNJ-VFTTP-138:vol#show
+      resource
+    6 ./vzlogs/2012-0807-0813.log|59181 col 22| NWRKNJ-VFTTP-138:vol#show resource <b>&lt;2&gt;</b>
+    7 ./vzlogs/2012-0810-0516.log|1866 col 18| ^MLSANCA-VFTTP-88#show resource
+    8 ./vzlogs/2012-0810-0886.log|205 col 18| ^MWASHDC-VFTTP-89#show resource
+    9 ./vzlogs/2012-0811-0055.log|926 col 18| ^MPHLAPA-VFTTP-87#show resources
+   10 ./vzlogs/2012-0811-0055.log|33906 col 18| ^MPHLAPA-VFTTP-87#show resource
+   11 ./vzlogs/2012-0811-0056.log|333 col 19| ^MTAMPFL-VFTTP-130#show resource
+   12 ./vzlogs/2012-0811-0056.log|5208 col 23| ^MTAMPFL-VFTTP-130:vol#show resource
+   13 ./vzlogs/2012-0811-0058.log|221 col 19| ^MNWRKNJ-VFTTP-153#show resource
+   14 ./vzlogs/2012-0811-0079.log|247 col 18| ^MPHLAPA-VFTTP-79#show resource
+   15 ./vzlogs/2012-0811-0081.log|1272 col 18| ^MPHLAPA-VFTTP-91#show resource
+   16 ./vzlogs/2012-0811-0083.log|237 col 18| ^MDLLSTX-VFTTP-88#show resource
+   17 ./vzlogs/2012-0811-0088.log|2193 col 18| ^MWASHDC-VFTTP-99#show resource^M
+   18 ./vzlogs/2012-0811-0104.log|393 col 19| ^MNYCMNY-VFTTP-120#show resource
+   19 ./vzlogs/2012-0812-0048.log|1550 col 18| ^MPHLAPA-VFTTP-91#show resource^M
+   20 ./vzlogs/2012-0812-0048.log|16088 col 18| ^MPHLAPA-VFTTP-91#show resource^M
+   21 ./vzlogs/2012-0812-0059.log|253 col 19| ^MWASHDC-VFTTP-130#show resource
+   22 ./vzlogs/2012-0812-0071.log|1030 col 18| ^MPHLAPA-VFTTP-75#show resource
+   23 ./vzlogs/2012-0812-0082.log|250 col 19| ^MWASHDC-VFTTP-131#show resource
+   24 ./vzlogs/2012-0812-0084.log|934 col 18| ^MNWRKNJ-VFTTP-53#show resource
+   25 ./vzlogs/2012-0812-0094.log|284 col 19| ^MNYCMNY-VFTTP-136#show resource</code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+the quick fix window, listing all matched lines from all files containing
+any matches
+</p>
+</li>
+<li>
+<p>
+put the cursor in a line in the quickfix window, press &lt;enter&gt;, the
+corresponding file containing current match will be opened in another window
+</p>
+</li>
+<li>
+<p>
+the file opened in a new window , with the matched line(s) displayed
+</p>
+</li>
+<li>
+<p>
+the matched line in the opened file
+</p>
+</li>
+</ol>
+</td></tr></table>
+<p><b>Example 4. </b>use vim built-in grep tool to search across files/folders</p>
+<hr>
+<h2><a name="_window_split"></a>7. window split</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>:split or :spl <br><i>[vim&#8217;s auto-completion system is as fantastic as its other features, you can use the pretty much the similiar way to complete a command as when you are typing a command in a modern linux bash , or a cisco router]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 5. </b>herizon split(good for long lines)</p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>:vsplit or :vsp</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 6. </b>a vertical split (good for not long lines over a wide screen)</p>
+<hr>
+<h2><a name="_multi_page_display_layout_option_in_msword"></a>8. multi-page display (layout option in MSword)</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>:MPage 2 <br><i>[this requires MPage plugin]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 7. </b>compact display - put double (or more if you have real wider screen) times the lines within one screen</p>
+<hr>
+<h2><a name="_much_more_as_an_editor"></a>9. MUCH MORE as an editor</h2>
+<p><b>there are MUCH MORE features that VIM is doing better than others</b></p><ul>
+<li>
+<p>
+external tool integration
+</p>
+</li>
+<li>
+<p>
+folding
+</p>
+</li>
+<li>
+<p>
+advanced undo system: (time machine)
+</p>
+<ul>
+<li>
+<p>
+undo over branch,
+</p>
+</li>
+<li>
+<p>
+permanent undo over close
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+split
+</p>
+</li>
+<li>
+<p>
+diff &amp; patch
+</p>
+</li>
+<li>
+<p>
+multi-page(MPage)
+</p>
+</li>
+<li>
+<p>
+text hyper links(utl)
+</p>
+</li>
+<li>
+<p>
+math
+</p>
+</li>
+<li>
+<p>
+column/block editing(c-v)
+</p>
+</li>
+<li>
+<p>
+alignment(Align)
+</p>
+</li>
+<li>
+<p>
+write/append selected texts into other files
+</p>
+</li>
+<li>
+<p>
+multiple clipboard (register)&#8230;
+</p>
+</li>
+<li>
+<p>
+syntax highlighting (customizable)
+</p>
+<ul>
+<li>
+<p>
+<strong>colorscheme</strong> can be easily changed to your favorite
+</p>
+</li>
+<li>
+<p>
+<strong>default</strong> and <strong>koehler</strong> is my favorite
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+user defined command (command)
+</p>
+</li>
+<li>
+<p>
+event triggered action (autocmd)
+</p>
+</li>
+<li>
+<p>
+platform independent Chinese input system (vimim)
+</p>
+</li>
+<li>
+<p>
+&#8230;
+</p>
+</li>
+<li>
+<p>
+encryption<br>
+  you can encrypt your file , open it with a password, work on it, then save it
+  still in the encrypted from.
+</p>
+</li>
+</ul>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X3"></a>external tools integration (JTAC may like)</h1>
+<p><b>JTAC vs logs</b></p><ul>
+<li>
+<p>
+JTAC help customer to troubleshooting the <strong>outage</strong>
+</p>
+</li>
+<li>
+<p>
+to troubleshoot JTAC need <strong>log(files)</strong>
+</p>
+</li>
+<li>
+<p>
+good <strong>tools</strong> can help
+</p>
+</li>
+</ul>
+<p><b>log process tools</b></p><ul>
+<li>
+<p>
+<strong>notepad</strong> is too slight handling large files &#8230;
+  <br><i>[notepad is still a good note pad, even though MS-word/office are
+  dominating today]</i><br>
+</p>
+</li>
+<li>
+<p>
+<strong>more</strong> is no more much useful
+</p>
+</li>
+<li>
+<p>
+<strong>less</strong> is actually much more feature-rich,faster and agile
+  <br><i>[one of the best (my favorite) text &#8216;viewer&#8217;/or &#8216;pager&#8217;]</i><br>
+</p>
+</li>
+<li>
+<p>
+<strong>grep</strong> good/bad info out of raw log
+</p>
+</li>
+<li>
+<p>
+<strong>sort</strong> to make log entries in (wanted) order
+</p>
+</li>
+<li>
+<p>
+<strong>uniq</strong> to remove redundant entries
+</p>
+</li>
+<li>
+<p>
+<strong>cut</strong> good info out of raw entries
+</p>
+</li>
+<li>
+<p>
+<strong>ed/sed/awk</strong> is useful for pipelines/oneliner lovers or scripting
+</p>
+</li>
+<li>
+<p>
+<strong>diff</strong> old&amp;new files and then <strong>patch</strong> the old into new one
+</p>
+</li>
+<li>
+<p>
+&#8230;
+</p>
+</li>
+</ul>
+<p><b>issues about the old tools..</b></p><ul>
+<li>
+<p>
+how to only search a specific portion of a file (range)?
+</p>
+<p>a log file may contain over 20 command captures, but what if we only want to
+search in the output of "show system log" command?<br>
+you can copy a portion of the file &amp; paste into a temporary file for your grep
+to run on it, but this is not convenient and sometimes boring if you have to
+repeat over.</p>
+</li>
+<li>
+<p>
+you have to blindly type in the keyword you want to search
+</p>
+<p>use grep with pipe in terminal is handy,but blindly typing in long
+keyword/pattern from terminal without seeing them when you are typing is
+sometime pain/error-prone.<br>
+e.g you have to remember(or write down) this long stupid-looking command that
+you want to search before you can type them in the terminal:
+<em>print__11Ic1Detector</em></p>
+</li>
+<li>
+<p>
+it will add more pain and inconvenience in the case that you are not sure
+  about the keyword to search.&#8201;&#8212;&#8201;you will have to refine the pattern and
+  repeat the above whole process allover again and again.
+</p>
+</li>
+</ul>
+<p><b>vim way</b></p><ul>
+<li>
+<p>
+integrates all(most) equivalent functions of these tools
+</p>
+</li>
+<li>
+<p>
+provides a universal interface to for external utilities
+</p>
+</li>
+<li>
+<p>
+use legendary *nix tool in a new/more nature way, from <strong>inside</strong> vim
+</p>
+</li>
+<li>
+<p>
+all CLI based apps,supporting <strong>stdin/stdout steams</strong>, including you own APPs,
+  can be re-used
+</p>
+<ul>
+<li>
+<p>
+that&#8217;s why "text stream"(pipes) is part of essential UNIX philosophy
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+you can do following in almost real time and a much intuitive way:
+</p>
+<ul>
+<li>
+<p>
+search with a pattern
+</p>
+</li>
+<li>
+<p>
+get search result
+</p>
+</li>
+<li>
+<p>
+start a new search based on the search result (&#8216;search out of search
+  result&#8217;)
+</p>
+</li>
+<li>
+<p>
+undo the search (steps back to where we were)
+</p>
+</li>
+<li>
+<p>
+redo a search (steps forward to the previous search result)
+</p>
+</li>
+<li>
+<p>
+refine the new search pattern
+</p>
+</li>
+<li>
+<p>
+repeat the whole process
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+syntax
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+<hr>
+<h2><a name="_external_tool_example_8216_grep_8217_from_inside_vim"></a>1. external tool example: &#8216;grep&#8217; from inside vim</h2>
+<h3><a name="_quick_review_of_8216_grep_8217"></a>1.1. quick review of &#8216;grep&#8217;</h3>
+<p>grep is a utility for searching plain-text data sets for lines matching a
+regular expression. Its name comes from the old &#8216;ed&#8217; command g/re/p (global /
+regular expression / print)
+grep is versatile tool with full feature regex support, here we list the
+simplest and most commonly usage just in order to demonstrate how to use
+external tools from within vim.</p>
+<p><b>usage: traditional way vs. vim way</b><br>following are some quick examples, each paired with an equivalent vim command
+that calls external grep command directly but from within vim editor</p>
+<ul>
+<li>
+<p>
+get useful info
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+trash garbage info
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+logical &#8216;OR&#8217;
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+<li>
+<p>
+<strong>"search out of search results"</strong>, recursively
+  <br><i>[This is one of the many places that vim can get work done better
+  than traditional way - you can look at the text in the vim editor while
+  thinking of what can be the next good pattern/keyword for the next grep , and
+  see the grep result right away in the same editor. This is indeed much better
+  than the traditional way that you each time have to check the grep result by
+  redirecting it either to a temp file so you can open with another editor, or
+  to a text pager/viewer (like &#8216;more&#8217; or &#8216;less&#8217;), then quit the file or text
+  pager, refine your grep and repeat the whole thing all over.]</i><br>
+</p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>&#8220;traditional&#8221; way</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>vim way</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 8. </b>find lines about bgp related info, generated 8/16/2012, and containing keyword "peer reset"</p>
+</li>
+</ul>
+<p><b>benefit of vim method</b></p><ul>
+<li>
+<p>
+repeat the refining process right on refined text which you are visually
+  seeing in the editor<br>
+ &#8201;&#8212;&#8201;this is a really powerful but still convenient method to approach a complex target
+</p>
+</li>
+<li>
+<p>
+never need to leave/exit editor to use external tools from another terminal!
+</p>
+</li>
+</ul>
+<h3><a name="_grep_example_increamental_multi_steps_search"></a>1.2. grep example: "increamental multi-steps search"</h3>
+<p>To make it simple, you can always just use the simplest grep, do it multiple
+times , each time with a new pattern, to gradually narrow down the target logs
+entries. Or, for <strong>"power"</strong> grep user, putting everything in one line
+(&#8220;one-liner&#8221;) is a faster way to get the end result in just one go.</p>
+<p><b>the log</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>.RCMDVA-VFTTP-18#show log data sev deb
+ 1      
+RCMDVA-VFTTP-18#show log data sev deb
+ 2      *** stored log messages ***
+ 3      *** log: all
+ 4      *** severity: DEBUG and higher
+ 5      *** no baseline
+ 6
+ 7      NOTICE 08/07/2012 03:41:54 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core leaves established state due to hold timer expired
+ 8      NOTICE 08/07/2012 03:42:16 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core enters established state
+ 9      NOTICE 08/07/2012 03:45:02 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core leaves established state due to hold timer expired
+...&lt;snipped&gt;...
+216     NOTICE 08/07/2012 07:54:57 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core enters established state
+217     NOTICE 08/07/2012 07:57:06 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core leaves established state due to hold timer expired
+218     NOTICE 08/07/2012 07:57:21 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core enters established state
+219     DEBUG 08/07/2012 07:59:35 UTC ethernet (GigabitEthernet14/0/3.1680): Ethernet::setIfAdminStatusCommon() for VlanSub 0x2300b925 ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+220     DEBUG 08/07/2012 07:59:44 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x2300b925 over VlanMajor 0x2200004e
+221     NOTICE 08/07/2012 08:00:04 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core leaves established state due to hold timer expired
+222     NOTICE 08/07/2012 08:00:28 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core enters established state
+223     DEBUG 08/07/2012 08:01:38 UTC ethernet (GigabitEthernet14/1/7.1596): Ethernet::setIfAdminStatusCommon() for VlanSub 0x23002b5e ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+224     DEBUG 08/07/2012 08:01:43 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x23002b5e over VlanMajor 0x2200005d
+225     NOTICE 08/07/2012 08:03:22 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core leaves established state due to hold timer expired
+226     DEBUG 08/07/2012 08:03:30 UTC ethernet (GigabitEthernet13/0/3.504): Ethernet::setIfAdminStatusCommon() for VlanSub 0x23000914 ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+227     DEBUG 08/07/2012 08:03:34 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x23000914 over VlanMajor 0x22000046
+228     NOTICE 08/07/2012 08:03:48 UTC bgpNeighborChanges (vol): internal peer 130.81.248.130 in core enters established state
+...&lt;snipped&gt;...
+1735    DEBUG 08/20/2012 19:02:34 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x2300be27 over VlanMajor 0x22000055
+1736    DEBUG 08/20/2012 19:02:37 UTC ethernet (GigabitEthernet12/0/2.1343): Ethernet::setIfAdminStatusCommon() for VlanSub 0x2300be28 ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+1737    DEBUG 08/20/2012 19:02:42 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x2300be28 over VlanMajor 0x22000045
+1738    DEBUG 08/20/2012 19:16:31 UTC ethernet (GigabitEthernet13/0/2.3185): Ethernet::setIfAdminStatusCommon() for VlanSub 0x23004add ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+1739    DEBUG 08/20/2012 19:16:34 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x23004add over VlanMajor 0x22000048
+1740    DEBUG 08/20/2012 19:30:37 UTC ethernet (GigabitEthernet14/1/5.98): Ethernet::setIfAdminStatusCommon() for VlanSub 0x2300be07 ifAdminStatus=Down, validateOnly = true, icrAdmin = 1, askIcr = true
+1741    DEBUG 08/20/2012 19:30:41 UTC ethernet: Ethernet::removeVlanSubInterface VlanSub 0x2300be07 over VlanMajor 0x2200004a</code></pre>
+</td></tr></table>
+<p><b>our target lines need to :</b></p><ul>
+<li>
+<p>
+have timestamps during Aug.7 abt. 5 to 6 UTC, <strong>AND</strong>
+</p>
+</li>
+<li>
+<p>
+be related any of the following:
+</p>
+<ul>
+<li>
+<p>
+are about <em>bgp</em> <strong>AND</strong>
+</p>
+</li>
+<li>
+<p>
+<em>reset by peer</em>, <strong>OR</strong> ,
+</p>
+</li>
+<li>
+<p>
+to have more clues about the cause, any of the following events in between
+are wanted:
+</p>
+<ul>
+<li>
+<p>
+<em>link</em> down/up
+</p>
+</li>
+<li>
+<p>
+<em>warn</em>(ings)
+</p>
+</li>
+<li>
+<p>
+<em>error</em>
+</p>
+</li>
+<li>
+<p>
+<em>fail</em>(ures)
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><b>you can narrow down the logs with following multiple steps</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table frame="void" cellpadding="4">
+<tr valign="top">
+<td>
+<img style="border-image: none 0;" alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td style="border-left: 1px solid silver;">
+<ul>
+<li>
+<p>
+you will see the intermediate result of the filter after each step right
+away, press &#8216;u&#8217; to undo and &#8216;ctrl-r&#8217; to redo the filter, just like the usual vim
+normal mode operation.
+</p>
+</li>
+<li>
+<p>
+before the next grep action, you need to re-select the new range of the text
+  from the result of previous grep operation, because it is now a completely new
+  text blocks&#8201;&#8212;&#8201;every line has been &#8220;filtered&#8221; even if they looks the same.
+</p>
+</li>
+</ul>
+</td></tr></table>
+<p><b>final search result (still within your editor)</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p>As mentioned, you can also achieve the same effect by composing a complex grep
+regex in one line</p>
+<p><b>one liner</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>"bgp <a href="mailto:issues@Aug.7">issues@Aug.7</a> abt. 5 to 6 UTC, reset by peer,not sure there was link down or other errors&#8230;</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<h3><a name="_more_grep_example"></a>1.3. more grep example</h3>
+<p><b>issue:</b><br>need help from &#8216;grep&#8217; since there is no fancy options a/v by original &#8216;dir&#8217; command
+<br><i>[even MS-dos support some of the sort options to some extent for their
+version of &#8216;dir&#8217;]</i><br></p>
+<p><b>no much options available here:</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>CLR2.Austin-TX#dir ?
+  FILE PATH  The name of the local file or directory to list
+  short      Provide brief listing
+  &lt;cr&gt;</code></pre>
+</td></tr></table>
+<p><b>original E-serial &#8216;dir&#8217; output</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:clr2-austin-ping.cnf                  1712159     1712159   08/07/2012 08:52:10
+disk0:20110419.cnf                          1240326     1240326   08/22/2012 10:46:02
+disk0:xoBGP736.cnf                           215140      215140   08/22/2012 12:24:46
+disk0:20100727.cnf                          3331572     3331572   07/27/2012 07:49:14
+disk0:moe1440-736-020111.cnf                1295880     1295880   02/01/2011 18:37:56
+disk0:GE-test.cnf                           1295880     1295880   02/01/2011 18:22:56
+disk0:10-3-1xo.cnf                          1212543     1212543   03/21/2011 04:43:40
+disk0:Santana.cnf                           3328569     3328569   06/15/2012 03:58:58
+disk0:clr2-austin.cnf                       1711986     1711986   08/02/2012 08:14:12
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:jan29th08.scr                         1103161     1103161   01/29/2008 16:45:52
+disk0:March7MOE.scr                          348591      348591   03/07/2008 12:04:38
+disk0:March11MoeConfig.scr                   349102      349102   03/11/2008 09:57:34
+disk0:March19MOE.scr                         349921      349921   03/19/2008 14:01:12
+disk0:may15th.scr                             20637       20637   05/15/2008 11:07:50
+disk0:June11th.scr                            22926       22926   06/11/2008 13:43:26
+disk0:August19th.scr                          23192       23192   08/19/2008 13:50:42
+disk0:latency-812.scr                         59733       59733   09/05/2008 10:36:08
+disk0:latenRecreate812.scr                   163015      163015   09/05/2008 18:18:14
+disk0:latency_finalResutls723.scr            161098      161098   09/07/2008 22:17:38
+disk0:ATTStaticPPP823Final.scr              7012873     7012873   09/09/2008 16:48:12
+disk0:VZ_latency0912_812p033.scr             187429      187429   09/12/2008 11:37:58
+disk0:LI_work_812.scr                        187528      187528   09/25/2008 13:35:52
+disk0:li_823.scr                             187555      187555   09/26/2008 09:48:34
+disk0:snmp.scr                               794894      794894   12/15/2008 16:50:18
+disk0:emc613.scr                               6000        6000   02/05/2009 11:56:10
+disk0:emc613mod.scr                            6087        6087   02/05/2009 12:51:50
+disk0:xo_bgp_recret.scr                       11072       11072   02/25/2010 19:21:54
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:xo613bgp.scr                            10274       10274   03/04/2010 12:26:34
+disk0:backup-jan-31-2011.scr                  60257       60257   01/31/2011 16:52:36
+disk0:lab-config.scr                         478140      478140   02/01/2011 12:58:54
+disk0:lab-config-wrong.scr                   127785      127785   02/01/2011 00:01:10
+disk0:lab-config-right.scr                   471302      471302   02/01/2011 13:07:46
+disk0:COC3_COC12_5_08_22_2011_23_45.dmp    24166111    24166111   08/22/2011 23:45:56
+disk0:lab-config-b4upgrade.scr               471248      471248   02/01/2011 18:47:22
+disk0:lab-config-afterupgrade.scr            470600      470600   02/01/2011 19:15:36
+disk0:test.scr                               474491      474491   03/31/2011 05:13:26
+disk0:7-3-6XO.scr                            473396      473396   03/21/2011 04:32:46
+disk0:7-3-6XO_modified.scr                   473046      473046   03/21/2011 04:46:32
+disk0:7-3-6-XO_April29.scr                   474538      474538   04/29/2011 09:41:06
+disk0:srp_stats.tsa                        16346209    16346209   09/03/2012 06:44:20
+ram:bulkstats1.sts                            66004       66004   09/03/2012 06:44:20
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>1st time grep:get all dmp files</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:COC3_COC12_5_08_22_2011_23_45.dmp    24166111    24166111   08/22/2011 23:45:56
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>2nd time grep</b><br>get all &#8216;GE&#8217; ( <strong>AND</strong> ) &#8216;dmp&#8217; files
+<br><i>[if you grep out of previous grep results, naturely the new operation
+is always logical &#8220;AND&#8221; to previous operation, just like you grep everything
+at one go :'&lt;,\'&gt;!grep "GE.*.dmp"]</i><br></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>all today&#8217;s file</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:20110419.cnf                          1240326     1240326   08/22/2012 10:46:02
+disk0:xoBGP736.cnf                           215140      215140   08/22/2012 12:24:46
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>all today&#8217;s dmp file</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>all today&#8217;s file, or all file related to GE card</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:20110419.cnf                          1240326     1240326   08/22/2012 10:46:02
+disk0:xoBGP736.cnf                           215140      215140   08/22/2012 12:24:46
+disk0:GE-test.cnf                           1295880     1295880   02/01/2011 18:22:56
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<p><b>anything except cnf file</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:COC3_COC12_5_08_22_2011_23_45.dmp    24166111    24166111   08/22/2011 23:45:56
+disk0:srp_stats.tsa                        16346209    16346209   09/03/2012 06:44:20
+ram:bulkstats1.sts                            66004       66004   09/03/2012 06:44:20
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="_external_tool_example_8216_sort_8217_from_inside_vim"></a>2. external tool example: &#8216;sort&#8217; from inside vim</h2>
+<p><b>how to sort the files per size/time/type/&#8230;/etc?</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ERX-40-89-f2#dir
+Please wait...
+                                                      unshared                          in
+                 file                       size        size          date (UTC)        use
+---------------------------------------   ---------   ---------   -------------------   ---
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:clr2-austin-ping.cnf                  1712159     1712159   08/07/2012 08:52:10
+disk0:20110419.cnf                          1240326     1240326   04/19/2012 10:46:02
+disk0:xoBGP736.cnf                           215140      215140   03/04/2010 12:24:46
+disk0:20100727.cnf                          3331572     3331572   07/27/2012 07:49:14
+disk0:moe1440-736-020111.cnf                1295880     1295880   02/01/2011 18:37:56
+disk0:10-3-1xo.cnf                          1212543     1212543   03/21/2011 04:43:40
+disk0:Santana.cnf                           3328569     3328569   06/15/2012 03:58:58
+disk0:clr2-austin.cnf                       1711986     1711986   08/02/2012 08:14:12
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56</code></pre>
+</td></tr></table>
+<p><b>sort by name:</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>disk0:10-3-1xo.cnf                          1212543     1212543   03/21/2011 04:43:40
+disk0:20100727.cnf                          3331572     3331572   07/27/2012 07:49:14
+disk0:20110419.cnf                          1240326     1240326   04/19/2012 10:46:02
+disk0:clr2-austin.cnf                       1711986     1711986   08/02/2012 08:14:12
+disk0:clr2-austin-ping.cnf                  1712159     1712159   08/07/2012 08:52:10
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:moe1440-736-020111.cnf                1295880     1295880   02/01/2011 18:37:56
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:Santana.cnf                           3328569     3328569   06/15/2012 03:58:58
+disk0:xoBGP736.cnf                           215140      215140   03/04/2010 12:24:46</code></pre>
+</td></tr></table>
+<p><b>sort by size:</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:20100727.cnf                          3331572     3331572   07/27/2012 07:49:14
+disk0:Santana.cnf                           3328569     3328569   06/15/2012 03:58:58
+disk0:clr2-austin-ping.cnf                  1712159     1712159   08/07/2012 08:52:10
+disk0:clr2-austin.cnf                       1711986     1711986   08/02/2012 08:14:12
+disk0:moe1440-736-020111.cnf                1295880     1295880   02/01/2011 18:37:56
+disk0:20110419.cnf                          1240326     1240326   04/19/2012 10:46:02
+disk0:10-3-1xo.cnf                          1212543     1212543   03/21/2011 04:43:40
+disk0:xoBGP736.cnf                           215140      215140   03/04/2010 12:24:46
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26</code></pre>
+</td></tr></table>
+<p><b>sort by time</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>disk0:COC3_COC12_5_08_22_2012_22_43.dmp    24166561    24166561   08/22/2012 22:45:56
+disk0:GE_FE_0_08_22_2012_06_42.dmp         31593741    31593741   08/22/2012 06:45:42
+disk0:GE_FE_0_08_07_2012_10_02.dmp         28617646    28617646   08/07/2012 10:06:04
+disk0:clr2-austin-ping.cnf                  1712159     1712159   08/07/2012 08:52:10
+disk0:clr2-austin.cnf                       1711986     1711986   08/02/2012 08:14:12
+disk0:20100727.cnf                          3331572     3331572   07/27/2012 07:49:14
+disk0:Santana.cnf                           3328569     3328569   06/15/2012 03:58:58
+disk0:20110419.cnf                          1240326     1240326   04/19/2012 10:46:02
+disk0:10-3-1xo.cnf                          1212543     1212543   03/21/2011 04:43:40
+disk0:moe1440-736-020111.cnf                1295880     1295880   02/01/2011 18:37:56
+disk0:xoBGP736.cnf                           215140      215140   03/04/2010 12:24:46
+disk0:/incoming &lt;DIR&gt;                             0               10/03/2007 16:11:26
+disk0:/outgoing &lt;DIR&gt;                             0               10/03/2007 16:11:26</code></pre>
+</td></tr></table>
+<div style="page-break-after:always"></div>
+<hr>
+<h2><a name="_external_tool_example_reuse_strong_your_own_strong_programs_scripts"></a>3. external tool example: reuse <strong>your own</strong> programs/scripts</h2>
+<p>if you have some of your own well-tested programes/scripts and enjoyed using
+them in the terminal, you can always re-use them from inside vim. The even
+better thing is that the result will be displayed &#8220;on the fly&#8221;.
+<br><i>[This is more efficient than relying on traditional method that you
+have to switch between your editor and terminals, and quite often you&#8217;ll need to
+copy/paste between your work file and some temp files/etc. However, for better
+integration with VIM, your script/program better support stdin/stdout &#8220;text
+streams&#8221; as input/output flow, otherwise you might have to wrap them into that
+looking :)]</i><br></p>
+<p><span style="background:yellow;">ifdef::basebackend-html[[source,vim]]</span></p>
+<p><b>original output block of &#8220;show version&#8221; command</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>-   26 ^MLSANCA-VFTTP-142#show version
+|   27 Juniper Edge Routing Switch E320
+|   28 Copyright (c) 1999-2012 Juniper Networks, Inc.  All rights reserved.
+|   29 System Release: e320_12-1-1p0-3.rel
+|   30         Version: 12.1.1 patch-0.3 [BuildId 14015]   (February 20, 2012  14:18)
+|   31 Active Hotfixes:
+|   32         e320_12-1-1p0-3_hf2228.hfx
+|   33         e320_12-1-1p0-3_hf2235.hfx
+|   34         e320_12-1-1p0-3_hf2236.hfx
+|   35         e320_12-1-1p0-3_hf2331.hfx
+|   36         e320_12-1-1p0-3_hf2421.hfx
+|   37         e320_12-1-1p0-3_hf2383.hfx
+|   38 System running for: 1378 days, 22 hours, 14 minutes, 54 seconds
+|   39         (since MON DEC 01 2008 21:30:03 UTC)
+|   40
+|   41 slot  state    type    admin  spare   running release    slot uptime
+|   42 ---- -------- ------- ------- ----- ------------------- --------------
+|   43 0    standby  LM-10   enabled spare e320_12-1-1p0-3.rel      ---
+|   44 1     online  LM-4    enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:31s
+|   45 2     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:28m:04s
+|   46 3     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:24m:00s
+|   47 4     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:28m:23s
+|   48 5     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:49s
+|   49 6    standby  SRP-320 enabled  ---  e320_12-1-1p0-3.rel      ---
+|   50 6     online  SFM-320 enabled  ---          ---         89d11h:43m:50s
+|   51 7     online  SRP-320 enabled  ---  e320_12-1-1p0-3.rel 89d11h:43m:57s
+|   52 7     online  SFM-320 enabled  ---          ---         89d11h:43m:39s
+|   53 8     online  SFM-320 enabled  ---          ---         89d11h:43m:44s
+|   54 9     online  SFM-320 enabled  ---          ---         89d11h:43m:30s
+|   55 10    online  SFM-320 enabled  ---          ---         89d11h:43m:34s
+|   56 11    online  LM-10   enabled spare e320_12-1-1p0-3.rel 0d07h:29m:41s
+|   57 12    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:23m:47s
+|   58 13    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:33s
+|   59 14    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:26m:30s
+|   60 15   inactive LM-10   enabled  ---  e320_12-1-1p0-3.rel      ---
+|   61 16    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:06m:50s
+|   62
+|   63 ^MLSANCA-VFTTP-142#
++   64 +-- 74 lines: ^MLSANCA-VFTTP-142#show hardware
++  138 +-- 30 lines: ^MLSANCA-VFTTP-142#show utili detailontrol-flow-detection count delta
++  168 +--416 lines: ^MLSANCA-VFTTP-142#show log data
++  584 +--  7 lines: ^MLSANCA-VFTTP-142#show log data nv-file
++  591 +-- 11 lines: ^MLSANCA-VFTTP-142#show subscribers summary slot
+vzlogs/2012-0910-0848.log [utf-8] [jel] [26/9561,20] [0%]      [0---------------------------
+:'&lt;,'&gt;!showversion      <b>&lt;1&gt;</b></code></pre>
+</td></tr></table>
+<p><b>after applying the external tool to the output blocks</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>-   26 ^MLSANCA-VFTTP-142#show version
+|   27 Juniper Edge Routing Switch E320
+|   28 Copyright (c) 1999-2012 Juniper Networks, Inc.  All rights reserved.
+|   29 System Release: e320_12-1-1p0-3.rel
+|   30         Version: 12.1.1 patch-0.3 [BuildId 14015]   (February 20, 2012  14:18)
+|   31 Active Hotfixes:
+|   32         e320_12-1-1p0-3_hf2228.hfx
+|   33         e320_12-1-1p0-3_hf2235.hfx
+|   34         e320_12-1-1p0-3_hf2236.hfx
+|   35         e320_12-1-1p0-3_hf2331.hfx
+|   36         e320_12-1-1p0-3_hf2421.hfx
+|   37         e320_12-1-1p0-3_hf2383.hfx
+|   38 System running for: 1378 days, 22 hours, 14 minutes, 54 seconds
+|   39         (since MON DEC 01 2008 21:30:03 UTC)
+|   40 Time this "show version" CLI command was executed:                                   Tue Sep 11 00:44:57 2012
+|   41
+|   42 slot  state    type    admin  spare   running release    slot uptime
+|   43 ---- -------- ------- ------- ----- ------------------- --------------
+|   44 0    standby  LM-10   enabled spare e320_12-1-1p0-3.rel      ---
+|   45 1     online  LM-4    enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:31s since Wed Jun 13 13:24:26 2012
+|   46 2     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:28m:04s since Wed Jun 13 13:16:53 2012
+|   47 3     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:24m:00s since Wed Jun 13 13:20:57 2012
+|   48 4     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:28m:23s since Wed Jun 13 13:16:34 2012
+|   49 5     online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:49s since Wed Jun 13 13:24:08 2012
+|   50 6    standby  SRP-320 enabled  ---  e320_12-1-1p0-3.rel      ---
+|   51 6     online  SFM-320 enabled  ---          ---         89d11h:43m:50s since Wed Jun 13 13:01:07 2012
+|   52 7     online  SRP-320 enabled  ---  e320_12-1-1p0-3.rel 89d11h:43m:57s since Wed Jun 13 13:01:00 2012
+|   53 7     online  SFM-320 enabled  ---          ---         89d11h:43m:39s since Wed Jun 13 13:01:18 2012
+|   54 8     online  SFM-320 enabled  ---          ---         89d11h:43m:44s since Wed Jun 13 13:01:13 2012
+|   55 9     online  SFM-320 enabled  ---          ---         89d11h:43m:30s since Wed Jun 13 13:01:27 2012
+|   56 10    online  SFM-320 enabled  ---          ---         89d11h:43m:34s since Wed Jun 13 13:01:23 2012
+|   57 11    online  LM-10   enabled spare e320_12-1-1p0-3.rel 0d07h:29m:41s  since Mon Sep 10 17:15:16 2012
+|   58 12    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:23m:47s since Wed Jun 13 13:21:10 2012
+|   59 13    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:20m:33s since Wed Jun 13 13:24:24 2012
+|   60 14    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:26m:30s since Wed Jun 13 13:18:27 2012
+|   61 15   inactive LM-10   enabled  ---  e320_12-1-1p0-3.rel      ---
+|   62 16    online  LM-10   enabled  ---  e320_12-1-1p0-3.rel 89d11h:06m:50s since Wed Jun 13 13:38:07 2012
+|   63
+|   64 ^MLSANCA-VFTTP-142#
++   65 +-- 74 lines: ^MLSANCA-VFTTP-142#show hardwaretailontrol-flow-detection count delta
++  139 +-- 30 lines: ^MLSANCA-VFTTP-142#show utili detail
++  169 +--416 lines: ^MLSANCA-VFTTP-142#show log data nv-file
++  585 +--  7 lines: ^MLSANCA-VFTTP-142#show log data nv-fileary slot
++  592 +-- 11 lines: ^MLSANCA-VFTTP-142#show subscribers summary slot
+vzlogs/2012-0910-0848.log [utf-8,+] [jel] [26/9562,1] [0%]       [0--------------------------------------------------
+36 lines filtered <b>&lt;2&gt;</b></code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+call the external "showversion" program, and apply the selected range of
+text as the stdin to the program
+</p>
+</li>
+<li>
+<p>
+because the every line of &#8220;show version&#8221; output (line26-line62,total 36)
+was processed by the external program and was replaced by the result
+</p>
+</li>
+</ol>
+<table frame="void" cellpadding="4">
+<tr valign="top">
+<td>
+<img style="border-image: none 0;" alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td style="border-left: 1px solid silver;">
+<p>the &#8220;showversion&#8221; program is written by
+<a href="mailto:jnatale@juniper.net">Jonathan</a> with the original name:
+&#8220;realTimeGetterAllFromShowVersion&#8221;.  Here we use it to domonstrate how to
+re-use the existing program that you took time to write/test, from within vim.
+so your/others effort/hard work won&#8217;t be wasted.</p>
+</td></tr></table>
+<hr>
+<h1><a name="X4"></a>vim folding:make huge file small (JTAC may like)</h1>
+<p><b>commonly used method</b></p><ul>
+<li>
+<p>
+manual
+</p>
+<ul>
+<li>
+<p>
+better than nothing
+</p>
+</li>
+<li>
+<p>
+use for temporary
+</p>
+</li>
+<li>
+<p>
+no need modify(good)
+</p>
+</li>
+<li>
+<p>
+disadvantage: Do not persist across file reload
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+indent
+</p>
+<ul>
+<li>
+<p>
+better
+</p>
+</li>
+<li>
+<p>
+good for well-indented text (code in consistent indent style, or JUNOS
+        config)
+</p>
+</li>
+<li>
+<p>
+advantage: no need modify file content
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+marker
+</p>
+<ul>
+<li>
+<p>
+Markers in the text tell where folds start and end.
+</p>
+</li>
+<li>
+<p>
+This allows you to precisely specify the folds.
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+expr
+</p>
+<ul>
+<li>
+<p>
+powerful
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+syntax
+</p>
+<ul>
+<li>
+<p>
+really powerful, but takes time and sharp learning curve to make it work
+</p>
+</li>
+<li>
+<p>
+an example:
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+more to read:
+</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</li>
+</ul>
+<hr>
+<h2><a name="_folding_marker"></a>1. folding: marker</h2>
+<p><b>does this looks like 6859 lines of VZ BBE configuration?  <br><i>[each <strong>+</strong> sign in the left column is &#8216;alive&#8217;, click it will toggle the folding; The sign will switch between a <strong>+</strong> and a <strong>-</strong> accordingly, and the &#8216;sub-fold&#8217; under current fold appears when current fold got extended]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<hr>
+<h2><a name="_folding_indentation"></a>2. folding: indentation</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>before fold</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>after fold 2nd level indent (c to f)</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>after fold 1st level indent (b to f)</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>      16 a
+   -+ 17 +---  5 lines: b
+      22 g</code></pre>
+</td></tr></table>
+</td></tr></table>
+<p><b>Example 9. </b>fold on indent</p>
+<hr>
+<h2><a name="_folding_indentation_junose_cisco_config_file"></a>3. folding: indentation: JUNOSe/CISCO config file</h2>
+<p><b>JUNOS config folding on indentation <br><i>[personally I prefer folding on mark than indentation in this case. Mark folding looks more &#8216;compact&#8217; and hence &#8216;cleaner&#8217;, because the marker method includes the the &#8216;headers&#8217; (e.g, &#8216;groups&#8217;) line while indentation method only folds the indented lines, excluding the headers]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<hr>
+<h2><a name="_folding_syntax_junose_config"></a>4. folding: syntax: JUNOSe config</h2>
+<p><b>config file:junose(cisco) <br><i>[as near as I know, JUNOSe/cisco configuration file (or any other network devices in the current industry ) doesn&#8217;t look as well structured as JUNOS/JUNOS-like configurations, which makes the syntax fold for JUNOSe/cisco-like configuration files far more complex and less consistent-looking than JUNOS-like configuration files]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<hr>
+<h2><a name="_folding_syntax_junos_logs"></a>5. folding: syntax: JUNOS logs</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>does this look like 6000+ lines?  <br><i>[6 vs. 6000 lines, the ratio depends on how long output the command line printed. in this case a &#8216;show config&#8217; prints thousands of lines. actually to achive this effect, the long regex demonstrated earlier as an example was used to locate the command line itself as part of the work; folding on &#8216;syntax&#8217; was created in a &#8216;syntax file&#8217;; and the syntax folding action was triggered on a &#8216;set filetype&#8217; event, which, was either triggered by a manual vim ex command, or the vim automatic file type detection method &#8230;]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 10. </b>JUNOS log captures with vim syntax folding</p>
+<hr>
+<h2><a name="_folding_syntax_junose_logs"></a>6. folding: syntax: JUNOSe logs</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>does this look like 3492+ lines?</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 11. </b>JUNOSe log captures with vim syntax folding</p>
+<hr>
+<h2><a name="_folding_syntax_linux_command_logs"></a>7. folding: syntax: linux command logs</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 12. </b>linux bash log</p>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X5"></a>vim as file manager: netrw (windows explorer)</h1>
+<p><b>what an typical file system explorer can do</b></p><ul>
+<li>
+<p>
+folder operation
+</p>
+</li>
+<li>
+<p>
+files operation:cp,mv,delete
+</p>
+</li>
+<li>
+<p>
+jumping back and forth
+</p>
+</li>
+<li>
+<p>
+going up and down
+</p>
+</li>
+<li>
+<p>
+bookmarks/browsing history
+</p>
+</li>
+<li>
+<p>
+open files with associated applications: pdf, word, png, rmvb, etc.
+</p>
+</li>
+<li>
+<p>
+etc
+</p>
+</li>
+</ul>
+<p><b>how does it work</b><br>In VIM this is essentially done by the
+<a href="http://www.vim.org/scripts/script.php?script_id=1075"><em>netrw</em></a> plugin, which is
+now one of the VIM built-in plugins - it comes with VIM so no need to install
+the plugin anymore.</p>
+<p>This plugin don&#8217;t need to be activated - it will just work by default.</p>
+<hr>
+<h2><a name="_advantage_of_vim_as_a_fm"></a>1. advantage of vim as a FM</h2>
+<ul>
+<li>
+<p>
+search file/folders fast
+</p>
+<ul>
+<li>
+<p>
+the same skill you learned about how to search text in a file!
+</p>
+</li>
+<li>
+<p>
+all regex applys!
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+open/edit remote files/dirs directly from local machine (JTAC,JUNOS)
+</p>
+<ul>
+<li>
+<p>
+traditional way:
+</p>
+<ol type="1">
+<li>
+<p>
+copy(download) remote file to local machine<br>
+      (plus: ftp,http,scp,sftp,etc tools need to be explicitly involves)
+</p>
+</li>
+<li>
+<p>
+open/edit local copy, save to a local temp file
+</p>
+</li>
+<li>
+<p>
+copy(upload) to remote place (ftp,http,scp,sftp tools involves)
+</p>
+</li>
+</ol>
+</li>
+<li>
+<p>
+with VIM:
+</p>
+<ol type="1">
+<li>
+<p>
+open/edit remote file directly, save, done
+    <br><i>[some may think this is not too much fancy in unix system - all
+    unix-like system comes with a standard vi/vim installed. However, Think
+    about how do you modify files in a remote system that supports SSH, but no
+    fancy terminal-based editor installed- for example, you may want to edit
+    some files in your iphone :p ]</i><br>
+</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>
+open edit file from achives directly
+</p>
+<ul>
+<li>
+<p>
+traditional way:
+</p>
+<ol type="1">
+<li>
+<p>
+extract to another temp folder
+</p>
+</li>
+<li>
+<p>
+open/edit files from the temp folder, save
+</p>
+</li>
+<li>
+<p>
+make a new achive
+</p>
+</li>
+</ol>
+</li>
+<li>
+<p>
+with VIM:
+</p>
+<ol type="1">
+<li>
+<p>
+open/edit files from archieve , save, done
+</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2><a name="_example_open_local_fs"></a>2. example:open local FS</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>ping@640g-laptop:~$ vim e-serials</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 13. </b>browse local file system</p>
+<hr>
+<h2><a name="_example_open_archive_file_tarball"></a>3. example:open archive file: tarball</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><span style="background:yellow;">ifdef::basebackend-html[[source,vim]]</span></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>    1 " tar.vim version v26
+    2 " Browsing tarfile /home/ping/Downloads/XML-Parser-2.40.tar.gz
+    3 " Select a file with cursor and press ENTER
+    4
+    5 XML-Parser-2.40
+    6 XML-Parser-2.40/Changes
+    7 XML-Parser-2.40/Makefile.PL
+    8 XML-Parser-2.40/MANIFEST
+    9 XML-Parser-2.40/META.yml
+   10 XML-Parser-2.40/Parser.pm
+   11 XML-Parser-2.40/README
+   12 XML-Parser-2.40/Expat
+   13 XML-Parser-2.40/Expat/encoding.h                            <b>&lt;1&gt;</b>
+   14 XML-Parser-2.40/Expat/Expat.pm
+   15 XML-Parser-2.40/Expat/Expat.xs
+   16 XML-Parser-2.40/Expat/Makefile.PL
+   17 XML-Parser-2.40/Expat/typemap
+   18 XML-Parser-2.40/inc
+   19 XML-Parser-2.40/inc/Devel
+   20 XML-Parser-2.40/inc/Devel/CheckLib.pm
+   21 XML-Parser-2.40/Parser
+   22 XML-Parser-2.40/Parser/LWPExternEnt.pl
+XML-Parser-2.40.tar.gz [utf-8,-,RO] [tar] [1/78,1] [1%]      [0-------------]</code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+move cursor here
+</p>
+</li>
+</ol>
+<p>now move to line 13 and press &lt;enter&gt;, the file listed in line 13
+&#8220;XML-Parser-2.40/encoding.h&#8221; will be opened in a second window:</p>
+<p><span style="background:yellow;">ifdef::basebackend-html[[source,vim]]</span></p>
+<p><b>file &#8220;XML-Parser-2.40/encoding.h&#8221;</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>   13 XML-Parser-2.40/Expat/encoding.h                          <b>&lt;1&gt;</b>
+   14 XML-Parser-2.40/Expat/Expat.pm
+   15 XML-Parser-2.40/Expat/Expat.xs
+XML-Parser-2.40.tar.gz [utf-8,-,RO] [tar] [13/78,1] [16%]                  [0----]
+    1 /*****************************************************************
+    2 ** encoding.h                                             <b>&lt;2&gt;</b>
+    3 **
+    4 ** Copyright 1998 Clark Cooper
+    5 ** All rights reserved.
+    6 **
+    7 ** This program is free software; you can redistribute it and/or
+    8 ** modify it under the same terms as Perl itself.
+    9 */
+   10
+   11 #ifndef ENCODING_H
+   12 #define ENCODING_H 1
+   13
+   14 #define ENCMAP_MAGIC    0xfeebface
+   15
+   16 typedef struct prefixmap {
+   17   unsigned char min;
+   18   unsigned char len;                    /* 0 =&gt; 256 */
+   19   unsigned short bmap_start;
+   20   unsigned char ispfx[32];
+   21   unsigned char ischar[32];
+   22 } PrefixMap;
+tarfile::XML-Parser-2.40/Expat/encoding.h [utf-8] [cpp] [1/91,1] [1%]      [0--</code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+original window that contains the file lists in the tar ball
+</p>
+</li>
+<li>
+<p>
+new window with opened file
+<br><i>[the file that is just opened is the one that you pressed &lt;return&gt; when your
+ cursor was on]</i><br>
+</p>
+</li>
+</ol>
+</td></tr></table>
+<p><b>Example 14. </b>$vim XML-Parser-2.40.tar.gz</p>
+<hr>
+<h2><a name="_example_open_remote_fs_junos"></a>4. example:open remote FS: JUNOS</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>vim <a href="ftp://lab@10.1.1.1//">ftp://lab@10.1.1.1//</a> <br><i>[ftp is not the only option, vim support almost all protocols(fttp/scp/sftp/rcp/rsync/&#8230;)to retrieve remote FS info, see :help netrw for more info]</i><br></b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 15. </b>remote(MX) (root) file system</p>
+<hr>
+<h2><a name="_example_open_remote_fs_junos_list_view"></a>5. example:open remote FS :JUNOS: list view</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 16. </b>remote(MX) file system: "long" view</p>
+<hr>
+<h2><a name="_example_open_remote_fs_directly_junos_tree_view"></a>6. example:open remote FS directly: JUNOS: tree view</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 17. </b>remote(MX) file system: "tree view"</p>
+<hr>
+<h2><a name="_example_open_archive_file_on_remote_fs_on_the_fly_junos"></a>7. example:open archive file on remote FS "on the fly": JUNOS</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>  jdhcpd_sdb.log.1.gz     1 Jul 13 08:52:00 MX-FIOS-02-re0 newsyslog[22326]: logfile turned o
+  jdhcpd_sdb.log.2.gz     2 Jul 13 08:55:37  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:Non first c
+  jdhcpd_sdb.log.3.gz     3 Jul 13 08:55:37  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  jdhcpd_sdb.log.4.gz     4 Jul 13 08:59:38  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  jdhcpd_sdb.log.5.gz     5 Jul 13 09:03:40  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  jdhcpd_sdb.log.6.gz     6 Jul 13 09:07:41  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  jdhcpd_sdb.log.7.gz     7 Jul 13 09:11:42  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  jdhcpd_sdb.log.8.gz     8 Jul 13 09:15:43  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  ksyncd                  9 Jul 13 09:19:44  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:first cell
+  ldp.trace              10 Jul 13 09:23:46  MX-FIOS-02-re0 fpc2 ICHIP(0)_REG_ERR:first cell
+  license                11 Jul 13 09:23:46  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  license_subs_trace.log 12 Jul 13 09:27:47  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  lmpd                   13 Jul 13 09:31:48  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:first cell
+  lsp.stats              14 Jul 13 09:31:48  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  lsp.stats.0.gz         15 Jul 13 09:35:49  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  mastership             16 Jul 13 09:37:50  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:first cell
+  messages               17 Jul 13 09:39:50  MX-FIOS-02-re0 fpc2 ICHIP(0)_REG_ERR:first cell
+  messages.0.gz <b>&lt;1&gt;</b>      18 Jul 13 09:43:52  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.1.gz          19 Jul 13 09:47:53  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.2.gz          20 Jul 13 09:51:54  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:first cell
+  messages.3.gz          21 Jul 13 09:51:54  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:first cell
+  messages.4.gz          22 Jul 13 09:55:55  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.5.gz          23 Jul 13 09:59:56  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.6.gz          24 Jul 13 10:07:59  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:first cell
+  messages.7.gz          25 Jul 13 10:07:59  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.8.gz          26 Jul 13 10:20:02  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  messages.9.gz          27 Jul 13 10:24:04  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  mpls.trace             28 Jul 13 10:30:05  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:first cell
+  op-script.log          29 Jul 13 10:32:06  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pf                     30 Jul 13 10:36:07  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pfed                   31 Jul 13 10:40:08  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pfed_jdhcpd_trace.log  32 Jul 13 10:44:10  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pfed_trace.log         33 Jul 13 10:52:12  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pgmd                   34 Jul 13 10:56:13  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  poweron_seq.log        35 Jul 13 11:04:16  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pppoed_era_jpppoed_era_36 Jul 13 11:08:17  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pppoed_era_jpppoed_era_37 Jul 13 11:12:18  MX-FIOS-02-re0 fpc2 ICHIP(0)_REG_ERR:first cell
+  pppoed_era_jpppoed_era_38 Jul 13 11:12:18  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pppoed_era_jpppoed_era_39 Jul 13 11:16:19  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  pppoed_era_jpppoed_era_40 Jul 13 11:20:20  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  rtspd                  41 Jul 13 11:24:22  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  snapshot               42 Jul 13 11:28:23  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  utmp                   43 Jul 13 11:32:24  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  wtmp                   44 Jul 13 11:34:25  MX-FIOS-02-re0 fpc2 ICHIP(1)_REG_ERR:first cell
+  wtmp.0.gz              45 Jul 13 11:40:26  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  wtmp.1.gz              46 Jul 13 11:44:28  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  wtmp.2.gz              47 Jul 13 11:48:29  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  wtmp.3.gz              48 Jul 13 11:52:30  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  wtmp.4.gz              49 Jul 13 11:56:31  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:first cell
+  ~                      50 Jul 13 11:56:31  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+  ~                      51 Jul 13 12:00:32  MX-FIOS-02-re0 fpc2 ICHIP(3)_REG_ERR:Non first c
+ftp://lab@172.25.84.216//var/log/ [utf-8,RO] [78%]ftp://lab@172.25.84.216//var/log/messages.0.gz
+:set nowrap</code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+file currently viewed in the vertical window on the right
+</p>
+</li>
+</ol>
+</td></tr></table>
+<p><b>Example 18. </b>remote(MX) file system: open messages.0.gz in vertical window <br><i>[so yes there is no doubt vim also supports accessing local archives (in whatever known format) &#8216;on the fly&#8217;]</i><br></p>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X6"></a>vim as terminal emulator: <em>Conqterm</em> (secureCRT) (JTAC may like)</h1>
+<p>This is done by vim
+<a href="http://www.vim.org/scripts/script.php?script_id=2771">Conque Shell</a> plugin.
+Once installed, it can be activated to start a <em>bash</em> terminal into a VIM
+buffer.</p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>:ConqueTerm bash</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="_em_conqterm_em_examples"></a>1. <em>Conqterm</em> examples</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>ping@640g-laptop:~$
+ping@640g-laptop:~$ pwd
+/home/ping
+ping@640g-laptop:~$
+~
+~
+~
+~
+~
+~
+ping@640g-laptop: ~
+-- INSERT --                     <b>&lt;1&gt;</b></code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+vim "insert mode" indicator
+</p>
+</li>
+</ol>
+</td></tr></table>
+<p><b>Example 19. </b>vim as a terminal: local bash</p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>5960                                                                    <b>&lt;1&gt;</b>
+5970 PRVDRI-VFTTP-32:vol#
+5971 PRVDRI-VFTTP-32:vol#show ip int g12/1/5.1619                       <b>&lt;2&gt;</b>
+5972 GigabitEthernet12/1/5.1619 line protocol VlanSub is up, ip is up   <b>&lt;3&gt;</b>
+5973   Network Protocols: IP
+5974   Unnumbered Interface on loopback100
+5975   ( IP address  74.103.242.1 )
+5976   Operational MTU = 1500  Administrative MTU = 0
+5977   Operational speed = 1000000000  Administrative speed = 0
+5978   Discontinuity Time = 3959287872
+5979   Router advertisement = disabled
+5980   Proxy Arp = enabled
+5981   ARP spoof checking = enabled
+5982   Network Address Translation is disabled
+5983   TCP MSS Adjustment = disabled
+5984   SA-validation Enabled
+5985   Administrative debounce-time = disabled
+5986   Operational debounce-time    = disabled
+......                                                                  <b>&lt;4&gt;</b>
+6068       traffic-class RT-VIDEO
+6069       mark 128 mask 224
+6070 PRVDRI-VFTTP-32:vol#
+Verizon SSH Jumpstation - PRVDRI-VFTTP-32
+ -- INSERT --                                                           <b>&lt;5&gt;</b></code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+line number
+</p>
+</li>
+<li>
+<p>
+router (ERX) command line typed in
+</p>
+</li>
+<li>
+<p>
+router (ERX) command line output captures
+</p>
+</li>
+<li>
+<p>
+snipped - original output is long
+</p>
+</li>
+<li>
+<p>
+vim "insert mode" indicator - we ARE in an editor, no doubt!
+</p>
+</li>
+</ol>
+</td></tr></table>
+<p><b>Example 20. </b>vim as a terminal: login remote system (telnet/ssh)</p>
+<hr>
+<h2><a name="_terminal_emulator_list_of_cool_features"></a>2. terminal emulator:list of cool features</h2>
+<p><b>all(most) vim power as an editor conveys:</b></p><ul>
+<li>
+<p>
+pattern search ,jumping using same skills as if in normal text file
+</p>
+</li>
+<li>
+<p>
+syntax highlight
+</p>
+</li>
+<li>
+<p>
+(syntax) fold
+</p>
+</li>
+<li>
+<p>
+multi-tab (like secureCRT)
+</p>
+</li>
+<li>
+<p>
+split, multi page, etc
+</p>
+</li>
+<li>
+<p>
+suspend/resume anytime as will
+</p>
+</li>
+<li>
+<p>
+save logs
+</p>
+</li>
+<li>
+<p>
+etc&#8230;
+</p>
+</li>
+</ul>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X7"></a>vim as free hand drawing tool: drawit (paint,visio,word)(JTAC may like)</h1>
+<hr>
+<h2><a name="_free_hand_tools_considerations"></a>1. free hand tools considerations</h2>
+<ul>
+<li>
+<p>
+JTAC sometimes need draw ascii graph:
+</p>
+<ul>
+<li>
+<p>
+network topology (mostly)
+</p>
+</li>
+<li>
+<p>
+flow chart (occasionally)
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+available tools overview:
+</p>
+<ul>
+<li>
+<p>
+<strong>notepad</strong> is only good at horizontal lines, try it with vertical lines
+</p>
+</li>
+<li>
+<p>
+<strong>paint</strong> is lightweight, but &#8230; anyone use that?
+</p>
+</li>
+<li>
+<p>
+<strong>word</strong>/<strong>visio</strong> is standard/powerful/&#8230; but <strong>heavy</strong> &amp; <strong>expensive</strong>
+</p>
+</li>
+<li>
+<p>
+<strong>heavy</strong> in the sense like <strong>"overkills"</strong> for simple tasks
+</p>
+</li>
+<li>
+<p>
+<strong>expensive</strong> not in sense of <strong>price</strong>, more in sense of <strong>time</strong>
+</p>
+</li>
+<li>
+<p>
+<strong>UltraEdit</strong> and others might be nice, but try it with a MPLSVPN topo
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+ascii art vs. binary tools:
+</p>
+<ul>
+<li>
+<p>
+<strong>ascii</strong> art is always my first choice whenever possible:
+</p>
+<ul>
+<li>
+<p>
+small/portable/easy to maintain,
+</p>
+</li>
+<li>
+<p>
+still cool/good enough to demonstrate the issue
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>small</strong>: only several K or within a hundred of Bytes
+</p>
+</li>
+<li>
+<p>
+<strong>clear</strong>: arrow, signs, letters,numbers are always enough to demonstrate
+</p>
+</li>
+<li>
+<p>
+<strong>portable</strong>: 100% green, no need to install any fancy software
+</p>
+</li>
+<li>
+<p>
+<strong>maintain</strong>: the cool thing is you can just <strong>write topology directly into configs/code!</strong>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>There are a couple of plugins available to draw ascii-arts, my personal favorite
+is
+<a href="http://vim.sourceforge.net/scripts/script.php?script_id=40">drawit</a>.</p>
+<blockquote>DrawIt is a plugin which allows one to draw lines left, right, up, down, and
+along both slants. Optionally one may "cap" the lines with arrowheads.  One may
+change the horizontal, vertical, slant, and crossing characters to whichever
+characters one wishes.<p align="right">
+</p>
+</blockquote>
+<hr>
+<h2><a name="_example_draw_a_strong_decent_looking_strong_mpls_vpn_topology_in_2_minutes"></a>2. example:draw a <strong>"decent-looking"</strong> MPLS-VPN topology, in 2 minutes</h2>
+<p><b>try drawing a topology that involves: <br><i>[I finished it in this vim presentation within 1.5 min I guess :) ]</i><br></b></p><ul>
+<li>
+<p>
+4 P backbone
+</p>
+</li>
+<li>
+<p>
+2 PE
+</p>
+</li>
+<li>
+<p>
+2 CE
+</p>
+</li>
+<li>
+<p>
+lines/marks/rectangle/eclipse (for better readability)
+</p>
+</li>
+</ul>
+<hr>
+<h2><a name="_example_a_more_complicated_topology"></a>3. example:a more complicated topology</h2>
+<p><b>jncie-sg-topo:l2vpn</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<table frame="void" cellpadding="4">
+<tr valign="top">
+<td>
+<img style="border-image: none 0;" alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td style="border-left: 1px solid silver;">
+<p>Multi-level IS-IS, Areas 0001 and 0002 with ISO NET based on router number.</p>
+<p>lo0 address of r3 and r4 not injected into Area 0001 to ensure optimal forwarding between 10.0.3.3 and 10.0.3.4.
+Passive setting on r5&#8217;s core interfaces for optimal Area 0002-to-core routing.</p>
+<p>No authentication or route summarization. Routing policy at r5 to leak L1 externals (DC routes) to L2.</p>
+<p>Redistribution of static default route to data center from both r6 and r7.
+    Redistribution of 192.168.0/24 through 192.168.3/24 routes from RIP into IS-IS by both r6 and r7.</p>
+<p>All adjacencies are up, reachability problem discovered at r1 and r2 caused by local aggregate definition.
+    Corrected through IBGP policy to effect 10.0/16 route advertisement from r3 and r4 to r1 and r2;
+    removed local aggregate from r1 and r2.</p>
+<p>Suboptimal routing detected at the data center and at r1/r2 for some locations.
+    This is the result of random nexthop choice for data center&#8217;s default,
+    and the result of r1 and r2&#8217;s preference for r3&#8217;s RID over r4 with regard to the 10.0/16 route.
+    This is considered normal behavior, so no corrective actions are taken.</p>
+</td></tr></table>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X8"></a>vim as a doc browser: txtbrowser, Man</h1>
+<hr>
+<h2><a name="_spec_browser"></a>1. spec browser</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>RFC2328</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>       " Press &lt;F1&gt; to display help text              1
+                                                      2
+    -  rfc2328.txt (/Dropbox/temp-transfer)           3
+    |-   content                                      4
+    ||     1.  Introduction                           5 Network Working Group                                             J. Moy
+    ||     2.  The Link-state Database: organi&gt;       6 Request for Comments: 2328                   Ascend Communications, Inc.
+    ||     3.  Splitting the AS into Areas            7 STD: 54                                                       April 1998
+    ||     4.  Functional Summary                     8 Obsoletes: 2178
+    ||     5.  Protocol Data Structures               9 Category: Standards Track
+    ||     6.  The Area Data Structure               10
+    ||     7.  Bringing Up Adjacencies               11
+    ||     8.  Protocol Packet Processing            12                              OSPF Version 2
+    ||     9.  The Interface Data Structure          13
+    ||     10.  The Neighbor Data Structure          14
+    ||     11.  The Routing Table Structure          15 Status of this Memo
+    ||     12.  Link State Advertisements (LSA&gt;      16
+    ||     13.  The Flooding Procedure               17     This document specifies an Internet standards track protocol for the
+    ||     14.  Aging The Link State Database        18     Internet community, and requests discussion and suggestions for
+    ||     15.  Virtual Links                        19     improvements.  Please refer to the current edition of the "Internet
+    ||     16.  Calculation of the routing tab&gt;      20     Official Protocol Standards" (STD 1) for the standardization state
+    |                                                21     and status of this protocol.  Distribution of this memo is
+    |-   figures                                     22     unlimited.
+    ||     Figure 1a: Network map components         23
+    ||     Figure 1b illustrates the link-stat&gt;      24 Copyright Notice
+    ||     Figure 1b: Network map components         25
+    ||     Figure 2 shows a sample map of an A&gt;      26     Copyright (C) The Internet Society (1998).  All Rights Reserved.
+    ||     Figure 2: A sample Autonomous System      27
+    ||     Figure 3: The resulting directed gr&gt;      28 Abstract
+    ||     Figure 4: Individual link state com&gt;      29
+    ||     Figure 5.                                 30     This memo documents version 2 of the OSPF protocol.  OSPF is a
+    ||     Figure 5: The SPF tree for Router R&gt;      31     link-state routing protocol.  It is designed to be run internal to a
+    ||     Figure 6 shows a sample area config&gt;      32     single Autonomous System.  Each OSPF router maintains an identical
+    ||     Figure 7 shows the resulting link-s&gt;      33     database describing the Autonomous System's topology.  From this
+    ||     Figure 7 by the dashed stub routes.&gt;      34     database, a routing table is calculated by constructing a shortest-
+    ||     Figure 6: A sample OSPF area config&gt;      35     path tree.
+    ||     Figure 7: Area 1's Database.              36
+    ||     Figure 8: The backbone's database.        37     OSPF recalculates routes quickly in the face of topological changes,
+    ||     Figure 9 shows the collection of da&gt;      38     utilizing a minimum of routing protocol traffic.  OSPF provides
+    ||     Figure 9: Router RT10's Data struct&gt;      39     support for equal-cost multipath.  An area routing capability is
+    ||     Figure 10: The graph of adjacencies       40     provided, enabling an additional level of routing protection and a
+    ||     Figure 11 shows the graph of interf&gt;      41     reduction in routing protocol traffic.  In addition, all OSPF
+    ||     Figure 11: Interface State changes        42     routing protocol exchanges are authenticated.
+    ||     Figure 12: Neighbor state changes (&gt;      43
+    ||     Figure 13: Neighbor state changes (&gt;      44     The differences between this memo and RFC 2178 are explained in
+    ||     Figure 14 shows an example of an ad&gt;      45     Appendix G. All differences are backward-compatible in nature.
+    ||     Figure 14: An adjacency bring-up ex&gt;      46
+    ||     Figure 15: Area 1 with IP addresses&gt;      47
+    ||     Figure 16: Forwarding address examp&gt;      48
+    ||     Figure 17: Routing through transit &gt;      49
+    ||     Figure 18: Usage of the Authenticat&gt;      50 Moy                         Standards Track                     [Page 1]
+    |                                                51 ^L
+    |-   tables                                      52 RFC 2328                     OSPF Version 2                   April 1998
+    ||     Table 2: The portion of Router RT6'&gt;      53
+    ||     Table 3: The portion of Router RT6'&gt;      54
+    ||     Table 4.  These summaries show whic&gt;      55     Implementations of this memo and of RFCs 2178, 1583, and 1247 will
+    ||     Table 4: Networks advertised to the&gt;      56     interoperate.
+    ||     Table 5: Backbone distances calcula&gt;      57
+    __Tag_List__ [utf-8,-] [taglist] [3/86,1] &gt; Dropbox/temp-transfer/rfc2328.txt [utf-8] [txt] [4/12201,1] [0%]         [0---</code></pre>
+</td></tr></table>
+</td></tr></table>
+<p><b>Example 21. </b>spec(RFC) reader</p>
+<hr>
+<h2><a name="_man_page_browser"></a>2. man page browser</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>VIM(1)                                                                                                                                                                                        VIM(1)
+
+
+NAME
+       vim - Vi IMproved, a programmers text editor
+
+SYNOPSIS
+       vim [options] [file ..]
+       vim [options] -
+       vim [options] -t tag
+       vim [options] -q [errorfile]
+
+       ex
+       view
+       gvim gview evim eview
+       rvim rview rgvim rgview
+
+DESCRIPTION
+       Vim is a text editor that is upwards compatible to Vi.  It can be used to edit all kinds of plain text.  It is especially useful for editing programs.
+
+       There  are a lot of enhancements above Vi: multi level undo, multi windows and buffers, syntax highlighting, command line editing, filename completion, on-line help, visual selection, etc..
+       See ":help vi_diff.txt" for a summary of the differences between Vim and Vi.
+
+       While running Vim a lot of help can be obtained from the on-line help system, with the ":help" command.  See the ON-LINE HELP section below.
+
+       Most often Vim is started to edit a single file with the command
+
+            vim file
+
+        ......
+
+                      Script to detect the type of a file by its contents.  See ":help 'filetype'".
+
+       /usr/share/vim/vim73/print/*.ps
+                      Files used for PostScript printing.
+
+       For recent info read the VIM home page:
+       &lt;URL:http://www.vim.org/&gt;
+
+SEE ALSO
+       vimtutor(1)</code></pre>
+</td></tr></table>
+<p><b>jump between the man manual "see also" chains</b><br>move cursor on top of any places in the &#8220;vimtutor&#8221; command under the man page
+&#8220;SEE ALSO&#8221; section, and press ctrl-], vim will take you to the man page of
+that new command under current cursor. a ctrl-o will jump back to &#8216;man vim&#8217;
+again.</p>
+<p><b>man vimtutor</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>1] D/t/rfc2328.txt [2] /h/p/vimtutor
+    1 VIMTUTOR(1)
+    2
+    3
+    4
+    5 NAME
+    6        vimtutor - the Vim tutor
+    7
+    8 SYNOPSIS
+    9        vimtutor [-g] [language]
+   10
+   11 DESCRIPTION
+   12        Vimtutor starts the Vim tutor.  It copies the tutor file first, so that it can be modified without changing the original file.
+   13
+   14        The Vimtutor is useful for people that want to learn their first Vim commands.
+   15
+   16        The optional argument -g starts vimtutor with gvim rather than vim, if the GUI version of vim is available, or falls back to Vim if gvim is not found.
+   17
+   18        The  optional  [language]  argument  is  the two-letter name of a language, like "it" or "es".  If the [language] argument is missing, the language of the current locale will be used.  If a
+   19        tutor in this language is available, it will be used.  Otherwise the English version will be used.
+   20
+   21        Vim is always started in Vi compatible mode.
+   22
+   23 FILES
+   24        /usr/share/vim/vim73/tutor/tutor[.language]
+   25                       The Vimtutor text file(s).
+   26
+   27        /usr/share/vim/vim73/tutor/tutor.vim
+   28                       The Vim script used to copy the Vimtutor text file.
+   29
+   30 AUTHOR
+   31        The Vimtutor was originally written for Vi by Michael C. Pierce and Robert K. Ware, Colorado School of Mines using ideas supplied by  Charles  Smith,  Colorado  State  University.   E-mail:
+   32        bware@mines.colorado.edu.
+   33        It was modified for Vim by Bram Moolenaar.  For the names of the translators see the tutor files.
+   34
+   35 SEE ALSO
+   36        vim(1)</code></pre>
+</td></tr></table>
+</td></tr></table>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X9"></a>vim as IDE: ctag (elips,visual studio?) (DE may like, not for JTAC)</h1>
+<hr>
+<h2><a name="_extra_power_as_an_ide"></a>1. extra power as an IDE</h2>
+<ul>
+<li>
+<p>
+realtime syntax hi
+</p>
+</li>
+<li>
+<p>
+industry <strong>"standard"</strong> source code browser :
+</p>
+<ul>
+<li>
+<p>
+ctag,
+</p>
+</li>
+<li>
+<p>
+cscope
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+vimdiff
+</p>
+</li>
+<li>
+<p>
+web develop
+</p>
+</li>
+<li>
+<p>
+a lot more &#8230;
+</p>
+</li>
+</ul>
+<hr>
+<h2><a name="_code_browser_taglist"></a>2. code browser:taglist</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>Tlist</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 22. </b>vim code browser: taglist</p>
+<hr>
+<h2><a name="_diff_tool_vimdiff"></a>3. diff tool:vimdiff</h2>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>3 out of 5000+ lines diff</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 23. </b>vimdiff</p>
+<hr>
+<h2><a name="_web_develop_vimwiki_webadmin_may_like"></a>4. web develop:vimwiki (webadmin may like)</h2>
+<p>super quick web developing tool, need a whole seperate presentation to
+demonstrate the power.
+not much useful for JTAC.</p>
+<hr>
+<h2><a name="_git_vcs_integration"></a>5. git/vcs integration</h2>
+<p>super version management tools, need a whole seperate presentation to
+demonstrate the power.</p>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X10"></a>vim programming language: vimL</h1>
+<p><b>combine the power:vim script (vimL)</b></p><ul>
+<li>
+<p>
+vim is programmable - vimL programming language
+</p>
+</li>
+<li>
+<p>
+combine all existing command/operations into action sequence
+</p>
+</li>
+</ul>
+<hr>
+<h2><a name="_viml_example_clean_a_log_file"></a>1. vimL example:clean a log file</h2>
+<p><b>creating a new command to:</b></p><ul>
+<li>
+<p>
+remove special <strong>control characters</strong>
+  <br><i>[e.g, ascii code 8 or 9,representing BS (Backspace) or HT(Horizontal
+  Tab), see unix man page <strong>man ascii</strong> for more detail]</i><br>
+</p>
+<ul>
+<li>
+<p>
+&#8216;CR&#8217; (unix version of return)
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+"translate" control characters back into the control
+</p>
+<ul>
+<li>
+<p>
+turn the &#8220;backspace&#8221; in the log into "deleting 1 characters before it"
+</p>
+</li>
+</ul>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>command! Log2AsciidocClean call Log2AsciidocClean()
+function! Log2AsciidocClean()
+
+"clean the file
+    "remove some special CH, like ^M
+    :%s#\r\|\s\=\(^G\|^M\)##                                    <b>&lt;1&gt;</b>
+
+endfunc</code></pre>
+</td></tr></table>
+<ol>
+<li>
+<p>
+Although the &#8220;special&#8221; characters listed visually (represented by a literal
+<code>^</code> and <code>G</code>) in this example does not looks &#8220;special&#8221;, they are printed here
+only for the visibility purpose. The character itself (e.g. you pressed a BACKSPACE key) is not
+visible in the real file.
+In vim there is a way to generate this kind of non-visible character:
+by pressing a &#8220;ctrl-V&#8221; (make it <code>Visual</code>) and another &#8220;ctrl-M&#8221;, a &#8220;Backspace&#8221;,repsensented
+in the text as a <code>^M</code> (ascii code 0x07) is inserted. A <code>^M</code> (<code>\r</code>) can be
+generated the same way.
+</p>
+</li>
+</ol>
+<p><b>execute new created command</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>:Log2AsciidocClean</code></pre>
+</td></tr></table>
+</td></tr></table>
+<p><b>Example 24. </b>vimL</p>
+</li>
+</ul>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 25. </b>raw logs(folded)</p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+</td></tr></table>
+<p><b>Example 26. </b>cleaned logs(folded)</p>
+<hr>
+<h2><a name="_viml_example_indent_command_output"></a>2. vimL example:indent command output</h2>
+<p><b>with vim you can do much more powerful things</b></p><ul>
+<li>
+<p>
+turn a huge log file into a structured HTML file
+</p>
+</li>
+<li>
+<p>
+you can then share the web link instead of bothering attachment/go to a server/passwd/etc..
+</p>
+</li>
+<li>
+<p>
+examples:
+  <a href="http://www-in.juniper.net/~pings/index.txt.html#_no_bind_no_ping_issue">
+    whole log file as a structured-looking web page</a>
+</p>
+</li>
+<li>
+<p>
+all can be done with a few keystrokes in a second!
+</p>
+</li>
+</ul>
+<p><b>a more complex vim script: indent command output, from keyword &#8220;&lt;&lt;top&gt;&gt;&#8221; to</b><br>end of the command output <br><i>[there is a longer story behind this.  Following code was partially captured from a sequence of code groups that each will fulfill a partial work to proceed one step toward my target: turning a pure text log file to the source of a structured HTML file. One handy feature of the generated HTML will be the presence of &#8220;go back to TOC&#8221; label following each command line, which is done by inserting a &#8220;&lt;&lt;top&gt;&gt;&#8221; mark right after each command line (done by a vim substitution regex).]</i><br></p>
+<table frame="void" width="100%" cellpadding="4">
+<tr><td style="border-left: 2px solid silver;">
+<p><b>vim script to selectively indent only command output</b></p>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td></td></tr></table>
+<p><b>usage</b><br>with the above vimL code, a long text log file can be converted to a
+not-so-bad-looking web page, with a Table Of Content linking to each of the
+command executed.
+<br><i>[with my current VIM script(I may change/enhance it from time to time),
+I type following newly created vim command to get the job done:<br>
+:Log2AsciidocClean<br>
+:Log2AsciidocTop<br>
+:Log2AsciidocIndent<br>
+:Log2AsciidocList<br>
+:Asciidoc2Html<br>
+each of the above &#8220;user command&#8221; do one different job in the processing flow.
+These can be further simplified into one VIM user command like:
+:Log2Asciidoc<br>
+But personally I prefer to disassemble it to different processing stage, so I can review
+the partial result just in case something went wrong.
+]</i><br>
+text log file: 2012-0619-0971.log]
+&#8658;</p>
+</td></tr></table>
+<div style="page-break-after:always"></div>
+<hr>
+<h1><a name="X11"></a>appendix</h1>
+<hr>
+<h2><a name="_motion_commands"></a>1. motion commands</h2>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>        hjkl,gk|a-up,gj|a-dn    #left down up right,up,down in long line(useful!)
+            map j gj            #j means gj,for long lines under set nowrap
+            map k gk
+            imap &lt;UP&gt; &lt;ESC&gt;gki  #same for insert mode
+            imap &lt;DOWN&gt; &lt;ESC&gt;gji
+        gf                      #go open the file under cursor
+        C-f,C-b,C-d,C-u         #page down/up, half page down/up
+        C-Y,C-E                 #scroll down,up a line
+        zh,zl,zH,zL             #scroll left,right a column,half screen
+        z&lt;CR&gt;|zt,z.|zz,z-|zb    #"drag" curr line to top,center,bottom
+        ze,zs                                        right|end,left|start
+        H,M,L,g0,g^,gm,g$       #go top,mid,tail,left,left-non-blank,mid,right of curr screen
+                                #keep column info change|unchange
+            :set scrolloff=3    #add padding to margin when scrolling
+            :set scrolljump=3   #scroll 3 lines when reach the margin of screen
+            ;set sidescroll=3   #same, but scroll horizontally
+
+        G,gg,25G|25gg|:25       #jump to end,begin of the file,show current location
+                                #jump to line 25
+        60%                     #go to 60% of the full text
+
+        0|HOME,$,3$,^|_,+,-     #go to beginning,end of curr line,3 lines
+                                #1st non-bl CH of curr,next,prev line
+        ga                      #display the ascii num for curr CH
+        g C-g                   #display curr poistion,or selected text stats
+        9go,:goto 9             #go to #9 Ch in the file
+        w/W,e/E,b/B,ge          #to head,end of curr w/W,head,end of prev w/W
+            w  normal word
+            W  space sperated
+        2w,3e,^,0/HOME,$/END    #2w fwd,3w fwd,1st non-blank ch,start,eol
+                                #cap is to ignore punctuation ch,so be preferred
+        fx,Fx,tx,Tx, ; ,        #in a line find fwd,back TO CH 'x'
+                                #go fwd,back to BEFORE x,
+                                #repeat it,in reverse order
+
+                                #use CR and backspace to navigate in help</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="_different_ways_to_go_to_insert_mode"></a>2. different ways to go to insert-mode</h2>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>    i,I,gI              #ins at curr,non-blank beg of line,beg of line
+    10iaESC             #insert 10 CH "a"
+    s,S                 #del curr ch,line and insert
+    a,A,o,O             #APPEND more txt after curr ch/line,
+                        #open a new line after,bef curr line</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="insert-mode-commands"></a>3. insert-mode commands</h2>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>    ctrl-w, ctrl-u      :delete word (all) before the cursor
+    c-t,c-d             #indent,de-indent
+    s-left,s-right      #one word left, right
+
+    ctrl-e, ctrl-y      :insert CHs below/above curr line
+
+    ctrl-n, ctrl-p      :complete part of a keyword (not by dictionary)
+        rely on "complete" option
+        :help ins-completion for more
+
+    ctrl-r {register}   :insert content of a reg (paste under ins mode)
+                        :same for ex-mode
+                '"'     the unnamed register, containing the text of
+                        the last delete or yank
+                '%'     the current file name
+                '#'     the alternate file name
+                '*'     the clipboard contents (X11: primary selection)
+                '+'     the clipboard contents
+                '/'     the last search pattern
+                ':'     the last command-line
+                '-'     the last small (less than a line) delete
+                '.'     the last inserted text
+
+    s-left|c-left       :one word back
+    s-right|c-right     :one word forward
+
+    c-a,c-@             repeat last inserted text,and then back normal
+
+
+    C-X C-F             file names      (great!)
+    C-X C-L             whole lines
+    C-X C-D             macro definitions (also in included files)
+    C-X C-I             current and included files
+    C-X C-K             words from a dictionary
+    C-X C-T             words from a thesaurus
+    C-X C-]             tags
+    C-X C-V             Vim command line
+        C-P/N           prev/next
+    C-X C-E/Y           scoll up/down
+    C-X C-O             omni complete (for coding)
+
+    c-v SOME-KEYS
+
+    #sometimes useful and make text docs more readable
+    c-k                 digraphs #type special chs(std ISO-646 ch)
+      C-k,Co            #insert,Ctrl-k,Co,then you get: ©
+      :digraphs         #list all digraphs
+      :dig a: 9639      #define a 'map' , a: to ▧  (super!)
+
+    c-o NORMAL-MODE-CMD #execute normal mode cmd from insert mode</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="normal-mode-commands"></a>4. copy/paste/change/replace/etc</h2>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>    ce|cw,c$|C,S|cc     #CHANGE(cx) till eOw,eol,whole line
+    ciw                 #replace whole word under cursor
+
+    de,dw|dW,d3w|3dw,d$|D #DELETE(dx) fr curr till:eow,1word,3words,eol
+
+    d0,dd,2dd,dG,d20G   #...beginOfline,1line,2lines,eOf,line#20
+    x|dl,X|dh                   #...curr ch,prev ch
+
+    C-w,C-u             #DEL under insert mode 1word back,to head the line
+
+    yy|Y,5yy,yW,y$,y0,yG #COPY(yx) 1line,5lines,word,...
+
+    p,P                 #PASTE whatever just deleted after,before cursor
+
+    rx,3rx,3rENTER      #REPLACE(rx) a ch with x,3 x,1(not 3!!) enter
+
+    #cut/cp/paste(across app,using visual mode)
+    v SELECTTEXT "+y    #cp to the system clipboard using Xwin '+' reg.
+    "+gP                #paste contents from clipboard(X-reg:+)
+
+    #other select/cp/del methods
+    :%y a               select all and copy to buffer a
+    :1,$y               copy all
+    :1,$d               delete all
+    #using text object
+    "+yap               #cp the current paragragh into clipboard
+    d3ap                #delete 3 paragraghs from current line, good!
+
+
+    #copy the output of : command to clipboard
+    :redir @+           #type this before the vim command
+    :nmap &lt;buffer&gt;      #type the vim command,e.g. print the mapping
+    :redir END          #type this after the vim command</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="visual-mode-commands"></a>5. visual-mode commands</h2>
+<table border="0" bgcolor="#e8e8e8" width="100%" cellpadding="10"><tr><td>
+<pre><code>        v,S-v|V,C-v             #VISUAL:normal,line,block
+            o,O                 #under normal&amp;line,block v-mode to toggle cursor position
+        C-v
+            $                   #all CHs after curr cursor will be marked, good!
+            I,c,C               #insert,change,change to eol,to every line in block,
+                                but except shorter lines(great!)
+            ~,U,u
+            A                   #insert to the end of everyline in block , including shorter lines
+            $A                  #select and append to end of everyline (diff with A, good!)
+            ~,U,u
+
+        S-v d,y,c|s|R|S = v D,Y,C
+                                #delete,copy,delete&amp;go-insert some lines
+        S-v J,gJ                #joining selected lines&amp;seperate w/ blank,w/o blank
+        C-v I,c/C,A             #ins,change(del&amp;start ins),append txts in block mode
+                                #changes will be cp to all lines:
+            c                   #del blocks(leave unslected)&amp;start insert
+                                #  inserted txt be copied to all lines in block
+            C                   #del from the left edge of block to eol&amp;start...
+            A                   #...
+            rCH                 #replace all block with ch
+        gv                      #select same visual again</code></pre>
+</td></tr></table>
+<hr>
+<h2><a name="_become_a_8220_vimer_8221"></a>6. become a &#8220;vimer&#8221;</h2>
+<p>VIM looks hard for a beginner, especially for those who always prefer GUI based
+editors that are easily available around. The biggest headache is that there are
+a lot of <strong>"command"</strong> to remember before you can even proceed with your editing
+work. However, the power is also generated from the same and, Once you get use
+to it, you will wonder how you ever got along without it!</p>
+<hr>
+<h2><a name="_much_more_features"></a>7. much more features</h2>
+<p><b>there are much much more that VIM is really good at&#8230;</b></p><ul>
+<li>
+<p>
+we only demonstrate the very surface,<br>
+  (a very small part of) most popular features
+</p>
+</li>
+<li>
+<p>
+there are MUCH MUCH MORE that VIM is really good at&#8230;
+</p>
+</li>
+<li>
+<p>
+more popular/cool features (that I&#8217;m using)
+</p>
+<ul>
+<li>
+<p>
+popular/cool: really depending on what do you want it to do
+</p>
+</li>
+<li>
+<p>
+web/wiki developing: TOhtml, vimwiki, vimviki
+</p>
+</li>
+<li>
+<p>
+diary
+</p>
+</li>
+<li>
+<p>
+selective printing(hardcopy &amp; pdf convert)
+</p>
+</li>
+<li>
+<p>
+gnu screen/tmux integretion
+</p>
+</li>
+<li>
+<p>
+version control integretion
+</p>
+</li>
+<li>
+<p>
+integration into/with other apps(mutt,w3m,firefox,etc)
+</p>
+</li>
+<li>
+<p>
+knowledge/note tool (mybase? evernote?)
+</p>
+<pre><code>personal wiki  : vimwiki
+single file DB : Voom</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>
+inspired a lot of other project
+</p>
+<ul>
+<li>
+<p>
+pentadactyl
+</p>
+</li>
+<li>
+<p>
+vimperator
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2><a name="_vim_unix_philosophy_learning_curve_etc"></a>8. vim , unix philosophy, learning curve, etc</h2>
+<ul>
+<li>
+<p>
+UNIX philosophy
+</p>
+<blockquote>
+<pre style="font-family: inherit;">Write programs that do <strong>one</strong> thing and do it <strong>well</strong>.
+Write programs to work together.
+Write programs to handle text streams, because that is a universal interface.</pre>
+<p align="left">
+<em>Doug McIlroy</em><br>
+&#8212; inventor of Unix pipes
+</p>
+</blockquote>
+</li>
+<li>
+<p>
+editor learning curve
+<br><i>[the &#8220;curve&#8221; itself,however,is quite confusing and
+<a href="http://www.thejach.com/view/2012/07/vims_learning_curve_is_wrong">controversial</a>]</i><br>
+</p>
+<div>
+<img style="border-image: none 0; padding: 0; margin: 0;" alt="curves.jpg"
+">
+</div>
+</li>
+<li>
+<p>
+<a href="http://en.wikipedia.org/wiki/Editor_war">editor war/jokes</a>
+  <br><i>[mostly between vi vs. emacs users]</i><br>
+</p>
+</li>
+</ul>
+<hr>
+<h2><a name="_some_resource_lists"></a>9. (some) resource lists</h2>
+<ul>
+<li>
+<p>
+google: tons of vim document, tips, articles, discussions, &#8230;
+</p>
+</li>
+<li>
+<p>
+vim help system.Unbelievable good.
+</p>
+<ul>
+<li>
+<p>
+:help user-manual
+</p>
+</li>
+<li>
+<p>
+:help ANYTHING
+</p>
+</li>
+<li>
+<p>
+<a href="http://vimdoc.sourceforge.net/htmldoc/vimfaq.html">faq</a>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+An application to help learning vim:
+  <a href="http://linuxcommand.org/man_pages/vimtutor1.html">vimtutor</a>
+</p>
+<blockquote>
+<pre style="font-family: inherit;">The Vimtutor is useful for people that want to learn their first Vim commands.</pre>
+<p align="left">
+&#8212; man vimtutor
+</p>
+</blockquote>
+</li>
+<li>
+<p>
+<a href="http://vim-adventures.com/">A game</a> to help learning vim
+</p>
+</li>
+<li>
+<p>
+vimL:
+</p>
+<ul>
+<li>
+<p>
+:help eval.txt
+</p>
+</li>
+<li>
+<p>
+:help options.txt
+</p>
+</li>
+<li>
+<p>
+:help usr_41.txt
+</p>
+</li>
+<li>
+<p>
+<a href="http://learnvimscriptthehardway.stevelosh.com/">learn vim script in the hard
+    way</a>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<a href="mailto:vim_use@googlegroups.com">"vim user group"</a>
+</p>
+</li>
+</ul>
+<hr>
+<h2><a name="_download_this_presentation"></a>10. download this presentation</h2>
+<ul>
+<li>
+<p>
+this presentation is available in following format:
+<br><i>[again, these are all done by from within vim , with only a couple of
+commands calling external apps(but executed from within vim)]</i><br>
+</p>
+<ul>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_datauri.html">HTML(this
+    is the only up-to-date version)</a><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_html5toc2.html">HTML-TOC2</a>
+    <br><i>[a &#8220;side-panel&#8221; TOC]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work.pdf">pdf1</a>
+    <br><i>[this is the dblatex version]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_fop.pdf">pdf2</a>
+    <br><i>[this is the fop version]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_ooo.pdf">pdf3</a>
+    <br><i>[this is open-office version, rendered from HTML]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work.epub">epub</a>
+    <br><i>[Firefox EPUBReader addon is one of the best epub reader available,
+    and it&#8217;s platform independent]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work.txt">text</a>
+    <br><i>[this is my favorite format. simple pure text as it is, its looks
+    clear and comfortable enough , at leat for me :-) . firefox is the prefered
+    browser for it]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_docbook.xml">xml</a>
+    <br><i>[the best xml reader that I&#8217;m aware of so far, is the <strong>yelp</strong> - gnome-help-viewer
+    <a href="https://live.gnome.org/Yelp">yelp</a>]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_chunk.html">chunk</a><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_docbook.html">docbook</a><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work.chm">chm</a>
+    <br><i>[windows html help file]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work_ooo.doc">MSword(may not look good)</a>
+    <br><i>[this is converted by open-office,rendered from HTML]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/vim-jtac-work.doc">MSword(not tested,may not work)</a>
+    <br><i>[generated from experimental fodt backend]</i><br>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www-in.juniper.net/~pings/webdata/vim-jtac-work/ping%27s%20toi_2_0.flv">video</a><br>
+</p>
+<ul>
+<li>
+<p>
+not complete (forgot start the recording from the start :D )
+</p>
+</li>
+<li>
+<p>
+no audio (forgot to open microphone :D )
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>
+other available formats:
+</p>
+<ul>
+<li>
+<p>
+<a href="http://www-in.juniper.net">Unix man page(t.b.d)</a>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<table frame="void" cellpadding="4">
+<tr valign="top">
+<td>
+<img style="border-image: none 0;" alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td style="border-left: 1px solid silver;">this page and every other version of this same document, are done in vim.</td></tr></table>
+<p>+</p>
+<div style="page-break-after:always"></div>
+</div>

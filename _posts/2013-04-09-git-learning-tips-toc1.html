@@ -1,0 +1,2105 @@
+---
+layout: post
+title: "git learning tips(no side toc)"
+created:  2013 Apr 09 09:07:42 PM
+tags: [git, learning notes]
+categories: [tech]
+published: true
+---
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title></title>
+<style type="text/css">
+/*
+ * AsciiDoc 'volnitsky' theme for xhtml11 and html5 backends.
+ * Based on css from http://volnitsky.com, which was in turn based on default
+ * theme from AsciiDoc
+ *
+ * FIXME: The styling is still a bit rough in places.
+ *
+ */
+
+/* Default font. */
+body {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Candara,Arial,sans-serif;
+}
+
+
+#toc a {
+    border-bottom: 1px dotted #999999;
+    color: #3A3A4D !important;
+    text-decoration: none !important;
+}
+#toc a:hover {
+    border-bottom: 1px solid #6D4100;
+    color: #6D4100 !important;
+    text-decoration: none !important;
+}
+a { color: #666688; text-decoration: none; border-bottom: 1px dotted #666688; }
+a:visited { color: #615FA0; border-bottom: 1px dotted #615FA0; }
+a:hover { color: #6D4100; border-bottom: 1px solid #6D4100; }
+
+em {
+  font-style: italic;
+  color: #444466;
+}
+
+strong {
+  font-weight: bold;
+  color: #444466;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #666688;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  letter-spacing:+0.15em;
+}
+
+h1, h2, h3 { border-bottom: 2px solid #ccd; }
+h2 { padding-top: 0.5em; }
+h3 { float: left; }
+h3 + * { clear: left; }
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid #444466;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #444466;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #444466;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.verseblock > pre.content {
+  font-family: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #444466;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: #444466;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #444466;
+}
+thead {
+  font-weight: bold;
+  color: #444466;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: #444466;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toctitle {
+  color: #666688;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 { margin-top: 0; margin-bottom: 0; }
+div.toclevel1 { margin-top: 0.3em; margin-left: 0; font-size: 1.0em; }
+div.toclevel2 { margin-top: 0.25em; margin-left: 2em; font-size: 0.9em; }
+div.toclevel3 { margin-left: 4em; font-size: 0.8em; }
+div.toclevel4 { margin-left: 6em; font-size: 0.8em; }
+
+body {
+  margin: 1em 5%;
+  max-width:  55em;
+  padding-left: 0;
+
+}
+
+.monospaced, tt, div.listingblock > div.content {
+  font-family:  Consolas, "Andale Mono", "Courier New", monospace;
+  color: #004400;
+  background: #f4f4f4;
+  max-width: 80em;
+  line-height: 1.2em;
+}
+
+.paragraph p  {
+  line-height: 1.5em;
+  margin-top: 1em;
+}
+
+.paragraph p, li, dd, .content { max-width: 45em; }
+.admonitionblock               { max-width: 35em; }
+
+div.sectionbody div.ulist > ul > li {
+  list-style-type: square;
+  color: #aaa;
+}
+  div.sectionbody div.ulist >  ul > li > * {
+    color: black;
+    /*font-size: 50%;*/
+  }
+
+
+div.sectionbody div.ulist > ul > li div.ulist > ul > li {
+  color: #ccd ;
+}
+  div.sectionbody div.ulist > ul > li div.ulist > ul > li > * {
+    color: black ;
+  }
+
+em {
+  font-style: normal ! important;
+  font-weight: bold ! important;
+  color: #662222   ! important;
+  letter-spacing:+0.08em ! important;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #666688;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #444466;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #444466;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(4);
+/*]]>*/
+</script>
+</head>
+<body class="article" style="max-width:85em">
+<div id="header">
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_git">1. git</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+some docs
+</dt>
+<dd>
+<p>
+<a href="http://www.vogella.de/articles/Git/article.html">http://www.vogella.de/articles/Git/article.html</a><br />
+</p>
+</dd>
+<dt class="hdlist1">
+git official book
+</dt>
+<dd>
+<p>
+<a href="http://git-scm.com/book/">http://git-scm.com/book/</a><br />
+</p>
+</dd>
+<dt class="hdlist1">
+chinese resource
+</dt>
+<dd>
+<p>
+<a href="http://www.uzzf.com/news/31/1922_1.html">http://www.uzzf.com/news/31/1922_1.html</a><br />
+<a href="http://git-scm.com/book/zh/¿?¿?-¿?¿?¿?¿?-Git-¿?¿?¿??">http://git-scm.com/book/zh/¿?¿?-¿?¿?¿?¿?-Git-¿?¿?¿??</a>??
+</p>
+</dd>
+</dl></div>
+<div class="sect2">
+<h3 id="_config_git">1.1. config git</h3>
+<div class="listingblock">
+<div class="title">config git initially</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~$ git config --global user.name "ping"
+ping@640g-laptop:~$ git config --global user.email "songpingemail@gmail.com"
+ping@640g-laptop:~$ git config --global color.status auto
+ping@640g-laptop:~$ git config --global color.branch auto
+
+git config --global core.excludesfile ~/.gitignore</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">git config</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~$ git config --list
+user.name=ping
+user.email=songpingemail@gmail.com
+color.status=auto
+color.branch=auto</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">check config file: .gitconfig</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~$ less .gitconfig
+[user]
+        name = ping
+        email = songpingemail@gmail.com
+[color]
+        status = auto
+        branch = auto</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">make git ignore some dirs/files (useful!)</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~$ echo "bin" &gt; .gitignore</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_init_addfile_commit_git">1.2. init/addfile/commit git</h3>
+<div class="listingblock">
+<div class="title">create some test folders/files</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~$ mkdir temp-git
+ping@640g-laptop:~$ cd temp-git/
+ping@640g-laptop:~/temp-git$ mkdir datafiles
+ping@640g-laptop:~/temp-git$ touch test01
+ping@640g-laptop:~/temp-git$ touch test02
+ping@640g-laptop:~/temp-git$ touch test03
+ping@640g-laptop:~/temp-git$ touch datafiles/data.txt
+ping@640g-laptop:~/temp-git$ ls &gt; test01
+
+ping@640g-laptop:~/temp-git$ tree -s
+.
+|-- [       4096]  datafiles
+|   `-- [          0]  data.txt
+|-- [         31]  test01
+|-- [          0]  test02
+`-- [          0]  test03
+
+1 directory, 4 files</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">init git: git init</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git init
+Initialized empty Git repository in /home/ping/temp-git/.git/</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">add all curr files/folders: git add file/folder(s)</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git add .</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">commit the change: git commit -m &lt;msg&gt;</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git commit -m "Initial commit"
+[master (root-commit) 9c2ed13] Initial commit
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 datafiles/data.txt
+ create mode 100644 test01
+ create mode 100644 test02
+ create mode 100644 test03</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_check_git_log_diff">1.3. check git log/diff</h3>
+<div class="listingblock">
+<div class="title">check the log:git log</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git log
+
+commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Mon Apr 2 15:13:06 2012 -0400
+
+Initial commit</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">induce some changes and check the changes</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ echo "This is a change" &gt; test01
+ping@640g-laptop:~/temp-git$ echo "and this is another change" &gt; test02
+
+ping@640g-laptop:~/temp-git$ git diff
+diff --git a/test01 b/test01
+index 749eb2d..d0a432b 100644
+--- a/test01
++++ b/test01
+@@ -1,4 +1 @@
+-datafiles
+-test01
+-test02
+-test03
++This is a change
+diff --git a/test02 b/test02
+index e69de29..552c22e 100644
+--- a/test02
++++ b/test02
+@@ -0,0 +1 @@
++and this is another change</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_commit_the_changes">1.4. Commit the changes</h3>
+<div class="paragraph"><p><strong>-a</strong> will commit changes for modified files
+but will not add automatically new files</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git commit -a -m "These are new changes"
+
+ping@640g-laptop:~/temp-git$ git commit -a -m "These are new changes"
+[master e2712e9] These are new changes
+ 2 files changed, 2 insertions(+), 4 deletions(-)</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_status_diff_and_commit_log">1.5. Status, Diff and Commit Log</h3>
+<div class="literalblock">
+<div class="title">Make some changes in the file</div>
+<div class="content">
+<pre><code>echo "This is a new change" &gt; test01
+echo "and this is another new change" &gt; test02</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">See the current status of your repository (which files are changed / new / deleted)</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git status
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#       modified:   test01
+#       modified:   test02
+#
+    no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+</div></div>
+<div class="paragraph"><div class="title">Show the differences between the uncommitted files and the last commit in the</div><p>current branch</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>git diff</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>diff --git a/test01 b/test01
+index d0a432b..18fec42 100644
+--- a/test01
++++ b/test01
+@@ -1 +1 @@
+-This is a change
++This is a new change
+diff --git a/test02 b/test02
+index 552c22e..307d61a 100644
+--- a/test02
++++ b/test02
+@@ -1 +1 @@
+-and this is another change
++This is another new change</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">Add the changes to the index and commit</div>
+<div class="content">
+<pre><code>git add . &amp;&amp; git commit -m "More chaanges - typo in the commit message"
+ping@640g-laptop:~/temp-git$ git add . &amp;&amp; git commit -m "More chaanges - typo in the commit message"
+[master 8e12be3] More chaanges - typo in the commit message
+ 2 files changed, 2 insertions(+), 2 deletions(-)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">Show the history of commits in the current branch</div>
+<div class="content">
+<pre><code>git log</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>commit 8e12be35dc5ae1bb10960329c74cd0d85e40616c
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Mon Apr 2 16:16:36 2012 -0400</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>More chaanges - typo in the commit message</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Mon Apr 2 16:11:02 2012 -0400</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>These are new changes</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Mon Apr 2 15:13:06 2012 -0400</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Initial commit</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_git_amend_correction_of_commit_messages_git_commit_amend_m_lt_msg_gt">1.6. git amend:Correction of commit messages: git commit --amend -m &lt;msg&gt;</h3>
+<div class="paragraph"><p>The git amend command makes it possible to change <strong>the last commit</strong> message.
+In the above example the commit message was incorrect as it contained a typo.
+The following will correct this via the --amend parameter.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>    ping@640g-laptop:~/temp-git$ git commit --amend -m "More changes - now correct"
+    [master 17944b3] More changes - now correct
+     2 files changed, 2 insertions(+), 2 deletions(-)
+
+    ping@640g-laptop:~/temp-git$ git log
+    commit 17944b32e93fafaa33a6c75ff98201d263601538
+    Author: ping &lt;songpingemail@gmail.com&gt;
+    Date:   Mon Apr 2 16:16:36 2012 -0400
+
+        More changes - now correct
+
+    commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+    Author: ping &lt;songpingemail@gmail.com&gt;
+    Date:   Mon Apr 2 16:11:02 2012 -0400
+
+        These are new changes
+
+    commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+    Author: ping &lt;songpingemail@gmail.com&gt;
+    Date:   Mon Apr 2 15:13:06 2012 -0400
+
+        Initial commit</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_delete_files">1.7. Delete files</h3>
+<div class="listingblock">
+<div class="title">Create a file and put it under version control</div>
+<div class="content">
+<pre><code>touch nonsense.txt
+git add . &amp;&amp; git commit -m "a new file has been created"</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Remove the file</div>
+<div class="content">
+<pre><code>rm nonsense.txt</code></pre>
+</div></div>
+<div class="paragraph"><p>Try standard way of committing&#8201;&#8212;&#8201;This will not work</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git add . &amp;&amp; git commit -m "a new file has been created"</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Now commit all: -a</div>
+<div class="content">
+<pre><code>git commit -a -m "File nonsense.txt is now removed"</code></pre>
+</div></div>
+<div class="quoteblock">
+<div class="content">-a, --all
+  Tell the command to automatically stage files that have been
+  modified and deleted, but new files you have not told git about are
+  not affected.</div>
+<div class="attribution">
+<em>man git-commit</em>
+</div></div>
+<div class="listingblock">
+<div class="title">Alternatively you could add deleted files to the staging index via:</div>
+<div class="content">
+<pre><code>git add -A .
+git commit -m "File nonsense.txt is now removed"</code></pre>
+</div></div>
+<div class="quoteblock">
+<div class="content">-A, --all
+ Like -u, but match &lt;filepattern&gt; against files in the working
+ tree in addition to the index. That means that it will find
+ new files as well as staging modified content and removing
+ files that are no longer in the working tree.</div>
+<div class="attribution">
+<em>man git-add</em>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_clone_your_repository">1.8. Clone your repository</h3>
+<div class="paragraph"><p>Create a new repository in a new directory via the following commands.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Switch to home
+cd ~
+# Make new directory
+mkdir repo02
+
+# Switch to new directory
+cd ~/repo02
+# Clone
+git clone ../remote-repository.git .
+
+ping@640g-laptop:~/temp-git$ mkdir ../temp-git2
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ git clone ../temp-remote-repository.git .
+Initialized empty Git repository in /home/ping/temp-git2/.git/</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_setting_up_a_remote_bare_git_repository">1.9. Setting up a remote (bare) Git repository</h3>
+<div class="paragraph"><div class="title">remote git repos: git clone --bare</div><p>We will now create a remote Git repository.</p></div>
+<div class="paragraph"><p>Git allows you to store this remote repository either on the network or locally.</p></div>
+<div class="paragraph"><p>A <strong>standard</strong> Git repository is different from a <strong>remote Git repository</strong> .</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+A <strong>standard</strong> Git repository 
+</dt>
+<dd>
+<p>
+contains the source code and the Git repository.
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>You can work directly in this directory as the repository contains a working
+copy of all files.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+A <strong>Remote</strong> repositories 
+</dt>
+<dd>
+<p>
+<strong>DO NOT</strong> contain working copies of the files.  They
+only contain repository files.
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>To create such a repository, set the <code>--bare</code> flag.</p></div>
+<div class="paragraph"><p>In order to simplify the following examples, the Git repository will be created
+locally in the filesystem.</p></div>
+<div class="listingblock">
+<div class="title">Switch to the first repository</div>
+<div class="content">
+<pre><code>cd ~/repo01</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git clone --bare . ../remote-repository.git</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_push_changes_to_another_repository">1.10. Push changes to another repository</h3>
+<div class="paragraph"><p>Make some changes and push them from your first repository to the remote
+repository via the following commands.</p></div>
+<div class="listingblock">
+<div class="title">Make some changes in the first repository</div>
+<div class="content">
+<pre><code>cd ~/repo01</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Make some changes in the file</div>
+<div class="content">
+<pre><code>echo "Hello, hello. Turn your radio on" &gt; test01
+echo "Bye, bye. Turn your radio off" &gt; test02</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">commit</div>
+<div class="content">
+<pre><code>git commit -a -m "Some changes"
+ping@640g-laptop:~/temp-git$ git commit -am "Some Changes"
+[master 6d181d6] Some Changes
+ 2 files changed, 2 insertions(+), 2 deletions(-)</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Push the changes</div>
+<div class="content">
+<pre><code>git push ../remote-repository.git
+
+ping@640g-laptop:~/temp-git$ git push ../temp-remote-repository.git/
+Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 396 bytes, done.
+Total 4 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+To ../temp-remote-repository.git/
+   17944b3..6d181d6  master -&gt; master</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_lable_origin">1.11. lable "origin"</h3>
+<div class="paragraph"><p>You can always push to a Git repository via its full URL.  But you can also add
+a "shortname" to a repository via the git remote add command.</p></div>
+<div class="paragraph"><p><strong>origin</strong> is a special name which is normally used automatically, if you clone a
+Git repository.  Origin indicates the original repository from which you
+started.  As we started from scratch, this name is still available.</p></div>
+<div class="literalblock">
+<div class="title">Add ../remote-repository.git with the name origin</div>
+<div class="content">
+<pre><code>git remote add origin ../remote-repository.git</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">Again some changes</div>
+<div class="content">
+<pre><code>echo "I added a remote repo" &gt; test02</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">Commit</div>
+<div class="content">
+<pre><code>git commit -a -m "This is a test for the new remote origin"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">If you do not label a repository it will push to origin</div>
+<div class="content">
+<pre><code>git push origin</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_show_the_existing_remote_repositories">1.12. Show the existing remote repositories</h3>
+<div class="paragraph"><p>To see the existing definitions of the remote repositories, use the following
+command.</p></div>
+<div class="listingblock">
+<div class="title">Show the existing defined remote repositories:git remote</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git remote
+origin</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_pull_changes">1.13. Pull changes</h3>
+<div class="paragraph"><p>Pull allows you to get the latest changes from another repository.
+In your second repository, make some changes, push them to your remote
+repository and pull these changes to your first repository.</p></div>
+<div class="listingblock">
+<div class="title">original example</div>
+<div class="content">
+<pre><code># Switch to home
+cd ~
+
+# Switch to second directory
+cd ~/repo02
+
+# Make changes
+echo "A change" &gt; test01
+
+# Commit
+git commit -a -m "A change"
+
+# Push changes to remote repository
+# Origin is automatically maintained as we cloned from this repository
+git push origin
+
+# Switch to the first repository and pull in the changes
+cd ~/repo01
+git pull ../remote-repository.git/
+
+# Check the changes
+less test01</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">my test logs</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git2$ echo "A change" &gt; test01
+ping@640g-laptop:~/temp-git2$ git commit -a -m "A change"
+[master 42230df] A change
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git2$ git push origin
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 326 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   d0c385f..42230df  master -&gt; master
+
+ping@640g-laptop:~/temp-git2$ less ../temp-remote-repository.git/test01
+../temp-remote-repository.git/test01: No such file or directory
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git pull ../temp-remote-repository.git/
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            HEAD       -&gt; FETCH_HEAD
+Updating d0c385f..42230df
+Fast-forward
+ test01 |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git$ less test01
+A change</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_revert_changes">1.14. Revert Changes</h3>
+<div class="paragraph"><p>If you create files in your working copy which you do not want to commit, you
+can discard them.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># Create a new file with content
+touch test04
+echo "this is trash" &gt; test04</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># Make a dry-run to see what would happen
+# -n is the same as --dry-run
+git clean -n</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code># Now delete
+git clean -f</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#also remove dir
+git clean -fd</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">my test:</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ touch test04
+ping@640g-laptop:~/temp-git$ echo "this is trash" &gt; test04
+ping@640g-laptop:~/temp-git$ ls
+datafiles  test01  test02  test03  test04
+ping@640g-laptop:~/temp-git$ git clean -n
+Would remove test04
+ping@640g-laptop:~/temp-git$ ls
+datafiles  test01  test02  test03  test04
+ping@640g-laptop:~/temp-git$ git clean -f
+Removing test04
+ping@640g-laptop:~/temp-git$ ls
+datafiles  test01  test02  test03</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_check_out_via_commitid">1.15. check out via commitID</h3>
+<div class="paragraph"><p>You can check out older revisions of your source code via the commit ID.
+The commit ID is shown if you enter the git log command.
+It is displayed behind the commit word.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Switch to home
+cd ~/repo01
+# Get the log
+git log
+
+# Copy one of the older commits and checkout the older revision via
+git checkout commit_name</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">my test</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git checkout 9c2ed13c92dec39e193d8311ad180104cb211f46
+Note: checking out '9c2ed13c92dec39e193d8311ad180104cb211f46'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 9c2ed13... Initial commit
+
+ping@640g-laptop:~/temp-git$
+ping@640g-laptop:~/temp-git$ less test01
+datafiles
+test01
+test02
+test03</code></pre>
+</div></div>
+<div class="paragraph"><p>If you have not added the changes to the staging index, you can also revert the
+changes directly.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>#Some nonsense change
+echo "nonsense change" &gt; test01
+#Not added to the staging index. Therefore we can just checkout the old version
+git checkout test01
+# Check the result
+cat test01
+
+# Another nonsense change
+echo "another nonsense change" &gt; test01
+# We add the file to the staging index
+git add test01
+# Restore the file in the staging index
+git reset HEAD test01                           <img alt="1" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" />
+# Get the old version from the staging index
+git checkout test01</code></pre>
+</div></div>
+<div class="colist arabic"><table>
+<tr><td><img alt="1" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" /></td><td>
+why?
+</td></tr>
+</table></div>
+<div class="paragraph"><p>You can also revert commits via the following command:</p></div>
+<div class="literalblock">
+<div class="title">Revert a commit</div>
+<div class="content">
+<pre><code>git revert commit_name</code></pre>
+</div></div>
+<div class="paragraph"><p>If you deleted a file but you have not yet added it to the index or committed
+the change, you can check out the file again.</p></div>
+<div class="literalblock">
+<div class="title">Delete a file</div>
+<div class="content">
+<pre><code>rm test01</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">Revert the deletion</div>
+<div class="content">
+<pre><code>git checkout test01</code></pre>
+</div></div>
+<div class="paragraph"><p>If you added a file to the index but do not want to commit the file, you can
+remove it from the index via the git reset file command.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>// Create a file
+touch incorrect.txt
+// Accidently add it to the index
+git add .
+// Remove it from the index
+git reset incorrect.txt
+// Delete the file
+rm incorrect.txt</code></pre>
+</div></div>
+<div class="paragraph"><p>If you deleted a directory and you have not yet committed the changes, you can
+restore the directory via the following command:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>git checkout HEAD -- your_dir_to_restore</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_tagging_in_git">1.16. Tagging in Git</h3>
+<div class="paragraph"><p>Git has the option to tag certain versions in the history so that you find them
+more easily at a later point in time.
+Most commonly, this is used to tag a certain version which has been released.</p></div>
+<div class="listingblock">
+<div class="title">You can list the available tags via the following command:</div>
+<div class="content">
+<pre><code>git tag</code></pre>
+</div></div>
+<div class="paragraph"><p>You can create a new tag via the following. Via the -m parameter, you specify
+the description of this tag.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git tag version1.6 -m 'version 1.6'</code></pre>
+</div></div>
+<div class="paragraph"><p>If you want to use the code associated with the tag, use:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git checkout &lt;tag_name&gt;
+
+#test
+ping@640g-laptop:~/temp-git$ git tag
+ping@640g-laptop:~/temp-git$ git tag version1.6 -m 'version 1.6'
+ping@640g-laptop:~/temp-git$ git tag
+version1.6
+ping@640g-laptop:~/temp-git$ git checkout version1.6
+HEAD is now at 9c2ed13... Initial commit
+ping@640g-laptop:~/temp-git$</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_branches_and_merging">1.17. Branches and Merging</h3>
+<div class="sect3">
+<h4 id="_branches">1.17.1. Branches</h4>
+<div class="paragraph"><p>Git allows you to create branches, e.g.
+independent copies of the source code which can be changed independently from
+each other.  The default branch is called <strong>master</strong>.
+Git allows you to create branches very fast and cheap in terms of resource
+consumption.  Developers are encouraged to use branches frequently.</p></div>
+<div class="listingblock">
+<div class="title">lists all locally available branches. currently active branch is marked with *.</div>
+<div class="content">
+<pre><code>git branch</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">all branches (including remote branches)</div>
+<div class="content">
+<pre><code>git branch -a</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">create a new branch via the following.</div>
+<div class="content">
+<pre><code># Syntax: git branch &lt;name&gt; &lt;hash&gt;
+# &lt;hash&gt; in the above is optional
+# if not specified the last commit will be used
+# If specified the corresponding commit will be used
+git branch testing
+# Switch to your new branch
+git checkout testing
+# Some changes
+echo "Cool new feature in this branch" &gt; test01
+git commit -a -m "new feature"
+# Switch to the master branch
+git checkout master
+# Check that the content of test01 is the old one
+cat test01</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">my test</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ git branch
+* (no branch)
+  master
+ping@640g-laptop:~/temp-git$ git branch -a
+* (no branch)
+  master
+  remotes/origin/master
+ping@640g-laptop:~/temp-git$ git branch testing
+ping@640g-laptop:~/temp-git$ git checkout testing
+Switched to branch 'testing'
+ping@640g-laptop:~/temp-git$ echo "cool new feature in this branch" &gt; test01
+ping@640g-laptop:~/temp-git$ git checkout master
+error: You have local changes to 'test01'; cannot switch branches.
+ping@640g-laptop:~/temp-git$ git commit -am "new feature"
+[testing 8380236] new feature
+ 1 files changed, 1 insertions(+), 4 deletions(-)
+ping@640g-laptop:~/temp-git$ git checkout master
+Switched to branch 'master'
+ping@640g-laptop:~/temp-git$ cat test01
+A change</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_delete_a_branch">1.17.2. Delete a branch</h4>
+<div class="paragraph"><p>To delete a branch which is not needed anymore; you can use the following command.</p></div>
+<div class="listingblock">
+<div class="title">Delete branch testing</div>
+<div class="content">
+<pre><code>git branch -d testing</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Check if branch has been deleted</div>
+<div class="content">
+<pre><code>git branch</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_merging">1.17.3. Merging</h4>
+<div class="paragraph"><p>Merge allows you to <strong>combine</strong> the changes of two branches.
+Merge performs a so-called <strong>three-way-merge</strong> between the latest snapshot of two
+branches, based on the most recent common ancestor of both.
+As a result, you have a new snapshot.
+You can merge changes from one branch to the current active one via the following command.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Syntax: git merge &lt;branch-name&gt;
+git merge testing</code></pre>
+</div></div>
+<div class="paragraph"><p>If a merge conflict occurs Git will mark the conflict in the file and the
+programmer has to resolve the conflict manually.
+After resolving it, he can add the file to the staging index and commit the
+change.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_solving_merge_conflicts">1.17.4. Solving merge conflicts</h4>
+<div class="paragraph"><p>A merge conflicts occurs, if two people have modified the same content and Git
+cannot automatically determine how both changes should be applied.</p></div>
+<div class="paragraph"><p>Git requires that merge conflicts are solved <strong>manually</strong>.
+In this section; we will first create a merge conflict and then resolve it and
+apply the change to the Git repository.</p></div>
+<div class="paragraph"><p>The following will create a merge conflict.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>cd ~/repo01                     # Switch to the first directory
+touch mergeconflict.txt         # Make changes
+echo "Change in the first repository" &gt; mergeconflict.txt
+git add . &amp;&amp; git commit -a -m "Will create merge conflict 1"
+                                # Stage and commit
+
+cd ~/repo02                     # Switch to the second directory
+touch mergeconflict.txt         # Make changes
+echo "Change in the second repository" &gt; mergeconflict.txt
+git add . &amp;&amp; git commit -a -m "Will create merge conflict 2"
+                                # Stage and commit
+
+git push                        # Push to the master repository
+
+# Now try to push from the first directory
+cd ~/repo01                     # Switch to the first directory
+git push                        # Try to push --&gt; will get an error message
+git pull origin master          # Get the changes</code></pre>
+</div></div>
+<div class="paragraph"><p>Git marks the conflict in the affected file. This file looks like the following.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Change in the first repository
+=======
+Change in the second repository
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; b29196692f5ebfd10d8a9ca1911c8b08127c85f8</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">my testing:</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/temp-git$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git$ echo "Change in the first repository" &gt; mergeconflict.txt
+ping@640g-laptop:~/temp-git$ git add . &amp;&amp; git commit -a -m "Will create merge conflict 1"
+[master 8de3801] Will create merge conflict 1
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ echo "Change in the second repository" &gt; mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git add . &amp;&amp; git commit -a -m "Will create merge conflict 2"
+[master a57ae5d] Will create merge conflict 2
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git branch
+* master
+ping@640g-laptop:~/temp-git2$ git push
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 405 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   42230df..a57ae5d  master -&gt; master
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git push
+To ../temp-remote-repository.git
+ ! [rejected]        master -&gt; master (non-fast-forward)
+error: failed to push some refs to '../temp-remote-repository.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again.  See the 'Note about
+fast-forwards' section of 'git push --help' for details.
+
+ping@640g-laptop:~/temp-git$ git pull origin master
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            master     -&gt; FETCH_HEAD
+Auto-merging mergeconflict.txt
+CONFLICT (add/add): Merge conflict in mergeconflict.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+ping@640g-laptop:~/temp-git$ less mergeconflict.txt
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Change in the first repository
+=======
+Change in the second repository
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; a57ae5ddbf4d38abfc50bfccdf2c9859a394afbd</code></pre>
+</div></div>
+<div class="paragraph"><p>The above is the part from your repository and the below one from the remote
+repository.
+You could now edit the file manually and then commit the changes.
+Alternatively, you could use the git mergetool command.
+git mergetool starts a configurable merge tool that displays the changes in a
+split screen.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>git mergetool           #Either edit the file manually or use
+
+ping@640g-laptop:~/temp-git11$ git mergetool
+merge tool candidates: opendiff kdiff3 tkdiff xxdiff meld tortoisemerge
+gvimdiff diffuse ecmerge p4merge araxis bc3 vimdiff emerge
+No files need merging
+
+# You will be prompted to select which merge tool you want to use
+# For example on Ubuntu you can use the tool "meld"
+# After  merging the changes manually, commit them
+
+git commit -m "merged changes"</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rebase">1.18. Rebase</h3>
+<div class="sect3">
+<h4 id="_rebasing_commits_in_the_same_branch">1.18.1. Rebasing commits in the same branch</h4>
+<div class="paragraph"><p>The <strong>rebase</strong> command allows you to combine several commits into one commit.
+This is useful as it allows the user to rewrite some of the commit history
+(cleaning it up) before pushing your changes to a remote repository.
+The following will create several commits which should be combined at a later
+point in time.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Create a new file
+touch rebase.txt
+
+# Add it to git
+git add . &amp;&amp; git commit -m "rebase.txt added to index"
+
+# Do some silly changes and commit
+echo "content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added content"
+echo " more content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added more content"
+echo " more content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added more content"
+echo " more content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added more content"
+echo " more content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added more content"
+echo " more content" &gt;&gt; rebase.txt
+git add . &amp;&amp; git commit -m "added more content"
+
+# Check the git log message
+git log</code></pre>
+</div></div>
+<div class="paragraph"><p>We will combine the last seven commits. You can do this interactively via the
+following command.</p></div>
+<div class="paragraph"><p>git rebase -i HEAD~7</p></div>
+<div class="paragraph"><p>This will open your editor of choice and let you edit the commit message or squash/ fixup the commit with the last one.</p></div>
+<div class="paragraph"><p>Squash will combine the commit messages while fixup will disregard the commit message.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_rebasing_branches">1.18.2. Rebasing branches</h4>
+<div class="paragraph"><p>You can also use Git to rebase two branches. As described; the merge command
+combines the changes of two branches. Rebase takes the changes of a branch,
+creates a patch and applies it to another branch.</p></div>
+<div class="paragraph"><p>The final result for the source code is the same as with merge but the commit
+history is cleaner; the history appears to be linear.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Create new branch
+git branch testing
+# Checkout the branch
+git checkout testing
+# Make some changes
+echo "This will be rebased to master" &gt; test01
+# Commit into testing branch
+git commit -a -m "New feature in branch"
+# Rebase the master
+git rebase master</code></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_best_practice_for_rebase">1.18.3. Best practice for rebase</h4>
+<div class="paragraph"><p>You should always check your local branch history before pushing changes to
+another Git repository or review system.</p></div>
+<div class="paragraph"><p>Git allows you to do local commits. This feature is frequently used to have
+points to which you can go back, if something should go wrong later during a
+feature development. If you do so you, before pushing, should look at your
+local branch history and validate, whether or not these commits are relevant
+for others.</p></div>
+<div class="paragraph"><p>If they all belong to the implementation of the same feature you, most likely,
+want to summarize them in one single commit before pushing.</p></div>
+<div class="paragraph"><p>The interactive rebase is basically rewriting the history. It is safe to do
+this as long as the commits have not been pushed to another repository. This
+means commits should only be rewritten as long as they have not been pushed.</p></div>
+<div class="paragraph"><p>If you rewrite and push a commit that is already present in other Git
+repositories, it will look as if you implemented something that somebody
+already implemented in the past.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_create_and_apply_patches">1.18.4. Create and apply patches</h4>
+<div class="paragraph"><p>A patch is a text file that contains changes to the source code. This file can
+be sent to someone else and this person can use this file to apply the changes
+to his/her local repository.</p></div>
+<div class="paragraph"><p>The following creates a branch, makes some changes in this branch, creates a
+patch and applies the patch to the master.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Create a new branch
+git branch mybranch
+# Use this new branch
+git checkout mybranch
+# Make some changes
+touch test05
+# Change some content in an existing file
+echo "New content for test01" &gt;test01
+# Commit this to the branch
+git add .
+git commit -a -m "First commit in the branch"
+
+# Create a patch --&gt; git format-patch master
+git format-patch origin/master
+# This created patch 0001-First-commit-in-the-branch.patch
+
+# Switch to the master
+git checkout master
+
+# Apply the patch
+git apply 0001-First-commit-in-the-branch.patch
+# Do your normal commit in the master
+git add .
+git commit -a -m "Applied patch"
+
+# Delete the patch
+rm 0001-First-commit-in-the-branch.patch</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_define_alias">1.19. Define alias</h3>
+<div class="paragraph"><p>An alias in Git allows you to setup your own Git command. For example, you can
+define an alias which is a short form of your own favorite commands or you can
+combine several commands with an alias.</p></div>
+<div class="paragraph"><p>For example, the following defines the git add-commit command which combines
+git add . -A and git commit -m. After defining this command, you can use it via
+the git add-commit -m "message" command.</p></div>
+<div class="paragraph"><p>git config --global alias.add-commit <em>!git add . -A &amp;&amp; git commit</em></p></div>
+<div class="paragraph"><p>Unfortunately, defining an alias is at the time of writing this not completely
+supported in msysGit. You can do single aliases, e.g. ca for ca = commit -a)
+but you can&#8217;t do ones beginning with !.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_untrack_a_file_directory">1.20. Untrack a file / directory</h3>
+<div class="paragraph"><p>Sometimes you want to have files or directories not being included in your Git
+repository. If you add it to your .gitignore file, Git will stop tracking it
+from this moment. It will not remove it from the repository. Thus, the last
+version will still be in git. To untrack a file or directory in Git you can
+use.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Remove directory .metadata from git repo
+git rm -r --cached .metadata
+# Remove file test.txt from repo
+git rm --cached test.txt</code></pre>
+</div></div>
+<div class="paragraph"><p>This will not remove the file from the commit history. If the file should also
+be removed from the history, have a look at git filter-branch which allows you
+to rewrite the commit history.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_other_useful_commands">1.21. Other useful commands</h3>
+<div class="paragraph"><p>The following lists a few Git commands that are useful in the daily work with
+Git.</p></div>
+<div class="paragraph"><p>Table 2. Useful Git Commands</p></div>
+<div class="paragraph"><p>Command Description
+git blame filename      Who created / modified the file
+git checkout -b mybranch master~1       Creates a new branch based on the master branch without the last commit</p></div>
+</div>
+<div class="sect2">
+<h3 id="_installing_a_git_server">1.22. Installing a Git server</h3>
+<div class="paragraph"><p>As described before, you don&#8217;t need a server. You can just use a file system or
+a public Git provider, such as Github or Bitbucket. Sometimes, however, it is
+convenient to have your own server, and installing it under Ubuntu is
+relatively easy.</p></div>
+<div class="paragraph"><p>First make sure you have installed ssh.</p></div>
+<div class="paragraph"><p>apt-get install ssh</p></div>
+<div class="paragraph"><p>If you have not yet installed Git on your server, you need to do this too.</p></div>
+<div class="paragraph"><p>sudo apt-get install git-core</p></div>
+<div class="paragraph"><p>Create a new user for git.</p></div>
+<div class="paragraph"><p>sudo adduser git</p></div>
+<div class="paragraph"><p>Now log on with your Git user and create a bare repository.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Login to server
+# to test use localhost
+ssh git@IP_ADDRESS_OF_SERVER
+
+# Create repository
+git init --bare example.git
+
+
+Now you can commit to the remote repository.
+
+
+mkdir gitexample
+cd gitexample
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@IP_ADDRESS_OF_SERVER:example.git
+git push origin master</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_online_remote_repositories">1.23. Online remote repositories</h3>
+<div class="sect3">
+<h4 id="_cloning_remote_repositories">1.23.1. Cloning remote repositories</h4>
+<div class="paragraph"><p>Git also support remote operations. Git supports several transport types; the
+native protocol for Git is also called git.</p></div>
+<div class="paragraph"><p>The following will clone an existing repository via the Git protocol.</p></div>
+<div class="paragraph"><p>git clone <a href="mailto:git@github.com">git@github.com</a>:vogella/gitbook.git</p></div>
+<div class="paragraph"><p>Alternatively you could clone the same repository via the http protocol.</p></div>
+<div class="paragraph"><p># The following will clone via HTTP
+git clone <a href="http://vogella@github.com/vogella/gitbook.git">http://vogella@github.com/vogella/gitbook.git</a></p></div>
+</div>
+<div class="sect3">
+<h4 id="_add_more_remote_repositories">1.23.2. Add more remote repositories</h4>
+<div class="paragraph"><p>If you clone a remote repository, the original repository will automatically be
+called origin.</p></div>
+<div class="paragraph"><p>You can push changes to this origin repository via git push origin . Of course,
+pushing to a remote repository requires write access to this repository.</p></div>
+<div class="paragraph"><p>You can add more remote repositories to your repository via the git remote add
+name gitrepo command. For example if you cloned the repository from above via
+the Git protocol, you could add the http protocol via:</p></div>
+<p><span class="comment"> Add the https protocol</span></p>
+<div class="paragraph"><p>git remote add githttp <a href="https://vogella@github.com/vogella/gitbook.git">https://vogella@github.com/vogella/gitbook.git</a></p></div>
+</div>
+<div class="sect3">
+<h4 id="_remote_operations_via_http_and_a_proxy">1.23.3. Remote operations via http and a proxy</h4>
+<div class="paragraph"><p>It is possible to use the HTTP protocol to clone Git repositories. This is
+especially helpful, if your firewall blocks everything except http.</p></div>
+<div class="paragraph"><p>Git also provides support for http access via a proxy server. The following Git
+command could, for example, clone a repository via http and a proxy. You can
+either set the proxy variable in general for all applications or set it only
+for Git.</p></div>
+<div class="paragraph"><p>This example uses environment variables.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Linux
+export http_proxy=http://proxy:8080
+# On Windows
+# Set http_proxy=http://proxy:8080
+git clone http://dev.eclipse.org/git/org.eclipse.jface/org.eclipse.jface.snippets.git
+# Push back to the origin using http
+git push origin
+
+This example uses the Git config settings.
+
+
+// Set proxy for git globally
+git config --global http.proxy http://proxy:8080
+// To check the proxy settings
+git config --get http.proxy
+// Just in case you need to you can also revoke the proxy settings
+git config --global --unset http.proxy</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_git_hosting_provider">1.24. Git Hosting Provider</h3>
+<div class="paragraph"><p>Instead of setting up your own server, you can also use a hosting service. The
+most popular Git hosting sites are GitHub and Bitbucket. Both offer free
+hosting with certain limitations.</p></div>
+<div class="sect3">
+<h4 id="_github">1.24.1. GitHub</h4>
+<div class="paragraph"><p>GitHub can be found under the URL <a href="https://github.com/">https://github.com/</a>. GitHub is free for all
+public repositories, i.e. if you want to have private repositories which are
+only visible to people you select, you have to pay GitHub a monthly fee.</p></div>
+<div class="paragraph"><p>GitHub requires you to create an ssh key. A description for creating an ssh key
+in Ubuntu can be found in the ssh key creation in Ubuntu webpage. For Windows
+please see msysgit ssh key generation .</p></div>
+<div class="paragraph"><p>Create an account at GitHub and create a repository. After creating a
+repository at GitHub you will get a description of all the commands you need to
+execute to upload your project to GitHub. Follow the instructions.</p></div>
+<div class="paragraph"><p>These instructions will be similar to the following:</p></div>
+<div class="listingblock">
+<div class="title">Global setup:</div>
+<div class="content">
+<pre><code>Set up git
+git config --global user.name "Your Name"
+git config --global user.email your.email@gmail.com</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Next steps:</div>
+<div class="content">
+<pre><code>mkdir gitbook
+cd gitbook
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master
+
+Existing Git Repo?
+cd existing_git_repo
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master</code></pre>
+</div></div>
+<div class="paragraph"><div class="title">my test&amp;notes</div><p>cd bin
+git init
+git add .
+git commit -m <em>my commit</em>
+#now go to github website and create a repo manually, say <code>mybin</code>
+git remote set-url origin <a href="https://github.com/pinggit/mybin.git">https://github.com/pinggit/mybin.git</a>
+#list the current remote
+git remove -v
+git push -f origin master</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Username for 'https://github.com': pinggit
+Password for 'https://pinggit@github.com':
+To https://github.com/pinggit/mybin.git
+ + ca88f88...9fc59a7 master -&gt; master (forced update)</code></pre>
+</div></div>
+<div class="paragraph"><p>#to delete, for now only from website</p></div>
+</div>
+<div class="sect3">
+<h4 id="_bitbucket">1.24.2. Bitbucket</h4>
+<div class="paragraph"><p>Bitbucket can be found under the URL <a href="https://bitbucket.org/">https://bitbucket.org/</a>. Bitbucket allows
+unlimited public and private repositories, while the number of participants for
+one private repository is currently limited to 5 collaborators. I.e. if you
+have more then 5 developers which need access to a private repository you have
+to pay money to Bitbucket.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_graphical_ui_8217_s_for_git">1.25. Graphical UI&#8217;s for Git</h3>
+<div class="paragraph"><p>This tutorial focused on the usage of the command line for Git. After finishing
+this tutorial, you may want to look at graphical tools for working with Git.</p></div>
+<div class="paragraph"><p>Git provides two graphical tools. gitk shows the history and git gui shows an
+editor that allows you to perform Git operations.</p></div>
+<div class="paragraph"><p>The Eclipse EGit project provides Git integration into Eclipse, which is
+included in the latest Eclipse release.</p></div>
+<div class="sect3">
+<h4 id="_gitk">1.25.1. gitk</h4>
+<div class="literalblock">
+<div class="content">
+<pre><code>gitk --all</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_the_kindle_edition">1.26. Get the Kindle edition</h3>
+<div class="paragraph"><p>This tutorial is available for your Kindle.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_git_cmds_options_sums">1.27. git cmds,options sums</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>.cmds          options                 examples
+git-config     --global                git config --global user.name "ping"
+                                       git config --global user.name "ping"
+                                       git config --global user.email "a@b.us"
+                                       git config --global color.status auto
+                                       git config --global color.branch auto</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>--list                  git config --list</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>git-init                               git init
+git-add                                git add .
+               std commit,
+               not RMed file
+               -A
+git-logs                               git log
+git-status
+git-commit     -a                      git commit -a -m "new changes"
+                   commit chg/RMed f
+                   ,but no new file
+               -m
+               --amend                 git commit --amend -m "chg corrected"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> git-diff                               git diff
+ git-clone      --bare                  git clone --bare rep1 ../remote-rep
+                    remote rep
+ git-push                               git push origin
+ git-pull                               git pull ../temp-git11.r/
+ git-clean
+                RM untracked Fs
+                from working tree
+                -n
+                    test drive
+                -f
+                    execute
+git-reset                               git reset HEAD file1.txt
+git-checkout                            git checkout file1.txt
+git-revert
+git-branch                              git branch mybranch1
+                                        git branch master
+                                        git branch -d testing</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_fugitive">1.28. fugitive</h3>
+</div>
+<div class="sect2">
+<h3 id="_questions_and_discussion">1.29. Questions and Discussion</h3>
+<div class="paragraph"><p>Before posting questions, please see the vogella FAQ. If you have questions or
+find an error in this article please use the www.vogella.de Google Group. I
+have created a short list how to create good questions which might also help
+you.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_links_and_literature">1.30. Links and Literature</h3>
+<div class="paragraph"><p>Git homepage</p></div>
+<div class="paragraph"><p>EGit - Teamprovider for Eclipse</p></div>
+<div class="paragraph"><p>Video with Linus Torwalds on Git</p></div>
+<div class="paragraph"><p>Progit book - Free Git book</p></div>
+<div class="paragraph"><p>Video casts about Git</p></div>
+<div class="paragraph"><p><a href="http://code.google.com/p/msysgit/">http://code.google.com/p/msysgit/</a> Git on Windows</p></div>
+<div class="paragraph"><p><a href="http://github.com/guides/git-cheat-sheet">http://github.com/guides/git-cheat-sheet</a> Git Cheat Sheets</p></div>
+</div>
+<div class="sect2">
+<h3 id="_real_usage_cases">1.31. real usage cases</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+to recover the delete file
+</dt>
+<dd>
+<p>
+    git reset --hard HEAD
+</p>
+</dd>
+<dt class="hdlist1">
+go back to historical version(git essential usev)
+</dt>
+<dd>
+<p>
+¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?commit¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?push¿?¿?¿?¿?¿?¿?
+¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿? ¿?¿?¿?¿?¿?git
+reset¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?reset¿?¿?
+¿?¿?¿?¿?git pull¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?merge ¿?¿?¿?
+¿?¿?¿?¿?¿?¿?¿?¿?
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>git reset --hard 393d3aefc673b01fc26b887c68b57450f1b34178
+git push origin master -f</code></pre>
+</div></div>
+</dd>
+</dl></div>
+<div class="listingblock">
+<div class="title">git log:before</div>
+<div class="content">
+<pre><code>ping@640g-laptop:~/mytest-project/jekyll-site/pinggit.github.com$ git log
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Sun Feb 24 12:37:54 2013 -0500
+
+    some change
+
+commit b715e0e371ee175c693c55ceb6e9df4111098f65
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Sun Feb 24 12:26:25 2013 -0500
+
+    change yaml
+
+...&lt;a million more changes here&gt;...
+
+commit 7622dc6f03484be25a4bdc07562a44691bf3bf3c
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Sun Feb 24 11:57:33 2013 -0500
+
+    change config.yaml
+
+commit 393d3aefc673b01fc26b887c68b57450f1b34178         <img alt="1" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=" />
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim</code></pre>
+</div></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+target release that we want to go back to
+</p>
+</li>
+</ol></div>
+<div class="listingblock">
+<div class="title">git log:now, looks we lost/trashed all commit info after the target release</div>
+<div class="content">
+<pre><code>commit 393d3aefc673b01fc26b887c68b57450f1b34178
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim
+
+commit 64ac9a0becbf4707a6454460601dbf90aa39f056
+Author: ping &lt;songpingemail@gmail.com&gt;
+Date:   Thu Feb 21 16:18:03 2013 -0500
+
+    new post: usb3.0</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-04-09 21:07:26 EDT
+</div>
+</div>
+</body>
+</html>

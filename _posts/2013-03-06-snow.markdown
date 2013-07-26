@@ -1,0 +1,50 @@
+---
+layout: post
+title: "大雪"
+published: true
+created:  2013 Mar 06 10:54:35 AM
+tags: 
+    - photo
+    - video
+categories: [life]
+---
+
+![snow1](/images/snow1.JPG "snow")
+![snow2](/images/snow2.JPG "snow")
+![snow3](/images/snow3.JPG "snow")
+
+<!--
+![snowvedio](/images/snow20130306.mov "snowvideo")
+
+test from asciidoc:
+
+<video
+poster="webdata/IMG00185-20110421-1334.jpg" id="video" style="cursor: pointer;" >
+  <source src="pics/video/gizmo.mp4" />
+  <source src="http://www.808.dk/pics/video/gizmo.webm" type="video/webm" />
+  <source src="pics/video/gizmo.ogv" type="video/ogg" />
+  Video not playing? <a href="pics/video/gizmo.mp4">Download file</a> instead.
+</video>
+
+<script type="text/javascript">
+  var video = document.getElementById('video');
+  video.addEventListener('click',function(){
+    video.play();
+  },false);
+</script>
+
+a jekyll plugin : but not work yet
+
+-->
+
+<iframe width="620" height="550" src="http://www.youtube.com/embed/fgfdRpNrq-8" frameborder="0">  </iframe>
+
+一夜北风寒，万里彤云厚；
+
+长空雪乱飘，改尽江山旧。 
+
+仰面观太虚，疑是玉龙斗； 
+
+纷纷麟甲飞，顷刻遍宇宙。
+
+骑驴过小桥，独叹梅花瘦

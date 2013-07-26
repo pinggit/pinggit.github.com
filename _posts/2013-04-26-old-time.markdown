@@ -1,0 +1,12 @@
+---
+layout: post
+title: "记忆片段"
+published: true
+created:  2013 Apr 26 04:38:14 PM
+tags: [life]
+categories: [life]
+---
+
+![old-time](/images/old-time1-1024x768.JPG "old-time")
+![old-time](/images/old-time2-1024x768.JPG "old-time")
+![old-time](/images/old-time3-1024x768.JPG "old-time")

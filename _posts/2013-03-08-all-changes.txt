@@ -1,0 +1,113 @@
+---
+layout: post
+title: "all changes"
+created:  2013 Mar 08 11:06:19 PM
+tags: [english]
+categories: [english]
+published: false
+---
+
+
+== The main supervisory agencies get a new set of bosses
+
+http://article.yeeyan.org/bilingual/230705
+
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+China’s financial regulators                    中国金融高管大洗盘              
+                                                译者：mandy萌                   
+All change                                      大洗盘
+                                                
+The main supervisory agencies get a new set     主要监管机构迎来新的领导班子                                    
+of bosses                                       
+                                                
+THE grey men at the top of China’s main         中国主要金融监管机构的高层很少变 
+financial-regulatory agencies do not change     动。所以，这次对银行，证券和保险                                 
+often. So the appointment of new bosses to      机构新领导的任命，激起一场波动。 
+the agencies supervising the banking,           
+securities and insurance industries has         
+created a splash.                               
+                                                
+The most important job, that atop the China      中国银行业监督管理委员会（银监会                                  
+Banking Regulatory Commission (CBRC), goes to    ）主席这个重要职务，由尚福林担任                                  
+Shang Fulin (pictured), a careful bureaucrat     。尚之前曾担任中国证监会主席。他                                  
+who most recently served as the chief            的改革措施广受欢迎，包括允许国有                                  
+securities regulator. His widely applauded       企业的非流动资产进入交易，以及引                                  
+reforms allowed illiquid shares of               进期货指数和保证金交易等。不过西                                  
+state-owned enterprises to be traded, as well    班牙毕尔巴鄂比斯银行的艾丽西亚认                                  
+as the introduction of index futures and         为，尚针对债券市场的改革缓慢，担                                  
+margin trading. But Alicia Garcia-Herrero of     心这会降低利率自由化的可能性，固                                  
+BBVA, a Spanish bank, argues that he moved       定资产账户的进一步开放也会放缓。                                  
+too slowly on bond-market reforms and fears     
+that “this reduces the likelihood of             
+interest-rate liberalisation and further         
+opening up of the capital account any time       
+soon.”                                           
+                                                 郭树清接替尚福林担任中国证监会主                                  
+Mr Shang’s former job running the China          席一职。之前郭曾是中国建设银行行                                  
+Securities Regulatory Commission goes to Guo     长。郭曾在牛津留学，英文流利，直                                  
+Shuqing, who until recently was chairman of      言不讳，并有市场头脑。去年接受路                                  
+China Construction Bank, a giant                 透社采访时，他曾说：如果不冒险，                                  
+state-controlled bank. A fluent English          怎么能赚到钱？                                                    
+speaker who spent time at Oxford, he is          
+outspoken and seems market-minded: “If you       
+don’t take any risk how can you make any         
+money?” he asked in an interview with Reuters    
+last year.                                       
+                                                 
+Xiang Junbo, the former boss of the              
+Agricultural Bank of China (ABC), another        
+government-run banking goliath, is the new       
+insurance regulator. He made his mark with       中国农业银行前行长项俊波成为新一  
+the dual listing of ABC shares last year in      任保监会主席。去年，农行股份在沪  
+Hong Kong and Shanghai, which at $22 billion     市和香港股市两地上市，市值220亿                                 
+was then the biggest public placement ever.      美元，成为了最大的公共股份。      
+                                                
+The trio have a tough task ahead. They must      三个人眼前的任务都很艰巨。他们一 
+overcome meddling from above as well as          方面要应对上层的干预，又要克服下 
+crises brewing below. Zhao Xinge of the China    面的危机。中欧国际商学院的赵新歌 
+Europe International Business School observes    说：银监会并没有完全掌握对银行业 
+that “CBRC clearly does not have total           的监管。他指出，国家领导的新政策 
+control in how the banks should be regulated.    ，让银行对中小企业的不良贷款更加 
+” He points to fresh demands from the country    忽视，所以，破产的中小企业“太多                                 
+’s leaders that banks be “more tolerant” of      了”。                            
+bad loans made to small and medium              
+enterprises, which, he quips, are “too many     
+to fail”.                                       
+                                                
+That hints at another sort of trouble for Mr     这意味着商和他的团队还面临新的麻 
+Shang and his colleagues.  Ostensibly, China’    烦。表面上，中国的银行系统运行良 
+s banks are in good health. Several              好。几个国有银行占据了四分之三的 
+publicly-listed state-controlled banks           利润。中国银行的季度利润去年一年 
+unveiled impressive third-quarter profits:       上升了9%。中国农业银行上升了40%  
+Bank of China’ s quarterly profits rose by 9%    。中国国际信托公司上升了41%。    
+from a year ago, ABC saw a rise of 40% and
+China CITIC posted a 41% increase.
+
+The snag is that these profits may be built      而缺陷是，这些高额利润的背后也许
+on a mountain of bad debt. Few analysts          是一群呆账坏账。大部分金融分析学
+believe the government’s rosy figures on         家都不相信这些依靠不良贷款取得的
+non-performing loans, given the lending binge    巨大数字，因为激进的财政政策出台
+that the big banks went on as part of China’s    后，各大银行都大规模发放贷款作为
+official stimulus policy (see chart). One        回应。有人担心财政气泡会破裂。另
+concern is that the property bubble will         外非正式贷款部门也可能破产，赤字
+burst.  Another is the meltdown of the           高达4万亿元（ 6290亿美元）      
+informal lending sector, which Credit Suisse
+estimates may be worth 4 trillion yuan ($629
+billion).
+
+The main worry, however, is local-government     不过最大的焦虑还是地方政府的债务
+debt. This week the CBRC hinted for the first    问题。本周，银监会表示它们将首次
+time that it may allow the special investment    允许特殊投资方接管延迟还贷造成的
+vehicles holding most of this debt to delay      大部分债务。这会暂时缓解压力，不
+loan payments. That would help ease an           止让银行业崩溃。不过同时银行账户
+immediate crunch—but it would also further       会进一步糜烂，对资产负债表的合理
+muddy the banks’ accounts and delay a proper     清算也将滞后。除非商和他的团队反
+clean-up of balance-sheets. Unless Mr Shang      应足够敏捷，否则投资商将面临复杂
+and his colleagues prove exceptionally deft,     的情况。                        
+investors will be in for a rocky ride.
+
+ifdef::basebackend-html[....]
+

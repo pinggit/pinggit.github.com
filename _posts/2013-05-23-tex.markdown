@@ -1,0 +1,29 @@
+---
+layout: post
+title: "tex in markdown"
+published: true
+created:  2013 May 23 02:14:02 PM
+tags: [tex]
+categories: [tech]
+---
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+## if formula is the only thing you want to get from tex...
+
+how about just :
+
+* keep your [`tex`](http://en.wikipedia.org/wiki/Lex_%28software%29) formula , 
+* trash the rest, and 
+* continue to enjoy `markdown` writing 
+
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
+
+nothing special?  
+if right click on it, you may see something that might
+interest you a bit more here...

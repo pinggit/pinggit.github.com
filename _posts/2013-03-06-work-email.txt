@@ -1,0 +1,565 @@
+---
+layout: post
+title: "work email"
+created:  2013 Mar 06 10:08:10 AM
+tags: [work]
+categories: [english]
+published: false
+---
+
+---
+== work email
+=== part I
+==== From: Sam
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Folks, We seem to have an issue with the http redirect in 12-1-1p0-3. Per              spotted['spɔtid]' adj.有斑点的；弄污的v.发现（spot的过去分词）；玷污；弄上污痕
+customer, removing and adding back the configuration line 'http server'                   data ['deitә] 重音很明显 configuration[kәnfiɡjʋә'reiʃ（ә）]
+*resolved* the issue. Below is the subscriber interface configuration and some    	【伙计们，好像12.1.1有个http重定向问题。客户说重新配置一下http server这行可解决】
+of the *captures* we took while the issue was there. Please let us know the 		capture,常用，捕获的log等排错所需数据，并非"抓包"。
+additional data that you would like to have it when a similar issue is 			【下面是用户接口配置和出问题时抓的信息。请告知还有需要什么可在下次出问题时抓的】
+*spotted* on some other router. Customer already informed us, they believe the            spot [spɔt],更似[spʌt]，显现
+issue might be there on a different router (washington dc vfttp-131) and they 		【客户认为这问题还会在另外一台上出现，如果他们的客户能配合我们排错的话会给通知】
+will let us know when the subscriber is available for troubleshooting the                 subscriber [sәb'skraibә(r)] NOT[sʌb'sgraiber] [ә'veilәb(ә)l]重音
+issue, so please let us know your recommendations for the additional data                 [rekәmen'deiʃ(ә)n]               ^   ^ 【所以请提供额外需要抓的信息，谢谢】
+capture.  Thanks for your help! 							极限：2breath/40s 正常：3breath/50s
+
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Sam, From the shared log, You have +pointed out+ two issues; 1. Subscriber 		【从提供的log看，你这说的是两个问题：1.终端用户不能打开重定向网址。2.对class 】
+unable to reach the redirected URL. 2. Ping test on classifier group shown a 		
+different output. For the problem 1, we need to collect the below logs to know 		【group的ping测试不通。搞清问题一需要收集以下信息：a, 测试重定向前后的show http 】
+the exact problem. (a). Show ip http output before and after +trying out+ the
+HTTP redirect feature from subscriber. (b). show ip interface gigabitEthernet 		【b. 测试前后show.。的输出－－看看是不是异常被触发和FC是否做了包转发】
+13/1/7.500012 output before and after the trial - to see the exception is hit
+and whether the FC has lifted the packet. (c). Enable the flag from RP shell 		【c. 在RP shell中打开标志。d. 打开log. 问题2好像是正常现象。policy组Dobrina那边】
+(d). Enable the logs. For the problem 2, It seems +an expected behavior+; There           [bi'heivjә(r)] 发出字母A的音，不是i:
+was another +mail chain+ going for policy team with Dobrina - Refer the                 【有另外^ 一个邮件在讨论这个问题－－请看附件。解决方法是－－配置带有tcp any any 】
+attached mail thread. Solution is – configure the classifier list with “tcp any 	【选项的classifier list 】
+any” option 										speed:  4b/60s
+
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Sam, There was a mistake done in the previous mail chain; I have *clubbed* the
+Ping test issue here with the influence of some other cases.  Actually it’s not
+available in your shared logs.
+ 
+ifdef::basebackend-html[....]
+
+==== From: Sam
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Raja, Thanks for all your *input*...+As of now+, it is most likely some time 	as of now...至于现在。。input:意见，看法，所有对问题"输入"的东西
+tomorrow our time we will have a chance to look at the issue on a different
+router [washington dc-vfttp-131].
+ 
+ifdef::basebackend-html[....]
+
+==== From: Scott
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja, I believe that I’ve been able to reproduce the customer problem here in 		
+the lab. The router is 10.3.200.3. The subscriber is a DHCP user *off* this 		off的用法 ，相当于 from
+interface: I get the same log message that we saw at customer site: The server
+is +tearing down+ the initial TCP connection attempt from the client: I haven’t         tearing,['tєәriŋ] not [tiәriŋ]，常用词，拆连接
+tried to reproduce it more than once, so I’m not sure how easy it is to get. I          a bunch of stuff很多（其^ 他）东西 
+tried +a bunch of stuff+ today, but I think I hit it by just *hammering* the box 	hammper,地道用法，用锤子砸，意思是折腾设备使得bug重现
+with a single user having multiple *concurrent* TCP connections. Feel free to 		['mʌltipl] like ['mɔltipl]
+collect whatever data you want *off* my system. Once you have what you need, I 				   ^
+can clear the condition and see how repeatable the condition is. If you have
+problems with access, TAC in BNG or US should be able to +get you in+ or get you        ['ækses] NOT [әk'ses] get .. in :把。。。弄进去
+the data you need. 									speed:normal 4b/57s max 
+
+ifdef::basebackend-html[....]
+
+=== part II
+==== From: Ikram
+ 
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Thanks! Scott; hopefully router (in +broken-state+) should help Development…
+Raja, Please let us know if you need any additional info… I know we are still
+working on root-cause… it will be helpful if (as soon) we can get some 			root-cause: 根本原因。[ru:t]发音简单，但微妙得很 [kɔ:z]not[kɔ:ls],也没有儿化
+*indication* that this is hotfixable? [and not to get too far ahead :) – this 		[,indi'keiʃәn]                                       ^      ^^^^
+will probably be another RP hotfix; we need to make sure if we can *deploy* this
+on routers (already running 12.1.1) without needing reload; for example, post 		[iɡ'zæmpl] 重音夸张
+activation, disable/enable http-server +will do the trick?+]
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+ 
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+We have discussed in the separate mail chain and suspect some of the area – 		['eәriә] 圆滑的感觉
+like the same host limit enforcement and age out on each client connection.  I 		[in'fɔ:smәnt]->美语有儿化 host [hәust] o, not [hɔst]
+will provide the debug HotFix to scott team by *EOD*. I will share the HotFix 		EndOfDay:常用缩写
+details once I have created a debug HotFix..    					[kri:'eit] 重音一定要单独发出
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Scott, In the lab setup reproduce the issue *freshly* and collect the 		['setʌp]重音在前
+following logs in the system.  Activate the HF only after the reproduction of 		['æktiveit]大嘴
+the issue. So that we can avoid unnecessary logs. 					[ʌn'nesәsәri; -seri]更似第二种,第二个元音要明确发出,不可掠过
+1.   During the test:  										 ^ 	^
+wireshark log – to see the communication between (dhcp client) Ixia and router.  	['waiә]shark大嘴[bi'twi:n] -> [bi'tuwi:n]
+2.   After the test – Once the problem is reproduced:
+show ip tcp statistics . 								[stә'tistiks]第一"ti"清晰发出,第二"ti"作di
+Activate the fix 46001 and enable the below flag in shell: 				     ^	^ shell[ʃel] vs. share
+-> staleHttpcEntryCheck = 1 								stale
+
+Now the situation is all incoming http packet will be rejected as “ Too many 		[ɔ:l]->实际似毫无儿化,对比"or"
+connection” ; Send some few http packets from Ixia  ,Then for each “Too many
+connection” rejection action, This hotfix will print the existing entries
+present in the HttpcTable.  So don’t send too many packets to router after this 	['teibl]重音,not['teibɔ],更似['teibәʋ]; enable同样
+flag is enabled. 									   ^^ ^  	      ^
+3.   Do core dump on RP and share the core dump. 					share[ʃєә] vs. shell
+
+ifdef::basebackend-html[....]
+
+==== From: Scott
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja, I replicated the problem again and collected as much of the requested 			   v 			vv 		       v vv
+data as I could.  The CLI, log data, and core dump are posted.  Unfortunately,  	[ʌn'fɔ:tjʋnәtli] not [ʌn'fɔ:tjʋneitli], like [ʌn'fɔ:chnә-li],'t'音极轻
+the system +can’t keep up with+ the volume of log data with httpServer and 		赶不上，来不及处理
+tcpEngineering enabled, so you’ll find that there are a high number of dropped
+messages: I also have 2 capture files in that same location.  The larger file 		[fail] like [faiɔ]not fire ['faiә]
+was taken when the problem was being replicated.  The smaller file is taken
+after the router is already in the +broken condition+.  If you need more data or 	or :youdao[ɔ:, ə],jinshan[ɔ:(r)],极强儿化感,对比all
+tests, please let me know.  Thanks,
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Scott, In the shared logs we could see the TCP connections are available in
+the system even after done with client.  Unfortunately so many logs dropped we
+are not able to *conclude* on the issue.  Please share the setup with Ixia keep
+running with http send. So that we will further analyze and share the update by
+Monday.  
+
+ifdef::basebackend-html[....]
+
+=== part III
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+==== From: Raja V 
+
+Hi Scott, Thanks for providing the test setup with flexibility of dev engineers
+requirement. Which helps me to narrow down the issue in fast track mode.  I
+have tested with fix in your setup. It seems the fix is working fine. Please
+verify the fix from your side and share me the result.  The fix is already in
+active state in your setup 10.3.200.3.  Without fix, whenever I enabled the
+httpServer and policy config ; the problem is reproduced in few minutes.  With
+HF the problem is not seen 5-6 hours, still it’s going.
+ 
+ifdef::basebackend-html[....]
+
+==== From: Ikram Ali 
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja (Scott), Thx for the update… looks like the FIX is looking/running good.
+[I had a sidebar with Scott – he concur]. Scott will do further testing to make 	[kәn'kә:(r)]'
+sure everything is good.  So, once we get the +green light+, please let us know
+(ETA time) when we will be able to check this in and ready for VZ delivery?  Thanks,
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja V
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Here I have attached the problem summary  for the future reference, Once I get
+confirmation from Scott; I will start the process of providing the fix from dev
+side on the same day.
+ 
+ifdef::basebackend-html[....]
+
+layout: post
+title: "work email"
+created:  2013 Mar 06 10:05:25 AM
+tags: [work]
+categories: [english]
+published: false
+---
+
+---
+== work email
+=== part I
+==== From: Sam
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Folks, We seem to have an issue with the http redirect in 12-1-1p0-3. Per              spotted['spɔtid]' adj.有斑点的；弄污的v.发现（spot的过去分词）；玷污；弄上污痕
+customer, removing and adding back the configuration line 'http server'                   data ['deitә] 重音很明显 configuration[kәnfiɡjʋә'reiʃ（ә）]
+*resolved* the issue. Below is the subscriber interface configuration and some    	【伙计们，好像12.1.1有个http重定向问题。客户说重新配置一下http server这行可解决】
+of the *captures* we took while the issue was there. Please let us know the 		capture,常用，捕获的log等排错所需数据，并非"抓包"。
+additional data that you would like to have it when a similar issue is 			【下面是用户接口配置和出问题时抓的信息。请告知还有需要什么可在下次出问题时抓的】
+*spotted* on some other router. Customer already informed us, they believe the            spot [spɔt],更似[spʌt]，显现
+issue might be there on a different router (washington dc vfttp-131) and they 		【客户认为这问题还会在另外一台上出现，如果他们的客户能配合我们排错的话会给通知】
+will let us know when the subscriber is available for troubleshooting the                 subscriber [sәb'skraibә(r)] NOT[sʌb'sgraiber] [ә'veilәb(ә)l]重音
+issue, so please let us know your recommendations for the additional data                 [rekәmen'deiʃ(ә)n]               ^   ^ 【所以请提供额外需要抓的信息，谢谢】
+capture.  Thanks for your help! 							极限：2breath/40s 正常：3breath/50s
+
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Sam, From the shared log, You have +pointed out+ two issues; 1. Subscriber 		【从提供的log看，你这说的是两个问题：1.终端用户不能打开重定向网址。2.对class 】
+unable to reach the redirected URL. 2. Ping test on classifier group shown a 		
+different output. For the problem 1, we need to collect the below logs to know 		【group的ping测试不通。搞清问题一需要收集以下信息：a, 测试重定向前后的show http 】
+the exact problem. (a). Show ip http output before and after +trying out+ the
+HTTP redirect feature from subscriber. (b). show ip interface gigabitEthernet 		【b. 测试前后show.。的输出－－看看是不是异常被触发和FC是否做了包转发】
+13/1/7.500012 output before and after the trial - to see the exception is hit
+and whether the FC has lifted the packet. (c). Enable the flag from RP shell 		【c. 在RP shell中打开标志。d. 打开log. 问题2好像是正常现象。policy组Dobrina那边】
+(d). Enable the logs. For the problem 2, It seems +an expected behavior+; There           [bi'heivjә(r)] 发出字母A的音，不是i:
+was another +mail chain+ going for policy team with Dobrina - Refer the                 【有另外^ 一个邮件在讨论这个问题－－请看附件。解决方法是－－配置带有tcp any any 】
+attached mail thread. Solution is – configure the classifier list with “tcp any 	【选项的classifier list 】
+any” option 										speed:  4b/60s
+
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Sam, There was a mistake done in the previous mail chain; I have *clubbed* the
+Ping test issue here with the influence of some other cases.  Actually it’s not
+available in your shared logs.
+ 
+ifdef::basebackend-html[....]
+
+==== From: Sam
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Raja, Thanks for all your *input*...+As of now+, it is most likely some time 	as of now...至于现在。。input:意见，看法，所有对问题"输入"的东西
+tomorrow our time we will have a chance to look at the issue on a different
+router [washington dc-vfttp-131].
+ 
+ifdef::basebackend-html[....]
+
+==== From: Scott
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja, I believe that I’ve been able to reproduce the customer problem here in 		
+the lab. The router is 10.3.200.3. The subscriber is a DHCP user *off* this 		off的用法 ，相当于 from
+interface: I get the same log message that we saw at customer site: The server
+is +tearing down+ the initial TCP connection attempt from the client: I haven’t         tearing,['tєәriŋ] not [tiәriŋ]，常用词，拆连接
+tried to reproduce it more than once, so I’m not sure how easy it is to get. I          a bunch of stuff很多（其^ 他）东西 
+tried +a bunch of stuff+ today, but I think I hit it by just *hammering* the box 	hammper,地道用法，用锤子砸，意思是折腾设备使得bug重现
+with a single user having multiple *concurrent* TCP connections. Feel free to 		['mʌltipl] like ['mɔltipl]
+collect whatever data you want *off* my system. Once you have what you need, I 				   ^
+can clear the condition and see how repeatable the condition is. If you have
+problems with access, TAC in BNG or US should be able to +get you in+ or get you        ['ækses] NOT [әk'ses] get .. in :把。。。弄进去
+the data you need. 									speed:normal 4b/57s max 
+
+ifdef::basebackend-html[....]
+
+=== part II
+==== From: Ikram
+ 
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Thanks! Scott; hopefully router (in +broken-state+) should help Development…
+Raja, Please let us know if you need any additional info… I know we are still
+working on root-cause… it will be helpful if (as soon) we can get some 			root-cause: 根本原因。[ru:t]发音简单，但微妙得很 [kɔ:z]not[kɔ:ls],也没有儿化
+*indication* that this is hotfixable? [and not to get too far ahead :) – this 		[,indi'keiʃәn]                                       ^      ^^^^
+will probably be another RP hotfix; we need to make sure if we can *deploy* this
+on routers (already running 12.1.1) without needing reload; for example, post 		[iɡ'zæmpl] 重音夸张
+activation, disable/enable http-server +will do the trick?+]
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+ 
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+We have discussed in the separate mail chain and suspect some of the area – 		['eәriә] 圆滑的感觉
+like the same host limit enforcement and age out on each client connection.  I 		[in'fɔ:smәnt]->美语有儿化 host [hәust] o, not [hɔst]
+will provide the debug HotFix to scott team by *EOD*. I will share the HotFix 		EndOfDay:常用缩写
+details once I have created a debug HotFix..    					[kri:'eit] 重音一定要单独发出
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Scott, In the lab setup reproduce the issue *freshly* and collect the 		['setʌp]重音在前
+following logs in the system.  Activate the HF only after the reproduction of 		['æktiveit]大嘴
+the issue. So that we can avoid unnecessary logs. 					[ʌn'nesәsәri; -seri]更似第二种,第二个元音要明确发出,不可掠过
+1.   During the test:  										 ^ 	^
+wireshark log – to see the communication between (dhcp client) Ixia and router.  	['waiә]shark大嘴[bi'twi:n] -> [bi'tuwi:n]
+2.   After the test – Once the problem is reproduced:
+show ip tcp statistics . 								[stә'tistiks]第一"ti"清晰发出,第二"ti"作di
+Activate the fix 46001 and enable the below flag in shell: 				     ^	^ shell[ʃel] vs. share
+-> staleHttpcEntryCheck = 1 								stale
+
+Now the situation is all incoming http packet will be rejected as “ Too many 		[ɔ:l]->实际似毫无儿化,对比"or"
+connection” ; Send some few http packets from Ixia  ,Then for each “Too many
+connection” rejection action, This hotfix will print the existing entries
+present in the HttpcTable.  So don’t send too many packets to router after this 	['teibl]重音,not['teibɔ],更似['teibәʋ]; enable同样
+flag is enabled. 									   ^^ ^  	      ^
+3.   Do core dump on RP and share the core dump. 					share[ʃєә] vs. shell
+
+ifdef::basebackend-html[....]
+
+==== From: Scott
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja, I replicated the problem again and collected as much of the requested 			   v 			vv 		       v vv
+data as I could.  The CLI, log data, and core dump are posted.  Unfortunately,  	[ʌn'fɔ:tjʋnәtli] not [ʌn'fɔ:tjʋneitli], like [ʌn'fɔ:chnә-li],'t'音极轻
+the system +can’t keep up with+ the volume of log data with httpServer and 		赶不上，来不及处理
+tcpEngineering enabled, so you’ll find that there are a high number of dropped
+messages: I also have 2 capture files in that same location.  The larger file 		[fail] like [faiɔ]not fire ['faiә]
+was taken when the problem was being replicated.  The smaller file is taken
+after the router is already in the +broken condition+.  If you need more data or 	or :youdao[ɔ:, ə],jinshan[ɔ:(r)],极强儿化感,对比all
+tests, please let me know.  Thanks,
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Hi Scott, In the shared logs we could see the TCP connections are available in
+the system even after done with client.  Unfortunately so many logs dropped we
+are not able to *conclude* on the issue.  Please share the setup with Ixia keep
+running with http send. So that we will further analyze and share the update by
+Monday.  
+
+ifdef::basebackend-html[....]
+
+=== part III
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+==== From: Raja V 
+
+Hi Scott, Thanks for providing the test setup with flexibility of dev engineers
+requirement. Which helps me to narrow down the issue in fast track mode.  I
+have tested with fix in your setup. It seems the fix is working fine. Please
+verify the fix from your side and share me the result.  The fix is already in
+active state in your setup 10.3.200.3.  Without fix, whenever I enabled the
+httpServer and policy config ; the problem is reproduced in few minutes.  With
+HF the problem is not seen 5-6 hours, still it’s going.
+ 
+ifdef::basebackend-html[....]
+
+==== From: Ikram Ali 
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Raja (Scott), Thx for the update… looks like the FIX is looking/running good.
+[I had a sidebar with Scott – he concur]. Scott will do further testing to make 	[kәn'kә:(r)]'
+sure everything is good.  So, once we get the +green light+, please let us know
+(ETA time) when we will be able to check this in and ready for VZ delivery?  Thanks,
+ 
+ifdef::basebackend-html[....]
+
+==== From: Raja V
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Here I have attached the problem summary  for the future reference, Once I get
+confirmation from Scott; I will start the process of providing the fix from dev
+side on the same day.
+ 
+ifdef::basebackend-html[....]
+
+layout: post
+title: "work email"
+created:  2013 Mar 06 10:00:07 AM
+tags: [work]
+categories: [english]
+published: false
+---
+
+
+== work email
+=== part I
+==== From: Sam
+
+Hi Folks, We seem to have an issue with the http redirect in 12-1-1p0-3. Per              spotted['spɔtid]' adj.有斑点的；弄污的v.发现（spot的过去分词）；玷污；弄上污痕
+customer, removing and adding back the configuration line 'http server'                   data ['deitә] 重音很明显 configuration[kәnfiɡjʋә'reiʃ（ә）]
+*resolved* the issue. Below is the subscriber interface configuration and some    	【伙计们，好像12.1.1有个http重定向问题。客户说重新配置一下http server这行可解决】
+of the *captures* we took while the issue was there. Please let us know the 		capture,常用，捕获的log等排错所需数据，并非"抓包"。
+additional data that you would like to have it when a similar issue is 			【下面是用户接口配置和出问题时抓的信息。请告知还有需要什么可在下次出问题时抓的】
+*spotted* on some other router. Customer already informed us, they believe the            spot [spɔt],更似[spʌt]，显现
+issue might be there on a different router (washington dc vfttp-131) and they 		【客户认为这问题还会在另外一台上出现，如果他们的客户能配合我们排错的话会给通知】
+will let us know when the subscriber is available for troubleshooting the                 subscriber [sәb'skraibә(r)] NOT[sʌb'sgraiber] [ә'veilәb(ә)l]重音
+issue, so please let us know your recommendations for the additional data                 [rekәmen'deiʃ(ә)n]               ^   ^ 【所以请提供额外需要抓的信息，谢谢】
+capture.  Thanks for your help! 							极限：2breath/40s 正常：3breath/50s
+
+==== From: Raja
+
+Hi Sam, From the shared log, You have +pointed out+ two issues; 1. Subscriber 		【从提供的log看，你这说的是两个问题：1.终端用户不能打开重定向网址。2.对class 】
+unable to reach the redirected URL. 2. Ping test on classifier group shown a 		
+different output. For the problem 1, we need to collect the below logs to know 		【group的ping测试不通。搞清问题一需要收集以下信息：a, 测试重定向前后的show http 】
+the exact problem. (a). Show ip http output before and after +trying out+ the
+HTTP redirect feature from subscriber. (b). show ip interface gigabitEthernet 		【b. 测试前后show.。的输出－－看看是不是异常被触发和FC是否做了包转发】
+13/1/7.500012 output before and after the trial - to see the exception is hit
+and whether the FC has lifted the packet. (c). Enable the flag from RP shell 		【c. 在RP shell中打开标志。d. 打开log. 问题2好像是正常现象。policy组Dobrina那边】
+(d). Enable the logs. For the problem 2, It seems +an expected behavior+; There           [bi'heivjә(r)] 发出字母A的音，不是i:
+was another +mail chain+ going for policy team with Dobrina - Refer the                 【有另外^ 一个邮件在讨论这个问题－－请看附件。解决方法是－－配置带有tcp any any 】
+attached mail thread. Solution is – configure the classifier list with “tcp any 	【选项的classifier list 】
+any” option 										speed:  4b/60s
+
+==== From: Raja
+
+Hi Sam, There was a mistake done in the previous mail chain; I have *clubbed* the
+Ping test issue here with the influence of some other cases.  Actually it’s not
+available in your shared logs.
+ 
+==== From: Sam
+Hi Raja, Thanks for all your *input*...+As of now+, it is most likely some time 	as of now...至于现在。。input:意见，看法，所有对问题"输入"的东西
+tomorrow our time we will have a chance to look at the issue on a different
+router [washington dc-vfttp-131].
+ 
+==== From: Scott
+
+Raja, I believe that I’ve been able to reproduce the customer problem here in 		
+the lab. The router is 10.3.200.3. The subscriber is a DHCP user *off* this 		off的用法 ，相当于 from
+interface: I get the same log message that we saw at customer site: The server
+is +tearing down+ the initial TCP connection attempt from the client: I haven’t         tearing,['tєәriŋ] not [tiәriŋ]，常用词，拆连接
+tried to reproduce it more than once, so I’m not sure how easy it is to get. I          a bunch of stuff很多（其^ 他）东西 
+tried +a bunch of stuff+ today, but I think I hit it by just *hammering* the box 	hammper,地道用法，用锤子砸，意思是折腾设备使得bug重现
+with a single user having multiple *concurrent* TCP connections. Feel free to 		['mʌltipl] like ['mɔltipl]
+collect whatever data you want *off* my system. Once you have what you need, I 				   ^
+can clear the condition and see how repeatable the condition is. If you have
+problems with access, TAC in BNG or US should be able to +get you in+ or get you        ['ækses] NOT [әk'ses] get .. in :把。。。弄进去
+the data you need. 									speed:normal 4b/57s max 
+
+=== part II
+==== From: Ikram
+ 
+Thanks! Scott; hopefully router (in +broken-state+) should help Development…
+Raja, Please let us know if you need any additional info… I know we are still
+working on root-cause… it will be helpful if (as soon) we can get some 			root-cause: 根本原因。[ru:t]发音简单，但微妙得很 [kɔ:z]not[kɔ:ls],也没有儿化
+*indication* that this is hotfixable? [and not to get too far ahead :) – this 		[,indi'keiʃәn]                                       ^      ^^^^
+will probably be another RP hotfix; we need to make sure if we can *deploy* this
+on routers (already running 12.1.1) without needing reload; for example, post 		[iɡ'zæmpl] 重音夸张
+activation, disable/enable http-server +will do the trick?+]
+ 
+==== From: Raja
+ 
+We have discussed in the separate mail chain and suspect some of the area – 		['eәriә] 圆滑的感觉
+like the same host limit enforcement and age out on each client connection.  I 		[in'fɔ:smәnt]->美语有儿化 host [hәust] o, not [hɔst]
+will provide the debug HotFix to scott team by *EOD*. I will share the HotFix 		EndOfDay:常用缩写
+details once I have created a debug HotFix..    					[kri:'eit] 重音一定要单独发出
+ 
+==== From: Raja
+
+Hi Scott, In the lab setup reproduce the issue *freshly* and collect the 		['setʌp]重音在前
+following logs in the system.  Activate the HF only after the reproduction of 		['æktiveit]大嘴
+the issue. So that we can avoid unnecessary logs. 					[ʌn'nesәsәri; -seri]更似第二种,第二个元音要明确发出,不可掠过
+1.   During the test:  										 ^ 	^
+wireshark log – to see the communication between (dhcp client) Ixia and router.  	['waiә]shark大嘴[bi'twi:n] -> [bi'tuwi:n]
+2.   After the test – Once the problem is reproduced:
+show ip tcp statistics . 								[stә'tistiks]第一"ti"清晰发出,第二"ti"作di
+Activate the fix 46001 and enable the below flag in shell: 				     ^	^ shell[ʃel] vs. share
+-> staleHttpcEntryCheck = 1 								stale
+
+Now the situation is all incoming http packet will be rejected as “ Too many 		[ɔ:l]->实际似毫无儿化,对比"or"
+connection” ; Send some few http packets from Ixia  ,Then for each “Too many
+connection” rejection action, This hotfix will print the existing entries
+present in the HttpcTable.  So don’t send too many packets to router after this 	['teibl]重音,not['teibɔ],更似['teibәʋ]; enable同样
+flag is enabled. 									   ^^ ^  	      ^
+3.   Do core dump on RP and share the core dump. 					share[ʃєә] vs. shell
+
+==== From: Scott
+
+Raja, I replicated the problem again and collected as much of the requested 			   v 			vv 		       v vv
+data as I could.  The CLI, log data, and core dump are posted.  Unfortunately,  	[ʌn'fɔ:tjʋnәtli] not [ʌn'fɔ:tjʋneitli], like [ʌn'fɔ:chnә-li],'t'音极轻
+the system +can’t keep up with+ the volume of log data with httpServer and 		赶不上，来不及处理
+tcpEngineering enabled, so you’ll find that there are a high number of dropped
+messages: I also have 2 capture files in that same location.  The larger file 		[fail] like [faiɔ]not fire ['faiә]
+was taken when the problem was being replicated.  The smaller file is taken
+after the router is already in the +broken condition+.  If you need more data or 	or :youdao[ɔ:, ə],jinshan[ɔ:(r)],极强儿化感,对比all
+tests, please let me know.  Thanks,
+ 
+==== From: Raja
+
+Hi Scott, In the shared logs we could see the TCP connections are available in
+the system even after done with client.  Unfortunately so many logs dropped we
+are not able to *conclude* on the issue.  Please share the setup with Ixia keep
+running with http send. So that we will further analyze and share the update by
+Monday.  
+
+=== part III
+
+==== From: Raja V 
+
+Hi Scott, Thanks for providing the test setup with flexibility of dev engineers
+requirement. Which helps me to narrow down the issue in fast track mode.  I
+have tested with fix in your setup. It seems the fix is working fine. Please
+verify the fix from your side and share me the result.  The fix is already in
+active state in your setup 10.3.200.3.  Without fix, whenever I enabled the
+httpServer and policy config ; the problem is reproduced in few minutes.  With
+HF the problem is not seen 5-6 hours, still it’s going.
+ 
+==== From: Ikram Ali 
+
+Raja (Scott), Thx for the update… looks like the FIX is looking/running good.
+[I had a sidebar with Scott – he concur]. Scott will do further testing to make 	[kәn'kә:(r)]'
+sure everything is good.  So, once we get the +green light+, please let us know
+(ETA time) when we will be able to check this in and ready for VZ delivery?  Thanks,
+ 
+==== From: Raja V
+
+Here I have attached the problem summary  for the future reference, Once I get
+confirmation from Scott; I will start the process of providing the fix from dev
+side on the same day.
+ 

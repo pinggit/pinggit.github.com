@@ -1,0 +1,62 @@
+---
+layout: post
+title: "man of 40"
+created:  2013 Mar 08 11:10:09 PM
+tags: [english]
+categories: [english]
+published: false
+---
+
+
+== 调查：四十岁前后的英国人最不快乐
+
+文章来源：未知 文章作者：meng 发布时间：2010-10-09 02:23
+
+    Britons in their late 30s and early 40s are unhappier than any other age group, 
+    suffering from loneliness and depression as work and relationship pressures 
+    (take their toll), according to a survey on Wednesday.
+
+    周三发布的一项调查显示，相比其他年龄段的英国人来说，四十岁前后的英国人最不快乐，
+    因为来自工作和家庭关系的压力让他们感到孤独和抑郁。
+
+    The research, by relationship advice charity Relate, found a fifth of those 
+    aged 35 to 44 wished they had a better relationship with their family, 
+    with nearly a third saying these relationships would improve if they could 
+    work fewer hours.
+
+    More than 20 percent of that age group said they felt lonely a lot of the time 
+    and 5 percent said they had no friends at all.
+
+    "Traditionally we associate the (midlife crisis) with people in their late 40s to 
+    50s, but the report reveals that this period could be reaching people earlier 
+    than we would expect," said Claire Tyler, chief executive of Relate.
+
+    "It's when life gets really hard -- you're starting a family, pressure at work 
+    can be immense and increasingly money worries can be crippling（削弱，受损） ."
+
+	immense 					crippling
+	[i'mens]                                    ['kripliŋ]
+	adj. 巨大的, 广大的, <口>非常好的           adj. 造成严重后果的
+						    动词cripple的现在分词形式
+	take the toll
+	1. 起作用  起作用破坏性的.
+
+    Relate found that 22 percent of 35 to 44-year-olds had suffered depression because 
+    of a bad relationship, and 40 percent had been cheated on by a partner.
+
+    The survey of 2,004 adults showed that, across all age groups, money worries and 
+    redundancies（冗陈，裁员） were the biggest strain on people's relationships with 
+    their partners, while communication problems, working long hours and the division 
+    of housework also put pressure on couples.
+
+    The ways in which people communicate with their friends and family have changed 
+    with the growth of modern technology, the survey found, with emails and text 
+    messages more popular than face-to-face communication for staying in touch with 
+    friends.  A quarter of parents said they used social networking sites such as 
+    Facebook and MySpace to keep in contact with their children, while one in 10 
+    parents said they had no face to face contact with their children at all.
+
+    Relationships with dads have particularly suffered from changes to family structures, 
+    the charity said, with a third of dads who are divorced or separated never seeing 
+    their children, compared to 10 percent of mums.
+

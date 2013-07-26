@@ -1,0 +1,2948 @@
+---
+layout: post
+title: "git learning tips"
+created:  2013 Apr 09 09:02:00 PM
+tags: [git, learning notes]
+categories: [tech]
+published: false
+---
+
+---
+=== git
+
+some docs::
+http://www.vogella.de/articles/Git/article.html +
+
+git official book::
+http://git-scm.com/book/ +
+
+chinese resource::
+http://www.uzzf.com/news/31/1922_1.html +
+http://git-scm.com/book/zh/¿?¿?-¿?¿?¿?¿?-Git-¿?¿?¿?¿?
+
+
+==== config git
+
+.config git initially
+----
+ping@640g-laptop:~$ git config --global user.name "ping"
+ping@640g-laptop:~$ git config --global user.email "songpingemail@gmail.com"
+ping@640g-laptop:~$ git config --global color.status auto
+ping@640g-laptop:~$ git config --global color.branch auto
+
+git config --global core.excludesfile ~/.gitignore
+
+----
+
+.git config
+----
+ping@640g-laptop:~$ git config --list
+user.name=ping
+user.email=songpingemail@gmail.com
+color.status=auto
+color.branch=auto
+
+----
+
+.check config file: .gitconfig
+----
+ping@640g-laptop:~$ less .gitconfig
+[user]
+	name = ping
+	email = songpingemail@gmail.com
+[color]
+	status = auto
+	branch = auto
+----
+
+.make git ignore some dirs/files (useful!)
+----
+ping@640g-laptop:~$ echo "bin" > .gitignore
+----
+
+==== init/addfile/commit git
+
+.create some test folders/files
+----
+ping@640g-laptop:~$ mkdir temp-git
+ping@640g-laptop:~$ cd temp-git/
+ping@640g-laptop:~/temp-git$ mkdir datafiles
+ping@640g-laptop:~/temp-git$ touch test01
+ping@640g-laptop:~/temp-git$ touch test02
+ping@640g-laptop:~/temp-git$ touch test03
+ping@640g-laptop:~/temp-git$ touch datafiles/data.txt
+ping@640g-laptop:~/temp-git$ ls > test01
+
+ping@640g-laptop:~/temp-git$ tree -s
+.
+|-- [       4096]  datafiles
+|   `-- [          0]  data.txt
+|-- [         31]  test01
+|-- [          0]  test02
+`-- [          0]  test03
+
+1 directory, 4 files
+----
+
+.init git: git init
+----
+ping@640g-laptop:~/temp-git$ git init
+Initialized empty Git repository in /home/ping/temp-git/.git/
+----
+
+.add all curr files/folders: git add file/folder(s)
+----
+ping@640g-laptop:~/temp-git$ git add .
+----
+
+.commit the change: git commit -m <msg>
+
+----
+ping@640g-laptop:~/temp-git$ git commit -m "Initial commit"
+[master (root-commit) 9c2ed13] Initial commit
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 datafiles/data.txt
+ create mode 100644 test01   
+ create mode 100644 test02   
+ create mode 100644 test03   
+----
+
+==== check git log/diff
+
+.check the log:git log
+----
+ping@640g-laptop:~/temp-git$ git log
+
+commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+Author: ping <songpingemail@gmail.com>
+Date:   Mon Apr 2 15:13:06 2012 -0400
+
+Initial commit
+----
+
+.induce some changes and check the changes
+[literal]
+..............
+ping@640g-laptop:~/temp-git$ echo "This is a change" > test01
+ping@640g-laptop:~/temp-git$ echo "and this is another change" > test02
+
+ping@640g-laptop:~/temp-git$ git diff
+diff --git a/test01 b/test01
+index 749eb2d..d0a432b 100644
+--- a/test01
++++ b/test01
+@@ -1,4 +1 @@
+-datafiles
+-test01
+-test02
+-test03
++This is a change
+diff --git a/test02 b/test02
+index e69de29..552c22e 100644
+--- a/test02
++++ b/test02
+@@ -0,0 +1 @@
++and this is another change
+..............
+
+==== Commit the changes
+
+*-a* will commit changes for modified files
+but will not add automatically new files
+
+----
+git commit -a -m "These are new changes"
+
+ping@640g-laptop:~/temp-git$ git commit -a -m "These are new changes"
+[master e2712e9] These are new changes
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+----
+
+==== Status, Diff and Commit Log
+
+.Make some changes in the file
+    echo "This is a new change" > test01
+    echo "and this is another new change" > test02
+
+
+.See the current status of your repository (which files are changed / new / deleted)
+
+    ping@640g-laptop:~/temp-git$ git status 
+    # On branch master
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #       modified:   test01
+    #       modified:   test02
+    #
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+.Show the differences between the uncommitted files and the last commit in the
+current branch
+
+    git diff
+
+    diff --git a/test01 b/test01
+    index d0a432b..18fec42 100644
+    --- a/test01
+    +++ b/test01
+    @@ -1 +1 @@
+    -This is a change
+    +This is a new change
+    diff --git a/test02 b/test02
+    index 552c22e..307d61a 100644
+    --- a/test02
+    +++ b/test02
+    @@ -1 +1 @@
+    -and this is another change
+    +This is another new change
+
+.Add the changes to the index and commit
+
+    git add . && git commit -m "More chaanges - typo in the commit message"
+    ping@640g-laptop:~/temp-git$ git add . && git commit -m "More chaanges - typo in the commit message"
+    [master 8e12be3] More chaanges - typo in the commit message
+     2 files changed, 2 insertions(+), 2 deletions(-)
+
+.Show the history of commits in the current branch
+
+    git log
+
+    commit 8e12be35dc5ae1bb10960329c74cd0d85e40616c
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:16:36 2012 -0400
+
+	More chaanges - typo in the commit message
+
+    commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:11:02 2012 -0400
+
+	These are new changes
+
+    commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 15:13:06 2012 -0400
+
+	Initial commit
+
+==== git amend:Correction of commit messages: git commit --amend -m <msg>
+
+The git amend command makes it possible to change *the last commit* message.  
+In the above example the commit message was incorrect as it contained a typo. 
+The following will correct this via the --amend parameter.
+
+----
+    ping@640g-laptop:~/temp-git$ git commit --amend -m "More changes - now correct"
+    [master 17944b3] More changes - now correct
+     2 files changed, 2 insertions(+), 2 deletions(-)
+
+    ping@640g-laptop:~/temp-git$ git log
+    commit 17944b32e93fafaa33a6c75ff98201d263601538
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:16:36 2012 -0400
+
+	More changes - now correct
+
+    commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:11:02 2012 -0400
+
+	These are new changes
+
+    commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 15:13:06 2012 -0400
+
+	Initial commit
+----
+
+==== Delete files
+
+.Create a file and put it under version control
+----
+touch nonsense.txt
+git add . && git commit -m "a new file has been created"
+----
+
+.Remove the file
+----
+rm nonsense.txt
+----
+
+Try standard way of committing -- This will not work 
+----
+git add . && git commit -m "a new file has been created"
+----
+
+.Now commit all: -a 
+
+----
+git commit -a -m "File nonsense.txt is now removed"
+----
+
+[quote,,man git-commit]
+ -a, --all
+   Tell the command to automatically stage files that have been
+   modified and deleted, but new files you have not told git about are
+   not affected.
+
+
+.Alternatively you could add deleted files to the staging index via:
+
+----
+git add -A . 
+git commit -m "File nonsense.txt is now removed"
+----
+
+[quote,,man git-add]
+ -A, --all
+  Like -u, but match <filepattern> against files in the working
+  tree in addition to the index. That means that it will find
+  new files as well as staging modified content and removing
+  files that are no longer in the working tree.
+
+==== Clone your repository
+
+Create a new repository in a new directory via the following commands.
+
+----
+# Switch to home
+cd ~
+# Make new directory
+mkdir repo02
+
+# Switch to new directory
+cd ~/repo02
+# Clone
+git clone ../remote-repository.git .
+
+ping@640g-laptop:~/temp-git$ mkdir ../temp-git2
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ git clone ../temp-remote-repository.git .
+Initialized empty Git repository in /home/ping/temp-git2/.git/
+----
+
+==== Setting up a remote (bare) Git repository
+
+.remote git repos: git clone --bare
+
+We will now create a remote Git repository. 
+
+Git allows you to store this remote repository either on the network or locally.  
+
+A *standard* Git repository is different from a *remote Git repository* . 
+
+A *standard* Git repository :: contains the source code and the Git repository. 
+
+You can work directly in this directory as the repository contains a working
+copy of all files.  
+
+A *Remote* repositories :: *DO NOT* contain working copies of the files.  They
+only contain repository files. 
+
+To create such a repository, set the `--bare` flag.  
+
+In order to simplify the following examples, the Git repository will be created
+locally in the filesystem.  
+				
+.Switch to the first repository
+----
+cd ~/repo01
+----
+
+----
+git clone --bare . ../remote-repository.git
+----
+
+////
+.Check the content, it is identical to the .git directory in repo01
+----
+ls ~/remote-repository.git
+
+ping@640g-laptop:~/temp-git$ git clone --bare . ../temp-remote-repository.git
+Initialized empty Git repository in /home/ping/temp-remote-repository.git/
+
+ping@640g-laptop:~/temp-git$ ls ../temp-remote-repository.git/
+branches  config  description  HEAD  hooks  info  objects  packed-refs  refs
+
+:~/temp-git$ tree .git/ 			$ tree ../temp-remote-repository.git/
+.git/                                             	../temp-remote-repository.git/
+|-- branches                                      	|-- branches
+|-- COMMIT_EDITMSG                                	|-- config
+|-- config                                        	|-- description
+|-- description                                   	|-- HEAD
+|-- gitk.cache                                    	|-- hooks
+|-- HEAD                                          	|   |-- applypatch-msg.sample
+|-- hooks                                         	|   |-- commit-msg.sample
+|   |-- applypatch-msg.sample                     	|   |-- post-commit.sample
+|   |-- commit-msg.sample                         	|   |-- post-receive.sample
+|   |-- post-commit.sample                        	|   |-- post-update.sample
+|   |-- post-receive.sample                       	|   |-- pre-applypatch.sample
+|   |-- post-update.sample                        	|   |-- pre-commit.sample
+|   |-- pre-applypatch.sample                     	|   |-- prepare-commit-msg.sample
+|   |-- pre-commit.sample                         	|   |-- pre-rebase.sample
+|   |-- prepare-commit-msg.sample                 	|   `-- update.sample
+|   |-- pre-rebase.sample                         	|-- info
+|   `-- update.sample                             	|   `-- exclude
+|-- index                                         	|-- objects
+|-- info                                          	|   |-- 10
+|   `-- exclude                                   	|   |   `-- 69075cfc1d791ec9b5700bd1f0b1c54e82f1e3
+|-- logs                                          	|   |-- 17
+|   |-- HEAD                                      	|   |   `-- 944b32e93fafaa33a6c75ff98201d263601538
+|   `-- refs                                      	|   |-- 18
+|       `-- heads                                 	|   |   `-- fec4283fdaf2287d80fd3a4e22e33700d158cf
+|           `-- master                            	|   |-- 30
+|-- objects                                       	|   |   `-- 7d61a379c23b64f926df1c221bf33602ab0448
+|   |-- 10                                        	|   |-- 55
+|   |   `-- 69075cfc1d791ec9b5700bd1f0b1c54e82f1e3	|   |   `-- 2c22e016e4134653b07220f6c483c6997cb5fe
+|   |-- 17                                        	|   |-- 74
+|   |   `-- 944b32e93fafaa33a6c75ff98201d263601538	|   |   `-- 9eb2d5119aa8404930f8888f340d3be7def912
+|   |-- 18                                        	|   |-- 86
+|   |   `-- fec4283fdaf2287d80fd3a4e22e33700d158cf	|   |   `-- baef48fc6bf966acc6612f7c9905fb472e9bcf
+|   |-- 30                                        	|   |-- 8e
+|   |   `-- 7d61a379c23b64f926df1c221bf33602ab0448	|   |   `-- 12be35dc5ae1bb10960329c74cd0d85e40616c
+|   |-- 55                                        	|   |-- 9c
+|   |   `-- 2c22e016e4134653b07220f6c483c6997cb5fe	|   |   `-- 2ed13c92dec39e193d8311ad180104cb211f46
+|   |-- 74                                        	|   |-- 9d
+|   |   `-- 9eb2d5119aa8404930f8888f340d3be7def912	|   |   `-- cb5d92475546e6a491d4debaa0b8cd023a6c48
+|   |-- 86                                        	|   |-- d0
+|   |   `-- baef48fc6bf966acc6612f7c9905fb472e9bcf	|   |   `-- a432bb64f5a4c235a2a88d8fcf7bc5ecde067d
+|   |-- 8e                                        	|   |-- e2
+|   |   `-- 12be35dc5ae1bb10960329c74cd0d85e40616c	|   |   `-- 712e95caa0f5f3853a976c2073b566fa712bc3
+|   |-- 9c                                        	|   |-- e6
+|   |   `-- 2ed13c92dec39e193d8311ad180104cb211f46	|   |   `-- 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+|   |-- 9d                                        	|   |-- fc
+|   |   `-- cb5d92475546e6a491d4debaa0b8cd023a6c48	|   |   `-- da4f4f4fed4693a20e03170bf14884b5012841
+|   |-- d0                                        	|   |-- info
+|   |   `-- a432bb64f5a4c235a2a88d8fcf7bc5ecde067d	|   `-- pack
+|   |-- e2                                        	|-- packed-refs
+|   |   `-- 712e95caa0f5f3853a976c2073b566fa712bc3	`-- refs
+|   |-- e6                                        	|-- heads
+|   |   `-- 9de29bb2d1d6434b8b29ae775ad8c2e48c5391	`-- tags
+|   |-- fc
+|   |   `-- da4f4f4fed4693a20e03170bf14884b5012841	23 directories, 29 files
+|   |-- info
+|   `-- pack
+`-- refs
+|-- heads
+|   `-- master
+`-- tags
+26 directories, 34 files
+----
+////
+
+==== Push changes to another repository
+
+Make some changes and push them from your first repository to the remote
+repository via the following commands.
+				
+.Make some changes in the first repository
+----
+cd ~/repo01
+----
+
+.Make some changes in the file
+----
+echo "Hello, hello. Turn your radio on" > test01
+echo "Bye, bye. Turn your radio off" > test02
+----
+
+.commit
+----
+git commit -a -m "Some changes"
+ping@640g-laptop:~/temp-git$ git commit -am "Some Changes"
+[master 6d181d6] Some Changes
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+----
+
+.Push the changes
+----
+git push ../remote-repository.git
+
+ping@640g-laptop:~/temp-git$ git push ../temp-remote-repository.git/
+Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 396 bytes, done.
+Total 4 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+To ../temp-remote-repository.git/
+   17944b3..6d181d6  master -> master
+----
+
+==== lable "origin"
+
+You can always push to a Git repository via its full URL.  But you can also add
+a "shortname" to a repository via the git remote add command.  
+
+*origin* is a special name which is normally used automatically, if you clone a
+Git repository.  Origin indicates the original repository from which you
+started.  As we started from scratch, this name is still available.
+
+.Add ../remote-repository.git with the name origin
+
+    git remote add origin ../remote-repository.git 
+
+.Again some changes
+
+    echo "I added a remote repo" > test02
+
+.Commit
+
+    git commit -a -m "This is a test for the new remote origin"
+
+.If you do not label a repository it will push to origin
+
+    git push origin
+
+==== Show the existing remote repositories
+To see the existing definitions of the remote repositories, use the following
+command.
+
+.Show the existing defined remote repositories:git remote
+
+----
+ping@640g-laptop:~/temp-git$ git remote
+origin
+----
+
+==== Pull changes
+
+Pull allows you to get the latest changes from another repository. 
+In your second repository, make some changes, push them to your remote
+repository and pull these changes to your first repository.
+
+.original example
+----
+# Switch to home
+cd ~
+
+# Switch to second directory
+cd ~/repo02
+
+# Make changes
+echo "A change" > test01
+
+# Commit
+git commit -a -m "A change"
+
+# Push changes to remote repository
+# Origin is automatically maintained as we cloned from this repository
+git push origin
+
+# Switch to the first repository and pull in the changes
+cd ~/repo01
+git pull ../remote-repository.git/
+
+# Check the changes
+less test01
+----
+
+.my test logs
+----
+ping@640g-laptop:~/temp-git2$ echo "A change" > test01
+ping@640g-laptop:~/temp-git2$ git commit -a -m "A change"
+[master 42230df] A change
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git2$ git push origin 
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 326 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   d0c385f..42230df  master -> master
+
+ping@640g-laptop:~/temp-git2$ less ../temp-remote-repository.git/test01
+../temp-remote-repository.git/test01: No such file or directory
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git pull ../temp-remote-repository.git/
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            HEAD       -> FETCH_HEAD
+Updating d0c385f..42230df
+Fast-forward
+ test01 |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git$ less test01
+A change
+----
+
+==== Revert Changes
+
+If you create files in your working copy which you do not want to commit, you
+can discard them.
+
+    # Create a new file with content
+    touch test04
+    echo "this is trash" > test04
+
+    # Make a dry-run to see what would happen
+    # -n is the same as --dry-run 
+    git clean -n
+
+    # Now delete
+    git clean -f
+
+    #also remove dir
+    git clean -fd
+
+.my test:
+
+    ping@640g-laptop:~/temp-git$ touch test04
+    ping@640g-laptop:~/temp-git$ echo "this is trash" > test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03  test04
+    ping@640g-laptop:~/temp-git$ git clean -n
+    Would remove test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03  test04
+    ping@640g-laptop:~/temp-git$ git clean -f
+    Removing test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03
+
+==== check out via commitID
+
+You can check out older revisions of your source code via the commit ID. 
+The commit ID is shown if you enter the git log command. 
+It is displayed behind the commit word.
+
+----
+# Switch to home
+cd ~/repo01
+# Get the log
+git log
+
+# Copy one of the older commits and checkout the older revision via 
+git checkout commit_name
+----
+
+.my test
+----
+
+ping@640g-laptop:~/temp-git$ git checkout 9c2ed13c92dec39e193d8311ad180104cb211f46
+Note: checking out '9c2ed13c92dec39e193d8311ad180104cb211f46'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 9c2ed13... Initial commit
+
+ping@640g-laptop:~/temp-git$ 
+ping@640g-laptop:~/temp-git$ less test01
+datafiles
+test01
+test02
+test03
+----
+
+If you have not added the changes to the staging index, you can also revert the
+changes directly.
+
+----
+#Some nonsense change
+echo "nonsense change" > test01
+#Not added to the staging index. Therefore we can just checkout the old version
+git checkout test01
+# Check the result
+cat test01
+
+# Another nonsense change
+echo "another nonsense change" > test01
+# We add the file to the staging index
+git add test01
+# Restore the file in the staging index
+git reset HEAD test01 				<1>
+# Get the old version from the staging index
+git checkout test01
+----
+<1> why?
+		
+You can also revert commits via the following command:
+			
+.Revert a commit
+
+    git revert commit_name
+
+If you deleted a file but you have not yet added it to the index or committed
+the change, you can check out the file again.
+			
+.Delete a file
+
+    rm test01
+
+.Revert the deletion
+
+    git checkout test01
+		
+If you added a file to the index but do not want to commit the file, you can
+remove it from the index via the git reset file command.
+
+----
+// Create a file
+touch incorrect.txt
+// Accidently add it to the index
+git add .
+// Remove it from the index
+git reset incorrect.txt
+// Delete the file
+rm incorrect.txt
+----
+
+If you deleted a directory and you have not yet committed the changes, you can
+restore the directory via the following command:
+
+    git checkout HEAD -- your_dir_to_restore
+
+==== Tagging in Git
+
+Git has the option to tag certain versions in the history so that you find them
+more easily at a later point in time. 
+Most commonly, this is used to tag a certain version which has been released.
+
+.You can list the available tags via the following command:
+----
+git tag
+----
+
+You can create a new tag via the following. Via the -m parameter, you specify
+the description of this tag.
+
+----
+git tag version1.6 -m 'version 1.6'
+
+----
+	
+If you want to use the code associated with the tag, use:
+
+----
+git checkout <tag_name>
+
+#test
+ping@640g-laptop:~/temp-git$ git tag
+ping@640g-laptop:~/temp-git$ git tag version1.6 -m 'version 1.6'
+ping@640g-laptop:~/temp-git$ git tag
+version1.6
+ping@640g-laptop:~/temp-git$ git checkout version1.6
+HEAD is now at 9c2ed13... Initial commit
+ping@640g-laptop:~/temp-git$
+----
+
+==== Branches and Merging
+
+===== Branches
+
+Git allows you to create branches, e.g. 
+independent copies of the source code which can be changed independently from
+each other.  The default branch is called *master*. 
+Git allows you to create branches very fast and cheap in terms of resource
+consumption.  Developers are encouraged to use branches frequently.
+
+.lists all locally available branches. currently active branch is marked with *.
+----
+git branch 
+----
+			
+.all branches (including remote branches)
+----
+git branch -a
+----
+			
+.create a new branch via the following.
+----
+# Syntax: git branch <name> <hash>
+# <hash> in the above is optional 
+# if not specified the last commit will be used
+# If specified the corresponding commit will be used
+git branch testing
+# Switch to your new branch
+git checkout testing
+# Some changes
+echo "Cool new feature in this branch" > test01
+git commit -a -m "new feature"
+# Switch to the master branch
+git checkout master
+# Check that the content of test01 is the old one
+cat test01
+----
+
+.my test
+----
+ping@640g-laptop:~/temp-git$ git branch
+* (no branch)
+  master
+ping@640g-laptop:~/temp-git$ git branch -a
+* (no branch)
+  master
+  remotes/origin/master
+ping@640g-laptop:~/temp-git$ git branch testing
+ping@640g-laptop:~/temp-git$ git checkout testing
+Switched to branch 'testing'
+ping@640g-laptop:~/temp-git$ echo "cool new feature in this branch" > test01
+ping@640g-laptop:~/temp-git$ git checkout master
+error: You have local changes to 'test01'; cannot switch branches.
+ping@640g-laptop:~/temp-git$ git commit -am "new feature"
+[testing 8380236] new feature
+ 1 files changed, 1 insertions(+), 4 deletions(-)
+ping@640g-laptop:~/temp-git$ git checkout master
+Switched to branch 'master'
+ping@640g-laptop:~/temp-git$ cat test01
+A change
+
+----
+
+===== Delete a branch
+
+To delete a branch which is not needed anymore; you can use the following command.
+
+.Delete branch testing
+----
+git branch -d testing
+----
+
+.Check if branch has been deleted
+----
+git branch
+----
+
+===== Merging
+
+Merge allows you to *combine* the changes of two branches. 
+Merge performs a so-called *three-way-merge* between the latest snapshot of two
+branches, based on the most recent common ancestor of both.
+As a result, you have a new snapshot. 
+You can merge changes from one branch to the current active one via the following command.
+
+----
+# Syntax: git merge <branch-name>
+git merge testing
+----
+		    
+If a merge conflict occurs Git will mark the conflict in the file and the
+programmer has to resolve the conflict manually. 
+After resolving it, he can add the file to the staging index and commit the
+change.
+
+===== Solving merge conflicts
+
+A merge conflicts occurs, if two people have modified the same content and Git
+cannot automatically determine how both changes should be applied.
+
+Git requires that merge conflicts are solved *manually*. 
+In this section; we will first create a merge conflict and then resolve it and
+apply the change to the Git repository.
+
+The following will create a merge conflict.
+
+----
+cd ~/repo01 			# Switch to the first directory
+touch mergeconflict.txt 	# Make changes
+echo "Change in the first repository" > mergeconflict.txt
+git add . && git commit -a -m "Will create merge conflict 1"
+				# Stage and commit
+
+cd ~/repo02 			# Switch to the second directory
+touch mergeconflict.txt 	# Make changes
+echo "Change in the second repository" > mergeconflict.txt
+git add . && git commit -a -m "Will create merge conflict 2"
+				# Stage and commit
+
+git push 			# Push to the master repository
+
+# Now try to push from the first directory
+cd ~/repo01 			# Switch to the first directory
+git push 			# Try to push --> will get an error message
+git pull origin master 		# Get the changes
+----
+
+Git marks the conflict in the affected file. This file looks like the following.
+
+----
+<<<<<<< HEAD
+Change in the first repository
+=======
+Change in the second repository
+>>>>>>> b29196692f5ebfd10d8a9ca1911c8b08127c85f8
+----
+
+.my testing:
+----
+ping@640g-laptop:~/temp-git$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git$ echo "Change in the first repository" > mergeconflict.txt
+ping@640g-laptop:~/temp-git$ git add . && git commit -a -m "Will create merge conflict 1"
+[master 8de3801] Will create merge conflict 1
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ echo "Change in the second repository" > mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git add . && git commit -a -m "Will create merge conflict 2"
+[master a57ae5d] Will create merge conflict 2
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git branch
+* master
+ping@640g-laptop:~/temp-git2$ git push
+Counting objects: 4, done.   
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 405 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   42230df..a57ae5d  master -> master
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git push
+To ../temp-remote-repository.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to '../temp-remote-repository.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again.  See the 'Note about
+fast-forwards' section of 'git push --help' for details.
+
+ping@640g-laptop:~/temp-git$ git pull origin master
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            master     -> FETCH_HEAD
+Auto-merging mergeconflict.txt
+CONFLICT (add/add): Merge conflict in mergeconflict.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+ping@640g-laptop:~/temp-git$ less mergeconflict.txt
+<<<<<<< HEAD
+Change in the first repository
+=======
+Change in the second repository
+>>>>>>> a57ae5ddbf4d38abfc50bfccdf2c9859a394afbd
+----
+	    
+The above is the part from your repository and the below one from the remote
+repository. 
+You could now edit the file manually and then commit the changes. 
+Alternatively, you could use the git mergetool command. 
+git mergetool starts a configurable merge tool that displays the changes in a
+split screen.
+
+----
+git mergetool 		#Either edit the file manually or use 
+
+ping@640g-laptop:~/temp-git11$ git mergetool
+merge tool candidates: opendiff kdiff3 tkdiff xxdiff meld tortoisemerge
+gvimdiff diffuse ecmerge p4merge araxis bc3 vimdiff emerge
+No files need merging
+
+# You will be prompted to select which merge tool you want to use
+# For example on Ubuntu you can use the tool "meld"
+# After  merging the changes manually, commit them
+
+git commit -m "merged changes"
+----
+
+==== Rebase
+
+===== Rebasing commits in the same branch
+
+The *rebase* command allows you to combine several commits into one commit. 
+This is useful as it allows the user to rewrite some of the commit history
+(cleaning it up) before pushing your changes to a remote repository.
+The following will create several commits which should be combined at a later
+point in time.
+
+----
+# Create a new file
+touch rebase.txt
+
+# Add it to git
+git add . && git commit -m "rebase.txt added to index"
+
+# Do some silly changes and commit
+echo "content" >> rebase.txt
+git add . && git commit -m "added content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+
+# Check the git log message
+git log
+----
+
+We will combine the last seven commits. You can do this interactively via the
+following command.
+			    
+git rebase -i HEAD~7
+		    
+This will open your editor of choice and let you edit the commit message or squash/ fixup the commit with the last one.
+
+Squash will combine the commit messages while fixup will disregard the commit message.
+
+===== Rebasing branches
+
+You can also use Git to rebase two branches. As described; the merge command
+combines the changes of two branches. Rebase takes the changes of a branch,
+creates a patch and applies it to another branch.
+
+The final result for the source code is the same as with merge but the commit
+history is cleaner; the history appears to be linear.
+
+----
+# Create new branch 
+git branch testing
+# Checkout the branch
+git checkout testing
+# Make some changes
+echo "This will be rebased to master" > test01
+# Commit into testing branch
+git commit -a -m "New feature in branch"
+# Rebase the master
+git rebase master
+----
+
+===== Best practice for rebase
+
+You should always check your local branch history before pushing changes to
+another Git repository or review system.
+
+Git allows you to do local commits. This feature is frequently used to have
+points to which you can go back, if something should go wrong later during a
+feature development. If you do so you, before pushing, should look at your
+local branch history and validate, whether or not these commits are relevant
+for others.
+
+If they all belong to the implementation of the same feature you, most likely,
+want to summarize them in one single commit before pushing.
+
+The interactive rebase is basically rewriting the history. It is safe to do
+this as long as the commits have not been pushed to another repository. This
+means commits should only be rewritten as long as they have not been pushed.
+
+If you rewrite and push a commit that is already present in other Git
+repositories, it will look as if you implemented something that somebody
+already implemented in the past.
+
+===== Create and apply patches
+A patch is a text file that contains changes to the source code. This file can
+be sent to someone else and this person can use this file to apply the changes
+to his/her local repository.
+
+The following creates a branch, makes some changes in this branch, creates a
+patch and applies the patch to the master.
+
+----
+# Create a new branch
+git branch mybranch
+# Use this new branch
+git checkout mybranch
+# Make some changes
+touch test05
+# Change some content in an existing file
+echo "New content for test01" >test01
+# Commit this to the branch
+git add .
+git commit -a -m "First commit in the branch"
+
+# Create a patch --> git format-patch master
+git format-patch origin/master
+# This created patch 0001-First-commit-in-the-branch.patch
+
+# Switch to the master
+git checkout master
+
+# Apply the patch
+git apply 0001-First-commit-in-the-branch.patch
+# Do your normal commit in the master 
+git add .
+git commit -a -m "Applied patch"
+
+# Delete the patch 
+rm 0001-First-commit-in-the-branch.patch
+----
+
+==== Define alias
+
+An alias in Git allows you to setup your own Git command. For example, you can
+define an alias which is a short form of your own favorite commands or you can
+combine several commands with an alias.
+
+For example, the following defines the git add-commit command which combines
+git add . -A and git commit -m. After defining this command, you can use it via
+the git add-commit -m "message" command.
+
+		    
+git config --global alias.add-commit '!git add . -A && git commit'
+
+	    
+Unfortunately, defining an alias is at the time of writing this not completely
+supported in msysGit. You can do single aliases, e.g. ca for ca = commit -a)
+but you can't do ones beginning with !.
+
+==== Untrack a file / directory
+Sometimes you want to have files or directories not being included in your Git
+repository. If you add it to your .gitignore file, Git will stop tracking it
+from this moment. It will not remove it from the repository. Thus, the last
+version will still be in git. To untrack a file or directory in Git you can
+use.
+
+----
+# Remove directory .metadata from git repo
+git rm -r --cached .metadata
+# Remove file test.txt from repo
+git rm --cached test.txt
+----
+	    
+This will not remove the file from the commit history. If the file should also
+be removed from the history, have a look at git filter-branch which allows you
+to rewrite the commit history.
+
+==== Other useful commands
+The following lists a few Git commands that are useful in the daily work with
+Git.
+
+Table 2. Useful Git Commands
+
+Command	Description
+git blame filename	Who created / modified the file
+git checkout -b mybranch master~1	Creates a new branch based on the master branch without the last commit
+
+==== Installing a Git server
+As described before, you don't need a server. You can just use a file system or
+a public Git provider, such as Github or Bitbucket. Sometimes, however, it is
+convenient to have your own server, and installing it under Ubuntu is
+relatively easy.
+
+First make sure you have installed ssh.
+
+		    
+apt-get install ssh
+	    
+If you have not yet installed Git on your server, you need to do this too.
+
+			    
+sudo apt-get install git-core
+		    
+Create a new user for git.
+
+		    
+sudo adduser git
+
+	    
+Now log on with your Git user and create a bare repository.
+
+----
+# Login to server
+# to test use localhost
+ssh git@IP_ADDRESS_OF_SERVER
+
+# Create repository
+git init --bare example.git
+
+	    
+Now you can commit to the remote repository.
+
+		    
+mkdir gitexample
+cd gitexample
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@IP_ADDRESS_OF_SERVER:example.git
+git push origin master
+----
+	    
+==== Online remote repositories
+===== Cloning remote repositories
+
+Git also support remote operations. Git supports several transport types; the
+native protocol for Git is also called git.
+
+The following will clone an existing repository via the Git protocol.
+
+			    
+git clone git@github.com:vogella/gitbook.git
+		    
+Alternatively you could clone the same repository via the http protocol.
+
+			    
+# The following will clone via HTTP 
+git clone http://vogella@github.com/vogella/gitbook.git
+		    
+===== Add more remote repositories
+
+If you clone a remote repository, the original repository will automatically be
+called origin.
+
+You can push changes to this origin repository via git push origin . Of course,
+pushing to a remote repository requires write access to this repository.
+
+You can add more remote repositories to your repository via the git remote add
+name gitrepo command. For example if you cloned the repository from above via
+the Git protocol, you could add the http protocol via:
+
+			    
+// Add the https protocol 
+git remote add githttp https://vogella@github.com/vogella/gitbook.git
+
+		    
+===== Remote operations via http and a proxy
+
+It is possible to use the HTTP protocol to clone Git repositories. This is
+especially helpful, if your firewall blocks everything except http.
+
+Git also provides support for http access via a proxy server. The following Git
+command could, for example, clone a repository via http and a proxy. You can
+either set the proxy variable in general for all applications or set it only
+for Git.
+
+This example uses environment variables.
+
+----
+# Linux
+export http_proxy=http://proxy:8080
+# On Windows
+# Set http_proxy=http://proxy:8080 
+git clone http://dev.eclipse.org/git/org.eclipse.jface/org.eclipse.jface.snippets.git
+# Push back to the origin using http
+git push origin
+		    
+This example uses the Git config settings.
+
+			    
+// Set proxy for git globally
+git config --global http.proxy http://proxy:8080
+// To check the proxy settings
+git config --get http.proxy
+// Just in case you need to you can also revoke the proxy settings
+git config --global --unset http.proxy
+----
+		    
+==== Git Hosting Provider
+Instead of setting up your own server, you can also use a hosting service. The
+most popular Git hosting sites are GitHub and Bitbucket. Both offer free
+hosting with certain limitations.
+
+===== GitHub
+
+GitHub can be found under the URL https://github.com/. GitHub is free for all
+public repositories, i.e. if you want to have private repositories which are
+only visible to people you select, you have to pay GitHub a monthly fee.
+
+GitHub requires you to create an ssh key. A description for creating an ssh key
+in Ubuntu can be found in the ssh key creation in Ubuntu webpage. For Windows
+please see msysgit ssh key generation .
+
+Create an account at GitHub and create a repository. After creating a
+repository at GitHub you will get a description of all the commands you need to
+execute to upload your project to GitHub. Follow the instructions.
+
+These instructions will be similar to the following:
+
+.Global setup:
+------------------------------------------------------------------------------
+Set up git
+git config --global user.name "Your Name"
+git config --global user.email your.email@gmail.com
+------------------------------------------------------------------------------
+  
+.Next steps:
+------------------------------------------------------------------------------
+mkdir gitbook 
+cd gitbook
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master
+  
+Existing Git Repo?
+cd existing_git_repo
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master
+
+------------------------------------------------------------------------------
+
+.my test&notes
+cd bin
+git init
+git add .
+git commit -m 'my commit'
+#now go to github website and create a repo manually, say `mybin`
+git remote set-url origin https://github.com/pinggit/mybin.git
+#list the current remote
+git remove -v
+git push -f origin master
+
+    Username for 'https://github.com': pinggit
+    Password for 'https://pinggit@github.com':
+    To https://github.com/pinggit/mybin.git
+     + ca88f88...9fc59a7 master -> master (forced update)
+
+#to delete, for now only from website
+
+
+===== Bitbucket
+
+Bitbucket can be found under the URL https://bitbucket.org/. Bitbucket allows
+unlimited public and private repositories, while the number of participants for
+one private repository is currently limited to 5 collaborators. I.e. if you
+have more then 5 developers which need access to a private repository you have
+to pay money to Bitbucket.
+
+==== Graphical UI's for Git
+This tutorial focused on the usage of the command line for Git. After finishing
+this tutorial, you may want to look at graphical tools for working with Git.
+
+Git provides two graphical tools. gitk shows the history and git gui shows an
+editor that allows you to perform Git operations.
+
+The Eclipse EGit project provides Git integration into Eclipse, which is
+included in the latest Eclipse release.
+
+===== gitk
+    gitk --all
+
+
+==== Get the Kindle edition
+
+This tutorial is available for your Kindle.
+
+
+==== git cmds,options sums
+
+ .cmds 		options 		examples
+ git-config 	--global		git config --global user.name "ping"
+ 					git config --global user.name "ping"
+ 					git config --global user.email "a@b.us"
+ 					git config --global color.status auto
+ 					git config --global color.branch auto
+ 
+ 		--list 			git config --list
+ 
+ git-init 	 			git init
+ git-add 	 			git add .
+ 		std commit, 
+ 		not RMed file
+ 		-A
+ git-logs 				git log
+ git-status
+ git-commit 	-a  			git commit -a -m "new changes"
+ 		    commit chg/RMed f
+ 		    ,but no new file
+ 		-m
+ 		--amend 		git commit --amend -m "chg corrected"
+ 
+ git-diff 				git diff
+ git-clone  	--bare 	 		git clone --bare rep1 ../remote-rep
+ 		    remote rep
+ git-push 				git push origin
+ git-pull 				git pull ../temp-git11.r/
+ git-clean 	
+		RM untracked Fs
+		from working tree
+ 		-n
+		    test drive
+ 		-f
+		    execute
+git-reset 				git reset HEAD file1.txt
+git-checkout 				git checkout file1.txt
+git-revert
+git-branch 				git branch mybranch1
+					git branch master
+					git branch -d testing
+
+
+
+
+==== fugitive
+
+==== Questions and Discussion
+
+Before posting questions, please see the vogella FAQ. If you have questions or
+find an error in this article please use the www.vogella.de Google Group. I
+have created a short list how to create good questions which might also help
+you.
+
+==== Links and Literature
+
+Git homepage
+
+EGit - Teamprovider for Eclipse
+
+Video with Linus Torwalds on Git
+
+Progit book - Free Git book
+
+Video casts about Git
+
+http://code.google.com/p/msysgit/ Git on Windows
+
+http://github.com/guides/git-cheat-sheet Git Cheat Sheets
+
+==== real usage cases
+
+to recover the delete file::
+
+    git reset --hard HEAD
+
+go back to historical version(git essential usev)::
+
+¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?commit¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?push¿?¿?¿?¿?¿?¿?
+¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿? ¿?¿?¿?¿?¿?git
+reset¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?reset¿?¿?
+¿?¿?¿?¿?git pull¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?merge ¿?¿?¿?
+¿?¿?¿?¿?¿?¿?¿?¿?
+
+    git reset --hard 393d3aefc673b01fc26b887c68b57450f1b34178 
+    git push origin master -f
+
+.git log:before
+----
+ping@640g-laptop:~/mytest-project/jekyll-site/pinggit.github.com$ git log
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 12:37:54 2013 -0500
+
+    some change
+
+commit b715e0e371ee175c693c55ceb6e9df4111098f65
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 12:26:25 2013 -0500
+
+    change yaml
+
+...<a million more changes here>...
+
+commit 7622dc6f03484be25a4bdc07562a44691bf3bf3c
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 11:57:33 2013 -0500
+
+    change config.yaml
+
+commit 393d3aefc673b01fc26b887c68b57450f1b34178         <1>
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim
+
+----
+1. target release that we want to go back to
+
+.git log:now, looks we lost/trashed all commit info after the target release
+----
+commit 393d3aefc673b01fc26b887c68b57450f1b34178
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim
+
+commit 64ac9a0becbf4707a6454460601dbf90aa39f056
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:18:03 2013 -0500
+
+    new post: usb3.0
+
+----
+
+
+layout: post
+title: "git learning tips"
+created:  2013 Apr 09 08:52:41 PM
+tags: [git]
+categories: [tech]
+published: false
+---
+
+
+=== git
+
+some docs::
+http://www.vogella.de/articles/Git/article.html +
+
+git official book::
+http://git-scm.com/book/ +
+
+chinese resource::
+http://www.uzzf.com/news/31/1922_1.html +
+http://git-scm.com/book/zh/起步-初次运行-Git-前的配置
+
+
+==== config git
+
+.config git initially
+----
+ping@640g-laptop:~$ git config --global user.name "ping"
+ping@640g-laptop:~$ git config --global user.email "songpingemail@gmail.com"
+ping@640g-laptop:~$ git config --global color.status auto
+ping@640g-laptop:~$ git config --global color.branch auto
+
+git config --global core.excludesfile ~/.gitignore
+
+----
+
+.git config
+----
+ping@640g-laptop:~$ git config --list
+user.name=ping
+user.email=songpingemail@gmail.com
+color.status=auto
+color.branch=auto
+
+----
+
+.check config file: .gitconfig
+----
+ping@640g-laptop:~$ less .gitconfig
+[user]
+	name = ping
+	email = songpingemail@gmail.com
+[color]
+	status = auto
+	branch = auto
+----
+
+.make git ignore some dirs/files (useful!)
+----
+ping@640g-laptop:~$ echo "bin" > .gitignore
+----
+
+==== init/addfile/commit git
+
+.create some test folders/files
+----
+ping@640g-laptop:~$ mkdir temp-git
+ping@640g-laptop:~$ cd temp-git/
+ping@640g-laptop:~/temp-git$ mkdir datafiles
+ping@640g-laptop:~/temp-git$ touch test01
+ping@640g-laptop:~/temp-git$ touch test02
+ping@640g-laptop:~/temp-git$ touch test03
+ping@640g-laptop:~/temp-git$ touch datafiles/data.txt
+ping@640g-laptop:~/temp-git$ ls > test01
+
+ping@640g-laptop:~/temp-git$ tree -s
+.
+|-- [       4096]  datafiles
+|   `-- [          0]  data.txt
+|-- [         31]  test01
+|-- [          0]  test02
+`-- [          0]  test03
+
+1 directory, 4 files
+----
+
+.init git: git init
+----
+ping@640g-laptop:~/temp-git$ git init
+Initialized empty Git repository in /home/ping/temp-git/.git/
+----
+
+.add all curr files/folders: git add file/folder(s)
+----
+ping@640g-laptop:~/temp-git$ git add .
+----
+
+.commit the change: git commit -m <msg>
+
+----
+ping@640g-laptop:~/temp-git$ git commit -m "Initial commit"
+[master (root-commit) 9c2ed13] Initial commit
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+ create mode 100644 datafiles/data.txt
+ create mode 100644 test01   
+ create mode 100644 test02   
+ create mode 100644 test03   
+----
+
+==== check git log/diff
+
+.check the log:git log
+----
+ping@640g-laptop:~/temp-git$ git log
+
+commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+Author: ping <songpingemail@gmail.com>
+Date:   Mon Apr 2 15:13:06 2012 -0400
+
+Initial commit
+----
+
+.induce some changes and check the changes
+[literal]
+..............
+ping@640g-laptop:~/temp-git$ echo "This is a change" > test01
+ping@640g-laptop:~/temp-git$ echo "and this is another change" > test02
+
+ping@640g-laptop:~/temp-git$ git diff
+diff --git a/test01 b/test01
+index 749eb2d..d0a432b 100644
+--- a/test01
++++ b/test01
+@@ -1,4 +1 @@
+-datafiles
+-test01
+-test02
+-test03
++This is a change
+diff --git a/test02 b/test02
+index e69de29..552c22e 100644
+--- a/test02
++++ b/test02
+@@ -0,0 +1 @@
++and this is another change
+..............
+
+==== Commit the changes
+
+*-a* will commit changes for modified files
+but will not add automatically new files
+
+----
+git commit -a -m "These are new changes"
+
+ping@640g-laptop:~/temp-git$ git commit -a -m "These are new changes"
+[master e2712e9] These are new changes
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+----
+
+==== Status, Diff and Commit Log
+
+.Make some changes in the file
+    echo "This is a new change" > test01
+    echo "and this is another new change" > test02
+
+
+.See the current status of your repository (which files are changed / new / deleted)
+
+    ping@640g-laptop:~/temp-git$ git status 
+    # On branch master
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #       modified:   test01
+    #       modified:   test02
+    #
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+.Show the differences between the uncommitted files and the last commit in the
+current branch
+
+    git diff
+
+    diff --git a/test01 b/test01
+    index d0a432b..18fec42 100644
+    --- a/test01
+    +++ b/test01
+    @@ -1 +1 @@
+    -This is a change
+    +This is a new change
+    diff --git a/test02 b/test02
+    index 552c22e..307d61a 100644
+    --- a/test02
+    +++ b/test02
+    @@ -1 +1 @@
+    -and this is another change
+    +This is another new change
+
+.Add the changes to the index and commit
+
+    git add . && git commit -m "More chaanges - typo in the commit message"
+    ping@640g-laptop:~/temp-git$ git add . && git commit -m "More chaanges - typo in the commit message"
+    [master 8e12be3] More chaanges - typo in the commit message
+     2 files changed, 2 insertions(+), 2 deletions(-)
+
+.Show the history of commits in the current branch
+
+    git log
+
+    commit 8e12be35dc5ae1bb10960329c74cd0d85e40616c
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:16:36 2012 -0400
+
+	More chaanges - typo in the commit message
+
+    commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:11:02 2012 -0400
+
+	These are new changes
+
+    commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 15:13:06 2012 -0400
+
+	Initial commit
+
+==== git amend:Correction of commit messages: git commit --amend -m <msg>
+
+The git amend command makes it possible to change *the last commit* message.  
+In the above example the commit message was incorrect as it contained a typo. 
+The following will correct this via the --amend parameter.
+
+----
+    ping@640g-laptop:~/temp-git$ git commit --amend -m "More changes - now correct"
+    [master 17944b3] More changes - now correct
+     2 files changed, 2 insertions(+), 2 deletions(-)
+
+    ping@640g-laptop:~/temp-git$ git log
+    commit 17944b32e93fafaa33a6c75ff98201d263601538
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:16:36 2012 -0400
+
+	More changes - now correct
+
+    commit e2712e95caa0f5f3853a976c2073b566fa712bc3
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 16:11:02 2012 -0400
+
+	These are new changes
+
+    commit 9c2ed13c92dec39e193d8311ad180104cb211f46
+    Author: ping <songpingemail@gmail.com>
+    Date:   Mon Apr 2 15:13:06 2012 -0400
+
+	Initial commit
+----
+
+==== Delete files
+
+.Create a file and put it under version control
+----
+touch nonsense.txt
+git add . && git commit -m "a new file has been created"
+----
+
+.Remove the file
+----
+rm nonsense.txt
+----
+
+Try standard way of committing -- This will not work 
+----
+git add . && git commit -m "a new file has been created"
+----
+
+.Now commit all: -a 
+
+----
+git commit -a -m "File nonsense.txt is now removed"
+----
+
+[quote,,man git-commit]
+ -a, --all
+   Tell the command to automatically stage files that have been
+   modified and deleted, but new files you have not told git about are
+   not affected.
+
+
+.Alternatively you could add deleted files to the staging index via:
+
+----
+git add -A . 
+git commit -m "File nonsense.txt is now removed"
+----
+
+[quote,,man git-add]
+ -A, --all
+  Like -u, but match <filepattern> against files in the working
+  tree in addition to the index. That means that it will find
+  new files as well as staging modified content and removing
+  files that are no longer in the working tree.
+
+==== Clone your repository
+
+Create a new repository in a new directory via the following commands.
+
+----
+# Switch to home
+cd ~
+# Make new directory
+mkdir repo02
+
+# Switch to new directory
+cd ~/repo02
+# Clone
+git clone ../remote-repository.git .
+
+ping@640g-laptop:~/temp-git$ mkdir ../temp-git2
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ git clone ../temp-remote-repository.git .
+Initialized empty Git repository in /home/ping/temp-git2/.git/
+----
+
+==== Setting up a remote (bare) Git repository
+
+.remote git repos: git clone --bare
+
+We will now create a remote Git repository. 
+
+Git allows you to store this remote repository either on the network or locally.  
+
+A *standard* Git repository is different from a *remote Git repository* . 
+
+A *standard* Git repository :: contains the source code and the Git repository. 
+
+You can work directly in this directory as the repository contains a working
+copy of all files.  
+
+A *Remote* repositories :: *DO NOT* contain working copies of the files.  They
+only contain repository files. 
+
+To create such a repository, set the `--bare` flag.  
+
+In order to simplify the following examples, the Git repository will be created
+locally in the filesystem.  
+				
+.Switch to the first repository
+----
+cd ~/repo01
+----
+
+----
+git clone --bare . ../remote-repository.git
+----
+
+////
+.Check the content, it is identical to the .git directory in repo01
+----
+ls ~/remote-repository.git
+
+ping@640g-laptop:~/temp-git$ git clone --bare . ../temp-remote-repository.git
+Initialized empty Git repository in /home/ping/temp-remote-repository.git/
+
+ping@640g-laptop:~/temp-git$ ls ../temp-remote-repository.git/
+branches  config  description  HEAD  hooks  info  objects  packed-refs  refs
+
+:~/temp-git$ tree .git/ 			$ tree ../temp-remote-repository.git/
+.git/                                             	../temp-remote-repository.git/
+|-- branches                                      	|-- branches
+|-- COMMIT_EDITMSG                                	|-- config
+|-- config                                        	|-- description
+|-- description                                   	|-- HEAD
+|-- gitk.cache                                    	|-- hooks
+|-- HEAD                                          	|   |-- applypatch-msg.sample
+|-- hooks                                         	|   |-- commit-msg.sample
+|   |-- applypatch-msg.sample                     	|   |-- post-commit.sample
+|   |-- commit-msg.sample                         	|   |-- post-receive.sample
+|   |-- post-commit.sample                        	|   |-- post-update.sample
+|   |-- post-receive.sample                       	|   |-- pre-applypatch.sample
+|   |-- post-update.sample                        	|   |-- pre-commit.sample
+|   |-- pre-applypatch.sample                     	|   |-- prepare-commit-msg.sample
+|   |-- pre-commit.sample                         	|   |-- pre-rebase.sample
+|   |-- prepare-commit-msg.sample                 	|   `-- update.sample
+|   |-- pre-rebase.sample                         	|-- info
+|   `-- update.sample                             	|   `-- exclude
+|-- index                                         	|-- objects
+|-- info                                          	|   |-- 10
+|   `-- exclude                                   	|   |   `-- 69075cfc1d791ec9b5700bd1f0b1c54e82f1e3
+|-- logs                                          	|   |-- 17
+|   |-- HEAD                                      	|   |   `-- 944b32e93fafaa33a6c75ff98201d263601538
+|   `-- refs                                      	|   |-- 18
+|       `-- heads                                 	|   |   `-- fec4283fdaf2287d80fd3a4e22e33700d158cf
+|           `-- master                            	|   |-- 30
+|-- objects                                       	|   |   `-- 7d61a379c23b64f926df1c221bf33602ab0448
+|   |-- 10                                        	|   |-- 55
+|   |   `-- 69075cfc1d791ec9b5700bd1f0b1c54e82f1e3	|   |   `-- 2c22e016e4134653b07220f6c483c6997cb5fe
+|   |-- 17                                        	|   |-- 74
+|   |   `-- 944b32e93fafaa33a6c75ff98201d263601538	|   |   `-- 9eb2d5119aa8404930f8888f340d3be7def912
+|   |-- 18                                        	|   |-- 86
+|   |   `-- fec4283fdaf2287d80fd3a4e22e33700d158cf	|   |   `-- baef48fc6bf966acc6612f7c9905fb472e9bcf
+|   |-- 30                                        	|   |-- 8e
+|   |   `-- 7d61a379c23b64f926df1c221bf33602ab0448	|   |   `-- 12be35dc5ae1bb10960329c74cd0d85e40616c
+|   |-- 55                                        	|   |-- 9c
+|   |   `-- 2c22e016e4134653b07220f6c483c6997cb5fe	|   |   `-- 2ed13c92dec39e193d8311ad180104cb211f46
+|   |-- 74                                        	|   |-- 9d
+|   |   `-- 9eb2d5119aa8404930f8888f340d3be7def912	|   |   `-- cb5d92475546e6a491d4debaa0b8cd023a6c48
+|   |-- 86                                        	|   |-- d0
+|   |   `-- baef48fc6bf966acc6612f7c9905fb472e9bcf	|   |   `-- a432bb64f5a4c235a2a88d8fcf7bc5ecde067d
+|   |-- 8e                                        	|   |-- e2
+|   |   `-- 12be35dc5ae1bb10960329c74cd0d85e40616c	|   |   `-- 712e95caa0f5f3853a976c2073b566fa712bc3
+|   |-- 9c                                        	|   |-- e6
+|   |   `-- 2ed13c92dec39e193d8311ad180104cb211f46	|   |   `-- 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+|   |-- 9d                                        	|   |-- fc
+|   |   `-- cb5d92475546e6a491d4debaa0b8cd023a6c48	|   |   `-- da4f4f4fed4693a20e03170bf14884b5012841
+|   |-- d0                                        	|   |-- info
+|   |   `-- a432bb64f5a4c235a2a88d8fcf7bc5ecde067d	|   `-- pack
+|   |-- e2                                        	|-- packed-refs
+|   |   `-- 712e95caa0f5f3853a976c2073b566fa712bc3	`-- refs
+|   |-- e6                                        	|-- heads
+|   |   `-- 9de29bb2d1d6434b8b29ae775ad8c2e48c5391	`-- tags
+|   |-- fc
+|   |   `-- da4f4f4fed4693a20e03170bf14884b5012841	23 directories, 29 files
+|   |-- info
+|   `-- pack
+`-- refs
+|-- heads
+|   `-- master
+`-- tags
+26 directories, 34 files
+----
+////
+
+==== Push changes to another repository
+
+Make some changes and push them from your first repository to the remote
+repository via the following commands.
+				
+.Make some changes in the first repository
+----
+cd ~/repo01
+----
+
+.Make some changes in the file
+----
+echo "Hello, hello. Turn your radio on" > test01
+echo "Bye, bye. Turn your radio off" > test02
+----
+
+.commit
+----
+git commit -a -m "Some changes"
+ping@640g-laptop:~/temp-git$ git commit -am "Some Changes"
+[master 6d181d6] Some Changes
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+----
+
+.Push the changes
+----
+git push ../remote-repository.git
+
+ping@640g-laptop:~/temp-git$ git push ../temp-remote-repository.git/
+Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 396 bytes, done.
+Total 4 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (4/4), done.
+To ../temp-remote-repository.git/
+   17944b3..6d181d6  master -> master
+----
+
+==== lable "origin"
+
+You can always push to a Git repository via its full URL.  But you can also add
+a "shortname" to a repository via the git remote add command.  
+
+*origin* is a special name which is normally used automatically, if you clone a
+Git repository.  Origin indicates the original repository from which you
+started.  As we started from scratch, this name is still available.
+
+.Add ../remote-repository.git with the name origin
+
+    git remote add origin ../remote-repository.git 
+
+.Again some changes
+
+    echo "I added a remote repo" > test02
+
+.Commit
+
+    git commit -a -m "This is a test for the new remote origin"
+
+.If you do not label a repository it will push to origin
+
+    git push origin
+
+==== Show the existing remote repositories
+To see the existing definitions of the remote repositories, use the following
+command.
+
+.Show the existing defined remote repositories:git remote
+
+----
+ping@640g-laptop:~/temp-git$ git remote
+origin
+----
+
+==== Pull changes
+
+Pull allows you to get the latest changes from another repository. 
+In your second repository, make some changes, push them to your remote
+repository and pull these changes to your first repository.
+
+.original example
+----
+# Switch to home
+cd ~
+
+# Switch to second directory
+cd ~/repo02
+
+# Make changes
+echo "A change" > test01
+
+# Commit
+git commit -a -m "A change"
+
+# Push changes to remote repository
+# Origin is automatically maintained as we cloned from this repository
+git push origin
+
+# Switch to the first repository and pull in the changes
+cd ~/repo01
+git pull ../remote-repository.git/
+
+# Check the changes
+less test01
+----
+
+.my test logs
+----
+ping@640g-laptop:~/temp-git2$ echo "A change" > test01
+ping@640g-laptop:~/temp-git2$ git commit -a -m "A change"
+[master 42230df] A change
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git2$ git push origin 
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 326 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   d0c385f..42230df  master -> master
+
+ping@640g-laptop:~/temp-git2$ less ../temp-remote-repository.git/test01
+../temp-remote-repository.git/test01: No such file or directory
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git pull ../temp-remote-repository.git/
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            HEAD       -> FETCH_HEAD
+Updating d0c385f..42230df
+Fast-forward
+ test01 |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+ping@640g-laptop:~/temp-git$ less test01
+A change
+----
+
+==== Revert Changes
+
+If you create files in your working copy which you do not want to commit, you
+can discard them.
+
+    # Create a new file with content
+    touch test04
+    echo "this is trash" > test04
+
+    # Make a dry-run to see what would happen
+    # -n is the same as --dry-run 
+    git clean -n
+
+    # Now delete
+    git clean -f
+
+    #also remove dir
+    git clean -fd
+
+.my test:
+
+    ping@640g-laptop:~/temp-git$ touch test04
+    ping@640g-laptop:~/temp-git$ echo "this is trash" > test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03  test04
+    ping@640g-laptop:~/temp-git$ git clean -n
+    Would remove test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03  test04
+    ping@640g-laptop:~/temp-git$ git clean -f
+    Removing test04
+    ping@640g-laptop:~/temp-git$ ls
+    datafiles  test01  test02  test03
+
+==== check out via commitID
+
+You can check out older revisions of your source code via the commit ID. 
+The commit ID is shown if you enter the git log command. 
+It is displayed behind the commit word.
+
+----
+# Switch to home
+cd ~/repo01
+# Get the log
+git log
+
+# Copy one of the older commits and checkout the older revision via 
+git checkout commit_name
+----
+
+.my test
+----
+
+ping@640g-laptop:~/temp-git$ git checkout 9c2ed13c92dec39e193d8311ad180104cb211f46
+Note: checking out '9c2ed13c92dec39e193d8311ad180104cb211f46'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 9c2ed13... Initial commit
+
+ping@640g-laptop:~/temp-git$ 
+ping@640g-laptop:~/temp-git$ less test01
+datafiles
+test01
+test02
+test03
+----
+
+If you have not added the changes to the staging index, you can also revert the
+changes directly.
+
+----
+#Some nonsense change
+echo "nonsense change" > test01
+#Not added to the staging index. Therefore we can just checkout the old version
+git checkout test01
+# Check the result
+cat test01
+
+# Another nonsense change
+echo "another nonsense change" > test01
+# We add the file to the staging index
+git add test01
+# Restore the file in the staging index
+git reset HEAD test01 				<1>
+# Get the old version from the staging index
+git checkout test01
+----
+<1> why?
+		
+You can also revert commits via the following command:
+			
+.Revert a commit
+
+    git revert commit_name
+
+If you deleted a file but you have not yet added it to the index or committed
+the change, you can check out the file again.
+			
+.Delete a file
+
+    rm test01
+
+.Revert the deletion
+
+    git checkout test01
+		
+If you added a file to the index but do not want to commit the file, you can
+remove it from the index via the git reset file command.
+
+----
+// Create a file
+touch incorrect.txt
+// Accidently add it to the index
+git add .
+// Remove it from the index
+git reset incorrect.txt
+// Delete the file
+rm incorrect.txt
+----
+
+If you deleted a directory and you have not yet committed the changes, you can
+restore the directory via the following command:
+
+    git checkout HEAD -- your_dir_to_restore
+
+==== Tagging in Git
+
+Git has the option to tag certain versions in the history so that you find them
+more easily at a later point in time. 
+Most commonly, this is used to tag a certain version which has been released.
+
+.You can list the available tags via the following command:
+----
+git tag
+----
+
+You can create a new tag via the following. Via the -m parameter, you specify
+the description of this tag.
+
+----
+git tag version1.6 -m 'version 1.6'
+
+----
+	
+If you want to use the code associated with the tag, use:
+
+----
+git checkout <tag_name>
+
+#test
+ping@640g-laptop:~/temp-git$ git tag
+ping@640g-laptop:~/temp-git$ git tag version1.6 -m 'version 1.6'
+ping@640g-laptop:~/temp-git$ git tag
+version1.6
+ping@640g-laptop:~/temp-git$ git checkout version1.6
+HEAD is now at 9c2ed13... Initial commit
+ping@640g-laptop:~/temp-git$
+----
+
+==== Branches and Merging
+
+===== Branches
+
+Git allows you to create branches, e.g. 
+independent copies of the source code which can be changed independently from
+each other.  The default branch is called *master*. 
+Git allows you to create branches very fast and cheap in terms of resource
+consumption.  Developers are encouraged to use branches frequently.
+
+.lists all locally available branches. currently active branch is marked with *.
+----
+git branch 
+----
+			
+.all branches (including remote branches)
+----
+git branch -a
+----
+			
+.create a new branch via the following.
+----
+# Syntax: git branch <name> <hash>
+# <hash> in the above is optional 
+# if not specified the last commit will be used
+# If specified the corresponding commit will be used
+git branch testing
+# Switch to your new branch
+git checkout testing
+# Some changes
+echo "Cool new feature in this branch" > test01
+git commit -a -m "new feature"
+# Switch to the master branch
+git checkout master
+# Check that the content of test01 is the old one
+cat test01
+----
+
+.my test
+----
+ping@640g-laptop:~/temp-git$ git branch
+* (no branch)
+  master
+ping@640g-laptop:~/temp-git$ git branch -a
+* (no branch)
+  master
+  remotes/origin/master
+ping@640g-laptop:~/temp-git$ git branch testing
+ping@640g-laptop:~/temp-git$ git checkout testing
+Switched to branch 'testing'
+ping@640g-laptop:~/temp-git$ echo "cool new feature in this branch" > test01
+ping@640g-laptop:~/temp-git$ git checkout master
+error: You have local changes to 'test01'; cannot switch branches.
+ping@640g-laptop:~/temp-git$ git commit -am "new feature"
+[testing 8380236] new feature
+ 1 files changed, 1 insertions(+), 4 deletions(-)
+ping@640g-laptop:~/temp-git$ git checkout master
+Switched to branch 'master'
+ping@640g-laptop:~/temp-git$ cat test01
+A change
+
+----
+
+===== Delete a branch
+
+To delete a branch which is not needed anymore; you can use the following command.
+
+.Delete branch testing
+----
+git branch -d testing
+----
+
+.Check if branch has been deleted
+----
+git branch
+----
+
+===== Merging
+
+Merge allows you to *combine* the changes of two branches. 
+Merge performs a so-called *three-way-merge* between the latest snapshot of two
+branches, based on the most recent common ancestor of both.
+As a result, you have a new snapshot. 
+You can merge changes from one branch to the current active one via the following command.
+
+----
+# Syntax: git merge <branch-name>
+git merge testing
+----
+		    
+If a merge conflict occurs Git will mark the conflict in the file and the
+programmer has to resolve the conflict manually. 
+After resolving it, he can add the file to the staging index and commit the
+change.
+
+===== Solving merge conflicts
+
+A merge conflicts occurs, if two people have modified the same content and Git
+cannot automatically determine how both changes should be applied.
+
+Git requires that merge conflicts are solved *manually*. 
+In this section; we will first create a merge conflict and then resolve it and
+apply the change to the Git repository.
+
+The following will create a merge conflict.
+
+----
+cd ~/repo01 			# Switch to the first directory
+touch mergeconflict.txt 	# Make changes
+echo "Change in the first repository" > mergeconflict.txt
+git add . && git commit -a -m "Will create merge conflict 1"
+				# Stage and commit
+
+cd ~/repo02 			# Switch to the second directory
+touch mergeconflict.txt 	# Make changes
+echo "Change in the second repository" > mergeconflict.txt
+git add . && git commit -a -m "Will create merge conflict 2"
+				# Stage and commit
+
+git push 			# Push to the master repository
+
+# Now try to push from the first directory
+cd ~/repo01 			# Switch to the first directory
+git push 			# Try to push --> will get an error message
+git pull origin master 		# Get the changes
+----
+
+Git marks the conflict in the affected file. This file looks like the following.
+
+----
+<<<<<<< HEAD
+Change in the first repository
+=======
+Change in the second repository
+>>>>>>> b29196692f5ebfd10d8a9ca1911c8b08127c85f8
+----
+
+.my testing:
+----
+ping@640g-laptop:~/temp-git$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git$ echo "Change in the first repository" > mergeconflict.txt
+ping@640g-laptop:~/temp-git$ git add . && git commit -a -m "Will create merge conflict 1"
+[master 8de3801] Will create merge conflict 1
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+
+ping@640g-laptop:~/temp-git$ cd ../temp-git2
+ping@640g-laptop:~/temp-git2$ touch mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ echo "Change in the second repository" > mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git add . && git commit -a -m "Will create merge conflict 2"
+[master a57ae5d] Will create merge conflict 2
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 mergeconflict.txt
+ping@640g-laptop:~/temp-git2$ git branch
+* master
+ping@640g-laptop:~/temp-git2$ git push
+Counting objects: 4, done.   
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 405 bytes, done.
+Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+To /home/ping/temp-git2/../temp-remote-repository.git
+   42230df..a57ae5d  master -> master
+
+ping@640g-laptop:~/temp-git2$ cd ../temp-git
+ping@640g-laptop:~/temp-git$ git push
+To ../temp-remote-repository.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to '../temp-remote-repository.git'
+To prevent you from losing history, non-fast-forward updates were rejected
+Merge the remote changes before pushing again.  See the 'Note about
+fast-forwards' section of 'git push --help' for details.
+
+ping@640g-laptop:~/temp-git$ git pull origin master
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From ../temp-remote-repository
+ * branch            master     -> FETCH_HEAD
+Auto-merging mergeconflict.txt
+CONFLICT (add/add): Merge conflict in mergeconflict.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+ping@640g-laptop:~/temp-git$ less mergeconflict.txt
+<<<<<<< HEAD
+Change in the first repository
+=======
+Change in the second repository
+>>>>>>> a57ae5ddbf4d38abfc50bfccdf2c9859a394afbd
+----
+	    
+The above is the part from your repository and the below one from the remote
+repository. 
+You could now edit the file manually and then commit the changes. 
+Alternatively, you could use the git mergetool command. 
+git mergetool starts a configurable merge tool that displays the changes in a
+split screen.
+
+----
+git mergetool 		#Either edit the file manually or use 
+
+ping@640g-laptop:~/temp-git11$ git mergetool
+merge tool candidates: opendiff kdiff3 tkdiff xxdiff meld tortoisemerge
+gvimdiff diffuse ecmerge p4merge araxis bc3 vimdiff emerge
+No files need merging
+
+# You will be prompted to select which merge tool you want to use
+# For example on Ubuntu you can use the tool "meld"
+# After  merging the changes manually, commit them
+
+git commit -m "merged changes"
+----
+
+==== Rebase
+
+===== Rebasing commits in the same branch
+
+The *rebase* command allows you to combine several commits into one commit. 
+This is useful as it allows the user to rewrite some of the commit history
+(cleaning it up) before pushing your changes to a remote repository.
+The following will create several commits which should be combined at a later
+point in time.
+
+----
+# Create a new file
+touch rebase.txt
+
+# Add it to git
+git add . && git commit -m "rebase.txt added to index"
+
+# Do some silly changes and commit
+echo "content" >> rebase.txt
+git add . && git commit -m "added content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+echo " more content" >> rebase.txt
+git add . && git commit -m "added more content"
+
+# Check the git log message
+git log
+----
+
+We will combine the last seven commits. You can do this interactively via the
+following command.
+			    
+git rebase -i HEAD~7
+		    
+This will open your editor of choice and let you edit the commit message or squash/ fixup the commit with the last one.
+
+Squash will combine the commit messages while fixup will disregard the commit message.
+
+===== Rebasing branches
+
+You can also use Git to rebase two branches. As described; the merge command
+combines the changes of two branches. Rebase takes the changes of a branch,
+creates a patch and applies it to another branch.
+
+The final result for the source code is the same as with merge but the commit
+history is cleaner; the history appears to be linear.
+
+----
+# Create new branch 
+git branch testing
+# Checkout the branch
+git checkout testing
+# Make some changes
+echo "This will be rebased to master" > test01
+# Commit into testing branch
+git commit -a -m "New feature in branch"
+# Rebase the master
+git rebase master
+----
+
+===== Best practice for rebase
+
+You should always check your local branch history before pushing changes to
+another Git repository or review system.
+
+Git allows you to do local commits. This feature is frequently used to have
+points to which you can go back, if something should go wrong later during a
+feature development. If you do so you, before pushing, should look at your
+local branch history and validate, whether or not these commits are relevant
+for others.
+
+If they all belong to the implementation of the same feature you, most likely,
+want to summarize them in one single commit before pushing.
+
+The interactive rebase is basically rewriting the history. It is safe to do
+this as long as the commits have not been pushed to another repository. This
+means commits should only be rewritten as long as they have not been pushed.
+
+If you rewrite and push a commit that is already present in other Git
+repositories, it will look as if you implemented something that somebody
+already implemented in the past.
+
+===== Create and apply patches
+A patch is a text file that contains changes to the source code. This file can
+be sent to someone else and this person can use this file to apply the changes
+to his/her local repository.
+
+The following creates a branch, makes some changes in this branch, creates a
+patch and applies the patch to the master.
+
+----
+# Create a new branch
+git branch mybranch
+# Use this new branch
+git checkout mybranch
+# Make some changes
+touch test05
+# Change some content in an existing file
+echo "New content for test01" >test01
+# Commit this to the branch
+git add .
+git commit -a -m "First commit in the branch"
+
+# Create a patch --> git format-patch master
+git format-patch origin/master
+# This created patch 0001-First-commit-in-the-branch.patch
+
+# Switch to the master
+git checkout master
+
+# Apply the patch
+git apply 0001-First-commit-in-the-branch.patch
+# Do your normal commit in the master 
+git add .
+git commit -a -m "Applied patch"
+
+# Delete the patch 
+rm 0001-First-commit-in-the-branch.patch
+----
+
+==== Define alias
+
+An alias in Git allows you to setup your own Git command. For example, you can
+define an alias which is a short form of your own favorite commands or you can
+combine several commands with an alias.
+
+For example, the following defines the git add-commit command which combines
+git add . -A and git commit -m. After defining this command, you can use it via
+the git add-commit -m "message" command.
+
+		    
+git config --global alias.add-commit '!git add . -A && git commit'
+
+	    
+Unfortunately, defining an alias is at the time of writing this not completely
+supported in msysGit. You can do single aliases, e.g. ca for ca = commit -a)
+but you can't do ones beginning with !.
+
+==== Untrack a file / directory
+Sometimes you want to have files or directories not being included in your Git
+repository. If you add it to your .gitignore file, Git will stop tracking it
+from this moment. It will not remove it from the repository. Thus, the last
+version will still be in git. To untrack a file or directory in Git you can
+use.
+
+----
+# Remove directory .metadata from git repo
+git rm -r --cached .metadata
+# Remove file test.txt from repo
+git rm --cached test.txt
+----
+	    
+This will not remove the file from the commit history. If the file should also
+be removed from the history, have a look at git filter-branch which allows you
+to rewrite the commit history.
+
+==== Other useful commands
+The following lists a few Git commands that are useful in the daily work with
+Git.
+
+Table 2. Useful Git Commands
+
+Command	Description
+git blame filename	Who created / modified the file
+git checkout -b mybranch master~1	Creates a new branch based on the master branch without the last commit
+
+==== Installing a Git server
+As described before, you don't need a server. You can just use a file system or
+a public Git provider, such as Github or Bitbucket. Sometimes, however, it is
+convenient to have your own server, and installing it under Ubuntu is
+relatively easy.
+
+First make sure you have installed ssh.
+
+		    
+apt-get install ssh
+	    
+If you have not yet installed Git on your server, you need to do this too.
+
+			    
+sudo apt-get install git-core
+		    
+Create a new user for git.
+
+		    
+sudo adduser git
+
+	    
+Now log on with your Git user and create a bare repository.
+
+----
+# Login to server
+# to test use localhost
+ssh git@IP_ADDRESS_OF_SERVER
+
+# Create repository
+git init --bare example.git
+
+	    
+Now you can commit to the remote repository.
+
+		    
+mkdir gitexample
+cd gitexample
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@IP_ADDRESS_OF_SERVER:example.git
+git push origin master
+----
+	    
+==== Online remote repositories
+===== Cloning remote repositories
+
+Git also support remote operations. Git supports several transport types; the
+native protocol for Git is also called git.
+
+The following will clone an existing repository via the Git protocol.
+
+			    
+git clone git@github.com:vogella/gitbook.git
+		    
+Alternatively you could clone the same repository via the http protocol.
+
+			    
+# The following will clone via HTTP 
+git clone http://vogella@github.com/vogella/gitbook.git
+		    
+===== Add more remote repositories
+
+If you clone a remote repository, the original repository will automatically be
+called origin.
+
+You can push changes to this origin repository via git push origin . Of course,
+pushing to a remote repository requires write access to this repository.
+
+You can add more remote repositories to your repository via the git remote add
+name gitrepo command. For example if you cloned the repository from above via
+the Git protocol, you could add the http protocol via:
+
+			    
+// Add the https protocol 
+git remote add githttp https://vogella@github.com/vogella/gitbook.git
+
+		    
+===== Remote operations via http and a proxy
+
+It is possible to use the HTTP protocol to clone Git repositories. This is
+especially helpful, if your firewall blocks everything except http.
+
+Git also provides support for http access via a proxy server. The following Git
+command could, for example, clone a repository via http and a proxy. You can
+either set the proxy variable in general for all applications or set it only
+for Git.
+
+This example uses environment variables.
+
+----
+# Linux
+export http_proxy=http://proxy:8080
+# On Windows
+# Set http_proxy=http://proxy:8080 
+git clone http://dev.eclipse.org/git/org.eclipse.jface/org.eclipse.jface.snippets.git
+# Push back to the origin using http
+git push origin
+		    
+This example uses the Git config settings.
+
+			    
+// Set proxy for git globally
+git config --global http.proxy http://proxy:8080
+// To check the proxy settings
+git config --get http.proxy
+// Just in case you need to you can also revoke the proxy settings
+git config --global --unset http.proxy
+----
+		    
+==== Git Hosting Provider
+Instead of setting up your own server, you can also use a hosting service. The
+most popular Git hosting sites are GitHub and Bitbucket. Both offer free
+hosting with certain limitations.
+
+===== GitHub
+
+GitHub can be found under the URL https://github.com/. GitHub is free for all
+public repositories, i.e. if you want to have private repositories which are
+only visible to people you select, you have to pay GitHub a monthly fee.
+
+GitHub requires you to create an ssh key. A description for creating an ssh key
+in Ubuntu can be found in the ssh key creation in Ubuntu webpage. For Windows
+please see msysgit ssh key generation .
+
+Create an account at GitHub and create a repository. After creating a
+repository at GitHub you will get a description of all the commands you need to
+execute to upload your project to GitHub. Follow the instructions.
+
+These instructions will be similar to the following:
+
+.Global setup:
+------------------------------------------------------------------------------
+Set up git
+git config --global user.name "Your Name"
+git config --global user.email your.email@gmail.com
+------------------------------------------------------------------------------
+  
+.Next steps:
+------------------------------------------------------------------------------
+mkdir gitbook 
+cd gitbook
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master
+  
+Existing Git Repo?
+cd existing_git_repo
+git remote add origin git@github.com:vogella/gitbook.git
+git push -u origin master
+
+------------------------------------------------------------------------------
+
+.my test&notes
+cd bin
+git init
+git add .
+git commit -m 'my commit'
+#now go to github website and create a repo manually, say `mybin`
+git remote set-url origin https://github.com/pinggit/mybin.git
+#list the current remote
+git remove -v
+git push -f origin master
+
+    Username for 'https://github.com': pinggit
+    Password for 'https://pinggit@github.com':
+    To https://github.com/pinggit/mybin.git
+     + ca88f88...9fc59a7 master -> master (forced update)
+
+#to delete, for now only from website
+
+
+===== Bitbucket
+
+Bitbucket can be found under the URL https://bitbucket.org/. Bitbucket allows
+unlimited public and private repositories, while the number of participants for
+one private repository is currently limited to 5 collaborators. I.e. if you
+have more then 5 developers which need access to a private repository you have
+to pay money to Bitbucket.
+
+==== Graphical UI's for Git
+This tutorial focused on the usage of the command line for Git. After finishing
+this tutorial, you may want to look at graphical tools for working with Git.
+
+Git provides two graphical tools. gitk shows the history and git gui shows an
+editor that allows you to perform Git operations.
+
+The Eclipse EGit project provides Git integration into Eclipse, which is
+included in the latest Eclipse release.
+
+===== gitk
+    gitk --all
+
+
+==== Get the Kindle edition
+
+This tutorial is available for your Kindle.
+
+
+==== git cmds,options sums
+
+ .cmds 		options 		examples
+ git-config 	--global		git config --global user.name "ping"
+ 					git config --global user.name "ping"
+ 					git config --global user.email "a@b.us"
+ 					git config --global color.status auto
+ 					git config --global color.branch auto
+ 
+ 		--list 			git config --list
+ 
+ git-init 	 			git init
+ git-add 	 			git add .
+ 		std commit, 
+ 		not RMed file
+ 		-A
+ git-logs 				git log
+ git-status
+ git-commit 	-a  			git commit -a -m "new changes"
+ 		    commit chg/RMed f
+ 		    ,but no new file
+ 		-m
+ 		--amend 		git commit --amend -m "chg corrected"
+ 
+ git-diff 				git diff
+ git-clone  	--bare 	 		git clone --bare rep1 ../remote-rep
+ 		    remote rep
+ git-push 				git push origin
+ git-pull 				git pull ../temp-git11.r/
+ git-clean 	
+		RM untracked Fs
+		from working tree
+ 		-n
+		    test drive
+ 		-f
+		    execute
+git-reset 				git reset HEAD file1.txt
+git-checkout 				git checkout file1.txt
+git-revert
+git-branch 				git branch mybranch1
+					git branch master
+					git branch -d testing
+
+
+
+
+==== fugitive
+
+==== Questions and Discussion
+
+Before posting questions, please see the vogella FAQ. If you have questions or
+find an error in this article please use the www.vogella.de Google Group. I
+have created a short list how to create good questions which might also help
+you.
+
+==== Links and Literature
+
+Git homepage
+
+EGit - Teamprovider for Eclipse
+
+Video with Linus Torwalds on Git
+
+Progit book - Free Git book
+
+Video casts about Git
+
+http://code.google.com/p/msysgit/ Git on Windows
+
+http://github.com/guides/git-cheat-sheet Git Cheat Sheets
+
+==== real usage cases
+
+to recover the delete file::
+
+    git reset --hard HEAD
+
+go back to historical version(git essential usev)::
+
+如果我们某次修改了某些内容，并且已经commit到本地仓库，而且已经push到远程仓库了
+这种情况下，我们想把本地和远程仓库都回退到某个版本，该怎么做呢？ 前面讲到的git
+reset只是在本地仓库中回退版本，而远程仓库的版本不会变化这样，即时本地reset了，
+但如果再git pull，那么，远程仓库的内容又会和本地之前版本的内容进行merge 这并不
+是我们想要的东西
+
+    git reset --hard 393d3aefc673b01fc26b887c68b57450f1b34178 
+    git push origin master -f
+
+.git log:before
+----
+ping@640g-laptop:~/mytest-project/jekyll-site/pinggit.github.com$ git log
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+commit c7ebffb59a0f61281c545743e589b9ce7f0469af
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 12:37:54 2013 -0500
+
+    some change
+
+commit b715e0e371ee175c693c55ceb6e9df4111098f65
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 12:26:25 2013 -0500
+
+    change yaml
+
+...<a million more changes here>...
+
+commit 7622dc6f03484be25a4bdc07562a44691bf3bf3c
+Author: ping <songpingemail@gmail.com>
+Date:   Sun Feb 24 11:57:33 2013 -0500
+
+    change config.yaml
+
+commit 393d3aefc673b01fc26b887c68b57450f1b34178         <1>
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim
+
+----
+1. target release that we want to go back to
+
+.git log:now, looks we lost/trashed all commit info after the target release
+----
+commit 393d3aefc673b01fc26b887c68b57450f1b34178
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:19:34 2013 -0500
+
+    new post: jekyll - current work flow in vim
+
+commit 64ac9a0becbf4707a6454460601dbf90aa39f056
+Author: ping <songpingemail@gmail.com>
+Date:   Thu Feb 21 16:18:03 2013 -0500
+
+    new post: usb3.0
+
+----
+

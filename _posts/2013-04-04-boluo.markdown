@@ -1,0 +1,15 @@
+---
+layout: post
+title: "菠萝"
+published: true
+created:  2013 Apr 04 12:31:25 AM
+tags: [小吃, video]
+categories: [life]
+---
+
+# 出处
+
+<http://www.jifenzhong.com/video/2386-How-To-Peel-a-Pineapple>
+
+<embed src="http://www.jifenzhong.com/external/player/v1.0/2386-How-To-Peel-a-Pineapple/player.swf" quality="high" width="480" height="305" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>
+

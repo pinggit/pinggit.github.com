@@ -1,0 +1,19 @@
+---
+layout: post
+title: "xixi"
+published: true
+created:  2013 Apr 26 04:44:11 PM
+tags: [photo, xixi]
+categories: [life]
+---
+
+[![xixi](/images/xixi-1024x768.JPG "xixi")](/docs/xixibook.pdf)
+
+click the picture to download the book...
+
+* [xixibook-I (published) samples](http://simplerlife.farbox.com/folder/images/xixibook/), thank you [amoblin](http://amoblin.marboo.biz/)! you are my friend!
+* [xixibook-I](/docs/xixibook.pdf)
+* [xixibook-II](/docs/xixibook-II.pdf)
+* [cover of the book](/docs/cover.pdf)
+* [sample page1](/docs/sample1.pdf) [sample page2](/docs/sample2.pdf)
+* [xixibook-I (no page number)](/docs/xixibook-nopn.pdf)

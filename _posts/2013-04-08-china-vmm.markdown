@@ -1,0 +1,12 @@
+---
+layout: post
+title: "china vmm"
+published: false
+created:  2013 Apr 08 10:23:15 AM
+tags: [vmm, junos]
+categories: [tech]
+---
+
+# vmm虚拟环境脱机版 (限量发布，未得本人许可，请勿传播！！！）
+请猛击[这里](http://lmgtfy.com/?q=china+vmm)
+

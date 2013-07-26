@@ -1,0 +1,9 @@
+foreword/1,Black,notBold,notItalic,closed,FitPage
+xixi turns 6 years old!/5,Black,notBold,notItalic,closed,FitPage
+family and friends/9,Black,notBold,notItalic,closed,FitPage
+xixi's arts/29,Black,notBold,notItalic,open,FitPage
+	drawings in classes/31,Black,notBold,notItalic,closed,FitPage
+	casual drawings and writings at home and school/41,Black,notBold,notItalic,closed,FitPage
+more arts by xixi/105,Black,notBold,notItalic,closed,FitPage
+mom and dad's arts/233,Black,notBold,notItalic,closed,FitPage
+xixi's family book/251,Black,notBold,notItalic,closed,FitPage

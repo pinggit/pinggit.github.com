@@ -1,0 +1,93 @@
+---
+layout: post
+title: "asciidoc qanda"
+created:  2013 Mar 13 11:30:10 PM
+tags: [asciidoc]
+categories: [tech]
+published: false
+---
+
+
+.qanda is good to record Q&A, and small tips
+
+.this qanda:
+----
+[qanda]
+
+missing mandatory statement::
++
+--
+error msg:
+
+    re0: 
+    [edit interfaces demux0 unit 10820019 family inet]
+      'unnumbered-address'
+        Missing mandatory statement: <source>
+    [edit access profile ACCESS_PROFILE-VZ_DHCPUSER]
+      'accounting'
+        warning: requires 'subscriber-accounting' license
+    [edit access]
+      'address-assignment'
+        warning: requires 'subscriber-address-assignment' license
+    error: commit failed: (missing mandatory statements)
+
+the "preferred-source-address" 71.120.27.1 was not configured in lo0.100:
+
+    {master}
+    z427047@WASHDC-VFTTP-302_RE0> show configuration interfaces demux0 unit 20490017 | display inheritance  
+    description "09/KQXA/344610/ /VZDC";
+    no-traps;
+    proxy-arp;
+    vlan-tags outer 49 inner 17;
+    demux-options {
+        underlying-interface ae2;
+    }
+    targetted-distribution;
+    family inet {
+        rpf-check fail-filter FILTER-RPF-SUB-IN;
+        unnumbered-address lo0.100 preferred-source-address 71.120.27.1;
+    }
+--
+----
+
+renders this:
+
+.qanda
+====
+[qanda]
+
+missing mandatory statement::
++
+--
+error msg:
+
+    re0: 
+    [edit interfaces demux0 unit 10820019 family inet]
+      'unnumbered-address'
+        Missing mandatory statement: <source>
+    [edit access profile ACCESS_PROFILE-VZ_DHCPUSER]
+      'accounting'
+        warning: requires 'subscriber-accounting' license
+    [edit access]
+      'address-assignment'
+        warning: requires 'subscriber-address-assignment' license
+    error: commit failed: (missing mandatory statements)
+
+the "preferred-source-address" 71.120.27.1 was not configured in lo0.100:
+
+    {master}
+    z427047@WASHDC-VFTTP-302_RE0> show configuration interfaces demux0 unit 20490017 | display inheritance  
+    description "09/KQXA/344610/ /VZDC";
+    no-traps;
+    proxy-arp;
+    vlan-tags outer 49 inner 17;
+    demux-options {
+        underlying-interface ae2;
+    }
+    targetted-distribution;
+    family inet {
+        rpf-check fail-filter FILTER-RPF-SUB-IN;
+        unnumbered-address lo0.100 preferred-source-address 71.120.27.1;
+    }
+--
+====

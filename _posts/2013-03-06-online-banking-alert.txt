@@ -1,0 +1,55 @@
+---
+layout: post
+title: "online banking alert"
+created:  2013 Mar 06 10:09:50 AM
+tags: [bank]
+categories: [english]
+published: false
+---
+
+
+== Online Banking Alert
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+    Money Transfer Deducted from Account. 					转账金额已从您账户中扣除
+
+    Security Checkpoint: You last signed in to Online Banking on April 11th.   	安全检查点：您上次登陆网银是2012年4月11日。['entә(r)]    v     v
+    Remember: Always look for your SiteKey® before entering your Passcode.      记住：输入密码前，总要看看你的"站点密钥"图。 [bi'fɔ:]->[bә'fɔ:-r-]
+
+    A money transfer over the amount you specified has occurred.  To review 	有一比转账超出了您的指定限额。请登陆网银查看这笔交易。如果您不认可这笔 
+    this transaction, please sign in to Online Banking. Please call us          交易的话，请立即拨打1.800.432.1000. [træn'zækʃ(ә)n]
+    immediately at 1-800-432-1000 if you do not recognize this transaction. 	TIPS: ['trænsfә:(r)] recognize['rekәɡnaiz]->['rekiɡnaiz],这里认可的意思
+
+    Want to confirm this email is from Bank of America? Sign in to Online 	您要确认这封邮件是否出自美国银行吗？请登陆网银并查看警示部分。警示历史         
+    Banking and go to Alerts. The Alerts History lists the Alerts sent to you   记录列出了过去60日内向您发出的所有警示。要得到更多的alerts? 请登陆美国银行网银 
+    in the past 60 days.  Like to get more Alerts? Sign in to your Online       系统，并在账户记录页面点击alerts这个tab                                        
+    Banking account at Bank of America and within the Accounts Overview page
+    select the Alerts tab.
+
+    Security Checkpoint: This email includes a Security Checkpoint. The 	安全检查站：本邮件包含了一个安全检查站。本节内的信息告知您这是一个同美国银行 
+    information in this section lets you know this is an authentic              之间的真实通信。每次登陆网银请记住要查看站点密钥图。                         
+    communication from Bank of America. Remember to look for your SiteKey every TIPS: authentic communication
+    time you sign in to Online Banking.
+
+    Email Preferences: This is a service email from Bank of America. Please 	邮件优先级别：这是一封来自美国银行的业务邮件。请注意根据您与美国银行之间的 
+    note that you may receive service email in accordance with your Bank of     协议，无论您是否选择接受，您都可能会收到来自银行的促销邮件。               
+    America service agreements, whether or not you elect to receive promotional [ә'kɔ:d(ә)ns],美语[ә'kɔ:-r-d(ә)ns]
+    email.
+
+    Contact us about this email: Please do not reply to this email with 	就此邮件联系我们：请不要在回复邮件中包含任何敏感信息，如账号信息，PIN码， 
+    sensitive information, such as an account number, PIN, password, or Online  密码，或者其他在线ID.您个人的安全和保密信息对我们很重要。如您此方面有任何 
+    ID. The security and confidentiality of your personal information is        问题，请拨打您银行账单上，或者"联系我们"页面上的电话，以便我们能妥善验证  
+    important to us. If you have any questions, please either call the phone    您的身份。                               v   v                            
+    number on your account statement or use the Contact Us page, so we can 	TIPS:[,kɔnfi,denʃi'æliti]->[,kɔnfi,denʃi'a:lidi]
+    properly verify your identity.
+
+    Privacy and Security: Keeping your financial information secure is one of   隐私和安全：确保您财务信息的安全是我们最重要的职责。关于我们如何保管客户信息， 
+    our most important responsibilities. For an explanation of how we manage  	请您阅读我们的隐私条款。您会知道美国银行如何确保您的个人信息安全以及您应当     
+    customer information, please read our Privacy Policy. You can also learn    如何协助我们保护您的隐私。 [eksplә'neiʃ(ә)n]->[ekspә'neiʃ(ә)n]
+    how Bank of America keeps your personal information secure and how you can  privacy ['praivәsi] financial [fai'nænʃ(ә)l] read[ri:d] yourself[jʋәr'self]
+    help protect yourself. 										  ^^
+
+ifdef::basebackend-html[....]
+

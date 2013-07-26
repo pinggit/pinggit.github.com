@@ -1,0 +1,4720 @@
+---
+layout: post
+title: "asciidoc learning tips"
+created:  2013 Mar 10 12:34:28 PM
+tags: [asciidoc]
+categories: [tech]
+published: false
+---
+
+
+== asciidoc learning tips
+:source-highlighter: pygments
+:numbered:
+:toc:
+:icons:
+:iconsdir: /home/ping/bin/asciidoc-8.6.8/images/icons
+:data-uri:
+
+=== good resources
+
+user manual::
+link:~/xnix/asciidoc/asciidoc.txt[manual] +
+link:~/xnix/asciidoc/userguide_cn.txt[manual-cn] +
+http://ccdocs.googlecode.com/svn-history/r14/trunk/asciidoc/userguide_cn.txt[chinese
+user manual] +
+http://www.csc.kth.se/~akozlov/asciidoc-mini.html[a "mini" manual]
+
+vim ft::
+link:.vim/ftdetect/myft.vim[my ft detection file] +
+
+the ./doc dir, contains a lot of good docs
+
+ext. resources::
+http://www.methods.co.nz/asciidoc/index.html#X2 +
+http://vanderwijk.info/2009/4/23/full-text-based-document-generation-using-asciidoc-and-ditaa +
+http://andrewk.webfactional.com/asciidoc.php[web test tool] +
+http://www.methods.co.nz/asciidoc/asciidoc.css-embedded.html[xhtml single file] +
+http://www.methods.co.nz/asciidoc/article.txt[article template (source)]
+
+#good example source files::
+
+http://www.methods.co.nz/asciidoc/asciidoc.txt +
+http://xpt.sourceforge.net/techdocs/nix/tool/asciidoc-syn/ascs01-AsciiDocMarkupSyntaxQuickSummary/single/ +
+http://houqp.github.com/wbwa/wbwa.html#idp25085648 +
+https://plus.google.com/114112334290393746697/posts/CdXJt6hVn5A +
+https://community.jboss.org/thread/196216?_sscc=t +
+
+http://powerman.name/doc/asciidoc[cheat sheet]
+
+https://github.com/houqp/wbwa/blob/master/src/wbwa.txt[about leveloffset]
+
+http://www.methods.co.nz/asciidoc/faq.html[great FAQs:]
+
+#Use Vim as syntax-highlighting filter for AsciiDoc, 
+#source code can be always highlighted as source block in asciidoc generated 
+#webpage, just like in vim. seems powerful if work!
+http://whileimautomaton.net/2010/11/03201210
+
+Takeshi Komiya has created a suite of diagram layout toolst: 
+http://blockdiag.com/en/index.html
+
+#use git, github, asciidoc to write a ebook
+The git-scribe tool is a simple command line toolset to help you use Git,
+GitHub and Asciidoc to write e-books
+https://github.com/schacon/git-scribe
+
+#some discussions about font
+https://groups.google.com/forum/?fromgroups=#!topic/asciidoc/ZLBxuyHenPA
+
+=== pending issue
+
+--
+
+* `[verse,,book]`: how to deal with anoymous quote?
+
+* how to quote multiple paragraph?
+
+* confusion about continuation (+), when using ifdef macro
+
+* looks examples get displayed in only 1 page, if its too long, anything beyond
+  1 page will not be displayed
+
+* PDF fop don't have footnote
+
+* need further cleanup the vim asciidoc auto commands
+
+* chinese output
+
+* what's the different between 'abc' and _abc_ ?
+
+* macro - image - 
+  - with URL
+  - with space
+
+    //this doesn't work
+    //image::/home/ping/living{sp}files/linked-data/tcpswexampleserver.png[]
+    //this works
+    image::/home/ping/test111/tcpswexampleserver.png[TCP sliding window]
+
+* worth to put commonly used attributes into a config file
+
+--
+
+
+=== asciidoc process flow
+
+
+
+					      (more features)
+                                               docbook
+                                               toolchain
+                asciidoc cmd                       |      +---------+
+                      |                            |      |other    |
+                      v            +----------+    v      |formats  |
+           +--------------------->-+docbookXML|--->-------+         |
+           |                       +backend   |    A      |         |
+       +---+-----+                 |format    |    |      |         |
+       |asciidoc |                 +----------+    |      |         |
+       |source   |                             a2x wrapper|         |
+       +---+-----+                                        |         |
+           |                                              |         |
+           |                                              |         |
+           |                                   (HTMLonly) |         |
+           +--------------------------------------------->|         |
+                     A                                    +---------+
+                     |
+                asciidoc cmd
+		(faster,etc)
+
+
+
+
+=== Document header
+
+----
+
+//nothing should be put prior to following "document header"
+//otherwise will get:
+//asciidoc: ERROR: index.txt.asciidoc2: line 4: only book doctypes can contain level 0 sections
+
+Main Header
+===========
+Optional Author Name <optional@author.email>
+Optional version, optional date
+:Author:    AlternativeWayToSetOptional Author Name
+:Email:     <AlternativeWayToSetOptional@author.email>
+:Date:      AlternativeWayToSetOptional date
+:Revision:  AlternativeWayToSetOptional version
+
+----
+
+[NOTE]
+====
+
+nothing should be put prior to following "document header"
+otherwise will get:
+asciidoc: ERROR: index.txt.asciidoc2: line 4: only book doctypes can contain level 0 sections
+
+====
+
+
+.example:
+====
+ ping's page
+ ===========
+ ping <pings@juniper.net>
+ v1.0 Thu Mar  1 14:24:39 EST 2012
+ 
+ :Author:   ping
+ :Email:    pings@juniper.net 
+ :Date:     3/1/2012 
+ :Revision: 1.1 
+ :My full name: ping song
+ 
+ Author is {author}
+ Version is {revision}
+ My name is {myfullname}
+
+====
+
+.example from manual
+====
+ Writing Documentation using AsciiDoc
+ ====================================
+ Joe Bloggs <jbloggs@mymail.com> 	<1>
+ v2.0, February 2003: 			<2><3>
+ Rewritten for version 2 release. 	<3>
+====
+
+<1> Joe Bloggs: first 2nd name, emailbox
+<2> vVERSION, DATE
+<3> COMMENT from ':' to until next attr. blankline, etc
+
+=== titles
+
+.1/2 line(s) title
+----
+ 
+ 2 lines title 		1 line title
+ 
+ Level 1   		== Level 1
+ -------         	Text.
+ Text.           	
+                 	
+ Level 2         	=== Level 2
+ ~~~~~~~         	Text.
+ Text.           	
+                 	
+ Level 3         	==== Level 3
+ ^^^^^^^         	Text.
+ Text.           	
+                 	
+ Level 4         	===== Level 4
+ +++++++         	Text.        
+ Text.
+----
+
+
+==== float title
+
+[verse,,asciidoc manual]
+Setting the title's first positional attribute or 'style' attribute to
+'float' generates a free-floating title. A free-floating title is
+rendered just like a normal section title but is not formally
+associated with a text body and is not part of the regular section
+hierarchy so the normal ordering rules do not apply. Floating titles
+can also be used in contexts where section titles are illegal: for
+example sidebar and admonition blocks.  
+Floating titles do not appear in a document's table of contents.
+
+====
+  [float]
+  The second day
+  ~~~~~~~~~~~~~~
+====
+
+
+[NOTE]
+========
+it looks an good tool where:
+* just need a side panel/tree entry in vim/Voom, but not a real title in the article
+* intentionally skip a header in TOC
+
+========
+
+.float title
+====
+    //enable toc, and toc-reposition
+    = linux in (JTAC) work : vi/vim editor
+    :toc:
+    :toc-placement: manual
+
+    //make first section float, so won't appear in TOC
+    [float]
+    == overview
+
+    //start the TOC, and TOC numbering from here
+    :numbered:
+    toc::[]
+
+    == vim as an editor
+====
+
+==== float abstract
+
+====
+//this doesn't work 
+[abstract,float]
+//this works:
+[float,abstract]
+== Abstract
+
+This is a quick demonstration about the functionality of VIM editor from a JTAC
+
+====
+
+=== Attributes
+
+There a lot of predefined 
+http://www.methods.co.nz/asciidoc/userguide.html#X88[attributes in asciidoc]
+plus you can add your own. To get attribute value use `{attributename}` syntax.
+
+==== author/revision/etc
+
+----
+Author is {author}   		Author is Alex Efros
+Version is {revision}           Version is 2.2.2     
+:My name: Alex Efros 		My name is Alex Efros
+My name is {myname}
+
+----
+
+NOTE: Line with bad attribute `{qwe}` will be deleted
+
+.this doesn't work
+====
+
+----
+plus you can add your own. To get attribute value use '{attributename}' syntax.
+----
+====
+
+will renders:(nothing)
+
+plus you can add your own. To get attribute value use '{attributename}' syntax.
+
+Escaped:: 
+
+----
+\{qwe} and +++{qwe}+++ 
+----
+
+renders::
+
+\{qwe} and +++{qwe}+++ 
+
+==== numbered/numbered!
+#generate/stop numbered headers
+:numbered:
+:numbered!:
+
+==== plaintext
+If this global attribute is defined all inline substitutions are suppressed and
+block indents are retained. This option is useful when dealing with large
+amounts of imported plain text.
+
+seems good for render a novel.
+
+==== leveloffset
+
+.a good tool to 'checkout' a ``chapter'' or a ``sub-chapter''
+
+CLI::
+reduce one level
+
+    asciidoc ...-a leveloffset=-1@ 
+
+inline level adjustment with macro::
+if calling backend deckjs, then reduce 1 or 2 levels. always clear the levels
+first to make sure it doesn't accumulate.
+
+    ifdef::backend-deckjs[:leveloffset: 0]
+    ifdef::backend-deckjs[:leveloffset: -1, or -2]
+
+'checkout'(in vim) like this::
+
+----
+'<,'>w !asciidoc -o mx/RLI/RLI-12720.slides.html -a icons -a data-uri -a leveloffset=-1@ -b deckjs -
+----
+
+[NOTE]
+====
+'-a leveloffset=-1'::
+    reduce overall levels by N(N=1 here)
+    this is just to make the text block level start from 0
+
+'@'::
+    don't overide inline attribute
+
+':leveloffset: 0' ::
+    when adjust levels in file, good to reset it (to 0) before set it (to -1/-2)
+
+'ifdef::backend' ::
+    make these level adjustment only work for deckjs backend
+    other docs won't be affected.
+
+====
+
+for practical sample check the RLI doc.
+
+==== theme
+
+Q: I download compact.css from http://powerman.name/doc/stylesheets/compact.css
+
+A: 
+put the theme file (.css) ::
+in a directory named for the theme,
+the file would be ~/.asciiidoc/themes/compact/compact.css
+
+then:
+-a theme=compact.css
+
+tested and this works (but not as good as the default 'flask' theme)::
+-a theme=volnitsky
+
+==== conditional attribute
+
+.this works
+====
+[list]
+....
+= temp
+:toc:
+//there must be at least one empty line in between!!!
+
+//this works
+:ref: {backend@odp:odp:non-odp}
+//this doesn't work well
+:ref2: {basebackend@odp:odp:non-odp}
+
+== backend {ref}
+
+my dear conditional attribute-> {ref} <-
+
+== basebackend {ref2}
+....
+====
+
+.this won't work
+====
+[list]
+....
+= temp
+:toc:
+//this won't work
+:ref: {backend@odp:odp:non-odp}
+//this doesn't work well
+:ref2: {basebackend@odp:odp:non-odp}
+
+== backend {ref}
+
+my dear conditional attribute-> {ref} <-
+
+== basebackend {ref2}
+....
+====
+
+
+[quote,lex,gmail conditional attribute]
+The two attributes above are part of the header which is processed
+before the backend is decided, so basebackend is not defined.  Just
+leave a blank line between the toc line and the ref2 line.
+
+=== Paragraphs
+
+==== usual/normal parag
+
+----
+.Optional Title
+
+Usual
+paragraph.
+----
+
+renders:
+
+.Optional Title
+
+Usual
+paragraph.
+
+==== literal(indented) parag
+
+===== implicit (implied via indention) liternal style
+
+----
+.implicit "literal" style
+
+ Literal paragraph.
+  Must be indented.
+----
+
+renders
+
+
+.implicit "literal" style
+
+ Literal paragraph.
+  Must be indented.
+
+===== explicit liternal style
+
+----
+[literal]
+.title: explicit style
+
+no need indention if
+Use explicit "literal" style.
+----
+
+
+renders:
+
+[literal]
+.title: explicit style
+
+no need indention if
+Use explicit "literal" style.
+
+==== verse and quote style
+
+===== verse syle
+
+.The 'verse' style retains the line breaks, for example:
+---------------------------------------------------------------------
+[verse, William Blake, from Auguries of Innocence]
+To see a world in a grain of sand,
+And a heaven in a wild flower,
+Hold infinity in the palm of your hand,
+And eternity in an hour.
+---------------------------------------------------------------------
+
+renders
+
+
+[verse, William Blake, from Auguries of Innocence]
+To see a world in a grain of sand,
+And a heaven in a wild flower,
+Hold infinity in the palm of your hand,
+And eternity in an hour.
+
+===== verse block: use open block
+
+----
+[verse]
+--
+Did You Have a High Water and Sewer Bill?
+
+Your water may have been running,
+unintentionally, for more than 24 hours!
+--
+----
+
+renders
+
+[verse]
+--
+Did You Have a High Water and Sewer Bill?
+
+Your water may have been running,
+unintentionally, for more than 24 hours!
+--
+
+
+===== quote style
+
+
+---------------------------------------------------------------------
+[quote, Bertrand Russell, The World of Mathematics (1956)]
+A good notation has subtlety and suggestiveness which at times makes
+it almost seem like a live teacher.
+---------------------------------------------------------------------
+
+renders
+
+
+[quote, Bertrand Russell, The World of Mathematics (1956)]
+A good notation has subtlety and suggestiveness which at times makes
+it almost seem like a live teacher.
+
+.add links to the author
+----
+[quote,'http://en.wikipedia.org/wiki/Samuel_Johnson[Samuel Johnson]']
+_____________________________________________________________________
+Sir, a woman's preaching is like a dog's walking on his hind legs. It
+is not done well; but you are surprised to find it done at all.
+_____________________________________________________________________
+----
+
+renders
+
+
+[quote,'http://en.wikipedia.org/wiki/Samuel_Johnson[Samuel Johnson]']
+_____________________________________________________________________
+Sir, a woman's preaching is like a dog's walking on his hind legs. It
+is not done well; but you are surprised to find it done at all.
+_____________________________________________________________________
+
+==== code parag
+
+----
+.Optional Title
+
+[source,perl]
+die 'connect: '.$dbh->errstr;
+
+Not a code in next paragraph.
+----
+
+renders:
+
+.Optional Title
+
+[source,perl]
+die 'connect: '.$dbh->errstr;
+
+Not a code in next paragraph.
+	
+==== admonition
+	
+tip/important/warning/cautions
+
+
+===== single note para
+
+----
+.Optional Title
+NOTE: This is an example
+      single-paragraph note.
+
+	
+.Optional Title
+[NOTE]
+This is an example
+single-paragraph note.
+----
+
+renders the same:
+
+.Optional Title
+NOTE: This is an example
+      single-paragraph note.
+	
+.Optional Title
+[NOTE]
+This is an example
+single-paragraph note.
+
+===== (single-parag)note
+
+----
+NOTE: This is an example note.
+
+[NOTE]
+This is an example note.
+
+[icons=None, caption="My Special Note"]
+NOTE: This is my special note.
+----
+
+renders:
+
+NOTE: This is an example note.
+
+[NOTE]
+This is an example note.
+
+[icons=None, caption="My Special Note"]
+NOTE: This is my special note.
+
+[NOTE]
+====
+it looks a list will be treated as "multi" paragraph,so use multi-parag
+note in the case that a note contains list:
+
+.this doesn't work
+----
+[NOTE]
+* MPC3 is the first of ..
+* The MPC3 was designed to be similar ..
+----
+
+renders:
+
+[NOTE]
+* MPC3 is the first of ..
+* The MPC3 was designed to be similar ..
+
+.this works
+----
+[NOTE]
+====
+* MPC3 is the first of ..
+* The MPC3 was designed to be similar ..
+====
+----
+
+====
+
+===== TIP
+
+tip::
+
+----
+TIP: Tip.
+----
+
+renders::
+
+TIP: Tip.
+
+===== IMPORTANT
+
+important::
+
+IMPORTANT: Important.
+
+renders::
+
+IMPORTANT: Important.
+	
+===== WARNING
+
+warning::
+
+----
+WARNING: Warning.
+----
+
+renders::
+
+WARNING: Warning.
+
+===== CAUTION
+
+caution::
+
+----
+CAUTION: Caution.
+----
+
+renders::
+
+CAUTION: Caution.
+
+=== blocks (multi-paragraph?)
+
+==== listing block (great for CLIes)
+
+====
+....
+.Optional Title
+----
+*Listing* Block
+
+Use: code or file listings
+----
+....
+
+renders
+
+.Optional Title
+----
+*Listing* Block
+
+Use: code or file listings
+----
+
+====
+
+===== include dashes line inside listing block
+
+FAQ#17. How can I include lines of dashes inside a listing block?
+
+A line of four or more dashes will be mistaken for the ListingBlock terminator,
+one way round this problem is to use a LiteralBlock styled as a listing block.
+For example:
+
+====
+
+----
+ [listing]
+ ...........................
+ Lorum ipsum
+ -----------
+ ...........................
+----
+
+renders:
+
+[listing]
+...........................
+Lorum ipsum
+-----------
+...........................
+
+====
+
+==== literal block
+
+----
+.Optional Title
+....
+*Literal* Block
+
+Use: workaround when literal
+paragraph (indented) like
+1. First.
+2. Second.
+incorrectly processed as list.
+....
+----
+
+renders:
+
+.Optional Title
+....
+*Literal* Block
+
+Use: workaround when literal
+paragraph (indented) like
+1. First.
+2. Second.
+incorrectly processed as list.
+....
+
+===== "nested" listing block
+
+[verse,,manual page 23/88]
+If the 'listing' style is applied to a LiteralBlock it will be
+rendered as a ListingBlock (this is handy if you have a listing
+containing a *Listing*Block).
+
+.without listing style
+====
+
+.without listing style, the following:
+
+....
+----
+foo
+
+----
+
+blah
+
+----
+
+bar
+
+----
+....
+
+will render:
+
+----
+foo
+
+----
+
+blah
+
+----
+
+bar
+
+----
+
+====
+
+.with listing style:
+
+====
+
+.this 
+----
+ [listing]
+ ....
+ foo
+ 
+ ----
+ blah
+ ----
+ 
+ bar
+ ....
+----
+
+.will renders:
+
+[listing]
+....
+foo
+
+----
+blah
+----
+
+bar
+....
+
+====
+
+
+===== How to continue a list item on parent level?
+
+.this
+----
+    - The focus of the project is
+    .. solving problems and
+    .. easy maintenance
+    +
+    which means that... 
+----
+
+.will renders:
+
+
+- The focus of the project is
+.. solving problems and
+.. easy maintenance
++
+which means that... 
+
+.the request:
+I want that the "which means that" to be on the "The focus of the
+project" level. But now I can only manage it to show at the sub points
+level. 
+
+.the solution:
+Put the nested list and the following paragraph in a continuation block
+attached to the first list item i.e.
+
+http://www.methods.co.nz/asciidoc/userguide.html#X15
+
+.So this:
+
+----
+    - The focus of the project is
+    +
+    --
+    .. solving problems and
+    .. easy maintenance
+
+    which means that...
+    --
+----
+
+.will renders:
+
+- The focus of the project is
++
+--
+.. solving problems and
+.. easy maintenance
+
+which means that...
+--
+
+==== sidebar block
+
+A sidebar is a short piece of text presented outside the narrative flow of the
+main text. The sidebar is normally presented inside a bordered box to set it
+apart from the main text.
+
+----
+
+.Optional Title
+****
+*Sidebar* Block
+
+Use: sidebar notes :)
+****
+
+----
+
+example:
+
+====
+
+---------------------------------------------------------------------
+.An Example Sidebar
+************************************************
+Any AsciiDoc SectionBody element (apart from
+SidebarBlocks) can be placed inside a sidebar.
+************************************************
+---------------------------------------------------------------------
+
+renders:
+
+.An Example Sidebar
+************************************************
+Any AsciiDoc SectionBody element (apart from
+SidebarBlocks) can be placed inside a sidebar.
+************************************************
+
+====
+
+==== comment block
+
+----
+
+
+////
+*Comment* block
+
+Use: hide comments
+////
+
+
+----
+
+==== example block
+
+----
+.Optional Title
+==========================
+*Example* Block
+
+Use: examples :)
+
+Default caption "Example:"
+can be changed using
+
+ [caption="Custom: "]
+
+before example block.
+==========================
+----
+
+renders:
+
+
+.Optional Title
+==========================
+*Example* Block
+
+Use: examples :)
+
+Default caption "Example:"
+can be changed using
+
+ [caption="Custom: "]
+
+before example block.
+==========================
+
+
+==== source block
+
+
+    .Optional Title
+    [source,perl]
+    ----
+    # *Source* block
+    # Use: highlight code listings
+    # (require `source-highlight` or `pygmentize`)
+    use DBI;
+    my $dbh = DBI->connect('...',$u,$p)
+        or die "connect: $dbh->errstr";
+    ----
+
+renders
+
+
+.Optional Title
+[source,perl]
+----
+# *Source* block
+# Use: highlight code listings
+# (require `source-highlight` or `pygmentize`)
+use DBI;
+my $dbh = DBI->connect('...',$u,$p)
+    or die "connect: $dbh->errstr";
+----
+
+NOTE: seems [source,perl] make the '----' optional
+
+.Optional Title
+[source,perl]
+# *Source* block
+# Use: highlight code listings
+# (require `source-highlight` or `pygmentize`)
+use DBI;
+my $dbh = DBI->connect('...',$u,$p)
+    or die "connect: $dbh->errstr";
+
+===== numbered source block
+
+Numbered source code listing with callouts
+This source-highlight filtered block:
+
+----
+ [source,ruby,numbered]
+ ---------------------------------------------------------------------
+ #
+ # Useful Ruby base class extensions.
+ #
+
+ class Array
+
+   # Execute a block passing it corresponding items in
+   # +self+ and +other_array+.
+   # If self has less items than other_array it is repeated.
+
+   def cycle(other_array)  # :yields: item, other_item
+     other_array.each_with_index do |item, index|
+       yield(self[index % self.length], item)
+     end
+   end
+
+ end
+
+ if $0 == __FILE__                                 # <1>
+   # Array#cycle test
+   # true => 0
+   # false => 1
+   # true => 2
+   # false => 3
+   # true => 4
+   puts 'Array#cycle test'                         # <2>
+   [true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+     puts "#{a.inspect} => #{b.inspect}"
+   end
+ end
+ ---------------------------------------------------------------------
+
+ <1> First callout.
+ <2> Second callout.
+----
+
+Renders this highlighted source code:
+
+[source,ruby,numbered]
+---------------------------------------------------------------------
+#
+# Useful Ruby base class extensions.
+#
+
+class Array
+
+  # Execute a block passing it corresponding items in
+  # +self+ and +other_array+.
+  # If self has less items than other_array it is repeated.
+
+  def cycle(other_array)  # :yields: item, other_item
+    other_array.each_with_index do |item, index|
+      yield(self[index % self.length], item)
+    end
+  end
+
+end
+
+if $0 == __FILE__                                 # <1>
+  # Array#cycle test
+  # true => 0
+  # false => 1
+  # true => 2
+  # false => 3
+  # true => 4
+  puts 'Array#cycle test'                         # <2>
+  [true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+    puts "#{a.inspect} => #{b.inspect}"
+  end
+end
+---------------------------------------------------------------------
+<1> First callout.
+<2> Second callout.
+
+===== change source highlighter
+http://www.methods.co.nz/asciidoc/source-highlight-filter.html
+
+You have the choice of three HTML source code highlighters, 
+your selection is determined by the source-highlighter attribute (defaults to source-highlight):
+
+Set the source-highlighter attribute from the asciidoc(1) command-line or in the
+document header (not in the document body, because the configuration file
+conditional macros are processed at load time).
+
+====
+ great unix tool (for JTAC) : vi/vim editor
+ =========================================
+ ping song <pings@juniper.net>
+ :Author Initials: PS
+ :toc:
+ :icons:
+ :numbered:
+ :website: http://www-in.juniper.net/~pings/index2.html
+ :toc:
+ :toc-placement: manual
+ :revision: 0.6
+ :source-highlighter: highlight
+
+====
+
+To make Pygments your default highlighter put the following line in your
+'~/.asciidoc/asciidoc.conf file:'
+
+----
+source-highlighter=pygments
+----
+
+===== how to use vim as source highlight filter?
+
+http://whileimautomaton.net/2010/11/03201210
+
+not working yet.
+
+===== source highlighter limitation: forhtml only
+
+with source-highlighter=pygments, vim source block looks nice, but cause issue
+for: 								
+
+  - ODT
+  - PDF
+  - BOOK
+  - epub
+  - etc
+
+[verse,lex, lex email]
+The source-highlighter is only used for HTML generated by asciidoc.
+The toolchains have their own highlighters, help on them is beyond the
+scope of this list, you will have to look at their documentation on
+how to set them up and if they support vim.
+
+my current::
+use ifdef structure to make it work with diff backend differently
+
+for vim script::
+pygment is the best for vimL source block highlight
+
+===== more examples
+
+http://www.methods.co.nz/asciidoc/source-highlight-filter.html
+
+====
+
+[source,python]
+if n < 0: print 'Hello World!'
+
+:language: python
+
+[source]
+if n < 0: print 'Hello World!'
+
+[source,ruby,numbered]
+[true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+    puts "#{a.inspect} => #{b.inspect}"
+
+
+renders
+
+
+[source,python]
+if n < 0: print 'Hello World!'
+
+:language: python
+
+[source]
+if n < 0: print 'Hello World!'
+
+[source,ruby,numbered]
+[true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+    puts "#{a.inspect} => #{b.inspect}"
+
+====
+
+====
+ [source,python]
+ ---------------------------------------------------------------------
+ ''' A multi-line
+     comment.'''
+ def sub_word(mo):
+     ''' Single line comment.'''
+     word = mo.group('word')   # Inline comment
+     if word in keywords[language]:
+         return quote + word + quote
+     else:
+         return word
+ ---------------------------------------------------------------------
+
+renders
+
+[source,python]
+---------------------------------------------------------------------
+''' A multi-line
+    comment.'''
+def sub_word(mo):
+    ''' Single line comment.'''
+    word = mo.group('word')   # Inline comment
+    if word in keywords[language]:
+        return quote + word + quote
+    else:
+        return word
+---------------------------------------------------------------------
+
+====
+
+====
+
+ [source,ruby,numbered]
+ ---------------------------------------------------------------------
+ #
+ # Useful Ruby base class extensions.
+ #
+
+ class Array
+
+   # Execute a block passing it corresponding items in
+   # +self+ and +other_array+.
+   # If self has less items than other_array it is repeated.
+
+   def cycle(other_array)  # :yields: item, other_item
+     other_array.each_with_index do |item, index|
+       yield(self[index % self.length], item)
+     end
+   end
+
+ end
+
+ if $0 == __FILE__                                 # <1>
+   # Array#cycle test
+   # true => 0
+   # false => 1
+   # true => 2
+   # false => 3
+   # true => 4
+   puts 'Array#cycle test'                         # <2>
+   [true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+     puts "#{a.inspect} => #{b.inspect}"
+   end
+ end
+ ---------------------------------------------------------------------
+
+ <1> First callout.
+ <2> Second callout.
+
+
+renders
+
+[source,ruby,numbered]
+---------------------------------------------------------------------
+#
+# Useful Ruby base class extensions.
+#
+
+class Array
+
+  # Execute a block passing it corresponding items in
+  # +self+ and +other_array+.
+  # If self has less items than other_array it is repeated.
+
+  def cycle(other_array)  # :yields: item, other_item
+    other_array.each_with_index do |item, index|
+      yield(self[index % self.length], item)
+    end
+  end
+
+end
+
+if $0 == __FILE__                                 # <1>
+  # Array#cycle test
+  # true => 0
+  # false => 1
+  # true => 2
+  # false => 3
+  # true => 4
+  puts 'Array#cycle test'                         # <2>
+  [true, false].cycle([0, 1, 2, 3, 4]) do |a, b|
+    puts "#{a.inspect} => #{b.inspect}"
+  end
+end
+---------------------------------------------------------------------
+
+<1> First callout.
+<2> Second callout.
+
+====
+
+==== multi-parag note block
+
+----
+.Optional Title
+[NOTE]
+===============================
+*NOTE* Block
+
+Use: multi-paragraph notes.
+===============================
+----
+
+renders:
+
+.Optional Title
+[NOTE]
+===============================
+*NOTE* Block
+
+Use: multi-paragraph notes.
+===============================
+
+
+==== passthrough block
+
+content is backend (xml, html, etc) specific
+asciidoc don't interpret them.
+but may substitute some(attributes and macros only)
+
+[source,html]
+----
+
+//passthrough block start
+++++
+*Passthrough* Block
+<p>
+Use: backend-specific markup like
+<table border="1">
+<tr><td>1<td>2
+</table>
+++++
+//passthrough block end
+
+----
+
+.example in manual:
+
+---------------------------------------------------------------------
+[subs="quotes"]
+++++++++++++++++++++++++++++++++++++++
+<table border="1"><tr>
+  <td>*Cell 1*</td>
+  <td>*Cell 2*</td>
+</tr></table>
+++++++++++++++++++++++++++++++++++++++
+---------------------------------------------------------------------
+
+.renders:
+
+[subs="quotes"]
+++++++++++++++++++++++++++++++++++++++
+<table border="1"><tr>
+  <td>*Cell 1*</td>
+  <td>*Cell 2*</td>
+</tr></table>
+++++++++++++++++++++++++++++++++++++++
+
+==== quote block (multi-paragraph quote)
+
+----
+.Optional Title
+[quote, cite author, cite source]
+____
+*Quote* Block
+
+Use: cite somebody
+____
+
+----
+
+renders:
+
+.Optional Title
+[quote, cite author, cite source]
+____
+*Quote* Block
+
+Use: cite somebody
+____
+
+==== openblock (great!)
+
+Open blocks are special:
+
+- The open block delimiter is line containing two hyphen characters
+  (instead of four or more repeated characters).
+
+- They can be used to group block elements for <<X15,List item
+  continuation>>.
+
+- Open blocks can be styled to behave like any other type of delimited
+  block.  The  following built-in styles can be applied to open
+  blocks: 'literal', 'verse', 'quote', 'listing', 'TIP', 'NOTE',
+  'IMPORTANT', 'WARNING', 'CAUTION', 'abstract', 'partintro',
+  'comment', 'example', 'sidebar', 'source', 'music', 'latex',
+  'graphviz'. For example, the following open block and listing block
+  are functionally identical:
+
+  [listing]
+  --
+  Lorum ipsum ...
+  --
+
+  ---------------
+  Lorum ipsum ...
+  ---------------
+
+- An unstyled open block groups section elements but otherwise does
+  nothing.
+
+Open blocks are used to generate document abstracts and book part
+introductions:
+
+- Apply the 'abstract' style to generate an abstract, for example:
+
+  [abstract]
+  --
+  In this paper we will ...
+  --
+
+. Apply the 'partintro' style to generate a book part introduction for
+  a multi-part book, for example:
+
+  [partintro]
+  .Optional part introduction title
+  --
+  Optional part introduction goes here.
+  --
+
+=== text
+
+==== line break: +
+
+forced +
+line break
+
+A plus character preceded by at least one space character at the end
+of a non-blank line forces a line break. It generates a line break
+(`br`) tag for HTML outputs and a custom XML `asciidoc-br` processing
+instruction for DocBook outputs. The `asciidoc-br` processing
+
+==== page break
+
+A line of three or more less-than (`<<<`) characters will generate a
+hard page break in DocBook and printed HTML outputs.  It uses the CSS
+`page-break-after` property for HTML outputs and a custom XML
+`asciidoc-pagebreak` processing instruction for DocBook outputs. The
+`asciidoc-pagebreak` processing instruction is handled by
+<<X43,a2x(1)>>. Hard page breaks are sometimes handy but as a general
+rule you should let your page processor generate page breaks for you.
+
+NOTE: test shows seems not working for HTML web page
+
+==== italic/bold/mono:__/**/++
+normal, _italic_, *bold*, +mono+.
+
+==== to present/escape a real "" and ''
+``double quoted'', ==> "double quoted"
+`single quoted'.   ==> 'single quoted'
+
+==== super/sub-script:^^/~~
+normal, ^super^, ~sub~.
+
+==== `` inline literal passthrough
+Command: `ls -al`
+
+`passthru *bold*`
+
+this looks a better way to escape special letters
+
+===== FAQ 5: diff bet ` and +
+
+===== FAQ 25
+
+----
+25. How do I prevent double-quoted text being mistaken for an inline literal?
+
+Mixing doubled-quoted text with inline literal passthroughs can produce
+undesired results, for example, all of the following line is interpreted as an
+inline literal passthrough:
+
+``XXX'' `YYY`
+
+In this case the solution is to use monospace quoting instead of the inline
+literal:
+
+``XXX'' +YYY+
+
+Use the pass:[] macro if it’s necessary to suppress substitutions in the
+monospaced text, for example:
+
+``XXX'' +pass:[don't `quote` me]+
+----
+
+==== italic a text:''
+Path: '/some/filez.txt', '.b'
+
+==== (bg)-color/size/bold/underline/line-through:[xxx yyy]#..#
+
+[red]#red text# [yellow-background]#on yellow#
+[big]#large# [red yellow-background big]*all bold*
+[red]#Obvious# and [big red yellow-background]*very obvious*.
+[underline]#Underline text#, [overline]#overline text# and
+[bold blue line-through]*bold blue and line-through*.
+
+NOTE: not applicable to PDF/HTML4 outputs
+
+P15/88 manual
+
+
+==== italic/bold/mono for single CHs
+Chars: n__i__**b**++m++[red]##r##
+
+==== comment line
+// Comment
+
+===== FAQ 14
+
+----
+14. How can I add highlighted editorial comments to an AsciiDoc document?
+
+Both block and inline comment lines are displayed on the output if the
+showcomments attribute is defined. Example:
+
+:showcomments:
+// A block comment line.
+
+Qui in magna commodo, est labitur dolorum an. Est ne magna primis
+// An inline comment line.
+adolescens.
+
+----
+
+Comment blocks are never displayed.
+
+==== some text signs
+
+----
+(C) (R) (TM) -- ... -> <- => <= &#182;
+
+''''
+----
+
+renders:
+
+(C) (R) (TM) -- ... -> <- => <= &#182;
+
+''''
+
+==== Escaped:
+\_italic_, +++_italic_+++,
+t\__e__st, +++t__e__st+++,
++++<b>bold</b>+++, $$<b>normal</b>$$
+\&#182;
+\`not single quoted'
+\`\`not double quoted''
+
+
+
+
+
+FAQ36: standard escape method : preceding a \
+FAQ37: non-standard escape:
+
+
+==== format text from inside listing/literal block
+
+===== strong
+    http://www.methods.co.nz/asciidoc/faq.html#_how_can_i_format_text_inside_a_listing_block 
+    55. How can I format text inside a listing block?
+
+    By default only specialcharacters and callouts are substituted in listing
+    blocks; you can add quotes substitutions by explicitly setting the block subs
+    attribute, for example:
+
+    [subs="quotes"]
+    ------------------------------------------
+    $ ls *-al*
+    ------------------------------------------
+
+    The -al will rendered bold. Note that:
+
+    You would need to explicitly escape text you didn’t want quoted.
+
+    Don’t do this in source code listing blocks because it modifies the
+    source code which confuses the syntax highlighter.
+
+    This only works if your DocBook processor recognizes DocBook
+    <emphasis> elements inside <screen> elements.
+
+    Alternative, if the lines are contiguous, you could use the literal
+    paragraph style:
+
+    ["literal",subs="quotes"]
+    $ ls *-al*
+
+
+===== underline
+    [subs="quotes"]
+    ----
+    CLR2.Seattle-WA#show controllers sonet 4/0:12/1/1/3/1
+    [underline]#oc12# 4/0
+    channelized (12 channels, oc1 minimum speed)
+    ----
+
+===== escape HTML tags
+
+"<some texts>" is HTML tags and will be substituted (removed)
+need to escape < and >
+http://www.htmlescape.net/htmlescape_tool.html
+
+----
+&lt;default-chassis&gt;
+----
+
+<default-chassis>
+
+=== Macros: links,images & include
+If you’ll need to use space in url/path you should replace it with %20.
+
+
+==== anchors
+
+[[anchor-1]]
+Paragraph or block 1.
+
+anchor:anchor-2[]
+Paragraph or block 2.
+
+<<anchor-1>>,
+this is the <<anchor-1,First anchor>>,
+
+xref:anchor-2[],
+xref:anchor-2[Second anchor].
+
+==== links
+
+link:asciidoc[This document]
+link:asciidoc.html[]
+link:/index.html[This site root]
+
+
+http://google.com
+http://google.com[Google Search]
+mailto:root@localhost[email admin]
+
+
+link:http://www-in.abc.net/\~pings/webdata/vim-jtac-work.doc[normal charactors] +
+link:http://www-in.abc.net/~pings/webdata/ping%27s%20toi_2_0.flv[filesname with
+single quote and space:ping's toi_2_0.flv]
+
+===== more discussions about URL escape
+
+thanks for comment!
+
+just did a big re-search, problem solved, see comments inlines:
+
+On 08/29/2012 08:27 PM, Lex Trotman wrote:
+> On 30 August 2012 08:14, ping <songpingemail@gmail.com> wrote:
+>> this doesn't works:
+>> link:http://www-in.abc.com/~pings/webdata/pings-vedio.flv[video]
+>
+> ~ is illegal character in URLs
+>
+
+per
+http://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters
+RFC 3986 section 2.2 Reserved Characters (January 2005)
+~ seems to be legal. I guess it's asciidoc macro that requires a escape?
+that said, if I remove the link: and put the URL directly into my browser, I don't need escape ~.
+
+>>
+>> this works:
+>> link:http://www-in.abc.com/\~pings/webdata/pings-vedio.flv[video]
+>>
+>
+> a "friendly" browser must accept \ as an escape although it isn't standard
+>
+
+again I think this is the way asciidoc macro escape the ~ (super or sub- script?)
+
+>> this doesn't work:
+>> link:http://www-in.abc.com/\~pings/webdata/ping's toi_2_0.flv[video]
+>
+> space ends a macro, the Asciidoc User Guide 21.1.1 says:
+>
+> "If the <target> necessitates space characters use %20, for example
+> large%20image.png."
+>
+
+learned now, thanks.
+and looks even for "standard" URL, space is also required to be converted into percent-encode in practice:
+http://en.wikipedia.org/wiki/Percent-encoding#Character_data
+
+>>
+>> even this doesn't work
+>> link:http://www-in.abc.com/\~pings/webdata/ping's%20toi_2_0.flv[video]
+>
+> pass, might be the ' although it is legal in a URL it often has special meaning
+>
+>>
+>> and URL displays as (firefox copy link location):
+>> http://www-in.abc.com/%5C~pings/webdata/ping%E2%80%99s%20toi_2_0.flv
+>
+> Ask firefox.
+>
+
+I did a re-test, looks both firefox/chrome displays this:
+http://www-in.abc.net/~pings/webdata/ping%E2%80%99s%20toi_2_0.flv
+so looks for some reason single quote(') got translated into "%E2%80%99
+
+
+>>
+>> what happens here?
+>
+> Basic advice for URLs (this is not asciidoc specific) is don't use any
+> punctuation characters without escaping them to hex.  That includes
+> the ~
+>
+that's a good idea to simply the work and avoid the mess.
+finally I make it work in both browser this way:
+
+link:http://www-in.juniper.net/~pings/webdata/ping%27s%20toi_2_0.flv[video]
+
+basically I:
+1) percent encode both space (%20) and '(%27)
+2) don't escape ~
+
+so to give a comparison, here are 2 lines in my asciidoc source code that both work as expected:
+
+link:http://www-in.abc.net/\~pings/webdata/vim-jtac-work.doc[normal charactors] +
+link:http://www-in.abc.net/~pings/webdata/ping%27s%20toi_2_0.flv[special chars] +
+
+I'm really confused here , but they work. 
+
+
+==== image links
+
+//display in a line
+First home
+,image:/icons/home.png[]
+second home
+image:/icons/home.png[Alt text]
+
+//display in seperated blocks
+.Block image
+image::images/icons/home.png[]
+image::images/icons/home.png[Alt text]
+
+
+.Thumbnail linked to full image
+image:/images/font/640-screen2.gif[
+"My screenshot",width=128,
+link="/images/font/640-screen2.gif"]
+
+==== video
+
+video::http://www.youtube.com/embed/GP3zvc2dG5Y[width="420", height="315"]
+
+==== HTML5 video
+
+.example from UM
+++++
+<video poster="pics/video/gizmo.jpg" id="video" style="cursor: pointer;" >
+  <source src="pics/video/gizmo.mp4" />
+  <source src="pics/video/gizmo.webm" type="video/webm" />
+  <source src="pics/video/gizmo.ogv" type="video/ogg" />
+  Video not playing? <a href="pics/video/gizmo.mp4">Download file</a> instead.
+</video>
+
+<script type="text/javascript">
+  var video = document.getElementById('video');
+  video.addEventListener('click',function(){
+    video.play();
+  },false);
+</script>
+++++
+
+.this tested&work
+++++
+<video
+poster="webdata/IMG00185-20110421-1334.jpg" id="video" style="cursor: pointer;" >
+  <source src="pics/video/gizmo.mp4" />
+  <source src="http://www.808.dk/pics/video/gizmo.webm" type="video/webm" />
+  <source src="pics/video/gizmo.ogv" type="video/ogg" />
+  Video not playing? <a href="pics/video/gizmo.mp4">Download file</a> instead.
+</video>
+
+<script type="text/javascript">
+  var video = document.getElementById('video');
+  video.addEventListener('click',function(){
+    video.play();
+  },false);
+</script>
+++++
+
+==== include files
+
+This is example how files can be included.
+It's commented because there no such files. :)
+
+// include::footer.txt[]
+
+// [source,perl]
+// ----
+// include::script.pl[]
+// ----
+
+
+
+
+==== footnotes
+
+Article sections start at level 1 and can be nested up to four levels
+deep.
+footnote:[An example footnote.]
+indexterm:[Example index entry]
+
+
+===== asciidoc manual
+
+Example footnotes:
+
+  A footnote footnote:[An example footnote.];
+  a second footnote with a reference ID footnoteref:[note2,Second footnote.];
+  finally a reference to the second footnote footnoteref:[note2].
+
+Renders:
+
+A footnote footnote:[An example footnote.];
+a second footnote with a reference ID footnoteref:[note2,Second footnote.];
+finally a reference to the second footnote footnoteref:[note2].
+
+
+
+
+===== tips
+
+per testing, it looks footnote can be started from next line if in lists or
+normal parag, but not in the title.
+
+//this works
+.abc footnote:[my footnote]
+----
+abc
+---- 
+
+//this doesnt work
+.abc 
+footnote:[my footnote]
+----
+abc
+---- 
+
+//this works
+.my list
+* abc
+  footnote:[my footnote]
+
+
+
+
+==== ifdef::[] block
+
+if generating html, make it source block of vim language,
+otherwise (generating pdf, epub, etc...), ignore it, so turning to a listing block
+
+ifdef::basebackend-html[[source,vim]]
+----
+:%s/cisco/juniper/gc
+----
+
+===== FAQ 28:
+
+One-liner ifdef::[]'s are disproportionately verbose can they shortened?
+
+This is the response to a question posted on the AsciiDoc discussion list, it
+illustrates a number of useful techniques. The question arose because the
+source highlight filter language identifier for the C++ language is c++ when
+generating PDFs via dblatex (LaTeX listings package) or cpp when generating
+HTML (GNU source-highlight).
+
+Using straight ifdef::[] block macros we have:
+
+ifdef::basebackend-docbook[]
+[source,c++]
+endif::basebackend-docbook[]
+ifdef::basebackend-html[]
+[source,cpp]
+endif::basebackend-html[]
+-----------------------------------------
+class FooParser {
+    public:
+            virtual void startDocument() = 0;
+	            virtual void endDocument() = 0;
+};
+-----------------------------------------
+
+This can be shortened using the short form of the ifdef::[] macro:
+
+ifdef::basebackend-docbook[[source,c++]]
+ifdef::basebackend-html[[source,cpp]]
+-----------------------------------------
+class FooParser {
+    public:
+            virtual void startDocument() = 0;
+	            virtual void endDocument() = 0;
+};
+-----------------------------------------
+
+Using a conditional attribute instead of the ifdef::[] macro is even shorter:
+
+[source,{basebackend@docbook:c++:cpp}]
+-----------------------------------------
+class FooParser {
+    public:
+            virtual void startDocument() = 0;
+	            virtual void endDocument() = 0;
+};
+-----------------------------------------
+
+If you have a number of listings it makes sense to factor the conditional
+attribute to a normal attribute:
+
+:cpp: {basebackend@docbook:c++:cpp}
+
+[source,{cpp}]
+-----------------------------------------
+class FooParser {
+    public:
+            virtual void startDocument() = 0;
+	            virtual void endDocument() = 0;
+};
+-----------------------------------------
+
+Even shorter, set the default source highlight filter language attribute so you
+don’t have to specify it every time:
+
+:language: {basebackend@docbook:c++:cpp}
+
+[source]
+-----------------------------------------
+class FooParser {
+    public:
+            virtual void startDocument() = 0;
+	            virtual void endDocument() = 0;
+};
+-----------------------------------------
+
+
+
+=== lists
+
+==== bulleted: * -
+
+----
+.Bulleted
+* bullet
+* bullet
+  - bullet
+  - bullet
+* bullet
+** bullet
+** bullet
+*** bullet
+*** bullet
+**** bullet
+**** bullet
+***** bullet
+***** bullet
+**** bullet
+*** bullet
+** bullet
+* bullet
+----
+
+renders:
+
+.Bulleted
+* bullet
+* bullet
+  - bullet
+  - bullet
+* bullet
+** bullet
+** bullet
+*** bullet
+*** bullet
+**** bullet
+**** bullet
+***** bullet
+***** bullet
+**** bullet
+*** bullet
+** bullet
+* bullet
+
+
+
+.Bulleted 2
+- bullet
+  * bullet
+
+==== ordered(numbered): . .. ...
+
+.Ordered (explicit)
+1.   Arabic (decimal) numbered list item.
+a.   Lower case alpha (letter) numbered list item.
+F.   Upper case alpha (letter) numbered list item.
+iii) Lower case roman numbered list item.
+IX)  Upper case roman numbered list item.
+
+
+.Ordered (implicit)
+. number
+. number
+  .. letter
+  .. letter
+. number
+.. loweralpha
+.. loweralpha
+... lowerroman
+... lowerroman
+.... upperalpha
+.... upperalpha
+..... upperroman
+..... upperroman
+.... upperalpha
+... lowerroman
+.. loweralpha
+. number
+
+.or:
+ notation 		means
+ ============================
+ . 			1
+ .. 			a
+ ... 			i
+ .... 			A
+ ..... 			I
+
+
+.can be changed by, e.g.: 
+    [upperroman]
+	.. Fusce euismod commodo velit.
+	.. Vivamus fringilla mi eu lacus
+
+renders:
+
+[upperroman]
+    .. Fusce euismod commodo velit.
+    .. Vivamus fringilla mi eu lacus
+
+
+
+.Ordered (mixed)
+a. letter
+b. letter
+   .. letter2
+   .. letter2
+       .  number
+       .  number
+           1. number2
+           2. number2
+           3. number2
+           4. number2
+       .  number
+   .. letter2
+c. letter
+
+
+==== labeled: useful!
+
+NOTE: this is used a lot in asciidoc user manual.
+
+----
+.Labeled
+Term 1::
+    Definition 1
+Term 2::
+    Definition 2
+    Term 2.1;;
+        Definition 2.1
+    Term 2.2;;
+        Definition 2.2
+Term 3::
+    Definition 3
+Term 4:: Definition 4
+Term 4.1::: Definition 4.1
+Term 4.2::: Definition 4.2
+Term 4.2.1:::: Definition 4.2.1
+Term 4.2.2:::: Definition 4.2.2
+Term 4.3::: Definition 4.3
+Term 5:: Definition 5
+----
+
+renders:
+
+.Labeled
+Term 1::
+    Definition 1
+Term 2::
+    Definition 2
+    Term 2.1;;
+        Definition 2.1
+    Term 2.2;;
+        Definition 2.2
+Term 3::
+    Definition 3
+Term 4:: Definition 4
+Term 4.1::: Definition 4.1
+Term 4.2::: Definition 4.2
+Term 4.2.1:::: Definition 4.2.1
+Term 4.2.2:::: Definition 4.2.2
+Term 4.3::: Definition 4.3
+Term 5:: Definition 5
+
+
+
+----
+.Labeled 2
+Term 1;;
+    Definition 1
+    Term 1.1::
+        Definition 1.1
+----
+
+renders:
+
+.Labeled 2
+Term 1;;
+    Definition 1
+    Term 1.1::
+        Definition 1.1
+
+[NOTE]
+====
+.text notation supported
+
+*abc* ::
+item1
+
+.this doesn't work::
+some lines
+abc:: item1
+
+.this works::
+abc:: item1
+
+====
+
+===== horizontal labeled list (looks better), qanda
+[horizontal]
+.Labeled horizontal
+Term 1:: Definition 1
+Term 2:: Definition 2
+[horizontal]
+    Term 2.1;;
+        Definition 2.1
+    Term 2.2;;
+        Definition 2.2
+Term 3::
+    Definition 3
+Term 4:: Definition 4
+[horizontal]
+Term 4.1::: Definition 4.1
+Term 4.2::: Definition 4.2
+[horizontal]
+Term 4.2.1:::: Definition 4.2.1
+Term 4.2.2:::: Definition 4.2.2
+Term 4.3::: Definition 4.3
+Term 5:: Definition 5
+
+
+
+[qanda]
+.Q&A
+Question 1::
+    Answer 1
+Question 2:: Answer 2
+
+
+
+.Indent is optional
+- bullet
+    * another bullet
+        1. number
+        .  again number
+            a. letter
+            .. again letter
+
+.. letter
+. number
+
+* bullet
+- bullet
+
+
+
+
+==== list break
+
+.Break two lists
+. number
+. number
+
+Independent paragraph break list.
+
+. number
+
+.Header break list too
+. number
+
+--
+. List block define list boundary too
+. number
+. number
+--
+
+--
+. number
+. number
+--
+
+==== list number start
+
+    http://www.methods.co.nz/asciidoc/userguide.html#_numbered_lists
+
+You can set the list start number using the start attribute (works for HTML
+outputs and DocBook outputs processed by DocBook XSL Stylesheets). Example:
+
+[start=7]
+. List item 7.
+. List item 8.
+
+
+
+==== list continuation
+
+http://www.methods.co.nz/asciidoc/userguide.html#X15
+
+
+.Continuation
+- bullet
+continuation
+. number
+  continuation
+* bullet
+
+  literal continuation
+
+.. letter
++
+Non-literal continuation.
++
+----
+any block can be
+
+included in list
+----
++
+Last continuation.
+
+
+===== example: continuation with comment
+
+//this works:
+d. Based on the above output, get more details about each construct attached-
++
+//[subs="quotes"]
++
+----
+7.  show class-of-service classifier <classifier-name> [for different families]
+8.  show class-of-service translation-table <trans-table-name> [for different families]
+9.  show class-of-service forwarding-class <fc-q-map> 
+10. show class-of-service traffic-control-profile <tcp-name>
+----
+
+//this doesn't work
+d. Based on the above output, get more details about each construct attached-
++
+//[subs="quotes"]
+----
+7.  show class-of-service classifier <classifier-name> [for different families]
+8.  show class-of-service translation-table <trans-table-name> [for different families]
+9.  show class-of-service forwarding-class <fc-q-map> 
+10. show class-of-service traffic-control-profile <tcp-name>
+----
+
+
+.List block allow sublist inclusion
+- bullet
+  * bullet
++
+--
+    - bullet
+      * bullet
+--
+  * bullet
+- bullet
+  . number
+    .. letter
++
+--
+      . number
+        .. letter
+--
+    .. letter
+  . number
+
+
+==== some practise
+
+.these 2 looks similiar ?
+- abc +
+  this is bullet list
+  yes
+
+abc ::
+  this is labeled list
+  yes
+
+=== tables
+
+.more examples
+http://www.methods.co.nz/asciidoc/newtables.html
+
+You can fill table from CSV file using include:: macros inside table.
+
+==== table attributes
+
+format::
+    psv (default), dsv or csv (See Table Data Formats).
+separator::
+    The cell separator. A Python regular expression (psv and dsv formats) or a
+    single character (csv format).
+frame::
+    Defines the table border and can take the following values: topbot (top and
+    bottom), all (all sides), none and sides (left and right sides). The
+    default value is all.
+grid::
+    Defines which ruler lines are drawn between table rows and columns. The
+    grid attribute value can be any of the following values: none, cols, rows
+    and all. The default value is all.
+align::
+    Use the align attribute to horizontally align the table on the page (works
+    with HTML outputs only, has no effect on DocBook outputs). The following
+    values are valid: left, right, and center.
+float::
+    Use the float attribute to float the table left or right on the page (works
+    with HTML outputs only, has no effect on DocBook outputs). Floating only
+    makes sense in conjunction with a table width attribute value of less than
+    100% (otherwise the table will take up all the available space). float and
+    align attributes are mutually exclusive. Use the unfloat::[] block macro to
+    stop floating.
+halign::
+    Use the halign attribute to horizontally align all cells in a table. The
+    following values are valid: left, right, and center (defaults to left).
+    Overridden by Column specifiers and Cell specifiers.
+valign::
+    Use the valign attribute to vertically align all cells in a table. The
+    following values are valid: top, bottom, and middle (defaults to top).
+    Overridden by Column specifiers and Cell specifiers.
+options::
+    The options attribute can contain comma separated values, for example:
+    header, footer. By default header and footer rows are omitted. See
+    attribute options for a complete list of available table options.
+cols::
+    The cols attribute is a comma separated list of column specifiers. For
+    example cols="2<p,2*,4p,>".
+    * If cols is present it must specify all columns.
+    * If the cols attribute is not specified the number of columns is calculated
+      as the number of data items in the first line of the table.
+    * The degenerate form for the cols attribute is an integer specifying the
+      number of columns e.g. cols=4.
+width::
+    The width attribute is expressed as a percentage value ("1%"…"99%"). The
+    width specifies the table width relative to the available width. HTML
+    backends use this value to set the table width attribute. It’s a bit more
+    complicated with DocBook, see the DocBook table widths sidebar.
+filter::
+    The filter attribute defines an external shell command that is invoked for
+    each cell. The built-in asciidoc table style is implemented using a filter.
+
+==== column & cell spec
+
+.column spec
+
+    [<multiplier>*][<align>][<width>][<style>]
+    4*: four columns
+
+		    <,^,>
+		    		(1…) integer proportional value or 
+				(1%…100%) a percentage
+				The default value is 1.
+
+					d,e,m,s,h,a,l,v
+
+specifies four left-justified columns:
+
+ cols="4*<" 
+
+
+.cell spec
+
+    [<span>*|+][<align>][<style>]
+	|
+    [<colspan>][.<rowspan>]
+
+	    + horizontal and vertical cell spans
+	    * the number of times the cell is replicated
+
+the following psv formatted cell will span two columns and the text will be
+centered and emphasized:
+
+    `2+^e| Cell text`
+
+the cell contains `6`, spans(+) 2 columns and(.) 2 rows, center(and center) aligned
+
+	2.2+^.^|6
+
+the cell contains `7`, spans(+) 3 rows, left and down aligned
+	.3+<.>m|7
+
+the cell contains `10`, spans(+) 2 column,right (and center) aligned
+	2+>|10
+
+==== table style
+
+default::
+    The default style: AsciiDoc inline text formatting; blank lines are treated
+    as paragraph breaks.
+emphasis::
+    Like default but all text is emphasised.
+monospaced::
+    Like default but all text is in a monospaced font.
+strong::
+    Like default but all text is bold.
+header::
+    Apply the same style as the table header. Normally used to create a
+    vertical header in the first column.
+asciidoc::
+    With this style table cells can contain any of the AsciiDoc elements that
+    are allowed inside document sections. This style runs asciidoc(1) as a
+    filter to process cell contents. See also Docbook table limitations.
+literal::
+    No text formatting; monospaced font; all line breaks are retained (the same
+    as the AsciiDoc LiteralBlock element).
+verse::
+    All line breaks are retained (just like the AsciiDoc verse paragraph style).
+
+
+==== examples
+
+----
+.An example table
+[options="header,footer"]
+|=======================
+|Col 1|Col 2      |Col 3
+|1    |Item 1     |a
+|2    |Item 2     |b
+|3    |Item 3     |c
+|6    |Three items|d
+|=======================
+----
+
+renders:
+
+.An example table
+[options="header,footer"]
+|=======================
+|Col 1|Col 2      |Col 3
+|1    |Item 1     |a
+|2    |Item 2     |b
+|3    |Item 3     |c
+|6    |Three items|d
+|=======================
+
+.wrap long lines
+----
+[options="header,footer"]
+|=====================================================================
+|FPC Type/Module Type 		|Description
+|Dense Port Concentrator (DPC) 	|First-gen high-density and high-speed 
+ 				 Ethernet line cards
+|Modular Port Concentrator (MPC)|Second-gen high-density and high-speed 
+ 				 Ethernet line cards supporting modules
+|    Module Interface Card (MIC)|Second-gen Ethernet and optical modules 
+ 				 that are inserted into MPCs
+|=====================================================================
+----
+
+renders
+
+[options="header,footer"]
+|=====================================================================
+|FPC Type/Module Type 		|Description
+|Dense Port Concentrator (DPC) 	|First-gen high-density and high-speed 
+ 				 Ethernet line cards
+|Modular Port Concentrator (MPC)|Second-gen high-density and high-speed 
+ 				 Ethernet line cards supporting modules
+|    Module Interface Card (MIC)|Second-gen Ethernet and optical modules 
+ 				 that are inserted into MPCs
+|=====================================================================
+
+
+----
+.CSV data, 15% each column
+[format="csv",width="60%",cols="4"]
+[frame="topbot",grid="none"]
+|======
+1,2,3,4
+a,b,c,d
+A,B,C,D
+|======
+----
+
+renders:
+
+.CSV data, 15% each column
+[format="csv",width="60%",cols="4"]
+[frame="topbot",grid="none"]
+|======
+1,2,3,4
+a,b,c,d
+A,B,C,D
+|======
+
+
+----
+[grid="rows",format="csv"]
+[options="header",cols="^,<,<s,<,>m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
+----
+
+renders:
+
+[grid="rows",format="csv"]
+[options="header",cols="^,<,<s,<,>m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
+
+----
+ [format="csv",cols="^1,4*2",options="header"]
+ |===================================================
+ ID,Customer Name,Contact Name,Customer Address,Phone
+ include::customers.csv[]
+ |===================================================
+----
+
+renders:
+
+TODO
+
+----
+[cols="e,m,^,>s",width="25%"]
+|============================
+|1 >s|2 |3 |4
+^|5 2.2+^.^|6 .3+<.>m|7
+^|8
+|9 2+>|10
+|============================
+----
+
+renders:
+
+[cols="e,m,^,>s",width="25%"]
+|============================
+|1 >s|2 |3 |4
+^|5 2.2+^.^|6 .3+<.>m|7
+^|8
+|9 2+>|10
+|============================
+
+----
+.Multiline cells, row/col span
+|====
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 .2+^.^|10:24 | 157 |
+Worked out MSHR (max sustainable
+heart rate) by going hard
+for this interval.
+
+|22-Aug-08 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 3+^|none
+
+|====
+----
+
+renders:
+
+.Multiline cells, row/col span
+|====
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 .2+^.^|10:24 | 157 |
+Worked out MSHR (max sustainable
+heart rate) by going hard
+for this interval.
+
+|22-Aug-08 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 3+^|none
+
+|====
+
+----
+.Windtrainer workouts
+[width="80%",cols="3,^2,^2,10",options="header"]
+|=========================================================
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 |10:24 | 157 |
+Worked out MSHR (max sustainable heart rate) by going hard
+for this interval.
+
+|22-Aug-08 |23:03 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 |40:00 | 145 |
+Moderately hard interspersed with 3x 3min intervals (2min
+hard + 1min really hard taking the HR up to 160).
+
+|=========================================================
+----
+
+renders:
+
+.Windtrainer workouts
+[width="80%",cols="3,^2,^2,10",options="header"]
+|=========================================================
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 |10:24 | 157 |
+Worked out MSHR (max sustainable heart rate) by going hard
+for this interval.
+
+|22-Aug-08 |23:03 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 |40:00 | 145 |
+Moderately hard interspersed with 3x 3min intervals (2min
+hard + 1min really hard taking the HR up to 160).
+
+|=========================================================
+
+
+[NOTE]
+===============================
+Short cells can be entered horizontally, longer cells vertically. The default
+behavior is to strip leading and trailing blank lines within a cell. These
+characteristics aid readability and data entry.
+===============================
+
+===== for book reading
+
+.option1
+----
+[cols="65,35"]
+|=================================================
+|殷本来叫做商。商也是一个古老的部落                    |这么个古老原始的朝代
+|始祖契大约与夏禹同时，被封于商。到公元前17世纪或前    |（我估计我等白痴没
+|16世纪，商族逐渐强大，商汤发动了灭夏战争，夏亡，商    |多少人直到这个王朝干过
+|朝正式建立，定都于亳，成为我国历史上第二个奴隶制王    |什么？），居然也持续了
+|朝。大约到公元前13世纪，商王盘庚迁都于殷，此后，直    |小600年。我们呢？中国近
+|至商纣灭亡，共二百七十余年，一般称之为殷。整个商朝    |代史，这么热闹，包括民
+|，后来或称商殷，或称殷商。                            |国，不才100来年？我怎么
+|                                                      |感觉这么多事儿，只能说
+|                                                      |现代史料记载发达了？
+|=================================================
+----
+
+renders:
+
+.this looks better in text, but not good in html
+[cols="65,35"]
+|=================================================
+|殷本来叫做商。商也是一个古老的部落                    |这么个古老原始的朝代
+|始祖契大约与夏禹同时，被封于商。到公元前17世纪或前    |（我估计我等白痴没
+|16世纪，商族逐渐强大，商汤发动了灭夏战争，夏亡，商    |多少人直到这个王朝干过
+|朝正式建立，定都于亳，成为我国历史上第二个奴隶制王    |什么？），居然也持续了
+|朝。大约到公元前13世纪，商王盘庚迁都于殷，此后，直    |小600年。我们呢？中国近
+|至商纣灭亡，共二百七十余年，一般称之为殷。整个商朝    |代史，这么热闹，包括民
+|，后来或称商殷，或称殷商。                            |国，不才100来年？我怎么
+|                                                      |感觉这么多事儿，只能说
+|                                                      |现代史料记载发达了？
+|=================================================
+
+
+.option2
+----
+[cols="65,35"]
+|=================================================
+|殷本来叫做商。商也是一个古老的部落                    
+始祖契大约与夏禹同时，被封于商。到公元前17世纪或前    
+16世纪，商族逐渐强大，商汤发动了灭夏战争，夏亡，商    
+朝正式建立，定都于亳，成为我国历史上第二个奴隶制王    
+朝。大约到公元前13世纪，商王盘庚迁都于殷，此后，直    
+至商纣灭亡，共二百七十余年，一般称之为殷。整个商朝    
+，后来或称商殷，或称殷商。                            
+
+|这么个古老原始的朝代
+（我估计我等白痴没
+多少人直到这个王朝干过
+什么？），居然也持续了
+小600年。我们呢？中国近
+代史，这么热闹，包括民
+国，不才100来年？我怎么
+感觉这么多事儿，只能说
+现代史料记载发达了？
+
+|                                                      
+|=================================================
+----
+
+renders:
+
+.this looks better in html, not so good in text
+[cols="65,35"]
+|=================================================
+|殷本来叫做商。商也是一个古老的部落                    
+始祖契大约与夏禹同时，被封于商。到公元前17世纪或前    
+16世纪，商族逐渐强大，商汤发动了灭夏战争，夏亡，商    
+朝正式建立，定都于亳，成为我国历史上第二个奴隶制王    
+朝。大约到公元前13世纪，商王盘庚迁都于殷，此后，直    
+至商纣灭亡，共二百七十余年，一般称之为殷。整个商朝    
+，后来或称商殷，或称殷商。                            
+
+|这么个古老原始的朝代
+（我估计我等白痴没
+多少人直到这个王朝干过
+什么？），居然也持续了
+小600年。我们呢？中国近
+代史，这么热闹，包括民
+国，不才100来年？我怎么
+感觉这么多事儿，只能说
+现代史料记载发达了？
+
+|                                                      
+|=================================================
+
+==== use call out for table
+
+From the user guide "By default callout marks are confined to 
+LiteralParagraphs, LiteralBlocks and ListingBlocks (although this is a 
+configuration file option and can be changed). " 
+
+See http://www.methods.co.nz/asciidoc/userguide.html#X73 for how to 
+change subsnormal to include callouts.
+
+This works for me :
+
+----
+===== blah 
+
+:tabledef-default.subs: normal,callouts 
+|==== 
+|blah |blah <1> 
+|blah |blah <2> 
+|==== 
+
+<1> blah 
+<2> blah 
+----
+
+renders:
+
+//add float here to avoid generating an entry in toc
+[float]
+===== blah 
+
+:tabledef-default.subs: normal,callouts 
+|==== 
+|blah |blah <1> 
+|blah |blah <2> 
+|==== 
+
+<1> blah 
+<2> blah 
+
+=== filters
+
+==== ditaa
+
+seems most ideal one
+
+http://ditaa.sourceforge.net/#download
+
+http://vanderwijk.info/2009/4/23/full-text-based-document-generation-using-asciidoc-and-ditaa
+
+http://tkhanson.net/cgit.cgi/misc.git/plain/ditaa_example/ditaa_asciidoc.html
+
+https://github.com/matze/jekyll-ditaa
+
+#quick online testing
+http://ditaa.org/ditaa
+
+stathissideris@users.sourceforge.net
+
+
+===== issue & workaround
+
+java -jar /home/ping/ditaa/trunk/web/lib/ditaa0_9.jar -o inputfile.txt outputfile.png
+
+===== a working example
+
+http://vanderwijk.info/2009/4/23/full-text-based-document-generation-using-asciidoc-and-ditaa
+plus some small modifications
+
+.bin/handleimages.py
+----
+#!/usr/bin/env python
+import sys
+import re
+import subprocess
+
+header = re.compile("\[ASCIIART\s+(\S+?)\s*\((.*?)\)?\]")
+
+def main(document):
+    parsed = []
+    parsing = False
+    filename = ""
+    worklist = {}
+    for line in document:
+        if line.strip().startswith("[ASCIIART"):
+            filename, flags = header.match(line).groups()
+            if flags:
+                flags = "[%s]" % flags
+            else:
+                flags = ""
+#            parsed.append("image:%s%s\n\n" % (filename, flags))
+#ping: change to block image link
+            parsed.append("image::%s%s\n\n" % (filename, flags))
+            parsing = True
+            worklist[filename] = ""
+        elif line.strip() == "[TRAIICSA]":
+            a = open("/tmp/asciiart.txt", "w")
+            a.write(worklist[filename])
+            a.close()
+            parsing = False
+#            job = subprocess.Popen(["java", "-jar", "ditaa0_6b.jar", "-o", "/tmp/asciiart.txt", filename], stdout=subprocess.PIPE)
+#ping: change to new version, locate ditaa*.jar to find the current jar file
+            job = subprocess.Popen(["java", "-jar", "/home/ping/ditaa/trunk/web/lib/ditaa0_9.jar", "-o", "/tmp/asciiart.txt", filename], stdout=subprocess.PIPE)
+            job.wait()
+        elif parsing:
+            worklist[filename] += line
+        else:
+            parsed.append(line)
+
+    print "".join(parsed)
+
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        document = open(sys.argv[1], "r").readlines()
+    else:
+        document = sys.stdin.readlines()
+    main(document)
+----
+
+
+.bin/create.sh
+----
+#!/bin/sh 
+
+if [ "$1" = "" ]; then
+  echo "Specify an asciidoc file"
+  exit
+fi
+
+TARGET=`basename $1 .txt`.html
+
+handleimages.py $1 | asciidoc -d book -o $TARGET - 
+----
+
+==== diag filter
+
+https://code.google.com/p/asciidoc-diag-filter/
+
+===== install & test
+
+.install
+----
+#install easy_install first
+sudo apt-get install python-setuptools
+#install python packages
+sudo easy_install blockdiag seqdiag actdiag nwdiag packetdiag
+#download the diag-filter.zip and unzip it
+https://code.google.com/p/asciidoc-diag-filter/downloads/detail?name=diag_filter.zip&can=2&q=
+----
+
+.test
+==============================================================================
+....
+["seqdiag",target="seqdiag-1.png"]
+---------------------------------------------------------------------
+{  
+    // edge label  
+    A -> B [label = "call"];  
+    A <- B [label = "return"];  
+    // diagonal edge  
+    A -> B [diagonal, label = "diagonal edge"];  
+    A <- B [diagonal, label = "return diagonal edge"];
+}
+---------------------------------------------------------------------
+....
+
+.run this to generate the png file
+----
+asciidoc -f diag-filter.conf diag-test.txt 
+----
+
+.check the files (at home dir)
+----
+ping@640g-laptop:~$ ls -lt |head
+total 75368
+-rw-r--r--  1 ping ping   16533 2012-09-15 11:07 temp-seqdiag.html
+-rw-r--r--  1 ping ping   10903 2012-09-15 11:07 seqdiag-1.png
+-rw-r--r--  1 ping ping     400 2012-09-15 11:06 temp-seqdiag.txt
+----
+
+==============================================================================
+
+.test in real work
+----
+!asciidoc -a toc -f ~/Downloads/diag-filter.conf -o Dropbox/temp-transfer/vim-jtac-work.html -a iconsdir=~/bin/asciidoc-8.6.8/images/icons/ "%"
+
+----
+
+NOTE: looks data-uri don't support this?
+need more test
+
+
+===== working examples
+
+
+
+
+=== a2x
+
+The a2x toolchain wrapper uses the following programs (most will be available
+prepackaged for your Linux distribution):
+
+    xsltproc 
+    DocBook XSL Stylesheets 
+    dblatex (PDF file generator) 
+    FOP (alternative PDF file generator) 
+    epubcheck (optional EPUB file validator)
+
+.http://www.methods.co.nz/asciidoc/publishing-ebooks-with-asciidoc.html#X1
+----
+// a2x default options.
+//    a2x: -f epub -d book --epubcheck
+// Suppress revision history in dblatex outputs.
+//    a2x: --dblatex-opts "-P latex.output.revhistory=0"
+// Suppress book part, chapter and section numbering in DocBook XSL outputs.
+//    a2x: --xsltproc-opts
+//    a2x: "--stringparam part.autolabel 0
+//    a2x: --stringparam chapter.autolabel 0
+//    a2x: --stringparam section.autolabel.max.depth 0"
+----
+
+=== generate web page with toc
+
+#You can also generate an HTML formatted book, either using DocBook XSL
+#Stylesheets:
+a2x -fxhtml -dbook minimal-book.txt
+#or directly using the asciidoc command:
+asciidoc -dbook minimal-book.txt
+
+==== icons,iconsdir
+
+.in document
+:icons:
+:iconsdir: ~/bin/asciidoc-8.6.8/images/icons/
+
+command lines:
+
+.icons
+Standard icons for following are included automatically with "-a icons"
+NOTE:, TIP:, IMPORTANT:, WARNING: or CAUTION: paragraphs and blocks +
+
+    asciidoc -a icons asciidoc-mini.txt
+
+ If the <<X66,data-uri>> attribute is defined then icons are loaded
+ from the theme's `icons` sub-directory if it exists (i.e.  the
+ 'iconsdir' attribute is set to that location).
+
+ ping@640g-laptop:/etc/asciidoc/images/icons$ ls
+ callouts  caution.png  example.png  home.png  important.png  next.png  note.png
+ prev.png  README  tip.png  up.png  warning.png
+
+.generate icons
+:w|!asciidoc -a toc -a toclevels=6 -a icons -a iconsdir=/etc/asciidoc/images/icons/ -o /mnt/public_html/temp/asciidoctips.html "%"
+
+NOTE: sometime a test shows 'icons' only work when used with "-a data-uri",
+don't know why
+
+==== title/TOC level
+.number of title levels (1..4) .
+Defaults to 2 and must be used with the toc attribute.
+----
+$ asciidoc -a toc -a toclevels=3 doc/asciidoc.txt
+----
+
+.TOC(Table of Contents) is added automatically ,by default to the start
+    asciidoc -a toc asciidoc-mini.txt
+
+.asciidoc only support 4 level section
+http://www.methods.co.nz/asciidoc/chunked/ch08.html
+
+    In addition to the document title (level 0), AsciiDoc supports four section
+    levels: 1 (top) to 4 (bottom)
+
+http://www.csc.kth.se/~akozlov/asciidoc-mini.html
+    Level Four Section titles are not numbered.
+
+
+toc-title
+
+==== numbered section:
+* -n , or 
+* -a numbered or 
+* put :numbered: in head of the article
+----
+$ asciidoc -n -a toc -a toclevels=5 doc/asciidoc.txt
+$ asciidoc -a numbered -a toc -a toclevels=5 doc/asciidoc.txt
+----
+
+
+==== stand-alone HTML file(data-uri)
+AsciiDoc generated this stand-alone HTML file containing embedded CSS, 
+JavaScript and images from this AsciiDoc article template with this command: 
+
+----
+$asciidoc -a data-uri -a icons -a toc -a max-width=55em article.txt
+----
+
+[NOTE]
+* data-uri not work 
+use `iconsdir' (not `icons-dir', that is for pdf) attributes:
++
+.this works
+----
+:!asciidoc -a data-uri -a icons -a toc -a toclevels=6 -a iconsdir=~/bin/asciidoc-8.6.8/images/icons/ -o ~/Dropbox/temp-transfer/%:t:r_datauri.html "%"
+----
+
+==== HTML5 single page with toc in the left
+The same AsciiDoc article template generated this HTML 5 (the toc2 attribute
+puts a table of contents in the left margin) from this command: 
+
+asciidoc -b html5 -a icons -a toc2 -a theme=flask article.txt
+
+==== docbook: static (no need javascript) TOC,from the UG, tested and good
+
+the list block will lose its effect (no background color)
+Convert a DocBook XML file to a single XHTML file. For example:
+
+----
+$ asciidoc -b docbook asciidoc.txt
+$ xsltproc --nonet /etc/asciidoc/docbook-xsl/xhtml.xsl asciidoc.xml > asciidoc.html
+----
+
+#control toc level (def 2), seq of param matters here!
+#http://www.sagehill.net/docbookxsl/TOCcontrol.html
+#put --param ahead of --nonet
+
+ping@640g-laptop:~/mx/RLI$ xsltproc --param toc.section.depth 3  --nonet
+/etc/asciidoc/docbook-xsl/xhtml.xsl RLI-12720.xml > RLI-12720.html
+
+===== FAQ 8.
+    
+    The AsciiDoc toclevels attribute does not work with DocBook outputs,
+    why?
+
+    DocBook has no provision for specifying table of contents levels but you
+    can set the TOC level further down the toolchain by passing the DocBook XSL
+    Stylesheets toc.section.depth parameter to dblatex (using the --param
+    option) or xsltproc (using the --stringparam option). For example to show
+    only chapter titles in the TOC of a book document set toc.section.depth to
+    0. Increment the toc.section.depth value to show more sub-section titles.
+    If you are using a2x you can set the options in the source file, for
+    example:
+
+    // a2x: --xsltproc-opts "--stringparam toc.section.depth 0"
+    // a2x: --dblatex-opts "--param toc.section.depth=0"
+
+    If the document is of type article use the value 1 to show only top level
+    section titles in the TOC, use the value 2 for two levels etc.
+
+
+===== FAQ 9
+
+How can I include chapter and section tables of contents?
+
+DocBook outputs processed by DocBook XSL Stylesheets (either manually or via
+a2x) can generate additional separate section and chapter tables of contents
+using combinations of the TOC parameters. Here are some examples using
+combinations of the generate.section.toc.level and toc.section.depth DocBook XSL
+Stylesheets parameters:
+generate.section.toc.level 	toc.section.depth 	
+1 							Single level book chapter TOCs or article section TOCs 
+1 				3 			Article section TOCs with two levels 
+1 				2 			Book chapter TOCs with two levels
+
+.this works (in vimrc)
+----
+command! Asciidoc2Hdocbook :w|!
+    \ asciidoc -b docbook -o ~/Dropbox/temp-transfer/%:t:r.xml "%";
+    \ xsltproc --param generate.section.toc.level 1 --param toc.section.depth 2 --nonet /etc/asciidoc/docbook-xsl/xhtml.xsl ~/Dropbox/temp-transfer/%:t:r.xml > ~/Dropbox/temp-transfer/%:t:r_docbook.html
+----
+
+==== toc re-position
+
+----
+60. Is it possible to reposition the Table of Contents in HTML outputs?
+
+By default the xhtml11 and html5 backends auto-position the TOC after the
+header. You can manually position the TOC by setting the toc-placement attribute
+value to manual and then inserting the toc::[] block macro where you want the
+TOC to appear. For example, put this in the document header:
+
+= header
+:toc:
+:toc-placement: manual
+
+The put this where you want the TOC to appear:
+
+......
+
+== section 3
+toc::[]
+----
+
+.testing shows, this doesn't work:
+----
+= header
+		<---no blank line is allowed for it to work
+:toc:
+:toc-placement: manual
+
+== section 1
+
+== section 2
+toc::[]
+----
+
+.this works
+----
+= header
+:toc:
+:toc-placement: manual
+
+== section 1
+
+== section 2
+toc::[]
+----
+
+==== toc-toggle
+
+
+https://groups.google.com/forum/?fromgroups=#!topic/asciidoc/x34-kEmDtVw
+
+2 samples:
+
+toc2 + flask theme:
+  asciidoc -a data-uri -a toc-toggle -a toc2 -a theme=flask -o article_toc2.html article.txt
+
+toc + default theme:
+  asciidoc -a data-uri -a toc-toggle -a toc -o article_toc.html article.txt
+
+
+[NOTE] this doesn't work
+
+==== generate from stdin
+
+visual selection &
+:'<,'>w !asciidoc -a toc -a toclevels=6 -o /mnt/public_html/cases/2011-0331-0399.html -
+
+#use :RANGEw !ext-prog , so only pipe selected text TO (stdout) ext-grog
+#use :RANGE!ext-prog only when pipe sele4cted text TO (stdout) and FROM(stdin) ext-prog
+
+==== file path with spaces
+
+use "%" in vim ex cmd if the path include space, otherwise report too many
+parameters.
+
+:w|!asciidoc -a toc -a toclevels=6 -o /mnt/public_html/temp/asciidoctips.html "%"
+
+=>
+
+:!asciidoc -a toc -a toclevels=6 -o /mnt/public_html/temp/asciidoctips.html "/data/backup/living files/asciidoctips.txt"
+
+==== vim: user command for all files
+
+:w|!asciidoc -a toc -a toclevels=6 -o /mnt/public_html/temp/%:t:r.html "%"
+
+==== generate chunked XHTML
+
+Seperated pages for each docs
+
+[source,bash]
+----
+asciidoc -b docbook asciidoc.txt
+xsltproc --nonet /etc/asciidoc/docbook-xsl/chunked.xsl asciidoc.xml
+----
+
+
+=== generate pdf: a2x
+
+[source,bash]
+----
+#use dblatex pdf generator
+#--verbose: see what toolchain command is used
+a2x -f pdf --verbose --no-xmllint index.txt.asciidoc2
+a2x -fpdf -dbook minimal-book.txt
+
+#use FOP
+a2x -f pdf --verbose --fop doc/source-hightlights-filter.txt
+a2x -fpdf -dbook --fop minimal-book.txt
+----
+
+[NOTE]
+====
+AsciiDoc’s a2x toolchain command automatically performs validation checks using xmllint
+
+*--no-xmllint* was used otherwise it will report:
+
+a2x: executing: asciidoc --backend docbook  --doctype article --verbose --out-file /mnt/smbwf-sam/home/public_html/index.txt.xml /mnt/smbwf-sam/home/public_html/index.txt.asciidoc2
+
+
+====
+
+==== special chars(^G^H) complain
+
+[source,bash]
+.this bring issue to dblatex(a2x way of pdf geneartion)
+----
+    ":g/<<top>>/+1,/^== \(\S\S\+.\{0,40}\S#\s*[^:]\+\|slot \d\d\=->\S\+\|->.\+\|\*-\*-\*-\*-\*-\)/-1 >
+----
+
+.solution is to remove escape chars, so this is fine:
+----
+    ":g/<<top>>/+1,/^== \(\S\S\+.\{0,40}\S#\s*[^:^H^G]\+\|slot \d\d\=->\S\+\|->.\+\|\*-\*-\*-\*-\*-\)/-1 >
+----
+
+.logs and email discussions
+----
+> Build the book set list...
+> xsltproc --xinclude --xincludestyle -o /tmp/tmpH_Dlc3/doclist.txt
+> doclist.xsl /Dropbox/temp-transfer/vim-at-work.xml
+> /Dropbox/temp-transfer/vim-at-work.xml:2129: parser error : PCDATA invalid
+> Char value 8
+>     ":g/&lt;&lt;top&gt;&gt;/+1,/^== \(\S\S\+.\{0,40}\S#\s*[^]\+\|slot
+> \d\d\=-
+>                                                              ^
+> /Dropbox/temp-transfer/vim-at-work.xml:2129: parser error : PCDATA invalid
+> Char value 7
+>     ":g/&lt;&lt;top&gt;&gt;/+1,/^== \(\S\S\+.\{0,40}\S#\s*[^]\+\|slot
+> \d\d\=-
+>                                                               ^
+> unable to parse /Dropbox/temp-transfer/vim-at-work.xml
+>
+> a2x: deleting /home/ping/Dropbox/temp-transfer/vim-at-work.xml
+
+Dblatex is telling you that you have illegal characters (codes 8 and
+7, backspace and bell) in your text at the position indicated.
+----
+
+
+
+=== generate pdf: non-a2x way
+
+this seems better than a2x way
+
+    $ asciidoc -b docbook article.txt
+    $ xsltproc --nonet /etc/asciidoc/docbook-xsl/fo.xsl article.xml > article.fo
+    $ fop article.fo article.pdf
+
+.generate pdf using fop
+====
+ping@640g-laptop:~/Dropbox/house/hsbc-china$ asciidoc -b docbook -o /Dropbox/temp-transfer/hsbc-statement-ping-song.xml hsbc-statement-ping-song.txt +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$ xsltproc --nonet /etc/asciidoc/docbook-xsl/fo.xsl /Dropbox/temp-transfer/hsbc-statement-ping-song.xml > /Dropbox/temp-transfer/hsbc-statement-ping-song.fo +
+Making portrait pages on A4 paper (210mmx297mm) +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$ +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$ fop /Dropbox/temp-transfer/hsbc-statement-ping-song.fo /Dropbox/temp-transfer/hsbc-statement-ping-song.pdf +
+log4j:WARN No appenders could be found for logger (org.apache.fop.util.ContentHandlerFactoryRegistry). +
+log4j:WARN Please initialize the log4j system properly. +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$  +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$  +
+ping@640g-laptop:~/Dropbox/house/hsbc-china$ gnome-open /Dropbox/temp-transfer/hsbc-statement-ping-song.pdf  +
+====
+
+=== generate book(multiple level0)
+
+a2x -f pdf -d book --verbose --no-xmllint temp-asciidoc.txt 
+
+=== generate htmlhelp
+
+.from manual
+----
+`htmlhelp.xsl`::
+    Generate Microsoft HTML Help source files for the MS HTML Help
+    Compiler in the `./doc/htmlhelp` directory. This example is run on
+    MS Windows from a Cygwin shell prompt:
+
+    $ python ../asciidoc.py -b docbook asciidoc.txt
+    $ xsltproc --nonet ../docbook-xsl/htmlhelp.xsl asciidoc.xml
+    $ c:/Program\ Files/HTML\ Help\ Workshop/hhc.exe htmlhelp.hhp
+----
+
+==== pending issue
+
+xml ===(xsltproc)==> hhp: name is always asciidoc.hhp, how to change?
+hhp ===(hhc.exe)===> chm: name is always htmlhelp.chm, how to change?
+
+==== example
+
+.command flow:
+----
+#asciidoc => xml
+asciidoc -n -b docbook -o ~/Dropbox/temp-transfer/mydoc.xml mydoc.txt 
+
+#xml => hhp
+#NOTE: seq matters for xsltproc params! put -o before anything else!
+xsltproc -o ~/Dropbox/temp-transfer/%:t:r/ --nonet ~/bin/asciidoc-8.6.8/docbook-xsl/htmlhelp.xsl ~/Dropbox/temp-transfer/mydoc.xml > ~/Dropbox/temp-transfer/mydoc_htmlhelp.hhp
+
+#in windows: hhp => chm
+C:\Program Files (x86)\HTML Help Workshop>hhc.exe "C:\Documents and Settings\ping\Dropbox\temp-transfer\vim-jtac-work\asciidoc.hhp"
+----
+
+.in vimrc
+----
+command! Asciidoc2Htmlhelp :w|!asciidoc -n
+    \ -b docbook -o ~/Dropbox/temp-transfer/%:t:r.xml "%";
+    \ xsltproc -o ~/Dropbox/temp-transfer/%:t:r/ 
+    \ --nonet ~/bin/asciidoc-8.6.8/docbook-xsl/htmlhelp.xsl
+    \ ~/Dropbox/temp-transfer/%:t:r.xml
+    \ > ~/Dropbox/temp-transfer/%:t:r_htmlhelp.hhp
+----
+
+.windows
+----
+C:\Program Files (x86)\HTML Help Workshop>hhc.exe "C:\Documents and Settings\ping\Dropbox\temp-transfer\vim-jtac-work\asciidoc.hhp"
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\ping\Dropbox\temp-transfer\vim-jtac-work\htmlhelp.chm
+
+index.html
+ar01s01.html
+ar01s02.html
+ar01s03.html
+ar01s04.html
+ar01s05.html
+ar01s06.html
+ar01s07.html
+ar01s08.html
+ar01s09.html
+ar01s10.html
+toc.hhc
+
+Compile time: 0 minutes, 0 seconds
+60      Topics
+217     Local links
+22      Internet links
+0       Graphics
+
+Created c:\Documents and Settings\ping\Dropbox\temp-transfer\vim-jtac-work\htmlhelp.chm, 107,812 bytes
+
+----
+
+=== slidy backend:slides show
+
+http://www.methods.co.nz/asciidoc/slidy.html#%281%29
+
+
+
+Use the following command to create this document (slidy.html):
+
+    asciidoc slidy.txt
+
+    Press the Space key or the Left Arrow key to continue the slideshow.
+
+
+Overview
+
+    AsciiDoc has a slidy backend for generating self contained Slidy HTML slideshows.
+
+    An overview of Slidy can be found here: http://www.w3.org/Talks/Tools/Slidy2/
+    AsciiDoc ships with the Slidy JavaScript a customised Slidy CSS file.
+    Use the asciidoc --backend slidy command-line option to generate browser viewable HTML slideshow. Example:
+
+    asciidoc --backend slidy slidy-example.txt
+
+    By default, asciidoc creates a self contained distributable HTML document which includes all necessary CSS and JavaScripts. Use the asciidoc --attribute linkcss command-line option if you prefer to link (rather than embed) external CSS and JavaScript files.
+
+How Slidy uses AsciiDoc markup
+
+    The document header is displayed as the first page of the slideshow.
+    If the document has a preamble (the content between the header and the first section) it will be displayed on the second page.
+    Each top level section is displayed as a separate slide.
+    If the AsciiDoc incremental attribute is defined then all lists and OpenBlock elements are treated as incremental i.e. Slidy exposes their child elements one at a time as you progress through the slideshow.
+    You can explicitly set an element as incremental by setting its role attribute to incremental. Example:
+
+    [role="incremental"]
+    Sagittis in vestibulum. Habitasse ante nulla enim bibendum nulla.
+    Odio sed pede litora.
+
+Slidy Specific Attributes
+
+    incremental
+
+    If this attribute is defined then all lists and OpenBlock elements are classed as incremental i.e. Slidy will expose them one at a time as you progress through the slideshow. The default behavior is for the show to progress a full slide at at time. Elements that have been explicitly classed as incremental with the role attribute are always displayed incrementally.
+    duration
+
+    Set this to the estimated number of minutes that your presentation will take and Slidy will display a countdown timer at the bottom right of the slideshow. For example, this asciidoc command-line option --attribute duration=5 sets the duration to five minutes.
+    copyright
+
+    If you set the copyright attribute it will be displayed in the Slidy menu bar at the bottom of the slide. If the copyright attribute is not define then the author name, if it is defined, will be displayed.
+    outline
+
+    Setting the role attribute to outline in a bulleted or numbered list allows nested lists to be expanded and collapsed using the mouse. Nested lists are expanded when an enclosing list item (the ones with blue bullet points or numbers) is clicked.
+
+Slidy Specific Attributes
+
+incremental
+
+    If this attribute is defined then all lists and OpenBlock elements are classed as incremental i.e. Slidy will expose them one at a time as you progress through the slideshow. The default behavior is for the show to progress a full slide at at time. Elements that have been explicitly classed as incremental with the role attribute are always displayed incrementally.
+    duration
+
+    Set this to the estimated number of minutes that your presentation will take and Slidy will display a countdown timer at the bottom right of the slideshow. For example, this asciidoc command-line option --attribute duration=5 sets the duration to five minutes.
+    copyright
+
+    If you set the copyright attribute it will be displayed in the Slidy menu bar at the bottom of the slide. If the copyright attribute is not define then the author name, if it is defined, will be displayed.
+    outline
+
+    Setting the role attribute to outline in a bulleted or numbered list allows nested lists to be expanded and collapsed using the mouse. Nested lists are expanded when an enclosing list item (the ones with blue bullet points or numbers) is clicked.
+
+
+Tips
+
+    The Slidy help? and contents? links at the bottom left are your friends.
+    Use the AsciiDoc data-uri attribute to embed images in your slideshow — add this attribute entry to your document’s header:
+
+    :data-uri:
+
+    Use the AsciiDoc max-width attribute to set the document display width. For example, add this attribute entry to your document’s header:
+
+    :max-width: 45em
+
+
+
+==== tips
+
+- looks only following will be in a seperate slide
+  * document header
+  * level 1 header
+  * preamble
+
+- generate slides html file
++
+----
+asciidoc -b slidy index.txt.asciidoc2
+----
+
+- use *incremental* roll to generate increamental slides
++
+----
+[role="incremental"]
+----
+
+=== deckjs backend:slides show
+
+==== pending issues
+
+* no reference support
+
+    === slides1
+    Ref <<1>> provides more details about the bigger picture in terms of QoS
+
+    === slide2: existing "show class-of-service interface" command [[1]]
+
+* only support level 1 as slides 
+	(workaround with leveloffset)
+
+* paging re-numbered every numbered (list, header)
+	(workaround with unnumbered list, header
+
+lost title (.abc) of list::
+    workaround with labeled list 'abc::'
+
+list block's subs=quotes::
+    color not right
+
+pagedown/up in a slide::
+    deckjs don't support.
+    use chrome vimium keymap:
+
+    map J scrollPageDown
+    map K scrollPageUp
+
+incremental bug, currently only work in a very limited condition
+
+  ifdef::backend-deckjs[[options="incremental"]]
+  Traditionally::
+  * the QoS configs are defined in different hierarch
+  * viewing the QoS config parameters needs the user 
+      execute a sequence of multiple JUNOS commands c
+      hierarchies.
+ 
+  ifdef::backend-deckjs[[options="incremental"]]
+  In the subscriber model::
+  * typically a customer/subscriber is represented by
+  * it is desirable to :
+ 
+ (10:17:16 PM) ping: 这样不work，只有第二个有incremental，第一个没有。
+ (10:17:37 PM) ping: workaround 很奇怪，只要前面再加一个无用的list 条目即可：
+ (10:17:53 PM) ping:  add any thing here::
+ 
+  ifdef::backend-deckjs[[options="incremental"]]
+  Traditionally::
+  * the QoS configs are defined in different hierarch
+  * viewing the QoS config parameters needs the user 
+      execute a sequence of multiple JUNOS commands c
+      hierarchies.
+ 
+  ifdef::backend-deckjs[[options="incremental"]]
+  In the subscriber model::
+  * typically a customer/subscriber is represented by
+  * it is desirable to :
+ 
+ (10:18:21 PM) ping: 就是说这个work：
+ add any thing here::
+ 
+  ifdef::backend-deckjs[[options="incremental"]]
+  Traditionally::
+  * the QoS configs are defined in different hierarch
+  * viewing the QoS config parameters needs the user 
+      execute a sequence of multiple JUNOS commands c
+      hierarchies.
+ 
+  ifdef::backend-deckjs[[options="incremental"]]
+  In the subscriber model::
+  * typically a customer/subscriber is represented by
+  * it is desirable to :
+
+
+http://houqp.github.com/asciidoc-deckjs/[project home]
+http://houqp.github.com/asciidoc-deckjs/tutorial-slide.html[tutoror slides]
+http://houqp.github.com/asciidoc-deckjs/tutorial-slide.asciidoc[tutoror slides
+source]
+https://github.com/houqp/asciidoc-deckjs/downloads[backend download]
+http://houqp.github.com/asciidoc-deckjs/example-template.asciidoc[a template to
+start with]
+/data/backup/xnix/asciidoc/deckjs-example-template.asciidoc
+
+installation::
+asciidoc --backend install Downloads/deckjs-X.Y.Z.zip
+
+usage::
+asciidoc -b deckjs file.asciidoc
+
+
+.increamental effect:
+
+[options="incremental"]
+* this entry should be the first to show up
+* this entry should show up following the first one
+* this entry should be the last one 
+
+
+.template file:
+
+    deck.js Support for Asciidoc
+    =============================
+    :author: Foo Bar 
+    :email: <foo@bar.org>
+    :description: just a template file.
+    :revdate: 2011-12-16
+    :revnumber: 0.1
+    ///////////////////////
+	    Themes that you can choose includes:
+	    web-2.0, swiss, neon beamer
+    ///////////////////////
+    :deckjs_theme: web-2.0
+    ///////////////////////
+	    Transitions that you can choose includes:
+	    fade, horizontal-slide, vertical-slide
+    ///////////////////////
+    :deckjs_transition: horizontal-slide
+    ///////////////////////
+	    AsciiDoc use `source-highlight` as default highlighter.
+
+	    Styles available for pygment highlighter:
+	    monokai, manni, perldoc, borland, colorful, default, murphy, vs, trac,
+	    tango, fruity, autumn, bw, emacs, vim, pastie, friendly, native,
+
+	    Uncomment following two lines if you want to highlight your code
+	    with `Pygments`.
+    ///////////////////////
+    //:pygments:
+    //:pygments_style: native
+    ///////////////////////
+	    Uncomment following line if you want to scroll inside slides
+	    with {down,up} arrow keys.
+    ///////////////////////
+    //:scrollable:
+    ///////////////////////
+	    Uncomment following line if you want to link css and js file 
+	    from outside instead of embedding them into the output file.
+    ///////////////////////
+    //:linkcss:
+    ///////////////////////
+	    Uncomment following line if you want to count each incremental
+	    bullet as a new slide
+    ///////////////////////
+    //:count_nested:
+
+    == Slide One
+
+    [options="incremental"]
+     * item 1
+     * item 2
+
+    == Slide Two
+
+    That's all.
+
+=== odf/odp backend:generate fodt/fodp/doc/ppt
+ridiculous
+:!asciidoc -b odt -o ~/Dropbox/temp-transfer/%:t:r.fodt %
+:!asciidoc -b odp -o ~/Dropbox/temp-transfer/%:t:r.fodp %
+
+==== fodp example
+
+https://github.com/dagwieers/asciidoc-odf/tree/master/examples
+
+[listing]
+.fodp example
+....
+
+= Demo presentation
+Dag Wieërs <dag@wieers.com>
+
+== Slide 1 title
+
+Slide 1 is arguably the most important slide of your deck.
+
+Therefor it is important to grab the attention of the audience, by:
+
+- using blink in your slides
+- adding a funny animation
+- adding a fart sound
+- shouting really loud
+- playing dead
+
+
+== Slide 2 title
+
+The second slide is less important, and therefor can be removed.
+
+But in case you want to keep it, add some silly enumerations:
+
+1. Look funny
+2. Mumble something
+3. Do a silly walk
+4. Undress
+5. Dance the lambada for 10 seconds
+6. Leave the building
+
+
+== Slide 3 title
+
+Slide 3 usually adds a graph, chart or some source code:
+
+[code,bash]
+----
+#!/bin/bash
+
+for file in *.txt; do
+    stat --printf="%s %n" $file
+done | sort -d
+----
+
+....
+
+
+.my test:
+* have to be strictly level 0&1, otherwise whole doc break
+* highlight only support [code,bash]
+* [subs="quotes"] is supported, but lose all format
+* beware of <> in [subs=quotes], it will break the whole doc
+
+==== FAQ 42: ODF by OOO
+
+tested, looks good
+
+----
+42. Can you create ODF and PDF files using LibreOffice?
+
+LibreOffice can convert HTML produced by AsciiDoc to ODF text format and PDF format (I used LibreOffice 3.5 at the time of writing, the fidelity is very good but it’s not perfect):
+
+    Create the HTML file using AsciiDoc, for example:
+
+    asciidoc -a icons -a numbered -a disable-javascript article.txt
+
+    JavaScript is disabled because LibreOffice does not execute JavaScript, this means that AsciiDoc table of contents and footnotes will not be rendered into ODF (if you want the table of contents and footnotes you could manually cut and paste them from a Web browser).
+
+    Convert the HTML file to an ODF text file using LibreOffice:
+
+    lowriter --invisible --convert-to odt article.html
+
+    The images imported from an HTML file will be linked, if your document contains images you should convert them to embedded images:
+
+        Open the document in LibreOffice Writer.
+
+        Run the Edit→Links… menu command.
+
+        Select all links and press the Break Link button.
+
+    Some images may also have been resized. To restore an image to its original size:
+
+        Right-click on the image and select the Picture… menu item.
+
+        Click on the Crop tab.
+
+        Press the Original Size button.
+
+    Convert the ODF file to an PDF text file using LibreOffice:
+
+    lowriter --invisible --convert-to pdf article.odt
+
+    A PDF index is automatically created using the section headings.
+
+Alternatively you could manually copy-and-paste the entire document from a Web browser into a blank ODF document in LibreOffice — this technique will bring through the table of contents and footnotes.
+
+This tip was originally contributed by Bernard Amade.
+----
+
+=== dzslides backend:really nice slides show
+
+looks so far the best slides backend
+
+[verse,Dan]
+====
+My directions to get the presentation running were too terse. (I was also
+missing an image). I just gave it a try on a separate machine and now have the
+exact steps that you need:
+
+# fetch and setup the backend, dzslides and decks
+mkdir -p $HOME/.asciidoc/backends
+cd $HOME/.asciidoc/backends
+git clone git://github.com/mojavelinux/asciidoc-dzslides-backend.git dzslides
+cd dzslides
+git clone git://github.com/mojavelinux/dzslides.git
+mkdir $HOME/tmp-slide-decks
+cd $HOME/tmp-slide-decks
+git clone git://github.com/mojavelinux/decks.git mojavelinux-decks
+cd mojavelinux-decks/asciidoc-with-pleasure
+
+# create a version of the presentation w/ embedded assets
+asciidoc -a data-uri -a linkcss! slides.asciidoc
+
+# If you get the warning:
+#
+# asciidoc: WARNING: slides.asciidoc: line 37: missing style:
+# [blockdef-listing]: qrcode
+#
+# ...it means you need to install the qrcode filter (linked from the asciidoc
+# project site)
+
+# create a version of the presentation w/ linked assets
+asciidoc slides.asciidoc
+ln -s $HOME/.asciidoc/backends/dzslides/dzslides dzslides
+
+The symlink is required in the second case since the presentation will be
+looking in the current folder for dzslides.
+
+Note that the presentation relies on my fork of dzslides, which has some
+enhancements and tweaks to my liking. It could probably work w/ the original
+dzslides w/ some tweaks.
+
+Personally, I like dzslides better than all the other HTML5-based presentation
+frameworks...and I've tried them all. dzslides has much more flexibility, has a
+better out of the box stylesheet, uses more semantic markup and has an awesome
+presenter mode console. It's just better, IMO.
+====
+
+
+
+
+https://github.com/mojavelinux/dzslides[dzslides]
+https://github.com/mojavelinux/asciidoc-dzslides-backend[dzslides-backend]
+
+install::
+    https://github.com/downloads/mojavelinux/asciidoc-dzslides-backend/dzslides.zip[download]
+    asiidoc --backend install dzslides.zip
+    cd ~/.asciidoc/backends/dzslides/
+    git clone https://github.com/mojavelinux/dzslides.git
+    or make a ln to that folder
+
+testdrive/examples::
+    http://mojavelinux.github.com/decks/
+
+    #source
+    https://github.com/mojavelinux/decks/blob/master/asciidoc-with-pleasure/slides.asciidoc
+    #html
+    http://mojavelinux.github.com/decks/asciidoc-with-pleasure/rwx2012/index.html
+
+    #source
+    https://github.com/mojavelinux/decks/blob/master/awestruct-git/slides.asciidoc
+    #html
+    http://mojavelinux.github.com/decks/awestruct-git/rwx2012/index.html
+
+command lines::
+    see in source file.
+
+==== pending issues
+
+==== obsolete inf(resolved)
+
+some errors::
+.missing 2 highlight related files
+----
+ping@640g-laptop:~/Dropbox/temp-transfer$ asciidoc ~/Dropbox/temp-transfer/slides.asciidoc.txt
+asciidoc: WARNING: slides.asciidoc.txt: line 37: missing style: [blockdef-listing]: qrcode
+
+ping@640g-laptop:~/Dropbox/temp-transfer$ asciidoc -a data-uri -a linkcss! ~/Dropbox/temp-transfer/slides.asciidoc.txt
+asciidoc: WARNING: slides.asciidoc.txt: line 30: include file not found: /home/ping/.asciidoc/backends/dzslides/dzslides/themes/highlight/monokai.min.css
+asciidoc: WARNING: slides.asciidoc.txt: line 30: include file not found: /home/ping/.asciidoc/backends/dzslides/dzslides/highlight/highlight.min.js
+asciidoc: WARNING: slides.asciidoc.txt: line 37: missing style: [blockdef-listing]: qrcode
+sh: /home/ping/Dropbox/temp-transfer/images/mild.png: No such file or directory
+asciidoc: WARNING: slides.asciidoc.txt: line 139: {sys3:"/usr/bin/python" -u -c "import base64,sys; base64.encode(sys.stdin,sys.stdout)" < "/home/ping/Dropbox/temp-transfer/images/mild.png"}: non-zero exit status 
+/home/ping/.asciidoc/backends/dzslides/
+----
++
+.a list of the plugin dir
+----
+├── dzslides
+│   ├── core
+│   │   ├── dzslides.css
+│   │   └── dzslides.js
+│   ├── highlight
+│   │   └── highlight.pack.js
+│   ├── images
+│   │   └── gray-noise.png
+│   ├── readme.md
+│   ├── scripts
+│   │   ├── slides2png
+│   │   ├── slides2png4win.groovy
+│   │   └── slides2png.bat
+│   ├── shells
+│   │   ├── embedder.html
+│   │   └── onstage.html
+│   ├── template.html
+│   └── themes
+│       ├── highlight
+│       │   ├── default.css
+│       │   ├── github.css
+│       │   ├── monokai.css
+│       │   └── tomorrow-night-bright.css
+│       ├── style
+│       │   ├── default.css
+│       │   ├── stormy.css
+│       │   └── watermelon.css
+│       └── transition
+│           ├── fade.css
+│           ├── horizontal-slide.css
+│           └── vertical-slide.css
+├── dzslides.conf
+└── README.asciidoc
+
+10 directories, 25 files
+
+----
+
+some highlight are not as good as the demonstration, don't know why
+
+and per dzslides.conf, looks the missing HL files are the reason.
+
+=== bootstrap-docs backend
+
+https://github.com/mojavelinux/asciidoc-bootstrap-docs-backend
+
+.more example sources
+https://github.com/llaville/Pirus/blob/master/docs/pirus-book.txt
+
+works, looks nice. the project is still in progress.
+
+currently once installed, the backend folder need to be renamed to
+bootstrap-docs
+
+:'<,'>w !asciidoc -o ~/temp-transfer/temp-git.html -a leveloffset=-2@ -a toc -a
+numbered -b bootstrap-docs -
+
+.issues (tested with my vim doc):
+some alarms from cli::
+
+    asciidoc -b bootstrap-docs vim-jtac-work.txt
+
+    asciidoc: WARNING: vim-jtac-work.txt: line 47: colspec dropped: contains
+    undefined attribute
+
+TOC not perfect::
+    looks good, but not working quite in sync with mouse click
+    another test of my own docs shows OK.
+    
+don't support `.abc` title::
+
+
+
+=== blogger backend: -b blogger
+
+greate to generate blog-compatible HTML pages.
+tested and works super with vimrepress, to publish blog via xml rpc
+without this plugin the final blog looks wierd.
+
+.in vimrepress: 
+write a new post :BlogNew
+change format from default markdown to HTML
+write post in asciidoc format
+visual select post texts, :'<,'>!asciidoc -b blogger -
+this will replace selected text into HTML
+publish the new post :BlogPreview publish
+
+=== generate epub
+
+a2x -fepub -dbook minimal-book.txt
+
+.more info/examples about epub
+http://www.methods.co.nz/asciidoc/publishing-ebooks-with-asciidoc.html
+it demonstrate how to covert a Gutenberg text novel into epub
+
+I tested, replacing its example with my asciidoc source , surprisingly doens't
+work (still generating pdf, not epub), don't know why.
+
+
+4. How can I include embedded fonts in an EPUB document?
+
+This is a two step process:
+
+.Declare the font files and their use in your document's CSS stylesheet. For example:
+----
+@font-face {
+  font-family : LiberationSerif-Regular;
+  font-weight : normal;
+  font-style: normal;
+  src : url(LiberationSerif-Regular.ttf);
+}
+
+body {
+  font-family: LiberationSerif-Regular, serif;
+}
+----
+
+.Declare the font file as resource when you use a2x(1) to compile the EPUB
+----
+a2x -f epub -d book --epubcheck --stylesheet epubtest.css --resource .ttf=application/x-font-ttf --resource LiberationSerif-Regular.ttf epubtest.txt
+----
+
+[NOTE]
+* Requires AsciiDoc 8.6.5 or better.
+* The True Type Font mimetype had to be declared explicitly with the --resource .ttf=application/x-font-ttf option because it wasnât registered on my Linux system.
+* In the above example the font file is in the same directory as the AsciiDoc source file and is installed to the same relative location in the EPUB archive OEBPS directoryâââif your font file resides in a different location youâll need to adjust the --resource option accordingly (see the RESOURCES section in the a2x(1) man page for details).
+* The URL value of the CSS src property is set to the destination font file relative to the CSS file.
+* The --resource option allows you to inject any file (not just font files) into the EPUB output document.
+* Using the CSS @font-face rule is a complex subject and is outside the scope of this FAQ.
+* Many EPUB readers do not process embedded fonts.
+
+.after testing this works:
+ping@640g-laptop:~$ a2x -f epub -d book --verbose --no-xmllint --epubcheck --stylesheet temp-epubtest.css --resource .ttf=application/x-font-ttf --resource LiberationSerif-Regular.ttf -D /mnt/public_html/webdata/ xnix/vim/vim-jtac-work.txt
+
+have to copy following into the same dir as source file:
+* cp /usr/share/fonts/truetype/ttf-liberation/LiberationSerif-Regular.ttf xnix/vim/
+    - use absolute path report errors
+* temp-epubtest.css
+
+=== ``checkout'' (-a leveloffset=-1)
+
+.portion of the doc
+    ....
+    === TCOM509 Homework4 Due October 1, 2012 
+    Yuan Li (Sandy) <gogosandyli@gmail.com>
+    :toc:
+    :toc-title: home work
+    :numbered:
+    :data-uri:
+
+    ==== others
+    ....
+
+.``check out'' into html using nagative leveloffset
+----
+'y,'lw !asciidoc -a leveloffset=-2 -o Dropbox/temp-transfer/yuan-li-homework4.html -
+----
+
+.issue
+title (header) level only 0-4, so this works:
+
+    //this works
+    //file: temp111.txt
+    //asciidoc -a toc -a toclevels=10 -a leveloffset=-2 temp111.txt
+    === topic1
+    Ping Sandy <abc@gmail.com>
+    :toc-title: agenda
+    :toclevels: 7
+    :leveloffset: -2
+
+    ==== sub-topic1
+    text
+
+    ===== sub-topic11
+    text
+
+    ==== sub-topic2
+    text
+
+    ===== sub-topic21
+    text 
+
+
+while this doesn't work:
+
+    //file: temp111.txt
+    //asciidoc -a toc -a toclevels=10 -a leveloffset=-4 temp111.txt
+    ===== topic1
+    Ping Sandy <abc@gmail.com>
+    :toc-title: agenda
+    :toclevels: 7
+    :leveloffset: -4
+
+    ====== sub-topic1
+    text
+
+    ======= sub-topic11
+    text
+
+    ====== sub-topic2
+    text
+
+    ======= sub-topic21
+    text
+
+
+.reason and solution
+Asciidoc only knows how to generate 4 levels, 
+offsetting using :leveloffset: must remain in that range.  
+':toclevels:' sets which levels show in the toc, 
+it does not generate more levels.
+
+You need to configure both input syntax and the output to be generated
+to extend the number of section levels.  Section level 4 uses h5 and
+HTML only goes to h6 so you can only add one more level anyway.
+
+Cheers
+Lex
+
+
+.add this in /etc/asciidoc/xx.conf, locate configuration of "sections"
+
+    #xhtml11.conf
+    [sect5]
+    <div class="sect5{style? {style}}{role? {role}}">
+    <h6{id? id="{id}"}>{title}</h6>
+    |
+    </div>
+
+    #html4.conf
+
+still not work yet
+
+<<<<
+
+
+==== What are the primary purposes of port number?
+=== man page
+
+a2x --doctype manpage --format manpage asciidoc.1.txt
+
+
+$ python ../asciidoc.py -d manpage -b docbook asciidoc.1.txt
+$ xsltproc --nonet ../docbook-xsl/manpage.xsl asciidoc.1.xml
+
+
+Viewing and printing manpage files
+
+Use the man(1) command to view the manpage file:
+
+$ man -l asciidoc.1
+
+To print a high quality man page to a postscript printer:
+
+$ man -l -Tps asciidoc.1 | lpr
+
+You could also create a PDF version of the man page by converting PostScript to PDF using ps2pdf(1):
+
+$ man -l -Tps asciidoc.1 | ps2pdf - asciidoc.1.pdf
+
+The ps2pdf(1) command is included in the Ghostscript distribution.
+
+
+=== convert VOom to asciidoc
+
+- remove all potential headers within the content
+
+    #by adding one space ahead
+    :%s@\(^\(=\|-\|\.\|\~\|\^\|\*\|\/\/\|+\|_\)\)\+@ \1@gc
+
+- convert voom mark to asciidoc headers
+
+    #this drops anything after {{{
+    #drawbacks: there might be some useful info after the voom marks (Utl tag)
+    :%s/^\s*\(-*\)\(.\{-}\)\(-*\)\s*{{{\(\d\+\).*/\=repeat('=',submatch(4)).' '.submatch(2)/
+    #this retains anything after {{{ mark, not tested
+    :%s/^\s*\(-*\)\(.\{-}\)\(-*\)\s*{{{\(\d\+\)(.*)/\=repeat('=',submatch(4)).' '.submatch(2).submatch(5)/
+
+
+- make sure at least 1 blank line above headers
+    :%s@\(^\s*\S\+.\{-}\n\)\(=.*\)@\1\r\2@g
+
+=== convert asciidoc to markdown
+
+currently best practice is:
+asciidoc--(asiidoc)-->docbook--(pandoc)-->markdown
+
+=== list of cmds from faq
+
+53. Where can I find examples of commands used to build output documents?
+
+The User Guide has some. You could also look at ./doc/main.aap and
+./examples/website/main.aap in the AsciiDoc distribution, they have all the
+commands used to build the AsciiDoc documentation and the AsciiDoc website (even
+if you don’t use A-A-P you’ll still find it useful).
+
+=== others
+
+----
+#article generated:
+#asciidoc -a data-uri -a icons -a toc -a max-width=55em article.txt 
+    http://www.methods.co.nz/asciidoc/article-standalone.html
+
+#asciidoc -b html5 -a icons -a toc2 -a theme=flask article.txt
+    http://www.methods.co.nz/asciidoc/article-html5-toc2.html
+
+    http://www.methods.co.nz/asciidoc/article.html
+    http://www.methods.co.nz/asciidoc/article.pdf
+----
+
+https://community.jboss.org/thread/196216?_sscc=t
+
+Here are the commands I used to generate the HTML, PDF and Docbook outputs with AsciiDoc 8.6.6.
+ 
+HTML:
+﻿asciidoc -b html5 -a icons -a iconsdir=$HOME/opt/asciidoc/images/icons -a theme=flask -a data-uri -a toc2 -a pygments tutorial.asciidoc
+ 
+PDF:
+a2x -fpdf -dbook --fop --icons --icons-dir=$HOME/opt/asciidoc/images/icons tutorial.asciidoc
+ 
+Docbook:
+a2x -fdocbook -dbook --fop --icons --icons-dir=$HOME/opt/asciidoc/images/icons tutorial.asciidoc
+
+
+=== debug asciidoc
+
+-v: verbose
+
+trace:
+
+    Command-line examples:
+
+	Trace the entire document.
+
+	$ asciidoc -a trace mydoc.txt
+
+	Trace messages whose names start with quotes or macros:
+
+	$ asciidoc -a 'trace=quotes|macros'  mydoc.txt
+
+	Print the first line of each trace message:
+
+	$ asciidoc -a trace mydoc.txt 2>&1 | grep ^TRACE:
+
+    Attribute Entry examples:
+
+	Begin printing all trace messages:
+
+	:trace:
+
+	Print only matched trace messages:
+
+	:trace: quotes|macros
+
+	Turn trace messages off:
+
+	:trace!:
+
+=== config file
+
+<url:books/asciidoc.txt#tn=Configuration file names, precedence and locations>
+
+asciidoc -f asciidoc.conf mydoc.txt
+
+=== asciidoc in vim
+
+==== ftdetect
+
+http://groups.google.com/group/asciidoc/browse_thread/thread/a9762e21ec0cc244/5d3a4ebf20e6847e
+
+ping@640g-laptop:~$ dpkg -L asciidoc | grep -i vim
+/usr/share/vim
+/usr/share/vim/registry
+/usr/share/vim/registry/asciidoc.yaml
+/usr/share/vim/addons
+/usr/share/vim/addons/ftdetect
+/usr/share/vim/addons/ftdetect/asciidoc_filetype.vim 	<------
+/usr/share/vim/addons/syntax
+/usr/share/vim/addons/syntax/asciidoc.vim
+
+put this file in .vim/ftdetect/, restart vim, that's it
+whenever vim open .txt or .asciidoc file, it start detect the file type
+
+    " au BufNewFile,BufRead *.asciidoc,*.txt,README,TODO,CHANGELOG,NOTES  setfiletype asciidoc
+     au BufRead *.asciidoc,*.txt,README,TODO,CHANGELOG,NOTES call s:FTasciidoc()
+
+    " This function checks for a valid AsciiDoc document title after first
+    " skipping any leading comments.
+    function! s:FTasciidoc()
+
+    " scan the file line by line, skipping all comment blocks and comment lines
+    " for a title/header text
+      let in_comment_block = 0
+      let n = 1                         "starting from 1st line
+      while n < 50                      "checking only 1st 49 lines
+	let line = getline(n)           "get a line
+	let n = n + 1                   "anchor move to next line
+	if line =~ '^/\{4,}$'           "if '////..', then it's a comment block
+	  if ! in_comment_block         "if haven't see it before
+	    let in_comment_block = 1    "mark it as block start
+	  else                          "otherwise,
+	    let in_comment_block = 0    "mark it as block end
+	  endif
+	  continue                      "go check next line
+	endif                           "in either case
+	if in_comment_block             "if we are still in block
+	  continue                      "move on
+	endif
+	if line !~ '\(^//\)\|\(^\s*$\)' "if we find sth else (means out of block)
+	  break                         "break the loop, if it's neither '//' nor blank line
+	endif                           "as this point we got some texts that
+      endwhile                          "we assume to be a title or header
+
+    "the title/header texts must be more than 3CH
+      if line !~ '.\{3,}'               "if the line is too short (<3)
+	return                          "don't set
+      endif
+
+    "there must be a '---' or '===' line under the text,also need >3 CH
+      let len = len(line)               "now check 'next' line, get length & content
+      let line = getline(n)             "see line 23(n=n+1) for why it's next line
+      if line !~ '[-=]\{3,}'            "if there are no 3 or more '-' or '='
+	return                          "don't set
+      endif
+
+    "the length difference of text and mark line in the header/title
+    "must less than 3
+      if len < len(line) - 3 || len > len(line) + 3
+	return
+      endif
+
+    "if such a title/head is found, then set it after default ft check
+      setfiletype asciidoc
+
+endfunction
+
+
+
+=== my arts
+
+index2.txt
+RLI-12720.txt
+hsbc-statement-ping-song.txt
+vim-jtac-work.txt
+
+=== revisionhistory
+
+ Subject: 	Re: Multiple entries in the REVISION HISTORY
+ Date: 	Thu, 3 Jan 2013 09:40:23 +1100
+ From: 	Lex Trotman <elextr@gmail.com>
+ Reply-To: 	asciidoc@googlegroups.com
+ To: 	asciidoc@googlegroups.com
+ 
+ 
+ On 3 January 2013 06:21, Andreas Piening <andreas.piening@gmail.com> wrote:
+ > Hi asciidoc list,
+ >
+ > I use a author and version string in my asciidoc sourcefile which is showed
+ > up in the revision history table of my DBLATEX created PDF file as expected.
+ >
+ > I just can't figure out how to add multiple entries into that table. I want
+ > to track the changed made by different editors in this revision history.
+ >
+ > Thank you very much!
+ 
+ Hi Andreas,
+ 
+ Asciidoc doesn't support revhistory itself.
+ 
+ The undocumented attribute revisionhistory  (Hint Stuart, at least I
+ couldn't find it documented :) will load a docbook file in the
+ document directory called <document name>-revhistory.xml containing
+ the revhistory entity.
+ 
+ Cheers
+ Lex
+
+ > this solutions is just fine to me. Please can you give me an example or
+ > point me somewhere so that I know how this *-revhistory.xml needs to be
+ > formatted?
+ 
+ Hi Andreas,
+ 
+ Its a docbook revhistory element, see your "favourite" docbook spec,
+ eg http://www.docbook.org/tdg/en/html/revhistory.html
+ 
+ >
+ > Do I need to activate the attribute in the asciidoc sourcefile then, or via
+ > commandline? Can I pass it to a2x -t pdf too, so that I get the revhistory
+ > used by DBLATEX to be rendered in my PDF?
+ 
+ Well, if it was me I would put it right at the very top of the source
+ file, then you don't have to remember that it is needed on the command
+ line.  Note it *must* be part of the header IIUC.
+
+=== some best practice/working solutions
+
+==== for learning english/ancient docs
+
+.requirement:
+* highlight support to emphasis, itally, mono...
+* side notes vertical block, with some spaces away from original text block
+* good alignment
+
+.problem
+* liternal block is good to retain the text returns
+* to have substitutions, text formats, use [subs="quotes"]
+* this works, but the implicit liternal block (via indention) fails the
+  asciidoc syntax highlight
+* solution to retain the syntax highlight:
+    - use explicit liternal block (via `....`) to avoid indention
+    - use ifdef macro, to avoid direct `....`
+
+
+===== solution1 (current best solution): 
+
+.explicit liternal block + ifdef macro
+----
+
+ ifdef::basebackend-html[[subs="quotes"]]
+ ifdef::basebackend-html[....]
+
+//orignal text block 							sidenote
+
+禹为人聪敏机智，能吃苦耐劳，他遵守道德，仁爱可亲，言语可信。 		
+他的声音就是标准的音律，他的身躯就是标准的尺度， *凭着他的声音*  	太牛了
+*和躯体就可以校正音律的高低和尺度的长短* 。他勤勤恳恳，庄重严肃
+，堪称是百官的典范。禹接受了舜帝的命令，与益、后稷一起到任，
+
+ ifdef::basebackend-html[....]
+
+----
+
+This renders:
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+//orignal text block 							sidenote
+
+禹为人聪敏机智，能吃苦耐劳，他遵守道德，仁爱可亲，言语可信。 		
+他的声音就是标准的音律，他的身躯就是标准的尺度， *凭着他的声音*  	太牛了
+*和躯体就可以校正音律的高低和尺度的长短* 。他勤勤恳恳，庄重严肃
+，堪称是百官的典范。禹接受了舜帝的命令，与益、后稷一起到任，
+
+ifdef::basebackend-html[....]
+
+
+.working doc reference
+* english 
+* shiji notes
+
+===== solution2
+
+.use verse + openblock to have a 'verse block'
+
+----
+[verse]
+--
+Put your hand on the side of the _toilet tank_
+If the tank is cold and sweating and the        [swet] 汗 出汗, 渗出, 烦恼
+toilet has not been flushed for a while, 
+bla bla bla bla bla bla
+
+bla bla bla bla bla bla
+toilet *dye* tablets.                           n. 颜料, 染料
+Did You Have a High Water and Sewer Bill?
+--
+----
+
+renders:
+
+[verse]
+--
+Put your hand on the side of the _toilet tank_
+If the tank is cold and sweating and the        [swet] 汗 出汗, 渗出, 烦恼
+toilet has not been flushed for a while, 
+bla bla bla bla bla bla
+
+bla bla bla bla bla bla
+toilet *dye* tablets.                           n. 颜料, 染料
+Did You Have a High Water and Sewer Bill?
+--
+
+NOTE: comparing this with solution1 (explicit liternal + macro), the above is
+better, in terms of alighment
+
+===== solution3: use enhanced TOhtml: ToHtml
+
+this will convert whatever looks in vim into html
+
+but work on only whole file?
+
+=== misc (from email/etc, need test)
+
+==== source line-range
+....
+    ["source","java",src_tab="8",args="--line-range=4-"]
+    ----
+    include::./Main-extrait.java[]
+    ----
+....
+
+==== internationality
+
+gmail thread: I18n on CAUTION and IMPORTANT
+
+Hi ping,
+
+I just tried and got the following error:
+
+asciidoc: WARNING: my_doc.txt: line 6: missing language conf file: lang-cn.conf
+
+In my asciidoc folder there are several lang-*.conf files:
+
+ls asciidoc/lang-*.conf
+asciidoc/lang-cs.conf	asciidoc/lang-fr.conf	asciidoc/lang-ro.conf
+asciidoc/lang-de.conf	asciidoc/lang-hu.conf	asciidoc/lang-ru.conf
+asciidoc/lang-el.conf	asciidoc/lang-it.conf	asciidoc/lang-uk.conf
+asciidoc/lang-en.conf	asciidoc/lang-nl.conf
+asciidoc/lang-es.conf	asciidoc/lang-pt-BR.conf
+
+So it should be easy to create one on your own. I don't know about UTF-8 support and so on but it's easy to find out by creating a lang-cn.conf file copied from the lang-en.conf for example and change one translated term there.
+
+Am Donnerstag, 3. Januar 2013 18:03:52 UTC+1 schrieb ping:
+
+    how about other languages? like CJK... ,e,g is there a lang=cn ?
+
+    On 01/03/2013 12:02 PM, Andreas Piening wrote:
+>     Hi Will,
+>
+>     YES that did the trick... works for asciidoc and a2x -t pdf the same way. Other terms like index headers etc. are also translated now.
+>
+>     Thank you very much!
+>
+>     Andreas
+>
+>     Am Donnerstag, 3. Januar 2013 17:57:25 UTC+1 schrieb Will:
+>
+>         Hi Andreas,
+>
+>         Using the lang attribute works for me (XHTML output, as well as PDF via dblatex).  For example:
+>
+>             python asciidoc.py --attribute lang=de doc.txt
+>
+>         Not sure if that is valid for a2x though, I don't use it.
+>
+>         Cheers,
+>         Will
+
+
+==== which looks better?
+
+.this
+    * 酸辣土豆丝
+
+    原料::
+
+	土豆、紅椒、花椒、香菜、白醋、蒜、盐、味精。
+
+    做法::
+
+	1、红椒洗净切丝，香菜切断，蒜切片。
+	2、土豆去皮切丝，越细越好哦，如果切不好就用擦子擦吧。
+	3、切好的土豆丝放凉水里浸泡，洗去淀粉，这样炒出来脆爽，不粘锅。
+	4、锅内放油，油热后放花椒，炸出香味，放入蒜片爆香。
+	5、放入土豆丝翻炒，放白醋和盐，动作要快哦，放入红椒丝快速翻炒。
+	6、最后放入香菜和味精翻炒均匀即可
+
+looks much(?) better than:
+
+.this
+
+    酸辣土豆丝::
+
+    * 原料
+
+	土豆、紅椒、花椒、香菜、白醋、蒜、盐、味精。
+
+    * 做法
+
+	1、红椒洗净切丝，香菜切断，蒜切片。
+	2、土豆去皮切丝，越细越好哦，如果切不好就用擦子擦吧。
+	3、切好的土豆丝放凉水里浸泡，洗去淀粉，这样炒出来脆爽，不粘锅。
+	4、锅内放油，油热后放花椒，炸出香味，放入蒜片爆香。
+	5、放入土豆丝翻炒，放白醋和盐，动作要快哦，放入红椒丝快速翻炒。
+	6、最后放入香菜和味精翻炒均匀即可
+
+=== work history
+
+.7/25/2012
+
+    install asciidoc8.6.8. compiling from source
+
+    Installing asciidoc for all users
+    http://www.methods.co.nz/asciidoc/INSTALL.html#_installing_from_the_mercurial_repository
+
+    Create configure using autoconf(1); use configure to create the Makefile;
+    run make(1); build the man pages; install:
+
+    $ autoconf
+    $ ./configure
+    $ make
+    $ sudo make install
+
+
+    ping@640g-laptop:~$ which asciidoc
+    /usr/local/bin/asciidoc
+    ping@640g-laptop:~$ /usr/local/bin/asciidoc --version
+    asciidoc 8.6.8
+
+
+.7/24/2012
+
+    On 7/24/2012 10:40 PM, ping wrote:
+    > On 7/24/2012 9:02 PM, Lex Trotman wrote:
+    >> On 25 July 2012 10:04, Alex Efros <powerman@powerman.name> wrote:
+    >>> Hi!
+    >>>
+    >>> On Wed, Jul 25, 2012 at 09:57:42AM +1000, Lex Trotman wrote:
+    >>>>> Is it possible to convert asciidoc article (one file) into Word
+    >>>>> document
+    >>>>> format (.doc, .docx, .rtf, etc.)?
+    >>>> Not officially.  You could try the experimental odt backend, load in
+    >>>> libreoffice and save as those.
+    >>>
+    >>> Thanks. Where I can get this backend?
+    >>
+    >> https://github.com/dagwieers/asciidoc-odf
+    >>
+    > this looks extremely useful when we have to talk to MicroSoft-world
+    > people. but sadly, I tried that and got errors...
+    >
+    > ping@640g-laptop%asciidoc -b odp asciidoctips.txt
+    > asciidoc: WARNING: asciidoctips.txt: line 4: include file not found:
+    > /etc/asciidoc/backends/odp/asciidoc.odp.styles
+    > asciidoc: FAILED: asciidoctips.txt: line 4: illegal [miscellaneous]
+    > subsverbatim: specialcharacters,callouts,replacements3: replacements3
+    >
+    > so the -b odp expect to locate:
+    >    /etc/asciidoc/backends/odp/asciidoc.odp.styles
+    > but look at the installation, it actually copied the "backends" folder
+    > into user home dir .asciidoc:
+    >
+    > ping@640g-laptop:~/.asciidoc$ ls
+    > backends  filters  themes
+    >
+    > ping@640g-laptop:~/.asciidoc/backends/odp$ ls
+    > a2x-backend.py  asciidoc.odp.styles  asciidoc.otp  odp.conf
+    >
+    > what is the correct folder to install and to refer? how to solve this
+    > issue? I don't want to make any dirty tricks to ruin out the system
+    > default behavior, unless have to...
+    >
+
+    ok, I fixed the issue by:
+
+    [following work done from a ubuntu machine:]
+    1) ln ~/.asciidoc/backends/ to /etc/asciidoc/backends
+    ping@640g-laptop:/etc/asciidoc$ sudo ln -s ~/.asciidoc/backends/ backends
+
+    2) upgrade asciidoc from 8.6.7
+
+    current issue:
+
+    1) although I still get following "warning":
+    asciidoc: WARNING: asciidoc.txt: line 3155: include file not found:
+    /data/backup/xnix/asciidoc/customers.csv
+
+    I end up with the fodt file generated! amazing! see attached 3 files: fodt,
+    doc(converted from fodt in libreoffice), fodp.
+
+    [following work done from a windows7 machine]
+    the fodt and MS-doc file looks nice.but
+
+    2) the fodp file I can't open. libreoffice report:
+    general error/general input/output error.
+
+    3) the fodt file generated can be opened from libreoffice, save as word97 (doc)
+    is also good. but saving as office2010 (docx) crashed the libreoffice...
+
+
+    regards
+    ping 
+
+
+    ping@640g-laptop:/etc/asciidoc$ sudo ln -s ~/.asciidoc/backends/ backends
+
+    2) upgrade asciidoc from 8.6.7
+
+    current issue:
+
+    1) although I still get following "warning":
+    asciidoc: WARNING: asciidoc.txt: line 3155: include file not found:
+    /data/backup/xnix/asciidoc/customers.csv
+
+    I end up with the fodt file generated! amazing! see attached 3 files: fodt,
+    doc(converted from fodt in libreoffice), fodp.
+
+    [following work done from a windows7 machine]
+    the fodt and MS-doc file looks nice.but
+
+    2) the fodp file I can't open. libreoffice report:
+    general error/general input/output error.
+
+    3) the fodt file generated can be opened from libreoffice, save as word97 (doc)
+    is also good. but saving as office2010 (docx) crashed the libreoffice...
+
+
+    regards
+    ping 
+

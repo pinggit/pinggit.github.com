@@ -1,0 +1,72 @@
+---
+layout: post
+title: "fastfood kfc"
+created:  2013 Mar 08 10:52:37 PM
+tags: [english]
+categories: [english]
+published: false
+---
+
+
+== 快餐常客必会的点餐英语
+
+经常去麦当劳、肯德基的朋友们一定要看看了。
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+May I help you? / What can I get for you today?
+Yes. number one *combo*. And one Big Mac with medium fries。
+
+For here or to go?
+For here, 
+
+With cheese?
+No. Thanks。
+
+Would you like something to drink? / What kinds of drinks?
+Yes, one small Sprite please.
+
+Cream or sugar?
+Both.
+
+Would you like fries to go with that?
+Yes, a big one。
+
+Is that all? / Anything else?
+That's it. / That's all。
+
+Five dollars and fifty five cents。
+Here is six dollars。
+
+Here is forty five cents, have a great day!
+Thanks. / You too!
+
+ifdef::basebackend-html[....]
+
+[NOTE]
+====
+http://www.24en.com 爱思英语网
+
+1. 套餐 (combo)
+通常看着图片就知道几号是什么套餐，点套餐时只要说 Combo number one，或是 number
+two 就好了。有时店员会问Do you want to go large?  如果你需要，他会给你大的薯条
+和可乐。
+2. 汉堡 (hamburger)
+老美说汉堡通常会说 burger， 如 cheese burger。在美国单点汉堡店员会问你 goes
+with cheese? 所以也可以在点的时候就说 without cheese，他就不会再问你了。有些比
+较好的餐厅还会问你肉要几分熟，有意思吧。
+3. 薯条 (fries)
+4. 饮料 (drinks)
+在快餐店的饮料就那么几种： 
+
+    a. 可乐 coke  
+    b. 减肥可乐 diet coke (diet)   
+    c. 雪碧 Sprite  
+    d. 橘子汽水 Hi-C (or orange soda)   
+    e. 冰茶 (iced tea)
+
+soft drink 大多数是可以 refill 的
+
+====
+

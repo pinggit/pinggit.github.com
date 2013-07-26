@@ -1,0 +1,1352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>ranger</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(4);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>ranger</h1>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>a very good cli file manager.
+need to use/research more
+<a href="http://www.youtube.com/watch?v=qooLR8NmYKs">http://www.youtube.com/watch?v=qooLR8NmYKs</a></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_help_resources">1. help/resources</h2>
+<div class="sectionbody">
+<div class="paragraph"><div class="title">very good tuturial</div><p><a href="https://wiki.archlinux.org/index.php/Ranger">https://wiki.archlinux.org/index.php/Ranger</a></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pending_issue">2. pending issue</h2>
+<div class="sectionbody">
+<div class="qlist qanda"><ol>
+<li>
+<p><em>
+one slow tab slows all
+</em></p>
+<p><em>
+when using choose-file/dir, how to call ext-prog?
+</em></p>
+<p>
+    A: use :shell command, <em>@</em> as shortcut, plus
+       "macro"(like %c), powerful!
+</p>
+</li>
+<li>
+<p><em>
+man page bash example doesn&#8217;t work?
+</em></p>
+<p>
+    A: it actually works: need to then start ranger as "ranger-cd"
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_macros">3. macros</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><a href="http://www.nongnu.org/ranger/ranger.1.html#macros">http://www.nongnu.org/ranger/ranger.1.html#macros</a></p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>%f   the highlighted file
+%d   the path of the current directory
+%s   the selected files in the current directory.
+%t   all tagged files in the current directory
+%c   the full paths of the currently copied/cut files</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_strokes">4. key-strokes</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>check .config/ranger/rc.config, everything is inside.</p></div>
+<div class="paragraph"><p>i                       :view the file
+W                       :see logs
+w                       :check Q list
+S                       :start a new shell
+f                       :real time search (:find)
+zf                      :only show some filtered files (:filter)
+/                       :search (not real time)
+v/&lt;SPACE&gt;/              :mark all, current file (:mark )</p></div>
+<div class="paragraph"><p>!       :shell
+@       :shell <sup> %s     (</sup> is cursor position)
+#       :shell -p ^</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>flags give you a way to modify the behavior of the spawned process.  They
+are used in the commands ":open_with" (key "r") and ":shell" (key "!").</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>p   Redirect output to the (p)ager
+s   (s)ilent mode.  Output will be discarded.
+w   (w)ait for an Enter-press when the process is done</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#w/p is useful to capture the output of a shell cmd
+#start a shell, issue pwd, wait for a enter to go back ranger
+:shell -w pwd</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>#another similar(some time better) way is:
+:shell pwd;read</code></pre>
+</div></div>
+<div class="paragraph"><p>r       :open-with
+m       :mark things
+'       :refer things</p></div>
+<div class="paragraph"><p>gm      :go media (go to /media)</p></div>
+<div class="paragraph"><p>#my customization</p></div>
+<div class="paragraph"><p>#ping, read pcap file when hitting "l"
+#ext pcap = tcpdump -SvvtttXXnr "$@" | vim -
+ext pcap = vim "$@"</p></div>
+<div class="paragraph"><p>#Pressing ",r" will first let you edit your rc.conf and then load it into
+#ranger with the :source command, so you don&#8217;t have to restart it.
+map ,r chain shell vim <sub>/.config/ranger/rc.conf; source </sub>/.config/ranger/rc.conf
+map ,a shell vim <sub>/.config/ranger/rifle.conf; source </sub>/.config/ranger/rc.conf
+map ,c shell vim <sub>/.config/ranger/commands.py; source </sub>/.config/ranger/rc.conf
+map ,s shell vim <sub>/.config/ranger/scope.sh; source </sub>/.config/ranger/rc.conf</p></div>
+<div class="literalblock">
+<div class="title">key-binding (rc.config) examples:</div>
+<div class="content">
+<pre><code>#rc.config
+# move to trash
+map DD shell mv -t /home/myname/.config/ranger/Trash %s</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="title">bind app (rifle.conf) example:</div>
+<div class="content">
+<pre><code>~/.config/ranger/rifle.conf
+#Since the beginning lines are executed first, you should put your
+#modifications at the beginning of the file. For example, the following
+#entry will open a tex file with kile.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>ext tex = kile "$@"</code></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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" />
+</td>
+<td class="content">tested, doesn&#8217;t work yet</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_help">5. help</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>?  for man page
+1? for a list of key bindings,
+2? for a list of commands and
+3? for a list of settings.</p></div>
+<div class="paragraph"><div class="title">rc.conf</div><p>controls startup commands and key bindings
+.commands.py
+controls the commands which are launched with the ":" key
+.rifle.conf
+controls the applications used when a given type of file is launched.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command">6. command</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>:shell</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>only show any files containing PATTERN
+:filter&lt;CR&gt;       reset the filter</code></pre>
+</div></div>
+<div class="paragraph"><p>:travel</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commands_commands_py_examples">7. commands (commands.py) examples::</h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="title">Example 1. trash a file</div>
+<div class="content">
+<div class="paragraph"><p>#~/.config/ranger/commands.py
+class empty(Command):
+    """:empty</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Empties the trash directory ~/.Trash
+"""</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def execute(self):
+    self.fm.run("rm -rf /home/myname/.Trash/{*,.[^.]*}")</code></pre>
+</div></div>
+<div class="paragraph"><p>#usage
+:empty&lt;Enter&gt;</p></div>
+</div></div>
+<div class="exampleblock">
+<div class="title">Example 2. copy archive file and extract into current folder</div>
+<div class="content">
+<div class="paragraph"><p>#The following command implements archive extraction by copying (yy) one or more
+#archive files and then executing ":extracthere" on the desired directory.</p></div>
+<div class="paragraph"><p>import os
+from ranger.core.loader import CommandLoader</p></div>
+<div class="paragraph"><p>class extracthere(Command):
+    def execute(self):
+        """ Extract copied files to current directory """
+        copied_files = tuple(self.fm.env.copy)</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>if not copied_files:
+    return</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def refresh(_):
+    cwd = self.fm.env.get_directory(original_path)
+    cwd.load_content()</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>one_file = copied_files[0]
+cwd = self.fm.env.cwd
+original_path = cwd.path
+au_flags = ['-X', cwd.path]
+au_flags += self.line.split()[1:]
+au_flags += ['-e']</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>self.fm.env.copy.clear()
+self.fm.env.cut = False
+if len(copied_files) == 1:
+    descr = "extracting: " + os.path.basename(one_file.path)
+else:
+    descr = "extracting files from: " + os.path.basename(one_file.dirname)
+obj = CommandLoader(args=['aunpack'] + au_flags \
+        + [f.path for f in copied_files], descr=descr)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>obj.signal_bind('after', refresh)
+self.fm.loader.add(obj)</code></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>The following command allows the user to compress several files on the current
+directory by marking them and then calling ":compress &lt;package name&gt;". It
+supports name suggestions by getting the basename of the current directory and
+appending several possibilities for the extension.</p></div>
+<div class="exampleblock">
+<div class="title">Example 3. mark and compress</div>
+<div class="content">
+<div class="paragraph"><p>import os
+from ranger.core.loader import CommandLoader</p></div>
+<div class="paragraph"><p>class compress(Command):
+    def execute(self):
+        """ Compress marked files to current directory """
+        cwd = self.fm.env.cwd
+        marked_files = cwd.get_selection()</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>if not marked_files:
+    return</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def refresh(_):
+    cwd = self.fm.env.get_directory(original_path)
+    cwd.load_content()</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>original_path = cwd.path
+parts = self.line.split()
+au_flags = parts[1:]</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>descr = "compressing files in: " + os.path.basename(parts[1])
+obj = CommandLoader(args=['apack'] + au_flags + \
+        [os.path.relpath(f.path, cwd.path) for f in marked_files], descr=descr)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>obj.signal_bind('after', refresh)
+self.fm.loader.add(obj)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def tab(self):
+    """ Complete with current folder name """</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>extension = ['.zip', '.tar.gz', '.rar', '.7z']
+return ['compress ' + os.path.basename(self.fm.env.cwd.path) + ext for ext in extension]</code></pre>
+</div></div>
+</div></div>
+<div class="paragraph"><p>Image Mounting</p></div>
+<div class="paragraph"><p>The following command assumes you are using cdemu as your image mounter and
+some kind of system like autofs which mounts the virtual drive to a specified
+location (<em>/media/virtualrom</em> in this case). Don&#8217;t forget to change mountpath
+to reflect your system settings.</p></div>
+<div class="paragraph"><p>To mount an image (or images) to a cdemud virtual drive from ranger you select
+the image files and then type <em>:mount</em> on the console. The mounting may
+actually take some time depending on your setup (in mine it may take as long as
+one minute) so the command uses a custom loader that waits until the mount
+directory is mounted and then opens it on the background in tab 9.</p></div>
+<div class="exampleblock">
+<div class="title">Example 4. select and :mount</div>
+<div class="content">
+<div class="paragraph"><p>import os, time
+from ranger.core.loader import Loadable
+from ranger.ext.signals import SignalDispatcher
+from ranger.ext.shell_escape import *</p></div>
+<div class="paragraph"><p>class MountLoader(Loadable, SignalDispatcher):
+    """
+    Wait until a directory is mounted
+    """
+    def <em>init</em>(self, path):
+        SignalDispatcher.<em>init</em>(self)
+        descr = "Waiting for dir <em>" + path + "</em> to be mounted"
+        Loadable.<em>init</em>(self, self.generate(), descr)
+        self.path = path</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def generate(self):
+    available = False
+    while not available:
+        try:
+            if os.path.ismount(self.path):
+                available = True
+        except:
+            pass
+        yield
+        time.sleep(0.03)
+    self.signal_emit('after')</code></pre>
+</div></div>
+<div class="paragraph"><p>class mount(Command):
+    def execute(self):
+        selected_files = self.fm.env.cwd.get_selection()</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>if not selected_files:
+    return</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>space = ' '
+self.fm.execute_command("cdemu -b system unload 0")
+self.fm.execute_command("cdemu -b system load 0 " + \
+        space.join([shell_escape(f.path) for f in selected_files]))</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>mountpath = "/media/virtualrom/"</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>def mount_finished(path):
+    currenttab = self.fm.current_tab
+    self.fm.tab_open(9, mountpath)
+    self.fm.tab_open(currenttab)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>obj = MountLoader(mountpath)
+obj.signal_bind('after', mount_finished)
+self.fm.loader.add(obj)</code></pre>
+</div></div>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set_options">8. set options</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>:set show_hidden=True</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_email_thread">9. email thread</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><code>On Sun, Feb 24, 2013 at 07:14:19PM -0500, ping wrote:
+&gt; a good tutorials to start with...</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>There are some tutorials out there for beginners if you google a
+bit, for example [1], [2].  But I guess you're not a beginner</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>[1] https://wiki.archlinux.org/index.php/Ranger
+[2] http://www.serverwatch.com/tutorials/article.php/3898746/Ranger-ConsoleBased-File-Management.htm</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>I assume that you know how to find the default configs and how to use
+custom configs.  If not, check the "Customization" section of the
+archlinux wiki page.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>On Sun, Feb 24, 2013 at 07:14:19PM -0500, ping wrote:
+&gt; where can I get the how-tos or cheat-sheet kind of things?
+&gt; yes I know we have the man page, but I may not want to read through
+&gt; it for the commonly used commands.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>if you search for COMMANDS in the man page, there is a brief listing of
+all commands.  Often the names are self-explanatory.  Just skim through
+it and look for things that sound useful to you.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>The most commonly used commands are probably :delete, :shell (key
+binding "!"), :search (key binding "/") and :filter (key binding "zf").
+Useful commands for traveling fast are :travel and :find (key "f").</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>On Sun, Feb 24, 2013 at 07:14:19PM -0500, ping wrote:
+&gt; for example I know yy ,dd, pp can do copy/paste/cut quick, but they
+&gt; are my "guess" based on my knowledge of vim.
+&gt; but why dd won't delete the file? checking the manual I found
+&gt; :delete, or even :shell rm %f.
+&gt; so which is the best?</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>I recommend using :delete, because it will ask you for confirmation if
+you try to delete more than 1 file or a non-empty directory.
+You can also change the setting "confirm_on_delete" to make it
+never/always ask you for confirmation.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Note that if you select multiple files with SPACE or "v" or ":mark" etc,
+all of the selected files will be deleted.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Also, I can recommend you to skim through the key binding section of the
+default rc.conf and look for things that you find useful.  Not all key
+bindings are documented in the man page.  Useful key bindings are:</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&gt; map @  console -p6 shell  %%s
+The @ key opens the console with "shell  %s" and puts the cursor at
+position 6, between the two spaces, so you can enter commands quickly
+that require the current selection as arguments.  E.g.: @mount&lt;enter&gt;
+to mount the currently selected directory.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&gt; map r  chain draw_possible_programs; console open_with
+"r" displays a list of programs that are associated with this file type
+and you can enter a number to select one and press enter, or type the
+name of a completely different program.  You can also use flags here,
+e.g.: rmplayer t&lt;enter&gt; opens the current file with mplayer, using the
+flag "t" which makes mplayer open in a separate terminal.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>check out the bindings starting with "g" for quick movement to important
+directories.  you can of course add your own g-bindings by putting
+something like this your custom ~/.config/ranger/rc.conf:
+&gt; map gX cd /usr/lib/gcc/i686-pc-linux-gnu/4.7.2/plugin/include/ada/gcc-interface/secret_pron</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>To change permissions of files, you can use the key bindings starting
+with - or +, for example "+ar" will execute "chmod a+r %s", "-ow" does
+"chmod o-w %s" etc. I hope you see the pattern.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>----------------------------------------
+You can always make your own commands quickly by combining :alias,
+:shell, :console and :chain.
+&gt; :alias &lt;new command&gt; &lt;old command&gt;
+&gt; :shell [-flags] &lt;shell command&gt;
+&gt; :console &lt;line&gt;
+&gt; :chain command1; command2; command3; ...
+:alias will allow you to define new commands without editing any python code,
+simply by combining existing commands.  :shell allows you to run any
+:shell commands with certain flags, see FLAGS in the man page.  :console
+will reopen the console with the given content, very useful for key
+bindings like this:
+&gt; map F console shell -p find . | grep
+And finally, chain lets you run multiple commands sequentially in a
+single key binding or alias.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>For example add this to your rc.conf:
+&gt; alias mount shell mount %f
+Now go to a directory that is listed in fstab as mountable by users and
+type :mount to mount it.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>My favourite custom key bindings are probably these:
+&gt; map ,r chain shell vim ~/.config/ranger/rc.conf; source ~/.config/ranger/rc.conf
+&gt; map ,a shell vim ~/.config/ranger/rifle.conf
+&gt; map ,c shell vim ~/.config/ranger/commands.py
+&gt; map ,s shell vim ~/.config/ranger/scope.sh</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Pressing ",r" will first let you edit your rc.conf and then load it into
+ranger with the :source command, so you don't have to restart it.
+The other ones only let you edit the configs, but you still have to
+restart ranger.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>On Sun, Feb 24, 2013 at 07:14:19PM -0500, ping wrote:
+&gt; also I want to make it display sth that does not come by default,
+&gt; like displaying a pcap file using tcpdump...
+&gt; how do I achieve that?</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>In the preview column?  Then what you're looking for is the
+configuration file "scope.sh".  That's a shell script which tries to
+print useful information about the given file, which is then fed into
+the preview column of ranger.</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Regards,
+Roman</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-03-05 02:57:35 EST
+</div>
+</div>
+</body>
+</html>

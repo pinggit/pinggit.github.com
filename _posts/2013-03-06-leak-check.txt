@@ -1,0 +1,128 @@
+---
+layout: post
+title: "leak check"
+created:  2013 Mar 06 09:51:40 AM
+tags: [english]
+categories: [english]
+published: false
+---
+
+
+== leak check
+
+http://www.loudounwater.org/About/highbills/
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Did You Have a High Water and _Sewer_ Bill?       ['su:ә] n. 下水
+
+Your water may have been running,
+*unintentionally*, for more than 24 hours!
+
+When our meter reading trucks are in the
+service area *pulling* meter readings, our      pull是个黄金词
+system will sometimes notice homes that have
+had water running for long periods of time.
+Our meter reading system will notify the
+service representative of a potential leak if
+water has been _flowing through_ the water
+meter for over 24 hours. If our meter reading
+trucks receive notification of a possible
+leak, we will notify those customers through
+a note on their water and *wastewater* bill or
+by leaving a hanging door tag.
+
+If you have not received notification on your
+bill or a hanging doortag, but still believe
+your bill is too high, please use the
+following checklist for water usage both
+inside and outside the home:
+
+ifdef::basebackend-html[....]
+
+=== Inside your Home
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Put your hand on the side of the _toilet tank_
+If the tank is cold and _sweating_ and the     [swet] 出汗, 渗出, 烦恼
+toilet has not been flushed for a while, you
+may have a leak.  Remove the _tank lid_ and
+_squeeze_ a few drops of food coloring into the 紧握, 挤, 榨取
+_back tank_. Wait 10 minutes; if color shows up
+in the bowl the _flapper_ is leaking and needs  阻水阀,挡板
+to be replaced. You can purchase flapper kits
+at local hardware stores or call a
+professional to replace the flapper. If you
+do not have food coloring, contact us for
+*toilet dye tablets*.                           n. 颜料, 染料
+
+Check the water level in the tank by taking
+off the cover.  The level should be set so it
+is below the overflow level.  If you have to
+_*jiggle* the flush handle_ on your toilet to get (使)轻摇, (使)微动
+it to stop running, the _flush level bar_ and
+chain (or the handle itself) may be _sticking_.
+There are some flapper kits that also contain
+replacement flush handles and chains.
+
+Look for wet, *warped* or *discolored* stains on 美[wɔrp] 变形, 弯曲,
+your ceilings, floors, walls and _woodwork_     变色,木制品, 木制家具
+(such as bottom of your kitchen and bathroom
+_sink cabinets_).                               柜式洗涤槽
+
+Be sure that the pressure release valve line    活瓣, 阀, 活门
+on your water heater is not dripping.  This     滴, 滴下物, 水滴
+would be the line that is *perpendicular* with    [,pә:pәn'dikjulә] n. 垂直线
+the water heater and dumps water into a pan
+or _floor drain_.                               地漏；[建] 地面排水管
+
+Be sure that your *humidifier* is set correctly
+to prevent over usage of water.  Check the
+manufacturing _directions_ to see if you can
+adjust it, or a heating or cooling company may
+need to _make adjustments_
+
+ifdef::basebackend-html[....]
+
+=== Outside Your Home
+
+ifdef::basebackend-html[[subs="quotes"]]
+ifdef::basebackend-html[....]
+
+Walk around your home and check your yard to
+see if there are any *saturated* spots or very  ['sætʃәreitid] 饱和的, 渗透的
+green spots in your yard. These spots may
+mean a leak in the _irrigation line_ or a leak
+from the meter to the house. Or the above
+ground sprinkler is watering an area for too
+long and may need a timing adjustment.
+
+Check your sprinkler system for broken heads
+or broken pipes.  Check your outside *hose bibs*  软管龙头 
+to see if they are dripping. If so the
+valve may not be holding.                       活瓣, 阀, 活门
+
+We can help you determine whether or not you
+have a leak, and we may be able to help you
+locate the leak, by scheduling a leak check
+appointment. To schedule a leak check
+appointment, please call Customer Service at
+571.291.7880.
+
+ifdef::basebackend-html[....]
+
+
+=== keyword to learn
+
+* tank / bowl / flapper handler / chain / cover / dye 
+* drip
+* valve
+* drain
+* adjustment/adjust
+* saturated
+* spots
+* unintentionally 
+
