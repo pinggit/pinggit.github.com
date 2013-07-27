@@ -1,6 +1,6 @@
 ---
 layout: page
-title: STUPID IS AS STUPID DOES
+title: tags and categories
 tagline: -- my collection of tips of life, tech, thought , everything ...
 ---
 

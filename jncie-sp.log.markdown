@@ -1,3 +1,10 @@
+---
+layout: page
+title: jncie-sp logs
+tagline: -- my collection of tips of life, tech, thought , everything ...
+---
+{% include JB/setup %}
+
 # logs
 
 ## transfer-on-commit
