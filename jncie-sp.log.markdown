@@ -3,6 +3,7 @@ layout: page
 title: jncie-sp logs
 tagline: -- my collection of tips of life, tech, thought , everything ...
 ---
+
 {% include JB/setup %}
 
 # logs
@@ -113,7 +114,7 @@ this looks succeed, but actually not working (no file a/v in the server)
 
 ### R2 => DC
 
-.DC got sum route of internal addr, but no default since not in R2's bgp route
+DC got sum route of internal addr, but no default since not in R2's bgp route
 
     test@MX80-NGGWR-02# run show ospf route logical-system ldc 
     Topology default Route Table:
