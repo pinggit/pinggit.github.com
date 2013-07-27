@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "资治通鉴 10 to 20 卷"
+title: "资治通鉴 十至二十卷 人物事件关系略图（部分）"
 published: true
 created:  2013 Jul 26 09:39:13 PM
 tags: [资治通鉴]
@@ -84,6 +84,7 @@ categories: [reading]
 
 
 酷吏：
+<http://news.ifeng.com/history/zhongguogudaishi/detail_2012_02/10/12426462_0.shtml>
 
         郅都            张汤                 严延年             宁成            王温舒
         （苍鹰）       （腹诽论罪发明者）    （屠伯）          （乳虎）
