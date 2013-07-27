@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "资治通鉴 十至二十卷 人物事件关系略图（部分）"
+title: "资治通鉴 读十至二十卷 人物事件关系略图（部分）"
 published: true
 created:  2013 Jul 26 09:39:13 PM
 tags: [资治通鉴]
