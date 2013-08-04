@@ -153,7 +153,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#cos">cos</a></li>
+<li><a href="#cos">cos</a><ul>
 <li><a href="#tip-qoscos">TIP: QoS/CoS</a><ul>
 <li><a href="#key-concepts">key concepts</a></li>
 <li><a href="#ip-tosrfc791">IP TOS(RFC791)</a></li>
@@ -181,6 +181,8 @@
 <li><a href="#policy-cos-based-forwarding">policy: Cos Based Forwarding</a></li>
 <li><a href="#scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</a></li>
 <li><a href="#rewrite-marker">rewrite marker</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3733,8 +3735,8 @@ traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
  4  20.20.1.22 (20.20.1.22)  0.682 ms  0.689 ms  0.618 ms
 </code></pre>
 <h2 id="cos">cos</h2>
-<pre><code>        111         110             other
-        EF          AF              BE
+<pre><code>IPPref        111         110             other
+fwd-class        EF          AF              BE
 </code></pre>
 <p>R1:</p>
 <pre><code>#firewall policers:5m,7m,10m
@@ -3767,10 +3769,10 @@ set class-of-service classifiers inet-precedence class-ippre forwarding-class ex
 set class-of-service classifiers inet-precedence class-ippre forwarding-class assured-forwarding loss-priority low code-points 110 
 set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence class-ippre
 </code></pre>
-<h2 id="tip-qoscos">TIP: QoS/CoS</h2>
-<h3 id="key-concepts">key concepts</h3>
+<h3 id="tip-qoscos">TIP: QoS/CoS</h3>
+<h4 id="key-concepts">key concepts</h4>
 <p>unidirectonal</p>
-<h3 id="ip-tosrfc791">IP TOS(RFC791)</h3>
+<h4 id="ip-tosrfc791">IP TOS(RFC791)</h4>
 <pre><code>P2      P1      P0      D      T      R      CU1     CU0
 </code></pre>
 <ul>
@@ -3790,17 +3792,17 @@ routine         Match packets with routine precedence (0)</p>
 </li>
 <li>CU (Currently Unused)—two bits(CU1-CU0)</li>
 </ul>
-<h3 id="dscp">DSCP</h3>
-<h4 id="diffserv-field">DiffServ field</h4>
+<h4 id="dscp">DSCP</h4>
+<h5 id="diffserv-field">DiffServ field</h5>
 <p>Original IPv4 ToS byte (ping: just a new name in the context of diffserv)</p>
 <p>RFC2474</p>
 <pre><code>DS5     DS4     DS3     DS2     DS1     DS0     ECN     ECN
 </code></pre>
-<h4 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h4>
+<h5 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h5>
 <p><strong>Classification</strong> 
 based / indexed on DSCP 
 Packets with a common DSCP belong to the same BA (forwarding class)</p>
-<h4 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h4>
+<h5 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h5>
 <p>Forwarding treatment associated with a given BA
 Packets with the same DSCP value have the same PHB</p>
 <p>PHB group:
@@ -3808,9 +3810,9 @@ A set of one or more PHBs with related forwarding behavior </p>
 <p>Example: 
 assured forwarding (AF) is a PHB group, consisting of PHBs AF1, AF2, AF3, and
 AF4</p>
-<h5 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h5>
+<h6 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h6>
 <p>RFC3246</p>
-<h5 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h5>
+<h6 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h6>
 <p>RFC2597</p>
 <pre><code>DSCP        AAA BB0
 =====================        
@@ -3826,16 +3828,16 @@ AF3         011
 
 AF4         100
 </code></pre>
-<h5 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h5>
+<h6 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h6>
 <p>RFC2474: 
 defined for backward compatible with RFC791 (IP precedence)
 "code selector code point"
 for network control traffic</p>
 <p>AAA: 001 - 111
 BBB: 000        #&lt;------this is how to diff with other PHB</p>
-<h5 id="bebest-effort-000000">BE(Best Effort): 000000</h5>
+<h6 id="bebest-effort-000000">BE(Best Effort): 000000</h6>
 <p>no spec</p>
-<h5 id="redback-device-table">redback device table:</h5>
+<h6 id="redback-device-table">redback device table:</h6>
 <pre><code>============================================================
 &lt;0-63&gt;   Differentiated services codepoint value 
 af11     Match packets with AF11 dscp (001010) 
@@ -3860,7 +3862,7 @@ cs7      Match packets with CS7(precedence 7) dscp (111000)
 be(def)  Match packets with default dscp (000000) 
 ef       Match packets with EF dscp (101110)
 </code></pre>
-<h5 id="junos-default-forwarding-class">JUNOS default forwarding-class</h5>
+<h6 id="junos-default-forwarding-class">JUNOS default forwarding-class</h6>
 <pre><code>lab@MX80-NGGWR-01# set logical-systems r1 firewall filter Jfilter term 1 then forwarding-class ?
 Possible completions:
   &lt;forwarding-class&gt;   Classify packet to forwarding class
@@ -3877,7 +3879,7 @@ Possible completions:
   expedited-forwarding  
   network-control
 </code></pre>
-<h4 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h4>
+<h5 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h5>
 <pre><code>lab@rams# run show class-of-service code-point-aliases (inet-precedence|exp|dscp)
 
 Alias              Bit pattern 
@@ -3910,10 +3912,10 @@ ef1                 011
 nc1         110     110     110000
 nc2         111     111     111000
 </code></pre>
-<h3 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h3>
-<h3 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h3>
-<h3 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h3>
-<h3 id="junos-tool-chains">JUNOS tool chains</h3>
+<h4 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h4>
+<h4 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h4>
+<h4 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h4>
+<h4 id="junos-tool-chains">JUNOS tool chains</h4>
 <pre><code>          +-----------+     +-----------+    +-----------+    +-----------+
    Ingress|classifier |     |policer    |    |multi-field|    |policy     |
     --&gt;---+           +-----+           +----+classifier +----+           +
@@ -3927,11 +3929,11 @@ nc2         111     111     111000
     &lt;-----+marker     +-----+shaper/RED +----+classifier +----+           +
           +-----------+     +-----------+    +-----------+    +-----------+
 </code></pre>
-<h4 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h4>
-<h4 id="policer-traffic-limit">policer: traffic limit</h4>
-<h4 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h4>
-<h4 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h4>
-<h4 id="rewrite-marker">rewrite marker</h4>
+<h5 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h5>
+<h5 id="policer-traffic-limit">policer: traffic limit</h5>
+<h5 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h5>
+<h5 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h5>
+<h5 id="rewrite-marker">rewrite marker</h5>
 <h2 id="misc-obsoleted">misc (obsoleted)</h2>
 <h3 id="ipv6_1">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
