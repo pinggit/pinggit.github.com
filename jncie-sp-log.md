@@ -1,4 +1,4 @@
-<p>TABLE OF CONTENTTTT</p>
+<p>TABLE OF CONTENT</p>
 <hr />
 <div class="toc">
 <ul>
@@ -3736,13 +3736,13 @@ traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
 <pre><code>        111         110             other
         EF          AF              BE
 </code></pre>
-<p>R1:
-    #firewall policers:5m,7m,10m
-    set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m  <br />
-    set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k <br />
-    set logical-systems r1 firewall policer 5m then discard                       <br />
-</p>
-<pre><code>set logical-systems r1 firewall policer 7m if-exceeding bandwidth-limit 7m    
+<p>R1:</p>
+<pre><code>#firewall policers:5m,7m,10m
+set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m    
+set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k   
+set logical-systems r1 firewall policer 5m then discard
+
+set logical-systems r1 firewall policer 7m if-exceeding bandwidth-limit 7m    
 set logical-systems r1 firewall policer 7m if-exceeding burst-size-limit 15k   
 set logical-systems r1 firewall policer 7m then discard
 
@@ -3774,18 +3774,20 @@ set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence cla
 <pre><code>P2      P1      P0      D      T      R      CU1     CU0
 </code></pre>
 <ul>
-<li>IP precedence—three bits (P2 to P0)</li>
-</ul>
+<li>
+<p>IP precedence—three bits (P2 to P0)</p>
 <p>network         Match packets with network control precedence (7)
-  internet        Match packets with internetwork control precedence (6)
-  critical        Match packets with critical precedence (5)
-  flash-override  Match packets with flash override precedence (4)
-  flash           Match packets with flash precedence (3)
-  immediate       Match packets with immediate precedence (2)
-  priority        Match packets with priority precedence (1)
-  routine         Match packets with routine precedence (0)</p>
-<ul>
-<li>Delay, Throughput and Reliability—three bits (D T R)</li>
+internet        Match packets with internetwork control precedence (6)
+critical        Match packets with critical precedence (5)
+flash-override  Match packets with flash override precedence (4)
+flash           Match packets with flash precedence (3)
+immediate       Match packets with immediate precedence (2)
+priority        Match packets with priority precedence (1)
+routine         Match packets with routine precedence (0)</p>
+</li>
+<li>
+<p>Delay, Throughput and Reliability—three bits (D T R)</p>
+</li>
 <li>CU (Currently Unused)—two bits(CU1-CU0)</li>
 </ul>
 <h3 id="dscp">DSCP</h3>
@@ -3912,9 +3914,8 @@ nc2         111     111     111000
 <h3 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h3>
 <h3 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h3>
 <h3 id="junos-tool-chains">JUNOS tool chains</h3>
-<pre><code>      +-----------+     +-----------+    +-----------+    +-----------+
-</code></pre>
-<p>Ingress|classifier |     |policer    |    |multi-field|    |policy     |
+<pre><code>          +-----------+     +-----------+    +-----------+    +-----------+
+   Ingress|classifier |     |policer    |    |multi-field|    |policy     |
     --&gt;---+           +-----+           +----+classifier +----+           +
           +-----------+     +-----------+    +-----------+    +-----+-----+
                                                                     |
@@ -3924,7 +3925,8 @@ nc2         111     111     111000
           +-----------+     +-----------+    +-----------+    +-----+-----+
     Egress|rewrite    |     |scheduler  |    |multi-field|    |policer    |
     &lt;-----+marker     +-----+shaper/RED +----+classifier +----+           +
-          +-----------+     +-----------+    +-----------+    +-----------+</p>
+          +-----------+     +-----------+    +-----------+    +-----------+
+</code></pre>
 <h4 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h4>
 <h4 id="policer-traffic-limit">policer: traffic limit</h4>
 <h4 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h4>
