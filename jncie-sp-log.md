@@ -69,7 +69,8 @@
 </li>
 <li><a href="#question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: family inet unicast vs. family inet labeled-unicast</a></li>
 <li><a href="#question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why family inet labeled-unicast in this solution?</a></li>
-<li><a href="#tip-rib-inet3">TIP: rib inet.3</a></li>
+<li><a href="#tip-inet-labeled-unicast-rib-inet3">TIP: inet labeled-unicast rib inet.3</a></li>
+<li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
 <li><a href="#tip-6pe-basic">TIP: 6PE basic</a><ul>
 <li><a href="#simple-topo">simple topo</a></li>
 <li><a href="#pe1-config">PE1 config</a></li>
@@ -137,6 +138,7 @@
 <li><a href="#internet-r1-r1-adv-an-aggr-route-out">Internet =&gt; R1 : R1: adv an aggr route out</a></li>
 <li><a href="#r1-vrf-look-up-vpn-aggr-routes-of-r1-inet0-also-in-vrf-table">R1 =&gt; vrf : look up vpn aggr routes (of R1 inet.0) also in vrf table</a></li>
 <li><a href="#ping-test">ping test</a></li>
+<li><a href="#remove-solution-2_1">remove solution 2</a></li>
 </ul>
 </li>
 <li><a href="#tip-about-next-hop-next-table-greeninet0">TIP: about next-hop next-table GREEN.inet.0</a></li>
@@ -151,6 +153,24 @@
 <li><a href="#verify_1">verify</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#interas-vpn">InterAS VPN</a><ul>
+<li><a href="#solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: inet (uncast+labeled-unicast rib inet.3)</a><ul>
+<li><a href="#config_4">config</a></li>
+</ul>
+</li>
+<li><a href="#remove-solution1_2">remove solution1</a></li>
+<li><a href="#solution2-inet-resolved-vpn">solution2: inet resolved-vpn</a></li>
+<li><a href="#remove-solution2">remove solution2</a></li>
+<li><a href="#tip-inet-labeled-unicast-resolve-vpn">TIP: inet labeled-unicast resolve-vpn</a></li>
+<li><a href="#question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</a></li>
+<li><a href="#toggle-traffic-engineering-mpls-forwarding">toggle traffic-engineering mpls-forwarding</a></li>
+</ul>
+</li>
+<li><a href="#vpls">VPLS</a><ul>
+<li><a href="#config_5">config</a></li>
+<li><a href="#tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: encapsulation extended-vlan-vpls and flexible-ethernet-services</a></li>
 </ul>
 </li>
 <li><a href="#cos">cos</a><ul>
@@ -1944,10 +1964,47 @@ device. </p>
 inet.3 statement:</p>
 <pre><code>rib inet.3;
 </code></pre>
-<h4 id="tip-rib-inet3">TIP: <code>rib inet.3</code></h4>
+<h4 id="tip-inet-labeled-unicast-rib-inet3">TIP: <code>inet labeled-unicast rib inet.3</code></h4>
+<p>manual about "rib inet.3":</p>
 <p>You can allow both labeled and unlabeled routes to be exchanged in a single
 session. The labeled routes are placed in the inet.3 routing table, and both
 labeled and unlabeled unicast routes can be sent or received by the router.</p>
+<p>(WRONG) this looks also inherit all behavior of <code>inet unicast</code></p>
+<p>(correct):
+without rib inet.3, following can't co-exist:</p>
+<pre><code>inet unicast 
+inet labeled-unicast
+</code></pre>
+<p>so only one address family can't be supported</p>
+<p>with rib inet.3 ,these are fine:</p>
+<pre><code>inet unicast
+inet labeled-unicast rib inet.3
+</code></pre>
+<p>so now "You can allow both labeled and unlabeled routes to be exchanged in a single
+session"</p>
+<h4 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h4>
+<pre><code>R1             (BGP route NLRI addr family)         R5
+   ============================================&gt;
+inet.0          inet unicast                        inet.0
+inet.3          inet labeled-unicast                inet.3
+
+lab@MX80-NGGWR-01# show logical-systems r5 policy-options policy-statement exp-bgp-adv-1    
+term 1 {
+    from {
+        protocol isis;                      #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-unicast`
+    }
+    then accept;
+
+}
+term 2 {
+    from {
+        rib inet.3;                         #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-labeled-unicast`
+    }
+    then accept;
+}
+</code></pre>
 <h4 id="tip-6pe-basic">TIP: 6PE basic</h4>
 <ul>
 <li>like MPLS/VPN. but no vrf, </li>
@@ -3398,6 +3455,29 @@ delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
 delete logical-systems r1 protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf
 </code></pre>
 <h5 id="solution2-config">solution2 config</h5>
+<pre><code>set logical-systems r1 routing-options static route 0/0 next-hop [ 10.10.12.2 10.10.13.2 ] 
+set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [ inet.0 GREEN.inet.0 ] 
+set logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
+
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol static route-filter 0/0 exact  
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                       
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
+
+#config an aggr route in R1 and adv to all R
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from protocol aggregate route-filter 20.20/16 exact  
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 then accept                                            
+set logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-agg
+
+#aggr. routes need at least one contributor, import some contributing routes from vrf table
+set logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0    
+set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [GREEN.inet.0 inet.0]
+
+set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 from rib inet.0 protocol aggregate route-filter 20.20/16 exact    
+set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then next-hop next-table GREEN.inet.0 
+set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then accept
+
+set logical-systems r1 routing-options forwarding-table export exp-fwd-vpn-agg
+</code></pre>
 <h5 id="r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</h5>
 <pre><code>set logical-systems r1 routing-options static route 0/0 next-hop [ 10.10.12.2 10.10.13.2 ]
 
@@ -3529,6 +3609,24 @@ PING 10.10.1.5 (10.10.1.5): 56 data bytes
 --- 10.10.1.5 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.665/1.048/1.432/0.384 ms
+</code></pre>
+<h5 id="remove-solution-2_1">remove solution 2</h5>
+<pre><code>delete logical-systems r1 routing-options static route 0/0
+delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
+delete logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
+
+delete logical-systems r1 policy-options policy-statement vrf-exp term 3
+
+#config an aggr route in R1 and adv to all R
+delete logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg
+delete logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-agg
+
+#aggr. routes need at least one contributor, import some contributing routes from vrf table
+delete logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0    
+delete logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0
+
+delete logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg
+delete logical-systems r1 routing-options forwarding-table export exp-fwd-vpn-agg
 </code></pre>
 <h4 id="tip-about-next-hop-next-table-greeninet0">TIP: about <code>next-hop next-table GREEN.inet.0</code></h4>
 <ul>
@@ -3734,8 +3832,99 @@ traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
  3  20.20.42.2 (20.20.42.2)  0.477 ms  0.460 ms  0.552 ms
  4  20.20.1.22 (20.20.1.22)  0.682 ms  0.689 ms  0.618 ms
 </code></pre>
+<h2 id="interas-vpn">InterAS VPN</h2>
+<h3 id="solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: <code>inet (uncast+labeled-unicast rib inet.3)</code></h3>
+<h4 id="config_4">config</h4>
+<pre><code>###R5: adv R1 lo0 to peer ASBR via policy, as inet-unicast&amp;labeled-unicast
+###    so peer ASBR can install R1 lo0 in both inet.0 &amp; inet.3
+#match r1 lo0 from inet.0 (serving `inet-unicast` bgp family only)
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from protocol isis
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from route-filter 10.10.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 then accept
+#match r1 lo0 from inet.3 (serving `inet-labeled-unicast` family only)
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from rib inet.3
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from route-filter 10.10.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 then accept
+
+#`family inet unicast` =&gt;                    r1 lo0 from inet.0 will be adv.ed as `inet-unicast` bgp routes
+#`family inet labeled-unicast rib inet.3` =&gt; r1 lo0 from inet.3 will be adv.ed as `inet-labeled-unicast` routes
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet unicast
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet labeled-unicast rib inet.3
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 export exp-bgp-adv-1
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 peer-as 2
+
+###R1-R5-peerASBR : all need to have both family enabled, to pass along the lo0 as both NLRI
+set logical-systems r5 protocols bgp group rr family inet unicast
+set logical-systems r5 protocols bgp group rr family inet labeled-unicast rib inet.3 
+set logical-systems r1 protocols bgp group to-rr family inet unicast
+set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast rib inet.3 
+set logical-systems r9 protocols bgp group to-r5 family inet unicast
+set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast rib inet.3
+</code></pre>
+<h3 id="remove-solution1_2">remove solution1</h3>
+<h3 id="solution2-inet-resolved-vpn">solution2: <code>inet resolved-vpn</code></h3>
+<pre><code>set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast resolve-vpn    
+set logical-systems r5 protocols bgp group l3vpn family inet labeled-unicast
+set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast
+</code></pre>
+<h3 id="remove-solution2">remove solution2</h3>
+<h3 id="tip-inet-labeled-unicast-resolve-vpn">TIP: <code>inet labeled-unicast resolve-vpn</code></h3>
+<p>Allow labeled routes to be placed in the inet.3 routing table for route
+resolution. These routes are then resolved for PE router connections where the
+remote PE is located across another AS. For a PE router to install a route in
+the VRF, the next hop must resolve to a route stored within the inet.3 table</p>
+<h3 id="question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</h3>
+<p>noticed bgp flaps during inter-AS vpn configs,might be normal</p>
+<pre><code>Aug  4 04:39:35  MX80-NGGWR-01 r1:rpd[1401]: RPD_OSPF_NBRDOWN: OSPF neighbor 4.4.4.4 (realm ospf-v2 shamlink.0 area 0.0.0.0) state changed f
+rom Full to Down due to KillNbr (event reason: interface went down)
+Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.2 (Internal AS 4012345678): code 6 (Cea
+se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
+Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.3 (Internal AS 4012345678): code 6 (Cea
+se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
+</code></pre>
+<h3 id="toggle-traffic-engineering-mpls-forwarding">toggle <code>traffic-engineering mpls-forwarding</code></h3>
+<pre><code>delete logical-systems r1 protocols mpls traffic-engineering  
+delete logical-systems r5 protocols mpls traffic-engineering     
+delete logical-systems r9 protocols mpls traffic-engineering
+</code></pre>
+<h2 id="vpls">VPLS</h2>
+<h3 id="config_5">config</h3>
+<pre><code>set logical-systems r1 interfaces ge-1/2/1 unit 121 vlan-id 121 encapsulation vlan-vpls family vpls  
+set logical-systems r1 interfaces ge-1/2/1 unit 122 vlan-id 122 encapsulation vlan-vpls family vpls  
+set logical-systems r1 routing-instances vpls instance-type vpls interface ge-1/2/1.121                
+set logical-systems r1 routing-instances vpls instance-type vpls interface ge-1/2/1.122
+
+set logical-systems r1 routing-instances vpls instance-type vpls
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
+set logical-systems r1 routing-instances vpls route-distinguisher 1.1.1.1:1
+set logical-systems r1 routing-instances vpls vrf-target target:6500:1
+set logical-systems r1 routing-instances vpls protocols vpls site-range 10
+set logical-systems r1 routing-instances vpls protocols vpls interface-mac-limit 500
+set logical-systems r1 routing-instances vpls protocols vpls site 1 site-identifier 1
+set logical-systems r1 routing-instances vpls protocols vpls site 1 active-interface any
+set logical-systems r1 routing-instances vpls protocols vpls site 1 interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls protocols vpls site 1 interface ge-1/2/1.122
+
+T.B.C
+</code></pre>
+<h3 id="tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: <code>encapsulation extended-vlan-vpls</code> and <code>flexible-ethernet-services</code></h3>
+<p>Gigabit Ethernet, 4-port Fast Ethernet, MX Series router Gigabit Ethernet,
+Tri-Rate Ethernet copper, 10-Gigabit Ethernet, and aggregated Ethernet
+interfaces with VLAN tagging enabled can use extended VLAN CCC or VLAN VPLS,
+which allow 802.1Q tagging.</p>
+<p>flexible-ethernet-services—For Gigabit Ethernet IQ interfaces and Gigabit
+Ethernet PICs with small form-factor pluggable transceivers (SFPs) (except the
+10-port Gigabit Ethernet PIC and the built-in Gigabit Ethernet port on the M7i
+router), use flexible Ethernet services encapsulation when you want to
+configure multiple per-unit Ethernet encapsulations. Aggregated Ethernet
+bundles can use this encapsulation type. This encapsulation type allows you to
+configure any combination of route, TCC, CCC, Layer 2 virtual private networks
+(VPNs), and VPLS encapsulations on a single physical port. If you configure
+flexible Ethernet services encapsulation on the physical interface, VLAN IDs
+from 1 through 511 are no longer reserved for normal VLANs.</p>
 <h2 id="cos">cos</h2>
-<pre><code>IPPref        111         110             other
+<pre><code>IP Prec          111         110             other
 fwd-class        EF          AF              BE
 </code></pre>
 <p>R1:</p>
