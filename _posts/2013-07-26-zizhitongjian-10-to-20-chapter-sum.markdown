@@ -55,7 +55,7 @@ categories: [reading]
                                                                                                            |                                |
                                                                                                            +--------------------------------+
 
-![zizhitongjian](/images/zizhitongjian/zizhitongjian-emp.png)
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-emp.png "zizhitongjian")
                                                                                                                   
 
 王：                                                                                     
@@ -84,7 +84,7 @@ categories: [reading]
                                                                                                     |      
                                                                                                 被武帝重用     
 
-![zizhitongjian](/images/zizhitongjian/zizhitongjian-king.png)
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-king.png "zizhitongjian")
 
 侯：                                                                  
                                                                       
@@ -149,5 +149,5 @@ categories: [reading]
 
 
 
-![zizhitongjian](/images/zizhitongjian/zizhitongjian-xiongnu.png)
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-xiongnu.png "zizhitongjian")
 
