@@ -33,7 +33,7 @@ categories: [reading]
                |                                           | 因太子事自杀  |（无故杀死) |   |    |   |      |      |                    |
                |卫少（姐）--私--霍仲孺（平阳县吏）--|-- ？刘据（太子）     |            |   |    |阳石公主 诸邑公主|                    |
                |            |       辅佐昭帝三大臣  |      |--- 太傅：     |            |   |    |    (巫蛊死)     |                    |
-               | ； ；（长平侯）  |  （金日  上官桀     霍光）   |      |赵周/石庆            |   |夷安公主 ---------  昭平                   |
+               |（长平侯）  |  （金日  上官桀     霍光）   |      |赵周/石庆            |   |夷安公主 ---------  昭平                   |
                |卫伉        |             |         |      | 江充陷害      |            |   |                            朝廷           |
                |（巫蛊死）霍去病          |         |      | 被迫杀江充被杀|            |   |                               A           |
                |            |          上官安 -|-  女儿                    |        鄂邑公主|    （封宜城侯） （谨慎未告）  |(封建平侯) |
@@ -55,6 +55,7 @@ categories: [reading]
                                                                                                            |                                |
                                                                                                            +--------------------------------+
 
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-emp.png)
                                                                                                                   
 
 王：                                                                                     
@@ -83,6 +84,7 @@ categories: [reading]
                                                                                                     |      
                                                                                                 被武帝重用     
 
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-king.png)
 
 侯：                                                                  
                                                                       
@@ -123,7 +125,7 @@ categories: [reading]
 
 
 
-匈奴单于：
+匈奴：
                                         汉朝降将
                                            | 卫律 （相善 李延年）
                                            |            （被抄家）
@@ -147,8 +149,5 @@ categories: [reading]
 
 
 
-
-
-
-
+![zizhitongjian](/images/zizhitongjian/zizhitongjian-xiongnu.png)
 
