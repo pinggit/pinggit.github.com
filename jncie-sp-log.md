@@ -8,7 +8,7 @@ TABLE OF CONTENT
 
 # JNCIE logs
 
-## system
+## pre-IGP
 
 ### TIPS: about apply-groups
 
@@ -141,9 +141,8 @@ family?
 
 #### verify
 
-    [edit]
-    lab@abc# run show log messages | match transfer 
-    Jul 26 20:30:57  abc logger: transfer-file: Transferred /var/transfer/config/abc_juniper.conf.gz_20130726_203043
+    lab@MX80-NGGWR-02# run show log messages | match transfer 
+    Aug 11 15:26:03  MX80-NGGWR-02 logger: transfer-file: Transferred /var/transfer/config/MX80-NGGWR-02_juniper.conf.gz_20130811_152551
 
     [edit]
     lab@abc# run show system configuration archival  
@@ -152,7 +151,7 @@ family?
     total blocks: 8
     total files: 0
 
-#### QUESTION
+#### QUESTION: IMPORTANT: scp doesn't work
 
 this looks succeed, but actually not working (no file a/v in the server)
 
@@ -163,29 +162,277 @@ this looks succeed, but actually not working (no file a/v in the server)
     Wrote 5444 lines of configuration to 'scp://Ping@172.25.84.169:transfer-on-commit/abc.txt'
 
 
-## IGP
+### firewall filter
 
-### LAG: AE
+the target should be: block traffic coming from outside AS(like T/P), but
+sourcing from IP that is same as internal networks (10.100.x).
+
+#### config
+
+    set logical-systems r2 firewall family inet filter filter-block-ipv4 term 1 from destination-address 192.168.100.0/24
+    set logical-systems r2 firewall family inet filter filter-block-ipv4 term 1 then log
+    set logical-systems r2 firewall family inet filter filter-block-ipv4 term 1 then discard
+    set logical-systems r2 firewall family inet filter filter-block-ipv4 term 2 then accept
+    set logical-systems r2 firewall family inet6 filter filter-block-ipv6 term 1 from destination-address 8000::/16
+    set logical-systems r2 firewall family inet6 filter filter-block-ipv6 term 1 then log
+    set logical-systems r2 firewall family inet6 filter filter-block-ipv6 term 1 then discard
+    set logical-systems r2 firewall family inet6 filter filter-block-ipv6 term 2 then accept
+
+    set logical-systems r2 interfaces ge-1/2/1 unit 210 family inet filter input filter-block-ipv4
+    set logical-systems r2 interfaces ge-1/2/1 unit 210 family inet6 filter input filter-block-ipv6
+
+#### TIPS: don't forget the last term of `then accept`
+
+sam "deny all" rule as cisco
+
+### LAG
+
+#### config
+
 
     set interfaces ge-1/2/3 apply-groups interface-group
-    set interfaces ge-1/2/3 gigether-options 802.3ad ae11
+    set interfaces ge-1/2/3 gigether-options 802.3ad ae10
 
     set interfaces ge-1/2/4 apply-groups interface-group
-    set interfaces ge-1/2/4 gigether-options 802.3ad ae12
+    set interfaces ge-1/2/4 gigether-options 802.3ad ae11
 
-    set logical-systems r3 interfaces ae12 unit 0 family inet address 10.10.36.1/30
-    set logical-systems r3 interfaces ae12 unit 0 family iso
-    set logical-systems r3 interfaces ae12 unit 0 family inet6
-    set logical-systems r3 interfaces ae12 unit 0 family mpls
+    set interfaces ge-1/2/5 apply-groups interface-group
+    set interfaces ge-1/2/5 gigether-options 802.3ad ae10
+    
+    set interfaces ge-1/2/6 apply-groups interface-group
+    set interfaces ge-1/2/6 gigether-options 802.3ad ae11
+    
+    set logical-systems r3 interfaces ae10 unit 0 family inet address 10.100.36.1/30
+    set logical-systems r3 interfaces ae10 unit 0 family iso
+    set logical-systems r3 interfaces ae10 unit 0 family inet6
+    set logical-systems r3 interfaces ae10 unit 0 family mpls
 
-    set logical-systems r6 interfaces ae11 unit 0 family inet address 10.10.36.2/30
+    set logical-systems r6 interfaces ae11 unit 0 family inet address 10.100.36.2/30
     set logical-systems r6 interfaces ae11 unit 0 family iso
     set logical-systems r6 interfaces ae11 unit 0 family inet6
     set logical-systems r6 interfaces ae11 unit 0 family mpls
 
-### DC => R2 => all Rs
+### graceful restart
 
-.R2 learned routes from DC
+    set logical-systems r1 routing-options graceful-restart    
+    set logical-systems r2 routing-options graceful-restart    
+    set logical-systems r3 routing-options graceful-restart    
+    set logical-systems r4 routing-options graceful-restart    
+    set logical-systems r5 routing-options graceful-restart    
+    set logical-systems r6 routing-options graceful-restart    
+    set logical-systems r7 routing-options graceful-restart    
+    set logical-systems r8 routing-options graceful-restart    
+
+#### verify
+
+    lab@MX80-NGGWR-02# run show route summary logical-system r3 
+    Autonomous system number: 4012345678
+    Router ID: 10.200.1.3
+
+    inet.0: 50 destinations, 54 routes (50 active, 0 holddown, 1 hidden)
+    Restart Complete
+                  Direct:      9 routes,      9 active
+                   Local:      8 routes,      8 active
+                     BGP:     20 routes,     16 active
+                   IS-IS:     17 routes,     17 active
+
+    inet.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+    Restart Complete
+                     BGP:      4 routes,      3 active
+                    RSVP:      5 routes,      5 active
+
+    iso.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
+    Restart Complete
+                  Direct:      1 routes,      1 active
+
+    mpls.0: 10 destinations, 10 routes (10 active, 0 holddown, 0 hidden)
+    Restart Complete
+                    MPLS:      4 routes,      4 active
+                    RSVP:      6 routes,      6 active
+
+    bgp.l3vpn.0: 15 destinations, 15 routes (15 active, 0 holddown, 0 hidden)
+    Restart Complete
+                     BGP:     15 routes,     15 active
+
+    inet6.0: 41 destinations, 47 routes (41 active, 0 holddown, 0 hidden)
+    Restart Complete
+                  Direct:     13 routes,      7 active
+                   Local:     11 routes,     11 active
+                     BGP:     23 routes,     23 active
+
+    inet6.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+    Restart Complete
+                     BGP:      4 routes,      3 active
+                    RSVP:      5 routes,      5 active
+
+#### QUESTION: GRES, NSR, GR
+
+conceptual difference. need read more.
+
+### BFD/ISIS
+
+    set logical-systems r3 protocols isis interface ae10.0 bfd-liveness-detection minimum-interval 300 
+    set logical-systems r6 protocols isis interface ae11.0 bfd-liveness-detection minimum-interval 300 
+
+#### verify
+    
+    lab@MX80-NGGWR-02# run show bfd session  
+                                                      Detect   Transmit
+    Address                  State     Interface      Time     Interval  Multiplier
+    10.100.36.1              Up        ae11.0         0.900     0.300        3   
+    10.100.36.2              Up        ae10.0         0.900     0.300        3   
+
+    2 sessions, 2 clients
+    Cumulative transmit rate 6.7 pps, cumulative receive rate 6.7 pps
+
+    [edit]
+    lab@MX80-NGGWR-02# run show bfd session logical-system r3 
+                                                      Detect   Transmit
+    Address                  State     Interface      Time     Interval  Multiplier
+    10.100.36.2              Up        ae10.0         0.900     0.300        3   
+
+    1 sessions, 1 clients
+    Cumulative transmit rate 3.3 pps, cumulative receive rate 3.3 pps
+
+    [edit]
+    lab@MX80-NGGWR-02# run show bfd session logical-system r3 detail  
+                                                      Detect   Transmit
+    Address                  State     Interface      Time     Interval  Multiplier
+    10.100.36.2              Up        ae10.0         0.900     0.300        3   
+     Client ISIS L2, TX interval 0.300, RX interval 0.300
+     Session up time 00:01:17
+     Local diagnostic None, remote diagnostic None
+     Remote state Up, version 1
+     Logical system 2, routing table index 7
+
+    1 sessions, 1 clients
+    Cumulative transmit rate 3.3 pps, cumulative receive rate 3.3 pps
+
+    [edit]
+    lab@MX80-NGGWR-02# run show bfd session logical-system r3 extensive  
+                                                      Detect   Transmit
+    Address                  State     Interface      Time     Interval  Multiplier
+    10.100.36.2              Up        ae10.0         0.900     0.300        3   
+     Client ISIS L2, TX interval 0.300, RX interval 0.300
+     Session up time 00:01:23
+     Local diagnostic None, remote diagnostic None
+     Remote state Up, version 1
+     Logical system 2, routing table index 7
+     Min async interval 0.300, min slow interval 1.000
+     Adaptive async TX interval 0.300, RX interval 0.300
+     Local min TX interval 0.300, minimum RX interval 0.300, multiplier 3
+     Remote min TX interval 0.300, min RX interval 0.300, multiplier 3
+     Local discriminator 25, remote discriminator 26
+     Echo mode disabled/inactive
+     Remote is control-plane independent
+      Session ID: 0x10003a
+
+    1 sessions, 1 clients
+    Cumulative transmit rate 3.3 pps, cumulative receive rate 3.3 pps
+
+### BFD/OSPF
+
+#### config
+
+first config a whatever interval, then check session to read the RX interval
+from peer. then change accordingly , if required.
+
+    set logical-systems r2 protocols ospf area 0 interface ge-1/2/1.210 bfd-liveness-detection minimum-interval 300    
+
+#### verity
+
+    [edit]
+    lab@MX80-NGGWR-02# run show bfd session logical-system r2 detail  
+                                                      Detect   Transmit
+    Address                  State     Interface      Time     Interval  Multiplier
+    100.0.210.2              Up        ge-1/2/1.210   0.900     0.300        3   
+     Client OSPF realm ospf-v2 Area 0.0.0.0, TX interval 0.300, RX interval 0.300
+     Session up time 00:01:52
+     Local diagnostic None, remote diagnostic NbrSignal
+     Remote state Up, version 1
+     Logical system 6, routing table index 11
+
+    1 sessions, 1 clients
+    Cumulative transmit rate 3.3 pps, cumulative receive rate 3.3 pps
+
+## IGP
+
+### IGP policy config
+
+    #ospf import policy: reject some type5 : routes like 172.16.0/24~172.16.7/24 or longer prefix
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from route-filter 172.16.0.0/21 orlonger
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 then reject
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 2 then accept
+    set logical-systems r2 protocols ospf import imp-ospf-rej-longer
+    
+    #isis export policy: summarize 172.16.8~19/24
+    set logical-systems r2 routing-options aggregate route 172.16.8.0/21
+    set logical-systems r2 routing-options aggregate route 172.16.16.0/22
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggregate
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.8.0/21 exact
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.16.0/22 exact
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 then accept
+    set logical-systems r2 protocols isis export exp-isis-from-ospf
+
+    #ospf exprt policy: summarize internal as 10.200/16 and adv a default route to DC
+    set logical-systems r2 routing-options aggregate route 10.200.0.0/16
+    
+    set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
+    set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from route-filter 0.0.0.0/0 prefix-length-range /0-/32
+    set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 then accept
+    set logical-systems r2 policy-options policy-statement only-if-from-bgp term 2 then reject
+    set logical-systems r2 routing-options generate route 0.0.0.0/0 policy only-if-from-bgp
+    
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 1 from protocol aggregate
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 1 from route-filter 10.200.0.0/16 exact
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 1 then accept
+    
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2 from protocol aggregate
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2 from route-filter 0.0.0.0/0 exact
+    set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2 then accept
+    
+    set logical-systems r2 protocols ospf export exp-ospf-from-isis
+    
+    
+### verify
+
+#### DC => R2 => all Rs
+
+R2 received all routes in LSAs
+
+    lab@MX80-NGGWR-02# run show ospf database logical-system r2 
+
+    Area 0.0.0.0
+     Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+    Router  *10.200.1.2       10.200.1.2       0x8000000c  1307  0x22 0x6c9c  36
+    Router   100.0.210.2      100.0.210.2      0x8000000b  1471  0x22 0xa79a  36
+    Network  100.0.210.2      100.0.210.2      0x80000002  1328  0x22 0x4770  32
+        OSPF AS SCOPE link state database
+     Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+    Extern  *0.0.0.0          10.200.1.2       0x80000006   300  0x22 0x4394  36        #<------
+    Extern  *10.200.0.0       10.200.1.2       0x80000008  2293  0x22 0x53af  36        #<------
+    Extern   172.16.1.0       100.0.210.2      0x80000008  2756  0x22 0xba9   36        #<------
+    Extern   172.16.2.0       100.0.210.2      0x80000008  2613  0x22 0xffb3  36        #<------
+    Extern   172.16.3.0       100.0.210.2      0x80000008  2471  0x22 0xf4bd  36        #<------
+    Extern   172.16.4.0       100.0.210.2      0x80000008  2328  0x22 0xe9c7  36        #<------
+    Extern   172.16.5.0       100.0.210.2      0x80000008  2185  0x22 0xded1  36        #<------
+    Extern   172.16.6.0       100.0.210.2      0x80000008  2042  0x22 0xd3db  36        #<------
+    Extern   172.16.7.0       100.0.210.2      0x80000008  1899  0x22 0xc8e5  36        #<------
+    Extern   172.16.8.0       100.0.210.2      0x80000008  1757  0x22 0xbdef  36
+    Extern   172.16.9.0       100.0.210.2      0x80000008  1614  0x22 0xb2f9  36
+    Extern   172.16.10.0      100.0.210.2      0x80000008  1186  0x22 0xa704  36
+    Extern   172.16.11.0      100.0.210.2      0x80000008  1044  0x22 0x9c0e  36
+    Extern   172.16.12.0      100.0.210.2      0x80000008   901  0x22 0x9118  36
+    Extern   172.16.13.0      100.0.210.2      0x80000008   758  0x22 0x8622  36
+    Extern   172.16.14.0      100.0.210.2      0x80000008   615  0x22 0x7b2c  36
+    Extern   172.16.15.0      100.0.210.2      0x80000008   472  0x22 0x7036  36
+    Extern   172.16.16.0      100.0.210.2      0x80000008   329  0x22 0x6540  36
+    Extern   172.16.17.0      100.0.210.2      0x80000008   186  0x22 0x5a4a  36
+    Extern   172.16.18.0      100.0.210.2      0x80000008    44  0x22 0x4f54  36
+    Extern   172.16.19.0      100.0.210.2      0x80000007  2899  0x22 0x465d  36
+    
+R2 rejected 172.16.0-7/24 routes from DC
 
     [edit]
     test@MX80-NGGWR-02# run show route logical-system lr2 protocol ospf       
@@ -221,7 +468,7 @@ this looks succeed, but actually not working (no file a/v in the server)
     224.0.0.5/32       *[OSPF/10] 10:08:17, metric 1
                           MultiRecv
 
-.R2 then adv via ISIS to all internal Rs
+.R2 then adv via ISIS to all internal Rs, but as 2 summarized routes
 
     test@MX80-NGGWR-02# run show isis database logical-system lr2 MX80-NGGWR-02-lr2.00 detail  
     IS-IS level 1 link-state database:
@@ -244,10 +491,40 @@ this looks succeed, but actually not working (no file a/v in the server)
        IP prefix: 10.10.24.0/30                   Metric:        5 Internal Up
        IP prefix: 10.10.25.0/30                   Metric:        5 Internal Up
        IP prefix: 10.10.26.0/30                   Metric:        5 Internal Up
-       IP prefix: 172.16.8.0/21                   Metric:       10 External Up
-       IP prefix: 172.16.16.0/22                  Metric:       10 External Up
+       IP prefix: 172.16.8.0/21                   Metric:       10 External Up  #<------
+       IP prefix: 172.16.16.0/22                  Metric:       10 External Up  #<------
+       
+       
+    lab@MX80-NGGWR-02# run show route protocol isis logical-system r3 172.16/16     
 
-### R2 => DC
+    inet.0: 52 destinations, 71 routes (52 active, 0 holddown, 2 hidden)
+    Restart Complete
+    + = Active Route, - = Last Active, * = Both
+
+    172.16.8.0/21      *[IS-IS/165] 00:55:26, metric 15
+                        > to 100.0.23.1 via ge-1/2/2.203
+    172.16.16.0/22     *[IS-IS/165] 00:55:26, metric 15
+                        > to 100.0.23.1 via ge-1/2/2.203
+
+#### R2 => DC: summarization
+
+    lab@MX80-NGGWR-02# run show ospf database logical-system r2 
+    Extern  *0.0.0.0          10.200.1.2       0x80000006   300  0x22 0x4394  36        #<------
+    Extern  *10.200.0.0       10.200.1.2       0x80000008  2293  0x22 0x53af  36        #<------
+    
+    lab@MX80-NGGWR-02# run show route protocol ospf logical-system r0 table dc.inet.0 
+
+    dc.inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
+    + = Active Route, - = Last Active, * = Both
+
+    0.0.0.0/0          *[OSPF/150] 01:15:12, metric 0, tag 0
+                        > to 100.0.210.1 via ge-1/2/2.210
+    10.200.0.0/16      *[OSPF/150] 01:15:12, metric 0, tag 0
+                        > to 100.0.210.1 via ge-1/2/2.210
+    224.0.0.5/32       *[OSPF/10] 05:44:28, metric 1
+                          MultiRecv
+                          
+#### R2 => DC: conditional default routes
 
 DC got sum route of internal addr, but no default since not in R2's bgp route
 
@@ -265,30 +542,336 @@ DC got sum route of internal addr, but no default since not in R2's bgp route
     inet.0: 57 destinations, 59 routes (56 active, 0 holddown, 1 hidden)
     Restart Complete
 
-### TIP: policy "internal/exteral" vs. "route-type internal/external"
+### TIPS: conditional routes
 
-<http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html>
+the conditional routes can be either normal aggregation routes or generate route
 
-    external [ type metric-type ]   
-    Standard        
-    (OSPF and IS-IS only) Match IGP external routes. For IS-IS routes, the external
-    condition also matches routes that are exported from one IS-IS level to
-    another. The type keyword is optional and is applicable only to OSPF external
-    routes. When you do not specify type, the external condition matches all IGP
-    external (OSPF and IS-IS) routes. When you specify type, the external condition
-    matches only OSPF external routes with the specified OSPF metric type. The
-    metric type can either be 1 or 2.
+### config:no IPv6 routes allowed in ISIS
+    
+    set logical-systems r1 protocols isis no-ipv6-routing  
+    set logical-systems r2 protocols isis no-ipv6-routing  
+    set logical-systems r3 protocols isis no-ipv6-routing  
+    set logical-systems r4 protocols isis no-ipv6-routing  
+    set logical-systems r5 protocols isis no-ipv6-routing  
+    set logical-systems r6 protocols isis no-ipv6-routing  
+    set logical-systems r7 protocols isis no-ipv6-routing  
+    set logical-systems r8 protocols isis no-ipv6-routing  
 
-To match BGP external routes, use the route-type match condition.
+### verify
 
-    route-type value        
-    Standard        
-    Type of BGP route. The value can be one of the following:
-    external—External route.
-    internal—Internal route.
+    lab@MX80-NGGWR-02# run show isis route logical-system r1         
+     IS-IS routing table             Current version: L1: 1 L2: 100
+    IPv4/IPv6 Routes
+    ----------------
+    Prefix             L Version   Metric Type Interface       NH   Via
+    10.100.36.0/24     2     100        7 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    10.200.1.0/24      2     100       15 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+                                               ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    10.200.1.2/32      2     100        5 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    10.200.1.3/32      2     100        5 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    10.200.1.4/32      2     100       10 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    10.200.1.5/32      2     100       10 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+                                               ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    10.200.1.6/32      2     100        7 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    10.200.1.7/32      2     100       15 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+                                               ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    10.200.1.8/32      2     100       12 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    100.0.23.0/24      2     100       10 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+                                               ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    100.0.24.0/24      2     100       10 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    100.0.25.0/24      2     100       10 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    100.0.26.0/24      2     100       10 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    100.0.35.0/24      2     100       10 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    100.0.46.0/24      2     100       12 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    100.0.56.0/24      2     100       12 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    100.0.57.0/24      2     100       15 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+                                               ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    100.0.68.0/24      2     100       12 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    100.0.78.0/24      2     100       17 int  ge-1/2/1.103    IPV4 MX80-NGGWR-02-r3   
+    172.16.8.0/21      2     100       15 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    172.16.16.0/22     2     100       15 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
+    
+### config: isis metric
 
-To match IGP external routes, use the external match condition.
+    set logical-systems r1 protocols isis reference-bandwidth 5g
+    set logical-systems r2 protocols isis reference-bandwidth 5g
+    set logical-systems r3 protocols isis reference-bandwidth 5g
+    set logical-systems r4 protocols isis reference-bandwidth 5g
+    set logical-systems r5 protocols isis reference-bandwidth 5g
+    set logical-systems r6 protocols isis reference-bandwidth 5g
+    set logical-systems r7 protocols isis reference-bandwidth 5g
+    set logical-systems r8 protocols isis reference-bandwidth 5g
 
+### verify
+
+    lab@MX80-NGGWR-02# run show isis interface logical-system r1 
+    IS-IS interface database:
+    Interface             L CirID Level 1 DR        Level 2 DR        L1/L2 Metric
+    ge-1/2/1.102          2   0x1 Disabled          MX80-NGGWR-02-r2.02      5/5
+    ge-1/2/1.103          2   0x1 Disabled          MX80-NGGWR-02-r3.03      5/5
+    lo0.1                 0   0x1 Passive           Passive                 0/0
+
+## MPLS
+
+### config:MPLS interfaces
+
+    set logical-systems r1 protocols mpls interface ge-1/2/1.102
+    set logical-systems r1 protocols mpls interface ge-1/2/1.103
+    
+    set logical-systems r2 protocols mpls interface ge-1/2/2.102
+    set logical-systems r2 protocols mpls interface ge-1/2/1.203
+    set logical-systems r2 protocols mpls interface ge-1/2/1.204
+    set logical-systems r2 protocols mpls interface ge-1/2/1.205
+    set logical-systems r2 protocols mpls interface ge-1/2/1.206
+    
+    set logical-systems r3 protocols mpls interface ge-1/2/2.103
+    set logical-systems r3 protocols mpls interface ge-1/2/2.203
+    set logical-systems r3 protocols mpls interface ge-1/2/1.305
+    set logical-systems r3 protocols mpls interface ge-1/2/1.306
+    
+    set logical-systems r4 protocols mpls interface ge-1/2/2.204
+    set logical-systems r4 protocols mpls interface ge-1/2/1.406
+    
+    set logical-systems r5 protocols mpls interface ge-1/2/2.305
+    set logical-systems r5 protocols mpls interface ge-1/2/2.205
+    set logical-systems r5 protocols mpls interface ge-1/2/1.506
+    set logical-systems r5 protocols mpls interface ge-1/2/1.507
+    set logical-systems r5 protocols mpls interface ge-1/2/1.522
+
+    set logical-systems r6 protocols mpls interface ge-1/2/2.506
+    set logical-systems r6 protocols mpls interface ge-1/2/2.306
+    set logical-systems r6 protocols mpls interface ge-1/2/2.206
+    set logical-systems r6 protocols mpls interface ge-1/2/2.406
+    set logical-systems r6 protocols mpls interface ge-1/2/1.608
+    
+    set logical-systems r7 protocols mpls interface ge-1/2/1.708
+    set logical-systems r7 protocols mpls interface ge-1/2/2.507
+
+    set logical-systems r8 protocols mpls interface ge-1/2/2.608
+    set logical-systems r8 protocols mpls interface ge-1/2/2.708
+
+### ipv6-tunneling & icmp-tunneling
+    
+    set logical-systems r1 protocols mpls ipv6-tunneling
+    set logical-systems r1 protocols mpls icmp-tunneling
+    set logical-systems r2 protocols mpls ipv6-tunneling
+    set logical-systems r2 protocols mpls icmp-tunneling
+    set logical-systems r3 protocols mpls ipv6-tunneling
+    set logical-systems r3 protocols mpls icmp-tunneling
+    set logical-systems r4 protocols mpls ipv6-tunneling
+    set logical-systems r4 protocols mpls ipv6-tunneling
+    set logical-systems r5 protocols mpls ipv6-tunneling
+    set logical-systems r5 protocols mpls ipv6-tunneling
+    set logical-systems r6 protocols mpls icmp-tunneling
+    set logical-systems r6 protocols mpls icmp-tunneling
+    set logical-systems r7 protocols mpls icmp-tunneling
+    set logical-systems r7 protocols mpls icmp-tunneling
+    set logical-systems r8 protocols mpls icmp-tunneling
+    set logical-systems r8 protocols mpls icmp-tunneling
+    
+
+### config:RSVP
+
+    set logical-systems r1 protocols rsvp interface ge-1/2/1.102
+    set logical-systems r1 protocols rsvp interface ge-1/2/1.103
+    
+    set logical-systems r2 protocols rsvp interface ge-1/2/2.102
+    set logical-systems r2 protocols rsvp interface ge-1/2/1.203
+    set logical-systems r2 protocols rsvp interface ge-1/2/1.204
+    set logical-systems r2 protocols rsvp interface ge-1/2/1.205
+    set logical-systems r2 protocols rsvp interface ge-1/2/1.206
+
+    set logical-systems r3 protocols rsvp interface ge-1/2/2.103
+    set logical-systems r3 protocols rsvp interface ge-1/2/2.203
+    set logical-systems r3 protocols rsvp interface ge-1/2/1.305
+    set logical-systems r3 protocols rsvp interface ge-1/2/1.306
+
+    set logical-systems r4 protocols rsvp interface ge-1/2/2.204
+    set logical-systems r4 protocols rsvp interface ge-1/2/1.406
+    
+    set logical-systems r5 protocols rsvp interface ge-1/2/2.305
+    set logical-systems r5 protocols rsvp interface ge-1/2/2.205
+    set logical-systems r5 protocols rsvp interface ge-1/2/1.506
+    
+    set logical-systems r6 protocols rsvp interface ge-1/2/2.206
+    set logical-systems r6 protocols rsvp interface ge-1/2/2.306
+    set logical-systems r6 protocols rsvp interface ge-1/2/2.406
+    set logical-systems r6 protocols rsvp interface ge-1/2/2.506
+
+### config:LDP
+
+    set logical-systems r1 protocols ldp interface lo0.1
+    set logical-systems r4 protocols ldp interface lo0.4
+    
+    set logical-systems r5 protocols ldp interface lo0.5
+    set logical-systems r5 protocols ldp interface ge-1/2/1.506
+    set logical-systems r5 protocols ldp interface ge-1/2/1.507
+    
+    set logical-systems r6 protocols ldp interface lo0.6
+    set logical-systems r6 protocols ldp interface ge-1/2/1.608
+    set logical-systems r6 protocols ldp interface ge-1/2/2.506
+
+    set logical-systems r7 protocols ldp interface ge-1/2/1.708
+    set logical-systems r7 protocols ldp interface ge-1/2/2.507
+    set logical-systems r7 protocols ldp interface lo0.7
+
+    set logical-systems r8 protocols ldp interface ge-1/2/2.608
+    set logical-systems r8 protocols ldp interface ge-1/2/2.708
+    set logical-systems r8 protocols ldp interface lo0.8
+    
+            
+### verify LDP
+
+LDP sessions: Link LDP & Target LDP
+
+              TLDPoRSVP            LLDP
+         R1 ---------------   R5 ---------------  R7
+            __            __  |                   |
+              \_        _/    |                   |
+                \__  __/      |                   |
+               TLDPoRSVP      |                   |
+                __/   \_      |                   |
+              _/        \__   |                   |
+            _/             \_ |                   |
+         R4 ---------------   R6 ---------------  R8
+              TLDPoRSVP             LLDP
+
+
+    lab@MX80-NGGWR-02# run show ldp session logical-system r1 
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.5          Operational  Open             23         DU
+    10.200.1.6          Operational  Open             23         DU
+
+    [edit]
+    lab@MX80-NGGWR-02# run show ldp session logical-system r4    
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.5          Operational  Open             21         DU
+    10.200.1.6          Operational  Open             21         DU
+
+    [edit]
+    lab@MX80-NGGWR-02# run show ldp session logical-system r5    
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.1          Operational  Open             28         DU
+    10.200.1.4          Operational  Open             28         DU
+    10.200.1.6          Operational  Open             28         DU
+    10.200.1.7          Operational  Open             28         DU
+
+    [edit]
+    lab@MX80-NGGWR-02# run show ldp session logical-system r6    
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.1          Operational  Open             26         DU
+    10.200.1.4          Operational  Open             26         DU
+    10.200.1.5          Operational  Open             26         DU
+    10.200.1.8          Operational  Open             26         DU
+
+    [edit]
+    lab@MX80-NGGWR-02# run show ldp session logical-system r7    
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.5          Operational  Open             24         DU
+    10.200.1.8          Operational  Open             24         DU
+
+    [edit]
+    lab@MX80-NGGWR-02# run show ldp session logical-system r8    
+      Address           State        Connection     Hold time  Adv. Mode
+    10.200.1.6          Operational  Open             22         DU
+    10.200.1.7          Operational  Open             22         DU
+    
+### config:R2:ERO
+
+    set logical-systems r2 protocols mpls label-switched-path r2-r5 to 10.200.1.5
+    set logical-systems r2 protocols mpls label-switched-path r2-r5 primary via-r4-r6
+    set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.4 loose
+    set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.6 loose
+
+### verify:ERO
+
+    lab@MX80-NGGWR-02# run show mpls lsp logical-system r2 name r2-r5 ingress extensive  
+    Ingress LSP: 5 sessions
+
+    10.200.1.5
+      From: 10.200.1.2, State: Up, ActiveRoute: 0, LSPname: r2-r5
+      ActivePath: via-r4-r6 (primary)   #<------
+      LSPtype: Static Configured, Penultimate hop popping
+      LoadBalance: Random
+      Encoding type: Packet, Switching type: Packet, GPID: IPv4
+     *Primary   via-r4-r6        State: Up
+        Priorities: 7 0
+        SmartOptimizeTimer: 180
+        Computed ERO (S [L] denotes strict [loose] hops): (CSPF metric: 15)
+     100.0.24.2 S 100.0.46.2 S 100.0.56.1 S     #<------
+        Received RRO (ProtectionFlag 1=Available 2=InUse 4=B/W 8=Node 10=SoftPreempt 20=Node-ID):
+              100.0.24.2 100.0.46.2 100.0.56.1  #<------
+        6 Aug 11 15:01:43.138 Selected as active path
+        5 Aug 11 15:01:43.137 Record Route:  100.0.24.2 100.0.46.2 100.0.56.1
+        4 Aug 11 15:01:43.137 Up
+        3 Aug 11 15:01:43.043 Originate Call
+        2 Aug 11 15:01:43.043 CSPF: computation result accepted  100.0.24.2 100.0.46.2 100.0.56.1
+        1 Aug 11 15:01:13.569 CSPF failed: no route toward 10.200.1.4
+      Created: Sun Aug 11 15:00:14 2013
+    Total 1 displayed, Up 1, Down 0
+    
+### config:R2:link-protection
+    
+    set logical-systems r2 protocols mpls label-switched-path r2-r6 to 10.200.1.6
+    set logical-systems r2 protocols mpls label-switched-path r2-r6 link-protection
+    set logical-systems r2 protocols rsvp interface ge-1/2/1.206 link-protection
+    set logical-systems r6 protocols rsvp interface ge-1/2/2.206 link-protection
+
+### R1
+
+    set logical-systems r3 protocols mpls interface ge-1/2/1.305 admin-group blue
+    set logical-systems r5 protocols mpls interface ge-1/2/2.305 admin-group blue
+    
+    set logical-systems r1 protocols mpls label-switched-path r1-r2 to 10.200.1.2
+    set logical-systems r1 protocols mpls label-switched-path r1-r3 to 10.200.1.3
+    set logical-systems r1 protocols mpls label-switched-path r1-r4 to 10.200.1.4
+    set logical-systems r1 protocols mpls label-switched-path r1-r4-green to 10.200.1.4
+    set logical-systems r1 protocols mpls label-switched-path r1-r4-blue to 10.200.1.4
+    set logical-systems r1 protocols mpls label-switched-path r1-r5 to 10.200.1.5
+    set logical-systems r1 protocols mpls label-switched-path r1-r5 ldp-tunneling
+    set logical-systems r1 protocols mpls label-switched-path r1-r6 to 10.200.1.6
+    set logical-systems r1 protocols mpls label-switched-path r1-r6 ldp-tunneling
+    set logical-systems r1 protocols mpls label-switched-path r1-r6 priority 7 7
+    
+
+### R2
+
+    
+    set logical-systems r2 protocols mpls explicit-null
+    
+    set logical-systems r2 protocols mpls label-switched-path r2-r1 to 10.200.1.1
+    set logical-systems r2 protocols mpls label-switched-path r2-r3 to 10.200.1.3
+    set logical-systems r2 protocols mpls label-switched-path r2-r4 to 10.200.1.4
+
+### R3
+
+    set logical-systems r3 protocols mpls admin-groups blue 4
+    
+    set logical-systems r3 protocols mpls label-switched-path r3-r1 to 10.200.1.1
+    set logical-systems r3 protocols mpls label-switched-path r3-r2 to 10.200.1.2
+    set logical-systems r3 protocols mpls label-switched-path r3-r4 to 10.200.1.4
+    set logical-systems r3 protocols mpls label-switched-path r3-r5 to 10.200.1.5
+    set logical-systems r3 protocols mpls label-switched-path r3-r5 admin-group exclude blue
+    set logical-systems r3 protocols mpls label-switched-path r3-r6 to 10.200.1.6
+    set logical-systems r3 protocols mpls label-switched-path r3-r6 policing filter lsp-60m
+    
+### R4
+
+    set logical-systems r4 protocols mpls label-switched-path r4-r1 to 10.200.1.1
+    set logical-systems r4 protocols mpls label-switched-path r4-r2 to 10.200.1.2
+    set logical-systems r4 protocols mpls label-switched-path r4-r3 to 10.200.1.3
+    set logical-systems r4 protocols mpls label-switched-path r4-r3 bandwidth 600m
+    set logical-systems r4 protocols mpls label-switched-path r4-r3 adaptive
+    set logical-systems r4 protocols mpls label-switched-path r4-r3 primary via-r2
+    set logical-systems r4 protocols mpls label-switched-path r4-r3 secondary via-r2-r5 standby
+    set logical-systems r4 protocols mpls label-switched-path r4-r5 to 10.200.1.5
+    set logical-systems r4 protocols mpls label-switched-path r4-r5 ldp-tunneling
+    set logical-systems r4 protocols mpls label-switched-path r4-r6 to 10.200.1.6
+    set logical-systems r4 protocols mpls label-switched-path r4-r6 ldp-tunneling
+    set logical-systems r4 protocols mpls path via-r2 10.200.1.2 strict
+    set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.2 strict
+    set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.5 loose
+    
 
 ## BGP
 
@@ -659,6 +1242,31 @@ If you are not configure router ID on CE router, OPEN message will fail.  BGP se
     Mar  1 08:57:35  prime pe2: rpd[3251]: bgp_get_open: NOTIFICATION sent to 11::2+4597 (proto): 
     code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (proto): 
     invalid BGP identifier 0x0
+
+
+### TIP: policy "internal/exteral" vs. "route-type internal/external"
+
+<http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html>
+
+    external [ type metric-type ]   
+    Standard        
+    (OSPF and IS-IS only) Match IGP external routes. For IS-IS routes, the external
+    condition also matches routes that are exported from one IS-IS level to
+    another. The type keyword is optional and is applicable only to OSPF external
+    routes. When you do not specify type, the external condition matches all IGP
+    external (OSPF and IS-IS) routes. When you specify type, the external condition
+    matches only OSPF external routes with the specified OSPF metric type. The
+    metric type can either be 1 or 2.
+
+To match BGP external routes, use the route-type match condition.
+
+    route-type value        
+    Standard        
+    Type of BGP route. The value can be one of the following:
+    external—External route.
+    internal—Internal route.
+
+To match IGP external routes, use the external match condition.
 
 
 ### ipv6
