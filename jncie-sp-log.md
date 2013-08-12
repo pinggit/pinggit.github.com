@@ -650,6 +650,11 @@ the conditional routes can be either normal aggregation routes or generate route
     set logical-systems r8 protocols mpls interface ge-1/2/2.608
     set logical-systems r8 protocols mpls interface ge-1/2/2.708
 
+### TIP: `interface family mpls` vs. `protocol mpls interface`
+
+both is about data plane, one from `interface` standpoint and the other from
+`prototol` standpoint
+
 ### ipv6-tunneling & icmp-tunneling
     
     set logical-systems r1 protocols mpls ipv6-tunneling
@@ -776,7 +781,7 @@ LDP sessions: Link LDP & Target LDP
     10.200.1.6          Operational  Open             22         DU
     10.200.1.7          Operational  Open             22         DU
     
-### config:R2:ERO
+### config:R2:to R5 ERO
 
     set logical-systems r2 protocols mpls label-switched-path r2-r5 to 10.200.1.5
     set logical-systems r2 protocols mpls label-switched-path r2-r5 primary via-r4-r6
@@ -810,12 +815,58 @@ LDP sessions: Link LDP & Target LDP
       Created: Sun Aug 11 15:00:14 2013
     Total 1 displayed, Up 1, Down 0
     
-### config:R2:link-protection
+### config:R2:to R6 link-protection
     
     set logical-systems r2 protocols mpls label-switched-path r2-r6 to 10.200.1.6
     set logical-systems r2 protocols mpls label-switched-path r2-r6 link-protection
     set logical-systems r2 protocols rsvp interface ge-1/2/1.206 link-protection
     set logical-systems r6 protocols rsvp interface ge-1/2/2.206 link-protection
+
+### verify:link-protection
+
+    [edit]
+    lab@MX80-NGGWR-02# run show rsvp session logical-system r2 ingress                         
+    Ingress RSVP: 6 sessions
+    To              From            State   Rt Style Labelin Labelout LSPname 
+    10.200.1.1      10.200.1.2      Up       0  1 FF       -        3 r2-r1
+    10.200.1.3      10.200.1.2      Up       0  1 FF       -        3 r2-r3
+    10.200.1.4      10.200.1.2      Up       0  1 FF       -        3 r2-r4
+    10.200.1.5      10.200.1.2      Up       0  1 FF       -   299776 r2-r5
+    10.200.1.6      10.200.1.2      Up       0  1 SE       -        3 r2-r6
+    10.200.1.6      10.200.1.2      Up       0  1 SE       -   299920 Bypass->100.0.26.2        #<------
+    Total 6 displayed, Up 6, Down 0
+
+    [edit]
+    lab@MX80-NGGWR-02# run show rsvp session logical-system r2 ingress name r2-r5 extensive    
+    Ingress RSVP: 6 sessions
+
+    10.200.1.5
+      From: 10.200.1.2, LSPstate: Up, ActiveRoute: 0
+      LSPname: r2-r5, LSPpath: Primary
+      LSPtype: Static Configured
+      Suggested label received: -, Suggested label sent: -
+      Recovery label received: -, Recovery label sent: 299776
+      Resv style: 1 FF, Label in: -, Label out: 299776
+      Time left:    -, Since: Sun Aug 11 15:01:43 2013
+      Tspec: rate 0bps size 0bps peak Infbps m 20 M 1500
+      Port number: sender 1 receiver 31216 protocol 0
+      PATH rcvfrom: localclient 
+      Adspec: sent MTU 1500
+      Path MTU: received 1500
+      PATH sentto: 100.0.24.2 (ge-1/2/1.204) 1122 pkts
+      RESV rcvfrom: 100.0.24.2 (ge-1/2/1.204) 1116 pkts
+      Explct route: 100.0.24.2 100.0.46.2 100.0.56.1 
+      Record route: <self> 100.0.24.2 100.0.46.2 100.0.56.1  
+    Total 1 displayed, Up 1, Down 0
+    
+    [edit]
+    lab@MX80-NGGWR-02# run show rsvp session logical-system r2 ingress name Bypas->100.0.26.2 extensive  
+    Ingress RSVP: 6 sessions
+    Total 0 displayed, Up 0, Down 0
+
+### config:R4:to R3 secondary path
+
+### in here <--------
 
 ### R1
 
