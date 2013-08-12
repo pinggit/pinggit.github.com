@@ -1,10 +1,3 @@
----
-layout: post
-title: "jncie log"
-created:  2013 Aug 12 12:49:22 AM
-published: false
----
-
 TABLE OF CONTENT
 
   - - -
@@ -873,7 +866,8 @@ LDP sessions: Link LDP & Target LDP
 
 ### config:R4:to R3 secondary path
 
-### in here <--------
+### UPTO HERE
+
 
 ### R1
 
