@@ -1,3 +1,10 @@
+---
+layout: post
+title: "jncie log"
+created:  2013 Aug 12 12:49:22 AM
+published: false
+---
+
 TABLE OF CONTENT
 
   - - -
