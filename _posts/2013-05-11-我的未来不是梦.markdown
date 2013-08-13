@@ -7,7 +7,7 @@ tags: [老歌]
 categories: [life]
 ---
 
-<iframe width="640" height="360" src="http://www.youtube.com/embed/_5scbRuF2Lk?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="http://www.youtube.com/watch?v=-mludz1Mhq4&feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
                                  我的未来不是梦
                                    ---张雨生
