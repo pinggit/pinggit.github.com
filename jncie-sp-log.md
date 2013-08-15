@@ -79,10 +79,20 @@
 </ul>
 </li>
 <li><a href="#bgp">BGP</a><ul>
+<li><a href="#bgp-task">BGP task</a></li>
 <li><a href="#basic-bgp-rr-vpn-pre-config">basic BGP RR VPN pre-config</a></li>
 <li><a href="#verify_9">verify</a></li>
 <li><a href="#as-migration">AS migration</a></li>
-<li><a href="#pt-block">P/T block</a></li>
+<li><a href="#verify_10">verify</a></li>
+<li><a href="#config-ipv4-ipv6-rr-r5r6">config IPv4 IPv6 RR: R5/R6</a></li>
+<li><a href="#pt-block">P/T block</a><ul>
+<li><a href="#correct-nhs-policy-in-all-r">correct NHS policy in all R</a></li>
+</ul>
+</li>
+<li><a href="#delete-existing-reject-group">delete existing reject group</a></li>
+<li><a href="#ipv4-requirement">IPv4 requirement</a></li>
+<li><a href="#tag-routes">tag routes</a></li>
+<li><a href="#exp">exp</a></li>
 <li><a href="#tip-unverified-route">TIP: unverified route</a></li>
 <li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 <li><a href="#tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</a></li>
@@ -136,8 +146,8 @@
 <li><a href="#question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why family inet labeled-unicast in this solution?</a></li>
 <li><a href="#tip-inet-labeled-unicast-rib-inet3">TIP: inet labeled-unicast rib inet.3</a></li>
 <li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
-<li><a href="#tip-6pe-basic">TIP: 6PE basic</a><ul>
-<li><a href="#simple-topo">simple topo</a></li>
+<li><a href="#tip-6pe">TIP: 6PE</a></li>
+<li><a href="#simple-topo-and-config">simple topo and config</a><ul>
 <li><a href="#pe1-config">PE1 config</a></li>
 <li><a href="#pe2-config">PE2 config</a></li>
 <li><a href="#resources">resources</a></li>
@@ -216,7 +226,7 @@
 </li>
 <li><a href="#vpn-lsp-map">vpn lsp map</a><ul>
 <li><a href="#config_6">config</a></li>
-<li><a href="#verify_10">verify</a></li>
+<li><a href="#verify_11">verify</a></li>
 </ul>
 </li>
 </ul>
@@ -1273,9 +1283,13 @@ set logical-systems r3 firewall policer 60m if-exceeding bandwidth-limit 60m
 set logical-systems r3 firewall policer 60m if-exceeding burst-size-limit 15k
 set logical-systems r3 firewall policer 60m then discard
 </code></pre>
+<p>or use auto-policing:</p>
+<pre><code>set logical-systems r3 protocols mpls auto-policing class all drop
+</code></pre>
 <h3 id="question-how-to-verify-it-works-or-not">QUESTION: how to verify it works or not?</h3>
 <h3 id="question-how-to-config-lsp-lb-in-123">QUESTION: how to config LSP LB in 12.3</h3>
-<p>these are only for JUNOS 10.x / 11.x, not supported in 12.3</p>
+<p>http://www.juniper.net/techpubs/en_US/junos12.3/information-products/pathway-pages/config-guide-policy/config-guide-policy.pdf</p>
+<p>it looks, these are not supported in MX80</p>
 <pre><code>set logical-systems r3 policy-options policy-statement load-balance then load-balance per-packet
 set logical-systems r3 policy-options policy-statement load-balance then accept
 set logical-systems r3 routing-options forwarding-table export load-balance
@@ -1287,6 +1301,7 @@ set forwarding-options hash-key family mpls label-2
 set forwarding-options hash-key family mpls payload ip layer-3-only
 </code></pre>
 <h2 id="bgp">BGP</h2>
+<h3 id="bgp-task">BGP task</h3>
 <ol>
 <li>R5/R6 will be global RR, R1,R2,R3,R4,R7,R8 will be GRR’s clients </li>
 <li>R2/R3 will be VPN RR, R1,R4,R7,R8 will be VRR’s clients</li>
@@ -1300,26 +1315,17 @@ set forwarding-options hash-key family mpls payload ip layer-3-only
 <p>You can’t change the interface’s address setting on R1/R4/R7, only one NLRI
    are allowed under BGP family stanza ,connect all the IPV6 traffic between
    C/P/T devices according to following rules:</p>
-</li>
-<li>
-<p>C3 and R1 only running IPV4</p>
-</li>
-<li>
-<p>C4and R7 running IPV4/IPV6 Dual Stack</p>
-</li>
-<li>
-<p>C5 and R4 only running IPV6</p>
+<ul>
+<li>C3 and R1 only running IPV4</li>
+<li>C4and R7 running IPV4/IPV6 Dual Stack</li>
+<li>C5 and R4 only running IPV6</li>
+</ul>
 </li>
 </ol>
 <p>Every Core Router has an IPV6 loopback address, the requirements as follows: </p>
-<ul>
-<li>
-<p>C3/C4 can reach every IPV4 address in the testing topology</p>
-</li>
-<li>
-<p>C4/C5 can reach every IPV6 address in the testing topology</p>
-</li>
-</ul>
+<pre><code>* C3/C4 can reach every IPV4 address in the testing topology
+* C4/C5 can reach every IPV6 address in the testing topology
+</code></pre>
 <p>6,Advertising 10.200/16 and 2011:0310::/32 to C/P/T devices, P device can only receive IPV4 prefix less and equal than /20, IPV6 prefix less and equal than /48</p>
 <p>lr5/lr6 &lt;==inet/inet6 RR==&gt; lr1/2/3/4/7/8</p>
 <pre><code>test@MX80-NGGWR-02# run show bgp summary logical-system lr5    
@@ -1440,12 +1446,8 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   bgp.l3vpn.0: 0/2/2/0
 </code></pre>
 <h3 id="basic-bgp-rr-vpn-pre-config">basic BGP RR VPN pre-config</h3>
-<pre><code>set logical-systems r1 protocols bgp group to-v4v6-rr type internal
-set logical-systems r1 protocols bgp group to-v4v6-rr local-address 10.200.1.1
-set logical-systems r1 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r1 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
-set logical-systems r1 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
-set logical-systems r1 protocols bgp group to-vpn-rr type internal
+<p>initial config is all 65513 in core, need to change to 4012345678 in all R</p>
+<pre><code>set logical-systems r1 protocols bgp group to-vpn-rr type internal
 set logical-systems r1 protocols bgp group to-vpn-rr local-address 10.200.1.1
 set logical-systems r1 protocols bgp group to-vpn-rr family inet-vpn unicast
 set logical-systems r1 protocols bgp group to-vpn-rr neighbor 10.200.1.2
@@ -1455,11 +1457,6 @@ set logical-systems r1 protocols bgp group to-c3 family inet unicast
 set logical-systems r1 protocols bgp group to-c3 family inet6 unicast
 set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 peer-as 300
 
-set logical-systems r2 protocols bgp group to-v4v6-rr type internal
-set logical-systems r2 protocols bgp group to-v4v6-rr local-address 10.200.1.2
-set logical-systems r2 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r2 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
-set logical-systems r2 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
 set logical-systems r2 protocols bgp group vpn-rr type internal
 set logical-systems r2 protocols bgp group vpn-rr local-address 10.200.1.2
 set logical-systems r2 protocols bgp group vpn-rr family inet-vpn unicast
@@ -1490,11 +1487,6 @@ set logical-systems r2 protocols bgp group to-t-v6 family inet6 unicast
 set logical-systems r2 protocols bgp group to-t-v6 neighbor ::100.2.21.2 peer-as 1100
 set logical-systems r2 protocols bgp group to-t-v6 neighbor ::100.2.22.2 peer-as 1200
 
-set logical-systems r3 protocols bgp group to-v4v6-rr type internal
-set logical-systems r3 protocols bgp group to-v4v6-rr local-address 10.200.1.3
-set logical-systems r3 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r3 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
-set logical-systems r3 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
 set logical-systems r3 protocols bgp group vpn-rr type internal
 set logical-systems r3 protocols bgp group vpn-rr local-address 10.200.1.3
 set logical-systems r3 protocols bgp group vpn-rr family inet-vpn unicast
@@ -1523,11 +1515,6 @@ set logical-systems r3 protocols bgp group to-t-v6 family inet6 unicast
 set logical-systems r3 protocols bgp group to-t-v6 neighbor ::100.3.21.2 peer-as 1100
 set logical-systems r3 protocols bgp group to-t-v6 neighbor ::100.3.22.2 peer-as 1200
 
-set logical-systems r4 protocols bgp group to-v4v6-rr type internal
-set logical-systems r4 protocols bgp group to-v4v6-rr local-address 10.200.1.4
-set logical-systems r4 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r4 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
-set logical-systems r4 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
 set logical-systems r4 protocols bgp group to-c5 type external
 set logical-systems r4 protocols bgp group to-c5 family inet6 unicast
 set logical-systems r4 protocols bgp group to-c5 neighbor ::100.4.35.2 peer-as 500
@@ -1537,16 +1524,6 @@ set logical-systems r4 protocols bgp group to-vpn-rr family inet-vpn unicast
 set logical-systems r4 protocols bgp group to-vpn-rr neighbor 10.200.1.2
 set logical-systems r4 protocols bgp group to-vpn-rr neighbor 10.200.1.3
 
-set logical-systems r5 protocols bgp group v4v6-rr type internal
-set logical-systems r5 protocols bgp group v4v6-rr local-address 10.200.1.5
-set logical-systems r5 protocols bgp group v4v6-rr family inet unicast
-set logical-systems r5 protocols bgp group v4v6-rr cluster 5.5.5.5
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.1
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.2
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.3
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.4
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.7
-set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.8
 set logical-systems r5 protocols bgp group to-r6 type internal
 set logical-systems r5 protocols bgp group to-r6 local-address 10.200.1.5
 set logical-systems r5 protocols bgp group to-r6 family inet unicast
@@ -1560,26 +1537,11 @@ set logical-systems r5 protocols bgp group to-p-v6 family inet6 unicast
 set logical-systems r5 protocols bgp group to-p-v6 neighbor ::100.5.12.2 peer-as 2000
 set logical-systems r5 protocols bgp group to-p-v6 neighbor ::100.5.13.2 peer-as 3000
 
-set logical-systems r6 protocols bgp group v4v6-rr type internal
-set logical-systems r6 protocols bgp group v4v6-rr local-address 10.200.1.6
-set logical-systems r6 protocols bgp group v4v6-rr family inet unicast
-set logical-systems r6 protocols bgp group v4v6-rr cluster 6.6.6.6
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.1
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.2
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.3
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.4
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.8
-set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.7
 set logical-systems r6 protocols bgp group to-r5 type internal
 set logical-systems r6 protocols bgp group to-r5 local-address 10.200.1.6
 set logical-systems r6 protocols bgp group to-r5 family inet unicast
 set logical-systems r6 protocols bgp group to-r5 neighbor 10.200.1.5
 
-set logical-systems r7 protocols bgp group to-v4v6-rr type internal
-set logical-systems r7 protocols bgp group to-v4v6-rr local-address 10.200.1.7
-set logical-systems r7 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r7 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
-set logical-systems r7 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
 set logical-systems r7 protocols bgp group to-vpn-rr type internal
 set logical-systems r7 protocols bgp group to-vpn-rr local-address 10.200.1.7
 set logical-systems r7 protocols bgp group to-vpn-rr family inet-vpn unicast
@@ -1590,11 +1552,6 @@ set logical-systems r7 protocols bgp group to-c4 family inet unicast
 set logical-systems r7 protocols bgp group to-c4 family inet6 unicast
 set logical-systems r7 protocols bgp group to-c4 neighbor 100.7.34.2 peer-as 400
 
-set logical-systems r8 protocols bgp group to-v4v6-rr type internal
-set logical-systems r8 protocols bgp group to-v4v6-rr local-address 10.200.1.8
-set logical-systems r8 protocols bgp group to-v4v6-rr family inet unicast
-set logical-systems r8 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
-set logical-systems r8 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
 set logical-systems r8 protocols bgp group to-vpn-rr type internal
 set logical-systems r8 protocols bgp group to-vpn-rr local-address 10.200.1.8
 set logical-systems r8 protocols bgp group to-vpn-rr family inet-vpn unicast
@@ -1792,7 +1749,279 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet6.0: 1/1/1/0
 </code></pre>
 <h3 id="as-migration">AS migration</h3>
+<blockquote>
+<p>r1-r8 use AS 4012345678, but appears 65513 to C3, hide 65513 to the core</p>
+</blockquote>
+<pre><code>set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as 65513
+set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as private
+</code></pre>
+<h3 id="verify_10">verify</h3>
+<p>with <code>local-as private</code></p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# show | compare  
+[edit logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as]
+-       private;
+</code></pre>
+<p>simplest way to verify:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1
+
+inet.0: 49 destinations, 67 routes (46 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 3.3.3.0/24              Self                         100        65513 300 I
+* 20.20.0.0/16            Self                         100        I
+* 33.33.0.0/16            Self                         100        65513 300 I
+* 33.33.33.33/32          Self                         100        65513 300 I
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           Self                         100        65513 300 I
+* ::33.33.33.33/128       Self                         100        65513 300 I
+  2011:310:1020::1/128
+*                         Self                         100        I
+* 3333:3333:3333::/48     Self                         100        65513 300 I
+</code></pre>
+<p>use <code>detail | match</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1 detail | match 65513    
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     AS path: 65513 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+</code></pre>
+<p>use as-path regex:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1 aspath-regex ".* 65513 .*"
+
+inet.0: 49 destinations, 67 routes (46 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 3.3.3.0/24              Self                         100        65513 300 I
+* 33.33.0.0/16            Self                         100        65513 300 I
+* 33.33.33.33/32          Self                         100        65513 300 I
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           Self                         100        65513 300 I
+* ::33.33.33.33/128       Self                         100        65513 300 I
+* 3333:3333:3333::/48     Self                         100        65513 300 I
+</code></pre>
+<p>with <code>local-as private</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1
+
+inet.0: 49 destinations, 67 routes (46 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 3.3.3.0/24              Self                         100        300 I
+* 20.20.0.0/16            Self                         100        I
+* 33.33.0.0/16            Self                         100        300 I
+* 33.33.33.33/32          Self                         100        300 I
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           Self                         100        300 I
+* ::33.33.33.33/128       Self                         100        300 I
+  2011:310:1020::1/128
+*                         Self                         100        I
+* 3333:3333:3333::/48     Self                         100        300 I
+
+[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1 aspath-regex ".* 65513 .*"
+
+inet.0: 49 destinations, 67 routes (46 active, 0 holddown, 3 hidden)
+Restart Complete
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+
+[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-system r1 detail | match 65513          
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+     Communities: 65412:100 65513:100 target:4012345678L:2000
+</code></pre>
+<h3 id="config-ipv4-ipv6-rr-r5r6">config IPv4 IPv6 RR: R5/R6</h3>
+<pre><code>set logical-systems r1 protocols bgp group to-v4v6-rr type internal
+set logical-systems r1 protocols bgp group to-v4v6-rr local-address 10.200.1.1
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r1 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r1 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r2 protocols bgp group to-v4v6-rr type internal
+set logical-systems r2 protocols bgp group to-v4v6-rr local-address 10.200.1.2
+set logical-systems r2 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r2 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r2 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r2 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r3 protocols bgp group to-v4v6-rr type internal
+set logical-systems r3 protocols bgp group to-v4v6-rr local-address 10.200.1.3
+set logical-systems r3 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r3 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r3 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r3 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r4 protocols bgp group to-v4v6-rr type internal
+set logical-systems r4 protocols bgp group to-v4v6-rr local-address 10.200.1.4
+set logical-systems r4 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r4 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r4 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r4 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r7 protocols bgp group to-v4v6-rr type internal
+set logical-systems r7 protocols bgp group to-v4v6-rr local-address 10.200.1.7
+set logical-systems r7 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r7 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r7 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r7 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r8 protocols bgp group to-v4v6-rr type internal
+set logical-systems r8 protocols bgp group to-v4v6-rr local-address 10.200.1.8
+set logical-systems r8 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r8 protocols bgp group to-v4v6-rr neighbor 10.200.1.5
+set logical-systems r8 protocols bgp group to-v4v6-rr neighbor 10.200.1.6
+set logical-systems r8 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r5 protocols bgp group v4v6-rr type internal
+set logical-systems r5 protocols bgp group v4v6-rr local-address 10.200.1.5
+set logical-systems r5 protocols bgp group v4v6-rr family inet unicast
+set logical-systems r5 protocols bgp group v4v6-rr cluster 5.5.5.5  #&lt;------
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.1
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.2
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.3
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.4
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.7
+set logical-systems r5 protocols bgp group v4v6-rr neighbor 10.200.1.8
+set logical-systems r5 protocols bgp group to-v4v6-rr family inet6
+
+set logical-systems r6 protocols bgp group v4v6-rr type internal
+set logical-systems r6 protocols bgp group v4v6-rr local-address 10.200.1.6
+set logical-systems r6 protocols bgp group v4v6-rr family inet unicast
+set logical-systems r6 protocols bgp group v4v6-rr cluster 6.6.6.6  #&lt;------
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.1
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.2
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.3
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.4
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.8
+set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.7
+set logical-systems r6 protocols bgp group to-v4v6-rr family inet6
+</code></pre>
 <h3 id="pt-block">P/T block</h3>
+<h4 id="correct-nhs-policy-in-all-r">correct NHS policy in all R</h4>
+<pre><code>set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
+set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
+</code></pre>
+<h3 id="delete-existing-reject-group">delete existing <code>reject</code> group</h3>
+<pre><code>delete logical-systems r2 apply-groups reject
+delete logical-systems r3 apply-groups reject
+</code></pre>
+<h3 id="ipv4-requirement">IPv4 requirement</h3>
+<blockquote>
+<p>C 可以达到 C,P,T。P 之间可以互访，T 之间可以互访，P 与 T 之间不能互
+访。C3，C4，C5 的路由发给 P 和 T。T 和 P 的也需要发给 C。P 和 T
+不能相互发送。不能有次优路径 
+      =&gt; block P/T</p>
+<p>5,all the C devices will receive C/P/T routes, P devices will receive P/C
+routes, T devices will receive T/C routes.
+      =&gt; block P/T</p>
+<p>6,Advertising 10.200/16 and 2011:0310::/32 to C/P/T devices, P device can only
+receive IPV4 prefix less and equal than /20, IPV6 prefix less and equal than
+/48
+      =&gt; to C/T:
+              adv IPv4/IPv6 agg routes
+      =&gt; to P:
+              adv IPv4/IPv6 agg routes
+              block longer IPv4/IPv6 prefix to P</p>
+</blockquote>
+<h3 id="tag-routes">tag routes</h3>
+<pre><code>set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
+set logical-systems r1 policy-options community c-route members 65513:100
+set logical-systems r1 policy-options community p-route members 65513:200
+set logical-systems r1 policy-options community t-route members 65513:300
+
+set logical-systems r2 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
+set logical-systems r2 policy-options policy-statement imp-bgp-tag-t term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement imp-bgp-tag-t term 1 then community add t-route
+set logical-systems r2 policy-options community c-route members 65513:100
+set logical-systems r2 policy-options community p-route members 65513:200
+set logical-systems r2 policy-options community t-route members 65513:300
+
+set logical-systems r3 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
+set logical-systems r3 policy-options policy-statement imp-bgp-tag-t term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement imp-bgp-tag-t term 1 then community add t-route
+set logical-systems r3 policy-options community c-route members 65513:100
+set logical-systems r3 policy-options community p-route members 65513:200
+set logical-systems r3 policy-options community t-route members 65513:300
+
+set logical-systems r4 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
+set logical-systems r4 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
+set logical-systems r4 policy-options community c-route members 65513:100
+set logical-systems r4 policy-options community p-route members 65513:200
+set logical-systems r4 policy-options community t-route members 65513:300
+
+set logical-systems r5 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
+set logical-systems r5 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
+set logical-systems r5 policy-options community c-route members 65513:100
+set logical-systems r5 policy-options community p-route members 65513:200
+set logical-systems r5 policy-options community t-route members 65513:300
+
+set logical-systems r7 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
+set logical-systems r7 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
+set logical-systems r7 policy-options community c-route members 65513:100
+set logical-systems r7 policy-options community p-route members 65513:200
+set logical-systems r7 policy-options community t-route members 65513:300
+
+set logical-systems r1 protocols bgp group to-c3 import imp-bgp-tag-c
+set logical-systems r2 protocols bgp group to-p import imp-bgp-tag-p
+set logical-systems r2 protocols bgp group to-t import imp-bgp-tag-t
+set logical-systems r3 protocols bgp group to-p import imp-bgp-tag-p
+set logical-systems r3 protocols bgp group to-t import imp-bgp-tag-t
+set logical-systems r4 protocols bgp group to-c5 import imp-bgp-tag-c
+set logical-systems r5 protocols bgp group to-p import imp-bgp-tag-p
+set logical-systems r7 protocols bgp group to-c4 import imp-bgp-tag-c
+</code></pre>
+<h3 id="exp">exp</h3>
+<blockquote>
+<p>Advertising 10.200/16 and 2011:0310::/32 to C/P/T devices, 
+   P device can only receive IPV4 prefix less and equal than /20, IPV6 prefix
+   less and equal than /48</p>
+</blockquote>
+<pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 then reject
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 then reject
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 from route-filter 10.200.0.0/16 exact
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 then accept
+
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 from community p-route
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 then reject
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 2 then accept
+</code></pre>
 <p>before policy, p/t route goes to each other</p>
 <p>.t1's ipv4 bgp routes: got p1-3 routes:</p>
 <pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet.0
@@ -3204,12 +3433,15 @@ without rib inet.3, following can't co-exist:</p>
 <pre><code>inet unicast 
 inet labeled-unicast
 </code></pre>
-<p>so only one address family can't be supported</p>
+<p>because both routes (by default), will be put in inet.0 -- the only diff
+between these 2 types of routes are, the labeled route carries a label -- this
+will lead confliction so only one address family can't be supported</p>
 <p>with rib inet.3 ,these are fine:</p>
 <pre><code>inet unicast
 inet labeled-unicast rib inet.3
 </code></pre>
-<p>so now "You can allow both labeled and unlabeled routes to be exchanged in a single
+<p>because labeled-route are now put in inet.3, unlabeled are in inet.0</p>
+<p>now "You can allow both labeled and unlabeled routes to be exchanged in a single
 session"</p>
 <h4 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h4>
 <pre><code>R1             (BGP route NLRI addr family)         R5
@@ -3240,16 +3472,53 @@ term 2 {
     then accept;
 }
 </code></pre>
-<h4 id="tip-6pe-basic">TIP: 6PE basic</h4>
+<h4 id="tip-6pe">TIP: 6PE</h4>
 <ul>
 <li>like MPLS/VPN. but no vrf, </li>
 <li>bgp assign either reserved label 2(ipv6 explicit) or any lable as inner
   label(like vpn label).</li>
-<li>running on top of LSP</li>
+<li>running on top of LSP (ldp or rsvp based)   <br />
+</li>
 <li>Juniper PE core facing i/f <code>must</code> enable ipv6 =&gt; troubleshooting tip.
-  (seems only if use label 2). otherwise forwarding issue.</li>
+  (seems only if use label 2). otherwise forwarding will have issue.</li>
 </ul>
-<h5 id="simple-topo">simple topo</h5>
+<p>routing:</p>
+<ul>
+<li>CE2 adv IPv6 routes to PE2, via IPv6 protocols (BGP, ISIS, OSPFv3, RIPng, etc)</li>
+<li>PE2 get CE2 IPv6 routes, with NH as CE2 IPv6 address</li>
+<li><code>family inet6 labeled-unicast</code> =&gt; </li>
+<li>PE2 adv labeled(<code>explicit-null</code> =&gt; label 2) IPv6 routes to PE1, via MP-BGP</li>
+<li><code>protocol mpls ipv6-tunneling</code> =&gt; </li>
+<li>PE1 check inet3.0 (table of map: IPv4 &lt;=&gt; LSP )</li>
+<li>PE1 convert all IPv4 in inet.3 to IPv6, in a form of "IPv4 mapped IPv6 address"</li>
+<li>PE1 put all IPv4-m-IPv6 into inet6.3 (a table of map: IPv6 &lt;=&gt; LSP)</li>
+<li>
+<p>PE1 BGP now can: 
+                  (auto-convert based on IPv4 NH)
+        resolve IPv6 routes ===&gt; NH IPv4-m-IPv6
+                        (inet6.3)
+        resolve IPv4-m-IPv6 ===&gt; LSP</p>
+</li>
+<li>
+<p>PE1 adv IPv6 routes to CE1, NH to PE1 IPv6</p>
+<pre><code>                      &lt; ----MPLS---------&gt; 
+    CE1-----------PE1==========/P/==========PE2-------------CE2
+ (pure IPv6)   (dual)                       (dual)                (dual stack)
+
+                                                        (routing:)
+                                              &lt;===IPv6 protocol=
+                    &lt;==MP-BGP:labeled IPv6===
+    &lt;==IPv6 protocol=
+
+    (forwarding:)
+    ===IPv6 packet=&gt;
+                    =&gt;IPv6/IL:2/OL (PHP)
+                                ==IPv6/IL:2=&gt;               
+                                              ===&gt;IPv6 packet=&gt;
+</code></pre>
+</li>
+</ul>
+<h4 id="simple-topo-and-config">simple topo and config</h4>
 <pre><code>&lt;--ipv6 (AS1000)-&gt; &lt;---------ipv4 AS(3000)-------&gt; &lt;--ipv6 (AS2000)-&gt;
 +-----+        +-----+         +-----+         +-----+       +-----+
 | ce1 |--------| pe1 |---------|  p  |---------| pe2 |-------| ce2 |
@@ -5023,7 +5292,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 the
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
 </code></pre>
-<h4 id="verify_10">verify</h4>
+<h4 id="verify_11">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
 traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
