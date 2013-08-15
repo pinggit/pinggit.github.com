@@ -80,19 +80,21 @@
 </li>
 <li><a href="#bgp">BGP</a><ul>
 <li><a href="#bgp-task">BGP task</a></li>
-<li><a href="#basic-bgp-rr-vpn-pre-config">basic BGP RR VPN pre-config</a></li>
+<li><a href="#pre-configbasic-bgp-rr-vpn">pre-config:basic BGP RR VPN</a></li>
 <li><a href="#verify_9">verify</a></li>
-<li><a href="#as-migration">AS migration</a></li>
+<li><a href="#configas-migration">config:AS migration</a></li>
 <li><a href="#verify_10">verify</a></li>
-<li><a href="#config-ipv4-ipv6-rr-r5r6">config IPv4 IPv6 RR: R5/R6</a></li>
-<li><a href="#pt-block">P/T block</a><ul>
+<li><a href="#configipv4-ipv6-rr-r5r6">config:IPv4 IPv6 RR: R5/R6</a></li>
+<li><a href="#troubleshooting">troubleshooting</a><ul>
 <li><a href="#correct-nhs-policy-in-all-r">correct NHS policy in all R</a></li>
+<li><a href="#delete-existing-reject-group">delete existing reject group</a></li>
 </ul>
 </li>
-<li><a href="#delete-existing-reject-group">delete existing reject group</a></li>
 <li><a href="#ipv4-requirement">IPv4 requirement</a></li>
-<li><a href="#tag-routes">tag routes</a></li>
-<li><a href="#exp">exp</a></li>
+<li><a href="#config-1-all-cpt-facing-r-import-tag-routes">config 1: all C/P/T facing R: import : tag routes</a></li>
+<li><a href="#verify_11">verify</a></li>
+<li><a href="#config-2-all-pt-facing-r-export-reject-pt-routes">config 2: all P/T facing R: export: reject P(T) routes</a></li>
+<li><a href="#verify_12">verify</a></li>
 <li><a href="#tip-unverified-route">TIP: unverified route</a></li>
 <li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 <li><a href="#tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</a></li>
@@ -226,7 +228,7 @@
 </li>
 <li><a href="#vpn-lsp-map">vpn lsp map</a><ul>
 <li><a href="#config_6">config</a></li>
-<li><a href="#verify_11">verify</a></li>
+<li><a href="#verify_13">verify</a></li>
 </ul>
 </li>
 </ul>
@@ -1445,7 +1447,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
 10.10.1.8        4012345678         27         32       0       1       11:15 Establ
   bgp.l3vpn.0: 0/2/2/0
 </code></pre>
-<h3 id="basic-bgp-rr-vpn-pre-config">basic BGP RR VPN pre-config</h3>
+<h3 id="pre-configbasic-bgp-rr-vpn">pre-config:basic BGP RR VPN</h3>
 <p>initial config is all 65513 in core, need to change to 4012345678 in all R</p>
 <pre><code>set logical-systems r1 protocols bgp group to-vpn-rr type internal
 set logical-systems r1 protocols bgp group to-vpn-rr local-address 10.200.1.1
@@ -1748,7 +1750,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet.3: 0/0/0/0
   inet6.0: 1/1/1/0
 </code></pre>
-<h3 id="as-migration">AS migration</h3>
+<h3 id="configas-migration">config:AS migration</h3>
 <blockquote>
 <p>r1-r8 use AS 4012345678, but appears 65513 to C3, hide 65513 to the core</p>
 </blockquote>
@@ -1856,7 +1858,7 @@ lab@MX80-NGGWR-02# run show route advertising-protocol bgp 10.200.1.5 logical-sy
      Communities: 65412:100 65513:100 target:4012345678L:2000
      Communities: 65412:100 65513:100 target:4012345678L:2000
 </code></pre>
-<h3 id="config-ipv4-ipv6-rr-r5r6">config IPv4 IPv6 RR: R5/R6</h3>
+<h3 id="configipv4-ipv6-rr-r5r6">config:IPv4 IPv6 RR: R5/R6</h3>
 <pre><code>set logical-systems r1 protocols bgp group to-v4v6-rr type internal
 set logical-systems r1 protocols bgp group to-v4v6-rr local-address 10.200.1.1
 set logical-systems r1 protocols bgp group to-v4v6-rr family inet unicast
@@ -1923,13 +1925,13 @@ set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.8
 set logical-systems r6 protocols bgp group v4v6-rr neighbor 10.200.1.7
 set logical-systems r6 protocols bgp group to-v4v6-rr family inet6
 </code></pre>
-<h3 id="pt-block">P/T block</h3>
+<h3 id="troubleshooting">troubleshooting</h3>
 <h4 id="correct-nhs-policy-in-all-r">correct NHS policy in all R</h4>
 <pre><code>set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
 set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
 </code></pre>
-<h3 id="delete-existing-reject-group">delete existing <code>reject</code> group</h3>
+<h4 id="delete-existing-reject-group">delete existing <code>reject</code> group</h4>
 <pre><code>delete logical-systems r2 apply-groups reject
 delete logical-systems r3 apply-groups reject
 </code></pre>
@@ -1951,7 +1953,7 @@ receive IPV4 prefix less and equal than /20, IPV6 prefix less and equal than
               adv IPv4/IPv6 agg routes
               block longer IPv4/IPv6 prefix to P</p>
 </blockquote>
-<h3 id="tag-routes">tag routes</h3>
+<h3 id="config-1-all-cpt-facing-r-import-tag-routes">config 1: all C/P/T facing R: import : tag routes</h3>
 <pre><code>set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
 set logical-systems r1 policy-options community c-route members 65513:100
@@ -2001,239 +2003,47 @@ set logical-systems r4 protocols bgp group to-c5 import imp-bgp-tag-c
 set logical-systems r5 protocols bgp group to-p import imp-bgp-tag-p
 set logical-systems r7 protocols bgp group to-c4 import imp-bgp-tag-c
 </code></pre>
-<h3 id="exp">exp</h3>
-<blockquote>
-<p>Advertising 10.200/16 and 2011:0310::/32 to C/P/T devices, 
-   P device can only receive IPV4 prefix less and equal than /20, IPV6 prefix
-   less and equal than /48</p>
-</blockquote>
+<h3 id="verify_11">verify</h3>
+<pre><code>#tag C route
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r1 3.3.3/24 extensive | match comm  
+    Communities: 65412:100 65513:100 target:4012345678L:2000
+    Communities: 65412:100 65513:100 target:4012345678L:2000
+                Communities: 65412:100 65513:100 target:4012345678L:2000
+
+#tag P route
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r2 211.1/16 extensive | match comm        
+    Communities: 65513:200
+    Communities: 65513:200
+                Communities: 65513:200
+
+#tag T route
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r2 222.1/16 extensive | match comm 
+    Communities: 65513:300
+    Communities: 65513:300
+                Communities: 65513:300
+</code></pre>
+<h3 id="config-2-all-pt-facing-r-export-reject-pt-routes">config 2: all P/T facing R: export: reject P(T) routes</h3>
 <pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 then reject
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 then reject
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 from route-filter 10.200.0.0/16 exact
-set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 then accept
 
 set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 from community p-route
 set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 1 then reject
-set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 2 then accept
+
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 then reject
+
+set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 from community p-route
+set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 then reject
+
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 then reject
 </code></pre>
-<p>before policy, p/t route goes to each other</p>
-<p>.t1's ipv4 bgp routes: got p1-3 routes:</p>
-<pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet.0
-
-t1.inet.0: 13 destinations, 19 routes (13 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-10.10.0.0/16       *[BGP/170] 02:02:32, localpref 100
-                      AS path: 4012345678 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-192.168.33.0/24    *[BGP/170] 02:02:29, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-                    [BGP/170] 02:02:23, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-192.168.44.0/24    *[BGP/170] 02:02:38, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 02:02:32, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-212.100.0.0/16     *[BGP/170] 02:02:38, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 02:02:28, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-215.1.0.0/16       *[BGP/170] 02:02:38, localpref 100
-                      AS path: 4012345678 1000 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 02:02:32, localpref 100
-                      AS path: 4012345678 1000 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-218.2.0.0/16       *[BGP/170] 02:02:40, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-                    [BGP/170] 02:02:38, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-223.3.0.0/16       *[BGP/170] 02:02:38, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 02:02:32, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-</code></pre>
-<p>t1 ipv6 routes, got all routes from both t and p:</p>
-<pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet6.0
-
-t1.inet6.0: 14 destinations, 20 routes (14 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:1000::/32     *[BGP/170] 16:17:53, localpref 100
-                      AS path: 4012345678 1000 I, validation-state: unverified
-                    &gt; to ::192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 16:17:44, localpref 100
-                      AS path: 4012345678 1000 I, validation-state: unverified
-                    &gt; to ::192.168.21.1 via ge-1/2/2.321
-2000:2000::/32     *[BGP/170] 16:17:49, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to ::192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 16:17:44, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to ::192.168.21.1 via ge-1/2/2.321
-2000:3000::/32     *[BGP/170] 16:17:59, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to ::192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 16:17:43, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to ::192.168.21.1 via ge-1/2/2.321
-3000:2000::/32     *[BGP/170] 16:17:57, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to ::192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 16:17:43, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to ::192.168.21.1 via ge-1/2/2.321
-</code></pre>
-<p>after policy application, t/p won't get routes from each other</p>
-<pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p3.inet6.0
-
-p3.inet6.0: 9 destinations, 10 routes (9 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:1000::/32     *[BGP/170] 17:02:46, localpref 100
-                      AS path: 4012345678 1000 I, validation-state: unverified
-                    &gt; to ::192.168.213.1 via ge-1/2/2.213
-2000:2000::/32     *[BGP/170] 17:02:42, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to ::192.168.213.1 via ge-1/2/2.213
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet0.0    
-error: No routing tables matching specification.
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet.0
-
-t1.inet.0: 10 destinations, 13 routes (10 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-10.10.0.0/16       *[BGP/170] 17:03:03, localpref 100
-                      AS path: 4012345678 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-192.168.33.0/24    *[BGP/170] 17:03:00, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-                    [BGP/170] 17:02:54, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-192.168.44.0/24    *[BGP/170] 17:03:09, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 17:03:03, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-212.100.0.0/16     *[BGP/170] 17:03:09, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to 192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 17:02:59, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to 192.168.21.1 via ge-1/2/2.321
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table t1.inet6.0
-
-t1.inet6.0: 11 destinations, 14 routes (11 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-3000:2000::/32     *[BGP/170] 17:03:48, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to ::192.168.221.1 via ge-1/2/2.221
-                    [BGP/170] 17:03:34, localpref 100
-                      AS path: 4012345678 1002 I, validation-state: unverified
-                    &gt; to ::192.168.21.1 via ge-1/2/2.321
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p1.inet.0
-
-p1.inet.0: 12 destinations, 16 routes (12 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-192.168.33.0/24    *[BGP/170] 17:03:47, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 00:16:56, localpref 100
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to 192.168.11.1 via ge-1/2/2.511
-192.168.44.0/24    *[BGP/170] 17:04:08, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 00:16:56, localpref 100
-                      AS path: 4012345678 400 I, validation-state: unverified
-                    &gt; to 192.168.11.1 via ge-1/2/2.511
-218.2.0.0/16       *[BGP/170] 17:04:11, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to 192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 00:16:56, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to 192.168.11.1 via ge-1/2/2.511
-223.3.0.0/16       *[BGP/170] 17:04:10, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to 192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 00:16:56, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to 192.168.11.1 via ge-1/2/2.511
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p1.inet6.0
-
-p1.inet6.0: 12 destinations, 16 routes (12 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:2000::/32     *[BGP/170] 17:04:13, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to ::192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 00:19:56, localpref 100
-                      AS path: 4012345678 2000 I, validation-state: unverified
-                    &gt; to ::192.168.31.1 via ge-1/2/2.311
-2000:3000::/32     *[BGP/170] 17:04:17, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to ::192.168.211.1 via ge-1/2/2.211
-                    [BGP/170] 17:04:07, localpref 100
-                      AS path: 4012345678 3000 I, validation-state: unverified
-                    &gt; to ::192.168.31.1 via ge-1/2/2.311
-</code></pre>
-<p>c router can still get routes from both p/t:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet.0
-
-c3.inet.0: 10 destinations, 10 routes (9 active, 0 holddown, 1 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-1.0.0.0/8          *[BGP/170] 17:06:53, localpref 100
-                      AS path: 65513 4012345678 1001 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-10.10.0.0/16       *[BGP/170] 17:06:59, localpref 100
-                      AS path: 65513 4012345678 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-212.100.0.0/16     *[BGP/170] 17:06:53, localpref 100
-                      AS path: 65513 4012345678 1002 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-215.1.0.0/16       *[BGP/170] 17:06:59, localpref 100
-                      AS path: 65513 4012345678 1000 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-218.2.0.0/16       *[BGP/170] 17:06:53, localpref 100
-                      AS path: 65513 4012345678 2000 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-223.3.0.0/16       *[BGP/170] 17:06:59, localpref 100
-                      AS path: 65513 4012345678 3000 I, validation-state: unverified
-                    &gt; to 192.168.133.1 via ge-1/2/2.133
-</code></pre>
+<h3 id="verify_12">verify</h3>
 <h3 id="tip-unverified-route">TIP: unverified route</h3>
 <p><a href="http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html">http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html</a></p>
 <h3 id="tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</h3>
@@ -5292,7 +5102,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 the
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
 </code></pre>
-<h4 id="verify_11">verify</h4>
+<h4 id="verify_13">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
 traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
