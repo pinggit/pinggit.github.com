@@ -82,6 +82,7 @@
 <li><a href="#bgp-task">BGP task</a></li>
 <li><a href="#pre-configbasic-bgp-rr-vpn">pre-config:basic BGP RR VPN</a></li>
 <li><a href="#verify_9">verify</a></li>
+<li><a href="#tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</a></li>
 <li><a href="#configas-migration">config:AS migration</a></li>
 <li><a href="#verify_10">verify</a></li>
 <li><a href="#configipv4-ipv6-rr-r5r6">config:IPv4 IPv6 RR: R5/R6</a></li>
@@ -95,10 +96,15 @@
 <li><a href="#verify_11">verify</a></li>
 <li><a href="#config-2-all-pt-facing-r-export-reject-pt-routes">config 2: all P/T facing R: export: reject P(T) routes</a></li>
 <li><a href="#verify_12">verify</a></li>
-<li><a href="#tip-unverified-route">TIP: unverified route</a></li>
-<li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
-<li><a href="#tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</a></li>
-<li><a href="#ipv6">ipv6</a><ul>
+<li><a href="#config6pepe-ce">config:6PE:PE-CE</a></li>
+<li><a href="#verify_13">verify:</a><ul>
+<li><a href="#without-accept-remote-nexthop-and-nh-changing-policy">without accept-remote-nexthop and nh changing policy</a></li>
+<li><a href="#with-accept-remote-nexthop">with accept-remote-nexthop</a></li>
+<li><a href="#fix-incoming-nh-with-import-policy">fix incoming NH with import policy</a></li>
+</ul>
+</li>
+<li><a href="#config6pepe-pe">config:6PE:PE-PE</a></li>
+<li><a href="#verify-label-path">verify label path</a></li>
 <li><a href="#tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</a><ul>
 <li><a href="#accept-remote-nexthop">accept-remote-nexthop</a></li>
 </ul>
@@ -106,14 +112,14 @@
 <li><a href="#accept-remote-nexthop_1">accept-remote-nexthop</a></li>
 <li><a href="#policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</a><ul>
 <li><a href="#questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</a></li>
-<li><a href="#knowledge-base">knowledge base</a></li>
+<li><a href="#tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</a></li>
 </ul>
 </li>
 <li><a href="#how-c-routers-got-the-ipv6-routes">how C routers got the IPv6 routes?</a><ul>
 <li><a href="#change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</a></li>
 </ul>
 </li>
-<li><a href="#tip-all-4-solutions">TIP: all 4 solutions</a></li>
+<li><a href="#tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</a></li>
 <li><a href="#solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</a><ul>
 <li><a href="#install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</a></li>
 <li><a href="#make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</a><ul>
@@ -149,13 +155,12 @@
 <li><a href="#tip-inet-labeled-unicast-rib-inet3">TIP: inet labeled-unicast rib inet.3</a></li>
 <li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
 <li><a href="#tip-6pe">TIP: 6PE</a></li>
+<li><a href="#tip-ipv6-tunneling-vs-rib-group">TIP: ipv6-tunneling vs rib-group</a></li>
 <li><a href="#simple-topo-and-config">simple topo and config</a><ul>
 <li><a href="#pe1-config">PE1 config</a></li>
 <li><a href="#pe2-config">PE2 config</a></li>
 <li><a href="#resources">resources</a></li>
 <li><a href="#family-inet6-labeled-unicast-vs-unicast">family inet6 labeled-unicast vs unicast</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#rtbh">rtbh</a><ul>
@@ -168,6 +173,8 @@
 <li><a href="#question">QUESTION:</a></li>
 </ul>
 </li>
+<li><a href="#tip-unverified-route">TIP: unverified route</a></li>
+<li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 </ul>
 </li>
 <li><a href="#vpn">VPN</a><ul>
@@ -228,7 +235,7 @@
 </li>
 <li><a href="#vpn-lsp-map">vpn lsp map</a><ul>
 <li><a href="#config_6">config</a></li>
-<li><a href="#verify_13">verify</a></li>
+<li><a href="#verify_14">verify</a></li>
 </ul>
 </li>
 </ul>
@@ -295,7 +302,7 @@
 </ul>
 </li>
 <li><a href="#misc-obsoleted">misc (obsoleted)</a><ul>
-<li><a href="#ipv6_1">ipv6</a><ul>
+<li><a href="#ipv6">ipv6</a><ul>
 <li><a href="#p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</a></li>
 <li><a href="#p2-is-missing-some-ipv6-routes">p2 is missing some IPv6 routes</a></li>
 <li><a href="#r2r3-routes">R2/R3 routes</a></li>
@@ -1750,6 +1757,26 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet.3: 0/0/0/0
   inet6.0: 1/1/1/0
 </code></pre>
+<h3 id="tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</h3>
+<p><a href="http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html">http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html</a></p>
+<pre><code>external [ type metric-type ]   
+Standard        
+(OSPF and IS-IS only) Match IGP external routes. For IS-IS routes, the external
+condition also matches routes that are exported from one IS-IS level to
+another. The type keyword is optional and is applicable only to OSPF external
+routes. When you do not specify type, the external condition matches all IGP
+external (OSPF and IS-IS) routes. When you specify type, the external condition
+matches only OSPF external routes with the specified OSPF metric type. The
+metric type can either be 1 or 2.
+</code></pre>
+<p>To match BGP external routes, use the route-type match condition.</p>
+<pre><code>route-type value        
+Standard        
+Type of BGP route. The value can be one of the following:
+external—External route.
+internal—Internal route.
+</code></pre>
+<p>To match IGP external routes, use the external match condition.</p>
 <h3 id="configas-migration">config:AS migration</h3>
 <blockquote>
 <p>r1-r8 use AS 4012345678, but appears 65513 to C3, hide 65513 to the core</p>
@@ -2044,55 +2071,408 @@ set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 then reject
 </code></pre>
 <h3 id="verify_12">verify</h3>
-<h3 id="tip-unverified-route">TIP: unverified route</h3>
-<p><a href="http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html">http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html</a></p>
-<h3 id="tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</h3>
-<p>in the IPv6 network (only IPv6), BGP router id need to be specified 32 bit. OPEN message  need to be add on both CEs router.</p>
-<p>Quote from RFC 2544:
-  "Note that the information referred above is distinct from the BGP
-   Identifier used in the BGP-4 tie breaking procedure. The BGP
-   Identifier is a 32 bit unsigned integer exchanged between two peers
-   at session establishment time, within an OPEN message. This is a
-   system wide value determined at startup which must be unique in the
-   network and should be derived from an IPv4 address regardless of the
-   network protocol(s) a particular BGP-4 instance is configured to
-   convey at a given moment."</p>
-<p>If you are not configure router ID on CE router, OPEN message will fail.  BGP session cannot established. Debug will show why IPv6 BGP session failed when CE router have no router id.</p>
-<pre><code>Mar  1 08:57:35  prime pe2: rpd[3251]: bgp_get_open: NOTIFICATION sent to 11::2+4597 (proto): 
-code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (proto): 
-invalid BGP identifier 0x0
+<p>R1 -&gt; C3:</p>
+<pre><code>lab@MX80-NGGWR-02# run show route advertising-protocol bgp 100.1.33.2 logical-system r1
+
+inet.0: 45 destinations, 63 routes (43 active, 0 holddown, 2 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 3.3.3.0/24              100.1.33.2                              4012345678 300 I
+* 10.200.0.0/16           Self                                    4012345678 I      #&lt;------aggr. internal
+* 20.20.0.0/16            Self                                    I
+* 33.33.0.0/16            100.1.33.2                              4012345678 300 I
+* 33.33.33.33/32          100.1.33.2                              4012345678 300 I
+* 44.44.0.0/16            Self                                    4012345678 400 I  #&lt;------C4 routes
+* 211.1.0.0/16            Self                                    4012345678 1000 I #&lt;------all P routes
+* 211.2.0.0/16            Self                                    4012345678 2000 I
+* 211.3.0.0/16            Self                                    4012345678 3000 I
+* 211.4.0.0/16            Self                                    4012345678 1000 I
+* 211.5.0.0/16            Self                                    4012345678 2000 I
+* 211.6.0.0/16            Self                                    4012345678 2000 I
+* 211.7.0.0/16            Self                                    4012345678 3000 I
+* 222.1.0.0/16            Self                                    4012345678 1100 I #&lt;------all T routes
+* 222.2.0.0/16            Self                                    4012345678 1200 I
+* 222.3.0.0/16            Self                                    4012345678 1100 I
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           ::100.1.33.1                            4012345678 300 I
+* ::33.33.33.33/128       ::100.1.33.1                            4012345678 300 I
+* 2000:1000::/32          ::100.1.33.1                            4012345678 1000 I         #&lt;------P routes
+* 2000:2000::/32          ::100.1.33.1                            4012345678 2000 I
+* 2000:3000::/32          ::100.1.33.1                            4012345678 3000 I
+* 2000:4000::/32          ::100.1.33.1                            4012345678 1000 I
+* 2000:5000::/32          ::100.1.33.1                            4012345678 2000 I
+* 2000:6000::/32          ::100.1.33.1                            4012345678 2000 I
+* 2000:7000::/32          ::100.1.33.1                            4012345678 3000 I
+* 2011:310::/32           ::100.1.33.1                            4012345678 I      #&lt;------core IPv6 aggr
+  2011:310:1020::2/128                                                              #&lt;------core IPv6 lo0
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::3/128
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::4/128
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::5/128
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::6/128
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::7/128
+*                         ::100.1.33.1                            4012345678 I
+  2011:310:1020::8/128
+*                         ::100.1.33.1                            4012345678 I
+* 3000:1000::/32          ::100.1.33.1                            4012345678 1100 I #&lt;------T route
+* 3000:2000::/32          ::100.1.33.1                            4012345678 1200 I
+* 3000:3000::/32          ::100.1.33.1                            4012345678 1100 I
+* 3000:4000::/32          ::100.1.33.1                            4012345678 1200 I
+* 3333:3333:3333::/48     ::100.1.33.1                            4012345678 300 I  #&lt;------C routes
+* 4444:4444:4444::/48     ::100.1.33.1                            4012345678 400 I
+* 5555:5555:5555::/48     ::100.1.33.1                            4012345678 500 I
 </code></pre>
-<h3 id="tip-policy-internalexteral-vs-route-type-internalexternal">TIP: policy "internal/exteral" vs. "route-type internal/external"</h3>
-<p><a href="http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html">http://www.juniper.net/techpubs/en_US/junos/topics/usage-guidelines/policy-configuring-match-conditions-in-routing-policy-terms.html</a></p>
-<pre><code>external [ type metric-type ]   
-Standard        
-(OSPF and IS-IS only) Match IGP external routes. For IS-IS routes, the external
-condition also matches routes that are exported from one IS-IS level to
-another. The type keyword is optional and is applicable only to OSPF external
-routes. When you do not specify type, the external condition matches all IGP
-external (OSPF and IS-IS) routes. When you specify type, the external condition
-matches only OSPF external routes with the specified OSPF metric type. The
-metric type can either be 1 or 2.
+<p>R2 -&gt; P1: V4</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 100.2.11.2 logical-system r2
+
+inet.0: 72 destinations, 90 routes (71 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 10.200.0.0/16           Self                                    I         #&lt;------aggr
+* 20.20.0.0/16            Self                                    I         #&lt;------aggr
+* 33.33.0.0/16            Self                                    300 I     #&lt;------C3
+* 44.44.0.0/16            Self                                    400 I     #&lt;------C4
+* 211.2.0.0/16            Self                                    2000 I    #&lt;------all P
+* 211.3.0.0/16            Self                                    3000 I
+* 211.5.0.0/16            Self                                    2000 I
+* 211.6.0.0/16            Self                                    2000 I
+* 211.7.0.0/16            Self                                    3000 I
 </code></pre>
-<p>To match BGP external routes, use the route-type match condition.</p>
-<pre><code>route-type value        
-Standard        
-Type of BGP route. The value can be one of the following:
-external—External route.
-internal—Internal route.
+<p>R2 -&gt; P1: V6</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp ::100.2.11.2 logical-system r2
+
+inet6.0: 48 destinations, 77 routes (48 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 2000:2000::/32          Self                                    2000 I    #&lt;------all P V6 routes
+* 2000:3000::/32          Self                                    3000 I
+* 2000:5000::/32          Self                                    2000 I
+* 2000:6000::/32          Self                                    2000 I
+* 2000:7000::/32          Self                                    3000 I
+* 2011:310::/32           Self                                    I         #&lt;------V6 aggr
+* 3333:3333:3333::/48     Self                                    300 I     #&lt;------all C V6 routes
+* 4444:4444:4444::/48     Self                                    400 I
+* 5555:5555:5555::/48     Self                                    500 I
 </code></pre>
-<p>To match IGP external routes, use the external match condition.</p>
-<h3 id="ipv6">ipv6</h3>
-<h4 id="tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</h4>
+<h3 id="config6pepe-ce">config:6PE:PE-CE</h3>
+<p>R1:</p>
+<pre><code>#`accept-remote-nexthop`, otherwise not accept
+set logical-systems r1 protocols bgp group to-c3 accept-remote-nexthop
+set logical-systems r1 protocols bgp group to-c3 family inet unicast
+set logical-systems r1 protocols bgp group to-c3 family inet6 unicast
+set logical-systems r1 protocols bgp group to-c3 import imp-bgp-fix-nh
+set logical-systems r1 protocols bgp group to-c3 export exp-bgp-fix-nh
+
+#change NH of received C routes ,from (system default generated) IPv4-mapped-IPv6 addr
+#  to IPv4-compatible-IPv6, otherwise appears in local table as `hidden`
+set logical-systems r1 policy-options policy-statement imp-bgp-fix-nh term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement imp-bgp-fix-nh term 1 from route-filter ::0/0 prefix-length-range /0-/128    #&lt;------just for IPv6
+set logical-systems r1 policy-options policy-statement imp-bgp-fix-nh term 1 then next-hop ::100.1.33.2
+
+#change NH of advertised routes, from (system default generated) IPv4-mapped-IPv6 addr
+#  to IPv4-compatible-IPv6, otherwise appears as `hidden` in C router
+set logical-systems r1 policy-options policy-statement exp-bgp-fix-nh term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement exp-bgp-fix-nh term 1 from route-filter ::/0 prefix-length-range /0-/128     #&lt;------just for IPv6
+set logical-systems r1 policy-options policy-statement exp-bgp-fix-nh term 1 then next-hop ::100.1.33.1
+</code></pre>
+<p>R7:</p>
+<pre><code>set logical-systems r7 protocols bgp group to-c4 accept-remote-nexthop
+set logical-systems r7 protocols bgp group to-c4 family inet unicast
+set logical-systems r7 protocols bgp group to-c4 family inet6 unicast
+set logical-systems r7 protocols bgp group to-c4 import imp-bgp-fix-nh
+set logical-systems r7 protocols bgp group to-c4 export exp-bgp-fix-nh
+
+set logical-systems r7 policy-options policy-statement imp-bgp-fix-nh term 1 from protocol bgp
+set logical-systems r7 policy-options policy-statement imp-bgp-fix-nh term 1 from route-filter ::/0 prefix-length-range /0-/128     #&lt;------just for IPv6
+set logical-systems r7 policy-options policy-statement imp-bgp-fix-nh term 1 then next-hop ::100.7.34.2
+
+set logical-systems r7 policy-options policy-statement exp-bgp-fix-nh term 1 from protocol bgp
+set logical-systems r7 policy-options policy-statement exp-bgp-fix-nh term 1 from route-filter ::/0 prefix-length-range /0-/128     #&lt;------just for IPv6
+set logical-systems r7 policy-options policy-statement exp-bgp-fix-nh term 1 then next-hop ::100.7.34.1
+</code></pre>
+<h3 id="verify_13">verify:</h3>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table inet6.0 receive-protocol bgp 100.1.33.2
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           ::ffff:100.1.33.2                       300 I
+* ::33.33.33.33/128       ::ffff:100.1.33.2                       300 I
+* 3333:3333:3333::/48     ::ffff:100.1.33.2                       300 I
+</code></pre>
+<h4 id="without-accept-remote-nexthop-and-nh-changing-policy">without <code>accept-remote-nexthop</code> and nh changing policy</h4>
+<p>not accept any route at all, not even in hidden</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route receive-protocol bgp 100.1.33.2 logical-system r1 table inet6.0
+
+inet6.0: 29 destinations, 52 routes (29 active, 0 holddown, 0 hidden)
+Restart Complete
+</code></pre>
+<h4 id="with-accept-remote-nexthop">with <code>accept-remote-nexthop</code></h4>
+<p>accept route as <code>hidden</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# set logical-systems r1 protocols bgp group to-c3 accept-remote-nexthop
+
+[edit]
+lab@MX80-NGGWR-02# commit  
+commit complete
+
+[edit]
+lab@MX80-NGGWR-02# run show route receive-protocol bgp 100.1.33.2 logical-system r1 table inet6.0 hidden
+
+inet6.0: 32 destinations, 55 routes (29 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  ::3.3.3.0/120           ::ffff:100.1.33.2                       300 I     #&lt;------
+  ::33.33.33.33/128       ::ffff:100.1.33.2                       300 I     #&lt;------
+  3333:3333:3333::/48     ::ffff:100.1.33.2                       300 I     #&lt;------
+</code></pre>
+<h4 id="fix-incoming-nh-with-import-policy">fix incoming NH with import policy</h4>
+<p>rib-in still unchanged:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route receive-protocol bgp 100.1.33.2 logical-system r1 table inet6.0
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* ::3.3.3.0/120           ::ffff:100.1.33.2                       300 I
+                          ^^^^^^^^^^^^^^^^^
+* ::33.33.33.33/128       ::ffff:100.1.33.2                       300 I
+* 3333:3333:3333::/48     ::ffff:100.1.33.2                       300 I
+</code></pre>
+<p>routes in <code>rib</code> is changed, with new NH:</p>
+<pre><code>(IPv4-mapped-IPv6)          (IPv4-compatible-IPv6)
+::ffff:100.1.33.2   ==&gt;     ::100.1.33.2
+
+[edit]
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r1 table inet6.0 ::3.3.3.0/120 extensive
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
+::3.3.3.0/120 (1 entry, 1 announced)
+TSI:
+KRT in-kernel ::3.3.3.0/120 -&gt; {::100.1.33.2}
+Page 0 idx 0 Type 1 val 26e2824
+    Nexthop: ::100.1.33.2                                   #&lt;------
+    AS path: 4012345678 300 I
+    Communities: 65412:100 65513:100 target:4012345678L:2000
+Page 0 idx 1 Type 1 val 26e262c
+    Flags: Nexthop Change
+    Nexthop: Self
+    Localpref: 100
+    AS path: [4012345678] 300 I
+    Communities: 65412:100 65513:100 target:4012345678L:2000
+Path ::3.3.3.0 from 100.1.33.2 Vector len 4.  Val: 0 1
+        *BGP    Preference: 170/-101
+                Next hop type: Router, Next hop index: 2320
+                Address: 0x26e8698
+                Next-hop reference count: 9
+                Source: 100.1.33.2
+                Next hop: ::100.1.33.2 via ge-1/2/1.133, selected
+                Session Id: 0x500003
+                State: &lt;Active Ext&gt;
+                Local AS: 4012345678 Peer AS:   300
+                Age: 8:07 
+                Validation State: unverified 
+                Task: BGP_300_65513.100.1.33.2+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I
+                Communities: 65412:100 65513:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 3.3.3.1
+</code></pre>
+<h3 id="config6pepe-pe">config:6PE:PE-PE</h3>
+<p>R1:</p>
+<pre><code>set logical-systems r1 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
+</code></pre>
+<p>R2,R3,R7,R8:</p>
+<pre><code>set logical-systems r2 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
+set logical-systems r2 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r2 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
+
+set logical-systems r3 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
+set logical-systems r3 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r3 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
+
+set logical-systems r7 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
+set logical-systems r7 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r7 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
+
+set logical-systems r8 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
+set logical-systems r8 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r8 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
+</code></pre>
+<h3 id="verify-label-path">verify label path</h3>
+<p>R1-&gt;R2: label 299904</p>
+<pre><code>lab@MX80-NGGWR-02# run show route forwarding-table matching 4444:4444:4444::/48 | find r1 
+Logical system: r1
+Routing table: default.inet6
+Internet6:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+4444:4444:4444::/48 user     0                   indr 1048676     3
+                              100.0.12.2        Push 2, Push 299808, Push 299904(top)  2561     2 ge-1/2/1.102
+
+[edit]
+lab@MX80-NGGWR-02# run show route 4444:4444:4444::/48 logical-system r1
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+4444:4444:4444::/48*[BGP/170] 03:22:48, localpref 100, from 10.200.1.5
+                      AS path: 400 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r5     #&lt;------
+                    [BGP/170] 03:22:48, localpref 100, from 10.200.1.6
+                      AS path: 400 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r5
+
+lab@MX80-NGGWR-02# run show route 4444:4444:4444::/48 logical-system r1 detail | match label          
+                Label-switched-path r1-r5
+                Label operation: Push 2, Push 299808, Push 299904(top)
+                Label TTL action: prop-ttl, prop-ttl, prop-ttl(top)
+                Route Label: 2
+                Label-switched-path r1-r5
+                Label operation: Push 2, Push 299808, Push 299904(top)
+                Label TTL action: prop-ttl, prop-ttl, prop-ttl(top)
+                Route Label: 2
+</code></pre>
+<p>R2-&gt;R5: 299904 -&gt; pop                            <br />
+</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route table mpls.0 logical-system r2 label 299904
+
+mpls.0: 29 destinations, 29 routes (29 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+299904             *[RSVP/7/1] 03:17:04, metric 1
+                    &gt; to 100.0.25.2 via ge-1/2/1.205, label-switched-path r1-r5
+299904(S=0)        *[RSVP/7/1] 03:17:04, metric 1
+                    &gt; to 100.0.25.2 via ge-1/2/1.205, label-switched-path r1-r5
+
+[edit]
+lab@MX80-NGGWR-02# run show route table mpls.0 logical-system r2 label 299904 detail
+
+mpls.0: 29 destinations, 29 routes (29 active, 0 holddown, 0 hidden)
+Restart Complete
+299904 (1 entry, 1 announced)
+        *RSVP   Preference: 7/1
+                Next hop type: Router, Next hop index: 2485
+                Address: 0x2a8051c
+                Next-hop reference count: 3
+                Next hop: 100.0.25.2 via ge-1/2/1.205 weight 0x1, selected
+                Label-switched-path r1-r5
+                Label operation: Pop      
+                Session Id: 0x600002
+                State: &lt;Active Int AckRequest Accounting&gt;
+                Local AS: 4012345678 
+                Age: 3:18:10    Metric: 1 
+                Validation State: unverified 
+                Task: RSVP
+                Announcement bits (1): 1-KRT 
+                AS path: I
+
+299904(S=0) (1 entry, 1 announced)
+        *RSVP   Preference: 7/1
+                Next hop type: Router, Next hop index: 2486
+                Address: 0x2a80568
+                Next-hop reference count: 2
+                Next hop: 100.0.25.2 via ge-1/2/1.205 weight 0x1, selected
+                Label-switched-path r1-r5
+                Label operation: Pop      
+                Session Id: 0x600002
+                State: &lt;Active Int AckRequest Accounting&gt;
+                Local AS: 4012345678 
+                Age: 3:18:10    Metric: 1 
+                Validation State: unverified 
+                Task: RSVP
+                Announcement bits (1): 1-KRT 
+                AS path: I
+</code></pre>
+<p>R5-&gt;R7:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route table mpls.0 logical-system r5 label 299808
+
+mpls.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+299808             *[LDP/9] 03:19:58, metric 1
+                    &gt; to 100.0.57.2 via ge-1/2/1.507, Pop      
+299808(S=0)        *[LDP/9] 03:19:58, metric 1
+                    &gt; to 100.0.57.2 via ge-1/2/1.507, Pop
+
+[edit]
+lab@MX80-NGGWR-02# run show route table mpls.0 logical-system r5 label 299808 detail
+
+mpls.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
+Restart Complete
+299808 (1 entry, 1 announced)
+        *LDP    Preference: 9
+                Next hop type: Router, Next hop index: 2401
+                Address: 0x26e6d7c
+                Next-hop reference count: 2
+                Next hop: 100.0.57.2 via ge-1/2/1.507, selected
+                Label operation: Pop      
+                Session Id: 0x48000b
+                State: &lt;Active Int&gt;
+                Local AS: 4012345678 
+                Age: 3:20:03    Metric: 1 
+                Validation State: unverified 
+                Task: LDP
+                Announcement bits (1): 1-KRT 
+                AS path: I
+                Prefixes bound to route: 10.200.1.7/32
+
+299808(S=0) (1 entry, 1 announced)
+        *LDP    Preference: 9
+                Next hop type: Router, Next hop index: 2402
+                Address: 0x26e6dc8
+                Next-hop reference count: 2
+                Next hop: 100.0.57.2 via ge-1/2/1.507, selected
+                Label operation: Pop      
+                Session Id: 0x48000b
+                State: &lt;Active Int&gt;
+                Local AS: 4012345678 
+                Age: 3:20:03    Metric: 1 
+                Validation State: unverified 
+                Task: LDP
+                Announcement bits (1): 1-KRT 
+                AS path: I
+</code></pre>
+<p>R7: receive</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route table mpls.0 logical-system r7 label 2
+
+mpls.0: 11 destinations, 11 routes (11 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+2                  *[MPLS/0] 03:21:53, metric 1
+                      Receive
+</code></pre>
+<h3 id="tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</h3>
 <p><a href="http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html">http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html</a></p>
-<h5 id="accept-remote-nexthop">accept-remote-nexthop</h5>
+<h4 id="accept-remote-nexthop">accept-remote-nexthop</h4>
 <p>Q: how to make C router (BGP ipv4 neighbor) accept V6 routes without 
 configuring "accept-remote-nexthop" on it?                         <br />
 </p>
 <p>A: no way, C should have that pre-configured already.              <br />
 Kevin: is it possible to use IPv4-compatible address as next-hop to carry ipv6 routes? 
 http://www.juniper.net/techpubs/en_US/junos12.2/topics/example/bgp-ipv6.html</p>
-<h4 id="accept-remote-nexthop_1">accept-remote-nexthop</h4>
+<h3 id="accept-remote-nexthop_1">accept-remote-nexthop</h3>
 <p>.initially got no ipv6 route from a v4 peer, not even as hidden</p>
 <pre><code>lab@MX80-NGGWR-01# show logical-systems lr7 protocols bgp group c4                                                              
 family inet {
@@ -2130,7 +2510,7 @@ Restart Complete
      Nexthop: ::ffff:192.168.34.0   &lt;------
      AS path: 400 I
 </code></pre>
-<h4 id="policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</h4>
+<h3 id="policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</h3>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# show | compare  
 [edit logical-systems lr7 protocols bgp group c4]
@@ -2153,7 +2533,7 @@ lab@MX80-NGGWR-01# show | compare
 lab@MX80-NGGWR-01# commit  
 commit complete
 </code></pre>
-<h5 id="questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</h5>
+<h4 id="questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</h4>
 <p>check <code>rib</code> (after input policy applied) or <code>rib-out</code>(after input&amp;output policy
 applied), not <code>rib-in</code> (before policy applied)</p>
 <p>use <code>show route protocol</code>, instead of <code>show route received-protocol bgp</code></p>
@@ -2165,7 +2545,7 @@ inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
 Restart Complete
 * 4444:4444:4444::/48 (1 entry, 1 announced)
      Accepted
-     Nexthop: ::ffff:192.168.34.0
+     Nexthop: ::ffff:192.168.34.0   #&lt;------
      AS path: 400 I
 </code></pre>
 <p><code>rib</code>:</p>
@@ -2189,7 +2569,7 @@ Path 4444:4444:4444:: from 192.168.34.0 Vector len 4.  Val: 1
                 Address: 0x28886e4
                 Next-hop reference count: 3
                 Source: 192.168.34.0
-                Next hop: 192.168.34.0 via ge-1/2/1.734, selected
+                Next hop: 192.168.34.0 via ge-1/2/1.734, selected   #&lt;------
                 Session Id: 0x100001
                 State: &lt;Active Ext&gt;
                 Local AS: 4012345678 Peer AS:   400
@@ -2210,12 +2590,12 @@ inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
 Restart Complete
 * 4444:4444:4444::/48 (1 entry, 1 announced)
  BGP group to-rr type Internal
-     Nexthop: Self
+     Nexthop: Self  #&lt;------
      Flags: Nexthop Change
      Localpref: 100
      AS path: [4012345678] 400 I
 </code></pre>
-<h5 id="knowledge-base">knowledge base</h5>
+<h4 id="tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</h4>
 <p>RFC1771/4271 BGP Routing Information Base consists of three parts as explained below:</p>
 <ul>
 <li>
@@ -2236,7 +2616,7 @@ not forget;  BGP only advertises best routes if they are allowed by local
 outbound policies.</p>
 </li>
 </ul>
-<h4 id="how-c-routers-got-the-ipv6-routes">how C routers got the IPv6 routes?</h4>
+<h3 id="how-c-routers-got-the-ipv6-routes">how C routers got the IPv6 routes?</h3>
 <p>"accept-remote-nexthop" must have been pre-configured in C.</p>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.133.1 logical-system lptc table c3.inet6.0 all
@@ -2268,7 +2648,7 @@ c3.inet6.0: 11 destinations, 11 routes (4 active, 0 holddown, 7 hidden)
                           ipv4-mapped ipv6 address
                           generated by system
 </code></pre>
-<h5 id="change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</h5>
+<h4 id="change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0 hidden 4444:4444:4444::/48 extensive
 
 c3.inet6.0: 13 destinations, 13 routes (6 active, 0 holddown, 7 hidden)
@@ -2323,12 +2703,12 @@ KRT in-kernel 4444:4444:4444::/48 -&gt; {::192.168.133.1}      &lt;------
                 Localpref: 100
                 Router ID: 10.10.1.1
 </code></pre>
-<h4 id="tip-all-4-solutions">TIP: all 4 solutions</h4>
+<h3 id="tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</h3>
 <p>the issue: 
     no consistent LDP/RSVP (R2/3 run RSVP vs. R7/8 run LDP)     =&gt; 
-    R2/3 &lt;--&gt; R7/8 can't resolve each other as BGP NH           =&gt;
     R2/3 , R7/8 are missing each other in inet.3                =&gt;
     R2/3 , R7/8 are missing each other in inet6.3               =&gt;
+    R2/3 &lt;--&gt; R7/8 can't resolve each other as BGP NH           =&gt;
     R2/3 , R7/8: routes learned from each other show as hidden</p>
 <p>the solutions:</p>
 <ol>
@@ -2336,16 +2716,16 @@ KRT in-kernel 4444:4444:4444::/48 -&gt; {::192.168.133.1}      &lt;------
    LDP adv host @ R5/6 for R7/8(no RSVP)</li>
 <li>change NH @ RR(R5/6): because both R1/2 and R7/8 can resolve RR as NH</li>
 <li>mix 1/2</li>
-<li>RRs (R5/6) BGP: adv R2/3/7/8 , so all R has each other's lo0
+<li>RRs (R5/6) BGP: adv R2/3/7/8 , so all R has each other's lo0 in BGP
    all Rs(R2/3/5/6/7/8) BGP: 
-       inet labeld-unicast rib inet.3 =&gt; put learned BGP NH learned in inet.3
+       inet labeld-unicast rib inet.3 =&gt; put learned labeled lo0 into inet.3
    R2/3,R7/8 BGP:
-       inet labeld-unicast rib-group 6pe (inet.3=&gt;inet6.3) </li>
+       inet labeld-unicast rib-group 6pe =&gt; copy inet.3 into inet6.3</li>
 </ol>
 <p>notes:
 maybe R8 is not involved here (no C/P/T router attached, only for MPLS/VPN)</p>
-<h4 id="solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</h4>
-<h5 id="install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</h5>
+<h3 id="solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</h3>
+<h4 id="install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</h4>
 <p>install R7/8 host in R2/R3 at LSP</p>
 <pre><code>activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
 activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
@@ -2723,8 +3103,8 @@ c5.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
                       AS path: 4012345678 400 I
                     &gt; to 33b1::1 via ge-1/2/2.435
 </code></pre>
-<h5 id="make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</h5>
-<h6 id="r7-inet63">R7 inet6.3</h6>
+<h4 id="make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</h4>
+<h5 id="r7-inet63">R7 inet6.3</h5>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
 
 inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
@@ -2748,7 +3128,7 @@ Restart Complete
                    *[LDP/9] 3d 17:24:26, metric 1
                     &gt; to 10.10.78.2 via ge-1/2/1.78
 </code></pre>
-<h6 id="config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</h6>
+<h5 id="config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</h5>
 <pre><code>lab@MX80-NGGWR-01# show logical-systems lr5 policy-options policy-statement egr-ldp-adv-235  
 term 1 {
     from {
@@ -2761,7 +3141,7 @@ term 1 {
 
 lab@MX80-NGGWR-01# set logical-systems lr5 protocols ldp egress-policy egr-ldp-adv-235
 </code></pre>
-<h6 id="r7-iet63-after-policy">R7 iet6.3 after policy</h6>
+<h5 id="r7-iet63-after-policy">R7 iet6.3 after policy</h5>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
 
@@ -2860,12 +3240,12 @@ Restart Complete
                    *[LDP/9] 4d 04:56:51, metric 1
                     &gt; to 10.10.78.1 via ge-1/2/2.78
 </code></pre>
-<h6 id="question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</h6>
+<h5 id="question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</h5>
 <p>there is no C router attached in R8.
 R8 has nothing to do with the IPv6 task here
 so R8 don't need to reach R2/R3's lo0 in inet6.3
 it looks no need to config R6 ldp also adv R2/R3 lo0</p>
-<h5 id="install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</h5>
+<h4 id="install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</h4>
 <p>this is just for completeness, seems not help</p>
 <pre><code>lab@MX80-NGGWR-01# show | compare  
 [edit logical-systems lr2 protocols mpls label-switched-path r2-r5]
@@ -2879,7 +3259,7 @@ it looks no need to config R6 ldp also adv R2/R3 lo0</p>
 [edit logical-systems lr3 protocols mpls label-switched-path r3-r6]
 !       active: install 10.10.1.8/32 { ... }
 </code></pre>
-<h4 id="question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</h4>
+<h3 id="question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</h3>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run ping 4444:4444:4444::1 logical-system lptc routing-instance c3   
 PING6(56=40+8+8 bytes) ::192.168.133.0 --&gt; 4444:4444:4444::1
@@ -2913,8 +3293,8 @@ c3.inet6.0: 26 destinations, 29 routes (26 active, 0 holddown, 0 hidden)
                       AS path: 65513 4012345678 400 I, validation-state: unverified
                     &gt; to ::192.168.133.1 via ge-1/2/2.133
 </code></pre>
-<h4 id="solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</h4>
-<h5 id="remove-solution1">remove solution1</h5>
+<h3 id="solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</h3>
+<h4 id="remove-solution1">remove solution1</h4>
 <pre><code>deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
 deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
 deactivate logical-systems r2 protocols mpls label-switched-path r2-r6 install 10.10.1.7/32    
@@ -2932,7 +3312,7 @@ commit
 run clear bgp neighbor soft logical-system r2
 run clear bgp neighbor soft logical-system r3
 </code></pre>
-<h5 id="add-solution-2">add solution 2</h5>
+<h4 id="add-solution-2">add solution 2</h4>
 <pre><code>change bgp nh from rr R4/5 when reflecting between R2/3 and R7
 
 set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
@@ -2946,8 +3326,8 @@ commit
 run clear bgp neighbor soft logical-system lr5
 run clear bgp neighbor soft logical-system lr6
 </code></pre>
-<h4 id="solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</h4>
-<h5 id="remove-solution-2">remove solution 2:</h5>
+<h3 id="solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</h3>
+<h4 id="remove-solution-2">remove solution 2:</h4>
 <pre><code>delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
 delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
 delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3                           
@@ -2960,9 +3340,9 @@ run clear bgp neighbor soft logical-system lr5
 run clear bgp neighbor soft logical-system lr6
 </code></pre>
 <p>this solution does not look great. no extra benefit also.</p>
-<h4 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h4>
-<h5 id="config_4">config</h5>
-<pre><code>#R5/6: advertise R2/3/7/8 from R2/3 via BGP:
+<h3 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h3>
+<h4 id="config_4">config</h4>
+<pre><code>#R5/6: advertise R2/3/7/8 lo0 via BGP:
 
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.3/32 exact  
@@ -2997,7 +3377,7 @@ set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib
 set logical-systems r5 protocols bgp group to-rr family inet labeled-unicast rib inet.3
 set logical-systems r6 protocols bgp group to-rr family inet labeled-unicast rib inet.3
 </code></pre>
-<h5 id="before">before</h5>
+<h4 id="before">before</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
 
 inet.0: 62 destinations, 62 routes (62 active, 0 holddown, 0 hidden)
@@ -3025,7 +3405,7 @@ Restart Complete
 10.10.1.6/32       *[RSVP/7/1] 05:55:13, metric 5
                     &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
 </code></pre>
-<h5 id="after">after</h5>
+<h4 id="after">after</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
 
 inet.0: 67 destinations, 83 routes (67 active, 0 holddown, 2 hidden)
@@ -3076,7 +3456,7 @@ Restart Complete
                     &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
                       to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
 </code></pre>
-<h5 id="verification-of-rib-group">verification of rib-group</h5>
+<h4 id="verification-of-rib-group">verification of rib-group</h4>
 <p>before rib-group applied at R7:</p>
 <pre><code>family inet labeled-uncast rib-group 6pe
 </code></pre>
@@ -3175,14 +3555,14 @@ Restart Complete
                       AS path: I
                     &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300016
 </code></pre>
-<h5 id="tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</h5>
+<h4 id="tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</h4>
 <p>R2/3 inet.3 won't change before R5/6 and R2/3 configured:</p>
 <pre><code>family inet labeled-unicast rib inet.3
 </code></pre>
 <p>R2/3 inet6.3 won't updated before R2/3 configured:</p>
 <pre><code>family inet labeled-uncast rib-group 6pe
 </code></pre>
-<h4 id="question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: <code>family inet unicast</code> vs. <code>family inet labeled-unicast</code></h4>
+<h3 id="question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: <code>family inet unicast</code> vs. <code>family inet labeled-unicast</code></h3>
 <pre><code>lab@MX80-NGGWR-01# show logical-systems lr2 protocols bgp group to-rr  
 type internal;
 local-address 10.10.1.2;
@@ -3216,7 +3596,7 @@ lab@MX80-NGGWR-01# commit
 peer cannot have both inet6 unicast and inet6 labeled-unicast nlri
 error: configuration check-out failed
 </code></pre>
-<h4 id="question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why <code>family inet labeled-unicast</code> in this solution?</h4>
+<h3 id="question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why <code>family inet labeled-unicast</code> in this solution?</h3>
 <p>according to 6PE spec, <code>family inet6 labeled-unicast explicit-null</code> is used to
 assign label (2) to ipv6 prefixes at PE, why again <code>family inet
 labeled-unicast</code>? </p>
@@ -3232,7 +3612,7 @@ device. </p>
 inet.3 statement:</p>
 <pre><code>rib inet.3;
 </code></pre>
-<h4 id="tip-inet-labeled-unicast-rib-inet3">TIP: <code>inet labeled-unicast rib inet.3</code></h4>
+<h3 id="tip-inet-labeled-unicast-rib-inet3">TIP: <code>inet labeled-unicast rib inet.3</code></h3>
 <p>manual about "rib inet.3":</p>
 <p>You can allow both labeled and unlabeled routes to be exchanged in a single
 session. The labeled routes are placed in the inet.3 routing table, and both
@@ -3253,7 +3633,7 @@ inet labeled-unicast rib inet.3
 <p>because labeled-route are now put in inet.3, unlabeled are in inet.0</p>
 <p>now "You can allow both labeled and unlabeled routes to be exchanged in a single
 session"</p>
-<h4 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h4>
+<h3 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h3>
 <pre><code>R1             (BGP route NLRI addr family)         R5
    ============================================&gt;
 inet.0          inet unicast                        inet.0
@@ -3282,7 +3662,7 @@ term 2 {
     then accept;
 }
 </code></pre>
-<h4 id="tip-6pe">TIP: 6PE</h4>
+<h3 id="tip-6pe">TIP: 6PE</h3>
 <ul>
 <li>like MPLS/VPN. but no vrf, </li>
 <li>bgp assign either reserved label 2(ipv6 explicit) or any lable as inner
@@ -3329,7 +3709,11 @@ term 2 {
 </code></pre>
 </li>
 </ul>
-<h4 id="simple-topo-and-config">simple topo and config</h4>
+<h3 id="tip-ipv6-tunneling-vs-rib-group">TIP: <code>ipv6-tunneling</code> vs <code>rib-group</code></h3>
+<p>如果inet.3中的路由是从ldp或者rsvp学来的，那么配置了ipv-tunneling之后，
+这些路由会直接copy到inet6.3中，
+如果路由是从bgp学来的，默认不会copy，需要做rib-group</p>
+<h3 id="simple-topo-and-config">simple topo and config</h3>
 <pre><code>&lt;--ipv6 (AS1000)-&gt; &lt;---------ipv4 AS(3000)-------&gt; &lt;--ipv6 (AS2000)-&gt;
 +-----+        +-----+         +-----+         +-----+       +-----+
 | ce1 |--------| pe1 |---------|  p  |---------| pe2 |-------| ce2 |
@@ -3338,7 +3722,7 @@ term 2 {
   |              | 1.1.1.1/32     |       2.2.2.2 |             |
   |98::1/128                  10.10.10.10/32          98::1/128 |
 </code></pre>
-<h5 id="pe1-config">PE1 config</h5>
+<h4 id="pe1-config">PE1 config</h4>
 <pre><code>logical-routers 6pepe1 {
     routing-options {
         autonomous-system 3000;
@@ -3402,7 +3786,7 @@ term 2 {
     }
 }
 </code></pre>
-<h5 id="pe2-config">PE2 config</h5>
+<h4 id="pe2-config">PE2 config</h4>
 <pre><code>logical-systems 6pepe2 {                   
     routing-options {
         autonomous-system 3000;
@@ -3466,7 +3850,7 @@ term 2 {
     }
 }
 </code></pre>
-<h5 id="resources">resources</h5>
+<h4 id="resources">resources</h4>
 <ul>
 <li><a href="http://tools.ietf.org/html/rfc4798">6PE</a></li>
 <li><a href="http://tools.ietf.org/html/rfc3032">reserved IPv6 Explicit NULL Label</a></li>
@@ -3474,7 +3858,7 @@ term 2 {
 <li><a href="http://www.youtube.com/watch?v=zraAfs3bY5E">vedio</a></li>
 <li><a href="http://www.juniper.net/techpubs/en_US//junos/topics/example/mpls-tunneling-ipv6-over-mpls-ipv4.html">example</a></li>
 </ul>
-<h5 id="family-inet6-labeled-unicast-vs-unicast">family inet6 <code>labeled-unicast</code> vs <code>unicast</code></h5>
+<h4 id="family-inet6-labeled-unicast-vs-unicast">family inet6 <code>labeled-unicast</code> vs <code>unicast</code></h4>
 <pre><code>delete logical-systems lr1 protocols bgp group to-rr family inet6 unicast
 delete logical-systems lr2 protocols bgp group to-rr family inet6 unicast
 delete logical-systems lr3 protocols bgp group to-rr family inet6 unicast
@@ -4006,6 +4390,24 @@ any routes adv.ed by R7/8 will be hidden in R2/3</p>
 <p>solution: 
 1) install routes in R2/3       not allowed
 2) set next-hop self in R5/6       may not optimal routes</p>
+<h3 id="tip-unverified-route">TIP: unverified route</h3>
+<p><a href="http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html">http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html</a></p>
+<h3 id="tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</h3>
+<p>in the IPv6 network (only IPv6), BGP router id need to be specified 32 bit. OPEN message  need to be add on both CEs router.</p>
+<p>Quote from RFC 2544:
+  "Note that the information referred above is distinct from the BGP
+   Identifier used in the BGP-4 tie breaking procedure. The BGP
+   Identifier is a 32 bit unsigned integer exchanged between two peers
+   at session establishment time, within an OPEN message. This is a
+   system wide value determined at startup which must be unique in the
+   network and should be derived from an IPv4 address regardless of the
+   network protocol(s) a particular BGP-4 instance is configured to
+   convey at a given moment."</p>
+<p>If you are not configure router ID on CE router, OPEN message will fail.  BGP session cannot established. Debug will show why IPv6 BGP session failed when CE router have no router id.</p>
+<pre><code>Mar  1 08:57:35  prime pe2: rpd[3251]: bgp_get_open: NOTIFICATION sent to 11::2+4597 (proto): 
+code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (proto): 
+invalid BGP identifier 0x0
+</code></pre>
 <h2 id="vpn">VPN</h2>
 <h3 id="basic-interconnections">basic interconnections</h3>
 <h4 id="results">results</h4>
@@ -5103,7 +5505,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 the
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
 </code></pre>
-<h4 id="verify_13">verify</h4>
+<h4 id="verify_14">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
 traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
@@ -5688,7 +6090,7 @@ nc2         111     111     111000
 <h5 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h5>
 <h5 id="rewrite-marker">rewrite marker</h5>
 <h2 id="misc-obsoleted">misc (obsoleted)</h2>
-<h3 id="ipv6_1">ipv6</h3>
+<h3 id="ipv6">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p1.inet6.0
 
