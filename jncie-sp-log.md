@@ -96,6 +96,17 @@
 <li><a href="#verify_11">verify</a></li>
 <li><a href="#config-2-all-pt-facing-r-export-reject-pt-routes">config 2: all P/T facing R: export: reject P(T) routes</a></li>
 <li><a href="#verify_12">verify</a></li>
+<li><a href="#tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</a></li>
+<li><a href="#tip-6pe">TIP: 6PE</a><ul>
+<li><a href="#routing">routing:</a></li>
+<li><a href="#in-lab">in lab</a></li>
+<li><a href="#pe-to-ce">PE to CE</a></li>
+<li><a href="#pe-to-pe">PE to PE</a></li>
+<li><a href="#1">场景1:</a></li>
+<li><a href="#2">场景2:</a></li>
+<li><a href="#">规范规则</a></li>
+</ul>
+</li>
 <li><a href="#config6pepe-ce">config:6PE:PE-CE</a></li>
 <li><a href="#verify_13">verify:</a><ul>
 <li><a href="#without-accept-remote-nexthop-and-nh-changing-policy">without accept-remote-nexthop and nh changing policy</a></li>
@@ -104,94 +115,21 @@
 </ul>
 </li>
 <li><a href="#config6pepe-pe">config:6PE:PE-PE</a></li>
-<li><a href="#verify-label-path">verify label path</a></li>
-<li><a href="#tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</a><ul>
-<li><a href="#accept-remote-nexthop">accept-remote-nexthop</a></li>
-</ul>
-</li>
-<li><a href="#accept-remote-nexthop_1">accept-remote-nexthop</a></li>
-<li><a href="#policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</a><ul>
-<li><a href="#questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</a></li>
-<li><a href="#tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</a></li>
-</ul>
-</li>
-<li><a href="#how-c-routers-got-the-ipv6-routes">how C routers got the IPv6 routes?</a><ul>
-<li><a href="#change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</a></li>
-</ul>
-</li>
-<li><a href="#tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</a></li>
-<li><a href="#solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</a><ul>
-<li><a href="#install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</a></li>
-<li><a href="#make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</a><ul>
-<li><a href="#r7-inet63">R7 inet6.3</a></li>
-<li><a href="#config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</a></li>
-<li><a href="#r7-iet63-after-policy">R7 iet6.3 after policy</a></li>
-<li><a href="#question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</a></li>
-</ul>
-</li>
-<li><a href="#install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</a></li>
-</ul>
-</li>
-<li><a href="#question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</a></li>
-<li><a href="#solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</a><ul>
-<li><a href="#remove-solution1">remove solution1</a></li>
-<li><a href="#add-solution-2">add solution 2</a></li>
-</ul>
-</li>
-<li><a href="#solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</a><ul>
-<li><a href="#remove-solution-2">remove solution 2:</a></li>
-</ul>
-</li>
-<li><a href="#solution-4-rib-rib-group">solution 4: rib + rib-group</a><ul>
-<li><a href="#config_4">config</a></li>
-<li><a href="#before">before</a></li>
-<li><a href="#after">after</a></li>
-<li><a href="#verification-of-rib-group">verification of rib-group</a></li>
-<li><a href="#tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</a></li>
-</ul>
-</li>
-<li><a href="#question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: family inet unicast vs. family inet labeled-unicast</a></li>
-<li><a href="#question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why family inet labeled-unicast in this solution?</a></li>
-<li><a href="#tip-inet-labeled-unicast-rib-inet3">TIP: inet labeled-unicast rib inet.3</a></li>
-<li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
-<li><a href="#tip-6pe">TIP: 6PE</a></li>
-<li><a href="#tip-ipv6-tunneling-vs-rib-group">TIP: ipv6-tunneling vs rib-group</a></li>
-<li><a href="#simple-topo-and-config">simple topo and config</a><ul>
-<li><a href="#pe1-config">PE1 config</a></li>
-<li><a href="#pe2-config">PE2 config</a></li>
-<li><a href="#resources">resources</a></li>
-<li><a href="#family-inet6-labeled-unicast-vs-unicast">family inet6 labeled-unicast vs unicast</a></li>
-</ul>
-</li>
-<li><a href="#rtbh">rtbh</a><ul>
-<li><a href="#initial-routes">initial routes</a></li>
-<li><a href="#config_5">config</a></li>
-<li><a href="#result">result</a></li>
-</ul>
-</li>
-<li><a href="#ipv6-lo0-aggr">ipv6 lo0 aggr</a><ul>
-<li><a href="#question">QUESTION:</a></li>
-</ul>
-</li>
+<li><a href="#verify_14">verify:</a></li>
+<li><a href="#verify6pe-label-pathc3-c4">verify:6PE label path:C3-C4</a></li>
+<li><a href="#configrtbh">config:rtbh</a></li>
+<li><a href="#verify_15">verify</a></li>
+<li><a href="#config-ipv6-routes-aggregation">config: IPv6 routes aggregation</a></li>
+<li><a href="#verify_16">verify</a></li>
 <li><a href="#tip-unverified-route">TIP: unverified route</a></li>
 <li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 </ul>
 </li>
 <li><a href="#vpn">VPN</a><ul>
-<li><a href="#basic-interconnections">basic interconnections</a><ul>
-<li><a href="#results">results</a></li>
-<li><a href="#issue-no-ce45-routes">issue: no CE4/5 routes</a></li>
-<li><a href="#check-routes-in-rr">check routes in RR</a></li>
-<li><a href="#solution-non-workadv-inactive-in-rr">solution (non-work):adv-inactive in RR</a></li>
-<li><a href="#solution-install-r8-in-r2r3-lsp">solution: install R8 in R2/R3 lsp</a></li>
-</ul>
-</li>
-<li><a href="#backdoor-routes-and-sham-link">backdoor routes and sham-link</a><ul>
-<li><a href="#solutionsham-link">solution:sham-link</a></li>
+<li><a href="#config-basic-vpn">config: basic VPN</a></li>
+<li><a href="#up-here-now">UP HERE NOW</a></li>
 <li><a href="#tip-sham-link">TIP: sham-link</a></li>
 <li><a href="#tip-domain-id">TIP: domain-id</a></li>
-</ul>
-</li>
 <li><a href="#tip-traceroute-under-mpls-vpn">TIP: traceroute under mpls vpn</a></li>
 <li><a href="#tip-vrf-table-lable-vs-tunneled-interface">TIP: vrf-table-lable vs. tunneled-interface</a></li>
 <li><a href="#vpn-internet-access">VPN Internet access</a><ul>
@@ -216,7 +154,7 @@
 </ul>
 </li>
 <li><a href="#solution-2">solution 2</a><ul>
-<li><a href="#remove-solution1_1">remove solution1</a></li>
+<li><a href="#remove-solution1">remove solution1</a></li>
 <li><a href="#solution2-config">solution2 config</a></li>
 <li><a href="#r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</a></li>
 <li><a href="#r1vrf-r1-internet-r1-copy-route-into-vrf">R1:vrf =&gt; R1 =&gt; Internet : R1 copy route into vrf</a></li>
@@ -224,7 +162,7 @@
 <li><a href="#internet-r1-r1-adv-an-aggr-route-out">Internet =&gt; R1 : R1: adv an aggr route out</a></li>
 <li><a href="#r1-vrf-look-up-vpn-aggr-routes-of-r1-inet0-also-in-vrf-table">R1 =&gt; vrf : look up vpn aggr routes (of R1 inet.0) also in vrf table</a></li>
 <li><a href="#ping-test">ping test</a></li>
-<li><a href="#remove-solution-2_1">remove solution 2</a></li>
+<li><a href="#remove-solution-2">remove solution 2</a></li>
 </ul>
 </li>
 <li><a href="#tip-about-next-hop-next-table-greeninet0">TIP: about next-hop next-table GREEN.inet.0</a></li>
@@ -234,30 +172,31 @@
 </ul>
 </li>
 <li><a href="#vpn-lsp-map">vpn lsp map</a><ul>
-<li><a href="#config_6">config</a></li>
-<li><a href="#verify_14">verify</a></li>
+<li><a href="#config_4">config</a></li>
+<li><a href="#verify_17">verify</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#interas-vpn">InterAS VPN</a><ul>
 <li><a href="#solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: inet (uncast+labeled-unicast rib inet.3)</a><ul>
-<li><a href="#config_7">config</a></li>
+<li><a href="#config_5">config</a></li>
 </ul>
 </li>
 <li><a href="#tip-interas-vpn-options">TIP: interAS VPN options</a></li>
 <li><a href="#tip-family-in-diff-levels">TIP: family in diff levels</a></li>
 <li><a href="#tip-bgp-keep-all">TIP: bgp keep-all</a></li>
-<li><a href="#remove-solution1_2">remove solution1</a></li>
+<li><a href="#remove-solution1_1">remove solution1</a></li>
 <li><a href="#solution2-inet-resolved-vpn">solution2: inet resolved-vpn</a></li>
 <li><a href="#remove-solution2">remove solution2</a></li>
 <li><a href="#tip-inet-labeled-unicast-resolve-vpn">TIP: inet labeled-unicast resolve-vpn</a></li>
 <li><a href="#question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</a></li>
 <li><a href="#toggle-traffic-engineering-mpls-forwarding">toggle traffic-engineering mpls-forwarding</a></li>
+<li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
 </ul>
 </li>
 <li><a href="#vpls">VPLS</a><ul>
-<li><a href="#config_8">config</a></li>
+<li><a href="#config_6">config</a></li>
 <li><a href="#show-vpls-connection">show vpls connection</a></li>
 <li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
 <li><a href="#with-tunne-service">with tunne-service</a></li>
@@ -301,7 +240,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#misc-obsoleted">misc (obsoleted)</a><ul>
+<li><a href="#misc-notestips">misc notes/tips</a><ul>
 <li><a href="#ipv6">ipv6</a><ul>
 <li><a href="#p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</a></li>
 <li><a href="#p2-is-missing-some-ipv6-routes">p2 is missing some IPv6 routes</a></li>
@@ -310,6 +249,82 @@
 <li><a href="#r2r3-inet63-missing-r7r8">R2/R3 inet6.3: missing R7/R8</a></li>
 <li><a href="#question-r2-hidden-p1p3-route-from-r5">QUESTION: R2 hidden P1/P3 route , from R5?</a></li>
 <li><a href="#nh-self-on-rr-r5r6-when-reflecting-between-r2r3-and-r7">NH self on RR (R5/R6) when reflecting between R2/R3 and R7</a></li>
+</ul>
+</li>
+<li><a href="#6pe-more-misc-tips">6PE more misc tips</a><ul>
+<li><a href="#tip-ipv6-tunneling-vs-rib-group">TIP: ipv6-tunneling vs rib-group</a></li>
+<li><a href="#tip-inet-labeled-unicast-rib-inet3">TIP: inet labeled-unicast rib inet.3</a></li>
+<li><a href="#tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</a><ul>
+<li><a href="#accept-remote-nexthop">accept-remote-nexthop</a></li>
+</ul>
+</li>
+<li><a href="#accept-remote-nexthop_1">accept-remote-nexthop</a></li>
+<li><a href="#policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</a><ul>
+<li><a href="#questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</a></li>
+<li><a href="#tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</a></li>
+</ul>
+</li>
+<li><a href="#questionresolvedhow-c-routers-got-the-ipv6-routes">QUESTION(resolved):how C routers got the IPv6 routes?</a><ul>
+<li><a href="#change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</a></li>
+</ul>
+</li>
+<li><a href="#solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</a><ul>
+<li><a href="#install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</a></li>
+<li><a href="#make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</a><ul>
+<li><a href="#r7-inet63">R7 inet6.3</a></li>
+<li><a href="#config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</a></li>
+<li><a href="#r7-iet63-after-policy">R7 iet6.3 after policy</a></li>
+<li><a href="#question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</a></li>
+</ul>
+</li>
+<li><a href="#install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</a></li>
+</ul>
+</li>
+<li><a href="#question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</a></li>
+<li><a href="#solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</a><ul>
+<li><a href="#remove-solution1_2">remove solution1</a></li>
+<li><a href="#add-solution-2">add solution 2</a></li>
+</ul>
+</li>
+<li><a href="#solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</a><ul>
+<li><a href="#remove-solution-2_1">remove solution 2:</a></li>
+</ul>
+</li>
+<li><a href="#solution-4-rib-rib-group">solution 4: rib + rib-group</a><ul>
+<li><a href="#config_7">config</a></li>
+<li><a href="#before">before</a></li>
+<li><a href="#after">after</a></li>
+<li><a href="#verification-of-rib-group">verification of rib-group</a></li>
+<li><a href="#tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</a></li>
+</ul>
+</li>
+<li><a href="#question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: family inet unicast vs. family inet labeled-unicast</a></li>
+<li><a href="#question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why family inet labeled-unicast in this solution?</a></li>
+<li><a href="#simple-topo-and-config">simple topo and config</a><ul>
+<li><a href="#pe1-config">PE1 config</a></li>
+<li><a href="#pe2-config">PE2 config</a></li>
+<li><a href="#resources">resources</a></li>
+<li><a href="#family-inet6-labeled-unicast-vs-unicast">family inet6 labeled-unicast vs unicast</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#rtbh-verify">RTBH verify</a><ul>
+<li><a href="#initial-routes">initial routes</a></li>
+<li><a href="#config_8">config</a></li>
+<li><a href="#result">result</a></li>
+</ul>
+</li>
+<li><a href="#basic-interconnections">basic interconnections</a><ul>
+<li><a href="#results">results</a></li>
+<li><a href="#issue-no-ce45-routes">issue: no CE4/5 routes</a></li>
+<li><a href="#check-routes-in-rr">check routes in RR</a></li>
+<li><a href="#solution-non-workadv-inactive-in-rr">solution (non-work):adv-inactive in RR</a></li>
+<li><a href="#solution-install-r8-in-r2r3-lsp">solution: install R8 in R2/R3 lsp</a></li>
+</ul>
+</li>
+<li><a href="#backdoor-routes-and-sham-link">backdoor routes and sham-link</a><ul>
+<li><a href="#solutionsham-link">solution:sham-link</a></li>
 </ul>
 </li>
 </ul>
@@ -2163,6 +2178,178 @@ Restart Complete
 * 4444:4444:4444::/48     Self                                    400 I
 * 5555:5555:5555::/48     Self                                    500 I
 </code></pre>
+<h3 id="tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</h3>
+<p>the issue: 
+    no consistent LDP/RSVP (R2/3 run RSVP vs. R7/8 run LDP)     =&gt; 
+    R2/3 , R7/8 are missing each other in inet.3                =&gt;
+    R2/3 , R7/8 are missing each other in inet6.3               =&gt;
+    R2/3 &lt;--&gt; R7/8 can't resolve each other as BGP NH           =&gt;
+    R2/3 , R7/8: routes learned from each other show as hidden</p>
+<p>the solutions:</p>
+<ol>
+<li>RSVP install R7/8 @ R2/3 + 
+   LDP adv host @ R5/6 for R7/8(no RSVP)</li>
+<li>change NH @ RR(R5/6): because both R1/2 and R7/8 can resolve RR as NH</li>
+<li>mix 1/2</li>
+<li>RRs (R5/6) BGP: adv R2/3/7/8 , so all R has each other's lo0 in BGP
+   all Rs(R2/3/5/6/7/8) BGP: 
+       inet labeld-unicast rib inet.3 =&gt; put learned labeled lo0 into inet.3
+   R2/3,R7/8 BGP:
+       inet labeld-unicast rib-group 6pe =&gt; copy inet.3 into inet6.3</li>
+</ol>
+<p>notes:
+maybe R8 is not involved here (no C/P/T router attached, only for MPLS/VPN)</p>
+<h3 id="tip-6pe">TIP: 6PE</h3>
+<ul>
+<li>like MPLS/VPN. but no vrf, </li>
+<li>bgp assign either reserved label 2(ipv6 explicit) or any lable as inner
+  label(like vpn label).</li>
+<li>running on top of LSP (ldp or rsvp based)   <br />
+</li>
+<li>Juniper PE core facing i/f <code>must</code> enable ipv6 =&gt; troubleshooting tip.
+  (seems only if use label 2). otherwise forwarding will have issue.</li>
+</ul>
+<h4 id="routing">routing:</h4>
+<ul>
+<li>CE2 adv IPv6 routes to PE2, via IPv6 protocols (BGP, ISIS, OSPFv3, RIPng, etc)</li>
+<li>PE2 get CE2 IPv6 routes, with NH as CE2 IPv6 address</li>
+<li><code>family inet6 labeled-unicast</code> =&gt; </li>
+<li>PE2 adv labeled(<code>explicit-null</code> =&gt; label 2) IPv6 routes to PE1, via MP-BGP</li>
+<li><code>protocol mpls ipv6-tunneling</code> =&gt; </li>
+<li>PE1 check inet3.0 (table of map: IPv4 &lt;=&gt; LSP )</li>
+<li>PE1 convert all IPv4 in inet.3 to IPv6, in a form of "IPv4 mapped IPv6 address"</li>
+<li>PE1 put all IPv4-m-IPv6 into inet6.3 (a table of map: IPv6 &lt;=&gt; LSP)</li>
+<li>
+<p>PE1 BGP now can: </p>
+<pre><code>              (auto-convert based on IPv4 NH)
+    resolve IPv6 routes ===&gt; NH IPv4-m-IPv6
+                    (inet6.3)
+    resolve IPv4-m-IPv6 ===&gt; LSP
+</code></pre>
+</li>
+<li>
+<p>PE1 adv IPv6 routes to CE1, NH to PE1 IPv6</p>
+<pre><code>                      &lt; ----MPLS---------&gt; 
+    CE1-----------PE1==========/P/==========PE2-------------CE2
+ (pure IPv6)   (dual)                       (dual)                (dual stack)
+
+                                                        (routing:)
+                                              &lt;===IPv6 protocol=
+                    &lt;==MP-BGP:labeled IPv6===
+    &lt;==IPv6 protocol=
+
+    (forwarding:)
+    ===IPv6 packet=&gt;
+                    =&gt;IPv6/IL:2/OL (PHP)
+                                ==IPv6/IL:2=&gt;               
+                                              ===&gt;IPv6 packet=&gt;
+</code></pre>
+</li>
+</ul>
+<h4 id="in-lab">in lab</h4>
+<pre><code>                          &lt; ----MPLS---------&gt; 
+        CE1-----------PE2==========/P/==========PE8-------------CE2
+        CE1-----------R1===========R3===========R5==========R7--------------CE2
+     (pure IPv6)   (dual)                       (dual)      |         (dual stack)
+                      |                                     |                  |
+                      |                                     | (routing:)       |
+                      |                                     | &lt;===IPv6 protocol|
+                      |                                     |   NH:v4-m-v6 CE2 i/f (need 'accept-remote-nexthop`)           a)
+                      |                                     |   NH:v4-c-v6 CE2 i/f (need imp: change NH)
+                      |                                     |
+                      |               &lt;==MP-BGP:labeled IPv6|
+                      |                 1. NH:v4-m-v6 PE2 lo0, 
+                      |                 2. NH resolve: need inet6.3 (v4-m-v6 lo0 -&gt; LSP)
+                      |                   PE1 learn PE2 (labeled)v4 lo0 via :
+                      |                     1) LDP/RSVP (R1) -&gt; generate inet.3 (v4 lo0 -&gt; LSP)
+                      |                        `mpls ipv6-tunneling` -&gt; generate inet.6 from inet.3
+                      |                     2) BGP `inet labeled-unicast rib inet.3` (R2/3/7/8) -&gt; generate inet.3
+                      |                        `inet labeled-unicast rib-group` -&gt; generate inet.3 -&gt; inet.6
+                      | 
+      &lt;==IPv6 protocol|
+      NH:v4-m-v6 CE2 i/f ('accept-remote-nexthop`)
+      NH:v4-c-v6 CE2 i/f (imp: change NH)
+
+      (forwarding:)
+      ===IPv6 packet=&gt;
+                      =&gt;IPv6/IL:2/L:LDP/OL:RSVP 
+                                  (PHP RSVP)
+                                  ==IPv6/IL:2:=&gt;               
+                                                ===&gt;IPv6 packet=&gt;
+</code></pre>
+<h4 id="pe-to-ce">PE to CE</h4>
+<p>lab中：
+1. 只允许使用IPv4 BGP session
+2. PE CE都使用了IPv4-c-IPv6 地址，不允许更改（为IPv4-m-IPv6)</p>
+<p>因为1, 所以只能用V4的BGP session,配置family inet6 传递V6 路由信息
+但（V6规范或者JUNOS规则要求），V6路由信息只能用以下V6 地址做NH:
+<em> 明确配置的远端V6 lo0
+</em> 系统根据V4 lo0 生成的IPv4-m-IPv6 地址</p>
+<p>根据（JUNOS) EBGP规则，从single-hop的EBGP
+session收到的路由的NH,必须跟本地地址共享一个网段，否则丢弃路由信息。
+"the default behavior is for any next-hop address received from a single-hop
+EBGP peer that is not recognized as sharing a common subnet to be discarded."
+但目前是V4 session, V6路由信息的NH经自动转换也只能是V6形式(V4-m-V6), 所以会丢弃。
+解决方法是配置“accept-remote-nexthop”</p>
+<p>现在路由是显现了，但缺省规则也只是以V4-m-V6做NH,但lab中本地配置的是V4-c-V6,因此需要改变NH</p>
+<h4 id="pe-to-pe">PE to PE</h4>
+<ol>
+<li>PE之间建立bgp IPv4 session, 彼此双方PE的inet6
+   路由(此处称为6PE路由，相对于MPLSVPN中的vpn路由)以labeled inet6 NLRI形式传递,
+   (使用explicit-null 则用 label 2 -- 这是junos 6PE “标准”label);
+   决定这个的配置是<code>family inet6 labeled-unicast explicit-null</code></li>
+<li>因为有了可携带inet6 NLRI的BGP session,中间怎么乱都没所谓，路由信息都可以通过去</li>
+<li>
+<p>因为是inet6 的NLRI ，所以NH就自动使用v4-m-v6 (疑为IPv6规范)</p>
+<pre><code>Source: 10.200.1.5
+Protocol next hop: ::ffff:10.200.1.7
+</code></pre>
+</li>
+<li>
+<p>现在需要resolved 这个形式为v4-m-v6 的NH(解析为LSP),
+   JUNOS的实现规则，需要查找inet6.3</p>
+</li>
+<li>一切复杂性开始了，都是关于如何生成inet6.3. lab中有两个场景。</li>
+</ol>
+<h4 id="1">场景1:</h4>
+<ol>
+<li>R1有点特殊。它恰好已从RSVP(R2/3/4), 和LDPoRSVP(R5/6/7/8)学到了所有的IPv4 lo0.</li>
+<li>junos缺省规则：为ldp/rsvp路由缺省生成inet.3</li>
+<li>R1的配置"mpls ipv6-tunnel", 使得inet.6 可以根据inet.3做自动转换而生成，
+   “转换”基本就是把prefix 从IPv4 换为v4-m-v6</li>
+<li>R1 问题解决了。</li>
+</ol>
+<h4 id="2">场景2:</h4>
+<ol>
+<li>复杂问题在于R2/3/7/8. 因为R5/6分割了ldp/rsvp的连通性。所以R2/3
+   和R7/8之间互相通过LDP或者RSVP学到对方的IPv4 lo0, 也就是说，inet.3中缺这些东西</li>
+<li>解决的方法，按照solution 4, 就用连贯的bgp 取代不连贯的ldp/rsvp，
+   充当一个新的label 分配协议。也就是<code>inet labeled-unicast</code>;</li>
+<li>但如果不配置<code>rib inet.3</code>的话， 这个新的inet labeled-unicast和原来的inet
+   unicast, 因为承担了相同的prefix,
+   所以在路由信息放置在哪个表里的时候，冲突了。因此配置不允许并存，只能选择其一。
+   就是说如果用labled-unicast，则需要把unicast 删掉，而labeled
+   prefix则依然放在inet.0中，不会因为BGP充当了“LDP” 就放在inet.3
+   中，这是JUNOS bgp的缺省行为</li>
+<li>解决方法是使用<code>rib inet.3</code>配置，<code>inet labeled-unicast rib inet.3</code>， 这个配置
+   干了两个事情: 
+   现在inet labeled unicast不与inet unicast冲突: 
+   inet.0没有影响
+   RR上通告的labeled-unicast 的v4 lo0 则另外放在inet.3，这样就有了v4 NH 的inet.3</li>
+<li>此时细看r1的inet.3， 必定既有ldp/rsvp的，也有bgp来的；
+   但根据preference，选择ldp/rsvp的。只有新生成的r7/8的lo0
+   用了bgp的。这些细节都不重要了。</li>
+<li>只是这时候仍然没有inet.6， 但根据前面的原则， ipv6的NLRI硬性要求ipv4-m-v6
+   为NH，要解析的也是v6 NH. 也就是说必须要有inet.6， 但JUNOS规则，“mpls
+   ipv6-tunneling” ， 不会对BGP生成的inet.3 生成inet6.3 ， 因此手工用rib-group
+   生成。</li>
+</ol>
+<h4 id="">规范规则</h4>
+<p>这个过程中涉及到不少潜在的规则或者规范，（也是考试设置的环境特意要考察的知识点）：
+1. <code>family inet6 labeled-unicast explicit-null</code> =&gt; 为6PE路由分配“VPN” label 2
+1. inet6的BGP prefix，要求NH必须为V6, 因此系统自动根据IPv4 lo0生成IPv4-m-IPv6 作为NH
+1. LDP/RSVP学习到的lo0 自动放置在inet.3 ，BGP不会。除非配置<code>inet labeled-unicast rib inet.3</code>
+1. <code>mpls ipv6-tunnel</code>为LDP/RSVP的inet.3生成inet6.3, 不会为BGP的inet.3生成。使用rib-group 手工解决</p>
 <h3 id="config6pepe-ce">config:6PE:PE-CE</h3>
 <p>R1:</p>
 <pre><code>#`accept-remote-nexthop`, otherwise not accept
@@ -2293,13 +2480,15 @@ Path ::3.3.3.0 from 100.1.33.2 Vector len 4.  Val: 0 1
                 Router ID: 3.3.3.1
 </code></pre>
 <h3 id="config6pepe-pe">config:6PE:PE-PE</h3>
-<p>R1:</p>
-<pre><code>set logical-systems r1 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
-set logical-systems r1 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
-</code></pre>
+<p>R1:
+    #accept all lo0 via BGP labeled route, then put into inet.3
+    set logical-systems r1 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+    #assign 6PE label (like vpn label)
+    set logical-systems r1 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null</p>
 <p>R2,R3,R7,R8:</p>
 <pre><code>set logical-systems r2 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
 set logical-systems r2 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+#"manually" copy inet.3 into inet6.3
 set logical-systems r2 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
 
 set logical-systems r3 protocols bgp group to-v4v6-rr family inet labeled-unicast rib-group copy-inet.3-to-inet6.3
@@ -2314,7 +2503,166 @@ set logical-systems r8 protocols bgp group to-v4v6-rr family inet labeled-unicas
 set logical-systems r8 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
 set logical-systems r8 protocols bgp group to-v4v6-rr family inet6 labeled-unicast explicit-null
 </code></pre>
-<h3 id="verify-label-path">verify label path</h3>
+<h3 id="verify_14">verify:</h3>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r1 table inet6.0
+
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::3.3.3.0/120      *[BGP/170] 01:24:15, localpref 100, from 100.1.33.2      #&lt;------C3 IPv6 routes
+                      AS path: 300 I, validation-state: unverified
+                    &gt; to ::100.1.33.2 via ge-1/2/1.133
+::33.33.33.33/128  *[BGP/170] 01:24:15, localpref 100, from 100.1.33.2
+                      AS path: 300 I, validation-state: unverified
+                    &gt; to ::100.1.33.2 via ge-1/2/1.133
+2000:1000::/32     *[BGP/170] 01:24:09, localpref 100, from 10.200.1.5      #&lt;------all P IPv6 routes
+                      AS path: 1000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:09, localpref 100, from 10.200.1.6
+                      AS path: 1000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+2000:2000::/32     *[BGP/170] 01:24:16, localpref 100, from 10.200.1.5
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:17, localpref 100, from 10.200.1.6
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+2000:3000::/32     *[BGP/170] 01:24:16, localpref 100, from 10.200.1.5
+                      AS path: 3000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: 3000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+2000:4000::/32     *[BGP/170] 01:24:12, localpref 100, from 10.200.1.5
+                      AS path: 1000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 01:24:13, localpref 100, from 10.200.1.6
+                      AS path: 1000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+2000:5000::/32     *[BGP/170] 01:24:12, localpref 100, from 10.200.1.5
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+2000:6000::/32     *[BGP/170] 01:24:15, localpref 100, from 10.200.1.5
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 01:24:15, localpref 100, from 10.200.1.6
+                      AS path: 2000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2000:7000::/32     *[BGP/170] 01:24:13, localpref 100, from 10.200.1.5
+                      AS path: 3000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 01:24:13, localpref 100, from 10.200.1.6
+                      AS path: 3000 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310::/32      *[BGP/170] 01:24:24, localpref 100, from 10.200.1.6      #&lt;------core aggr IPv6 route
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::2/128                                                        #&lt;------core all IPv6 lo0
+                   *[BGP/170] 01:24:16, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+2011:310:1020::3/128
+                   *[BGP/170] 01:24:12, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+2011:310:1020::4/128
+                   *[BGP/170] 01:24:08, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 01:24:18, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+2011:310:1020::5/128
+                   *[BGP/170] 01:24:20, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::6/128
+                   *[BGP/170] 01:24:24, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+2011:310:1020::7/128
+                   *[BGP/170] 01:24:20, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 01:24:10, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::8/128
+                   *[BGP/170] 01:24:20, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 01:24:14, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+3000:1000::/32     *[BGP/170] 01:24:16, localpref 100, from 10.200.1.5      #&lt;------ all T IPv6 routes
+                      AS path: 1100 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: 1100 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+3000:2000::/32     *[BGP/170] 01:24:16, localpref 100, from 10.200.1.5
+                      AS path: 1200 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 01:24:20, localpref 100, from 10.200.1.6
+                      AS path: 1200 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+3000:3000::/32     *[BGP/170] 01:24:09, localpref 100, from 10.200.1.5
+                      AS path: 1100 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 01:24:09, localpref 100, from 10.200.1.6
+                      AS path: 1100 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+3000:4000::/32     *[BGP/170] 01:24:12, localpref 100, from 10.200.1.5
+                      AS path: 1200 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 01:24:17, localpref 100, from 10.200.1.6
+                      AS path: 1200 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+3333:3333:3333::/48*[BGP/170] 01:24:15, localpref 100, from 100.1.33.2      #&lt;------C3 IPv6 route
+                      AS path: 300 I, validation-state: unverified
+                    &gt; to ::100.1.33.2 via ge-1/2/1.133
+4444:4444:4444::/48*[BGP/170] 01:24:20, localpref 100, from 10.200.1.5      #&lt;------C4 IPv6 route
+                      AS path: 400 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 01:24:10, localpref 100, from 10.200.1.6
+                      AS path: 400 I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+5555:5555:5555::/48*[BGP/170] 01:24:08, localpref 100, from 10.200.1.5      #&lt;------C5 IPv6 route
+                      AS path: 500 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 01:24:18, localpref 100, from 10.200.1.6
+                      AS path: 500 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+</code></pre>
+<h3 id="verify6pe-label-pathc3-c4">verify:6PE label path:C3-C4</h3>
 <p>R1-&gt;R2: label 299904</p>
 <pre><code>lab@MX80-NGGWR-02# run show route forwarding-table matching 4444:4444:4444::/48 | find r1 
 Logical system: r1
@@ -2463,1933 +2811,432 @@ Restart Complete
 2                  *[MPLS/0] 03:21:53, metric 1
                       Receive
 </code></pre>
-<h3 id="tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</h3>
-<p><a href="http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html">http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html</a></p>
-<h4 id="accept-remote-nexthop">accept-remote-nexthop</h4>
-<p>Q: how to make C router (BGP ipv4 neighbor) accept V6 routes without 
-configuring "accept-remote-nexthop" on it?                         <br />
+<h3 id="configrtbh">config:rtbh</h3>
+<pre><code>set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then accept
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 then accept
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 then accept
+set logical-systems r2 policy-options community rtbh members 65412:100
+set logical-systems r2 policy-options community rtbh members target:4012345678L:2000
+set logical-systems r2 protocols bgp group to-v4v6-rr import imp-bgp-rtbh
+
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 then accept
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 then accept
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+set logical-systems r3 policy-options community rtbh members 65412:100
+set logical-systems r3 policy-options community rtbh members target:4012345678L:2000
+set logical-systems r2 protocols bgp group to-v4v6-rr import imp-bgp-rtbh
+
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 then accept
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 then accept
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+set logical-systems r5 policy-options community rtbh members 65412:100
+set logical-systems r5 policy-options community rtbh members target:4012345678L:2000
+set logical-systems r5 protocols bgp group v4v6-rr import imp-bgp-rtbh
+</code></pre>
+<h3 id="verify_15">verify</h3>
+<p>R5 rib-in (before imp policy): 
+initial C3 routes from R1</p>
+<ul>
+<li>
+<p>non-host routes also with 2 communities, need to delete</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r5 receive-protocol bgp 10.200.1.1 table inet.0 detail<br />
 </p>
-<p>A: no way, C should have that pre-configured already.              <br />
-Kevin: is it possible to use IPv4-compatible address as next-hop to carry ipv6 routes? 
-http://www.juniper.net/techpubs/en_US/junos12.2/topics/example/bgp-ipv6.html</p>
-<h3 id="accept-remote-nexthop_1">accept-remote-nexthop</h3>
-<p>.initially got no ipv6 route from a v4 peer, not even as hidden</p>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems lr7 protocols bgp group c4                                                              
-family inet {
-    unicast;
-}
-family inet6 {
-    unicast;
-}
-neighbor 192.168.34.0 {
-    peer-as 400;
-}
-
-lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.34.0 logical-system lr7 table inet6.0 hidden extensive
-
-inet6.0: 7 destinations, 14 routes (2 active, 0 holddown, 10 hidden)
+<p>inet.0: 50 destinations, 64 routes (50 active, 0 holddown, 0 hidden)
 Restart Complete
-</code></pre>
-<p>.add <code>accept-remote-nexthops</code>: showing as hidden</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr7 protocols bgp group c4]
-+     accept-remote-nexthop;
-
-[edit]
-lab@MX80-NGGWR-01# commit  
-commit complete
-
-[edit]
-lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.34.0 logical-system lr7 table inet6.0 hidden extensive
-
-inet6.0: 8 destinations, 15 routes (2 active, 0 holddown, 11 hidden)
-Restart Complete
-  4444:4444:4444::/48 (1 entry, 0 announced)
+* 3.3.3.0/24 (2 entries, 1 announced)
      Accepted
-     Nexthop: ::ffff:192.168.34.0   &lt;------
-     AS path: 400 I
-</code></pre>
-<h3 id="policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</h3>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr7 protocols bgp group c4]
-+     import imp-bgp-fix-nh;
-[edit logical-systems lr7 policy-options]
-+    policy-statement imp-bgp-fix-nh {
-+        term 1 {
-+            from {
-+                protocol bgp;
-+                neighbor 192.168.34.0;
-+            }
-+            then {
-+                next-hop peer-address;
-+                accept;
-+            }
-+        }
-+    }
-
-[edit]
-lab@MX80-NGGWR-01# commit  
-commit complete
-</code></pre>
-<h4 id="questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</h4>
-<p>check <code>rib</code> (after input policy applied) or <code>rib-out</code>(after input&amp;output policy
-applied), not <code>rib-in</code> (before policy applied)</p>
-<p>use <code>show route protocol</code>, instead of <code>show route received-protocol bgp</code></p>
-<p><code>rib-in</code>:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 receive-protocol bgp 192.168.34.0 4444:4444:4444::/48 extensive
-
-inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
-Restart Complete
-* 4444:4444:4444::/48 (1 entry, 1 announced)
-     Accepted
-     Nexthop: ::ffff:192.168.34.0   #&lt;------
-     AS path: 400 I
-</code></pre>
-<p><code>rib</code>:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 protocol bgp table inet6.0 4444:4444:4444::/48 extensive
-
-inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
-Restart Complete
-4444:4444:4444::/48 (1 entry, 1 announced)
-TSI:
-KRT in-kernel 4444:4444:4444::/48 -&gt; {192.168.34.0}
-Page 0 idx 1 Type 1 val 286a108
-    Flags: Nexthop Change
-    Nexthop: Self
-    Localpref: 100
-    AS path: [4012345678] 400 I
-    Communities:
-Path 4444:4444:4444:: from 192.168.34.0 Vector len 4.  Val: 1
-        *BGP    Preference: 170/-101
-                Next hop type: Router, Next hop index: 2221
-                Address: 0x28886e4
-                Next-hop reference count: 3
-                Source: 192.168.34.0
-                Next hop: 192.168.34.0 via ge-1/2/1.734, selected   #&lt;------
-                Session Id: 0x100001
-                State: &lt;Active Ext&gt;
-                Local AS: 4012345678 Peer AS:   400
-                Age: 4d 4:12:27 
-                Validation State: unverified 
-                Task: BGP_400.192.168.34.0+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 400 I
-                Accepted
-                Localpref: 100
-                Router ID: 44.44.1.1
-</code></pre>
-<p><code>rib-out</code>:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route advertising-protocol bgp 10.10.1.5 logical-system lr7 4444:4444:4444::/48 extensive
-
-inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
-Restart Complete
-* 4444:4444:4444::/48 (1 entry, 1 announced)
- BGP group to-rr type Internal
-     Nexthop: Self  #&lt;------
-     Flags: Nexthop Change
+     Nexthop: 10.200.1.1    #&lt;------
      Localpref: 100
-     AS path: [4012345678] 400 I
-</code></pre>
-<h4 id="tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</h4>
-<p>RFC1771/4271 BGP Routing Information Base consists of three parts as explained below:</p>
+     AS path: 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000       #&lt;------</p>
 <ul>
 <li>
-<p>The Adj-RIBs-In: BGP RIB-In stores BGP routing information received from
-different peers. The stored information is used as an input to BGP decision
-process. In other words this is the information received from peers before
-applying any attribute modifications or route filtering to them.</p>
+<p>20.20.0.0/16 (2 entries, 1 announced)
+     Accepted
+     Nexthop: 10.200.1.1
+     Localpref: 100
+     AS path: I
+     Aggregator: 4012345678 10.200.1.1</p>
 </li>
 <li>
-<p>The Local RIB: The local routing information base stores the resulted
-information from processing the RIBs-In database’s information. These are the
-routes that are used locally after applying BGP policies and decision process.</p>
+<p>33.33.0.0/16 (2 entries, 1 announced)
+     Accepted
+     Nexthop: 10.200.1.1    #&lt;------
+     Localpref: 100
+     AS path: 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000       #&lt;------</p>
 </li>
 <li>
-<p>The Adj-RIBs-out: This one stores the routing information that was selected by
-the local BGP router to advertise to its peers through BGP update messages. Do
-not forget;  BGP only advertises best routes if they are allowed by local
-outbound policies.</p>
+<p>33.33.33.33/32 (2 entries, 1 announced)
+     Accepted
+     Nexthop: 10.200.1.1    #&lt;------
+     Localpref: 100
+     AS path: 300 I
+     Communities: 65412:100 65513:100 target:4012345678L:2000       #&lt;------</p>
 </li>
 </ul>
-<h3 id="how-c-routers-got-the-ipv6-routes">how C routers got the IPv6 routes?</h3>
-<p>"accept-remote-nexthop" must have been pre-configured in C.</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.133.1 logical-system lptc table c3.inet6.0 all
-
-c3.inet6.0: 4 destinations, 4 routes (4 active, 0 holddown, 0 hidden)
-
-[edit]
-lab@MX80-NGGWR-01# set logical-systems lptc routing-instances c3 protocols bgp group to-r1 accept-remote-nexthop
-
-[edit]
-lab@MX80-NGGWR-01# commit
-commit complete
-
-[edit]
-lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.133.1 logical-system lptc table c3.inet6.0 all
-                                                                                                          ^^^
-                                                                                                     (hidden)
-
-c3.inet6.0: 11 destinations, 11 routes (4 active, 0 holddown, 7 hidden)
-  Prefix                  Nexthop              MED     Lclpref    AS path
-  2000:1000::/32          ::ffff:192.168.133.1                    65513 4012345678 1000 I
-  2000:2000::/32          ::ffff:192.168.133.1                    65513 4012345678 2000 I
-  2000:3000::/32          ::ffff:192.168.133.1                    65513 4012345678 3000 I
-  3000:1000::/32          ::ffff:192.168.133.1                    65513 4012345678 1001 I
-  3000:2000::/32          ::ffff:192.168.133.1                    65513 4012345678 1002 I
-  4444:4444:4444::/48     ::ffff:192.168.133.1                    65513 4012345678 400 I
-  5555:5555:5555::/48     ::ffff:192.168.133.1                    65513 4012345678 500 I
-                          ^^^^^^^^^^^^^^^^^^^^
-                          ipv4-mapped ipv6 address
-                          generated by system
-</code></pre>
-<h4 id="change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</h4>
-<pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0 hidden 4444:4444:4444::/48 extensive
-
-c3.inet6.0: 13 destinations, 13 routes (6 active, 0 holddown, 7 hidden)
-4444:4444:4444::/48 (1 entry, 0 announced)
-         BGP    Preference: 170/-101
-                Next hop type: Unusable     &lt;------
-                Address: 0x23f3f04
-                Next-hop reference count: 10
-                State: &lt;Hidden Ext&gt;
-                Local AS:   300 Peer AS: 65513
-                Age: 10:16 
-                Task: BGP_65513_300.192.168.133.1+52133
-                AS path: 65513 4012345678 400 I
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.1
-                Indirect next hops: 1
-                        Protocol next hop: ::ffff:192.168.133.1     &lt;------
-                        Indirect next hop: 0 -
-
-lab@MX80-NGGWR-01# show logical-systems lr1 policy-options policy-statement exp-bgp-fix-nh  
-term 1 {
-    from {
-        protocol bgp;
-        route-filter ::0/0 prefix-length-range /0-/128;
-    }
-    then {
-        next-hop ::192.168.133.1;
-    }
-}
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0  4444:4444:4444::/48 extensive
-
-c3.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
-4444:4444:4444::/48 (1 entry, 1 announced)
-TSI:
-KRT in-kernel 4444:4444:4444::/48 -&gt; {::192.168.133.1}      &lt;------
+</li>
+</ul>
+<p>R5 rib(after imp policy)</p>
+<ul>
+<li>the non-host routes: removed the 2 communities</li>
+<li>the non-host routes: don't change next-hop</li>
+<li>host routes: keep the 2 communities</li>
+<li>
+<p>host routes: next-hop set to discard</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r5 3.3.3.0/24 detail<br />
+</p>
+<p>inet.0: 50 destinations, 64 routes (50 active, 0 holddown, 0 hidden)
+Restart Complete
+3.3.3.0/24 (2 entries, 1 announced)
         *BGP    Preference: 170/-101
-                Next hop type: Router, Next hop index: 2361
-                Address: 0x282ea38
-                Next-hop reference count: 21
-                Source: 192.168.133.1
-                Next hop: ::192.168.133.1 via ge-1/2/2.133, selected        &lt;------
-                State: &lt;Active Ext&gt;
-                Local AS:   300 Peer AS: 65513
-                Age: 36 
-                Task: BGP_65513_300.192.168.133.1+52133
-                Announcement bits (2): 0-KRT 2-Resolve tree 4 
-                AS path: 65513 4012345678 400 I
+                Next hop type: Indirect
+                Address: 0x26e7664
+                Next-hop reference count: 12
+                Source: 10.200.1.1
+                Next hop type: Router, Next hop index: 2539
+                Next hop: 100.0.25.1 via ge-1/2/2.205 weight 0x1, selected  #&lt;------
+                Label-switched-path r5-r1
+                Label operation: Push 299936
+                Label TTL action: prop-ttl
+                Session Id: 0x80008
+                Protocol next hop: 10.200.1.1
+                Indirect next hop: 297c760 1048668 INH Session ID: 0x80012
+                State: <Active Int Ext>
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 2:26:58    Metric2: 10 
+                Validation State: unverified 
+                Task: BGP_4012345678.10.200.1.1+179
+                Announcement bits (3): 1-KRT 5-BGP_RT_Background 6-Resolve tree 4 
+                AS path: 300 I
+                Communities: 65513:100      #&lt;------
                 Accepted
                 Localpref: 100
-                Router ID: 10.10.1.1
-</code></pre>
-<h3 id="tip-6pe-all-4-solutions">TIP: 6PE all 4 solutions</h3>
-<p>the issue: 
-    no consistent LDP/RSVP (R2/3 run RSVP vs. R7/8 run LDP)     =&gt; 
-    R2/3 , R7/8 are missing each other in inet.3                =&gt;
-    R2/3 , R7/8 are missing each other in inet6.3               =&gt;
-    R2/3 &lt;--&gt; R7/8 can't resolve each other as BGP NH           =&gt;
-    R2/3 , R7/8: routes learned from each other show as hidden</p>
-<p>the solutions:</p>
-<ol>
-<li>RSVP install R7/8 @ R2/3 + 
-   LDP adv host @ R5/6 for R7/8(no RSVP)</li>
-<li>change NH @ RR(R5/6): because both R1/2 and R7/8 can resolve RR as NH</li>
-<li>mix 1/2</li>
-<li>RRs (R5/6) BGP: adv R2/3/7/8 , so all R has each other's lo0 in BGP
-   all Rs(R2/3/5/6/7/8) BGP: 
-       inet labeld-unicast rib inet.3 =&gt; put learned labeled lo0 into inet.3
-   R2/3,R7/8 BGP:
-       inet labeld-unicast rib-group 6pe =&gt; copy inet.3 into inet6.3</li>
-</ol>
-<p>notes:
-maybe R8 is not involved here (no C/P/T router attached, only for MPLS/VPN)</p>
-<h3 id="solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</h3>
-<h4 id="install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</h4>
-<p>install R7/8 host in R2/R3 at LSP</p>
-<pre><code>activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
-activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
-activate logical-systems lr2 protocols mpls label-switched-path r2-r6 install 10.10.1.7/32    
-activate logical-systems lr2 protocols mpls label-switched-path r2-r6 install 10.10.1.8/32
-
-activate logical-systems lr3 protocols mpls label-switched-path r3-r5 install 10.10.1.7/32  
-activate logical-systems lr3 protocols mpls label-switched-path r3-r5 install 10.10.1.8/32    
-activate logical-systems lr3 protocols mpls label-switched-path r3-r6 install 10.10.1.7/32    
-activate logical-systems lr3 protocols mpls label-switched-path r3-r6 install 10.10.1.8/32
-</code></pre>
-<p>r2/r3: before install:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr2 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[RSVP/7/1] 3d 18:20:35, metric 5
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-::ffff:10.10.1.3/128
-                   *[RSVP/7/1] 3d 18:20:36, metric 5
-                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
-::ffff:10.10.1.4/128
-                   *[RSVP/7/1] 3d 18:20:36, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-::ffff:10.10.1.5/128
-                   *[RSVP/7/1] 3d 18:20:35, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-::ffff:10.10.1.6/128
-                   *[RSVP/7/1] 3d 18:20:36, metric 5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-
-lab@MX80-NGGWR-01# run show route logical-system lr3 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[RSVP/7/1] 3d 18:52:18, metric 5
-                    &gt; to 10.10.13.1 via ge-1/2/2.13, label-switched-path r3-r1
-::ffff:10.10.1.2/128
-                   *[RSVP/7/1] 3d 18:52:19, metric 5
-                    &gt; to 10.10.23.1 via ge-1/2/2.23, label-switched-path r3-r2
-::ffff:10.10.1.4/128
-                   *[RSVP/7/1] 3d 18:52:19, metric 10
-                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r4
-::ffff:10.10.1.5/128
-                   *[RSVP/7/1] 3d 18:52:19, metric 5
-                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
-::ffff:10.10.1.6/128
-                   *[RSVP/7/1] 3d 18:52:18, metric 5
-                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
-</code></pre>
-<p>r2/lr3 after install:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr2 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[RSVP/7/1] 3d 18:58:42, metric 5
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-::ffff:10.10.1.3/128
-                   *[RSVP/7/1] 3d 18:58:43, metric 5
-                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
-::ffff:10.10.1.4/128
-                   *[RSVP/7/1] 3d 18:58:43, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-::ffff:10.10.1.5/128
-                   *[RSVP/7/1] 3d 18:58:42, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-::ffff:10.10.1.6/128
-                   *[RSVP/7/1] 00:00:21, metric 5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-::ffff:10.10.1.7/128        &lt;------
-                   *[RSVP/7/1] 00:00:21, metric 5
-                      to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-::ffff:10.10.1.8/128        &lt;------
-                   *[RSVP/7/1] 00:00:21, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr3 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[RSVP/7/1] 3d 18:58:32, metric 5
-                    &gt; to 10.10.13.1 via ge-1/2/2.13, label-switched-path r3-r1
-::ffff:10.10.1.2/128
-                   *[RSVP/7/1] 3d 18:58:33, metric 5
-                    &gt; to 10.10.23.1 via ge-1/2/2.23, label-switched-path r3-r2
-::ffff:10.10.1.4/128
-                   *[RSVP/7/1] 3d 18:58:33, metric 10
-                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r4
-::ffff:10.10.1.5/128
-                   *[RSVP/7/1] 00:00:12, metric 5
-                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
-::ffff:10.10.1.6/128
-                   *[RSVP/7/1] 00:00:12, metric 5
-                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
-::ffff:10.10.1.7/128        &lt;------
-                   *[RSVP/7/1] 00:00:12, metric 5
-                      to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
-                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
-::ffff:10.10.1.8/128        &lt;------
-                   *[RSVP/7/1] 00:00:12, metric 5
-                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
-                      to 10.10.36.2 via ae12.0, label-switched-path r3-r6
-</code></pre>
-<p>lr7/lr8:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 19:02:35, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 19:02:33, metric 1
-                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-::ffff:10.10.1.5/128
-                   *[LDP/9] 3d 19:02:48, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 3d 19:02:40, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299792
-::ffff:10.10.1.8/128
-                   *[LDP/9] 3d 19:02:42, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 19:02:40, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 19:02:40, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
-::ffff:10.10.1.5/128
-                   *[LDP/9] 3d 19:02:40, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
-::ffff:10.10.1.6/128
-                   *[LDP/9] 3d 19:02:47, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.7/128
-                   *[LDP/9] 3d 19:02:49, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78
-
-set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.2/32 exact
-set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.3/32 exact
-set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 then accept
-
-set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.2/32 exact
-set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.3/32 exact
-set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 then accept
-
-//after:
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 19:28:26, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.2/128
-                   *[LDP/9] 00:16:26, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.3/128
-                   *[LDP/9] 00:16:26, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 19:28:24, metric 1
-                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-::ffff:10.10.1.8/128
-                   *[LDP/9] 3d 19:28:33, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 19:12:08, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
-::ffff:10.10.1.2/128        &lt;------
-                   *[LDP/9] 00:00:10, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.3/128        &lt;------
-                   *[LDP/9] 00:00:10, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 19:12:08, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
-::ffff:10.10.1.7/128
-                   *[LDP/9] 3d 19:12:17, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78
-</code></pre>
-<p>have to add lr5/6 lo0:</p>
-<pre><code>set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.5/32 exact
-set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.6/32 exact
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 20:41:40, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.2/128
-                   *[LDP/9] 01:29:40, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.3/128
-                   *[LDP/9] 01:29:40, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 20:41:38, metric 1
-                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-::ffff:10.10.1.5/128
-                   *[LDP/9] 00:00:22, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 00:00:22, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299792
-::ffff:10.10.1.8/128
-                   *[LDP/9] 3d 20:41:47, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 3d 20:41:52, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
-::ffff:10.10.1.2/128
-                   *[LDP/9] 01:29:54, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.3/128
-                   *[LDP/9] 01:29:54, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.4/128
-                   *[LDP/9] 3d 20:41:52, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
-::ffff:10.10.1.5/128
-                   *[LDP/9] 00:00:36, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
-::ffff:10.10.1.6/128
-                   *[LDP/9] 00:00:36, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.7/128
-                   *[LDP/9] 3d 20:42:01, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78
-</code></pre>
-<p>C3 inet6.0 route:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0
-
-c3.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:1000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 1000 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-2000:2000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 2000 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-2000:3000::/32     *[BGP/170] 2d 01:01:03, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 3000 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-3000:1000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 1001 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-3000:2000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 1002 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-4444:4444:4444::/48*[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 400 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-5555:5555:5555::/48*[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 500 I
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c4.inet6.0
-
-c4.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:1000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 1000 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-2000:2000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 2000 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-2000:3000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 3000 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-3000:1000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 1001 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-3000:2000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 1002 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-3333:3333:3333::/48*[BGP/170] 2d 00:16:27, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 300 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-5555:5555:5555::/48*[BGP/170] 2d 00:16:27, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 500 I
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c5.inet6.0
-
-c5.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-2000:1000::/32     *[BGP/170] 2d 01:17:46, localpref 100
-                      AS path: 4012345678 1000 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-2000:2000::/32     *[BGP/170] 2d 01:17:39, localpref 100
-                      AS path: 4012345678 2000 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-2000:3000::/32     *[BGP/170] 2d 01:17:42, localpref 100
-                      AS path: 4012345678 3000 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-3000:1000::/32     *[BGP/170] 2d 01:17:46, localpref 100
-                      AS path: 4012345678 1001 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-3000:2000::/32     *[BGP/170] 2d 01:17:42, localpref 100
-                      AS path: 4012345678 1002 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-3333:3333:3333::/48*[BGP/170] 2d 01:17:46, localpref 100
-                      AS path: 4012345678 300 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-4444:4444:4444::/48*[BGP/170] 2d 01:17:46, localpref 100
-                      AS path: 4012345678 400 I
-                    &gt; to 33b1::1 via ge-1/2/2.435
-</code></pre>
-<h4 id="make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</h4>
-<h5 id="r7-inet63">R7 inet6.3</h5>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 4d 04:38:10, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.4/128
-                   *[LDP/9] 4d 04:38:09, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-                      to 10.10.78.2 via ge-1/2/1.78, Push 299840
-::ffff:10.10.1.5/128
-                   *[LDP/9] 4d 04:38:20, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 4d 04:38:20, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299808
-::ffff:10.10.1.8/128
-                   *[LDP/9] 3d 17:24:26, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-</code></pre>
-<h5 id="config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</h5>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems lr5 policy-options policy-statement egr-ldp-adv-235  
-term 1 {
-    from {
-        route-filter 10.10.1.2/32 exact;
-        route-filter 10.10.1.3/32 exact;
-        route-filter 10.10.1.5/32 exact;
-    }
-    then accept;
-}
-
-lab@MX80-NGGWR-01# set logical-systems lr5 protocols ldp egress-policy egr-ldp-adv-235
-</code></pre>
-<h5 id="r7-iet63-after-policy">R7 iet6.3 after policy</h5>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 4d 04:42:00, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.2/128
-                   *[LDP/9] 00:00:57, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.3/128
-                   *[LDP/9] 00:00:46, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.4/128
-                   *[LDP/9] 4d 04:41:59, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-                      to 10.10.78.2 via ge-1/2/1.78, Push 299840
-::ffff:10.10.1.5/128
-                   *[LDP/9] 4d 04:42:10, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 4d 04:42:10, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299808
-::ffff:10.10.1.8/128
-                   *[LDP/9] 3d 17:28:16, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-</code></pre>
-<p>R8 inet6.3 table is still missing R2/R3</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
-
-inet6.3: 6 destinations, 6 routes (6 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 4d 04:50:49, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299824
-::ffff:10.10.1.3/128
-                   *[LDP/9] 00:00:04, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
-::ffff:10.10.1.4/128
-                   *[LDP/9] 4d 04:50:44, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299888
-::ffff:10.10.1.5/128
-                   *[LDP/9] 4d 04:50:55, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
-::ffff:10.10.1.6/128
-                   *[LDP/9] 4d 04:50:55, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.7/128
-                   *[LDP/9] 4d 04:50:55, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78
-</code></pre>
-<p>config same on R6:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr6 protocols ldp]
--    inactive: egress-policy egr-ldp-adv-236;
-+    egress-policy egr-ldp-adv-236;
-
-[edit]
-lab@MX80-NGGWR-01# commit  
-commit complete
-</code></pre>
-<p>R8 inet6.3 :</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
-
-inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 4d 04:56:45, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299824
-::ffff:10.10.1.2/128
-                   *[LDP/9] 00:00:27, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.3/128
-                   *[LDP/9] 00:00:27, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.4/128
-                   *[LDP/9] 4d 04:56:40, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299888
-::ffff:10.10.1.5/128
-                   *[LDP/9] 4d 04:56:51, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
-::ffff:10.10.1.6/128
-                   *[LDP/9] 4d 04:56:51, metric 1
-                    &gt; to 10.10.68.1 via ge-1/2/2.68
-::ffff:10.10.1.7/128
-                   *[LDP/9] 4d 04:56:51, metric 1
-                    &gt; to 10.10.78.1 via ge-1/2/2.78
-</code></pre>
-<h5 id="question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</h5>
-<p>there is no C router attached in R8.
-R8 has nothing to do with the IPv6 task here
-so R8 don't need to reach R2/R3's lo0 in inet6.3
-it looks no need to config R6 ldp also adv R2/R3 lo0</p>
-<h4 id="install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</h4>
-<p>this is just for completeness, seems not help</p>
-<pre><code>lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr2 protocols mpls label-switched-path r2-r5]
-!       active: install 10.10.1.7/32 { ... }
-!       active: install 10.10.1.8/32 { ... }
-[edit logical-systems lr2 protocols mpls label-switched-path r2-r6]
-!       active: install 10.10.1.7/32 { ... }
-[edit logical-systems lr3 protocols mpls label-switched-path r3-r5]
-!       active: install 10.10.1.7/32 { ... }
-!       active: install 10.10.1.8/32 { ... }
-[edit logical-systems lr3 protocols mpls label-switched-path r3-r6]
-!       active: install 10.10.1.8/32 { ... }
-</code></pre>
-<h3 id="question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</h3>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run ping 4444:4444:4444::1 logical-system lptc routing-instance c3   
-PING6(56=40+8+8 bytes) ::192.168.133.0 --&gt; 4444:4444:4444::1
-^C
---- 4444:4444:4444::1 ping6 statistics ---
-8 packets transmitted, 0 packets received, 100% packet loss
-
-lab@MX80-NGGWR-01# run ping inet6 4444:4444:4444::1 logical-system lptc routing-instance c3 source 3333:3333:3333::1 
-PING6(56=40+8+8 bytes) 3333:3333:3333::1 --&gt; 4444:4444:4444::1
-^C
---- 4444:4444:4444::1 ping6 statistics ---
-6 packets transmitted, 0 packets received, 100% packet loss
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lptc table c4.inet6.0 3333:3333:3333::1
-
-c4.inet6.0: 23 destinations, 23 routes (23 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-3333:3333:3333::/48*[BGP/170] 4d 08:39:09, localpref 100, from 192.168.34.1
-                      AS path: 4012345678 300 I, validation-state: unverified
-                    &gt; to ::192.168.34.1 via ge-1/2/2.734
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system lptc table c3.inet6.0 4444:4444:4444::1
-
-c3.inet6.0: 26 destinations, 29 routes (26 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-4444:4444:4444::/48*[BGP/170] 4d 08:39:41, localpref 100, from 192.168.133.1
-                      AS path: 65513 4012345678 400 I, validation-state: unverified
-                    &gt; to ::192.168.133.1 via ge-1/2/2.133
-</code></pre>
-<h3 id="solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</h3>
-<h4 id="remove-solution1">remove solution1</h4>
-<pre><code>deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
-deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
-deactivate logical-systems r2 protocols mpls label-switched-path r2-r6 install 10.10.1.7/32    
-deactivate logical-systems r2 protocols mpls label-switched-path r2-r6 install 10.10.1.8/32
-
-deactivate logical-systems r3 protocols mpls label-switched-path r3-r5 install 10.10.1.7/32  
-deactivate logical-systems r3 protocols mpls label-switched-path r3-r5 install 10.10.1.8/32    
-deactivate logical-systems r3 protocols mpls label-switched-path r3-r6 install 10.10.1.7/32    
-deactivate logical-systems r3 protocols mpls label-switched-path r3-r6 install 10.10.1.8/32
-
-deactivate logical-systems r5 protocols ldp egress-policy    
-deactivate logical-systems r6 protocols ldp egress-policy
-
-commit
-run clear bgp neighbor soft logical-system r2
-run clear bgp neighbor soft logical-system r3
-</code></pre>
-<h4 id="add-solution-2">add solution 2</h4>
-<pre><code>change bgp nh from rr R4/5 when reflecting between R2/3 and R7
-
-set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
-set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
-set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3                           
-set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
-set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
-set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3
-
-commit
-run clear bgp neighbor soft logical-system lr5
-run clear bgp neighbor soft logical-system lr6
-</code></pre>
-<h3 id="solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</h3>
-<h4 id="remove-solution-2">remove solution 2:</h4>
-<pre><code>delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
-delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
-delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3                           
-delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
-delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
-delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3
-
-commit
-run clear bgp neighbor soft logical-system lr5
-run clear bgp neighbor soft logical-system lr6
-</code></pre>
-<p>this solution does not look great. no extra benefit also.</p>
-<h3 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h3>
-<h4 id="config_4">config</h4>
-<pre><code>#R5/6: advertise R2/3/7/8 lo0 via BGP:
-
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.3/32 exact  
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.7/32 exact  
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.8/32 exact  
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
-
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.3/32 exact  
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.7/32 exact  
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.8/32 exact  
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
-
-set logical-systems r5 protocols bgp group rr export exp-int-agg exp-bgp-adv-2378
-set logical-systems r6 protocols bgp group rr export exp-int-agg exp-bgp-adv-2378
-
-#R2/3/5/6: allow both unlabeled (`unicast`) and labeled (`labeled-unicast`) BGP routes; and place labeled routes in inet.3
-#R2/3: also copy table inet.3 into inet6.3
-
-set logical-systems r2 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
-set logical-systems r2 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
-set logical-systems r2 protocols bgp group to-rr family inet labeled-unicast rib inet.3
-
-set logical-systems r3 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
-set logical-systems r3 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
-set logical-systems r3 protocols bgp group to-rr family inet labeled-unicast rib inet.3
-
-set logical-systems r7 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
-set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
-set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib inet.3
-
-set logical-systems r5 protocols bgp group to-rr family inet labeled-unicast rib inet.3
-set logical-systems r6 protocols bgp group to-rr family inet labeled-unicast rib inet.3
-</code></pre>
-<h4 id="before">before</h4>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
-
-inet.0: 62 destinations, 62 routes (62 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.7/32       *[IS-IS/18] 06:13:33, metric 10
-                    &gt; to 10.10.25.2 via ge-1/2/1.25
-
-lab@MX80-NGGWR-01# run show route logical-system r2 table inet.3
-
-inet.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.1/32       *[RSVP/7/1] 05:55:13, metric 5
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.3/32       *[RSVP/7/1] 05:55:14, metric 5
-                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
-10.10.1.4/32       *[RSVP/7/1] 05:55:13, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.5/32       *[RSVP/7/1] 05:55:13, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.6/32       *[RSVP/7/1] 05:55:13, metric 5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-</code></pre>
-<h4 id="after">after</h4>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
-
-inet.0: 67 destinations, 83 routes (67 active, 0 holddown, 2 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.7/32       *[IS-IS/18] 06:13:40, metric 10
-                    &gt; to 10.10.25.2 via ge-1/2/1.25
-                    [BGP/170] 00:00:03, MED 5, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.25.2 via ge-1/2/1.25
-                    [BGP/170] 00:00:05, MED 10, localpref 100, from 10.10.1.6
-                      AS path: I
-                    &gt; to 10.10.25.2 via ge-1/2/1.25
-                      to 10.10.26.2 via ge-1/2/1.26
-
-lab@MX80-NGGWR-01# run show route logical-system r2 table inet.3
-
-inet.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.1/32       *[RSVP/7/1] 05:55:36, metric 5
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.2/32       *[BGP/170] 00:00:01, MED 5, localpref 4294967294, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.3/32       *[RSVP/7/1] 05:55:37, metric 5
-                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
-                    [BGP/170] 00:00:01, MED 5, localpref 4294967294, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.4/32       *[RSVP/7/1] 05:55:36, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.5/32       *[RSVP/7/1] 05:55:36, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.6/32       *[RSVP/7/1] 05:55:36, metric 5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-10.10.1.7/32       *[BGP/170] 00:00:01, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.8/32       *[BGP/170] 00:00:01, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-</code></pre>
-<h4 id="verification-of-rib-group">verification of rib-group</h4>
-<p>before rib-group applied at R7:</p>
-<pre><code>family inet labeled-uncast rib-group 6pe
-</code></pre>
-<p>inet.3 is good but inet6.3 are still not complete:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route table inet.3 logical-system r7
-
-inet.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.1/32       *[LDP/9] 07:21:14, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-10.10.1.2/32       *[BGP/170] 00:00:20, MED 5, localpref 4294967294, from 10.10.1.5         #&lt;------
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299968
-10.10.1.3/32       *[BGP/170] 00:00:20, MED 5, localpref 4294967294, from 10.10.1.5         #&lt;------
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299984
-10.10.1.4/32       *[LDP/9] 07:21:15, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
-                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
-10.10.1.5/32       *[LDP/9] 07:21:44, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-10.10.1.6/32       *[LDP/9] 07:21:43, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
-10.10.1.7/32       *[BGP/170] 00:00:20, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300000
-10.10.1.8/32       *[LDP/9] 07:21:43, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-                    [BGP/170] 00:00:20, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300016
-
-[edit]
-lab@MX80-NGGWR-01# run show route table inet6.3 logical-system r7
-
-inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 07:21:28, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-::ffff:10.10.1.4/128
-                   *[LDP/9] 07:21:29, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
-                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.5/128
-                   *[LDP/9] 07:21:58, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 07:21:57, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
-::ffff:10.10.1.8/128
-                   *[LDP/9] 07:21:57, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-
-[edit]
-lab@MX80-NGGWR-01# run show route table inet6.3 logical-system r7
-
-inet6.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::ffff:10.10.1.1/128
-                   *[LDP/9] 07:36:12, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
-::ffff:10.10.1.2/128        #&lt;------
-                   *[BGP/170] 00:10:46, MED 5, localpref 4294967294, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299968
-::ffff:10.10.1.3/128        #&lt;------
-                   *[BGP/170] 00:10:46, MED 5, localpref 4294967294, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299984
-::ffff:10.10.1.4/128
-                   *[LDP/9] 07:36:13, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
-                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
-::ffff:10.10.1.5/128
-                   *[LDP/9] 07:36:42, metric 1
-                    &gt; to 10.10.57.1 via ge-1/2/2.57
-::ffff:10.10.1.6/128
-                   *[LDP/9] 07:36:41, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
-::ffff:10.10.1.7/128        #&lt;------
-                   *[BGP/170] 00:10:46, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300000
-::ffff:10.10.1.8/128
-                   *[LDP/9] 07:36:41, metric 1
-                    &gt; to 10.10.78.2 via ge-1/2/1.78
-                    [BGP/170] 00:10:46, MED 1, localpref 100, from 10.10.1.5
-                      AS path: I
-                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300016
-</code></pre>
-<h4 id="tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</h4>
-<p>R2/3 inet.3 won't change before R5/6 and R2/3 configured:</p>
-<pre><code>family inet labeled-unicast rib inet.3
-</code></pre>
-<p>R2/3 inet6.3 won't updated before R2/3 configured:</p>
-<pre><code>family inet labeled-uncast rib-group 6pe
-</code></pre>
-<h3 id="question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: <code>family inet unicast</code> vs. <code>family inet labeled-unicast</code></h3>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems lr2 protocols bgp group to-rr  
-type internal;
-local-address 10.10.1.2;
-import imp-bgp-rtbh;
-family inet {
-    unicast;                #&lt;------these are fine being configured 
-    labeled-unicast {       #&lt;------together
-        rib-group 6pe;
-        rib {
-            inet.3;
-        }
-    }
-}
-family inet6 {
-    labeled-unicast {       #&lt;------can't co-exist with unicast.
-        explicit-null;
-    }
-}
-export [ exp-bgp-nhs exp-bgp-lo0-v6 ];
-neighbor 10.10.1.5;
-neighbor 10.10.1.6;
-</code></pre>
-<p>error message:</p>
-<pre><code>lab@MX80-NGGWR-01# set logical-systems lr2 protocols bgp group to-rr family inet6 unicast
-
-[edit]
-lab@MX80-NGGWR-01# commit  
-[edit logical-systems lr2 protocols]
-  'bgp'
-    Error in neighbor 10.10.1.5 of group to-rr:
-peer cannot have both inet6 unicast and inet6 labeled-unicast nlri
-error: configuration check-out failed
-</code></pre>
-<h3 id="question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why <code>family inet labeled-unicast</code> in this solution?</h3>
-<p>according to 6PE spec, <code>family inet6 labeled-unicast explicit-null</code> is used to
-assign label (2) to ipv6 prefixes at PE, why again <code>family inet
-labeled-unicast</code>? </p>
-<p>is it just because <code>rib</code> and <code>rib-group</code> feature only supported under
-labeled-unicast by design?</p>
-<p><a href="http://www.juniper.net/techpubs/software/junos/junos94/swconfig-routing/rib_2.html">http://www.juniper.net/techpubs/software/junos/junos94/swconfig-routing/rib_2.html</a>
-<a href="http://www.juniper.net/techpubs/en_US/junos12.1/topics/topic-map/bgp-multiprotocol.html">http://www.juniper.net/techpubs/en_US/junos12.1/topics/topic-map/bgp-multiprotocol.html</a></p>
-<p>You can allow both labeled and unlabeled routes to be exchanged in a single
-session. The labeled routes are placed in the inet.3 routing table, and both
-labeled and unlabeled unicast routes can be sent to or received by the routing
-device. </p>
-<p>To allow both labeled and unlabeled routes to be exchanged, include the rib
-inet.3 statement:</p>
-<pre><code>rib inet.3;
-</code></pre>
-<h3 id="tip-inet-labeled-unicast-rib-inet3">TIP: <code>inet labeled-unicast rib inet.3</code></h3>
-<p>manual about "rib inet.3":</p>
-<p>You can allow both labeled and unlabeled routes to be exchanged in a single
-session. The labeled routes are placed in the inet.3 routing table, and both
-labeled and unlabeled unicast routes can be sent or received by the router.</p>
-<p>(WRONG) this looks also inherit all behavior of <code>inet unicast</code></p>
-<p>(correct):
-without rib inet.3, following can't co-exist:</p>
-<pre><code>inet unicast 
-inet labeled-unicast
-</code></pre>
-<p>because both routes (by default), will be put in inet.0 -- the only diff
-between these 2 types of routes are, the labeled route carries a label -- this
-will lead confliction so only one address family can't be supported</p>
-<p>with rib inet.3 ,these are fine:</p>
-<pre><code>inet unicast
-inet labeled-unicast rib inet.3
-</code></pre>
-<p>because labeled-route are now put in inet.3, unlabeled are in inet.0</p>
-<p>now "You can allow both labeled and unlabeled routes to be exchanged in a single
-session"</p>
-<h3 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h3>
-<pre><code>R1             (BGP route NLRI addr family)         R5
-   ============================================&gt;
-inet.0          inet unicast                        inet.0
-inet.3          inet labeled-unicast                inet.3
-
-inet unicast: 传递unicast的路由，放入inet.0
-labeled-unicast：传递unciast路由，放入inet.0
-labeld-unicast rib inet.3: 传递inet.3的路由，放入inet.3
-inet unicast+rib inet.3：传递inet.0和inet.3的路由，unicast的放入inet.0, rib inet.3的放入inet.3
-</code></pre>
-<p>这就是为什么无法同时配置inet uncast 和labeled-unicast，而可以同时配置inet unicast和rib inet.3 </p>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems r5 policy-options policy-statement exp-bgp-adv-1    
-term 1 {
-    from {
-        protocol isis;                      #&lt;------taken from inet.0
-        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-unicast`
-    }
-    then accept;
-
-}
-term 2 {
-    from {
-        rib inet.3;                         #&lt;------taken from inet.0
-        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-labeled-unicast`
-    }
-    then accept;
-}
-</code></pre>
-<h3 id="tip-6pe">TIP: 6PE</h3>
-<ul>
-<li>like MPLS/VPN. but no vrf, </li>
-<li>bgp assign either reserved label 2(ipv6 explicit) or any lable as inner
-  label(like vpn label).</li>
-<li>running on top of LSP (ldp or rsvp based)   <br />
-</li>
-<li>Juniper PE core facing i/f <code>must</code> enable ipv6 =&gt; troubleshooting tip.
-  (seems only if use label 2). otherwise forwarding will have issue.</li>
-</ul>
-<p>routing:</p>
-<ul>
-<li>CE2 adv IPv6 routes to PE2, via IPv6 protocols (BGP, ISIS, OSPFv3, RIPng, etc)</li>
-<li>PE2 get CE2 IPv6 routes, with NH as CE2 IPv6 address</li>
-<li><code>family inet6 labeled-unicast</code> =&gt; </li>
-<li>PE2 adv labeled(<code>explicit-null</code> =&gt; label 2) IPv6 routes to PE1, via MP-BGP</li>
-<li><code>protocol mpls ipv6-tunneling</code> =&gt; </li>
-<li>PE1 check inet3.0 (table of map: IPv4 &lt;=&gt; LSP )</li>
-<li>PE1 convert all IPv4 in inet.3 to IPv6, in a form of "IPv4 mapped IPv6 address"</li>
-<li>PE1 put all IPv4-m-IPv6 into inet6.3 (a table of map: IPv6 &lt;=&gt; LSP)</li>
-<li>
-<p>PE1 BGP now can: </p>
-<pre><code>              (auto-convert based on IPv4 NH)
-    resolve IPv6 routes ===&gt; NH IPv4-m-IPv6
-                    (inet6.3)
-    resolve IPv4-m-IPv6 ===&gt; LSP
-</code></pre>
-</li>
-<li>
-<p>PE1 adv IPv6 routes to CE1, NH to PE1 IPv6</p>
-<pre><code>                      &lt; ----MPLS---------&gt; 
-    CE1-----------PE1==========/P/==========PE2-------------CE2
- (pure IPv6)   (dual)                       (dual)                (dual stack)
-
-                                                        (routing:)
-                                              &lt;===IPv6 protocol=
-                    &lt;==MP-BGP:labeled IPv6===
-    &lt;==IPv6 protocol=
-
-    (forwarding:)
-    ===IPv6 packet=&gt;
-                    =&gt;IPv6/IL:2/OL (PHP)
-                                ==IPv6/IL:2=&gt;               
-                                              ===&gt;IPv6 packet=&gt;
-</code></pre>
-</li>
-</ul>
-<h3 id="tip-ipv6-tunneling-vs-rib-group">TIP: <code>ipv6-tunneling</code> vs <code>rib-group</code></h3>
-<p>如果inet.3中的路由是从ldp或者rsvp学来的，那么配置了ipv-tunneling之后，
-这些路由会直接copy到inet6.3中，
-如果路由是从bgp学来的，默认不会copy，需要做rib-group</p>
-<h3 id="simple-topo-and-config">simple topo and config</h3>
-<pre><code>&lt;--ipv6 (AS1000)-&gt; &lt;---------ipv4 AS(3000)-------&gt; &lt;--ipv6 (AS2000)-&gt;
-+-----+        +-----+         +-----+         +-----+       +-----+
-| ce1 |--------| pe1 |---------|  p  |---------| pe2 |-------| ce2 |
-+-+---+ V1501  +-+---+ V1503   +--+--+ V1502   +--+--+ V1504 +--+--+
-  |  10::1/126   | 192.168.0.0/30 | 192.168.0.4/30|   11::0/126 |
-  |              | 1.1.1.1/32     |       2.2.2.2 |             |
-  |98::1/128                  10.10.10.10/32          98::1/128 |
-</code></pre>
-<h4 id="pe1-config">PE1 config</h4>
-<pre><code>logical-routers 6pepe1 {
-    routing-options {
-        autonomous-system 3000;
-    }
-    interfaces {
-        ge-1/2/1 {
-            unit 1501 {
-                vlan-id 1501;
-                family inet {
-                    address 192.168.0.1/30;
-                }
-                family inet6;
-                family mpls;
-            }
-        }
-        ge-1/2/1 {
-            unit 1503 {
-                description "PE1 to CE1 IPV6 Customer";
-                vlan-id 1503;
-                family inet6 {
-                    address 10::1/126;
-                }
-            }
-        }
-        lo0 {
-            unit 1501 {
-                family inet {
-                    address 1.1.1.1/32;
-                }
-            }
-        }
-    }
-    protocols {
-        bgp {
-            group ibgp {
-                type internal;
-                local-address 1.1.1.1;
-                family inet6 {
-                    labeled-unicast {       #&lt;------
-                        explicit-null;      #&lt;------
-                    }
-                }
-                neighbor 2.2.2.2;
-            }
-            group ipv6 {
-                family inet6 {
-                    unicast;
-                }
-                neighbor 10::1 {
-                    peer-as 1000;
-                }
-            }
-        }
-        mpls {
-            ipv6-tunneling;         #&lt;------
-            label-switched-path pe1-to-pe2 {
-                to 2.2.2.2;
-            }
-            interface ge-1/2/1.1501;
-        }
-    }
-}
-</code></pre>
-<h4 id="pe2-config">PE2 config</h4>
-<pre><code>logical-systems 6pepe2 {                   
-    routing-options {
-        autonomous-system 3000;
-    }
-    interfaces {                    
-        ge-1/2/1 {
-            unit 1504 {
-                vlan-id 1504;
-                family inet6 {
-                    address 11::1/126;
-                }
-            }
-        }
-        ge-1/2/1 {
-            unit 1502 {
-                vlan-id 1502;
-                family inet {
-                    address 192.168.0.6/30;
-                }
-                family inet6;
-                family mpls;
-            }
-        }
-        lo0 {
-            unit 1502 {
-                family inet {
-                    address 2.2.2.2/32;
-                }
-            }
-        }
-    }
-    protocols {
-        mpls {
-            ipv6-tunneling;
-            label-switched-path pe2-to-pe1 {
-                to 1.1.1.1;
-            }
-            interface ge-1/2/1.1502;
-        }
-        bgp {
-            group ipv6 {
-                traceoptions {
-                    file debug-ipv6;
-                    flag all detail;
-                }
-                neighbor 11::2 {
-                    peer-as 2000;
-                }
-            }
-            group ibgp {
-                type internal;
-                local-address 2.2.2.2;
-                family inet6 {
-                    labeled-unicast {
-                        explicit-null;
-                    }
-                }
-                neighbor 1.1.1.1;
-            }
-        }
-    }
-}
-</code></pre>
-<h4 id="resources">resources</h4>
-<ul>
-<li><a href="http://tools.ietf.org/html/rfc4798">6PE</a></li>
-<li><a href="http://tools.ietf.org/html/rfc3032">reserved IPv6 Explicit NULL Label</a></li>
-<li><a href="http://www.juniper.net/techpubs/en_US/junos13.1/topics/reference/configuration-statement/ipv6-tunneling-edit-protocols-mpls.html">ipv6-tunnel</a></li>
-<li><a href="http://www.youtube.com/watch?v=zraAfs3bY5E">vedio</a></li>
-<li><a href="http://www.juniper.net/techpubs/en_US//junos/topics/example/mpls-tunneling-ipv6-over-mpls-ipv4.html">example</a></li>
-</ul>
-<h4 id="family-inet6-labeled-unicast-vs-unicast">family inet6 <code>labeled-unicast</code> vs <code>unicast</code></h4>
-<pre><code>delete logical-systems lr1 protocols bgp group to-rr family inet6 unicast
-delete logical-systems lr2 protocols bgp group to-rr family inet6 unicast
-delete logical-systems lr3 protocols bgp group to-rr family inet6 unicast
-delete logical-systems lr4 protocols bgp group to-rr family inet6 unicast
-delete logical-systems lr5 protocols bgp group rr family inet6 unicast
-delete logical-systems lr6 protocols bgp group rr family inet6 unicast
-delete logical-systems lr7 protocols bgp group to-rr family inet6 unicast
-delete logical-systems lr8 protocols bgp group to-rr family inet6 unicast
-set logical-systems lr1 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-set logical-systems lr2 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-set logical-systems lr3 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-set logical-systems lr4 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-set logical-systems lr5 protocols bgp group rr family inet6 labeled-unicast explicit-null
-set logical-systems lr6 protocols bgp group rr family inet6 labeled-unicast explicit-null
-set logical-systems lr7 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-set logical-systems lr8 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
-</code></pre>
-<h3 id="rtbh">rtbh</h3>
-<h4 id="initial-routes">initial routes</h4>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 33.33.33.33/32
-
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-33.33.33.33/32     *[BGP/170] 01:05:50, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:05:48, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 33.33.33.33/32 detail
-
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+                Router ID: 10.200.1.1
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x26e7664
+                Next-hop reference count: 12
+                Source: 10.200.1.6
+                Next hop type: Router, Next hop index: 2539
+                Next hop: 100.0.25.1 via ge-1/2/2.205 weight 0x1, selected  #&lt;------
+                Label-switched-path r5-r1
+                Label operation: Push 299936
+                Label TTL action: prop-ttl
+                Session Id: 0x80008
+                Protocol next hop: 10.200.1.1
+                Indirect next hop: 297c760 1048668 INH Session ID: 0x80012
+                State: <NotBest Int Ext>
+                Inactive reason: Not Best in its group - Cluster list length
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 2:26:58    Metric2: 10 
+                Validation State: unverified 
+                Task: BGP_4012345678.10.200.1.6+179
+                AS path: 300 I (Originator)
+                Cluster list:  6.6.6.6
+                Originator ID: 10.200.1.1
+                Communities: 65513:100      #&lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.200.1.6 <br />
+</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run show route protocol bgp logical-system r5 33.33.33.33/32 detail<br />
+</p>
+<p>inet.0: 50 destinations, 64 routes (50 active, 0 holddown, 0 hidden)
 Restart Complete
 33.33.33.33/32 (2 entries, 1 announced)
         *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 16
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;Active Int Ext&gt;
+                Next hop type: Discard      #&lt;------
+                Address: 0x24cf08c
+                Next-hop reference count: 8
+                State: <Active Int Ext>
                 Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:06:28    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Age: 2:31:29 
+                Validation State: unverified 
+                Task: BGP_4012345678.10.200.1.1+179
+                Announcement bits (3): 1-KRT 5-BGP_RT_Background 6-Resolve tree 4 
+                AS path: 300 I
+                Communities: 65412:100 65513:100 target:4012345678L:2000    #&lt;------
                 Accepted
                 Localpref: 100
-                Router ID: 10.10.1.5
+                Router ID: 10.200.1.1
          BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 16
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
+                Next hop type: Discard      #&lt;------
+                Address: 0x24cf08c
+                Next-hop reference count: 8
+                State: <NotBest Int Ext>
+                Inactive reason: Not Best in its group - Cluster list length
                 Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:06:26    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Age: 2:31:29 
+                Validation State: unverified 
+                Task: BGP_4012345678.10.200.1.6+179
+                AS path: 300 I (Originator)
+                Cluster list:  6.6.6.6
+                Originator ID: 10.200.1.1
+                Communities: 65412:100 65513:100 target:4012345678L:2000    #&lt;------
                 Accepted
                 Localpref: 100
-                Router ID: 10.10.1.6
+                Router ID: 10.200.1.6</p>
+</li>
+</ul>
+<h3 id="config-ipv6-routes-aggregation">config: IPv6 routes aggregation</h3>
+<p>R1-R8: adv IPv6 lo0</p>
+<p>R5-R6: adv aggr.ed IPv4&amp;IPv6 routes</p>
+<pre><code>set logical-systems r1 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::1/128 exact
+set logical-systems r1 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r1 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24
+set logical-systems r2 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::2/128 exact
+set logical-systems r2 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r2 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
+set logical-systems r3 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::3/128 exact
+set logical-systems r3 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r3 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 
-3.3.3.0/24         *[BGP/170] 01:07:39, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:07:37, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+set logical-systems r4 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::4/128 exact
+set logical-systems r4 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r4 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24 detail
+set logical-systems r5 routing-options aggregate route 10.200.0.0/16
+set logical-systems r5 routing-options rib inet6.0 aggregate route 2011:0310::/32
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 10.200.0.0/16 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 from route-filter 2011:0310:1020::5/128 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 then accept
+set logical-systems r5 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
+set logical-systems r5 protocols bgp group to-r6 export exp-bgp-lo0-v6
 
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
-Restart Complete
-3.3.3.0/24 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 16
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:07:42    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 16
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:07:40    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
+set logical-systems r6 routing-options aggregate route 10.200.0.0/16
+set logical-systems r6 routing-options rib inet6.0 aggregate route 2011:0310::/32
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 10.200.0.0/16 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 3 from route-filter 2011:0310:1020::6/128 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 3 then accept
+set logical-systems r6 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
+set logical-systems r6 protocols bgp group to-r5 export exp-bgp-lo0-v6
 
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126
+set logical-systems r7 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::7/128 exact
+set logical-systems r7 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r7 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::3.3.3.0/126      *[BGP/170] 01:08:32, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:08:28, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-::3.3.3.0/126 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 12
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:08:39    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 12
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:08:35    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::33.33.33.33/128  *[BGP/170] 01:08:54, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:08:50, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-::33.33.33.33/128 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 12
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:09:00    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 12
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:08:56    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000      &lt;------
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
+set logical-systems r8 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::8/128 exact
+set logical-systems r8 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r8 protocols bgp group to-v4v6-rr export exp-bgp-lo0-v6
 </code></pre>
-<h4 id="config_5">config</h4>
-<pre><code>set logical-systems lr2 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
-set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+<p>to P: reject some too pecific routes</p>
+<pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 then reject     #&lt;------
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128     #&lt;------
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 from route-filter 10.200.0.0/16 exact   #&lt;------MUST
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 then accept                             #&lt;------MUST
+set logical-systems r2 protocols bgp group to-p-v4 export exp-bgp-p-out
+set logical-systems r2 protocols bgp group to-p-v6 export exp-bgp-p-out
 
-set logical-systems lr3 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
-set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 then reject
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 then reject     #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128     #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
+set logical-systems r3 protocols bgp group to-p-v4 export exp-bgp-p-out
+set logical-systems r3 protocols bgp group to-p-v6 export exp-bgp-p-out
 
-set logical-systems lr5 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
-set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 then reject
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 2 then reject     #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128     #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 4 from protocol aggregate
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 4 from route-filter 10.200.0.0/16 exact   #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 4 then accept     #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 from protocol aggregate         #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 from route-filter 2011:310::/32 exact   #&lt;------
+set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 then accept
+set logical-systems r5 protocols bgp group to-p-v4 export exp-bgp-p-out
+set logical-systems r5 protocols bgp group to-p-v6 export exp-bgp-p-out
 </code></pre>
-<h4 id="result">result</h4>
+<p>NOTE: R2 policy term4 is a must</p>
+<pre><code>lab@MX80-NGGWR-02# run show route logical-system r2 10.200/16
+
+inet.0: 72 destinations, 90 routes (71 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.200.0.0/16      *[Aggregate/130] 03:34:02
+                      Reject
+                    [BGP/170] 03:33:26, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.2 via ge-1/2/1.204, label-switched-path r2-r5
+                    [BGP/170] 03:33:36, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.26.2 via ge-1/2/1.206, label-switched-path r2-r6
+                      to 100.0.25.2 via ge-1/2/1.205, label-switched-path Bypass-&gt;100.0.26.2
+</code></pre>
+<h3 id="verify_16">verify</h3>
+<p>R1-R8 has : aggr. V4 &amp; V6 routes, all IPv6 lo0</p>
 <pre><code>[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24
+lab@MX80-NGGWR-02# run show route logical-system r1 10.200/16 exact table inet.0
 
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+inet.0: 49 destinations, 67 routes (46 active, 0 holddown, 3 hidden)
 Restart Complete
 + = Active Route, - = Last Active, * = Both
 
-3.3.3.0/24         *[BGP/170] 01:13:15, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:13:13, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.200.0.0/16      *[BGP/170] 03:25:58, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 03:25:54, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
 
 [edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24 detail
+lab@MX80-NGGWR-02# run show route logical-system r1 2011:310::/32
 
-inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
-Restart Complete
-3.3.3.0/24 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 12
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:22    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2826c00
-                Next-hop reference count: 12
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: 10.10.1.1
-                Indirect next hop: 2a2c740 1048600
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:20    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+inet6.0: 32 destinations, 55 routes (32 active, 0 holddown, 0 hidden)
 Restart Complete
 + = Active Route, - = Last Active, * = Both
 
-::33.33.33.33/128  *[BGP/170] 01:13:11, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                      Discard
-                    [BGP/170] 01:13:07, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                      Discard
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-::33.33.33.33/128 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Discard
-                Address: 0x23f36e8
-                Next-hop reference count: 8
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:17 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Discard
-                Address: 0x23f36e8
-                Next-hop reference count: 8
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:13 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::3.3.3.0/126      *[BGP/170] 01:13:28, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-                    [BGP/170] 01:13:24, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126 detail
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-::3.3.3.0/126 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 8
-                Source: 10.10.1.5
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:34    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Indirect
-                Address: 0x2824730
-                Next-hop reference count: 8
-                Source: 10.10.1.6
-                Next hop type: Router, Next hop index: 2363
-                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
-                Label-switched-path r2-r1
-                Protocol next hop: ::ffff:10.10.1.1
-                Indirect next hop: 28507e0 1048639
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:30    Metric2: 5 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-::33.33.33.33/128  *[BGP/170] 01:13:42, localpref 100, from 10.10.1.5
-                      AS path: 300 I
-                      Discard
-                    [BGP/170] 01:13:38, localpref 100, from 10.10.1.6
-                      AS path: 300 I
-                      Discard
-
-[edit]
-lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
-
-inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
-Restart Complete
-::33.33.33.33/128 (2 entries, 1 announced)
-        *BGP    Preference: 170/-101
-                Next hop type: Discard
-                Address: 0x23f36e8
-                Next-hop reference count: 8
-                State: &lt;Active Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:44 
-                Task: BGP_4012345678.10.10.1.5+179
-                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.5
-         BGP    Preference: 170/-101
-                Next hop type: Discard
-                Address: 0x23f36e8
-                Next-hop reference count: 8
-                State: &lt;NotBest Int Ext&gt;
-                Inactive reason: Not Best in its group - Update source
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 1:13:40 
-                Task: BGP_4012345678.10.10.1.6+179
-                AS path: 300 I (Originator) Cluster list:  1.1.1.1
-                AS path:  Originator ID: 10.10.1.1
-                Communities: 65412:100 target:4012345678L:2000
-                Accepted
-                Localpref: 100
-                Router ID: 10.10.1.6
+2011:310::/32      *[BGP/170] 03:26:49, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 03:26:45, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::1/128
+                   *[Direct/0] 03:27:06
+                    &gt; via lo0.1
+2011:310:1020::2/128
+                   *[BGP/170] 03:26:41, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+                    [BGP/170] 03:26:45, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r2
+2011:310:1020::3/128
+                   *[BGP/170] 03:26:37, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+                    [BGP/170] 03:26:45, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r3
+2011:310:1020::4/128
+                   *[BGP/170] 03:26:33, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 03:26:43, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+2011:310:1020::5/128
+                   *[BGP/170] 03:26:45, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 03:26:45, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::6/128
+                   *[BGP/170] 03:26:49, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 03:26:45, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+2011:310:1020::7/128                    
+                   *[BGP/170] 03:26:45, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+                    [BGP/170] 03:26:35, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.13.2 via ge-1/2/1.103, label-switched-path r1-r5
+2011:310:1020::8/128
+                   *[BGP/170] 03:26:45, localpref 100, from 10.200.1.5
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 03:26:39, localpref 100, from 10.200.1.6
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
 </code></pre>
-<h3 id="ipv6-lo0-aggr">ipv6 lo0 aggr</h3>
-<h4 id="question">QUESTION:</h4>
-<p>R2/R3 don't have R7/8 host in inet6.3 =&gt;
-any routes adv.ed by R7/8 will be hidden in R2/3</p>
-<p>solution: 
-1) install routes in R2/3       not allowed
-2) set next-hop self in R5/6       may not optimal routes</p>
+<p>R2 to P:  aggr V4&amp;V6, no too specific routes
+    [edit]
+    lab@MX80-NGGWR-02# run show route advertising-protocol bgp 100.2.11.2 logical-system r2  <br />
+</p>
+<pre><code>inet.0: 72 destinations, 90 routes (71 active, 0 holddown, 3 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 10.200.0.0/16           Self                                    I         #&lt;------
+* 20.20.0.0/16            Self                                    I
+* 33.33.0.0/16            Self                                    300 I
+* 44.44.0.0/16            Self                                    400 I
+* 211.2.0.0/16            Self                                    2000 I
+* 211.3.0.0/16            Self                                    3000 I
+* 211.5.0.0/16            Self                                    2000 I
+* 211.6.0.0/16            Self                                    2000 I
+* 211.7.0.0/16            Self                                    3000 I
+
+[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp ::100.2.11.2 logical-system r2
+
+inet6.0: 48 destinations, 77 routes (48 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 2000:2000::/32          Self                                    2000 I
+* 2000:3000::/32          Self                                    3000 I
+* 2000:5000::/32          Self                                    2000 I
+* 2000:6000::/32          Self                                    2000 I
+* 2000:7000::/32          Self                                    3000 I
+* 2011:310::/32           Self                                    I         #&lt;------
+* 3333:3333:3333::/48     Self                                    300 I
+* 4444:4444:4444::/48     Self                                    400 I
+* 5555:5555:5555::/48     Self                                    500 I
+</code></pre>
 <h3 id="tip-unverified-route">TIP: unverified route</h3>
 <p><a href="http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html">http://www.juniper.net/techpubs/en_US/junos12.2/topics/topic-map/bgp-origin-as-validation.html</a></p>
 <h3 id="tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</h3>
@@ -4409,382 +3256,11 @@ code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (pro
 invalid BGP identifier 0x0
 </code></pre>
 <h2 id="vpn">VPN</h2>
-<h3 id="basic-interconnections">basic interconnections</h3>
-<h4 id="results">results</h4>
-<p>R1:</p>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr1 table GREEN.inet.0
-
-GREEN.inet.0: 11 destinations, 28 routes (11 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-1.1.1.1/32         *[Direct/0] 3d 13:40:48
-                    &gt; via lo0.11
-                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-4.4.4.4/32         *[OSPF/10] 2d 19:15:40, metric 52
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 2d 20:00:30, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 20:00:30, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.1.11/32      *[OSPF/150] 2d 19:15:45, metric 0, tag 0
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 2d 19:15:40, MED 0, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 19:15:40, MED 0, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.1.22/32      *[OSPF/150] 2d 19:15:40, metric 0, tag 0
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 2d 19:15:45, MED 0, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 19:15:45, MED 0, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.1.33/32      *[OSPF/150] 05:21:45, metric 0, tag 103
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 05:21:50, localpref 100, from 10.10.1.2
-                      AS path: 65000 I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 05:21:50, localpref 100, from 10.10.1.3
-                      AS path: 65000 I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.19.0/24      *[Direct/0] 3d 13:39:14
-                    &gt; via ge-1/2/1.691
-                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.19.2/32      *[Local/0] 3d 13:39:23
-                      Local via ge-1/2/1.691
-20.20.42.0/24      *[OSPF/10] 2d 19:15:40, metric 52
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 3d 02:19:17, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 3d 11:37:33, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.100.0/31     *[BGP/170] 3d 02:19:17, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 3d 11:37:33, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-20.20.120.0/24     *[OSPF/10] 2d 19:15:45, metric 51
-                    &gt; to 20.20.19.1 via ge-1/2/1.691
-                    [BGP/170] 2d 19:15:45, MED 51, localpref 100, from 10.10.1.2
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 2d 19:15:45, MED 51, localpref 100, from 10.10.1.3
-                      AS path: I, validation-state: unverified
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-224.0.0.5/32       *[OSPF/10] 3d 13:41:03, metric 1
-                      MultiRecv
+<h3 id="config-basic-vpn">config: basic VPN</h3>
+<h3 id="up-here-now">UP HERE NOW</h3>
+<pre><code>&lt;------------------------
 </code></pre>
-<h4 id="issue-no-ce45-routes">issue: no CE4/5 routes</h4>
-<h4 id="check-routes-in-rr">check routes in RR</h4>
-<p>no CE4/5 routes:</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr2 table bgp.l3vpn.0
-
-bgp.l3vpn.0: 20 destinations, 20 routes (16 active, 0 holddown, 4 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.1:1:1.1.1.1/32                
-                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:4.4.4.4/32                
-                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:20.20.1.11/32                
-                   *[BGP/170] 2d 19:18:59, MED 0, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:20.20.1.22/32                
-                   *[BGP/170] 2d 19:18:54, MED 0, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:20.20.19.0/24                
-                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:20.20.42.0/24                
-                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.1:1:20.20.120.0/24                
-                   *[BGP/170] 2d 19:18:59, MED 51, localpref 100, from 10.10.1.1
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.4:1:1.1.1.1/32                
-                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:4.4.4.4/32                
-                   *[BGP/170] 2d 20:03:44, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.1.11/32                
-                   *[BGP/170] 2d 19:18:54, MED 0, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.1.22/32                
-                   *[BGP/170] 2d 19:18:59, MED 0, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.1.33/32                
-                   *[BGP/170] 05:25:04, localpref 100, from 10.10.1.4
-                      AS path: 65000 I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.19.0/24                
-                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.42.0/24                
-                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.100.0/31                
-                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.4:1:20.20.120.0/24                
-                   *[BGP/170] 2d 19:18:59, MED 51, localpref 100, from 10.10.1.4
-                      AS path: I, validation-state: unverified
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-</code></pre>
-<p>check RR bgp.l3vpn.0 =&gt;  CE4/5 route in "hidden":</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lr2 table bgp.l3vpn.0 all 20.20.1.44/32 extensive
-
-bgp.l3vpn.0: 20 destinations, 20 routes (16 active, 0 holddown, 4 hidden)
-Restart Complete
-10.10.1.8:1:20.20.1.44/32 (1 entry, 0 announced)
-         BGP    Preference: 170/-101
-                Route Distinguisher: 10.10.1.8:1
-                Next hop type: Unusable
-                Address: 0x244ce94
-                Next-hop reference count: 6
-                State: &lt;Hidden Int Ext&gt;
-                Local AS: 4012345678 Peer AS: 4012345678
-                Age: 2d 18:40:04 
-                Validation State: unverified 
-                Task: BGP_4012345678.10.10.1.8+57274
-                AS path: 65000 I
-                Communities: 65000:4 target:2:65000
-                Accepted
-                VPN Label: 16
-                Localpref: 100
-                Router ID: 10.10.1.8
-                Indirect next hops: 1
-                        Protocol next hop: 10.10.1.8
-                        Push 16
-                        Indirect next hop: 0 - INH Session ID: 0x0
-</code></pre>
-<p>reason is no next hop resolvation, =&gt; check inet.3. </p>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr2 table inet.3
-
-inet.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
-Restart Complete
-+ = Active Route, - = Last Active, * = Both
-
-10.10.1.1/32       *[RSVP/7/1] 3d 13:52:24, metric 5
-                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
-10.10.1.3/32       *[RSVP/7/1] 3d 13:52:23, metric 5
-                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
-10.10.1.4/32       *[RSVP/7/1] 3d 13:52:22, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
-10.10.1.5/32       *[RSVP/7/1] 3d 13:52:24, metric 5
-                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
-                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
-10.10.1.6/32       *[RSVP/7/1] 3d 13:52:23, metric 5
-                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
-</code></pre>
-<p>no LSP to R8. that's the issue.
-solution:
-   1) create LSP
-   2) install host routes
-   3) adv inactive (inactive = hidden ?)
-   4) ?</p>
-<h4 id="solution-non-workadv-inactive-in-rr">solution (non-work):adv-inactive in RR</h4>
-<p>doesn't work</p>
-<h4 id="solution-install-r8-in-r2r3-lsp">solution: install R8 in R2/R3 lsp</h4>
-<pre><code>lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr2 protocols mpls label-switched-path r2-r6]
-!       active: install 10.10.1.8/32 { ... }
-[edit]
-lab@MX80-NGGWR-01# commit
-
-[edit]
-lab@MX80-NGGWR-01# run show route advertising-protocol bgp 10.10.1.1 logical-system lr2
-
-bgp.l3vpn.0: 20 destinations, 20 routes (20 active, 0 holddown, 0 hidden)
-Restart Complete
-  Prefix                  Nexthop              MED     Lclpref    AS path
-  10.10.1.4:1:1.1.1.1/32                    
-*                         10.10.1.4            52      100        I
-  10.10.1.4:1:4.4.4.4/32                    
-*                         10.10.1.4                    100        I
-  10.10.1.4:1:20.20.1.11/32                    
-*                         10.10.1.4            0       100        I
-  10.10.1.4:1:20.20.1.22/32                    
-*                         10.10.1.4            0       100        I
-  10.10.1.4:1:20.20.1.33/32                    
-*                         10.10.1.4                    100        65000 I
-  10.10.1.4:1:20.20.19.0/24                    
-*                         10.10.1.4            52      100        I
-  10.10.1.4:1:20.20.42.0/24                    
-*                         10.10.1.4                    100        I
-  10.10.1.4:1:20.20.100.0/31                    
-*                         10.10.1.4                    100        I
-  10.10.1.4:1:20.20.120.0/24                    
-*                         10.10.1.4            51      100        I
-  10.10.1.8:1:20.20.1.44/32                                         #&lt;------
-*                         10.10.1.8                    100        65000 I
-  10.10.1.8:1:20.20.1.55/32                    
-*                         10.10.1.8                    100        65000 I
-  10.10.1.8:1:20.20.150.0/31                    
-*                         10.10.1.8                    100        I
-  10.10.1.8:1:20.20.200.0/31                    
-*                         10.10.1.8                    100        I
-</code></pre>
-<h3 id="backdoor-routes-and-sham-link">backdoor routes and sham-link</h3>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run show route logical-system lce table green-ce1.inet.0
-
-green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-1.1.1.1/32         *[OSPF/10] 2d 19:49:33, metric 1
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-4.4.4.4/32         *[OSPF/10] 2d 19:49:23, metric 51
-                    &gt; to 20.20.120.1 via ge-1/2/2.120
-20.20.1.11/32      *[Direct/0] 2d 19:49:39
-                    &gt; via ge-1/2/2.4001
-                    [Local/0] 2d 19:49:39
-                      Local via ge-1/2/2.4001
-20.20.1.22/32      *[OSPF/150] 2d 19:49:23, metric 0, tag 0         #&lt;------
-                    &gt; to 20.20.120.1 via ge-1/2/2.120
-20.20.1.33/32      *[OSPF/150] 05:55:33, metric 0, tag 103          #&lt;------
-                    &gt; to 20.20.120.1 via ge-1/2/2.120
-20.20.1.44/32      *[OSPF/150] 00:06:30, metric 0, tag 3489696078   #&lt;------
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.1.55/32      *[OSPF/150] 00:06:30, metric 0, tag 3489696078   #&lt;------
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.19.0/24      *[Direct/0] 3d 14:13:02
-                    &gt; via ge-1/2/2.691
-20.20.19.1/32      *[Local/0] 3d 14:13:14
-                      Local via ge-1/2/2.691
-20.20.42.0/24      *[OSPF/10] 2d 19:49:23, metric 51
-                    &gt; to 20.20.120.1 via ge-1/2/2.120
-20.20.100.0/31     *[OSPF/150] 05:45:57, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.120.0/24     *[Direct/0] 3d 14:13:02
-                    &gt; via ge-1/2/2.120
-20.20.120.2/32     *[Local/0] 3d 14:13:12
-                      Local via ge-1/2/2.120
-20.20.150.0/31     *[OSPF/150] 00:06:30, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.200.0/31     *[OSPF/150] 00:06:30, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-224.0.0.5/32       *[OSPF/10] 3d 14:14:52, metric 1
-                      MultiRecv
-</code></pre>
-<p>vpn route prefer the backdoor exit, need to fix it with shamlink</p>
-<h4 id="solutionsham-link">solution:sham-link</h4>
-<pre><code>lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr1 routing-instances GREEN protocols ospf]
-+       sham-link local 1.1.1.1;
-[edit logical-systems lr1 routing-instances GREEN protocols ospf area 0.0.0.0]
-+        sham-link-remote 4.4.4.4;
-
-lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems lr4 routing-instances GREEN protocols ospf]
-+       sham-link local 4.4.4.4;
-[edit logical-systems lr4 routing-instances GREEN protocols ospf area 0.0.0.0]
-+        sham-link-remote 1.1.1.1;
-
-[edit]
-lab@MX80-NGGWR-01# run show ospf neighbor logical-system lr1 instance all    
-Instance: GREEN
-Address          Interface              State     ID               Pri  Dead
-20.20.19.1       ge-1/2/1.691           Full      20.20.1.11       128    38
-4.4.4.4          shamlink.0             Full      4.4.4.4            0    38
-</code></pre>
-<p>now the ce1 prefer backbone instead of backdoor:</p>
-<pre><code>lab@MX80-NGGWR-01# run show route logical-system lce table green-ce1.inet.0
-
-green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-1.1.1.1/32         *[OSPF/150] 00:06:03, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-4.4.4.4/32         *[OSPF/150] 00:06:13, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.1.11/32      *[Direct/0] 2d 20:24:38
-                    &gt; via ge-1/2/2.4001
-                    [Local/0] 2d 20:24:38
-                      Local via ge-1/2/2.4001
-20.20.1.22/32      *[OSPF/150] 00:06:03, metric 0, tag 0    #&lt;------
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.1.33/32      *[OSPF/150] 00:06:03, metric 0, tag 103  #&lt;------
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.1.44/32      *[OSPF/150] 00:41:29, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.1.55/32      *[OSPF/150] 00:41:29, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.19.0/24      *[Direct/0] 3d 14:48:01
-                    &gt; via ge-1/2/2.691
-20.20.19.1/32      *[Local/0] 3d 14:48:13
-                      Local via ge-1/2/2.691
-20.20.42.0/24      *[OSPF/10] 00:06:03, metric 3
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.100.0/31     *[OSPF/150] 06:20:56, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.120.0/24     *[Direct/0] 3d 14:48:01
-                    &gt; via ge-1/2/2.120
-20.20.120.2/32     *[Local/0] 3d 14:48:11
-                      Local via ge-1/2/2.120
-20.20.150.0/31     *[OSPF/150] 00:41:29, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-20.20.200.0/31     *[OSPF/150] 00:41:29, metric 0, tag 3489696078
-                    &gt; to 20.20.19.2 via ge-1/2/2.691
-224.0.0.5/32       *[OSPF/10] 3d 14:49:51, metric 1
-                      MultiRecv
-</code></pre>
-<h4 id="tip-sham-link">TIP: sham-link</h4>
+<h3 id="tip-sham-link">TIP: sham-link</h3>
 <p>by default all type5 LSA</p>
 <pre><code>ce1--------vrf1:pe1-----------//-----------PE2:vrf2----------ce2
    (OSPF)          (MP-BGP)                 (OSPF)
@@ -4870,7 +3346,7 @@ GREEN.inet.0: 15 destinations, 29 routes (15 active, 0 holddown, 3 hidden)
                     &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
                       to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
 </code></pre>
-<h4 id="tip-domain-id">TIP: domain-id</h4>
+<h3 id="tip-domain-id">TIP: domain-id</h3>
 <pre><code>determine type3(same) vs type5(diff)
 make it unique at all PE routers to ensure that the Type 3 summary LSAs, which
 advertise the CE router’s loopback address, are correctly distributed to the remote PE as an
@@ -5203,7 +3679,7 @@ GREEN.inet.0: 22 destinations, 43 routes (22 active, 0 holddown, 3 hidden)
                       MultiRecv
 </code></pre>
 <h4 id="solution-2">solution 2</h4>
-<h5 id="remove-solution1_1">remove solution1</h5>
+<h5 id="remove-solution1">remove solution1</h5>
 <pre><code>#R1 global add static route summarizing all vpn routes, pointing intoto vrf
 delete logical-systems r1 routing-options static route 20.20.0.0/16
 
@@ -5381,7 +3857,7 @@ PING 10.10.1.5 (10.10.1.5): 56 data bytes
 2 packets transmitted, 2 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.665/1.048/1.432/0.384 ms
 </code></pre>
-<h5 id="remove-solution-2_1">remove solution 2</h5>
+<h5 id="remove-solution-2">remove solution 2</h5>
 <pre><code>delete logical-systems r1 routing-options static route 0/0
 delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
 delete logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
@@ -5495,7 +3971,7 @@ routing table:
      rib-group:     inet.0 + GREEN.inet.0       inet.3(need some test)
 </code></pre>
 <h3 id="vpn-lsp-map">vpn lsp map</h3>
-<h4 id="config_6">config</h4>
+<h4 id="config_4">config</h4>
 <pre><code>set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 from protocol bgp community ce2
 set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then install-nexthop lsp r1-r4-blue
 set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then accept
@@ -5505,7 +3981,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 the
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
 </code></pre>
-<h4 id="verify_14">verify</h4>
+<h4 id="verify_17">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
 traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
@@ -5607,7 +4083,7 @@ traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
 </code></pre>
 <h2 id="interas-vpn">InterAS VPN</h2>
 <h3 id="solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: <code>inet (uncast+labeled-unicast rib inet.3)</code></h3>
-<h4 id="config_7">config</h4>
+<h4 id="config_5">config</h4>
 <pre><code>###R5: adv R1 lo0 to peer ASBR via policy, as inet-unicast&amp;labeled-unicast
 ###    so peer ASBR can install R1 lo0 in both inet.0 &amp; inet.3
 #match r1 lo0 from inet.0 (serving `inet-unicast` bgp family only)
@@ -5687,7 +4163,7 @@ once configured in more specific level, it "overide", no more inheritence</p>
 <p>same as policys, anything else in JUNOS</p>
 <h3 id="tip-bgp-keep-all">TIP: bgp keep-all</h3>
 <p>keep all bgp.l3vpn.0 regardless of RT</p>
-<h3 id="remove-solution1_2">remove solution1</h3>
+<h3 id="remove-solution1_1">remove solution1</h3>
 <h3 id="solution2-inet-resolved-vpn">solution2: <code>inet resolved-vpn</code></h3>
 <pre><code>set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast resolve-vpn    
 set logical-systems r5 protocols bgp group l3vpn family inet labeled-unicast
@@ -5713,8 +4189,37 @@ se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN t
 delete logical-systems r5 protocols mpls traffic-engineering     
 delete logical-systems r9 protocols mpls traffic-engineering
 </code></pre>
+<h3 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h3>
+<pre><code>R1             (BGP route NLRI addr family)         R5
+   ============================================&gt;
+inet.0          inet unicast                        inet.0
+inet.3          inet labeled-unicast                inet.3
+
+inet unicast: 传递unicast的路由，放入inet.0
+labeled-unicast：传递unciast路由，放入inet.0
+labeld-unicast rib inet.3: 传递inet.3的路由，放入inet.3
+inet unicast+rib inet.3：传递inet.0和inet.3的路由，unicast的放入inet.0, rib inet.3的放入inet.3
+</code></pre>
+<p>这就是为什么无法同时配置inet uncast 和labeled-unicast，而可以同时配置inet unicast和rib inet.3 </p>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems r5 policy-options policy-statement exp-bgp-adv-1    
+term 1 {
+    from {
+        protocol isis;                      #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-unicast`
+    }
+    then accept;
+
+}
+term 2 {
+    from {
+        rib inet.3;                         #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-labeled-unicast`
+    }
+    then accept;
+}
+</code></pre>
 <h2 id="vpls">VPLS</h2>
-<h3 id="config_8">config</h3>
+<h3 id="config_6">config</h3>
 <pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
 set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
 set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
@@ -6089,7 +4594,7 @@ nc2         111     111     111000
 <h5 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h5>
 <h5 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h5>
 <h5 id="rewrite-marker">rewrite marker</h5>
-<h2 id="misc-obsoleted">misc (obsoleted)</h2>
+<h2 id="misc-notestips">misc notes/tips</h2>
 <h3 id="ipv6">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p1.inet6.0
@@ -6506,4 +5011,2208 @@ p2.inet6.0: 15 destinations, 22 routes (15 active, 0 holddown, 0 hidden)
                     [BGP/170] 02:02:46, localpref 100
                       AS path: 4012345678 500 I
                     &gt; to ::192.168.32.1 via ge-1/2/2.312
+</code></pre>
+<h3 id="6pe-more-misc-tips">6PE more misc tips</h3>
+<h4 id="tip-ipv6-tunneling-vs-rib-group">TIP: <code>ipv6-tunneling</code> vs <code>rib-group</code></h4>
+<p>R1 don't need extra config to copy inet.3 into inet6.3, 
+previous config: <code>ipv6-tunneling</code> under mpls will do it
+while this magic is true for r1, which built inet.3 via rsvp/ldp; 
+this doesn't work for other routers like R2/3/7/8. 
+the way they build their inet.3 is through BGP (<code>inet labeled-unicast rib inet.3</code>)</p>
+<p>如果inet.3中的路由是从ldp或者rsvp学来的，那么配置了ipv-tunneling之后，
+这些路由会直接copy到inet6.3中，
+如果路由是从bgp学来的，默认不会copy，需要做rib-group</p>
+<h4 id="tip-inet-labeled-unicast-rib-inet3">TIP: <code>inet labeled-unicast rib inet.3</code></h4>
+<p>manual about "rib inet.3":</p>
+<p>You can allow both labeled and unlabeled routes to be exchanged in a single
+session. The labeled routes are placed in the inet.3 routing table, and both
+labeled and unlabeled unicast routes can be sent or received by the router.</p>
+<p>(WRONG) this looks also inherit all behavior of <code>inet unicast</code></p>
+<p>(correct):
+without rib inet.3, following can't co-exist:</p>
+<pre><code>inet unicast 
+inet labeled-unicast
+</code></pre>
+<p>because both routes (by default), will be put in inet.0 -- the only diff
+between these 2 types of routes are, the labeled route carries a label -- this
+will lead confliction so only one address family can't be supported</p>
+<p>with rib inet.3 ,these are fine:</p>
+<pre><code>inet unicast
+inet labeled-unicast rib inet.3
+</code></pre>
+<p>because labeled-route are now put in inet.3, unlabeled are in inet.0</p>
+<p>now "You can allow both labeled and unlabeled routes to be exchanged in a single
+session"</p>
+<h4 id="tip-configuring-ipv6-bgp-routes-over-ipv4-transport">TIP: Configuring IPv6 BGP Routes over IPv4 Transport</h4>
+<p><a href="http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html">http://www.juniper.net/techpubs/en_US/junos10.4/topics/usage-guidelines/routing-configuring-ipv6-bgp-routes-over-ipv4-transport.html</a></p>
+<h5 id="accept-remote-nexthop">accept-remote-nexthop</h5>
+<p>Q: how to make C router (BGP ipv4 neighbor) accept V6 routes without 
+configuring "accept-remote-nexthop" on it?                         <br />
+</p>
+<p>A: no way, C should have that pre-configured already.              <br />
+Kevin: is it possible to use IPv4-compatible address as next-hop to carry ipv6 routes? 
+http://www.juniper.net/techpubs/en_US/junos12.2/topics/example/bgp-ipv6.html</p>
+<h4 id="accept-remote-nexthop_1">accept-remote-nexthop</h4>
+<p>.initially got no ipv6 route from a v4 peer, not even as hidden</p>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems lr7 protocols bgp group c4                                                              
+family inet {
+    unicast;
+}
+family inet6 {
+    unicast;
+}
+neighbor 192.168.34.0 {
+    peer-as 400;
+}
+
+lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.34.0 logical-system lr7 table inet6.0 hidden extensive
+
+inet6.0: 7 destinations, 14 routes (2 active, 0 holddown, 10 hidden)
+Restart Complete
+</code></pre>
+<p>.add <code>accept-remote-nexthops</code>: showing as hidden</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr7 protocols bgp group c4]
++     accept-remote-nexthop;
+
+[edit]
+lab@MX80-NGGWR-01# commit  
+commit complete
+
+[edit]
+lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.34.0 logical-system lr7 table inet6.0 hidden extensive
+
+inet6.0: 8 destinations, 15 routes (2 active, 0 holddown, 11 hidden)
+Restart Complete
+  4444:4444:4444::/48 (1 entry, 0 announced)
+     Accepted
+     Nexthop: ::ffff:192.168.34.0   &lt;------
+     AS path: 400 I
+</code></pre>
+<h4 id="policy-set-next-hop-with-next-hop-peer-address">policy: set next-hop with "next-hop peer-address"</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr7 protocols bgp group c4]
++     import imp-bgp-fix-nh;
+[edit logical-systems lr7 policy-options]
++    policy-statement imp-bgp-fix-nh {
++        term 1 {
++            from {
++                protocol bgp;
++                neighbor 192.168.34.0;
++            }
++            then {
++                next-hop peer-address;
++                accept;
++            }
++        }
++    }
+
+[edit]
+lab@MX80-NGGWR-01# commit  
+commit complete
+</code></pre>
+<h5 id="questionsolved-next-hop-peer-address-didnt-really-change-the-nexthop">QUESTION(solved): next-hop peer-address didn't really change the nexthop?</h5>
+<p>check <code>rib</code> (after input policy applied) or <code>rib-out</code>(after input&amp;output policy
+applied), not <code>rib-in</code> (before policy applied)</p>
+<p>use <code>show route protocol</code>, instead of <code>show route received-protocol bgp</code></p>
+<p><code>rib-in</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 receive-protocol bgp 192.168.34.0 4444:4444:4444::/48 extensive
+
+inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
+Restart Complete
+* 4444:4444:4444::/48 (1 entry, 1 announced)
+     Accepted
+     Nexthop: ::ffff:192.168.34.0   #&lt;------
+     AS path: 400 I
+</code></pre>
+<p><code>rib</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 protocol bgp table inet6.0 4444:4444:4444::/48 extensive
+
+inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
+Restart Complete
+4444:4444:4444::/48 (1 entry, 1 announced)
+TSI:
+KRT in-kernel 4444:4444:4444::/48 -&gt; {192.168.34.0}
+Page 0 idx 1 Type 1 val 286a108
+    Flags: Nexthop Change
+    Nexthop: Self
+    Localpref: 100
+    AS path: [4012345678] 400 I
+    Communities:
+Path 4444:4444:4444:: from 192.168.34.0 Vector len 4.  Val: 1
+        *BGP    Preference: 170/-101
+                Next hop type: Router, Next hop index: 2221
+                Address: 0x28886e4
+                Next-hop reference count: 3
+                Source: 192.168.34.0
+                Next hop: 192.168.34.0 via ge-1/2/1.734, selected   #&lt;------
+                Session Id: 0x100001
+                State: &lt;Active Ext&gt;
+                Local AS: 4012345678 Peer AS:   400
+                Age: 4d 4:12:27 
+                Validation State: unverified 
+                Task: BGP_400.192.168.34.0+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 400 I
+                Accepted
+                Localpref: 100
+                Router ID: 44.44.1.1
+</code></pre>
+<p><code>rib-out</code>:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route advertising-protocol bgp 10.10.1.5 logical-system lr7 4444:4444:4444::/48 extensive
+
+inet6.0: 24 destinations, 39 routes (22 active, 0 holddown, 9 hidden)
+Restart Complete
+* 4444:4444:4444::/48 (1 entry, 1 announced)
+ BGP group to-rr type Internal
+     Nexthop: Self  #&lt;------
+     Flags: Nexthop Change
+     Localpref: 100
+     AS path: [4012345678] 400 I
+</code></pre>
+<h5 id="tips-rib-in-rib-rib-out">TIPS: rib-in, rib, rib-out</h5>
+<p>RFC1771/4271 BGP Routing Information Base consists of three parts as explained below:</p>
+<ul>
+<li>
+<p>The Adj-RIBs-In: BGP RIB-In stores BGP routing information received from
+different peers. The stored information is used as an input to BGP decision
+process. In other words this is the information received from peers before
+applying any attribute modifications or route filtering to them.</p>
+</li>
+<li>
+<p>The Local RIB: The local routing information base stores the resulted
+information from processing the RIBs-In database’s information. These are the
+routes that are used locally after applying BGP policies and decision process.</p>
+</li>
+<li>
+<p>The Adj-RIBs-out: This one stores the routing information that was selected by
+the local BGP router to advertise to its peers through BGP update messages. Do
+not forget;  BGP only advertises best routes if they are allowed by local
+outbound policies.</p>
+</li>
+</ul>
+<h4 id="questionresolvedhow-c-routers-got-the-ipv6-routes">QUESTION(resolved):how C routers got the IPv6 routes?</h4>
+<p>"accept-remote-nexthop" must have been pre-configured in C.</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.133.1 logical-system lptc table c3.inet6.0 all
+
+c3.inet6.0: 4 destinations, 4 routes (4 active, 0 holddown, 0 hidden)
+
+[edit]
+lab@MX80-NGGWR-01# set logical-systems lptc routing-instances c3 protocols bgp group to-r1 accept-remote-nexthop
+
+[edit]
+lab@MX80-NGGWR-01# commit
+commit complete
+
+[edit]
+lab@MX80-NGGWR-01# run show route receive-protocol bgp 192.168.133.1 logical-system lptc table c3.inet6.0 all
+                                                                                                          ^^^
+                                                                                                     (hidden)
+
+c3.inet6.0: 11 destinations, 11 routes (4 active, 0 holddown, 7 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  2000:1000::/32          ::ffff:192.168.133.1                    65513 4012345678 1000 I
+  2000:2000::/32          ::ffff:192.168.133.1                    65513 4012345678 2000 I
+  2000:3000::/32          ::ffff:192.168.133.1                    65513 4012345678 3000 I
+  3000:1000::/32          ::ffff:192.168.133.1                    65513 4012345678 1001 I
+  3000:2000::/32          ::ffff:192.168.133.1                    65513 4012345678 1002 I
+  4444:4444:4444::/48     ::ffff:192.168.133.1                    65513 4012345678 400 I
+  5555:5555:5555::/48     ::ffff:192.168.133.1                    65513 4012345678 500 I
+                          ^^^^^^^^^^^^^^^^^^^^
+                          ipv4-mapped ipv6 address
+                          generated by system
+</code></pre>
+<h5 id="change-next-hop-to-local-ipv6-address-of-export-policy-in-lr">change next-hop to local IPv6 address of export policy in LR</h5>
+<pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0 hidden 4444:4444:4444::/48 extensive
+
+c3.inet6.0: 13 destinations, 13 routes (6 active, 0 holddown, 7 hidden)
+4444:4444:4444::/48 (1 entry, 0 announced)
+         BGP    Preference: 170/-101
+                Next hop type: Unusable     &lt;------
+                Address: 0x23f3f04
+                Next-hop reference count: 10
+                State: &lt;Hidden Ext&gt;
+                Local AS:   300 Peer AS: 65513
+                Age: 10:16 
+                Task: BGP_65513_300.192.168.133.1+52133
+                AS path: 65513 4012345678 400 I
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.1
+                Indirect next hops: 1
+                        Protocol next hop: ::ffff:192.168.133.1     &lt;------
+                        Indirect next hop: 0 -
+
+lab@MX80-NGGWR-01# show logical-systems lr1 policy-options policy-statement exp-bgp-fix-nh  
+term 1 {
+    from {
+        protocol bgp;
+        route-filter ::0/0 prefix-length-range /0-/128;
+    }
+    then {
+        next-hop ::192.168.133.1;
+    }
+}
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0  4444:4444:4444::/48 extensive
+
+c3.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
+4444:4444:4444::/48 (1 entry, 1 announced)
+TSI:
+KRT in-kernel 4444:4444:4444::/48 -&gt; {::192.168.133.1}      &lt;------
+        *BGP    Preference: 170/-101
+                Next hop type: Router, Next hop index: 2361
+                Address: 0x282ea38
+                Next-hop reference count: 21
+                Source: 192.168.133.1
+                Next hop: ::192.168.133.1 via ge-1/2/2.133, selected        &lt;------
+                State: &lt;Active Ext&gt;
+                Local AS:   300 Peer AS: 65513
+                Age: 36 
+                Task: BGP_65513_300.192.168.133.1+52133
+                Announcement bits (2): 0-KRT 2-Resolve tree 4 
+                AS path: 65513 4012345678 400 I
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.1
+</code></pre>
+<h4 id="solution-1-installr23-adv-addrr56">solution 1: install@R2/3 + adv addr@R5/6</h4>
+<h5 id="install-r7r8-host-into-r23-inet63">install R7/R8 host into R2/3 inet6.3</h5>
+<p>install R7/8 host in R2/R3 at LSP</p>
+<pre><code>activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
+activate logical-systems lr2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
+activate logical-systems lr2 protocols mpls label-switched-path r2-r6 install 10.10.1.7/32    
+activate logical-systems lr2 protocols mpls label-switched-path r2-r6 install 10.10.1.8/32
+
+activate logical-systems lr3 protocols mpls label-switched-path r3-r5 install 10.10.1.7/32  
+activate logical-systems lr3 protocols mpls label-switched-path r3-r5 install 10.10.1.8/32    
+activate logical-systems lr3 protocols mpls label-switched-path r3-r6 install 10.10.1.7/32    
+activate logical-systems lr3 protocols mpls label-switched-path r3-r6 install 10.10.1.8/32
+</code></pre>
+<p>r2/r3: before install:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr2 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[RSVP/7/1] 3d 18:20:35, metric 5
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+::ffff:10.10.1.3/128
+                   *[RSVP/7/1] 3d 18:20:36, metric 5
+                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
+::ffff:10.10.1.4/128
+                   *[RSVP/7/1] 3d 18:20:36, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+::ffff:10.10.1.5/128
+                   *[RSVP/7/1] 3d 18:20:35, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+::ffff:10.10.1.6/128
+                   *[RSVP/7/1] 3d 18:20:36, metric 5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+
+lab@MX80-NGGWR-01# run show route logical-system lr3 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[RSVP/7/1] 3d 18:52:18, metric 5
+                    &gt; to 10.10.13.1 via ge-1/2/2.13, label-switched-path r3-r1
+::ffff:10.10.1.2/128
+                   *[RSVP/7/1] 3d 18:52:19, metric 5
+                    &gt; to 10.10.23.1 via ge-1/2/2.23, label-switched-path r3-r2
+::ffff:10.10.1.4/128
+                   *[RSVP/7/1] 3d 18:52:19, metric 10
+                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r4
+::ffff:10.10.1.5/128
+                   *[RSVP/7/1] 3d 18:52:19, metric 5
+                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
+::ffff:10.10.1.6/128
+                   *[RSVP/7/1] 3d 18:52:18, metric 5
+                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
+</code></pre>
+<p>r2/lr3 after install:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr2 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[RSVP/7/1] 3d 18:58:42, metric 5
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+::ffff:10.10.1.3/128
+                   *[RSVP/7/1] 3d 18:58:43, metric 5
+                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
+::ffff:10.10.1.4/128
+                   *[RSVP/7/1] 3d 18:58:43, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+::ffff:10.10.1.5/128
+                   *[RSVP/7/1] 3d 18:58:42, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+::ffff:10.10.1.6/128
+                   *[RSVP/7/1] 00:00:21, metric 5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+::ffff:10.10.1.7/128        &lt;------
+                   *[RSVP/7/1] 00:00:21, metric 5
+                      to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+::ffff:10.10.1.8/128        &lt;------
+                   *[RSVP/7/1] 00:00:21, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr3 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[RSVP/7/1] 3d 18:58:32, metric 5
+                    &gt; to 10.10.13.1 via ge-1/2/2.13, label-switched-path r3-r1
+::ffff:10.10.1.2/128
+                   *[RSVP/7/1] 3d 18:58:33, metric 5
+                    &gt; to 10.10.23.1 via ge-1/2/2.23, label-switched-path r3-r2
+::ffff:10.10.1.4/128
+                   *[RSVP/7/1] 3d 18:58:33, metric 10
+                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r4
+::ffff:10.10.1.5/128
+                   *[RSVP/7/1] 00:00:12, metric 5
+                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
+::ffff:10.10.1.6/128
+                   *[RSVP/7/1] 00:00:12, metric 5
+                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
+::ffff:10.10.1.7/128        &lt;------
+                   *[RSVP/7/1] 00:00:12, metric 5
+                      to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
+                    &gt; to 10.10.36.2 via ae12.0, label-switched-path r3-r6
+::ffff:10.10.1.8/128        &lt;------
+                   *[RSVP/7/1] 00:00:12, metric 5
+                    &gt; to 10.10.35.2 via ge-1/2/1.35, label-switched-path r3-r5
+                      to 10.10.36.2 via ae12.0, label-switched-path r3-r6
+</code></pre>
+<p>lr7/lr8:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 19:02:35, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 19:02:33, metric 1
+                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+::ffff:10.10.1.5/128
+                   *[LDP/9] 3d 19:02:48, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 3d 19:02:40, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299792
+::ffff:10.10.1.8/128
+                   *[LDP/9] 3d 19:02:42, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 19:02:40, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 19:02:40, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
+::ffff:10.10.1.5/128
+                   *[LDP/9] 3d 19:02:40, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
+::ffff:10.10.1.6/128
+                   *[LDP/9] 3d 19:02:47, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.7/128
+                   *[LDP/9] 3d 19:02:49, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78
+
+set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.2/32 exact
+set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.3/32 exact
+set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 then accept
+
+set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.2/32 exact
+set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.3/32 exact
+set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 then accept
+
+//after:
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 19:28:26, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.2/128
+                   *[LDP/9] 00:16:26, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.3/128
+                   *[LDP/9] 00:16:26, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 19:28:24, metric 1
+                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+::ffff:10.10.1.8/128
+                   *[LDP/9] 3d 19:28:33, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 19:12:08, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
+::ffff:10.10.1.2/128        &lt;------
+                   *[LDP/9] 00:00:10, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.3/128        &lt;------
+                   *[LDP/9] 00:00:10, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 19:12:08, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
+::ffff:10.10.1.7/128
+                   *[LDP/9] 3d 19:12:17, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78
+</code></pre>
+<p>have to add lr5/6 lo0:</p>
+<pre><code>set logical-systems lr5 policy-options policy-statement egr-ldp-adv-235 term 1 from route-filter 10.10.1.5/32 exact
+set logical-systems lr6 policy-options policy-statement egr-ldp-adv-236 term 1 from route-filter 10.10.1.6/32 exact
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 20:41:40, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.2/128
+                   *[LDP/9] 01:29:40, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.3/128
+                   *[LDP/9] 01:29:40, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 20:41:38, metric 1
+                      to 10.10.78.2 via ge-1/2/1.78, Push 299824
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+::ffff:10.10.1.5/128
+                   *[LDP/9] 00:00:22, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 00:00:22, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299792
+::ffff:10.10.1.8/128
+                   *[LDP/9] 3d 20:41:47, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 3d 20:41:52, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299856
+::ffff:10.10.1.2/128
+                   *[LDP/9] 01:29:54, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.3/128
+                   *[LDP/9] 01:29:54, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.4/128
+                   *[LDP/9] 3d 20:41:52, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299872
+::ffff:10.10.1.5/128
+                   *[LDP/9] 00:00:36, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
+::ffff:10.10.1.6/128
+                   *[LDP/9] 00:00:36, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.7/128
+                   *[LDP/9] 3d 20:42:01, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78
+</code></pre>
+<p>C3 inet6.0 route:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c3.inet6.0
+
+c3.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+2000:1000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 1000 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+2000:2000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 2000 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+2000:3000::/32     *[BGP/170] 2d 01:01:03, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 3000 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+3000:1000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 1001 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+3000:2000::/32     *[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 1002 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+4444:4444:4444::/48*[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 400 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+5555:5555:5555::/48*[BGP/170] 2d 01:01:02, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 500 I
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c4.inet6.0
+
+c4.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+2000:1000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 1000 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+2000:2000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 2000 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+2000:3000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 3000 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+3000:1000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 1001 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+3000:2000::/32     *[BGP/170] 01:39:10, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 1002 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+3333:3333:3333::/48*[BGP/170] 2d 00:16:27, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 300 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+5555:5555:5555::/48*[BGP/170] 2d 00:16:27, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 500 I
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table c5.inet6.0
+
+c5.inet6.0: 13 destinations, 13 routes (13 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+2000:1000::/32     *[BGP/170] 2d 01:17:46, localpref 100
+                      AS path: 4012345678 1000 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+2000:2000::/32     *[BGP/170] 2d 01:17:39, localpref 100
+                      AS path: 4012345678 2000 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+2000:3000::/32     *[BGP/170] 2d 01:17:42, localpref 100
+                      AS path: 4012345678 3000 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+3000:1000::/32     *[BGP/170] 2d 01:17:46, localpref 100
+                      AS path: 4012345678 1001 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+3000:2000::/32     *[BGP/170] 2d 01:17:42, localpref 100
+                      AS path: 4012345678 1002 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+3333:3333:3333::/48*[BGP/170] 2d 01:17:46, localpref 100
+                      AS path: 4012345678 300 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+4444:4444:4444::/48*[BGP/170] 2d 01:17:46, localpref 100
+                      AS path: 4012345678 400 I
+                    &gt; to 33b1::1 via ge-1/2/2.435
+</code></pre>
+<h5 id="make-r23-inet63-reachable-from-r7">make R2/3 inet6.3 reachable from R7</h5>
+<h6 id="r7-inet63">R7 inet6.3</h6>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 4d 04:38:10, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.4/128
+                   *[LDP/9] 4d 04:38:09, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+                      to 10.10.78.2 via ge-1/2/1.78, Push 299840
+::ffff:10.10.1.5/128
+                   *[LDP/9] 4d 04:38:20, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 4d 04:38:20, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299808
+::ffff:10.10.1.8/128
+                   *[LDP/9] 3d 17:24:26, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+</code></pre>
+<h6 id="config-adv-r2r3-from-r5r6">config: adv R2/R3 from R5/R6</h6>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems lr5 policy-options policy-statement egr-ldp-adv-235  
+term 1 {
+    from {
+        route-filter 10.10.1.2/32 exact;
+        route-filter 10.10.1.3/32 exact;
+        route-filter 10.10.1.5/32 exact;
+    }
+    then accept;
+}
+
+lab@MX80-NGGWR-01# set logical-systems lr5 protocols ldp egress-policy egr-ldp-adv-235
+</code></pre>
+<h6 id="r7-iet63-after-policy">R7 iet6.3 after policy</h6>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr7 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 4d 04:42:00, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.2/128
+                   *[LDP/9] 00:00:57, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.3/128
+                   *[LDP/9] 00:00:46, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.4/128
+                   *[LDP/9] 4d 04:41:59, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+                      to 10.10.78.2 via ge-1/2/1.78, Push 299840
+::ffff:10.10.1.5/128
+                   *[LDP/9] 4d 04:42:10, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 4d 04:42:10, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299808
+::ffff:10.10.1.8/128
+                   *[LDP/9] 3d 17:28:16, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+</code></pre>
+<p>R8 inet6.3 table is still missing R2/R3</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
+
+inet6.3: 6 destinations, 6 routes (6 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 4d 04:50:49, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299824
+::ffff:10.10.1.3/128
+                   *[LDP/9] 00:00:04, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
+::ffff:10.10.1.4/128
+                   *[LDP/9] 4d 04:50:44, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299888
+::ffff:10.10.1.5/128
+                   *[LDP/9] 4d 04:50:55, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
+::ffff:10.10.1.6/128
+                   *[LDP/9] 4d 04:50:55, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.7/128
+                   *[LDP/9] 4d 04:50:55, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78
+</code></pre>
+<p>config same on R6:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr6 protocols ldp]
+-    inactive: egress-policy egr-ldp-adv-236;
++    egress-policy egr-ldp-adv-236;
+
+[edit]
+lab@MX80-NGGWR-01# commit  
+commit complete
+</code></pre>
+<p>R8 inet6.3 :</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr8 table inet6.3
+
+inet6.3: 7 destinations, 7 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 4d 04:56:45, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299824
+::ffff:10.10.1.2/128
+                   *[LDP/9] 00:00:27, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.3/128
+                   *[LDP/9] 00:00:27, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.4/128
+                   *[LDP/9] 4d 04:56:40, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68, Push 299888
+::ffff:10.10.1.5/128
+                   *[LDP/9] 4d 04:56:51, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78, Push 299776
+::ffff:10.10.1.6/128
+                   *[LDP/9] 4d 04:56:51, metric 1
+                    &gt; to 10.10.68.1 via ge-1/2/2.68
+::ffff:10.10.1.7/128
+                   *[LDP/9] 4d 04:56:51, metric 1
+                    &gt; to 10.10.78.1 via ge-1/2/2.78
+</code></pre>
+<h6 id="question-do-we-need-do-the-same-on-r6">QUESTION: do we need do the same on R6?</h6>
+<p>there is no C router attached in R8.
+R8 has nothing to do with the IPv6 task here
+so R8 don't need to reach R2/R3's lo0 in inet6.3
+it looks no need to config R6 ldp also adv R2/R3 lo0</p>
+<h5 id="install-both-host-routes-in-both-lsps-in-both-router-r23">install both host routes in both LSPs in both router R2/3</h5>
+<p>this is just for completeness, seems not help</p>
+<pre><code>lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr2 protocols mpls label-switched-path r2-r5]
+!       active: install 10.10.1.7/32 { ... }
+!       active: install 10.10.1.8/32 { ... }
+[edit logical-systems lr2 protocols mpls label-switched-path r2-r6]
+!       active: install 10.10.1.7/32 { ... }
+[edit logical-systems lr3 protocols mpls label-switched-path r3-r5]
+!       active: install 10.10.1.7/32 { ... }
+!       active: install 10.10.1.8/32 { ... }
+[edit logical-systems lr3 protocols mpls label-switched-path r3-r6]
+!       active: install 10.10.1.8/32 { ... }
+</code></pre>
+<h4 id="question-ipv6-not-end2end-pingable">QUESTION: ipv6 not end2end pingable</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run ping 4444:4444:4444::1 logical-system lptc routing-instance c3   
+PING6(56=40+8+8 bytes) ::192.168.133.0 --&gt; 4444:4444:4444::1
+^C
+--- 4444:4444:4444::1 ping6 statistics ---
+8 packets transmitted, 0 packets received, 100% packet loss
+
+lab@MX80-NGGWR-01# run ping inet6 4444:4444:4444::1 logical-system lptc routing-instance c3 source 3333:3333:3333::1 
+PING6(56=40+8+8 bytes) 3333:3333:3333::1 --&gt; 4444:4444:4444::1
+^C
+--- 4444:4444:4444::1 ping6 statistics ---
+6 packets transmitted, 0 packets received, 100% packet loss
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lptc table c4.inet6.0 3333:3333:3333::1
+
+c4.inet6.0: 23 destinations, 23 routes (23 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+3333:3333:3333::/48*[BGP/170] 4d 08:39:09, localpref 100, from 192.168.34.1
+                      AS path: 4012345678 300 I, validation-state: unverified
+                    &gt; to ::192.168.34.1 via ge-1/2/2.734
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system lptc table c3.inet6.0 4444:4444:4444::1
+
+c3.inet6.0: 26 destinations, 29 routes (26 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+4444:4444:4444::/48*[BGP/170] 4d 08:39:41, localpref 100, from 192.168.133.1
+                      AS path: 65513 4012345678 400 I, validation-state: unverified
+                    &gt; to ::192.168.133.1 via ge-1/2/2.133
+</code></pre>
+<h4 id="solution2-change-next-hop-at-rr-no-install">solution2 : change next-hop at RR ("no install")</h4>
+<h5 id="remove-solution1_2">remove solution1</h5>
+<pre><code>deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.7/32  
+deactivate logical-systems r2 protocols mpls label-switched-path r2-r5 install 10.10.1.8/32    
+deactivate logical-systems r2 protocols mpls label-switched-path r2-r6 install 10.10.1.7/32    
+deactivate logical-systems r2 protocols mpls label-switched-path r2-r6 install 10.10.1.8/32
+
+deactivate logical-systems r3 protocols mpls label-switched-path r3-r5 install 10.10.1.7/32  
+deactivate logical-systems r3 protocols mpls label-switched-path r3-r5 install 10.10.1.8/32    
+deactivate logical-systems r3 protocols mpls label-switched-path r3-r6 install 10.10.1.7/32    
+deactivate logical-systems r3 protocols mpls label-switched-path r3-r6 install 10.10.1.8/32
+
+deactivate logical-systems r5 protocols ldp egress-policy    
+deactivate logical-systems r6 protocols ldp egress-policy
+
+commit
+run clear bgp neighbor soft logical-system r2
+run clear bgp neighbor soft logical-system r3
+</code></pre>
+<h5 id="add-solution-2">add solution 2</h5>
+<pre><code>change bgp nh from rr R4/5 when reflecting between R2/3 and R7
+
+set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
+set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
+set logical-systems lr5 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3                           
+set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
+set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
+set logical-systems lr6 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3
+
+commit
+run clear bgp neighbor soft logical-system lr5
+run clear bgp neighbor soft logical-system lr6
+</code></pre>
+<h4 id="solution-3-mixed-solution12">solution 3: mixed solution1&amp;2</h4>
+<h5 id="remove-solution-2_1">remove solution 2:</h5>
+<pre><code>delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
+delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
+delete logical-systems lr5 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3                           
+delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.2 export exp-bgp-nhs-from-r7  
+delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.3 export exp-bgp-nhs-from-r7    
+delete logical-systems lr6 protocols bgp group rr neighbor 10.10.1.7 export exp-bgp-nhs-from-r2-r3
+
+commit
+run clear bgp neighbor soft logical-system lr5
+run clear bgp neighbor soft logical-system lr6
+</code></pre>
+<p>this solution does not look great. no extra benefit also.</p>
+<h4 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h4>
+<h5 id="config_7">config</h5>
+<pre><code>#R5/6: advertise R2/3/7/8 lo0 via BGP:
+
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.3/32 exact  
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.7/32 exact  
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.8/32 exact  
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
+
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.3/32 exact  
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.7/32 exact  
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.8/32 exact  
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
+
+set logical-systems r5 protocols bgp group rr export exp-int-agg exp-bgp-adv-2378
+set logical-systems r6 protocols bgp group rr export exp-int-agg exp-bgp-adv-2378
+
+#R2/3/5/6: allow both unlabeled (`unicast`) and labeled (`labeled-unicast`) BGP routes; and place labeled routes in inet.3
+#R2/3: also copy table inet.3 into inet6.3
+
+set logical-systems r2 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
+set logical-systems r2 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
+set logical-systems r2 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+
+set logical-systems r3 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
+set logical-systems r3 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
+set logical-systems r3 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+
+set logical-systems r7 routing-options rib-groups 6pe import-rib [ inet.3 inet6.3 ]
+set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib-group 6pe
+set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+
+set logical-systems r5 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+set logical-systems r6 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+</code></pre>
+<h5 id="before">before</h5>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
+
+inet.0: 62 destinations, 62 routes (62 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.7/32       *[IS-IS/18] 06:13:33, metric 10
+                    &gt; to 10.10.25.2 via ge-1/2/1.25
+
+lab@MX80-NGGWR-01# run show route logical-system r2 table inet.3
+
+inet.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.1/32       *[RSVP/7/1] 05:55:13, metric 5
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.3/32       *[RSVP/7/1] 05:55:14, metric 5
+                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
+10.10.1.4/32       *[RSVP/7/1] 05:55:13, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.5/32       *[RSVP/7/1] 05:55:13, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.6/32       *[RSVP/7/1] 05:55:13, metric 5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+</code></pre>
+<h5 id="after">after</h5>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system r2 10.10.1.7
+
+inet.0: 67 destinations, 83 routes (67 active, 0 holddown, 2 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.7/32       *[IS-IS/18] 06:13:40, metric 10
+                    &gt; to 10.10.25.2 via ge-1/2/1.25
+                    [BGP/170] 00:00:03, MED 5, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.25.2 via ge-1/2/1.25
+                    [BGP/170] 00:00:05, MED 10, localpref 100, from 10.10.1.6
+                      AS path: I
+                    &gt; to 10.10.25.2 via ge-1/2/1.25
+                      to 10.10.26.2 via ge-1/2/1.26
+
+lab@MX80-NGGWR-01# run show route logical-system r2 table inet.3
+
+inet.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.1/32       *[RSVP/7/1] 05:55:36, metric 5
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.2/32       *[BGP/170] 00:00:01, MED 5, localpref 4294967294, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.3/32       *[RSVP/7/1] 05:55:37, metric 5
+                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
+                    [BGP/170] 00:00:01, MED 5, localpref 4294967294, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.4/32       *[RSVP/7/1] 05:55:36, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.5/32       *[RSVP/7/1] 05:55:36, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.6/32       *[RSVP/7/1] 05:55:36, metric 5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+10.10.1.7/32       *[BGP/170] 00:00:01, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.8/32       *[BGP/170] 00:00:01, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+</code></pre>
+<h5 id="verification-of-rib-group">verification of rib-group</h5>
+<p>before rib-group applied at R7:</p>
+<pre><code>family inet labeled-uncast rib-group 6pe
+</code></pre>
+<p>inet.3 is good but inet6.3 are still not complete:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route table inet.3 logical-system r7
+
+inet.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.1/32       *[LDP/9] 07:21:14, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+10.10.1.2/32       *[BGP/170] 00:00:20, MED 5, localpref 4294967294, from 10.10.1.5         #&lt;------
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299968
+10.10.1.3/32       *[BGP/170] 00:00:20, MED 5, localpref 4294967294, from 10.10.1.5         #&lt;------
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299984
+10.10.1.4/32       *[LDP/9] 07:21:15, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
+                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
+10.10.1.5/32       *[LDP/9] 07:21:44, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+10.10.1.6/32       *[LDP/9] 07:21:43, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
+10.10.1.7/32       *[BGP/170] 00:00:20, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300000
+10.10.1.8/32       *[LDP/9] 07:21:43, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+                    [BGP/170] 00:00:20, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300016
+
+[edit]
+lab@MX80-NGGWR-01# run show route table inet6.3 logical-system r7
+
+inet6.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 07:21:28, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+::ffff:10.10.1.4/128
+                   *[LDP/9] 07:21:29, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
+                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.5/128
+                   *[LDP/9] 07:21:58, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 07:21:57, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
+::ffff:10.10.1.8/128
+                   *[LDP/9] 07:21:57, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+
+[edit]
+lab@MX80-NGGWR-01# run show route table inet6.3 logical-system r7
+
+inet6.3: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::ffff:10.10.1.1/128
+                   *[LDP/9] 07:36:12, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299824
+::ffff:10.10.1.2/128        #&lt;------
+                   *[BGP/170] 00:10:46, MED 5, localpref 4294967294, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299968
+::ffff:10.10.1.3/128        #&lt;------
+                   *[BGP/170] 00:10:46, MED 5, localpref 4294967294, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 299984
+::ffff:10.10.1.4/128
+                   *[LDP/9] 07:36:13, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299840
+                      to 10.10.57.1 via ge-1/2/2.57, Push 299808
+::ffff:10.10.1.5/128
+                   *[LDP/9] 07:36:42, metric 1
+                    &gt; to 10.10.57.1 via ge-1/2/2.57
+::ffff:10.10.1.6/128
+                   *[LDP/9] 07:36:41, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78, Push 299776
+::ffff:10.10.1.7/128        #&lt;------
+                   *[BGP/170] 00:10:46, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300000
+::ffff:10.10.1.8/128
+                   *[LDP/9] 07:36:41, metric 1
+                    &gt; to 10.10.78.2 via ge-1/2/1.78
+                    [BGP/170] 00:10:46, MED 1, localpref 100, from 10.10.1.5
+                      AS path: I
+                    &gt; to 10.10.57.1 via ge-1/2/2.57, Push 300016
+</code></pre>
+<h5 id="tips-about-ribrib-groupinet3inet63">TIPS: about rib/rib-group/inet.3/inet6.3</h5>
+<p>R2/3 inet.3 won't change before R5/6 and R2/3 configured:</p>
+<pre><code>family inet labeled-unicast rib inet.3
+</code></pre>
+<p>R2/3 inet6.3 won't updated before R2/3 configured:</p>
+<pre><code>family inet labeled-uncast rib-group 6pe
+</code></pre>
+<h4 id="question-family-inet-unicast-vs-family-inet-labeled-unicast">QUESTION: <code>family inet unicast</code> vs. <code>family inet labeled-unicast</code></h4>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems lr2 protocols bgp group to-rr  
+type internal;
+local-address 10.10.1.2;
+import imp-bgp-rtbh;
+family inet {
+    unicast;                #&lt;------these are fine being configured 
+    labeled-unicast {       #&lt;------together
+        rib-group 6pe;
+        rib {
+            inet.3;
+        }
+    }
+}
+family inet6 {
+    labeled-unicast {       #&lt;------can't co-exist with unicast.
+        explicit-null;
+    }
+}
+export [ exp-bgp-nhs exp-bgp-lo0-v6 ];
+neighbor 10.10.1.5;
+neighbor 10.10.1.6;
+</code></pre>
+<p>error message:</p>
+<pre><code>lab@MX80-NGGWR-01# set logical-systems lr2 protocols bgp group to-rr family inet6 unicast
+
+[edit]
+lab@MX80-NGGWR-01# commit  
+[edit logical-systems lr2 protocols]
+  'bgp'
+    Error in neighbor 10.10.1.5 of group to-rr:
+peer cannot have both inet6 unicast and inet6 labeled-unicast nlri
+error: configuration check-out failed
+</code></pre>
+<h4 id="question-why-family-inet-labeled-unicast-in-this-solution">QUESTION: why <code>family inet labeled-unicast</code> in this solution?</h4>
+<p>according to 6PE spec, <code>family inet6 labeled-unicast explicit-null</code> is used to
+assign label (2) to ipv6 prefixes at PE, why again <code>family inet
+labeled-unicast</code>? </p>
+<p>is it just because <code>rib</code> and <code>rib-group</code> feature only supported under
+labeled-unicast by design?</p>
+<p><a href="http://www.juniper.net/techpubs/software/junos/junos94/swconfig-routing/rib_2.html">http://www.juniper.net/techpubs/software/junos/junos94/swconfig-routing/rib_2.html</a>
+<a href="http://www.juniper.net/techpubs/en_US/junos12.1/topics/topic-map/bgp-multiprotocol.html">http://www.juniper.net/techpubs/en_US/junos12.1/topics/topic-map/bgp-multiprotocol.html</a></p>
+<p>You can allow both labeled and unlabeled routes to be exchanged in a single
+session. The labeled routes are placed in the inet.3 routing table, and both
+labeled and unlabeled unicast routes can be sent to or received by the routing
+device. </p>
+<p>To allow both labeled and unlabeled routes to be exchanged, include the rib
+inet.3 statement:</p>
+<pre><code>rib inet.3;
+</code></pre>
+<h4 id="simple-topo-and-config">simple topo and config</h4>
+<pre><code>&lt;--ipv6 (AS1000)-&gt; &lt;---------ipv4 AS(3000)-------&gt; &lt;--ipv6 (AS2000)-&gt;
++-----+        +-----+         +-----+         +-----+       +-----+
+| ce1 |--------| pe1 |---------|  p  |---------| pe2 |-------| ce2 |
++-+---+ V1501  +-+---+ V1503   +--+--+ V1502   +--+--+ V1504 +--+--+
+  |  10::1/126   | 192.168.0.0/30 | 192.168.0.4/30|   11::0/126 |
+  |              | 1.1.1.1/32     |       2.2.2.2 |             |
+  |98::1/128                  10.10.10.10/32          98::1/128 |
+</code></pre>
+<h5 id="pe1-config">PE1 config</h5>
+<pre><code>logical-routers 6pepe1 {
+    routing-options {
+        autonomous-system 3000;
+    }
+    interfaces {
+        ge-1/2/1 {
+            unit 1501 {
+                vlan-id 1501;
+                family inet {
+                    address 192.168.0.1/30;
+                }
+                family inet6;
+                family mpls;
+            }
+        }
+        ge-1/2/1 {
+            unit 1503 {
+                description "PE1 to CE1 IPV6 Customer";
+                vlan-id 1503;
+                family inet6 {
+                    address 10::1/126;
+                }
+            }
+        }
+        lo0 {
+            unit 1501 {
+                family inet {
+                    address 1.1.1.1/32;
+                }
+            }
+        }
+    }
+    protocols {
+        bgp {
+            group ibgp {
+                type internal;
+                local-address 1.1.1.1;
+                family inet6 {
+                    labeled-unicast {       #&lt;------
+                        explicit-null;      #&lt;------
+                    }
+                }
+                neighbor 2.2.2.2;
+            }
+            group ipv6 {
+                family inet6 {
+                    unicast;
+                }
+                neighbor 10::1 {
+                    peer-as 1000;
+                }
+            }
+        }
+        mpls {
+            ipv6-tunneling;         #&lt;------
+            label-switched-path pe1-to-pe2 {
+                to 2.2.2.2;
+            }
+            interface ge-1/2/1.1501;
+        }
+    }
+}
+</code></pre>
+<h5 id="pe2-config">PE2 config</h5>
+<pre><code>logical-systems 6pepe2 {                   
+    routing-options {
+        autonomous-system 3000;
+    }
+    interfaces {                    
+        ge-1/2/1 {
+            unit 1504 {
+                vlan-id 1504;
+                family inet6 {
+                    address 11::1/126;
+                }
+            }
+        }
+        ge-1/2/1 {
+            unit 1502 {
+                vlan-id 1502;
+                family inet {
+                    address 192.168.0.6/30;
+                }
+                family inet6;
+                family mpls;
+            }
+        }
+        lo0 {
+            unit 1502 {
+                family inet {
+                    address 2.2.2.2/32;
+                }
+            }
+        }
+    }
+    protocols {
+        mpls {
+            ipv6-tunneling;
+            label-switched-path pe2-to-pe1 {
+                to 1.1.1.1;
+            }
+            interface ge-1/2/1.1502;
+        }
+        bgp {
+            group ipv6 {
+                traceoptions {
+                    file debug-ipv6;
+                    flag all detail;
+                }
+                neighbor 11::2 {
+                    peer-as 2000;
+                }
+            }
+            group ibgp {
+                type internal;
+                local-address 2.2.2.2;
+                family inet6 {
+                    labeled-unicast {
+                        explicit-null;
+                    }
+                }
+                neighbor 1.1.1.1;
+            }
+        }
+    }
+}
+</code></pre>
+<h5 id="resources">resources</h5>
+<ul>
+<li><a href="http://tools.ietf.org/html/rfc4798">6PE</a></li>
+<li><a href="http://tools.ietf.org/html/rfc3032">reserved IPv6 Explicit NULL Label</a></li>
+<li><a href="http://www.juniper.net/techpubs/en_US/junos13.1/topics/reference/configuration-statement/ipv6-tunneling-edit-protocols-mpls.html">ipv6-tunnel</a></li>
+<li><a href="http://www.youtube.com/watch?v=zraAfs3bY5E">vedio</a></li>
+<li><a href="http://www.juniper.net/techpubs/en_US//junos/topics/example/mpls-tunneling-ipv6-over-mpls-ipv4.html">example</a></li>
+</ul>
+<h5 id="family-inet6-labeled-unicast-vs-unicast">family inet6 <code>labeled-unicast</code> vs <code>unicast</code></h5>
+<pre><code>delete logical-systems lr1 protocols bgp group to-rr family inet6 unicast
+delete logical-systems lr2 protocols bgp group to-rr family inet6 unicast
+delete logical-systems lr3 protocols bgp group to-rr family inet6 unicast
+delete logical-systems lr4 protocols bgp group to-rr family inet6 unicast
+delete logical-systems lr5 protocols bgp group rr family inet6 unicast
+delete logical-systems lr6 protocols bgp group rr family inet6 unicast
+delete logical-systems lr7 protocols bgp group to-rr family inet6 unicast
+delete logical-systems lr8 protocols bgp group to-rr family inet6 unicast
+set logical-systems lr1 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+set logical-systems lr2 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+set logical-systems lr3 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+set logical-systems lr4 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+set logical-systems lr5 protocols bgp group rr family inet6 labeled-unicast explicit-null
+set logical-systems lr6 protocols bgp group rr family inet6 labeled-unicast explicit-null
+set logical-systems lr7 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+set logical-systems lr8 protocols bgp group to-rr family inet6 labeled-unicast explicit-null
+</code></pre>
+<h3 id="rtbh-verify">RTBH verify</h3>
+<h4 id="initial-routes">initial routes</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 33.33.33.33/32
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+33.33.33.33/32     *[BGP/170] 01:05:50, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:05:48, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 33.33.33.33/32 detail
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
+33.33.33.33/32 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 16
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:06:28    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 16
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:06:26    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+3.3.3.0/24         *[BGP/170] 01:07:39, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:07:37, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24 detail
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
+3.3.3.0/24 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 16
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:07:42    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 16
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:07:40    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::3.3.3.0/126      *[BGP/170] 01:08:32, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:08:28, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
+::3.3.3.0/126 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 12
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:08:39    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 12
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:08:35    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::33.33.33.33/128  *[BGP/170] 01:08:54, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:08:50, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
+::33.33.33.33/128 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 12
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:09:00    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 12
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:08:56    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000      &lt;------
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+</code></pre>
+<h4 id="config_8">config</h4>
+<pre><code>set logical-systems lr2 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
+set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+
+set logical-systems lr3 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
+set logical-systems lr3 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+
+set logical-systems lr5 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 1 then accept              
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::0/0 prefix-length-range /128-/128 
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard                                                                        
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 2 then accept              
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh 
+set logical-systems lr5 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
+</code></pre>
+<h4 id="result">result</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+3.3.3.0/24         *[BGP/170] 01:13:15, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:13:13, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet.0 3.3.3.0/24 detail
+
+inet.0: 67 destinations, 76 routes (67 active, 0 holddown, 0 hidden)
+Restart Complete
+3.3.3.0/24 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 12
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:22    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (4): 2-KRT 5-Aggregate 6-BGP_RT_Background 7-Resolve tree 4 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2826c00
+                Next-hop reference count: 12
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: 10.10.1.1
+                Indirect next hop: 2a2c740 1048600
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:20    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::33.33.33.33/128  *[BGP/170] 01:13:11, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                      Discard
+                    [BGP/170] 01:13:07, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                      Discard
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
+::33.33.33.33/128 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Discard
+                Address: 0x23f36e8
+                Next-hop reference count: 8
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:17 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Discard
+                Address: 0x23f36e8
+                Next-hop reference count: 8
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:13 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::3.3.3.0/126      *[BGP/170] 01:13:28, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+                    [BGP/170] 01:13:24, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::3.3.3.0/126 detail
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
+::3.3.3.0/126 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 8
+                Source: 10.10.1.5
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:34    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x2824730
+                Next-hop reference count: 8
+                Source: 10.10.1.6
+                Next hop type: Router, Next hop index: 2363
+                Next hop: 10.10.12.1 via ge-1/2/2.12 weight 0x1, selected
+                Label-switched-path r2-r1
+                Protocol next hop: ::ffff:10.10.1.1
+                Indirect next hop: 28507e0 1048639
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:30    Metric2: 5 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+::33.33.33.33/128  *[BGP/170] 01:13:42, localpref 100, from 10.10.1.5
+                      AS path: 300 I
+                      Discard
+                    [BGP/170] 01:13:38, localpref 100, from 10.10.1.6
+                      AS path: 300 I
+                      Discard
+
+[edit]
+lab@MX80-NGGWR-01# run show route protocol bgp logical-system lr2 table inet6.0 ::33.33.33.33/128 detail
+
+inet6.0: 26 destinations, 37 routes (26 active, 0 holddown, 3 hidden)
+Restart Complete
+::33.33.33.33/128 (2 entries, 1 announced)
+        *BGP    Preference: 170/-101
+                Next hop type: Discard
+                Address: 0x23f36e8
+                Next-hop reference count: 8
+                State: &lt;Active Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:44 
+                Task: BGP_4012345678.10.10.1.5+179
+                Announcement bits (3): 0-KRT 3-BGP_RT_Background 4-Resolve tree 5 
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.5
+         BGP    Preference: 170/-101
+                Next hop type: Discard
+                Address: 0x23f36e8
+                Next-hop reference count: 8
+                State: &lt;NotBest Int Ext&gt;
+                Inactive reason: Not Best in its group - Update source
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 1:13:40 
+                Task: BGP_4012345678.10.10.1.6+179
+                AS path: 300 I (Originator) Cluster list:  1.1.1.1
+                AS path:  Originator ID: 10.10.1.1
+                Communities: 65412:100 target:4012345678L:2000
+                Accepted
+                Localpref: 100
+                Router ID: 10.10.1.6
+</code></pre>
+<h3 id="basic-interconnections">basic interconnections</h3>
+<h4 id="results">results</h4>
+<p>R1:</p>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr1 table GREEN.inet.0
+
+GREEN.inet.0: 11 destinations, 28 routes (11 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1.1.1.1/32         *[Direct/0] 3d 13:40:48
+                    &gt; via lo0.11
+                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+4.4.4.4/32         *[OSPF/10] 2d 19:15:40, metric 52
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 2d 20:00:30, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 20:00:30, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.1.11/32      *[OSPF/150] 2d 19:15:45, metric 0, tag 0
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 2d 19:15:40, MED 0, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 19:15:40, MED 0, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.1.22/32      *[OSPF/150] 2d 19:15:40, metric 0, tag 0
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 2d 19:15:45, MED 0, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 19:15:45, MED 0, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.1.33/32      *[OSPF/150] 05:21:45, metric 0, tag 103
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 05:21:50, localpref 100, from 10.10.1.2
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 05:21:50, localpref 100, from 10.10.1.3
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.19.0/24      *[Direct/0] 3d 13:39:14
+                    &gt; via ge-1/2/1.691
+                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 19:15:40, MED 52, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.19.2/32      *[Local/0] 3d 13:39:23
+                      Local via ge-1/2/1.691
+20.20.42.0/24      *[OSPF/10] 2d 19:15:40, metric 52
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 3d 02:19:17, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 3d 11:37:33, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.100.0/31     *[BGP/170] 3d 02:19:17, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 3d 11:37:33, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+20.20.120.0/24     *[OSPF/10] 2d 19:15:45, metric 51
+                    &gt; to 20.20.19.1 via ge-1/2/1.691
+                    [BGP/170] 2d 19:15:45, MED 51, localpref 100, from 10.10.1.2
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 2d 19:15:45, MED 51, localpref 100, from 10.10.1.3
+                      AS path: I, validation-state: unverified
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+224.0.0.5/32       *[OSPF/10] 3d 13:41:03, metric 1
+                      MultiRecv
+</code></pre>
+<h4 id="issue-no-ce45-routes">issue: no CE4/5 routes</h4>
+<h4 id="check-routes-in-rr">check routes in RR</h4>
+<p>no CE4/5 routes:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr2 table bgp.l3vpn.0
+
+bgp.l3vpn.0: 20 destinations, 20 routes (16 active, 0 holddown, 4 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.1:1:1.1.1.1/32                
+                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:4.4.4.4/32                
+                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:20.20.1.11/32                
+                   *[BGP/170] 2d 19:18:59, MED 0, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:20.20.1.22/32                
+                   *[BGP/170] 2d 19:18:54, MED 0, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:20.20.19.0/24                
+                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:20.20.42.0/24                
+                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.1:1:20.20.120.0/24                
+                   *[BGP/170] 2d 19:18:59, MED 51, localpref 100, from 10.10.1.1
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.4:1:1.1.1.1/32                
+                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:4.4.4.4/32                
+                   *[BGP/170] 2d 20:03:44, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.1.11/32                
+                   *[BGP/170] 2d 19:18:54, MED 0, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.1.22/32                
+                   *[BGP/170] 2d 19:18:59, MED 0, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.1.33/32                
+                   *[BGP/170] 05:25:04, localpref 100, from 10.10.1.4
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.19.0/24                
+                   *[BGP/170] 2d 19:18:54, MED 52, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.42.0/24                
+                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.100.0/31                
+                   *[BGP/170] 3d 02:22:31, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.4:1:20.20.120.0/24                
+                   *[BGP/170] 2d 19:18:59, MED 51, localpref 100, from 10.10.1.4
+                      AS path: I, validation-state: unverified
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+</code></pre>
+<p>check RR bgp.l3vpn.0 =&gt;  CE4/5 route in "hidden":</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lr2 table bgp.l3vpn.0 all 20.20.1.44/32 extensive
+
+bgp.l3vpn.0: 20 destinations, 20 routes (16 active, 0 holddown, 4 hidden)
+Restart Complete
+10.10.1.8:1:20.20.1.44/32 (1 entry, 0 announced)
+         BGP    Preference: 170/-101
+                Route Distinguisher: 10.10.1.8:1
+                Next hop type: Unusable
+                Address: 0x244ce94
+                Next-hop reference count: 6
+                State: &lt;Hidden Int Ext&gt;
+                Local AS: 4012345678 Peer AS: 4012345678
+                Age: 2d 18:40:04 
+                Validation State: unverified 
+                Task: BGP_4012345678.10.10.1.8+57274
+                AS path: 65000 I
+                Communities: 65000:4 target:2:65000
+                Accepted
+                VPN Label: 16
+                Localpref: 100
+                Router ID: 10.10.1.8
+                Indirect next hops: 1
+                        Protocol next hop: 10.10.1.8
+                        Push 16
+                        Indirect next hop: 0 - INH Session ID: 0x0
+</code></pre>
+<p>reason is no next hop resolvation, =&gt; check inet.3. </p>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system lr2 table inet.3
+
+inet.3: 5 destinations, 5 routes (5 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both
+
+10.10.1.1/32       *[RSVP/7/1] 3d 13:52:24, metric 5
+                    &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
+10.10.1.3/32       *[RSVP/7/1] 3d 13:52:23, metric 5
+                    &gt; to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r3
+10.10.1.4/32       *[RSVP/7/1] 3d 13:52:22, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r4
+10.10.1.5/32       *[RSVP/7/1] 3d 13:52:24, metric 5
+                    &gt; to 10.10.24.2 via ge-1/2/1.24, label-switched-path r2-r5
+                      to 10.10.23.2 via ge-1/2/1.23, label-switched-path r2-r5
+10.10.1.6/32       *[RSVP/7/1] 3d 13:52:23, metric 5
+                    &gt; to 10.10.26.2 via ge-1/2/1.26, label-switched-path r2-r6
+</code></pre>
+<p>no LSP to R8. that's the issue.
+solution:
+   1) create LSP
+   2) install host routes
+   3) adv inactive (inactive = hidden ?)
+   4) ?</p>
+<h4 id="solution-non-workadv-inactive-in-rr">solution (non-work):adv-inactive in RR</h4>
+<p>doesn't work</p>
+<h4 id="solution-install-r8-in-r2r3-lsp">solution: install R8 in R2/R3 lsp</h4>
+<pre><code>lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr2 protocols mpls label-switched-path r2-r6]
+!       active: install 10.10.1.8/32 { ... }
+[edit]
+lab@MX80-NGGWR-01# commit
+
+[edit]
+lab@MX80-NGGWR-01# run show route advertising-protocol bgp 10.10.1.1 logical-system lr2
+
+bgp.l3vpn.0: 20 destinations, 20 routes (20 active, 0 holddown, 0 hidden)
+Restart Complete
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  10.10.1.4:1:1.1.1.1/32                    
+*                         10.10.1.4            52      100        I
+  10.10.1.4:1:4.4.4.4/32                    
+*                         10.10.1.4                    100        I
+  10.10.1.4:1:20.20.1.11/32                    
+*                         10.10.1.4            0       100        I
+  10.10.1.4:1:20.20.1.22/32                    
+*                         10.10.1.4            0       100        I
+  10.10.1.4:1:20.20.1.33/32                    
+*                         10.10.1.4                    100        65000 I
+  10.10.1.4:1:20.20.19.0/24                    
+*                         10.10.1.4            52      100        I
+  10.10.1.4:1:20.20.42.0/24                    
+*                         10.10.1.4                    100        I
+  10.10.1.4:1:20.20.100.0/31                    
+*                         10.10.1.4                    100        I
+  10.10.1.4:1:20.20.120.0/24                    
+*                         10.10.1.4            51      100        I
+  10.10.1.8:1:20.20.1.44/32                                         #&lt;------
+*                         10.10.1.8                    100        65000 I
+  10.10.1.8:1:20.20.1.55/32                    
+*                         10.10.1.8                    100        65000 I
+  10.10.1.8:1:20.20.150.0/31                    
+*                         10.10.1.8                    100        I
+  10.10.1.8:1:20.20.200.0/31                    
+*                         10.10.1.8                    100        I
+</code></pre>
+<h3 id="backdoor-routes-and-sham-link">backdoor routes and sham-link</h3>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run show route logical-system lce table green-ce1.inet.0
+
+green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1.1.1.1/32         *[OSPF/10] 2d 19:49:33, metric 1
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+4.4.4.4/32         *[OSPF/10] 2d 19:49:23, metric 51
+                    &gt; to 20.20.120.1 via ge-1/2/2.120
+20.20.1.11/32      *[Direct/0] 2d 19:49:39
+                    &gt; via ge-1/2/2.4001
+                    [Local/0] 2d 19:49:39
+                      Local via ge-1/2/2.4001
+20.20.1.22/32      *[OSPF/150] 2d 19:49:23, metric 0, tag 0         #&lt;------
+                    &gt; to 20.20.120.1 via ge-1/2/2.120
+20.20.1.33/32      *[OSPF/150] 05:55:33, metric 0, tag 103          #&lt;------
+                    &gt; to 20.20.120.1 via ge-1/2/2.120
+20.20.1.44/32      *[OSPF/150] 00:06:30, metric 0, tag 3489696078   #&lt;------
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.1.55/32      *[OSPF/150] 00:06:30, metric 0, tag 3489696078   #&lt;------
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.19.0/24      *[Direct/0] 3d 14:13:02
+                    &gt; via ge-1/2/2.691
+20.20.19.1/32      *[Local/0] 3d 14:13:14
+                      Local via ge-1/2/2.691
+20.20.42.0/24      *[OSPF/10] 2d 19:49:23, metric 51
+                    &gt; to 20.20.120.1 via ge-1/2/2.120
+20.20.100.0/31     *[OSPF/150] 05:45:57, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.120.0/24     *[Direct/0] 3d 14:13:02
+                    &gt; via ge-1/2/2.120
+20.20.120.2/32     *[Local/0] 3d 14:13:12
+                      Local via ge-1/2/2.120
+20.20.150.0/31     *[OSPF/150] 00:06:30, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.200.0/31     *[OSPF/150] 00:06:30, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+224.0.0.5/32       *[OSPF/10] 3d 14:14:52, metric 1
+                      MultiRecv
+</code></pre>
+<p>vpn route prefer the backdoor exit, need to fix it with shamlink</p>
+<h4 id="solutionsham-link">solution:sham-link</h4>
+<pre><code>lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr1 routing-instances GREEN protocols ospf]
++       sham-link local 1.1.1.1;
+[edit logical-systems lr1 routing-instances GREEN protocols ospf area 0.0.0.0]
++        sham-link-remote 4.4.4.4;
+
+lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems lr4 routing-instances GREEN protocols ospf]
++       sham-link local 4.4.4.4;
+[edit logical-systems lr4 routing-instances GREEN protocols ospf area 0.0.0.0]
++        sham-link-remote 1.1.1.1;
+
+[edit]
+lab@MX80-NGGWR-01# run show ospf neighbor logical-system lr1 instance all    
+Instance: GREEN
+Address          Interface              State     ID               Pri  Dead
+20.20.19.1       ge-1/2/1.691           Full      20.20.1.11       128    38
+4.4.4.4          shamlink.0             Full      4.4.4.4            0    38
+</code></pre>
+<p>now the ce1 prefer backbone instead of backdoor:</p>
+<pre><code>lab@MX80-NGGWR-01# run show route logical-system lce table green-ce1.inet.0
+
+green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1.1.1.1/32         *[OSPF/150] 00:06:03, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+4.4.4.4/32         *[OSPF/150] 00:06:13, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.1.11/32      *[Direct/0] 2d 20:24:38
+                    &gt; via ge-1/2/2.4001
+                    [Local/0] 2d 20:24:38
+                      Local via ge-1/2/2.4001
+20.20.1.22/32      *[OSPF/150] 00:06:03, metric 0, tag 0    #&lt;------
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.1.33/32      *[OSPF/150] 00:06:03, metric 0, tag 103  #&lt;------
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.1.44/32      *[OSPF/150] 00:41:29, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.1.55/32      *[OSPF/150] 00:41:29, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.19.0/24      *[Direct/0] 3d 14:48:01
+                    &gt; via ge-1/2/2.691
+20.20.19.1/32      *[Local/0] 3d 14:48:13
+                      Local via ge-1/2/2.691
+20.20.42.0/24      *[OSPF/10] 00:06:03, metric 3
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.100.0/31     *[OSPF/150] 06:20:56, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.120.0/24     *[Direct/0] 3d 14:48:01
+                    &gt; via ge-1/2/2.120
+20.20.120.2/32     *[Local/0] 3d 14:48:11
+                      Local via ge-1/2/2.120
+20.20.150.0/31     *[OSPF/150] 00:41:29, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+20.20.200.0/31     *[OSPF/150] 00:41:29, metric 0, tag 3489696078
+                    &gt; to 20.20.19.2 via ge-1/2/2.691
+224.0.0.5/32       *[OSPF/10] 3d 14:49:51, metric 1
+                      MultiRecv
 </code></pre>
