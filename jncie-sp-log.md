@@ -136,17 +136,48 @@
 <li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 </ul>
 </li>
-<li><a href="#vpn">VPN</a><ul>
-<li><a href="#config-basic-vpn">config: basic VPN</a></li>
-<li><a href="#verify_17">verify</a></li>
-<li><a href="#up-here-now">UP HERE NOW</a></li>
+<li><a href="#vpn-part-b">VPN (PART B)</a><ul>
+<li><a href="#config-basic-vpn">config: basic VPN</a><ul>
+<li><a href="#r1">R1:</a></li>
+<li><a href="#r4">R4:</a></li>
+<li><a href="#r8">R8:</a></li>
+</ul>
+</li>
+<li><a href="#config-policy">config: policy</a></li>
+<li><a href="#verify-bgpospf-connections">verify bgp/ospf connections</a></li>
+<li><a href="#verify-vpn-table">verify: VPN table</a><ul>
+<li><a href="#vrf1">VRF1</a></li>
+<li><a href="#vrf2">VRF2</a></li>
+</ul>
+</li>
+<li><a href="#verify-data-plane-e2e-pingtraceroute">verify data plane: e2e ping/traceroute</a></li>
+<li><a href="#config-shamlink">config: shamlink</a></li>
+<li><a href="#verify1-shamlink">verify1: shamlink</a></li>
+<li><a href="#verify2-shamlink">verify2: shamlink</a></li>
 <li><a href="#tip-sham-link">TIP: sham-link</a></li>
 <li><a href="#tip-domain-id">TIP: domain-id</a></li>
 <li><a href="#tip-traceroute-under-mpls-vpn">TIP: traceroute under mpls vpn</a></li>
 <li><a href="#tip-vrf-table-lable-vs-tunneled-interface">TIP: vrf-table-lable vs. tunneled-interface</a></li>
-<li><a href="#vpn-internet-access">VPN Internet access</a><ul>
-<li><a href="#solution-1">solution 1</a><ul>
-<li><a href="#solution1-config">solution1 config</a></li>
+<li><a href="#vpn-access-solution-1">VPN access solution 1</a></li>
+<li><a href="#config-vpn-inetaccess-1">config: VPN InetAccess 1</a></li>
+<li><a href="#verify_17">verify</a></li>
+<li><a href="#vpn-access-solution-2">VPN access solution 2</a></li>
+<li><a href="#config-vpn-inetaccess-2">config: VPN InetAccess 2</a></li>
+<li><a href="#verify1-pingtraceroute">verify1 : ping/traceroute</a></li>
+<li><a href="#verify2-routing-table">verify2: routing table</a></li>
+<li><a href="#config-vpn-lsp-map">config vpn LSP map</a><ul>
+<li><a href="#verify_18">verify</a></li>
+</ul>
+</li>
+<li><a href="#config-vpn-lsp-map-old">config vpn lsp map (old)</a><ul>
+<li><a href="#verify_19">verify</a></li>
+</ul>
+</li>
+<li><a href="#config-vpn-inetaccess-3-tbc">config: VPN InetAccess 3 (t.b.c)</a><ul>
+<li><a href="#remove-sol3">remove sol3</a></li>
+</ul>
+</li>
+<li><a href="#solution-1-old-notes">solution 1 old notes</a><ul>
 <li><a href="#source-internet-r1-adv-aggr-vpn-routes-from-r1">source Internet =&gt; R1 : adv aggr. vpn routes from R1</a></li>
 <li><a href="#r1-r1vrf-r1-static-route-with-next-table">R1 =&gt; R1:vrf : R1: static route with next table</a><ul>
 <li><a href="#other-r-got-aggr-vpn-routes-from-r1">other R got aggr. vpn routes from R1</a></li>
@@ -165,7 +196,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#solution-2">solution 2</a><ul>
+<li><a href="#solution-2-old-notes">solution 2 old notes</a><ul>
 <li><a href="#remove-solution1">remove solution1</a></li>
 <li><a href="#solution2-config">solution2 config</a></li>
 <li><a href="#r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</a></li>
@@ -183,16 +214,9 @@
 <li><a href="#tip-import-rib-and-export-rib">TIP: import-rib and export-rib</a></li>
 </ul>
 </li>
-<li><a href="#vpn-lsp-map">vpn lsp map</a><ul>
-<li><a href="#config_4">config</a></li>
-<li><a href="#verify_18">verify</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#interas-vpn">InterAS VPN</a><ul>
+<li><a href="#interas-vpn-part-a">InterAS VPN (PART A)</a><ul>
 <li><a href="#solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: inet (uncast+labeled-unicast rib inet.3)</a><ul>
-<li><a href="#config_5">config</a></li>
+<li><a href="#config_4">config</a></li>
 </ul>
 </li>
 <li><a href="#tip-interas-vpn-options">TIP: interAS VPN options</a></li>
@@ -207,8 +231,8 @@
 <li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
 </ul>
 </li>
-<li><a href="#vpls">VPLS</a><ul>
-<li><a href="#config_6">config</a></li>
+<li><a href="#vpls-part-a">VPLS (PART A)</a><ul>
+<li><a href="#config_5">config</a></li>
 <li><a href="#show-vpls-connection">show vpls connection</a></li>
 <li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
 <li><a href="#with-tunne-service">with tunne-service</a></li>
@@ -218,7 +242,7 @@
 <li><a href="#tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: encapsulation extended-vlan-vpls and flexible-ethernet-services</a></li>
 </ul>
 </li>
-<li><a href="#cos">cos</a><ul>
+<li><a href="#config-cos">config COS</a></li>
 <li><a href="#tip-qoscos">TIP: QoS/CoS</a><ul>
 <li><a href="#key-concepts">key concepts</a></li>
 <li><a href="#ip-tosrfc791">IP TOS(RFC791)</a></li>
@@ -246,8 +270,6 @@
 <li><a href="#policy-cos-based-forwarding">policy: Cos Based Forwarding</a></li>
 <li><a href="#scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</a></li>
 <li><a href="#rewrite-marker">rewrite marker</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -303,7 +325,7 @@
 </ul>
 </li>
 <li><a href="#solution-4-rib-rib-group">solution 4: rib + rib-group</a><ul>
-<li><a href="#config_7">config</a></li>
+<li><a href="#config_6">config</a></li>
 <li><a href="#before">before</a></li>
 <li><a href="#after">after</a></li>
 <li><a href="#verification-of-rib-group">verification of rib-group</a></li>
@@ -323,7 +345,7 @@
 </li>
 <li><a href="#rtbh-verify">RTBH verify</a><ul>
 <li><a href="#initial-routes">initial routes</a></li>
-<li><a href="#config_8">config</a></li>
+<li><a href="#config_7">config</a></li>
 <li><a href="#result">result</a></li>
 </ul>
 </li>
@@ -3359,11 +3381,11 @@ Restart Complete
                       AS path: I, validation-state: unverified
                     &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
 </code></pre>
-<p>R2 to P:  aggr V4&amp;V6, no too specific routes
-    [edit]
-    lab@MX80-NGGWR-02# run show route advertising-protocol bgp 100.2.11.2 logical-system r2  <br />
-</p>
-<pre><code>inet.0: 72 destinations, 90 routes (71 active, 0 holddown, 3 hidden)
+<p>R2 to P:  aggr V4&amp;V6, no too specific routes</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route advertising-protocol bgp 100.2.11.2 logical-system r2
+
+inet.0: 72 destinations, 90 routes (71 active, 0 holddown, 3 hidden)
 Restart Complete
   Prefix                  Nexthop              MED     Lclpref    AS path
 * 10.200.0.0/16           Self                                    I         #&lt;------
@@ -3410,12 +3432,672 @@ Restart Complete
 code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (proto): 
 invalid BGP identifier 0x0
 </code></pre>
-<h2 id="vpn">VPN</h2>
+<h2 id="vpn-part-b">VPN (PART B)</h2>
 <h3 id="config-basic-vpn">config: basic VPN</h3>
-<p>done in BGP part</p>
-<h3 id="verify_17">verify</h3>
-<h3 id="up-here-now">UP HERE NOW</h3>
-<pre><code>&lt;------------------------
+<h4 id="r1">R1:</h4>
+<pre><code>set logical-systems r1 routing-instances GREEN instance-type vrf
+set logical-systems r1 routing-instances GREEN interface ge-1/2/1.611
+set logical-systems r1 routing-instances GREEN interface lo0.111
+set logical-systems r1 routing-instances GREEN route-distinguisher 10.200.1.1:1
+set logical-systems r1 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r1 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r1 routing-instances GREEN vrf-table-label
+set logical-systems r1 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.611
+
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 from community GREEN
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 then accept
+
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 from protocol ospf    #&lt;------OSPF
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 then community add GREEN
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 then accept
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 from protocol direct  #&lt;------direct
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 then community add GREEN
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 then accept
+set logical-systems r1 policy-options community GREEN members target:2:65000
+</code></pre>
+<h4 id="r4">R4:</h4>
+<pre><code>set logical-systems r4 routing-instances GREEN instance-type vrf
+set logical-systems r4 routing-instances GREEN interface ge-1/2/1.642
+set logical-systems r4 routing-instances GREEN interface ge-1/2/1.643
+set logical-systems r4 routing-instances GREEN interface lo0.444
+set logical-systems r4 routing-instances GREEN route-distinguisher 10.200.1.4:1
+set logical-systems r4 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r4 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r4 routing-instances GREEN vrf-table-label
+set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 family inet unicast
+set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 peer-as 65000
+set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 as-override
+set logical-systems r4 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.642
+
+set logical-systems r4 policy-options policy-statement vrf-imp term 1 from protocol bgp
+set logical-systems r4 policy-options policy-statement vrf-imp term 1 from community GREEN
+set logical-systems r4 policy-options policy-statement vrf-imp term 1 then accept
+
+set logical-systems r4 policy-options policy-statement vrf-exp term 1 from protocol ospf    #&lt;------OSPF
+set logical-systems r4 policy-options policy-statement vrf-exp term 1 then community add GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp term 1 then community add ce2
+set logical-systems r4 policy-options policy-statement vrf-exp term 1 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp term 2 from protocol direct  #&lt;------direct link1
+set logical-systems r4 policy-options policy-statement vrf-exp term 2 from route-filter 200.6.42.0/24 exact
+set logical-systems r4 policy-options policy-statement vrf-exp term 2 then community add GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp term 2 then community add ce2
+set logical-systems r4 policy-options policy-statement vrf-exp term 2 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp term 3 from protocol bgp     #&lt;------BGP
+set logical-systems r4 policy-options policy-statement vrf-exp term 3 then community add GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp term 3 then community add ce3
+set logical-systems r4 policy-options policy-statement vrf-exp term 3 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp term 4 from protocol direct  #&lt;------direct link2
+set logical-systems r4 policy-options policy-statement vrf-exp term 4 from route-filter 200.6.43.0/24 exact
+set logical-systems r4 policy-options policy-statement vrf-exp term 4 then community add GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp term 4 then community add ce3
+set logical-systems r4 policy-options policy-statement vrf-exp term 4 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp term 5 from protocol direct  #&lt;------optional(no need in exam)
+set logical-systems r4 policy-options policy-statement vrf-exp term 5 from route-filter 4.4.4.4/32 exact
+set logical-systems r4 policy-options policy-statement vrf-exp term 5 then community add GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp term 5 then community add ce2
+set logical-systems r4 policy-options policy-statement vrf-exp term 5 then accept
+set logical-systems r4 policy-options community GREEN members target:2:65000
+</code></pre>
+<h4 id="r8">R8:</h4>
+<pre><code>set logical-systems r8 routing-instances GREEN instance-type vrf
+set logical-systems r8 routing-instances GREEN interface ge-1/2/1.684
+set logical-systems r8 routing-instances GREEN interface ge-1/2/1.685
+set logical-systems r8 routing-instances GREEN interface lo0.888
+set logical-systems r8 routing-instances GREEN route-distinguisher 10.200.1.8:1
+set logical-systems r8 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r8 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r8 routing-instances GREEN vrf-table-label
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 type external
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 family inet unicast
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 peer-as 65000
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 as-override
+
+set logical-systems r8 policy-options policy-statement vrf-imp term 1 from protocol bgp
+set logical-systems r8 policy-options policy-statement vrf-imp term 1 from community GREEN
+set logical-systems r8 policy-options policy-statement vrf-imp term 1 then accept
+
+set logical-systems r8 policy-options policy-statement vrf-exp term 1 from protocol bgp     #&lt;------BGP
+set logical-systems r8 policy-options policy-statement vrf-exp term 1 then community add GREEN
+set logical-systems r8 policy-options policy-statement vrf-exp term 1 then accept
+set logical-systems r8 policy-options policy-statement vrf-exp term 2 from protocol direct  #&lt;------direct
+set logical-systems r8 policy-options policy-statement vrf-exp term 2 then community add GREEN
+set logical-systems r8 policy-options policy-statement vrf-exp term 2 then accept
+set logical-systems r8 policy-options community GREEN members target:2:65000
+</code></pre>
+<h3 id="config-policy">config: policy</h3>
+<pre><code>set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from community GREEN    #&lt;------optional
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 then accept
+set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-from-bgp
+
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 1 from protocol ospf
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 1 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 from protocol direct
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 from route-filter 200.6.42.0/24 exact
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 then accept
+
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from protocol bgp
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from community GREEN    #&lt;------optional
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 then accept     
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 2 then reject
+
+set logical-systems r4 routing-instances GREEN protocols bgp export vrf-exp-bgp-from-ospf
+set logical-systems r4 routing-instances GREEN protocols ospf export vrf-exp-ospf-from-bgp
+</code></pre>
+<h3 id="verify-bgpospf-connections">verify bgp/ospf connections</h3>
+<p>core MP-BGP: from RR: R2/3: all neighbor established, with correct family</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show bgp summary logical-system r2 
+Groups: 7 Peers: 17 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      33         15          0          0          0          0
+inet.3               
+                       8          3          0          0          0          0
+inet6.0              
+                      43         24          0          0          0          0
+bgp.l3vpn.0          
+                      16         16          0          0          0          0
+bgp.l2vpn.0          
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.200.1.1       4012345678       2803       2753       0       0    21:15:05 Establ        #&lt;------
+  bgp.l3vpn.0: 5/5/5/0
+10.200.1.3       4012345678       2748       2742       0       0    21:15:10 Establ        #&lt;------
+  bgp.l2vpn.0: 0/0/0/0
+10.200.1.4       4012345678       2795       2747       0       0    21:15:08 Establ        #&lt;------
+  bgp.l3vpn.0: 6/6/6/0
+10.200.1.5       4012345678       2821       2752       0       0    21:14:58 Establ
+  inet.0: 10/15/14/0
+  inet.3: 3/4/4/0
+  inet6.0: 18/19/19/0
+10.200.1.6       4012345678       2823       2753       0       0    21:15:08 Establ
+  inet.0: 0/13/12/0
+  inet.3: 0/4/4/0
+  inet6.0: 1/19/19/0
+10.200.1.7       4012345678       2797       2755       0       0    21:14:45 Establ        #&lt;------
+  bgp.l3vpn.0: 0/0/0/0
+10.200.1.8       4012345678       2790       2753       0       0    21:14:37 Establ        #&lt;------
+  bgp.l3vpn.0: 5/5/5/0
+100.2.11.2             1000       2715       2756       0       0    21:15:21 Establ
+  inet.0: 1/1/1/0
+100.2.12.2             2000       2716       2753       0       0    21:15:12 Establ
+  inet.0: 1/1/1/0
+100.2.13.2             3000       2715       2754       0       0    21:15:16 Establ
+  inet.0: 1/1/1/0
+100.2.21.2             1100       2716       2759       0       0    21:15:12 Establ
+  inet.0: 1/1/1/0
+100.2.22.2             1200       2715       2761       0       0    21:15:12 Establ
+  inet.0: 1/1/1/0
+::100.2.11.2           1000       2715       2751       0       0    21:14:51 Establ
+  inet6.0: 1/1/1/0
+::100.2.12.2           2000       2716       2752       0       0    21:14:59 Establ
+  inet6.0: 1/1/1/0
+::100.2.13.2           3000       2715       2754       0       0    21:15:04 Establ
+  inet6.0: 1/1/1/0
+::100.2.21.2           1100       2715       2757       0       0    21:15:04 Establ
+  inet6.0: 1/1/1/0
+::100.2.22.2           1200       2715       2756       0       0    21:15:04 Establ
+  inet6.0: 1/1/1/0
+</code></pre>
+<p>VRF-CE:</p>
+<pre><code>lab@MX80-NGGWR-02# run show ospf neighbor logical-system r1 instance GREEN 
+Address          Interface              State     ID               Pri  Dead
+200.6.11.2       ge-1/2/1.611           Full      20.20.1.11       128    39
+
+[edit]
+lab@MX80-NGGWR-02# run show ospf neighbor logical-system r4 instance GREEN 
+Address          Interface              State     ID               Pri  Dead
+200.6.42.2       ge-1/2/1.642           Full      20.20.1.22       128    37
+
+[edit]
+lab@MX80-NGGWR-02# run show bgp summary logical-system r4 instance GREEN 
+Groups: 1 Peers: 1 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+GREEN.inet.0         
+                      21         10          0          0          0          0
+GREEN.mdt.0          
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+200.6.43.2            65000       2719       2804       0       0    21:17:13 Establ        #&lt;------
+  GREEN.inet.0: 1/1/1/0
+
+[edit]
+lab@MX80-NGGWR-02# run show bgp summary logical-system r8 instance GREEN    
+Groups: 2 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+GREEN.inet.0         
+                      24         12          0          0          0          0
+GREEN.mdt.0          
+                       0          0          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+200.6.84.2            65000       2728       2814       0       0    21:20:40 Establ        #&lt;------
+  GREEN.inet.0: 1/1/1/0
+200.6.85.2            65000       2728       2814       0       0    21:20:38 Establ        #&lt;------
+  GREEN.inet.0: 1/1/1/0
+</code></pre>
+<h3 id="verify-vpn-table">verify: VPN table</h3>
+<h4 id="vrf1">VRF1</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0
+
+GREEN.inet.0: 17 destinations, 32 routes (17 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[Static/5] 21:59:08
+                      to table inet.0
+1.1.1.1/32         *[Direct/0] 21:58:59
+                    &gt; via lo0.111
+4.4.4.4/32         *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2      #&lt;------R4 VRF lo0
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 21:58:28, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+8.8.8.8/32         *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2      #&lt;------R8 VRF lo0
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 21:58:26, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+11.22.0.0/24       *[OSPF/10] 21:57:57, metric 51                           #&lt;------CE1-CE2 link
+                    &gt; to 200.6.11.2 via ge-1/2/1.611
+                    [BGP/170] 21:58:07, MED 51, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 21:58:07, MED 51, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+20.20.1.11/32      *[OSPF/150] 21:57:57, metric 0, tag 0                    #&lt;------CE1-5 lo0
+                    &gt; to 200.6.11.2 via ge-1/2/1.611
+20.20.1.22/32      *[BGP/170] 21:58:07, MED 1, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 21:58:07, MED 1, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+20.20.1.33/32      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                    [BGP/170] 21:58:28, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+20.20.1.44/32      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 21:58:26, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+20.20.1.55/32      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 21:58:26, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+200.6.11.0/24      *[Direct/0] 21:58:59
+                    &gt; via ge-1/2/1.611
+200.6.11.1/32      *[Local/0] 21:58:59
+                      Local via ge-1/2/1.611
+200.6.42.0/24      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2      #&lt;------remote PE-CE links
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 21:58:28, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+200.6.43.0/24      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                    [BGP/170] 21:58:28, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+200.6.84.0/24      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 21:58:26, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+200.6.85.0/24      *[BGP/170] 21:58:12, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+                    [BGP/170] 21:58:26, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r6
+224.0.0.5/32       *[OSPF/10] 21:59:15, metric 1
+                      MultiRecv
+</code></pre>
+<h4 id="vrf2">VRF2</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route logical-system r4 table GREEN.inet.0
+
+GREEN.inet.0: 18 destinations, 32 routes (18 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+                    [BGP/170] 22:03:44, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+1.1.1.1/32         *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+                    [BGP/170] 22:03:44, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+4.4.4.4/32         *[Direct/0] 22:04:21
+                    &gt; via lo0.444
+8.8.8.8/32         *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+                    [BGP/170] 22:03:42, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+11.22.0.0/24       *[OSPF/10] 22:03:23, metric 51
+                    &gt; to 200.6.42.2 via ge-1/2/1.642
+                    [BGP/170] 22:03:13, MED 51, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+                    [BGP/170] 22:03:13, MED 51, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+20.20.1.11/32      *[BGP/170] 22:03:13, MED 0, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+                    [BGP/170] 22:03:13, MED 0, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+20.20.1.22/32      *[OSPF/10] 22:03:23, metric 1
+                    &gt; to 200.6.42.2 via ge-1/2/1.642
+20.20.1.33/32      *[BGP/170] 22:04:01, localpref 100
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 200.6.43.2 via ge-1/2/1.643
+20.20.1.44/32      *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+                    [BGP/170] 22:03:42, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+20.20.1.55/32      *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+                    [BGP/170] 22:03:42, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+200.6.11.0/24      *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+                    [BGP/170] 22:03:44, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.24.1 via ge-1/2/2.204, label-switched-path r4-r1
+200.6.42.0/24      *[Direct/0] 22:04:21
+                    &gt; via ge-1/2/1.642
+200.6.42.1/32      *[Local/0] 22:04:21
+                      Local via ge-1/2/1.642
+200.6.43.0/24      *[Direct/0] 22:04:21
+                    &gt; via ge-1/2/1.643
+200.6.43.1/32      *[Local/0] 22:04:21
+                      Local via ge-1/2/1.643
+200.6.84.0/24      *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+                    [BGP/170] 22:03:42, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+200.6.85.0/24      *[BGP/170] 22:03:28, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+                    [BGP/170] 22:03:42, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                    &gt; to 100.0.46.2 via ge-1/2/1.406, label-switched-path r4-r6
+224.0.0.5/32       *[OSPF/10] 22:04:31, metric 1
+                      MultiRecv
+</code></pre>
+<h3 id="verify-data-plane-e2e-pingtraceroute">verify data plane: e2e ping/traceroute</h3>
+<pre><code>run ping 20.20.1.22 logical-system r0 routing-instance vpn1 source 20.20.1.11 count 3 rapid
+run ping 20.20.1.33 logical-system r0 routing-instance vpn1 source 20.20.1.11 count 3 rapid   
+run ping 20.20.1.44 logical-system r0 routing-instance vpn1 source 20.20.1.11 count 3 rapid   
+run ping 20.20.1.55 logical-system r0 routing-instance vpn1 source 20.20.1.11 count 3 rapid   
+run ping 20.20.1.11 logical-system r0 routing-instance vpn2 source 20.20.1.22 count 3 rapid   
+run ping 20.20.1.33 logical-system r0 routing-instance vpn2 source 20.20.1.22 count 3 rapid   
+run ping 20.20.1.44 logical-system r0 routing-instance vpn2 source 20.20.1.22 count 3 rapid   
+run ping 20.20.1.55 logical-system r0 routing-instance vpn2 source 20.20.1.22 count 3 rapid   
+run ping 20.20.1.11 logical-system r0 routing-instance vpn3 source 20.20.1.33 count 3 rapid   
+run ping 20.20.1.22 logical-system r0 routing-instance vpn3 source 20.20.1.33 count 3 rapid   
+run ping 20.20.1.44 logical-system r0 routing-instance vpn3 source 20.20.1.33 count 3 rapid   
+run ping 20.20.1.55 logical-system r0 routing-instance vpn3 source 20.20.1.33 count 3 rapid
+
+run traceroute 20.20.1.22 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+run traceroute 20.20.1.33 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+run traceroute 20.20.1.44 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+run traceroute 20.20.1.55 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+run traceroute 20.20.1.11 logical-system r0 routing-instance vpn2 source 20.20.1.22    
+run traceroute 20.20.1.33 logical-system r0 routing-instance vpn2 source 20.20.1.22    
+run traceroute 20.20.1.44 logical-system r0 routing-instance vpn2 source 20.20.1.22    
+run traceroute 20.20.1.55 logical-system r0 routing-instance vpn2 source 20.20.1.22    
+run traceroute 20.20.1.11 logical-system r0 routing-instance vpn3 source 20.20.1.33    
+run traceroute 20.20.1.22 logical-system r0 routing-instance vpn3 source 20.20.1.33    
+run traceroute 20.20.1.44 logical-system r0 routing-instance vpn3 source 20.20.1.33    
+run traceroute 20.20.1.55 logical-system r0 routing-instance vpn3 source 20.20.1.33
+
+[edit]
+lab@MX80-NGGWR-02# run ping 20.20.1.22 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+PING 20.20.1.22 (20.20.1.22): 56 data bytes
+64 bytes from 20.20.1.22: icmp_seq=0 ttl=61 time=0.686 ms
+64 bytes from 20.20.1.22: icmp_seq=1 ttl=61 time=0.599 ms
+^C
+--- 20.20.1.22 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.599/0.643/0.686/0.043 ms
+
+[edit]
+lab@MX80-NGGWR-02# run ping 20.20.1.33 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+PING 20.20.1.33 (20.20.1.33): 56 data bytes
+64 bytes from 20.20.1.33: icmp_seq=0 ttl=61 time=0.758 ms
+64 bytes from 20.20.1.33: icmp_seq=1 ttl=61 time=0.604 ms
+^C
+--- 20.20.1.33 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.604/0.681/0.758/0.077 ms
+
+[edit]
+lab@MX80-NGGWR-02# run ping 20.20.1.44 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+PING 20.20.1.44 (20.20.1.44): 56 data bytes
+64 bytes from 20.20.1.44: icmp_seq=0 ttl=60 time=0.727 ms
+^C
+--- 20.20.1.44 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.727/0.727/0.727/0.000 ms
+
+[edit]
+lab@MX80-NGGWR-02# run ping 20.20.1.55 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+PING 20.20.1.55 (20.20.1.55): 56 data bytes
+64 bytes from 20.20.1.55: icmp_seq=0 ttl=60 time=0.753 ms
+^C
+--- 20.20.1.55 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.753/0.753/0.753/0.000 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 20.20.1.22 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 20.20.1.22 (20.20.1.22) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.560 ms  0.399 ms  0.369 ms
+ 2  100.0.12.2 (100.0.12.2)  1.820 ms  0.551 ms  0.555 ms
+     MPLS Label=299904 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  4.4.4.4 (4.4.4.4)  0.544 ms  0.549 ms  0.518 ms
+ 4  20.20.1.22 (20.20.1.22)  0.604 ms  0.578 ms  0.556 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 20.20.1.33 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 20.20.1.33 (20.20.1.33) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.526 ms  0.427 ms  0.366 ms
+ 2  100.0.12.2 (100.0.12.2)  0.547 ms  0.522 ms  0.502 ms
+     MPLS Label=299808 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  4.4.4.4 (4.4.4.4)  0.601 ms  0.550 ms  0.521 ms
+ 4  20.20.1.33 (20.20.1.33)  0.571 ms  0.569 ms  0.553 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 20.20.1.44 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 20.20.1.44 (20.20.1.44) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.527 ms  0.417 ms  0.372 ms
+ 2  100.0.12.2 (100.0.12.2)  0.531 ms  0.531 ms  0.510 ms
+     MPLS Label=299872 CoS=0 TTL=1 S=0
+     MPLS Label=299808 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  100.0.26.2 (100.0.26.2)  0.556 ms  0.592 ms  0.545 ms
+     MPLS Label=299808 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=2 S=1
+ 4  8.8.8.8 (8.8.8.8)  0.561 ms  0.596 ms  0.544 ms
+ 5  20.20.1.44 (20.20.1.44)  0.583 ms  0.592 ms  0.566 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 20.20.1.55 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 20.20.1.55 (20.20.1.55) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.493 ms  0.398 ms  0.361 ms
+ 2  100.0.12.2 (100.0.12.2)  0.539 ms  0.531 ms  0.508 ms
+     MPLS Label=299872 CoS=0 TTL=1 S=0
+     MPLS Label=299808 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  100.0.26.2 (100.0.26.2)  0.562 ms  0.545 ms  0.523 ms
+     MPLS Label=299808 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=2 S=1
+ 4  8.8.8.8 (8.8.8.8)  0.566 ms  0.566 ms  2.423 ms
+ 5  20.20.1.55 (20.20.1.55)  0.593 ms  0.590 ms  0.613 ms
+</code></pre>
+<h3 id="config-shamlink">config: shamlink</h3>
+<pre><code>set logical-systems r1 routing-instances GREEN protocols ospf sham-link local 1.1.1.1
+set logical-systems r1 routing-instances GREEN protocols ospf area 0.0.0.0 sham-link-remote 4.4.4.4
+
+set logical-systems r4 routing-instances GREEN protocols ospf sham-link local 4.4.4.4
+set logical-systems r4 routing-instances GREEN protocols ospf area 0.0.0.0 sham-link-remote 1.1.1.1
+</code></pre>
+<h3 id="verify1-shamlink">verify1: shamlink</h3>
+<p>essential of shamlink:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show ospf route logical-system r0 instance vpn1                                   
+Topology default Route Table:
+
+Prefix             Path  Route      NH       Metric NextHop       Nexthop      
+                   Type  Type       Type            Interface     Address/LSP
+1.1.1.1            Intra Area/AS BR IP            1 ge-1/2/2.611  200.6.11.1
+4.4.4.4            Intra Area/AS BR IP            2 ge-1/2/2.611  200.6.11.1        #&lt;------shamlink!!!
+20.20.1.22         Intra Router     IP            3 ge-1/2/2.611  200.6.11.1
+0.0.0.0/0          Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+1.1.1.1/32         Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+4.4.4.4/32         Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+8.8.8.8/32         Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+11.22.0.0/24       Intra Network    IP           50 ge-1/2/1.1122
+20.20.1.22/32      Intra Network    IP            3 ge-1/2/2.611  200.6.11.1
+20.20.1.33/32      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+20.20.1.44/32      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+20.20.1.55/32      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+200.6.11.0/24      Intra Network    IP            1 ge-1/2/2.611
+200.6.42.0/24      Intra Network    IP            3 ge-1/2/2.611  200.6.11.1
+200.6.43.0/24      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+200.6.84.0/24      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+200.6.85.0/24      Ext2  Network    IP            0 ge-1/2/2.611  200.6.11.1
+</code></pre>
+<h3 id="verify2-shamlink">verify2: shamlink</h3>
+<pre><code>lab@MX80-NGGWR-02# run show route logical-system r0 table vpn1.inet.0 protocol ospf
+
+vpn1.inet.0: 18 destinations, 18 routes (18 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[OSPF/150] 00:23:19, metric 0, tag 0
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+1.1.1.1/32         *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+4.4.4.4/32         *[OSPF/150] 00:15:31, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+8.8.8.8/32         *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+20.20.1.22/32      *[OSPF/10] 00:23:19, metric 3
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+20.20.1.33/32      *[OSPF/150] 00:23:19, metric 0, tag 0    #&lt;------learned from type5(150)
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+20.20.1.44/32      *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+20.20.1.55/32      *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+200.6.42.0/24      *[OSPF/10] 00:23:19, metric 3
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+200.6.43.0/24      *[OSPF/150] 00:15:31, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+200.6.84.0/24      *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+200.6.85.0/24      *[OSPF/150] 00:23:19, metric 0, tag 3489696078
+                    &gt; to 200.6.11.1 via ge-1/2/2.611
+224.0.0.5/32       *[OSPF/10] 00:24:35, metric 1
+                      MultiRecv
+
+lab@MX80-NGGWR-02# run show ospf database logical-system r0 instance vpn1
+
+Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   1.1.1.1          1.1.1.1          0x80000023  1256  0x22 0x4a65  48
+Router   4.4.4.4          4.4.4.4          0x80000022   757  0x22 0x273e  48
+Router  *20.20.1.11       20.20.1.11       0x80000022  1257  0x22 0x6cfd  48
+Router   20.20.1.22       20.20.1.22       0x80000023   161  0x22 0x4c1   60
+Network  11.22.0.2        20.20.1.22       0x8000001f  1256  0x22 0x5ee7  32
+Network  200.6.11.1       1.1.1.1          0x80000003   240  0x22 0x170a  32
+Network  200.6.42.2       20.20.1.22       0x8000001d  1256  0x22 0x490   32
+    OSPF AS SCOPE link state database
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Extern   0.0.0.0          1.1.1.1          0x8000001e  1256  0x22 0xa8e8  36
+Extern   1.1.1.1          4.4.4.4          0x8000001f   400  0xa2 0x76e0  36
+Extern   4.4.4.4          1.1.1.1          0x80000001   786  0xa2 0x82f2  36
+Extern   8.8.8.8          1.1.1.1          0x80000001   786  0xa2 0xc99b  36
+Extern   8.8.8.8          4.4.4.4          0x8000001e    43  0xa2 0x3507  36
+Extern  *20.20.1.11       20.20.1.11       0x8000001e  1257  0x22 0xb874  36
+Extern   20.20.1.33       4.4.4.4          0x8000001e  1257  0x22 0x239   36        #&lt;------
+Extern   20.20.1.44       1.1.1.1          0x80000001   786  0xa2 0x80af  36
+Extern   20.20.1.44       4.4.4.4          0x8000001d  1257  0xa2 0xed1a  36        #&lt;------
+Extern   20.20.1.55       1.1.1.1          0x80000001   786  0xa2 0x1213  36
+Extern   20.20.1.55       4.4.4.4          0x8000001d  1257  0xa2 0x7f7d  36        #&lt;------
+Extern   200.6.43.0       1.1.1.1          0x80000001   786  0xa2 0xe5a5  36
+Extern   200.6.84.0       1.1.1.1          0x80000001   786  0xa2 0x2141  36
+Extern   200.6.84.0       4.4.4.4          0x8000001d  1257  0xa2 0x8eab  36
+Extern   200.6.85.0       1.1.1.1          0x80000001   786  0xa2 0x164b  36
+Extern   200.6.85.0       4.4.4.4          0x8000001d  1257  0xa2 0x83b5  36
+
+[edit]
+lab@MX80-NGGWR-02# run show ospf database logical-system r0 instance vpn1 lsa-id 20.20.1.33 detail  
+    OSPF AS SCOPE link state database
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Extern   20.20.1.33       4.4.4.4          0x8000001f   191  0x22 0xff3a  36
+  mask 255.255.255.255
+  Topology default (ID 0)
+    Type: 2, Metric: 0, Fwd addr: 0.0.0.0, Tag: 0.0.0.0
+
+[edit]
+lab@MX80-NGGWR-02# run show ospf database logical-system r0 instance vpn1 lsa-id 20.20.1.44 detail    
+    OSPF AS SCOPE link state database
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Extern   20.20.1.44       1.1.1.1          0x80000001  1307  0xa2 0x80af  36
+  mask 255.255.255.255
+  Topology default (ID 0)
+    Type: 2, Metric: 0, Fwd addr: 0.0.0.0, Tag: 208.0.137.78
+Extern   20.20.1.44       4.4.4.4          0x8000001d  1778  0xa2 0xed1a  36
+  mask 255.255.255.255
+  Topology default (ID 0)
+    Type: 2, Metric: 0, Fwd addr: 0.0.0.0, Tag: 208.0.137.78
+
+[edit]
+lab@MX80-NGGWR-02# run show route logical-system r4 table GREEN.inet.0 protocol ospf
+
+GREEN.inet.0: 18 destinations, 32 routes (18 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+11.22.0.0/24       *[OSPF/10] 22:04:44, metric 51
+                    &gt; to 200.6.42.2 via ge-1/2/1.642
+20.20.1.22/32      *[OSPF/10] 22:04:44, metric 1
+                    &gt; to 200.6.42.2 via ge-1/2/1.642
+224.0.0.5/32       *[OSPF/10] 22:05:52, metric 1
+                      MultiRecv
+
+[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0 protocol ospf
+
+GREEN.inet.0: 17 destinations, 32 routes (17 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+11.22.0.0/24       *[OSPF/10] 22:04:43, metric 51
+                    &gt; to 200.6.11.2 via ge-1/2/1.611
+20.20.1.11/32      *[OSPF/150] 22:04:43, metric 0, tag 0
+                    &gt; to 200.6.11.2 via ge-1/2/1.611
+224.0.0.5/32       *[OSPF/10] 22:06:01, metric 1
+                      MultiRecv
+
+[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0 hidden
+
+GREEN.inet.0: 17 destinations, 32 routes (17 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.22/32       [OSPF] 22:05:01, metric 2
+                    &gt; via shamlink.0
+20.20.1.33/32       [OSPF] 22:05:11, metric 0, tag 0
+                    &gt; via shamlink.0
+200.6.42.0/24       [OSPF] 22:05:11, metric 2
+                    &gt; via shamlink.0
+
+[edit]
+lab@MX80-NGGWR-02# run show route logical-system r4 table GREEN.inet.0 hidden
+
+GREEN.inet.0: 18 destinations, 32 routes (18 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0           [OSPF] 22:05:26, metric 0, tag 0
+                    &gt; via shamlink.0
+20.20.1.11/32       [OSPF] 22:05:01, metric 0, tag 0
+                    &gt; via shamlink.0
+200.6.11.0/24       [OSPF] 22:05:01, metric 2
+                    &gt; via shamlink.0
+
+[edit]
+lab@MX80-NGGWR-02#
 </code></pre>
 <h3 id="tip-sham-link">TIP: sham-link</h3>
 <p>by default all type5 LSA</p>
@@ -3465,7 +4147,7 @@ protocols {
             sham-link-remote 4.4.4.4;
             interface ge-1/2/1.691;
             interface all;
-            interface lo0.11;
+            interface lo0.11;       #&lt;------
         }
     }
 }
@@ -3544,10 +4226,322 @@ enable the knob =&gt; create 1 LSI for this vrf =&gt; assign lable to LSI (1024-
   interface (next hop equals the vt-x/y/z interface)                      <br />
 </li>
 </ul>
-<h3 id="vpn-internet-access">VPN Internet access</h3>
-<h4 id="solution-1">solution 1</h4>
-<h5 id="solution1-config">solution1 config</h5>
-<pre><code>#R1 global add static route summarizing all vpn routes, pointing intoto vrf
+<h3 id="vpn-access-solution-1">VPN access solution 1</h3>
+<p>VPN must have internet access, and 
+<em> the internet gateway is R1, 
+</em> you can’t define any static route in VRF instance, 
+<em> you can only define 1 static route on PE，
+</em> rib-group not allowed under VRF.</p>
+<p>solution 1:</p>
+<ul>
+<li>
+<p>R1-global: suck all downward (from Internet to VPN) traffic to R1-global</p>
+<ul>
+<li>aggr. VPN routes</li>
+<li>adv aggr.ed VPN routes via BGP</li>
+</ul>
+</li>
+<li>
+<p>R1-global: direct sucked traffic into VRF, who already knows how to reach all VPN site. downward done.</p>
+<ul>
+<li>static route to VPN aggr. routes via next-table GREEN.inet.0</li>
+</ul>
+</li>
+<li>
+<p>R1-vrf: suck all upward (to Internet) traffic to local R1-VRF</p>
+<ul>
+<li>vrf adv default routes to all VPN sites</li>
+</ul>
+</li>
+<li>
+<p>R1-global: leak full Internet table into R1-vrf, making R1-VRF knows how to reach Internet, upward done.</p>
+<ul>
+<li>rib-group, copy inet.0 into GREEN.inet.0</li>
+</ul>
+</li>
+</ul>
+<h3 id="config-vpn-inetaccess-1">config: VPN InetAccess 1</h3>
+<pre><code>set logical-systems r1 routing-options static route 20.20/16 next-table GREEN.inet.0 
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 from protocol static route-filter 20.20/16 exact  
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then next-hop self                                          
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then accept           
+set logical-systems r1 protocols bgp group to-v4v6-rr export exp-bgp-vpn-routes  
+set logical-systems r1 protocols bgp group to-c3 export exp-bgp-vpn-routes  
+set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [inet.0 GREEN.inet.0]  
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet unicast rib-group imp-inet.0-to-vrf 
+set logical-systems r1 protocols bgp group to-c3 family inet unicast rib-group imp-inet.0-to-vrf 
+set logical-systems r1 routing-instances GREEN routing-options aggregate route 0/0    
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 from instance GREEN protocol aggregate route-filter 0/0 exact                   
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 then accept                                                      
+set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-default  
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol aggregate route-filter 0/0 exact                  
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                          
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
+</code></pre>
+<h3 id="verify_17">verify</h3>
+<pre><code>lab@MX80-NGGWR-02# run ping 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid              
+PING 10.200.1.8 (10.200.1.8): 56 data bytes
+!!!!!
+--- 10.200.1.8 ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.543/0.621/0.752/0.083 ms
+
+lab@MX80-NGGWR-02# run ping 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid    
+PING 3.3.3.1 (3.3.3.1): 56 data bytes
+!!!!!
+--- 3.3.3.1 ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.505/0.775/1.632/0.435 ms
+</code></pre>
+<h3 id="vpn-access-solution-2">VPN access solution 2</h3>
+<h3 id="config-vpn-inetaccess-2">config: VPN InetAccess 2</h3>
+<pre><code>#R1:VRF -&gt; Internet: R1 config static def pointing to R2/3; then rib-group it to vrf
+set logical-systems r1 routing-options static route 0/0 next-hop [ 100.0.12.2 100.0.13.2 ]
+set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [ inet.0 GREEN.inet.0 ] 
+set logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
+
+#VPN site-&gt;R1:VRF: R1 VRF adv static def to remote site via vrf-exp; and to local CE via export to ospf 
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol static route-filter 0/0 exact  
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
+
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 from protocol static route-filter 0/0 exact  
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 then accept
+set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-default
+
+#Internet -&gt; R1: R1 
+#   config aggr vpn route; 
+#       rib-group some vrf routes (from vrf ospf) into R1,making aggr active
+#       adv aggr vpn routes to RR and ce2 
+set logical-systems r1 routing-options aggregate route 20.20/16
+
+set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [ GREEN.inet.0 inet.0 ] 
+set logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0
+
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from protocol aggregate route-filter 20.20/16 exact  
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 then accept                                      
+set logical-systems r1 protocols bgp group to-v4v6-rr export exp-bgp-vpn-agg  
+set logical-systems r1 protocols bgp group to-c3 export exp-bgp-vpn-agg
+
+#R1 -&gt; VRF: use policy to change NH to next-table pointing to vrf table; 
+#       and apply policy into fwd table
+set logical-systems r1 policy-options policy-statement exp-fwd-fix-vpn-nh term 1 from protocol aggregate rib inet.0 route-filter 20.20/16 exact
+set logical-systems r1 policy-options policy-statement exp-fwd-fix-vpn-nh term 1 then next-hop next-table GREEN.inet.0
+set logical-systems r1 policy-options policy-statement exp-fwd-fix-vpn-nh term 1 then accept
+set logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-nh
+</code></pre>
+<h3 id="verify1-pingtraceroute">verify1 : ping/traceroute</h3>
+<pre><code>lab@MX80-NGGWR-02# run ping 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid                 
+PING 10.200.1.8 (10.200.1.8): 56 data bytes
+!!!!!
+--- 10.200.1.8 ping statistics ---
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.546/0.619/0.863/0.122 ms
+
+[edit]
+lab@MX80-NGGWR-02# run ping 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid                  
+PING 3.3.3.1 (3.3.3.1): 56 data bytes
+....^C
+--- 3.3.3.1 ping statistics ---
+5 packets transmitted, 0 packets received, 100% packet loss
+
+[edit]
+lab@MX80-NGGWR-02# run ping 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+PING 44.44.1.1 (44.44.1.1): 56 data bytes
+64 bytes from 44.44.1.1: icmp_seq=0 ttl=60 time=0.750 ms
+64 bytes from 44.44.1.1: icmp_seq=1 ttl=60 time=0.634 ms
+^C
+--- 44.44.1.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.634/0.692/0.750/0.058 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+traceroute to 44.44.1.1 (44.44.1.1) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.527 ms  0.418 ms  0.485 ms
+^C
+[edit]
+lab@MX80-NGGWR-02# run traceroute 10.200.0.8 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+traceroute to 10.200.0.8 (10.200.0.8) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  2.590 ms  2.478 ms  3.191 ms
+^C
+[edit]
+</code></pre>
+<h3 id="verify2-routing-table">verify2: routing table</h3>
+<h3 id="config-vpn-lsp-map">config vpn LSP map</h3>
+<pre><code>set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 1 from community ce2
+set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 1 then install-nexthop lsp r1-r4-green  #&lt;------
+set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 from protocol bgp
+set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 from community ce3
+set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 then install-nexthop lsp r1-r4-blue   #&lt;------
+
+set logical-systems r1 routing-options forwarding-table export exp-fwd-lsp-map
+set logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-nh
+</code></pre>
+<h4 id="verify_18">verify</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0 20.20.1.22
+
+GREEN.inet.0: 17 destinations, 31 routes (17 active, 0 holddown, 2 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.22/32      *[BGP/170] 1d 12:48:48, MED 1, localpref 100, from 10.200.1.2
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+                    [BGP/170] 1d 12:48:48, MED 1, localpref 100, from 10.200.1.3
+                      AS path: I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-green
+
+[edit]
+lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0 20.20.1.33
+
+GREEN.inet.0: 17 destinations, 31 routes (17 active, 0 holddown, 2 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.33/32      *[BGP/170] 1d 12:49:06, localpref 100, from 10.200.1.2
+                      AS path: 65000 I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+                    [BGP/170] 1d 12:49:22, localpref 100, from 10.200.1.3
+                      AS path: 65000 I, validation-state: unverified
+                      to 100.0.12.2 via ge-1/2/1.102, label-switched-path r1-r4-blue
+</code></pre>
+<h3 id="config-vpn-lsp-map-old">config vpn lsp map (old)</h3>
+<pre><code>set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 from protocol bgp community ce2
+set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then install-nexthop lsp r1-r4-blue
+set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then accept
+set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 from protocol bgp community ce3
+set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 then install-nexthop lsp r1-r4-green
+set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 then accept
+
+set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
+</code></pre>
+<h4 id="verify_19">verify</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
+traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
+ 1  20.20.19.2 (20.20.19.2)  0.651 ms  33.948 ms  0.438 ms
+ 2  10.10.12.2 (10.10.12.2)  0.556 ms  0.516 ms  0.506 ms
+     MPLS Label=299824 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  20.20.100.1 (20.20.100.1)  0.465 ms  0.568 ms  0.448 ms
+ 4  20.20.1.33 (20.20.1.33)  0.583 ms  0.845 ms  0.703 ms
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.22
+
+GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.22/32      *[BGP/170] 00:41:23, MED 0, localpref 100, from 10.10.1.2
+                      AS path: I
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------default:all pick blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 00:41:23, MED 0, localpref 100, from 10.10.1.3
+                      AS path: I
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.33
+
+GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.33/32      *[BGP/170] 00:41:33, localpref 100, from 10.10.1.2
+                      AS path: 65000 I
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------default:all pick blue
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+                    [BGP/170] 00:41:33, localpref 100, from 10.10.1.3
+                      AS path: 65000 I
+                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
+
+[edit]
+lab@MX80-NGGWR-01# set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
+
+[edit]
+lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems r1 routing-options forwarding-table]
+-    export exp-fwd-vpn-agg;
++    export [ exp-fwd-vpn-agg exp-fwd-lspmap ];
+
+[edit]
+lab@MX80-NGGWR-01# commit  
+commit complete
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.22
+
+GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.22/32      *[BGP/170] 00:01:00, MED 0, localpref 100, from 10.10.1.2
+                      AS path: I
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------only 1 LSP (r1-r4-blue)
+                    [BGP/170] 00:01:00, MED 0, localpref 100, from 10.10.1.3
+                      AS path: I
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------was used
+
+[edit]
+lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.33
+
+GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
++ = Active Route, - = Last Active, * = Both
+
+20.20.1.33/32      *[BGP/170] 00:01:05, localpref 100, from 10.10.1.2
+                      AS path: 65000 I
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green        #&lt;------
+                    [BGP/170] 00:01:05, localpref 100, from 10.10.1.3
+                      AS path: 65000 I
+                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green        #&lt;------
+
+[edit]
+lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1            
+traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
+ 1  20.20.19.2 (20.20.19.2)  0.640 ms  0.585 ms  0.492 ms
+ 2  10.10.12.2 (10.10.12.2)  0.548 ms  0.541 ms  0.565 ms
+     MPLS Label=299824 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  20.20.100.1 (20.20.100.1)  0.640 ms  0.561 ms  0.438 ms
+ 4  20.20.1.33 (20.20.1.33)  0.625 ms  0.694 ms  0.544 ms
+
+[edit]
+lab@MX80-NGGWR-01# run traceroute 20.20.1.22 logical-system r0 routing-instance green-ce1    
+traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
+ 1  20.20.19.2 (20.20.19.2)  0.617 ms  0.436 ms  0.424 ms
+ 2  10.10.12.2 (10.10.12.2)  0.546 ms  0.747 ms  0.732 ms
+     MPLS Label=299856 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  20.20.42.2 (20.20.42.2)  0.477 ms  0.460 ms  0.552 ms
+ 4  20.20.1.22 (20.20.1.22)  0.682 ms  0.689 ms  0.618 ms
+</code></pre>
+<h3 id="config-vpn-inetaccess-3-tbc">config: VPN InetAccess 3 (t.b.c)</h3>
+<pre><code>set logical-systems r1 routing-options aggregate route 20.20.0.0/16
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from protocol aggregate
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from route-filter 20.20.0.0/16 exact
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 then accept
+set logical-systems r1 protocols bgp group to-v4v6-rr export exp-bgp-vpn-agg
+
+set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib GREEN.inet.0
+set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib inet.0
+</code></pre>
+<h4 id="remove-sol3">remove sol3</h4>
+<pre><code>lab@MX80-NGGWR-02# delete logical-systems r1 routing-instances GREEN routing-options static  
+lab@MX80-NGGWR-02# delete logical-systems r1 policy-options policy-statement vrf-exp term 3 
+lab@MX80-NGGWR-02# delete logical-systems r1 routing-instances GREEN protocols ospf export exp-defaults-to-vpn1    
+lab@MX80-NGGWR-02# delete logical-systems r1 policy-options policy-statement exp-defaults-to-vpn1                    
+lab@MX80-NGGWR-02# delete logical-systems r1 routing-options aggregate route 20.20.0.0/16       
+lab@MX80-NGGWR-02# delete logical-systems r1 routing-instances GREEN protocols ospf rib-group    
+lab@MX80-NGGWR-02# delete logical-systems r1 routing-instances GREEN routing-options interface-routes rib-group  
+lab@MX80-NGGWR-02# delete logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg                     
+lab@MX80-NGGWR-02# delete logical-systems r1 protocols bgp group to-v4v6-rr export exp-bgp-vpn-agg                     
+lab@MX80-NGGWR-02# delete logical-systems r1 protocols bgp group to-c3 export exp-bgp-vpn-agg  
+lab@MX80-NGGWR-02# delete logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-agg-nh  
+lab@MX80-NGGWR-02# delete logical-systems r1 policy-options policy-statement exp-fwd-fix-vpn-agg-nh
+</code></pre>
+<h3 id="solution-1-old-notes">solution 1 old notes</h3>
+<pre><code>#R1 global add static route summarizing all vpn routes, pointing into vrf
 set logical-systems r1 routing-options static route 20.20.0.0/16 next-table GREEN.inet.0
 
 #then adv to all internet via bgp
@@ -3579,9 +4573,9 @@ set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib i
 set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib GREEN.inet.0
 set logical-systems r1 protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf
 </code></pre>
-<h5 id="source-internet-r1-adv-aggr-vpn-routes-from-r1">source Internet =&gt; R1 : adv aggr. vpn routes from R1</h5>
-<h5 id="r1-r1vrf-r1-static-route-with-next-table">R1 =&gt; R1:vrf : R1: static route with next table</h5>
-<h6 id="other-r-got-aggr-vpn-routes-from-r1">other R got aggr. vpn routes from R1</h6>
+<h4 id="source-internet-r1-adv-aggr-vpn-routes-from-r1">source Internet =&gt; R1 : adv aggr. vpn routes from R1</h4>
+<h4 id="r1-r1vrf-r1-static-route-with-next-table">R1 =&gt; R1:vrf : R1: static route with next table</h4>
+<h5 id="other-r-got-aggr-vpn-routes-from-r1">other R got aggr. vpn routes from R1</h5>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r5 protocol bgp 20.20/16
 
 inet.0: 50 destinations, 56 routes (50 active, 0 holddown, 0 hidden)
@@ -3592,9 +4586,9 @@ Restart Complete
                       AS path: I
                     &gt; to 10.10.25.1 via ge-1/2/2.25, label-switched-path r5-r1
 </code></pre>
-<h5 id="r1vrf-dest-ce-current-behavior-no-need-extra-config">R1:vrf =&gt; dest CE : current behavior, no need extra config</h5>
-<h5 id="source-ce-r1vrf-r1vrf-adv-a-default-to-ce-via-ospf">source CE -&gt; R1:vrf : R1:vrf adv a default to CE via ospf</h5>
-<h6 id="ce1-routes-after-r1green-exp-default-to-ce1-via-ospf">ce1 routes after R1:GREEN exp default to ce1 via ospf</h6>
+<h4 id="r1vrf-dest-ce-current-behavior-no-need-extra-config">R1:vrf =&gt; dest CE : current behavior, no need extra config</h4>
+<h4 id="source-ce-r1vrf-r1vrf-adv-a-default-to-ce-via-ospf">source CE -&gt; R1:vrf : R1:vrf adv a default to CE via ospf</h4>
+<h5 id="ce1-routes-after-r1green-exp-default-to-ce1-via-ospf">ce1 routes after R1:GREEN exp default to ce1 via ospf</h5>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run show route logical-system r0 table green-ce1.inet.0 0/0 exact
 
@@ -3604,9 +4598,9 @@ green-ce1.inet.0: 24 destinations, 25 routes (24 active, 0 holddown, 0 hidden)
 0.0.0.0/0          *[OSPF/150] 00:01:57, metric 0, tag 0
                     &gt; to 20.20.19.2 via ge-1/2/2.691
 </code></pre>
-<h5 id="same-for-other-ce-adjacent-rvrf-r1vrf-export-the-default-route-to-all-sites">same for other CE -&gt; adjacent R:VRF : R1:vrf export the default route to all sites</h5>
-<h5 id="r1vrf-r1-internet-r1-leak-internet-means-bgp-table-into-r1-vrf">R1:vrf -&gt; R1 -&gt; Internet : R1 leak Internet (means bgp) table into R1 vrf</h5>
-<h6 id="original-r1vrfgreeninet0-table">original R1:vrf(GREEN.inet.0) table</h6>
+<h4 id="same-for-other-ce-adjacent-rvrf-r1vrf-export-the-default-route-to-all-sites">same for other CE -&gt; adjacent R:VRF : R1:vrf export the default route to all sites</h4>
+<h4 id="r1vrf-r1-internet-r1-leak-internet-means-bgp-table-into-r1-vrf">R1:vrf -&gt; R1 -&gt; Internet : R1 leak Internet (means bgp) table into R1 vrf</h4>
+<h5 id="original-r1vrfgreeninet0-table">original R1:vrf(GREEN.inet.0) table</h5>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN.inet.0
 
 GREEN.inet.0: 15 destinations, 29 routes (15 active, 0 holddown, 3 hidden)
@@ -3700,7 +4694,7 @@ GREEN.inet.0: 15 destinations, 29 routes (15 active, 0 holddown, 3 hidden)
 [edit]
 lab@MX80-NGGWR-01#
 </code></pre>
-<h6 id="r1greeninet0-after-rib-group-r1inet0-r1greeninet0">R1:GREEN.inet.0 , after rib-group: R1:inet.0 -&gt; R1:GREEN.inet.0</h6>
+<h5 id="r1greeninet0-after-rib-group-r1inet0-r1greeninet0">R1:GREEN.inet.0 , after rib-group: R1:inet.0 -&gt; R1:GREEN.inet.0</h5>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN.inet.0
 
 GREEN.inet.0: 22 destinations, 43 routes (22 active, 0 holddown, 3 hidden)
@@ -3835,8 +4829,8 @@ GREEN.inet.0: 22 destinations, 43 routes (22 active, 0 holddown, 3 hidden)
 224.0.0.5/32       *[OSPF/10] 00:20:15, metric 1
                       MultiRecv
 </code></pre>
-<h4 id="solution-2">solution 2</h4>
-<h5 id="remove-solution1">remove solution1</h5>
+<h3 id="solution-2-old-notes">solution 2 old notes</h3>
+<h4 id="remove-solution1">remove solution1</h4>
 <pre><code>#R1 global add static route summarizing all vpn routes, pointing intoto vrf
 delete logical-systems r1 routing-options static route 20.20.0.0/16
 
@@ -3858,31 +4852,33 @@ delete logical-systems r1 policy-options policy-statement vrf-exp term 3
 delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
 delete logical-systems r1 protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf
 </code></pre>
-<h5 id="solution2-config">solution2 config</h5>
-<pre><code>set logical-systems r1 routing-options static route 0/0 next-hop [ 10.10.12.2 10.10.13.2 ] 
+<h4 id="solution2-config">solution2 config</h4>
+<pre><code>#config R1 static default to R2/3, then copy to vrf
+set logical-systems r1 routing-options static route 0/0 next-hop [ 10.10.12.2 10.10.13.2 ] 
 set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [ inet.0 GREEN.inet.0 ] 
 set logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
 
+#R1 vrf adv this default to other VPN sites
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol static route-filter 0/0 exact  
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                       
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
 
 #config an aggr route in R1 and adv to all R
+set logical-systems r1 routing-options aggregate route 20.20/16      
 set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from protocol aggregate route-filter 20.20/16 exact  
 set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 then accept                                            
 set logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-agg
 
 #aggr. routes need at least one contributor, import some contributing routes from vrf table
-set logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0    
-set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [GREEN.inet.0 inet.0]
+set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [GREEN.inet.0 inet.0]    
+set logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0
 
 set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 from rib inet.0 protocol aggregate route-filter 20.20/16 exact    
 set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then next-hop next-table GREEN.inet.0 
-set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then accept
-
+set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then accept                                            
 set logical-systems r1 routing-options forwarding-table export exp-fwd-vpn-agg
 </code></pre>
-<h5 id="r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</h5>
+<h4 id="r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</h4>
 <pre><code>set logical-systems r1 routing-options static route 0/0 next-hop [ 10.10.12.2 10.10.13.2 ]
 
 lab@MX80-NGGWR-01# run show route 0/0 exact logical-system r1
@@ -3895,7 +4891,7 @@ Restart Complete
                     &gt; to 10.10.13.2 via ge-1/2/1.13
                       to 10.10.12.2 via ge-1/2/1.12
 </code></pre>
-<h5 id="r1vrf-r1-internet-r1-copy-route-into-vrf">R1:vrf =&gt; R1 =&gt; Internet : R1 copy route into vrf</h5>
+<h4 id="r1vrf-r1-internet-r1-copy-route-into-vrf">R1:vrf =&gt; R1 =&gt; Internet : R1 copy route into vrf</h4>
 <pre><code>set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [ inet.0 GREEN.inet.0 ] 
 set logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
 
@@ -3908,7 +4904,7 @@ GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
                       to 10.10.13.2 via ge-1/2/1.13
                     &gt; to 10.10.12.2 via ge-1/2/1.12
 </code></pre>
-<h5 id="other-rvrf-r1vrf-internet-adv-default-to-other-site">other R:vrf =&gt; R1:vrf (=&gt; Internet) : adv default to other site</h5>
+<h4 id="other-rvrf-r1vrf-internet-adv-default-to-other-site">other R:vrf =&gt; R1:vrf (=&gt; Internet) : adv default to other site</h4>
 <pre><code>set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol static route-filter 0/0 exact  
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                       
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
@@ -3939,7 +4935,7 @@ GREEN.inet.0: 16 destinations, 28 routes (16 active, 0 holddown, 0 hidden)
                       AS path: I
                     &gt; to 10.10.68.1 via ge-1/2/2.68, Push 16, Push 300544(top)
 </code></pre>
-<h5 id="internet-r1-r1-adv-an-aggr-route-out">Internet =&gt; R1 : R1: adv an aggr route out</h5>
+<h4 id="internet-r1-r1-adv-an-aggr-route-out">Internet =&gt; R1 : R1: adv an aggr route out</h4>
 <pre><code>#config an aggr route in R1 and adv to all R
 set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 from protocol aggregate route-filter 20.20/16 exact  
 set logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg term 1 then accept                                            
@@ -3975,7 +4971,7 @@ set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [
                           AS path: I
                         &gt; to 10.10.12.1 via ge-1/2/2.12, label-switched-path r2-r1
 </code></pre>
-<h5 id="r1-vrf-look-up-vpn-aggr-routes-of-r1-inet0-also-in-vrf-table">R1 =&gt; vrf : look up vpn aggr routes (of R1 inet.0) also in vrf table</h5>
+<h4 id="r1-vrf-look-up-vpn-aggr-routes-of-r1-inet0-also-in-vrf-table">R1 =&gt; vrf : look up vpn aggr routes (of R1 inet.0) also in vrf table</h4>
 <pre><code>set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 from rib inet.0 protocol aggregate route-filter 20.20/16 exact    
 set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then next-hop next-table GREEN.inet.0 
 set logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg term 1 then accept
@@ -4004,7 +5000,7 @@ GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
                     &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue
                       to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
 </code></pre>
-<h5 id="ping-test">ping test</h5>
+<h4 id="ping-test">ping test</h4>
 <pre><code>lab@MX80-NGGWR-01# run ping 10.10.1.5 logical-system r0 routing-instance green-ce3 source 20.20.1.33              
 PING 10.10.1.5 (10.10.1.5): 56 data bytes
 64 bytes from 10.10.1.5: icmp_seq=0 ttl=60 time=1.432 ms
@@ -4014,7 +5010,7 @@ PING 10.10.1.5 (10.10.1.5): 56 data bytes
 2 packets transmitted, 2 packets received, 0% packet loss
 round-trip min/avg/max/stddev = 0.665/1.048/1.432/0.384 ms
 </code></pre>
-<h5 id="remove-solution-2">remove solution 2</h5>
+<h4 id="remove-solution-2">remove solution 2</h4>
 <pre><code>delete logical-systems r1 routing-options static route 0/0
 delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
 delete logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
@@ -4032,9 +5028,10 @@ delete logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0
 delete logical-systems r1 policy-options policy-statement exp-fwd-vpn-agg
 delete logical-systems r1 routing-options forwarding-table export exp-fwd-vpn-agg
 </code></pre>
-<h4 id="tip-about-next-hop-next-table-greeninet0">TIP: about <code>next-hop next-table GREEN.inet.0</code></h4>
+<h3 id="tip-about-next-hop-next-table-greeninet0">TIP: about <code>next-hop next-table GREEN.inet.0</code></h3>
 <ul>
-<li>this only change where to "lookup" , not any routing tables themselves.</li>
+<li>this only change where to "lookup" , not to change/copy any routing tables
+  themselves.</li>
 <li>
 <p>once next-table is used, the <code>from</code> statement must exclude the table in the
   <code>next-table</code> action (meaning specifying a different table) </p>
@@ -4046,7 +5043,7 @@ delete logical-systems r1 routing-options forwarding-table export exp-fwd-vpn-ag
 </code></pre>
 </li>
 </ul>
-<h4 id="tip-icmp-tunneling">TIP: icmp-tunneling</h4>
+<h3 id="tip-icmp-tunneling">TIP: icmp-tunneling</h3>
 <pre><code>set logical-systems r1 protocols mpls icmp-tunneling       
 set logical-systems r2 protocols mpls icmp-tunneling       
 set logical-systems r3 protocols mpls icmp-tunneling       
@@ -4056,7 +5053,7 @@ set logical-systems r6 protocols mpls icmp-tunneling
 set logical-systems r7 protocols mpls icmp-tunneling       
 set logical-systems r8 protocols mpls icmp-tunneling
 </code></pre>
-<h4 id="tip-about-local-as">TIP: about <code>local-as</code></h4>
+<h3 id="tip-about-local-as">TIP: about <code>local-as</code></h3>
 <p>configured local-as under RI without <code>autonomous-system</code> under routing-option,
 will lead to unexpected behavior at least in the lab simulation</p>
 <pre><code>lab@MX80-NGGWR-01# run show route logical-system r0 table green-ce5.inet.0 hidden 0/0 exact extensive
@@ -4104,7 +5101,7 @@ KRT in-kernel 0.0.0.0/0 -&gt; {20.20.150.1}
                 Localpref: 100
                 Router ID: 20.20.150.1
 </code></pre>
-<h4 id="tip-import-rib-and-export-rib">TIP: import-rib and export-rib</h4>
+<h3 id="tip-import-rib-and-export-rib">TIP: import-rib and export-rib</h3>
 <p>example:</p>
 <pre><code>set logical-systems r1 routing-instances GREEN protocols ospf rib-group imp-vrf-to-inet.0    
 set logical-systems r1 routing-options rib-groups imp-vrf-to-inet.0 import-rib [GREEN.inet.0 inet.0]
@@ -4127,120 +5124,9 @@ routing table:
      default:       inet.0 (def. )              inet.0 (def. w/o export-rib)
      rib-group:     inet.0 + GREEN.inet.0       inet.3(need some test)
 </code></pre>
-<h3 id="vpn-lsp-map">vpn lsp map</h3>
-<h4 id="config_4">config</h4>
-<pre><code>set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 from protocol bgp community ce2
-set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then install-nexthop lsp r1-r4-blue
-set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 1 then accept
-set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 from protocol bgp community ce3
-set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 then install-nexthop lsp r1-r4-green
-set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 then accept
-
-set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
-</code></pre>
-<h4 id="verify_18">verify</h4>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
-traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
- 1  20.20.19.2 (20.20.19.2)  0.651 ms  33.948 ms  0.438 ms
- 2  10.10.12.2 (10.10.12.2)  0.556 ms  0.516 ms  0.506 ms
-     MPLS Label=299824 CoS=0 TTL=1 S=0
-     MPLS Label=16 CoS=0 TTL=1 S=1
- 3  20.20.100.1 (20.20.100.1)  0.465 ms  0.568 ms  0.448 ms
- 4  20.20.1.33 (20.20.1.33)  0.583 ms  0.845 ms  0.703 ms
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.22
-
-GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-20.20.1.22/32      *[BGP/170] 00:41:23, MED 0, localpref 100, from 10.10.1.2
-                      AS path: I
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------default:all pick blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 00:41:23, MED 0, localpref 100, from 10.10.1.3
-                      AS path: I
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.33
-
-GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-20.20.1.33/32      *[BGP/170] 00:41:33, localpref 100, from 10.10.1.2
-                      AS path: 65000 I
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------default:all pick blue
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-                    [BGP/170] 00:41:33, localpref 100, from 10.10.1.3
-                      AS path: 65000 I
-                    &gt; to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green
-
-[edit]
-lab@MX80-NGGWR-01# set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
-
-[edit]
-lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems r1 routing-options forwarding-table]
--    export exp-fwd-vpn-agg;
-+    export [ exp-fwd-vpn-agg exp-fwd-lspmap ];
-
-[edit]
-lab@MX80-NGGWR-01# commit  
-commit complete
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.22
-
-GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-20.20.1.22/32      *[BGP/170] 00:01:00, MED 0, localpref 100, from 10.10.1.2
-                      AS path: I
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
-                    [BGP/170] 00:01:00, MED 0, localpref 100, from 10.10.1.3
-                      AS path: I
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-blue         #&lt;------
-
-[edit]
-lab@MX80-NGGWR-01# run show route logical-system r1 table GREEN 20.20.1.33
-
-GREEN.inet.0: 16 destinations, 30 routes (16 active, 0 holddown, 3 hidden)
-+ = Active Route, - = Last Active, * = Both
-
-20.20.1.33/32      *[BGP/170] 00:01:05, localpref 100, from 10.10.1.2
-                      AS path: 65000 I
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green        #&lt;------
-                    [BGP/170] 00:01:05, localpref 100, from 10.10.1.3
-                      AS path: 65000 I
-                      to 10.10.12.2 via ge-1/2/1.12, label-switched-path r1-r4-green        #&lt;------
-
-[edit]
-lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1            
-traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
- 1  20.20.19.2 (20.20.19.2)  0.640 ms  0.585 ms  0.492 ms
- 2  10.10.12.2 (10.10.12.2)  0.548 ms  0.541 ms  0.565 ms
-     MPLS Label=299824 CoS=0 TTL=1 S=0
-     MPLS Label=16 CoS=0 TTL=1 S=1
- 3  20.20.100.1 (20.20.100.1)  0.640 ms  0.561 ms  0.438 ms
- 4  20.20.1.33 (20.20.1.33)  0.625 ms  0.694 ms  0.544 ms
-
-[edit]
-lab@MX80-NGGWR-01# run traceroute 20.20.1.22 logical-system r0 routing-instance green-ce1    
-traceroute to 20.20.1.22 (20.20.1.22), 30 hops max, 40 byte packets
- 1  20.20.19.2 (20.20.19.2)  0.617 ms  0.436 ms  0.424 ms
- 2  10.10.12.2 (10.10.12.2)  0.546 ms  0.747 ms  0.732 ms
-     MPLS Label=299856 CoS=0 TTL=1 S=0
-     MPLS Label=16 CoS=0 TTL=1 S=1
- 3  20.20.42.2 (20.20.42.2)  0.477 ms  0.460 ms  0.552 ms
- 4  20.20.1.22 (20.20.1.22)  0.682 ms  0.689 ms  0.618 ms
-</code></pre>
-<h2 id="interas-vpn">InterAS VPN</h2>
+<h2 id="interas-vpn-part-a">InterAS VPN (PART A)</h2>
 <h3 id="solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: <code>inet (uncast+labeled-unicast rib inet.3)</code></h3>
-<h4 id="config_5">config</h4>
+<h4 id="config_4">config</h4>
 <pre><code>###R5: adv R1 lo0 to peer ASBR via policy, as inet-unicast&amp;labeled-unicast
 ###    so peer ASBR can install R1 lo0 in both inet.0 &amp; inet.3
 #match r1 lo0 from inet.0 (serving `inet-unicast` bgp family only)
@@ -4375,8 +5261,8 @@ term 2 {
     then accept;
 }
 </code></pre>
-<h2 id="vpls">VPLS</h2>
-<h3 id="config_6">config</h3>
+<h2 id="vpls-part-a">VPLS (PART A)</h2>
+<h3 id="config_5">config</h3>
 <pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
 set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
 set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
@@ -4551,8 +5437,15 @@ configure any combination of route, TCC, CCC, Layer 2 virtual private networks
 (VPNs), and VPLS encapsulations on a single physical port. If you configure
 flexible Ethernet services encapsulation on the physical interface, VLAN IDs
 from 1 through 511 are no longer reserved for normal VLANs.</p>
-<h2 id="cos">cos</h2>
-<pre><code>IP Prec          111         110             other
+<h2 id="config-cos">config COS</h2>
+<p>[from sp3]</p>
+<pre><code>1,Provide COS service to the traffic flow from C3 to P3. 
+2,on R1, for the cos 111’s input traffic, assign to EF class, cos 110 to AF, others goes into BE.
+3,EF set speed limit to 5m, AF to 10m, BE to 7m
+4,you can’t affect the default cos policy.
+5,make sure the cos service was constant all the way from C3 to P3
+
+IP Prec          111         110             other
 fwd-class        EF          AF              BE
 </code></pre>
 <p>R1:</p>
@@ -4586,10 +5479,10 @@ set class-of-service classifiers inet-precedence class-ippre forwarding-class ex
 set class-of-service classifiers inet-precedence class-ippre forwarding-class assured-forwarding loss-priority low code-points 110 
 set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence class-ippre
 </code></pre>
-<h3 id="tip-qoscos">TIP: QoS/CoS</h3>
-<h4 id="key-concepts">key concepts</h4>
+<h2 id="tip-qoscos">TIP: QoS/CoS</h2>
+<h3 id="key-concepts">key concepts</h3>
 <p>unidirectonal</p>
-<h4 id="ip-tosrfc791">IP TOS(RFC791)</h4>
+<h3 id="ip-tosrfc791">IP TOS(RFC791)</h3>
 <pre><code>P2      P1      P0      D      T      R      CU1     CU0
 </code></pre>
 <ul>
@@ -4609,17 +5502,17 @@ routine         Match packets with routine precedence (0)</p>
 </li>
 <li>CU (Currently Unused)—two bits(CU1-CU0)</li>
 </ul>
-<h4 id="dscp">DSCP</h4>
-<h5 id="diffserv-field">DiffServ field</h5>
+<h3 id="dscp">DSCP</h3>
+<h4 id="diffserv-field">DiffServ field</h4>
 <p>Original IPv4 ToS byte (ping: just a new name in the context of diffserv)</p>
 <p>RFC2474</p>
 <pre><code>DS5     DS4     DS3     DS2     DS1     DS0     ECN     ECN
 </code></pre>
-<h5 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h5>
+<h4 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h4>
 <p><strong>Classification</strong> 
 based / indexed on DSCP 
 Packets with a common DSCP belong to the same BA (forwarding class)</p>
-<h5 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h5>
+<h4 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h4>
 <p>Forwarding treatment associated with a given BA
 Packets with the same DSCP value have the same PHB</p>
 <p>PHB group:
@@ -4627,9 +5520,9 @@ A set of one or more PHBs with related forwarding behavior </p>
 <p>Example: 
 assured forwarding (AF) is a PHB group, consisting of PHBs AF1, AF2, AF3, and
 AF4</p>
-<h6 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h6>
+<h5 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h5>
 <p>RFC3246</p>
-<h6 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h6>
+<h5 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h5>
 <p>RFC2597</p>
 <pre><code>DSCP        AAA BB0
 =====================        
@@ -4645,16 +5538,16 @@ AF3         011
 
 AF4         100
 </code></pre>
-<h6 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h6>
+<h5 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h5>
 <p>RFC2474: 
 defined for backward compatible with RFC791 (IP precedence)
 "code selector code point"
 for network control traffic</p>
 <p>AAA: 001 - 111
 BBB: 000        #&lt;------this is how to diff with other PHB</p>
-<h6 id="bebest-effort-000000">BE(Best Effort): 000000</h6>
+<h5 id="bebest-effort-000000">BE(Best Effort): 000000</h5>
 <p>no spec</p>
-<h6 id="redback-device-table">redback device table:</h6>
+<h5 id="redback-device-table">redback device table:</h5>
 <pre><code>============================================================
 &lt;0-63&gt;   Differentiated services codepoint value 
 af11     Match packets with AF11 dscp (001010) 
@@ -4679,7 +5572,7 @@ cs7      Match packets with CS7(precedence 7) dscp (111000)
 be(def)  Match packets with default dscp (000000) 
 ef       Match packets with EF dscp (101110)
 </code></pre>
-<h6 id="junos-default-forwarding-class">JUNOS default forwarding-class</h6>
+<h5 id="junos-default-forwarding-class">JUNOS default forwarding-class</h5>
 <pre><code>lab@MX80-NGGWR-01# set logical-systems r1 firewall filter Jfilter term 1 then forwarding-class ?
 Possible completions:
   &lt;forwarding-class&gt;   Classify packet to forwarding class
@@ -4696,7 +5589,7 @@ Possible completions:
   expedited-forwarding  
   network-control
 </code></pre>
-<h5 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h5>
+<h4 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h4>
 <pre><code>lab@rams# run show class-of-service code-point-aliases (inet-precedence|exp|dscp)
 
 Alias              Bit pattern 
@@ -4729,10 +5622,10 @@ ef1                 011
 nc1         110     110     110000
 nc2         111     111     111000
 </code></pre>
-<h4 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h4>
-<h4 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h4>
-<h4 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h4>
-<h4 id="junos-tool-chains">JUNOS tool chains</h4>
+<h3 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h3>
+<h3 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h3>
+<h3 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h3>
+<h3 id="junos-tool-chains">JUNOS tool chains</h3>
 <pre><code>          +-----------+     +-----------+    +-----------+    +-----------+
    Ingress|classifier |     |policer    |    |multi-field|    |policy     |
     --&gt;---+           +-----+           +----+classifier +----+           +
@@ -4746,11 +5639,11 @@ nc2         111     111     111000
     &lt;-----+marker     +-----+shaper/RED +----+classifier +----+           +
           +-----------+     +-----------+    +-----------+    +-----------+
 </code></pre>
-<h5 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h5>
-<h5 id="policer-traffic-limit">policer: traffic limit</h5>
-<h5 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h5>
-<h5 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h5>
-<h5 id="rewrite-marker">rewrite marker</h5>
+<h4 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h4>
+<h4 id="policer-traffic-limit">policer: traffic limit</h4>
+<h4 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h4>
+<h4 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h4>
+<h4 id="rewrite-marker">rewrite marker</h4>
 <h2 id="misc-notestips">misc notes/tips</h2>
 <h3 id="ipv6">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
@@ -6057,7 +6950,7 @@ run clear bgp neighbor soft logical-system lr6
 </code></pre>
 <p>this solution does not look great. no extra benefit also.</p>
 <h4 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h4>
-<h5 id="config_7">config</h5>
+<h5 id="config_6">config</h5>
 <pre><code>#R5/6: advertise R2/3/7/8 lo0 via BGP:
 
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
@@ -6742,7 +7635,7 @@ Restart Complete
                 Localpref: 100
                 Router ID: 10.10.1.6
 </code></pre>
-<h4 id="config_8">config</h4>
+<h4 id="config_7">config</h4>
 <pre><code>set logical-systems lr2 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
 set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
 set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
