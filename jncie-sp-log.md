@@ -4,8 +4,6 @@
 <ul>
 <li><a href="#jncie-logs">JNCIE logs</a><ul>
 <li><a href="#pre-igp">pre-IGP</a><ul>
-<li><a href="#tips-about-apply-groups">TIPS: about apply-groups</a></li>
-<li><a href="#question-about-apply-group-except">QUESTION: about apply-group-except</a></li>
 <li><a href="#transfer-on-commit">transfer-on-commit</a><ul>
 <li><a href="#config">config</a></li>
 <li><a href="#verify">verify</a></li>
@@ -35,6 +33,8 @@
 <li><a href="#verity">verity</a></li>
 </ul>
 </li>
+<li><a href="#tips-about-apply-groups">TIPS: about apply-groups</a></li>
+<li><a href="#questionresolved-about-apply-group-except">QUESTION(resolved): about apply-group-except</a></li>
 </ul>
 </li>
 <li><a href="#igp">IGP</a><ul>
@@ -136,6 +136,53 @@
 <li><a href="#tip-missing-rid-on-a-pure-ipv6-router">TIP: missing RID on a pure IPv6 router</a></li>
 </ul>
 </li>
+<li><a href="#interas-vpn-part-a">InterAS VPN (PART A)</a><ul>
+<li><a href="#config-r15-to-remote-asbrpe">config: R1/5 to remote ASBR/PE</a></li>
+<li><a href="#find-out-communities">find out communities</a></li>
+<li><a href="#config-r1-vrf-to-local-ce">config: R1 VRF to local CE</a></li>
+<li><a href="#verify_17">verify</a></li>
+<li><a href="#config-solution1old">config solution1(old):</a></li>
+<li><a href="#remove-solution1">remove solution1</a></li>
+<li><a href="#solution2-inet-resolved-vpn">solution2: inet resolved-vpn</a></li>
+<li><a href="#remove-solution2">remove solution2</a></li>
+<li><a href="#tip-inet-labeled-unicast-resolve-vpn">TIP: inet labeled-unicast resolve-vpn</a></li>
+<li><a href="#question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</a></li>
+<li><a href="#toggle-traffic-engineering-mpls-forwarding">toggle traffic-engineering mpls-forwarding</a></li>
+<li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
+<li><a href="#tip-interas-vpn-options">TIP: interAS VPN options</a></li>
+<li><a href="#tip-family-in-diff-levels">TIP: family in diff levels</a></li>
+<li><a href="#tip-bgp-keep-all">TIP: bgp keep-all</a></li>
+</ul>
+</li>
+<li><a href="#vpls-part-a">VPLS (PART A)</a><ul>
+<li><a href="#borrow-ae-ports-as-vpls-ports">borrow ae ports as vpls ports</a></li>
+<li><a href="#config_4">config</a></li>
+<li><a href="#verify_18">verify</a><ul>
+<li><a href="#r1-vpls-connection">R1 vpls connection</a></li>
+<li><a href="#r7-vpls-connection">R7 vpls connection</a></li>
+<li><a href="#r8-vpls-connection">R8 vpls connection</a></li>
+<li><a href="#vpls-forwarding-table-no-traffic">vpls forwarding-table (no traffic)</a></li>
+<li><a href="#vpls-forwarding-table-with-traffic">vpls forwarding table (with traffic)</a></li>
+<li><a href="#bridge-bridge-domain-per-instance">bridge bridge domain (per-instance)</a></li>
+<li><a href="#bridge-interface-statistics">bridge interface statistics</a></li>
+</ul>
+</li>
+<li><a href="#config-firewall-policer">config firewall policer</a></li>
+<li><a href="#tip-vpls-link-redundency-issue">TIP: vpls link redundency issue</a></li>
+<li><a href="#tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: encapsulation extended-vlan-vpls and flexible-ethernet-services</a></li>
+<li><a href="#2-commit-errors">2 commit errors</a></li>
+</ul>
+</li>
+<li><a href="#vpls-old">VPLS (old)</a><ul>
+<li><a href="#config_5">config</a></li>
+<li><a href="#show-vpls-connection">show vpls connection</a></li>
+<li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
+<li><a href="#with-tunne-service">with tunne-service</a></li>
+<li><a href="#without-tunnel-service">without tunnel service</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#vpn-part-b">VPN (PART B)</a><ul>
 <li><a href="#config-basic-vpn">config: basic VPN</a><ul>
 <li><a href="#r1">R1:</a></li>
@@ -160,17 +207,17 @@
 <li><a href="#tip-vrf-table-lable-vs-tunneled-interface">TIP: vrf-table-lable vs. tunneled-interface</a></li>
 <li><a href="#vpn-access-solution-1">VPN access solution 1</a></li>
 <li><a href="#config-vpn-inetaccess-1">config: VPN InetAccess 1</a></li>
-<li><a href="#verify_17">verify</a></li>
+<li><a href="#verify_19">verify</a></li>
 <li><a href="#vpn-access-solution-2">VPN access solution 2</a></li>
 <li><a href="#config-vpn-inetaccess-2">config: VPN InetAccess 2</a></li>
 <li><a href="#verify1-pingtraceroute">verify1 : ping/traceroute</a></li>
 <li><a href="#verify2-routing-table">verify2: routing table</a></li>
 <li><a href="#config-vpn-lsp-map">config vpn LSP map</a><ul>
-<li><a href="#verify_18">verify</a></li>
+<li><a href="#verify_20">verify</a></li>
 </ul>
 </li>
 <li><a href="#config-vpn-lsp-map-old">config vpn lsp map (old)</a><ul>
-<li><a href="#verify_19">verify</a></li>
+<li><a href="#verify_21">verify</a></li>
 </ul>
 </li>
 <li><a href="#config-vpn-inetaccess-3-tbc">config: VPN InetAccess 3 (t.b.c)</a><ul>
@@ -197,7 +244,7 @@
 </ul>
 </li>
 <li><a href="#solution-2-old-notes">solution 2 old notes</a><ul>
-<li><a href="#remove-solution1">remove solution1</a></li>
+<li><a href="#remove-solution1_1">remove solution1</a></li>
 <li><a href="#solution2-config">solution2 config</a></li>
 <li><a href="#r1-internet-r1-static-to-r23">R1 =&gt; Internet : R1 : static to R2/3</a></li>
 <li><a href="#r1vrf-r1-internet-r1-copy-route-into-vrf">R1:vrf =&gt; R1 =&gt; Internet : R1 copy route into vrf</a></li>
@@ -214,66 +261,9 @@
 <li><a href="#tip-import-rib-and-export-rib">TIP: import-rib and export-rib</a></li>
 </ul>
 </li>
-<li><a href="#interas-vpn-part-a">InterAS VPN (PART A)</a><ul>
-<li><a href="#solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: inet (uncast+labeled-unicast rib inet.3)</a><ul>
-<li><a href="#config_4">config</a></li>
-</ul>
-</li>
-<li><a href="#tip-interas-vpn-options">TIP: interAS VPN options</a></li>
-<li><a href="#tip-family-in-diff-levels">TIP: family in diff levels</a></li>
-<li><a href="#tip-bgp-keep-all">TIP: bgp keep-all</a></li>
-<li><a href="#remove-solution1_1">remove solution1</a></li>
-<li><a href="#solution2-inet-resolved-vpn">solution2: inet resolved-vpn</a></li>
-<li><a href="#remove-solution2">remove solution2</a></li>
-<li><a href="#tip-inet-labeled-unicast-resolve-vpn">TIP: inet labeled-unicast resolve-vpn</a></li>
-<li><a href="#question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</a></li>
-<li><a href="#toggle-traffic-engineering-mpls-forwarding">toggle traffic-engineering mpls-forwarding</a></li>
-<li><a href="#tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</a></li>
-</ul>
-</li>
-<li><a href="#vpls-part-a">VPLS (PART A)</a><ul>
-<li><a href="#config_5">config</a></li>
-<li><a href="#show-vpls-connection">show vpls connection</a></li>
-<li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
-<li><a href="#with-tunne-service">with tunne-service</a></li>
-<li><a href="#without-tunnel-service">without tunnel service</a></li>
-</ul>
-</li>
-<li><a href="#tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: encapsulation extended-vlan-vpls and flexible-ethernet-services</a></li>
-</ul>
-</li>
 <li><a href="#config-cos">config COS</a></li>
-<li><a href="#tip-qoscos">TIP: QoS/CoS</a><ul>
-<li><a href="#key-concepts">key concepts</a></li>
-<li><a href="#ip-tosrfc791">IP TOS(RFC791)</a></li>
-<li><a href="#dscp">DSCP</a><ul>
-<li><a href="#diffserv-field">DiffServ field</a></li>
-<li><a href="#behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</a></li>
-<li><a href="#per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</a><ul>
-<li><a href="#efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</a></li>
-<li><a href="#afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</a></li>
-<li><a href="#nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</a></li>
-<li><a href="#bebest-effort-000000">BE(Best Effort): 000000</a></li>
-<li><a href="#redback-device-table">redback device table:</a></li>
-<li><a href="#junos-default-forwarding-class">JUNOS default forwarding-class</a></li>
-</ul>
-</li>
-<li><a href="#junos-default-code-point-aliases">JUNOS default code-point-aliases</a></li>
-</ul>
-</li>
-<li><a href="#ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</a></li>
-<li><a href="#ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</a></li>
-<li><a href="#mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</a></li>
-<li><a href="#junos-tool-chains">JUNOS tool chains</a><ul>
-<li><a href="#classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</a></li>
-<li><a href="#policer-traffic-limit">policer: traffic limit</a></li>
-<li><a href="#policy-cos-based-forwarding">policy: Cos Based Forwarding</a></li>
-<li><a href="#scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</a></li>
-<li><a href="#rewrite-marker">rewrite marker</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#verify_22">verify</a></li>
+<li><a href="#config-cos-old">config COS (old)</a></li>
 <li><a href="#misc-notestips">misc notes/tips</a><ul>
 <li><a href="#ipv6">ipv6</a><ul>
 <li><a href="#p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</a></li>
@@ -361,6 +351,37 @@
 <li><a href="#solutionsham-link">solution:sham-link</a></li>
 </ul>
 </li>
+<li><a href="#tip-qoscos">TIP: QoS/CoS</a><ul>
+<li><a href="#key-concepts">key concepts</a></li>
+<li><a href="#ip-tosrfc791">IP TOS(RFC791)</a></li>
+<li><a href="#dscp">DSCP</a><ul>
+<li><a href="#diffserv-field">DiffServ field</a></li>
+<li><a href="#behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</a></li>
+<li><a href="#per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</a><ul>
+<li><a href="#efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</a></li>
+<li><a href="#afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</a></li>
+<li><a href="#nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</a></li>
+<li><a href="#bebest-effort-000000">BE(Best Effort): 000000</a></li>
+<li><a href="#redback-device-table">redback device table:</a></li>
+<li><a href="#junos-default-forwarding-class">JUNOS default forwarding-class</a></li>
+</ul>
+</li>
+<li><a href="#junos-default-code-point-aliases">JUNOS default code-point-aliases</a></li>
+</ul>
+</li>
+<li><a href="#ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</a></li>
+<li><a href="#ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</a></li>
+<li><a href="#mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</a></li>
+<li><a href="#junos-tool-chains">JUNOS tool chains</a><ul>
+<li><a href="#classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</a></li>
+<li><a href="#policer-traffic-limit">policer: traffic limit</a></li>
+<li><a href="#policy-cos-based-forwarding">policy: Cos Based Forwarding</a></li>
+<li><a href="#scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</a></li>
+<li><a href="#rewrite-marker">rewrite marker</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -370,114 +391,6 @@
 <hr />
 <h1 id="jncie-logs">JNCIE logs</h1>
 <h2 id="pre-igp">pre-IGP</h2>
-<h3 id="tips-about-apply-groups">TIPS: about apply-groups</h3>
-<p>it looks <code>apply-groups</code> doesn't necesarily save time/config work, and causing
-inheritance to unintented interfaces. but if preconfig already have it, removing
-them and reconfig bring more works.</p>
-<p>check with:</p>
-<pre><code>lab@MX80-NGGWR-01# run show interfaces routing logical-system lr2 
-Interface        State Addresses
-ge-1/2/2.12      Up    INET  10.10.12.2
-                       ISO   enabled
-                       MPLS  enabled
-ge-1/2/1.1000    Up    INET  192.168.100.1
-ge-1/2/1.222     Up    INET  192.168.222.1
-                       INET6 ::192.168.222.1
-                       INET6 fe80::fac0:100:de18:9391
-ge-1/2/1.221     Up    INET  192.168.221.1
-                       INET6 ::192.168.221.1
-                       INET6 fe80::fac0:100:dd18:9391
-ge-1/2/1.213     Up    INET  192.168.213.1
-                       INET6 ::192.168.213.1
-                       INET6 fe80::fac0:100:d518:9391
-ge-1/2/1.212     Up    INET  192.168.212.1
-                       INET6 ::192.168.212.1
-                       INET6 fe80::fac0:100:d418:9391
-ge-1/2/1.211     Up    INET  192.168.211.1
-                       INET6 ::192.168.211.1
-                       INET6 fe80::fac0:100:d318:9391
-ge-1/2/1.26      Up    INET  10.10.26.1
-                       ISO   enabled
-                       MPLS  enabled
-                       INET6 fe80::fac0:100:1a18:9391
-ge-1/2/1.25      Up    INET  10.10.25.1
-                       ISO   enabled
-                       MPLS  enabled
-                       INET6 fe80::fac0:100:1918:9391
-ge-1/2/1.24      Up    INET  10.10.24.1
-                       ISO   enabled
-                       MPLS  enabled
-                       INET6 fe80::fac0:100:1818:9391
-ge-1/2/1.23      Up    INET  10.10.23.1
-                       ISO   enabled
-                       MPLS  enabled
-                       INET6 fe80::fac0:100:1718:9391
-lo0.2            Up    INET  10.10.1.2
-                       ISO   enabled
-                       ISO   00.0001.2222.2222.2222
-                       INET6 2011:310:1020::2
-                       INET6 fe80::fac0:10f:fc18:93ff
-</code></pre>
-<p>so using <code>apply-group</code> or not, it's sufficient as long as core facing i/f (and
-lo0) has the required family:</p>
-<pre><code>inet6
-iso
-mpls
-</code></pre>
-<h3 id="question-about-apply-group-except">QUESTION: about <code>apply-group-except</code></h3>
-<p>in this lab, under which condition this is required?</p>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems lr3 interfaces                               
-apply-groups interface-group;
-+-- 47 lines: ge-1/2/1
-+-- 20 lines: ge-1/2/2
-+-- 10 lines: ae12
-+-- 13 lines: lo0
-
-[edit]
-lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12                          
-unit 0 {
-    family inet {
-        address 10.10.36.1/30;
-    }
-    family iso;
-    family mpls;
-}
-
-[edit]
-lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12 | display inheritance    
-unit 0 {
-    family inet {
-        address 10.10.36.1/30;
-    }
-    family iso;
-    family mpls;
-}
-
-lab@MX80-NGGWR-01# run show interfaces routing logical-system lr3 ae12   
-Interface        State Addresses
-ae12.0           Up    INET  10.10.36.1
-                       ISO   enabled
-                       MPLS  enabled
-</code></pre>
-<p>have to config inet6 manually on ae bundle, to make it support an address
-family?</p>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12  
-unit 0 {
-    family inet {
-        address 10.10.36.1/30;
-    }
-    family iso;
-    family inet6;
-    family mpls;
-}
-
-lab@MX80-NGGWR-01# run show interfaces routing logical-system lr3 ae12    
-Interface        State Addresses
-ae12.0           Up    INET  10.10.36.1
-                       ISO   enabled
-                       INET6 fe80::fac0:1ff:fe18:93cc
-                       MPLS  enabled
-</code></pre>
 <h3 id="transfer-on-commit">transfer-on-commit</h3>
 <h4 id="config">config</h4>
 <pre><code>[edit]
@@ -683,6 +596,116 @@ Address                  State     Interface      Time     Interval  Multiplier
 
 1 sessions, 1 clients
 Cumulative transmit rate 3.3 pps, cumulative receive rate 3.3 pps
+</code></pre>
+<h3 id="tips-about-apply-groups">TIPS: about apply-groups</h3>
+<p>it looks <code>apply-groups</code> doesn't necesarily save time/config work, and causing
+inheritance to unintented interfaces. but if preconfig already have it, removing
+them and reconfig bring more works.</p>
+<p>check with: <code>show int routing</code></p>
+<pre><code>lab@MX80-NGGWR-01# run show interfaces routing logical-system lr2 
+Interface        State Addresses
+ge-1/2/2.12      Up    INET  10.10.12.2
+                       ISO   enabled
+                       MPLS  enabled
+ge-1/2/1.1000    Up    INET  192.168.100.1
+ge-1/2/1.222     Up    INET  192.168.222.1
+                       INET6 ::192.168.222.1
+                       INET6 fe80::fac0:100:de18:9391
+ge-1/2/1.221     Up    INET  192.168.221.1
+                       INET6 ::192.168.221.1
+                       INET6 fe80::fac0:100:dd18:9391
+ge-1/2/1.213     Up    INET  192.168.213.1
+                       INET6 ::192.168.213.1
+                       INET6 fe80::fac0:100:d518:9391
+ge-1/2/1.212     Up    INET  192.168.212.1
+                       INET6 ::192.168.212.1
+                       INET6 fe80::fac0:100:d418:9391
+ge-1/2/1.211     Up    INET  192.168.211.1
+                       INET6 ::192.168.211.1
+                       INET6 fe80::fac0:100:d318:9391
+ge-1/2/1.26      Up    INET  10.10.26.1
+                       ISO   enabled
+                       MPLS  enabled
+                       INET6 fe80::fac0:100:1a18:9391
+ge-1/2/1.25      Up    INET  10.10.25.1
+                       ISO   enabled
+                       MPLS  enabled
+                       INET6 fe80::fac0:100:1918:9391
+ge-1/2/1.24      Up    INET  10.10.24.1
+                       ISO   enabled
+                       MPLS  enabled
+                       INET6 fe80::fac0:100:1818:9391
+ge-1/2/1.23      Up    INET  10.10.23.1
+                       ISO   enabled
+                       MPLS  enabled
+                       INET6 fe80::fac0:100:1718:9391
+lo0.2            Up    INET  10.10.1.2
+                       ISO   enabled
+                       ISO   00.0001.2222.2222.2222
+                       INET6 2011:310:1020::2
+                       INET6 fe80::fac0:10f:fc18:93ff
+</code></pre>
+<p>so using <code>apply-group</code> or not, it's sufficient as long as core facing i/f (and
+lo0) has the required family:</p>
+<pre><code>inet6
+iso
+mpls
+</code></pre>
+<h3 id="questionresolved-about-apply-group-except">QUESTION(resolved): about <code>apply-group-except</code></h3>
+<p>in this lab, under which condition this is required?</p>
+<p>A: like in vpls part, need this to exclude other family and only keep vpls
+   (otherwise commit check fail)</p>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems lr3 interfaces                               
+apply-groups interface-group;
++-- 47 lines: ge-1/2/1
++-- 20 lines: ge-1/2/2
++-- 10 lines: ae12
++-- 13 lines: lo0
+
+[edit]
+lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12                          
+unit 0 {
+    family inet {
+        address 10.10.36.1/30;
+    }
+    family iso;
+    family mpls;
+}
+
+[edit]
+lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12 | display inheritance    
+unit 0 {
+    family inet {
+        address 10.10.36.1/30;
+    }
+    family iso;
+    family mpls;
+}
+
+lab@MX80-NGGWR-01# run show interfaces routing logical-system lr3 ae12   
+Interface        State Addresses
+ae12.0           Up    INET  10.10.36.1
+                       ISO   enabled
+                       MPLS  enabled
+</code></pre>
+<p>have to config inet6 manually on ae bundle, to make it support an address
+family?</p>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems lr3 interfaces ae12  
+unit 0 {
+    family inet {
+        address 10.10.36.1/30;
+    }
+    family iso;
+    family inet6;
+    family mpls;
+}
+
+lab@MX80-NGGWR-01# run show interfaces routing logical-system lr3 ae12    
+Interface        State Addresses
+ae12.0           Up    INET  10.10.36.1
+                       ISO   enabled
+                       INET6 fe80::fac0:1ff:fe18:93cc
+                       MPLS  enabled
 </code></pre>
 <h2 id="igp">IGP</h2>
 <h3 id="igp-policy-config">IGP policy config</h3>
@@ -3432,6 +3455,950 @@ Restart Complete
 code 2 (Open Message Error) subcode 3 (bad BGP ID), Reason: peer 11::2+4597 (proto): 
 invalid BGP identifier 0x0
 </code></pre>
+<h2 id="interas-vpn-part-a">InterAS VPN (PART A)</h2>
+<h3 id="config-r15-to-remote-asbrpe">config: R1/5 to remote ASBR/PE</h3>
+<p>R5: 
+    #to both RR and ASBR, config: family inet unicast+labeled unicast rib inet.3 
+    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet unicast
+    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet labeled-unicast rib inet.3
+    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 peer-as 2</p>
+<pre><code>set logical-systems r5 protocols bgp group v4v6-rr family inet unicast
+set logical-systems r5 protocols bgp group v4v6-rr family inet labeled-unicast rib inet.3
+
+#adv. R1 lo0 both as inet (from def rib.0), and labeled-inet (from rib inet.3)
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from protocol isis
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from route-filter 10.200.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from rib inet.3
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from route-filter 10.200.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 then accept
+
+set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 export exp-bgp-adv-1
+</code></pre>
+<p>R1:</p>
+<pre><code>#config MH-MP-EBGP to remote PE; 
+#to both end enable inet unicast+labeled-unicast; to remote PE also enable inet-vpn
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet unicast
+set logical-systems r1 protocols bgp group to-v4v6-rr family inet labeled-unicast rib inet.3
+set logical-systems r1 protocols bgp group to-pe multihop
+set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet unicast
+set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet labeled-unicast rib inet.3
+set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet-vpn unicast
+set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 peer-as 2
+</code></pre>
+<h3 id="find-out-communities">find out communities</h3>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route receive-protocol bgp 10.10.10.10 logical-system r1 table bgp.l3vpn.0 detail
+
+bgp.l3vpn.0: 3 destinations, 3 routes (3 active, 0 holddown, 0 hidden)
+Restart Complete
+* 10.10.10.10:1:20.20.2.11/32 (1 entry, 1 announced)
+     Import Accepted
+     Route Distinguisher: 10.10.10.10:1
+     VPN Label: 16
+     Nexthop: 10.10.10.10
+     AS path: 2 I
+     Communities: target:2:65000
+</code></pre>
+<h3 id="config-r1-vrf-to-local-ce">config: R1 VRF to local CE</h3>
+<p>R1 VRF:</p>
+<pre><code>set logical-systems r1 routing-instances PINK instance-type vrf
+set logical-systems r1 routing-instances PINK interface ge-1/2/1.611
+set logical-systems r1 routing-instances PINK interface lo0.111
+set logical-systems r1 routing-instances PINK route-distinguisher 10.200.1.1:1
+set logical-systems r1 routing-instances PINK vrf-import vrf-imp
+set logical-systems r1 routing-instances PINK vrf-export vrf-exp
+set logical-systems r1 routing-instances PINK vrf-table-label
+set logical-systems r1 routing-instances PINK protocols bgp group to-ce1 neighbor 200.6.11.2 family inet unicast
+set logical-systems r1 routing-instances PINK protocols bgp group to-ce1 neighbor 200.6.11.2 peer-as 1111
+
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 then community add GREEN
+set logical-systems r1 policy-options policy-statement vrf-exp term 1 then accept
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 from protocol direct
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 then community add GREEN
+set logical-systems r1 policy-options policy-statement vrf-exp term 2 then accept
+
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 from community GREEN
+set logical-systems r1 policy-options policy-statement vrf-imp term 1 then accept
+</code></pre>
+<h3 id="verify_17">verify</h3>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run ping 20.20.2.11 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+PING 20.20.2.11 (20.20.2.11): 56 data bytes
+64 bytes from 20.20.2.11: icmp_seq=0 ttl=60 time=0.929 ms
+^C
+--- 20.20.2.11 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.929/0.929/0.929/0.000 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 20.20.2.11 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 20.20.2.11 (20.20.2.11) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.594 ms  0.495 ms  0.552 ms
+ 2  100.0.13.2 (100.0.13.2)  0.886 ms  0.876 ms  0.594 ms
+     MPLS Label=299776 CoS=0 TTL=1 S=0
+     MPLS Label=299984 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=1 S=1
+ 3  100.0.35.2 (100.0.35.2)  0.609 ms  0.722 ms  0.579 ms
+     MPLS Label=299984 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=2 S=1
+ 4  100.5.22.2 (100.5.22.2)  0.600 ms  0.610 ms  0.583 ms
+     MPLS Label=299776 CoS=0 TTL=1 S=0
+     MPLS Label=16 CoS=0 TTL=3 S=1
+ 5  20.20.2.11 (20.20.2.11)  0.637 ms  0.614 ms  0.576 ms
+</code></pre>
+<h3 id="config-solution1old">config solution1(old):</h3>
+<p><code>inet (uncast+labeled-unicast rib inet.3)</code></p>
+<pre><code>###R5: adv R1 lo0 to peer ASBR via policy, as inet-unicast&amp;labeled-unicast
+###    so peer ASBR can install R1 lo0 in both inet.0 &amp; inet.3
+#match r1 lo0 from inet.0 (serving `inet-unicast` bgp family only)
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from protocol isis
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from route-filter 10.10.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 then accept
+#match r1 lo0 from inet.3 (serving `inet-labeled-unicast` family only)
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from rib inet.3
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from route-filter 10.10.1.1/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 then accept
+
+#`family inet unicast` =&gt;                    r1 lo0 from inet.0 will be adv.ed as `inet-unicast` bgp routes
+#`family inet labeled-unicast rib inet.3` =&gt; r1 lo0 from inet.3 will be adv.ed as `inet-labeled-unicast` routes
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet unicast
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet labeled-unicast rib inet.3
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 export exp-bgp-adv-1
+set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 peer-as 2
+
+###R1-R5-peerASBR : all need to have both family enabled, to pass along the lo0 as both NLRI
+set logical-systems r5 protocols bgp group rr family inet unicast
+set logical-systems r5 protocols bgp group rr family inet labeled-unicast rib inet.3
+
+set logical-systems r1 protocols bgp group to-rr family inet unicast
+set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+
+set logical-systems r9 protocols bgp group to-r5 family inet unicast
+set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast rib inet.3
+</code></pre>
+<h3 id="remove-solution1">remove solution1</h3>
+<h3 id="solution2-inet-resolved-vpn">solution2: <code>inet resolved-vpn</code></h3>
+<pre><code>set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast resolve-vpn    
+set logical-systems r5 protocols bgp group l3vpn family inet labeled-unicast
+set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast
+</code></pre>
+<h3 id="remove-solution2">remove solution2</h3>
+<h3 id="tip-inet-labeled-unicast-resolve-vpn">TIP: <code>inet labeled-unicast resolve-vpn</code></h3>
+<p>Allow labeled routes to be placed in the inet.3 routing table for route
+resolution. These routes are then resolved for PE router connections where the
+remote PE is located across another AS. For a PE router to install a route in
+the VRF, the next hop must resolve to a route stored within the inet.3 table</p>
+<h3 id="question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</h3>
+<p>noticed bgp flaps during inter-AS vpn configs,might be normal</p>
+<pre><code>Aug  4 04:39:35  MX80-NGGWR-01 r1:rpd[1401]: RPD_OSPF_NBRDOWN: OSPF neighbor 4.4.4.4 (realm ospf-v2 shamlink.0 area 0.0.0.0) state changed f
+rom Full to Down due to KillNbr (event reason: interface went down)
+Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.2 (Internal AS 4012345678): code 6 (Cea
+se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
+Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.3 (Internal AS 4012345678): code 6 (Cea
+se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
+</code></pre>
+<h3 id="toggle-traffic-engineering-mpls-forwarding">toggle <code>traffic-engineering mpls-forwarding</code></h3>
+<pre><code>delete logical-systems r1 protocols mpls traffic-engineering  
+delete logical-systems r5 protocols mpls traffic-engineering     
+delete logical-systems r9 protocols mpls traffic-engineering
+</code></pre>
+<h3 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h3>
+<pre><code>R1             (BGP route NLRI addr family)         R5
+   ============================================&gt;
+inet.0          inet unicast                        inet.0
+inet.3          inet labeled-unicast                inet.3
+
+inet unicast: 传递unicast的路由，放入inet.0
+labeled-unicast：传递unciast路由，放入inet.0
+labeld-unicast rib inet.3: 传递inet.3的路由，放入inet.3
+inet unicast+rib inet.3：传递inet.0和inet.3的路由，unicast的放入inet.0, rib inet.3的放入inet.3
+</code></pre>
+<p>这就是为什么无法同时配置inet uncast 和labeled-unicast，而可以同时配置inet unicast和rib inet.3 </p>
+<pre><code>lab@MX80-NGGWR-01# show logical-systems r5 policy-options policy-statement exp-bgp-adv-1    
+term 1 {
+    from {
+        protocol isis;                      #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-unicast`
+    }
+    then accept;
+
+}
+term 2 {
+    from {
+        rib inet.3;                         #&lt;------taken from inet.0
+        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-labeled-unicast`
+    }
+    then accept;
+}
+</code></pre>
+<h3 id="tip-interas-vpn-options">TIP: interAS VPN options</h3>
+<p>Option A: Unlabeled VPN-IPv4 (b2b vrf)</p>
+<pre><code>vrf1                              vrf1                                 vrf1
+    PE1---------------------ASBR1-------ASBR2-----------------------PE2
+vrf2                              vrf2                                 vrf2
+</code></pre>
+<ul>
+<li>ASBR:<ul>
+<li>carry all routes in: bgp.v3vpn.0, and each VRFs</li>
+</ul>
+</li>
+<li>least scale, not good</li>
+</ul>
+<p>Option B: Labeled VPN-IPv4</p>
+<ul>
+<li>
+<p>ASBR:</p>
+<ul>
+<li>retain all VPN routes , in bgp.l3vpn.0</li>
+<li>labeled-unicast to assign label(stitching e2e LSP)</li>
+</ul>
+<p>vrf1                                                                   vrf1
+    PE1---------------------ASBR1-------ASBR2-----------------------PE2
+vrf2                                                                   vrf2</p>
+<pre><code>    &lt;....(ldp label).......(BGP label).....(ldp label)......&gt;
+</code></pre>
+</li>
+</ul>
+<p>Option C: Multihop MP-BGP</p>
+<pre><code>vrf1                                                                   vrf1
+    PE1---------------------ASBR1-------ASBR2-----------------------PE2
+vrf2                                                                   vrf2
+
+        &lt;....(ldp label).......(BGP label).....(ldp label)......&gt;
+</code></pre>
+<ul>
+<li>PE:<ul>
+<li>multi-hop MP-EBGP betw PE</li>
+</ul>
+</li>
+<li>ASBR: <ul>
+<li>no need to maintain VPN routes</li>
+<li>leak PE1 lo0 into peer AS</li>
+<li>labeled-unicast to assign label</li>
+</ul>
+</li>
+</ul>
+<h3 id="tip-family-in-diff-levels">TIP: family in diff levels</h3>
+<ul>
+<li>without configs in more specific level, it "inherit" from upper level</li>
+<li>once configured in more specific level, it "overide", no more inheritence</li>
+</ul>
+<p>same as policys, anything else in JUNOS</p>
+<h3 id="tip-bgp-keep-all">TIP: bgp keep-all</h3>
+<p>keep all bgp.l3vpn.0 regardless of RT</p>
+<h2 id="vpls-part-a">VPLS (PART A)</h2>
+<h3 id="borrow-ae-ports-as-vpls-ports">borrow ae ports as vpls ports</h3>
+<pre><code>deactivate interfaces ge-1/2/3 gigether-options 802.3ad    
+deactivate interfaces ge-1/2/4 gigether-options 802.3ad    
+deactivate interfaces ge-1/2/5 gigether-options 802.3ad    
+deactivate interfaces ge-1/2/6 gigether-options 802.3ad    
+deactivate logical-systems r3 interfaces ae10              
+deactivate logical-systems r6 interfaces ae11
+
+deactivate logical-systems r3 protocols isis interface ae10.0 
+deactivate logical-systems r6 protocols isis interface ae11.0
+
+activate logical-systems r3 interfaces ge-1/2/1 unit 306     
+activate logical-systems r6 interfaces ge-1/2/2 unit 306 
+activate logical-systems r3 protocols isis interface ge-1/2/1.306
+activate logical-systems r6 protocols isis interface ge-1/2/2.306
+</code></pre>
+<h3 id="config_4">config</h3>
+<p>R1/7/8: vpls inteface</p>
+<pre><code>set logical-systems r1 interfaces ge-1/2/3 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+set logical-systems r1 interfaces ge-1/2/5 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+set logical-systems r7 interfaces ge-1/3/0 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+set logical-systems r8 interfaces ge-1/3/2 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+
+set interfaces ge-1/2/3 vlan-tagging encapsulation flexible-ethernet-services
+set interfaces ge-1/2/5 vlan-tagging encapsulation flexible-ethernet-services
+set interfaces ge-1/3/0 vlan-tagging encapsulation flexible-ethernet-services
+set interfaces ge-1/3/2 vlan-tagging encapsulation flexible-ethernet-services
+</code></pre>
+<p>R1/7/8/2/3 BGP family L2vpn signaling:</p>
+<pre><code>set logical-systems r1 protocols bgp group to-vpn-rr family l2vpn signaling
+set logical-systems r7 protocols bgp group to-vpn-rr family l2vpn signaling
+set logical-systems r8 protocols bgp group to-vpn-rr family l2vpn signaling
+</code></pre>
+<p>VPLS RI: R1/7/8:</p>
+<pre><code>set logical-systems r1 routing-instances GOLD instance-type vpls
+set logical-systems r1 routing-instances GOLD interface ge-1/2/3.100
+set logical-systems r1 routing-instances GOLD interface ge-1/2/5.100
+set logical-systems r1 routing-instances GOLD route-distinguisher 1.1.1.1:1
+set logical-systems r1 routing-instances GOLD vrf-target target:6500:1
+set logical-systems r1 routing-instances GOLD protocols vpls site-range 10
+set logical-systems r1 routing-instances GOLD protocols vpls interface-mac-limit 500
+set logical-systems r1 routing-instances GOLD protocols vpls no-tunnel-services
+set logical-systems r1 routing-instances GOLD protocols vpls site 1 site-identifier 1
+set logical-systems r1 routing-instances GOLD protocols vpls site 1 active-interface any
+#just for ping test purpose
+#set logical-systems r1 routing-instances GOLD protocols vpls site 1 active-interface primary ge-1/2/5.100   
+set logical-systems r1 routing-instances GOLD protocols vpls site 1 interface ge-1/2/3.100
+set logical-systems r1 routing-instances GOLD protocols vpls site 1 interface ge-1/2/5.100
+
+set logical-systems r7 routing-instances GOLD instance-type vpls
+set logical-systems r7 routing-instances GOLD interface ge-1/3/0.100
+set logical-systems r7 routing-instances GOLD route-distinguisher 7.7.7.7:1
+set logical-systems r7 routing-instances GOLD vrf-target target:6500:1
+set logical-systems r7 routing-instances GOLD protocols vpls site-range 10
+set logical-systems r7 routing-instances GOLD protocols vpls no-tunnel-services
+set logical-systems r7 routing-instances GOLD protocols vpls site 7 site-identifier 2
+set logical-systems r7 routing-instances GOLD protocols vpls site 7 multi-homing
+set logical-systems r7 routing-instances GOLD protocols vpls site 7 site-preference 150
+set logical-systems r7 routing-instances GOLD protocols vpls site 7 interface ge-1/3/0.100
+
+set logical-systems r8 routing-instances GOLD instance-type vpls
+set logical-systems r8 routing-instances GOLD interface ge-1/3/2.100
+set logical-systems r8 routing-instances GOLD route-distinguisher 8.8.8.8:1
+set logical-systems r8 routing-instances GOLD vrf-target target:6500:1
+set logical-systems r8 routing-instances GOLD protocols vpls site-range 10
+set logical-systems r8 routing-instances GOLD protocols vpls no-tunnel-services
+set logical-systems r8 routing-instances GOLD protocols vpls site 8 site-identifier 2
+set logical-systems r8 routing-instances GOLD protocols vpls site 8 multi-homing
+#"preference": the higher the better, not like "priority"
+set logical-systems r8 routing-instances GOLD protocols vpls site 8 site-preference 200 
+set logical-systems r8 routing-instances GOLD protocols vpls site 8 interface ge-1/3/2.100
+</code></pre>
+<p>optional: tunnel-service</p>
+<h3 id="verify_18">verify</h3>
+<h4 id="r1-vpls-connection">R1 vpls connection</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r1 
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 1 (1)
+    connection-site           Type  St     Time last up          # Up trans
+    2                         rmt   Up     Aug 19 00:55:44 2013           1
+    ^
+      Remote PE: 10.200.1.8, Negotiated control-word: No
+      ^^^^^^^^^^^^^^^^^^^^^
+      Incoming label: 262154, Outgoing label: 262145
+      Local interface: lsi.152043520, Status: Up, Encapsulation: VPLS
+                       ^^^^^^^^^^^^^
+        Description: Intf - vpls GOLD local site 1 remote site 2
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r1 extensive  
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 1 (1)
+    Number of local interfaces: 2
+    Number of local interfaces up: 2
+    IRB interface present: no
+    ge-1/2/3.100       
+        Interface flags: VC-Down    #&lt;------("active-interface primary ge-1/2/5.100")
+    ge-1/2/5.100       
+    lsi.152043520       2         Intf - vpls GOLD local site 1 remote site 2
+    Label-base        Offset     Size  Range     Preference
+    262153            1          8      8         100   
+    connection-site           Type  St     Time last up          # Up trans
+    2                         rmt   Up     Aug 19 00:55:44 2013           1
+      Remote PE: 10.200.1.8, Negotiated control-word: No
+      Incoming label: 262154, Outgoing label: 262145
+      Local interface: lsi.152043520, Status: Up, Encapsulation: VPLS
+        Description: Intf - vpls GOLD local site 1 remote site 2
+    Connection History:
+        Aug 19 00:55:44 2013  status update timer  
+        Aug 19 00:55:44 2013  loc intf up                lsi.152043520
+        Aug 19 00:55:44 2013  PE route changed     
+        Aug 19 00:55:44 2013  Out lbl Update                    262145
+        Aug 19 00:55:44 2013  In lbl Update                     262154
+        Aug 19 00:55:44 2013  loc intf down
+</code></pre>
+<h4 id="r7-vpls-connection">R7 vpls connection</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r7              
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 7 (2)
+    connection-site           Type  St     Time last up          # Up trans
+    1                         rmt   LN   
+    2                         rmt   LN
+
+[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r7 extensive  
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 7 (2)
+    Number of local interfaces: 1
+    Number of local interfaces up: 0
+    IRB interface present: no
+    ge-1/3/0.100       
+        Interface flags: VC-Down
+    Label-base        Offset     Size  Range     Preference
+    262145            1          8      8         0     
+    connection-site           Type  St     Time last up          # Up trans
+    1                         rmt   LN   
+    2                         rmt   LN
+</code></pre>
+<h4 id="r8-vpls-connection">R8 vpls connection</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r8              
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 8 (2)
+    connection-site           Type  St     Time last up          # Up trans
+    1                         rmt   Up     Aug 19 00:55:44 2013           1
+      Remote PE: 10.200.1.1, Negotiated control-word: No
+      Incoming label: 262145, Outgoing label: 262154
+      Local interface: lsi.168820736, Status: Up, Encapsulation: VPLS
+        Description: Intf - vpls GOLD local site 2 remote site 1
+    2                         rmt   RN
+
+[edit]
+lab@MX80-NGGWR-02# run show vpls connections logical-system r8 extensive  
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: GOLD
+  Local site: 8 (2)
+    Number of local interfaces: 1
+    Number of local interfaces up: 1
+    IRB interface present: no
+    ge-1/3/2.100       
+    lsi.168820736       1         Intf - vpls GOLD local site 2 remote site 1
+    Label-base        Offset     Size  Range     Preference
+    262145            1          8      8         200   
+    connection-site           Type  St     Time last up          # Up trans
+    1                         rmt   Up     Aug 19 00:55:44 2013           1
+      Remote PE: 10.200.1.1, Negotiated control-word: No
+      Incoming label: 262145, Outgoing label: 262154
+      Local interface: lsi.168820736, Status: Up, Encapsulation: VPLS
+        Description: Intf - vpls GOLD local site 2 remote site 1
+    Connection History:
+        Aug 19 00:55:44 2013  status update timer  
+        Aug 19 00:55:44 2013  loc intf up                lsi.168820736
+        Aug 19 00:55:44 2013  PE route changed     
+        Aug 19 00:55:44 2013  Out lbl Update                    262154
+        Aug 19 00:55:44 2013  In lbl Update                     262145
+        Aug 19 00:55:44 2013  loc intf down        
+    2                         rmt   RN
+</code></pre>
+<h4 id="vpls-forwarding-table-no-traffic">vpls forwarding-table (no traffic)</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show route forwarding-table family vpls  
+Logical system: r8
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1829     1
+lsi.168820736      intf     0                    indr 1048689     4
+                              100.0.68.1        Push 262154, Push 299888(top)  1640     2 ge-1/2/2.608
+0x3000d/51         user     0                    comp  2582     2
+ge-1/3/2.100       intf     0                    ucst  1643     4 ge-1/3/2.100
+0x3000b/51         user     0                    comp  1906     2
+0x3000a/51         user     0                    comp  1901     2
+
+Logical system: r7
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1644     1
+ge-1/3/0.100       intf     0                    ucst  2496     4 ge-1/3/0.100
+0x30008/51         user     0                    comp  2511     2
+0x30009/51         user     0                    comp  2500     2
+
+Logical system: r1
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1215     1
+lsi.152043520      intf     0                    indr 1048688     4
+                              100.0.12.2        Push 262145, Push 299808, Push 299872(top)  1637     2 ge-1/2/1.102
+0x3000c/51         user     0                    comp  2552     2
+ge-1/2/5.100       intf     0                    ucst  1636     4 ge-1/2/5.100
+0x30007/51         user     0                    comp  2569     2
+0x30006/51         user     0                    comp  2536     2
+</code></pre>
+<h4 id="vpls-forwarding-table-with-traffic">vpls forwarding table (with traffic)</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run ping 100.100.1.2 logical-system r0 routing-instance vce1 source 100.100.1.1             
+PING 100.100.1.2 (100.100.1.2): 56 data bytes
+^C
+--- 100.100.1.2 ping statistics ---
+2 packets transmitted, 0 packets received, 100% packet loss
+
+[edit]
+lab@MX80-NGGWR-02# run ping 100.100.2.2 logical-system r0 routing-instance vce1 source 100.100.2.1                        
+PING 100.100.2.2 (100.100.2.2): 56 data bytes
+64 bytes from 100.100.2.2: icmp_seq=0 ttl=64 time=1.246 ms
+64 bytes from 100.100.2.2: icmp_seq=1 ttl=64 time=0.644 ms
+64 bytes from 100.100.2.2: icmp_seq=2 ttl=64 time=0.651 ms
+^C
+--- 100.100.2.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.644/0.847/1.246/0.282 ms
+
+[edit]
+lab@MX80-NGGWR-02# run show route forwarding-table family vpls                                        
+Logical system: r8
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1829     1
+lsi.168820736      intf     0                    indr 1048689     5
+                              100.0.68.1        Push 262154, Push 299888(top)  1640     2 ge-1/2/2.608
+0x3000d/51         user     0                    comp  2582     2
+f8:c0:01:18:91:96/48 user     0                  indr 1048689     5         #&lt;------
+                              100.0.68.1        Push 262154, Push 299888(top)  1640     2 ge-1/2/2.608
+f8:c0:01:18:91:ab/48 user     0                  ucst  1643     5 ge-1/3/2.100      #&lt;------
+ge-1/3/2.100       intf     0                    ucst  1643     5 ge-1/3/2.100
+0x3000b/51         user     0                    comp  1906     2
+0x3000a/51         user     0                    comp  1901     2
+
+Logical system: r7
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1644     1
+ge-1/3/0.100       intf     0                    ucst  2496     4 ge-1/3/0.100
+0x30008/51         user     0                    comp  2511     2
+0x30009/51         user     0                    comp  2500     2
+
+Logical system: r1
+Routing table: GOLD.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1215     1
+lsi.152043520      intf     0                    indr 1048688     5
+                              100.0.12.2        Push 262145, Push 299808, Push 299872(top)  1637     2 ge-1/2/1.102
+0x3000c/51         user     0                    comp  2552     2
+f8:c0:01:18:91:96/48 user     0                  ucst  1636     5 ge-1/2/5.100      #&lt;------
+f8:c0:01:18:91:ab/48 user     0                  indr 1048688     5         #&lt;------
+                              100.0.12.2        Push 262145, Push 299808, Push 299872(top)  1637     2 ge-1/2/1.102
+ge-1/2/5.100       intf     0                    ucst  1636     5 ge-1/2/5.100
+0x30007/51         user     0                    comp  2569     2
+0x30006/51         user     0                    comp  2536     2
+</code></pre>
+<h4 id="bridge-bridge-domain-per-instance">bridge bridge domain (per-instance)</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show bridge domain instance GOLD
+
+Routing instance        Bridge domain            VLAN ID     Interfaces
+GOLD                    __GOLD__                 NA       
+                                                     ge-1/2/3.100
+                                                     ge-1/2/5.100
+                                                     lsi.152043520
+GOLD                    __GOLD__                 NA       
+                                                     ge-1/3/0.100
+GOLD                    __GOLD__                 NA       
+                                                     ge-1/3/2.100
+                                                     lsi.168820736
+</code></pre>
+<h4 id="bridge-interface-statistics">bridge interface statistics</h4>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show bridge statistics logical-system r1 
+   Local interface: lsi.152043520, Index: 512
+     Current MAC count:                     1
+   Local interface: ge-1/2/5.100, Index: 335
+     Broadcast packets:                     4
+     Broadcast bytes  :                   240
+     Multicast packets:                     0
+     Multicast bytes  :                     0
+     Flooded packets  :                     1
+     Flooded bytes    :                   102
+     Unicast packets  :                    13
+     Unicast bytes    :                  1284
+     Current MAC count:                     1 (Limit 500)
+   Local interface: ge-1/2/3.100, Index: 465
+     Broadcast packets:                     0
+     Broadcast bytes  :                     0
+     Multicast packets:                     0
+     Multicast bytes  :                     0
+     Flooded packets  :                     0
+     Flooded bytes    :                     0
+     Unicast packets  :                     0
+     Unicast bytes    :                     0
+     Current MAC count:                     0 (Limit 500)
+
+[edit]
+lab@MX80-NGGWR-02# run show bridge statistics logical-system r7    
+   Local interface: ge-1/3/0.100, Index: 498
+     Broadcast packets:                     5
+     Broadcast bytes  :                   300
+     Multicast packets:                     0
+     Multicast bytes  :                     0
+     Flooded packets  :                     0
+     Flooded bytes    :                     0
+     Unicast packets  :                     0
+     Unicast bytes    :                     0
+     Current MAC count:                     0 (Limit 1024)
+
+[edit]
+lab@MX80-NGGWR-02# run show bridge statistics logical-system r8    
+   Local interface: lsi.168820736, Index: 535
+     Current MAC count:                     1
+   Local interface: ge-1/3/2.100, Index: 500
+     Broadcast packets:                     1
+     Broadcast bytes  :                    60
+     Multicast packets:                     0
+     Multicast bytes  :                     0
+     Flooded packets  :                     0
+     Flooded bytes    :                     0
+     Unicast packets  :                    13
+     Unicast bytes    :                  1158
+     Current MAC count:                     1 (Limit 1024)
+</code></pre>
+<h3 id="config-firewall-policer">config firewall policer</h3>
+<pre><code>set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m
+set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k
+set logical-systems r1 firewall policer 5m then discard
+
+set logical-systems r1 firewall family vpls filter vpls term 1 from traffic-type broadcast
+set logical-systems r1 firewall family vpls filter vpls term 1 from traffic-type multicast
+set logical-systems r1 firewall family vpls filter vpls term 1 then policer 5m
+set logical-systems r1 firewall family vpls filter vpls term 2 then accept
+
+set logical-systems r1 interfaces ge-1/2/3 unit 100 encapsulation vlan-vpls
+set logical-systems r1 interfaces ge-1/2/3 unit 100 family vpls filter input vpls
+set logical-systems r1 interfaces ge-1/2/5 unit 100 encapsulation vlan-vpls
+set logical-systems r1 interfaces ge-1/2/5 unit 100 family vpls filter input vpls
+</code></pre>
+<h3 id="tip-vpls-link-redundency-issue">TIP: vpls link redundency issue</h3>
+<p>by default system will disable one link. if the test ping happens to arrive
+from the disabled link, ping won't succeed </p>
+<h3 id="tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: <code>encapsulation extended-vlan-vpls</code> and <code>flexible-ethernet-services</code></h3>
+<p>Gigabit Ethernet, 4-port Fast Ethernet, MX Series router Gigabit Ethernet,
+Tri-Rate Ethernet copper, 10-Gigabit Ethernet, and aggregated Ethernet
+interfaces with VLAN tagging enabled can use extended VLAN CCC or VLAN VPLS,
+which allow 802.1Q tagging.</p>
+<p>flexible-ethernet-services—For Gigabit Ethernet IQ interfaces and Gigabit
+Ethernet PICs with small form-factor pluggable transceivers (SFPs) (except the
+10-port Gigabit Ethernet PIC and the built-in Gigabit Ethernet port on the M7i
+router), use flexible Ethernet services encapsulation when you want to
+configure multiple per-unit Ethernet encapsulations. Aggregated Ethernet
+bundles can use this encapsulation type. This encapsulation type allows you to
+configure any combination of route, TCC, CCC, Layer 2 virtual private networks
+(VPNs), and VPLS encapsulations on a single physical port. If you configure
+flexible Ethernet services encapsulation on the physical interface, VLAN IDs
+from 1 through 511 are no longer reserved for normal VLANs.</p>
+<h3 id="2-commit-errors">2 commit errors</h3>
+<pre><code>[edit logical-systems r1 interfaces ge-1/2/3]
+  'unit 100'
+     Link encapsulation type is not valid for device type
+error: configuration check-out failed
+</code></pre>
+<p>config encap flexible-ethernet-service resolve it</p>
+<pre><code>lab@MX80-NGGWR-02# set interfaces ge-1/2/3 encapsulation flexible-ethernet-services
+
+[edit logical-systems r1 interfaces ge-1/2/3 unit 100]
+  'family'
+     Only the VPLS family is allowed on VPLS interfaces
+error: configuration check-out failed
+</code></pre>
+<h2 id="vpls-old">VPLS (old)</h2>
+<h3 id="config_5">config</h3>
+<pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
+set logical-systems r1 routing-instances vpls interface ge-1/2/3.100
+set logical-systems r1 routing-instances vpls route-distinguisher 1.1.1.1:1
+set logical-systems r1 routing-instances vpls vrf-target target:6500:1
+set logical-systems r1 routing-instances vpls protocols vpls site-range 10
+set logical-systems r1 routing-instances vpls protocols vpls interface-mac-limit 500
+set logical-systems r1 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r1 routing-instances vpls protocols vpls site r1 site-identifier 1
+set logical-systems r1 routing-instances vpls protocols vpls site r1 active-interface any
+set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.122
+
+set logical-systems r7 routing-instances vpls instance-type vpls
+set logical-systems r7 routing-instances vpls interface ge-1/2/1.678
+set logical-systems r7 routing-instances vpls route-distinguisher 2.2.2.2:1
+set logical-systems r7 routing-instances vpls vrf-target target:6500:1
+set logical-systems r7 routing-instances vpls protocols vpls site-range 10
+set logical-systems r7 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r7 routing-instances vpls protocols vpls site r7 site-identifier 7
+set logical-systems r7 routing-instances vpls protocols vpls site r7 multi-homing
+set logical-systems r7 routing-instances vpls protocols vpls site r7 site-preference 150
+set logical-systems r7 routing-instances vpls protocols vpls site r7 active-interface any
+set logical-systems r7 routing-instances vpls protocols vpls site r7 interface ge-1/2/1.678
+
+set logical-systems r8 routing-instances vpls instance-type vpls
+set logical-systems r8 routing-instances vpls interface ge-1/2/1.687
+set logical-systems r8 routing-instances vpls interface ge-1/2/5.100
+set logical-systems r8 routing-instances vpls route-distinguisher 2.2.2.2:1
+set logical-systems r8 routing-instances vpls vrf-target target:6500:1
+set logical-systems r8 routing-instances vpls protocols vpls site-range 10
+set logical-systems r8 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r8 routing-instances vpls protocols vpls site r8 site-identifier 7
+set logical-systems r8 routing-instances vpls protocols vpls site r8 multi-homing
+set logical-systems r8 routing-instances vpls protocols vpls site r8 site-preference 200
+set logical-systems r8 routing-instances vpls protocols vpls site r8 active-interface any
+set logical-systems r8 routing-instances vpls protocols vpls site r8 interface ge-1/2/1.687
+</code></pre>
+<h3 id="show-vpls-connection">show vpls connection</h3>
+<pre><code>lab@MX80-NGGWR-01# run show vpls connections logical-system r1 extensive          
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: vpls
+  Local site: r1 (1)
+    Number of local interfaces: 2
+    Number of local interfaces up: 1
+    IRB interface present: no
+    ge-1/2/1.121       
+    ge-1/2/1.122       
+        Interface flags: VC-Down
+    vt-1/2/10.235929600 7         Intf - vpls vpls local site 1 remote site 7
+    Label-base        Offset     Size  Range     Preference
+    800000            1          8      8         100   
+    connection-site           Type  St     Time last up          # Up trans
+    7                         rmt   Up     Aug  7 01:29:36 2013           1
+      Remote PE: 10.10.1.8, Negotiated control-word: No
+      Incoming label: 800006, Outgoing label: 800000
+      Local interface: vt-1/2/10.235929600, Status: Up, Encapsulation: VPLS
+        Description: Intf - vpls vpls local site 1 remote site 7
+    Connection History:
+        Aug  7 01:29:36 2013  status update timer  
+        Aug  7 01:29:36 2013  loc intf up           vt-1/2/10.235929600
+        Aug  7 01:29:36 2013  PE route changed     
+        Aug  7 01:29:36 2013  Out lbl Update                    800000
+        Aug  7 01:29:36 2013  In lbl Update                     800006
+        Aug  7 01:29:36 2013  loc intf down
+</code></pre>
+<h3 id="show-route-forwarding-table">show route forwarding-table</h3>
+<h4 id="with-tunne-service">with tunne-service</h4>
+<pre><code>lab@MX80-NGGWR-01# run show route forwarding-table | find vpls.vpls
+Logical system: r1
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   728     1
+vt-1/2/10.235929600 intf     0                   indr 1048693     4
+                              10.10.12.2        Push 800000, Push 299808, Push 299792(top)  3007     2 ge-1/2/1.12
+0x3000b/51         user     0                    comp  3016     2
+f8:c0:01:18:93:92/48 user     0                  ucst  1986     5 ge-1/2/1.121      #&lt;------
+ge-1/2/1.121       intf     0                    ucst  1986     5 ge-1/2/1.121
+0x3000a/51         user     0                    comp  1997     2
+0x30007/51         user     0                    comp  1994     2
+
+Logical system: r8
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   716     1
+vt-1/2/10.202375168 intf     0                   indr 1048659     5
+                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
+0x3000c/51         user     0                    comp  3061     2
+f8:c0:01:18:93:92/48 user     0                  indr 1048659     5         #&lt;------
+                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
+ge-1/2/1.687       intf     0                    ucst  1973     4 ge-1/2/1.687
+0x30009/51         user     0                    comp  1983     2
+0x30006/51         user     0                    comp  1980     2
+</code></pre>
+<p>turn off tunnel service:</p>
+<pre><code>lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems r1 routing-instances vpls protocols vpls]
++      no-tunnel-services;
+[edit logical-systems r8 routing-instances vpls protocols vpls]
++      no-tunnel-services;
+</code></pre>
+<h4 id="without-tunnel-service">without tunnel service</h4>
+<pre><code>Logical system: r1
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   728     1
+lsi.235929600      intf     0                    indr 1048699     4
+                              10.10.12.2        Push 262145, Push 299808, Push 299792(top)  3014     2 ge-1/2/1.12
+0x3000a/51         user     0                    comp  3062     2
+f8:c0:01:18:93:92/48 user     0                  ucst   716     5 ge-1/2/1.121      #&lt;------
+ge-1/2/1.121       intf     0                    ucst   716     5 ge-1/2/1.121
+0x30006/51         user     0                    comp  1998     2
+0x30007/51         user     0                    comp  1995     2
+
+Logical system: r8
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1986     1
+lsi.202375168      intf     0                    indr 1048698     5
+                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
+0x3000d/51         user     0                    comp  1984     2
+f8:c0:01:18:93:92/48 user     0                  indr 1048698     5         #&lt;------
+                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
+ge-1/2/1.687       intf     0                    ucst  1980     4 ge-1/2/1.687
+0x3000b/51         user     0                    comp  3146     2
+0x30008/51         user     0                    comp  3143     2
+
+ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
+ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
+</code></pre>
 <h2 id="vpn-part-b">VPN (PART B)</h2>
 <h3 id="config-basic-vpn">config: basic VPN</h3>
 <h4 id="r1">R1:</h4>
@@ -4278,7 +5245,7 @@ set logical-systems r1 policy-options policy-statement vrf-exp term 3 from proto
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                          
 set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
 </code></pre>
-<h3 id="verify_17">verify</h3>
+<h3 id="verify_19">verify</h3>
 <pre><code>lab@MX80-NGGWR-02# run ping 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid              
 PING 10.200.1.8 (10.200.1.8): 56 data bytes
 !!!!!
@@ -4296,7 +5263,10 @@ round-trip min/avg/max/stddev = 0.505/0.775/1.632/0.435 ms
 <h3 id="vpn-access-solution-2">VPN access solution 2</h3>
 <h3 id="config-vpn-inetaccess-2">config: VPN InetAccess 2</h3>
 <pre><code>#R1:VRF -&gt; Internet: R1 config static def pointing to R2/3; then rib-group it to vrf
-set logical-systems r1 routing-options static route 0/0 next-hop [ 100.0.12.2 100.0.13.2 ]
+#this original solution doesn't work for c3
+#set logical-systems r1 routing-options static route 0/0 next-hop [ 100.0.12.2 100.0.13.2 ]
+set logical-systems r1 routing-options static route 0/0 next-hop [ 10.200.1.2 10.200.1.3 ]  #&lt;------use R2/3 lo0
+set logical-systems r1 routing-options static route 0.0.0.0/0 resolve       #&lt;------and resolve, now C3 is also pingable
 set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [ inet.0 GREEN.inet.0 ] 
 set logical-systems r1 routing-options static rib-group imp-inet.0-to-vrf
 
@@ -4331,41 +5301,76 @@ set logical-systems r1 policy-options policy-statement exp-fwd-fix-vpn-nh term 1
 set logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-nh
 </code></pre>
 <h3 id="verify1-pingtraceroute">verify1 : ping/traceroute</h3>
-<pre><code>lab@MX80-NGGWR-02# run ping 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid                 
+<ul>
+<li>ping to C3 doesn't work, all other OK</li>
+<li>
+<p>traceroute doesn't work</p>
+<p>lab@MX80-NGGWR-02# run ping 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid               <br />
 PING 10.200.1.8 (10.200.1.8): 56 data bytes
 !!!!!
 --- 10.200.1.8 ping statistics ---
 5 packets transmitted, 5 packets received, 0% packet loss
-round-trip min/avg/max/stddev = 0.546/0.619/0.863/0.122 ms
-
-[edit]
-lab@MX80-NGGWR-02# run ping 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid                  
+round-trip min/avg/max/stddev = 0.546/0.619/0.863/0.122 ms</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run ping 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11 rapid                <br />
 PING 3.3.3.1 (3.3.3.1): 56 data bytes
 ....^C
 --- 3.3.3.1 ping statistics ---
-5 packets transmitted, 0 packets received, 100% packet loss
-
-[edit]
-lab@MX80-NGGWR-02# run ping 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+5 packets transmitted, 0 packets received, 100% packet loss</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run ping 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11<br />
 PING 44.44.1.1 (44.44.1.1): 56 data bytes
 64 bytes from 44.44.1.1: icmp_seq=0 ttl=60 time=0.750 ms
 64 bytes from 44.44.1.1: icmp_seq=1 ttl=60 time=0.634 ms
 ^C
 --- 44.44.1.1 ping statistics ---
 2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max/stddev = 0.634/0.692/0.750/0.058 ms
-
-[edit]
-lab@MX80-NGGWR-02# run traceroute 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+round-trip min/avg/max/stddev = 0.634/0.692/0.750/0.058 ms</p>
+<p>[edit]
+lab@MX80-NGGWR-02# run traceroute 44.44.1.1 logical-system r0 routing-instance vpn1 source 20.20.1.11<br />
 traceroute to 44.44.1.1 (44.44.1.1) from 20.20.1.11, 30 hops max, 40 byte packets
  1  200.6.11.1 (200.6.11.1)  0.527 ms  0.418 ms  0.485 ms
 ^C
 [edit]
-lab@MX80-NGGWR-02# run traceroute 10.200.0.8 logical-system r0 routing-instance vpn1 source 20.20.1.11  
+lab@MX80-NGGWR-02# run traceroute 10.200.0.8 logical-system r0 routing-instance vpn1 source 20.20.1.11<br />
 traceroute to 10.200.0.8 (10.200.0.8) from 20.20.1.11, 30 hops max, 40 byte packets
  1  200.6.11.1 (200.6.11.1)  2.590 ms  2.478 ms  3.191 ms
 ^C
+[edit]</p>
+</li>
+</ul>
+<p>after workaround it works:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run ping 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11       
+PING 3.3.3.1 (3.3.3.1): 56 data bytes
+64 bytes from 3.3.3.1: icmp_seq=0 ttl=63 time=0.915 ms
+^C
+--- 3.3.3.1 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.915/0.915/0.915/0.000 ms
+
 [edit]
+lab@MX80-NGGWR-02# run traceroute 10.200.0.8 logical-system r0 routing-instance vpn1 source 20.20.1.11            
+traceroute to 10.200.0.8 (10.200.0.8) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.584 ms  0.450 ms  0.366 ms
+ 2  100.0.12.2 (100.0.12.2)  0.531 ms  0.522 ms  0.519 ms
+ 3  100.0.12.2 (100.0.12.2)  0.494 ms !N  0.423 ms !N  0.409 ms !N
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 10.200.1.8 logical-system r0 routing-instance vpn1 source 20.20.1.11   
+traceroute to 10.200.1.8 (10.200.1.8) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.578 ms  0.489 ms  0.393 ms
+ 2  100.0.12.2 (100.0.12.2)  0.685 ms  0.943 ms  0.593 ms
+ 3  100.0.26.2 (100.0.26.2)  0.463 ms  0.460 ms  0.426 ms
+ 4  10.200.1.8 (10.200.1.8)  0.584 ms  0.586 ms  0.558 ms
+
+[edit]
+lab@MX80-NGGWR-02# run traceroute 3.3.3.1 logical-system r0 routing-instance vpn1 source 20.20.1.11 
+traceroute to 3.3.3.1 (3.3.3.1) from 20.20.1.11, 30 hops max, 40 byte packets
+ 1  200.6.11.1 (200.6.11.1)  0.619 ms  0.427 ms  0.377 ms
+ 2  100.0.12.2 (100.0.12.2)  0.675 ms  0.571 ms  0.627 ms
+ 3  100.0.12.1 (100.0.12.1)  5.438 ms  0.432 ms  0.478 ms
+ 4  3.3.3.1 (3.3.3.1)  0.561 ms  0.550 ms  0.618 ms
 </code></pre>
 <h3 id="verify2-routing-table">verify2: routing table</h3>
 <h3 id="config-vpn-lsp-map">config vpn LSP map</h3>
@@ -4379,7 +5384,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 th
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lsp-map
 set logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-nh
 </code></pre>
-<h4 id="verify_18">verify</h4>
+<h4 id="verify_20">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-02# run show route logical-system r1 table GREEN.inet.0 20.20.1.22
 
@@ -4416,7 +5421,7 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lspmap term 2 the
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lspmap
 </code></pre>
-<h4 id="verify_19">verify</h4>
+<h4 id="verify_21">verify</h4>
 <pre><code>[edit]
 lab@MX80-NGGWR-01# run traceroute 20.20.1.33 logical-system r0 routing-instance green-ce1              
 traceroute to 20.20.1.33 (20.20.1.33), 30 hops max, 40 byte packets
@@ -4830,7 +5835,7 @@ GREEN.inet.0: 22 destinations, 43 routes (22 active, 0 holddown, 3 hidden)
                       MultiRecv
 </code></pre>
 <h3 id="solution-2-old-notes">solution 2 old notes</h3>
-<h4 id="remove-solution1">remove solution1</h4>
+<h4 id="remove-solution1_1">remove solution1</h4>
 <pre><code>#R1 global add static route summarizing all vpn routes, pointing intoto vrf
 delete logical-systems r1 routing-options static route 20.20.0.0/16
 
@@ -5124,319 +6129,6 @@ routing table:
      default:       inet.0 (def. )              inet.0 (def. w/o export-rib)
      rib-group:     inet.0 + GREEN.inet.0       inet.3(need some test)
 </code></pre>
-<h2 id="interas-vpn-part-a">InterAS VPN (PART A)</h2>
-<h3 id="solution1-inet-uncastlabeled-unicast-rib-inet3">solution1: <code>inet (uncast+labeled-unicast rib inet.3)</code></h3>
-<h4 id="config_4">config</h4>
-<pre><code>###R5: adv R1 lo0 to peer ASBR via policy, as inet-unicast&amp;labeled-unicast
-###    so peer ASBR can install R1 lo0 in both inet.0 &amp; inet.3
-#match r1 lo0 from inet.0 (serving `inet-unicast` bgp family only)
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from protocol isis
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 from route-filter 10.10.1.1/32 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 then accept
-#match r1 lo0 from inet.3 (serving `inet-labeled-unicast` family only)
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from rib inet.3
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from route-filter 10.10.1.1/32 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 then accept
-
-#`family inet unicast` =&gt;                    r1 lo0 from inet.0 will be adv.ed as `inet-unicast` bgp routes
-#`family inet labeled-unicast rib inet.3` =&gt; r1 lo0 from inet.3 will be adv.ed as `inet-labeled-unicast` routes
-set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet unicast
-set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 family inet labeled-unicast rib inet.3
-set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 export exp-bgp-adv-1
-set logical-systems r5 protocols bgp group l3vpn neighbor 172.16.5.5 peer-as 2
-
-###R1-R5-peerASBR : all need to have both family enabled, to pass along the lo0 as both NLRI
-set logical-systems r5 protocols bgp group rr family inet unicast
-set logical-systems r5 protocols bgp group rr family inet labeled-unicast rib inet.3 
-set logical-systems r1 protocols bgp group to-rr family inet unicast
-set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast rib inet.3 
-set logical-systems r9 protocols bgp group to-r5 family inet unicast
-set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast rib inet.3
-</code></pre>
-<h3 id="tip-interas-vpn-options">TIP: interAS VPN options</h3>
-<p>Option A: Unlabeled VPN-IPv4 (b2b vrf)</p>
-<pre><code>vrf1                              vrf1                                 vrf1
-    PE1---------------------ASBR1-------ASBR2-----------------------PE2
-vrf2                              vrf2                                 vrf2
-</code></pre>
-<ul>
-<li>ASBR:<ul>
-<li>carry all routes in: bgp.v3vpn.0, and each VRFs</li>
-</ul>
-</li>
-<li>least scale, not good</li>
-</ul>
-<p>Option B: Labeled VPN-IPv4</p>
-<ul>
-<li>
-<p>ASBR:</p>
-<ul>
-<li>retain all VPN routes , in bgp.l3vpn.0</li>
-<li>labeled-unicast to assign label(stitching e2e LSP)</li>
-</ul>
-<p>vrf1                                                                   vrf1
-    PE1---------------------ASBR1-------ASBR2-----------------------PE2
-vrf2                                                                   vrf2</p>
-<pre><code>    &lt;....(ldp label).......(BGP label).....(ldp label)......&gt;
-</code></pre>
-</li>
-</ul>
-<p>Option C: Multihop MP-BGP</p>
-<pre><code>vrf1                                                                   vrf1
-    PE1---------------------ASBR1-------ASBR2-----------------------PE2
-vrf2                                                                   vrf2
-
-        &lt;....(ldp label).......(BGP label).....(ldp label)......&gt;
-</code></pre>
-<ul>
-<li>PE:<ul>
-<li>multi-hop MP-EBGP betw PE</li>
-</ul>
-</li>
-<li>ASBR: <ul>
-<li>no need to maintain VPN routes</li>
-<li>leak PE1 lo0 into peer AS</li>
-<li>labeled-unicast to assign label</li>
-</ul>
-</li>
-</ul>
-<h3 id="tip-family-in-diff-levels">TIP: family in diff levels</h3>
-<p>without configs in more specific level, it "inherit" from upper level
-once configured in more specific level, it "overide", no more inheritence</p>
-<p>same as policys, anything else in JUNOS</p>
-<h3 id="tip-bgp-keep-all">TIP: bgp keep-all</h3>
-<p>keep all bgp.l3vpn.0 regardless of RT</p>
-<h3 id="remove-solution1_1">remove solution1</h3>
-<h3 id="solution2-inet-resolved-vpn">solution2: <code>inet resolved-vpn</code></h3>
-<pre><code>set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast resolve-vpn    
-set logical-systems r5 protocols bgp group l3vpn family inet labeled-unicast
-set logical-systems r9 protocols bgp group to-r5 family inet labeled-unicast
-</code></pre>
-<h3 id="remove-solution2">remove solution2</h3>
-<h3 id="tip-inet-labeled-unicast-resolve-vpn">TIP: <code>inet labeled-unicast resolve-vpn</code></h3>
-<p>Allow labeled routes to be placed in the inet.3 routing table for route
-resolution. These routes are then resolved for PE router connections where the
-remote PE is located across another AS. For a PE router to install a route in
-the VRF, the next hop must resolve to a route stored within the inet.3 table</p>
-<h3 id="question-bgp-flaps-duing-config">QUESTION: bgp flaps duing config</h3>
-<p>noticed bgp flaps during inter-AS vpn configs,might be normal</p>
-<pre><code>Aug  4 04:39:35  MX80-NGGWR-01 r1:rpd[1401]: RPD_OSPF_NBRDOWN: OSPF neighbor 4.4.4.4 (realm ospf-v2 shamlink.0 area 0.0.0.0) state changed f
-rom Full to Down due to KillNbr (event reason: interface went down)
-Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.2 (Internal AS 4012345678): code 6 (Cea
-se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
-Aug  4 04:39:34  MX80-NGGWR-01 r1: rpd[1401]: bgp_adv_main_update:7762: NOTIFICATION sent to 10.10.1.3 (Internal AS 4012345678): code 6 (Cea
-se) subcode 6 (Other Configuration Change), Reason: Configuration change - VPN table advertise
-</code></pre>
-<h3 id="toggle-traffic-engineering-mpls-forwarding">toggle <code>traffic-engineering mpls-forwarding</code></h3>
-<pre><code>delete logical-systems r1 protocols mpls traffic-engineering  
-delete logical-systems r5 protocols mpls traffic-engineering     
-delete logical-systems r9 protocols mpls traffic-engineering
-</code></pre>
-<h3 id="tip-policy-from-rib-inet3">TIP: policy "from rib inet.3"</h3>
-<pre><code>R1             (BGP route NLRI addr family)         R5
-   ============================================&gt;
-inet.0          inet unicast                        inet.0
-inet.3          inet labeled-unicast                inet.3
-
-inet unicast: 传递unicast的路由，放入inet.0
-labeled-unicast：传递unciast路由，放入inet.0
-labeld-unicast rib inet.3: 传递inet.3的路由，放入inet.3
-inet unicast+rib inet.3：传递inet.0和inet.3的路由，unicast的放入inet.0, rib inet.3的放入inet.3
-</code></pre>
-<p>这就是为什么无法同时配置inet uncast 和labeled-unicast，而可以同时配置inet unicast和rib inet.3 </p>
-<pre><code>lab@MX80-NGGWR-01# show logical-systems r5 policy-options policy-statement exp-bgp-adv-1    
-term 1 {
-    from {
-        protocol isis;                      #&lt;------taken from inet.0
-        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-unicast`
-    }
-    then accept;
-
-}
-term 2 {
-    from {
-        rib inet.3;                         #&lt;------taken from inet.0
-        route-filter 10.10.1.1/32 exact;    #&lt;--will be adv. as `inet-labeled-unicast`
-    }
-    then accept;
-}
-</code></pre>
-<h2 id="vpls-part-a">VPLS (PART A)</h2>
-<h3 id="config_5">config</h3>
-<pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
-set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
-set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
-set logical-systems r1 routing-instances vpls interface ge-1/2/3.100
-set logical-systems r1 routing-instances vpls route-distinguisher 1.1.1.1:1
-set logical-systems r1 routing-instances vpls vrf-target target:6500:1
-set logical-systems r1 routing-instances vpls protocols vpls site-range 10
-set logical-systems r1 routing-instances vpls protocols vpls interface-mac-limit 500
-set logical-systems r1 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r1 routing-instances vpls protocols vpls site r1 site-identifier 1
-set logical-systems r1 routing-instances vpls protocols vpls site r1 active-interface any
-set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.121
-set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.122
-
-set logical-systems r7 routing-instances vpls instance-type vpls
-set logical-systems r7 routing-instances vpls interface ge-1/2/1.678
-set logical-systems r7 routing-instances vpls route-distinguisher 2.2.2.2:1
-set logical-systems r7 routing-instances vpls vrf-target target:6500:1
-set logical-systems r7 routing-instances vpls protocols vpls site-range 10
-set logical-systems r7 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r7 routing-instances vpls protocols vpls site r7 site-identifier 7
-set logical-systems r7 routing-instances vpls protocols vpls site r7 multi-homing
-set logical-systems r7 routing-instances vpls protocols vpls site r7 site-preference 150
-set logical-systems r7 routing-instances vpls protocols vpls site r7 active-interface any
-set logical-systems r7 routing-instances vpls protocols vpls site r7 interface ge-1/2/1.678
-
-set logical-systems r8 routing-instances vpls instance-type vpls
-set logical-systems r8 routing-instances vpls interface ge-1/2/1.687
-set logical-systems r8 routing-instances vpls interface ge-1/2/5.100
-set logical-systems r8 routing-instances vpls route-distinguisher 2.2.2.2:1
-set logical-systems r8 routing-instances vpls vrf-target target:6500:1
-set logical-systems r8 routing-instances vpls protocols vpls site-range 10
-set logical-systems r8 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r8 routing-instances vpls protocols vpls site r8 site-identifier 7
-set logical-systems r8 routing-instances vpls protocols vpls site r8 multi-homing
-set logical-systems r8 routing-instances vpls protocols vpls site r8 site-preference 200
-set logical-systems r8 routing-instances vpls protocols vpls site r8 active-interface any
-set logical-systems r8 routing-instances vpls protocols vpls site r8 interface ge-1/2/1.687
-</code></pre>
-<h3 id="show-vpls-connection">show vpls connection</h3>
-<pre><code>lab@MX80-NGGWR-01# run show vpls connections logical-system r1 extensive          
-Layer-2 VPN connections:
-
-Legend for connection status (St)   
-EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
-EM -- encapsulation mismatch     WE -- interface and instance encaps not same
-VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
-CM -- control-word mismatch      -&gt; -- only outbound connection is up
-CN -- circuit not provisioned    &lt;- -- only inbound connection is up
-OR -- out of range               Up -- operational
-OL -- no outgoing label          Dn -- down                      
-LD -- local site signaled down   CF -- call admission control failure      
-RD -- remote site signaled down  SC -- local and remote site ID collision
-LN -- local site not designated  LM -- local site ID not minimum designated
-RN -- remote site not designated RM -- remote site ID not minimum designated
-XX -- unknown connection status  IL -- no incoming label
-MM -- MTU mismatch               MI -- Mesh-Group ID not available
-BK -- Backup connection          ST -- Standby connection
-PF -- Profile parse failure      PB -- Profile busy
-RS -- remote site standby        SN -- Static Neighbor
-VM -- VLAN ID mismatch
-
-Legend for interface status 
-Up -- operational           
-Dn -- down
-
-Instance: vpls
-  Local site: r1 (1)
-    Number of local interfaces: 2
-    Number of local interfaces up: 1
-    IRB interface present: no
-    ge-1/2/1.121       
-    ge-1/2/1.122       
-        Interface flags: VC-Down
-    vt-1/2/10.235929600 7         Intf - vpls vpls local site 1 remote site 7
-    Label-base        Offset     Size  Range     Preference
-    800000            1          8      8         100   
-    connection-site           Type  St     Time last up          # Up trans
-    7                         rmt   Up     Aug  7 01:29:36 2013           1
-      Remote PE: 10.10.1.8, Negotiated control-word: No
-      Incoming label: 800006, Outgoing label: 800000
-      Local interface: vt-1/2/10.235929600, Status: Up, Encapsulation: VPLS
-        Description: Intf - vpls vpls local site 1 remote site 7
-    Connection History:
-        Aug  7 01:29:36 2013  status update timer  
-        Aug  7 01:29:36 2013  loc intf up           vt-1/2/10.235929600
-        Aug  7 01:29:36 2013  PE route changed     
-        Aug  7 01:29:36 2013  Out lbl Update                    800000
-        Aug  7 01:29:36 2013  In lbl Update                     800006
-        Aug  7 01:29:36 2013  loc intf down
-</code></pre>
-<h3 id="show-route-forwarding-table">show route forwarding-table</h3>
-<h4 id="with-tunne-service">with tunne-service</h4>
-<pre><code>lab@MX80-NGGWR-01# run show route forwarding-table | find vpls.vpls
-Logical system: r1
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   728     1
-vt-1/2/10.235929600 intf     0                   indr 1048693     4
-                              10.10.12.2        Push 800000, Push 299808, Push 299792(top)  3007     2 ge-1/2/1.12
-0x3000b/51         user     0                    comp  3016     2
-f8:c0:01:18:93:92/48 user     0                  ucst  1986     5 ge-1/2/1.121      #&lt;------
-ge-1/2/1.121       intf     0                    ucst  1986     5 ge-1/2/1.121
-0x3000a/51         user     0                    comp  1997     2
-0x30007/51         user     0                    comp  1994     2
-
-Logical system: r8
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   716     1
-vt-1/2/10.202375168 intf     0                   indr 1048659     5
-                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
-0x3000c/51         user     0                    comp  3061     2
-f8:c0:01:18:93:92/48 user     0                  indr 1048659     5         #&lt;------
-                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
-ge-1/2/1.687       intf     0                    ucst  1973     4 ge-1/2/1.687
-0x30009/51         user     0                    comp  1983     2
-0x30006/51         user     0                    comp  1980     2
-</code></pre>
-<p>turn off tunnel service:</p>
-<pre><code>lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems r1 routing-instances vpls protocols vpls]
-+      no-tunnel-services;
-[edit logical-systems r8 routing-instances vpls protocols vpls]
-+      no-tunnel-services;
-</code></pre>
-<h4 id="without-tunnel-service">without tunnel service</h4>
-<pre><code>Logical system: r1
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   728     1
-lsi.235929600      intf     0                    indr 1048699     4
-                              10.10.12.2        Push 262145, Push 299808, Push 299792(top)  3014     2 ge-1/2/1.12
-0x3000a/51         user     0                    comp  3062     2
-f8:c0:01:18:93:92/48 user     0                  ucst   716     5 ge-1/2/1.121      #&lt;------
-ge-1/2/1.121       intf     0                    ucst   716     5 ge-1/2/1.121
-0x30006/51         user     0                    comp  1998     2
-0x30007/51         user     0                    comp  1995     2
-
-Logical system: r8
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd  1986     1
-lsi.202375168      intf     0                    indr 1048698     5
-                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
-0x3000d/51         user     0                    comp  1984     2
-f8:c0:01:18:93:92/48 user     0                  indr 1048698     5         #&lt;------
-                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
-ge-1/2/1.687       intf     0                    ucst  1980     4 ge-1/2/1.687
-0x3000b/51         user     0                    comp  3146     2
-0x30008/51         user     0                    comp  3143     2
-
-ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
-ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
-</code></pre>
-<h3 id="tip-encapsulation-extended-vlan-vpls-and-flexible-ethernet-services">TIP: <code>encapsulation extended-vlan-vpls</code> and <code>flexible-ethernet-services</code></h3>
-<p>Gigabit Ethernet, 4-port Fast Ethernet, MX Series router Gigabit Ethernet,
-Tri-Rate Ethernet copper, 10-Gigabit Ethernet, and aggregated Ethernet
-interfaces with VLAN tagging enabled can use extended VLAN CCC or VLAN VPLS,
-which allow 802.1Q tagging.</p>
-<p>flexible-ethernet-services—For Gigabit Ethernet IQ interfaces and Gigabit
-Ethernet PICs with small form-factor pluggable transceivers (SFPs) (except the
-10-port Gigabit Ethernet PIC and the built-in Gigabit Ethernet port on the M7i
-router), use flexible Ethernet services encapsulation when you want to
-configure multiple per-unit Ethernet encapsulations. Aggregated Ethernet
-bundles can use this encapsulation type. This encapsulation type allows you to
-configure any combination of route, TCC, CCC, Layer 2 virtual private networks
-(VPNs), and VPLS encapsulations on a single physical port. If you configure
-flexible Ethernet services encapsulation on the physical interface, VLAN IDs
-from 1 through 511 are no longer reserved for normal VLANs.</p>
 <h2 id="config-cos">config COS</h2>
 <p>[from sp3]</p>
 <pre><code>1,Provide COS service to the traffic flow from C3 to P3. 
@@ -5449,7 +6141,88 @@ IP Prec          111         110             other
 fwd-class        EF          AF              BE
 </code></pre>
 <p>R1:</p>
-<pre><code>#firewall policers:5m,7m,10m
+<pre><code>#define policers:5m/7m/10m
+set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m
+set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k
+set logical-systems r1 firewall policer 5m then discard
+set logical-systems r1 firewall policer 7m if-exceeding bandwidth-limit 7m
+set logical-systems r1 firewall policer 7m if-exceeding burst-size-limit 15k
+set logical-systems r1 firewall policer 7m then discard
+set logical-systems r1 firewall policer 10m if-exceeding bandwidth-limit 10m
+set logical-systems r1 firewall policer 10m if-exceeding burst-size-limit 15k
+set logical-systems r1 firewall policer 10m then discard
+
+#map: IPrec =&gt; fwd-class; 
+#(router will then rewrite MPLS EXP per fwd-class =&gt; exp rewrite rule) 
+#apply policers under firewall filter
+set logical-systems r1 firewall filter J-Classifier term 1 from precedence 7
+set logical-systems r1 firewall filter J-Classifier term 1 then policer 5m
+set logical-systems r1 firewall filter J-Classifier term 1 then forwarding-class expedited-forwarding
+set logical-systems r1 firewall filter J-Classifier term 1 then accept
+set logical-systems r1 firewall filter J-Classifier term 2 from precedence 6
+set logical-systems r1 firewall filter J-Classifier term 2 then policer 10m
+set logical-systems r1 firewall filter J-Classifier term 2 then forwarding-class assured-forwarding
+set logical-systems r1 firewall filter J-Classifier term 2 then accept
+set logical-systems r1 firewall filter J-Classifier term 3 then policer 7m
+set logical-systems r1 firewall filter J-Classifier term 3 then forwarding-class best-effort
+set logical-systems r1 firewall filter J-Classifier term 3 then accept
+
+#apply firewall filter under i/f
+set logical-systems r1 interfaces ge-1/2/1 unit 133 family inet filter input J-Classifier
+</code></pre>
+<p>R5:</p>
+<pre><code>#define map: DSCP code(IP prec) =&gt; fwd-class
+set class-of-service classifiers inet-precedence class-inetprec import default  
+set class-of-service classifiers inet-precedence class-inetprec forwarding-class expedited-forwarding loss-priority low code-points 111 
+set class-of-service classifiers inet-precedence class-inetprec forwarding-class assured-forwarding loss-priority low code-points 110
+
+set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence class-inetprec
+set class-of-service interfaces ge-1/2/2 unit 25 classifiers inet-precedence class-inetprec
+set class-of-service interfaces ge-1/2/2 unit 45 classifiers inet-precedence class-inetprec
+</code></pre>
+<h2 id="verify_22">verify</h2>
+<pre><code>run show class-of-service classifier type inet-precedence
+run show class-of-service rewrite-rule type exp
+</code></pre>
+<p>R5:</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-02# run show class-of-service classifier type inet-precedence                 
+Classifier: ipprec-default, Code point type: inet-precedence, Index: 12
+  Code point         Forwarding class                    Loss priority
+  000                best-effort                         low         
+  001                assured-forwarding                  low         
+  010                best-effort                         low         
+  011                best-effort                         low         
+  100                best-effort                         low         
+  101                expedited-forwarding                low         
+  110                network-control                     low         
+  111                network-control                     high
+
+Classifier: ipprec-compatibility, Code point type: inet-precedence, Index: 13
+  Code point         Forwarding class                    Loss priority
+  000                best-effort                         low         
+  001                best-effort                         high        
+  010                best-effort                         low         
+  011                best-effort                         high        
+  100                best-effort                         low         
+  101                best-effort                         high        
+  110                network-control                     low         
+  111                network-control                     high
+
+Classifier: class-inetprec, Code point type: inet-precedence, Index: 44252  #&lt;--my config
+  Code point         Forwarding class                    Loss priority
+  000                best-effort                         low   #&lt;---  
+  001                assured-forwarding                  low   #  A   
+  010                best-effort                         low   #  |def
+  011                best-effort                         low   #  |   
+  100                best-effort                         low   #  v   
+  101                expedited-forwarding                low   #&lt;---- 
+  110                assured-forwarding                  low   #&lt;------
+  111                expedited-forwarding                low   #&lt;------
+</code></pre>
+<h2 id="config-cos-old">config COS (old)</h2>
+<p>R1:</p>
+<pre><code>#config firewall policers:5m,7m,10m
 set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m    
 set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k   
 set logical-systems r1 firewall policer 5m then discard
@@ -5462,14 +6235,14 @@ set logical-systems r1 firewall policer 10m if-exceeding bandwidth-limit 10m
 set logical-systems r1 firewall policer 10m if-exceeding burst-size-limit 15k   
 set logical-systems r1 firewall policer 10m then discard
 
-#firewall filter: Jfilter
+#apply policer into firewall filter: Jfilter
 set logical-systems r1 firewall filter Jfilter term 1 from precedence 7                                    
 set logical-systems r1 firewall filter Jfilter term 1 then forwarding-class expedited-forwarding accept policer 5m 
 set logical-systems r1 firewall filter Jfilter term 2 from precedence 6                                    
 set logical-systems r1 firewall filter Jfilter term 2 then forwarding-class assured-forwarding accept policer 10m 
 set logical-systems r1 firewall filter Jfilter term 3 then forwarding-class best-effort accept policer 7m
 
-#apply firewall filter on PE ingress i/f
+#apply firewall filter on R1 ingress i/f
 set logical-systems r1 interfaces ge-1/2/2 unit 133 family inet filter input Jfilter
 </code></pre>
 <p>R5:</p>
@@ -5479,171 +6252,6 @@ set class-of-service classifiers inet-precedence class-ippre forwarding-class ex
 set class-of-service classifiers inet-precedence class-ippre forwarding-class assured-forwarding loss-priority low code-points 110 
 set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence class-ippre
 </code></pre>
-<h2 id="tip-qoscos">TIP: QoS/CoS</h2>
-<h3 id="key-concepts">key concepts</h3>
-<p>unidirectonal</p>
-<h3 id="ip-tosrfc791">IP TOS(RFC791)</h3>
-<pre><code>P2      P1      P0      D      T      R      CU1     CU0
-</code></pre>
-<ul>
-<li>
-<p>IP precedence—three bits (P2 to P0)</p>
-<p>network         Match packets with network control precedence (7)
-internet        Match packets with internetwork control precedence (6)
-critical        Match packets with critical precedence (5)
-flash-override  Match packets with flash override precedence (4)
-flash           Match packets with flash precedence (3)
-immediate       Match packets with immediate precedence (2)
-priority        Match packets with priority precedence (1)
-routine         Match packets with routine precedence (0)</p>
-</li>
-<li>
-<p>Delay, Throughput and Reliability—three bits (D T R)</p>
-</li>
-<li>CU (Currently Unused)—two bits(CU1-CU0)</li>
-</ul>
-<h3 id="dscp">DSCP</h3>
-<h4 id="diffserv-field">DiffServ field</h4>
-<p>Original IPv4 ToS byte (ping: just a new name in the context of diffserv)</p>
-<p>RFC2474</p>
-<pre><code>DS5     DS4     DS3     DS2     DS1     DS0     ECN     ECN
-</code></pre>
-<h4 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h4>
-<p><strong>Classification</strong> 
-based / indexed on DSCP 
-Packets with a common DSCP belong to the same BA (forwarding class)</p>
-<h4 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h4>
-<p>Forwarding treatment associated with a given BA
-Packets with the same DSCP value have the same PHB</p>
-<p>PHB group:
-A set of one or more PHBs with related forwarding behavior </p>
-<p>Example: 
-assured forwarding (AF) is a PHB group, consisting of PHBs AF1, AF2, AF3, and
-AF4</p>
-<h5 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h5>
-<p>RFC3246</p>
-<h5 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h5>
-<p>RFC2597</p>
-<pre><code>DSCP        AAA BB0
-=====================        
-AF1         001 BB0
-
-    AF11    001 01       low
-    AF11    001 10       medium
-    AF11    001 11       high
-
-AF2         010
-
-AF3         011
-
-AF4         100
-</code></pre>
-<h5 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h5>
-<p>RFC2474: 
-defined for backward compatible with RFC791 (IP precedence)
-"code selector code point"
-for network control traffic</p>
-<p>AAA: 001 - 111
-BBB: 000        #&lt;------this is how to diff with other PHB</p>
-<h5 id="bebest-effort-000000">BE(Best Effort): 000000</h5>
-<p>no spec</p>
-<h5 id="redback-device-table">redback device table:</h5>
-<pre><code>============================================================
-&lt;0-63&gt;   Differentiated services codepoint value 
-af11     Match packets with AF11 dscp (001010) 
-af12     Match packets with AF12 dscp (001100) 
-af13     Match packets with AF13 dscp (001110) 
-af21     Match packets with AF21 dscp (010010) 
-af22     Match packets with AF22 dscp (010100) 
-af23     Match packets with AF23 dscp (010110) 
-af31     Match packets with AF31 dscp (011010) 
-af32     Match packets with AF32 dscp (011100) 
-af33     Match packets with AF33 dscp (011110) 
-af41     Match packets with AF41 dscp (100010) 
-af42     Match packets with AF42 dscp (100100) 
-af43     Match packets with AF43 dscp (100110) 
-cs1      Match packets with CS1(precedence 1) dscp (001000) 
-cs2      Match packets with CS2(precedence 2) dscp (010000) 
-cs3      Match packets with CS3(precedence 3) dscp (011000) 
-cs4      Match packets with CS4(precedence 4) dscp (100000) 
-cs5      Match packets with CS5(precedence 5) dscp (101000) 
-cs6      Match packets with CS6(precedence 6) dscp (110000) 
-cs7      Match packets with CS7(precedence 7) dscp (111000) 
-be(def)  Match packets with default dscp (000000) 
-ef       Match packets with EF dscp (101110)
-</code></pre>
-<h5 id="junos-default-forwarding-class">JUNOS default forwarding-class</h5>
-<pre><code>lab@MX80-NGGWR-01# set logical-systems r1 firewall filter Jfilter term 1 then forwarding-class ?
-Possible completions:
-  &lt;forwarding-class&gt;   Classify packet to forwarding class
-  BusCriticalHigh_FWCLSS  
-  BusCriticalMed_FWCLSS  
-  Interactive_FWCLSS   
-  Network-Control_FWCLSS  
-  NonCriticalHigh_FWCLSS  
-  NonCriticalLow_FWCLSS  
-  RealTime_FWCLSS
-
-  assured-forwarding   
-  best-effort          
-  expedited-forwarding  
-  network-control
-</code></pre>
-<h4 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h4>
-<pre><code>lab@rams# run show class-of-service code-point-aliases (inet-precedence|exp|dscp)
-
-Alias              Bit pattern 
-===================================
-            PRE     EXP     DSCP
-            ---------------------
-af11        001     100     001010
-af12                101     001100
-af13                        001110
-af21        010             010010
-af22                        010100
-af23                        010110
-af31        011             011010
-af32                        011100
-af33                        011110
-af41        100             100010
-af42                        100100
-af43                        100110
-be          000     000     000000
-be1                 001 
-cs1                         001000  
-cs2                         010000
-cs3                         011000
-cs4                         100000
-cs5                         101000
-cs6         110     110     110000
-cs7         111     111     111000
-ef          101     010     101110
-ef1                 011 
-nc1         110     110     110000
-nc2         111     111     111000
-</code></pre>
-<h3 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h3>
-<h3 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h3>
-<h3 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h3>
-<h3 id="junos-tool-chains">JUNOS tool chains</h3>
-<pre><code>          +-----------+     +-----------+    +-----------+    +-----------+
-   Ingress|classifier |     |policer    |    |multi-field|    |policy     |
-    --&gt;---+           +-----+           +----+classifier +----+           +
-          +-----------+     +-----------+    +-----------+    +-----+-----+
-                                                                    |
-                                                                    |
-                                                                    |
-                                                                    |
-          +-----------+     +-----------+    +-----------+    +-----+-----+
-    Egress|rewrite    |     |scheduler  |    |multi-field|    |policer    |
-    &lt;-----+marker     +-----+shaper/RED +----+classifier +----+           +
-          +-----------+     +-----------+    +-----------+    +-----------+
-</code></pre>
-<h4 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h4>
-<h4 id="policer-traffic-limit">policer: traffic limit</h4>
-<h4 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h4>
-<h4 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h4>
-<h4 id="rewrite-marker">rewrite marker</h4>
 <h2 id="misc-notestips">misc notes/tips</h2>
 <h3 id="ipv6">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
@@ -8265,4 +8873,173 @@ green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
                     &gt; to 20.20.19.2 via ge-1/2/2.691
 224.0.0.5/32       *[OSPF/10] 3d 14:49:51, metric 1
                       MultiRecv
+</code></pre>
+<h3 id="tip-qoscos">TIP: QoS/CoS</h3>
+<h4 id="key-concepts">key concepts</h4>
+<p>unidirectonal</p>
+<h4 id="ip-tosrfc791">IP TOS(RFC791)</h4>
+<pre><code>P2      P1      P0      D      T      R      CU1     CU0
+</code></pre>
+<ul>
+<li>
+<p>IP precedence—three bits (P2 to P0)</p>
+<p>network         Match packets with network control precedence (7)
+internet        Match packets with internetwork control precedence (6)
+critical        Match packets with critical precedence (5)
+flash-override  Match packets with flash override precedence (4)
+flash           Match packets with flash precedence (3)
+immediate       Match packets with immediate precedence (2)
+priority        Match packets with priority precedence (1)
+routine         Match packets with routine precedence (0)</p>
+</li>
+<li>
+<p>Delay, Throughput and Reliability—three bits (D T R)</p>
+</li>
+<li>CU (Currently Unused)—two bits(CU1-CU0)</li>
+</ul>
+<h4 id="dscp">DSCP</h4>
+<h5 id="diffserv-field">DiffServ field</h5>
+<p>Original IPv4 ToS byte (ping: just a new name in the context of diffserv)</p>
+<p>RFC2474</p>
+<pre><code>DS5     DS4     DS3     DS2     DS1     DS0     ECN     ECN
+</code></pre>
+<h5 id="behavior-aggregate-ba-forwarding-class">Behavior aggregate (BA): forwarding class</h5>
+<p><strong>Classification</strong> 
+based / indexed on DSCP 
+Packets with a common DSCP belong to the same BA (forwarding class)</p>
+<h5 id="per-hop-behavior-phb-scheduling-algorithm-based-on-fwd-class">Per-hop behavior (PHB): scheduling algorithm based on fwd class</h5>
+<p>Forwarding treatment associated with a given BA
+Packets with the same DSCP value have the same PHB</p>
+<p>PHB group:
+A set of one or more PHBs with related forwarding behavior </p>
+<p>Example: 
+assured forwarding (AF) is a PHB group, consisting of PHBs AF1, AF2, AF3, and
+AF4</p>
+<h6 id="efexpedited-forwarding-101110">EF(Expedited Forwarding): 101110</h6>
+<p>RFC3246</p>
+<h6 id="afassured-forwarding-001010011100bb0">AF(Assured Forwarding): (001/010/011/100)BB0</h6>
+<p>RFC2597</p>
+<pre><code>DSCP        AAA BB0
+=====================        
+AF1         001 BB0
+
+    AF11    001 01       low
+    AF11    001 10       medium
+    AF11    001 11       high
+
+AF2         010
+
+AF3         011
+
+AF4         100
+</code></pre>
+<h6 id="nc-or-cscode-selector-aaa000001000-111000">NC or CS(Code Selector): AAA000(001000-111000)</h6>
+<p>RFC2474: 
+defined for backward compatible with RFC791 (IP precedence)
+"code selector code point"
+for network control traffic</p>
+<p>AAA: 001 - 111
+BBB: 000        #&lt;------this is how to diff with other PHB</p>
+<h6 id="bebest-effort-000000">BE(Best Effort): 000000</h6>
+<p>no spec</p>
+<h6 id="redback-device-table">redback device table:</h6>
+<pre><code>============================================================
+&lt;0-63&gt;   Differentiated services codepoint value 
+af11     Match packets with AF11 dscp (001010) 
+af12     Match packets with AF12 dscp (001100) 
+af13     Match packets with AF13 dscp (001110) 
+af21     Match packets with AF21 dscp (010010) 
+af22     Match packets with AF22 dscp (010100) 
+af23     Match packets with AF23 dscp (010110) 
+af31     Match packets with AF31 dscp (011010) 
+af32     Match packets with AF32 dscp (011100) 
+af33     Match packets with AF33 dscp (011110) 
+af41     Match packets with AF41 dscp (100010) 
+af42     Match packets with AF42 dscp (100100) 
+af43     Match packets with AF43 dscp (100110) 
+cs1      Match packets with CS1(precedence 1) dscp (001000) 
+cs2      Match packets with CS2(precedence 2) dscp (010000) 
+cs3      Match packets with CS3(precedence 3) dscp (011000) 
+cs4      Match packets with CS4(precedence 4) dscp (100000) 
+cs5      Match packets with CS5(precedence 5) dscp (101000) 
+cs6      Match packets with CS6(precedence 6) dscp (110000) 
+cs7      Match packets with CS7(precedence 7) dscp (111000) 
+be(def)  Match packets with default dscp (000000) 
+ef       Match packets with EF dscp (101110)
+</code></pre>
+<h6 id="junos-default-forwarding-class">JUNOS default forwarding-class</h6>
+<pre><code>lab@MX80-NGGWR-01# set logical-systems r1 firewall filter Jfilter term 1 then forwarding-class ?
+Possible completions:
+  &lt;forwarding-class&gt;   Classify packet to forwarding class
+  BusCriticalHigh_FWCLSS  
+  BusCriticalMed_FWCLSS  
+  Interactive_FWCLSS   
+  Network-Control_FWCLSS  
+  NonCriticalHigh_FWCLSS  
+  NonCriticalLow_FWCLSS  
+  RealTime_FWCLSS
+
+  assured-forwarding   
+  best-effort          
+  expedited-forwarding  
+  network-control
+</code></pre>
+<h5 id="junos-default-code-point-aliases">JUNOS default code-point-aliases</h5>
+<pre><code>lab@rams# run show class-of-service code-point-aliases (inet-precedence|exp|dscp)
+
+Alias              Bit pattern 
+===================================
+            PRE     EXP     DSCP
+            ---------------------
+af11        001     100     001010
+af12                101     001100
+af13                        001110
+af21        010             010010
+af22                        010100
+af23                        010110
+af31        011             011010
+af32                        011100
+af33                        011110
+af41        100             100010
+af42                        100100
+af43                        100110
+be          000     000     000000
+be1                 001 
+cs1                         001000  
+cs2                         010000
+cs3                         011000
+cs4                         100000
+cs5                         101000
+cs6         110     110     110000
+cs7         111     111     111000
+ef          101     010     101110
+ef1                 011 
+nc1         110     110     110000
+nc2         111     111     111000
+</code></pre>
+<h4 id="ipv6-rfc2460-tctraffic-class-8b">IPv6: RFC2460 TC(Traffic Class) 8b</h4>
+<h4 id="ethernet-8021p-pcppriority-code-point-3b">Ethernet: 802.1p PCP(Priority Code Point) 3b</h4>
+<h4 id="mpls-tctraffic-class-or-exp-3b">MPLS: TC(Traffic Class) or EXP 3b</h4>
+<h4 id="junos-tool-chains">JUNOS tool chains</h4>
+<pre><code>          +-----------+     +-----------+    +-----------+    +-----------+
+   Ingress|classifier |     |policer    |    |multi-field|    |policy     |
+    --&gt;---+           +-----+           +----+classifier +----+           +
+          +-----------+     +-----------+    +-----------+    +-----+-----+
+                                                                    |
+                                                                    |
+                                                                    |
+                                                                    |
+          +-----------+     +-----------+    +-----------+    +-----+-----+
+    Egress|rewrite    |     |scheduler  |    |multi-field|    |policer    |
+    &lt;-----+marker     +-----+shaper/RED +----+classifier +----+           +
+          +-----------+     +-----------+    +-----------+    +-----------+
+</code></pre>
+<h5 id="classifier-ingress-traffic-q-forwarding-class">classifier: ingress traffic ==&gt; Q (forwarding class)</h5>
+<pre><code>run show class-of-service classifier
+</code></pre>
+<h5 id="policer-traffic-limit">policer: traffic limit</h5>
+<h5 id="policy-cos-based-forwarding">policy: Cos Based Forwarding</h5>
+<h5 id="scheduler-redwredpwfqetc">scheduler: RED/WRED/PWFQ/etc</h5>
+<h5 id="rewrite-marker">rewrite marker</h5>
+<pre><code>run show class-of-service rewrite-rule type exp
 </code></pre>
