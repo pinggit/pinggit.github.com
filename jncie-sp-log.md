@@ -3,39 +3,43 @@
 <div class="toc">
 <ul>
 <li><a href="#jncie-logs">JNCIE logs</a><ul>
-<li><a href="#pre-igp">pre-IGP</a><ul>
+<li><a href="#troubleshooting-pre-config">troubleshooting pre-config</a></li>
+<li><a href="#device">Device</a><ul>
+<li><a href="#device-task">Device Task</a></li>
 <li><a href="#configtransfer-on-commit">config:transfer-on-commit</a></li>
-<li><a href="#verifytransfer-on-commit">verify:transfer-on-commit</a></li>
-<li><a href="#question-important-scp-doesnt-work">QUESTION: IMPORTANT: scp doesn't work</a></li>
-<li><a href="#configfirewall-filter">config:firewall filter</a></li>
-<li><a href="#tips-firewall-filter-dont-forget-the-last-term-of-then-accept">TIPS: firewall filter: don't forget the last term of then accept</a></li>
+<li><a href="#configfirewall-filter-on-r23">config:firewall filter on R2/3</a></li>
 <li><a href="#config-lag">config LAG</a></li>
 <li><a href="#config-graceful-restart">config graceful restart</a></li>
+<li><a href="#config-bfd">config BFD</a></li>
+<li><a href="#verifytransfer-on-commit">verify:transfer-on-commit</a></li>
+<li><a href="#tips-firewall-filter-dont-forget-the-last-term-of-then-accept">TIPS: firewall filter: don't forget the last term of then accept</a></li>
 <li><a href="#verify-gr">verify: GR</a></li>
 <li><a href="#question-gres-nsr-gr">QUESTION: GRES, NSR, GR</a></li>
-<li><a href="#config-bfd">config BFD</a></li>
 <li><a href="#verify-bfd">verify BFD</a></li>
 <li><a href="#tip-detect-bfd-interval">TIP: detect BFD interval</a></li>
 <li><a href="#tips-about-apply-groups">TIPS: about apply-groups</a></li>
+<li><a href="#question-important-scp-doesnt-work">QUESTION: IMPORTANT: scp doesn't work</a></li>
 <li><a href="#questionresolved-about-apply-group-except">QUESTION(resolved): about apply-group-except</a></li>
 </ul>
 </li>
 <li><a href="#igp">IGP</a><ul>
+<li><a href="#igp-task">IGP task</a></li>
 <li><a href="#configigp-policy">config:IGP policy</a></li>
+<li><a href="#configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</a></li>
+<li><a href="#config-isis-metric">config: isis metric</a></li>
 <li><a href="#verify-igp-policy">verify IGP policy</a><ul>
 <li><a href="#dc-r2-all-rs">DC =&gt; R2 =&gt; all Rs</a></li>
 <li><a href="#r2-dc-summarization">R2 =&gt; DC: summarization</a></li>
 <li><a href="#r2-dc-conditional-default-routes">R2 =&gt; DC: conditional default routes</a></li>
 </ul>
 </li>
-<li><a href="#configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</a></li>
 <li><a href="#verifyigp-policy">verify:IGP policy</a></li>
-<li><a href="#config-isis-metric">config: isis metric</a></li>
 <li><a href="#verifyisis-metric">verify:isis metric</a></li>
 <li><a href="#tips-conditional-routes">TIPS: conditional routes</a></li>
 </ul>
 </li>
 <li><a href="#mpls">MPLS</a><ul>
+<li><a href="#mpls-task">MPLS task</a></li>
 <li><a href="#configmpls-interfaces">config:MPLS interfaces</a></li>
 <li><a href="#tip-interface-family-mpls-vs-protocol-mpls-interface">TIP: interface family mpls vs. protocol mpls interface</a></li>
 <li><a href="#configicmp-tunneling-not-required">config:icmp-tunneling (not required)</a></li>
@@ -150,16 +154,6 @@
 <li><a href="#2-commit-errors">2 commit errors</a></li>
 </ul>
 </li>
-<li><a href="#vpls-old">VPLS (old)</a><ul>
-<li><a href="#config">config</a></li>
-<li><a href="#show-vpls-connection">show vpls connection</a></li>
-<li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
-<li><a href="#with-tunne-service">with tunne-service</a></li>
-<li><a href="#without-tunnel-service">without tunnel service</a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li><a href="#vpn-part-b">VPN (PART B)</a><ul>
 <li><a href="#vpn-internet-access-task">VPN internet access task</a></li>
 <li><a href="#config-basic-vpn">config: basic VPN</a><ul>
@@ -272,6 +266,7 @@
 </ul>
 </li>
 <li><a href="#misc-notestips">misc notes/tips</a><ul>
+<li><a href="#clear-commit-history">clear commit history</a></li>
 <li><a href="#ipv6">ipv6</a><ul>
 <li><a href="#p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</a></li>
 <li><a href="#p2-is-missing-some-ipv6-routes">p2 is missing some IPv6 routes</a></li>
@@ -322,7 +317,7 @@
 </ul>
 </li>
 <li><a href="#solution-4-rib-rib-group">solution 4: rib + rib-group</a><ul>
-<li><a href="#config_1">config</a></li>
+<li><a href="#config">config</a></li>
 <li><a href="#before">before</a></li>
 <li><a href="#after">after</a></li>
 <li><a href="#verification-of-rib-group">verification of rib-group</a></li>
@@ -342,7 +337,7 @@
 </li>
 <li><a href="#rtbh-verify">RTBH verify</a><ul>
 <li><a href="#initial-routes">initial routes</a></li>
-<li><a href="#config_2">config</a></li>
+<li><a href="#config_1">config</a></li>
 <li><a href="#result">result</a></li>
 </ul>
 </li>
@@ -358,6 +353,16 @@
 <li><a href="#solutionsham-link">solution:sham-link</a></li>
 </ul>
 </li>
+<li><a href="#vpls-old">VPLS (old)</a><ul>
+<li><a href="#config_2">config</a></li>
+<li><a href="#show-vpls-connection">show vpls connection</a></li>
+<li><a href="#show-route-forwarding-table">show route forwarding-table</a><ul>
+<li><a href="#with-tunne-service">with tunne-service</a></li>
+<li><a href="#without-tunnel-service">without tunnel service</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -366,38 +371,72 @@
 </div>
 <hr />
 <h1 id="jncie-logs">JNCIE logs</h1>
-<h2 id="pre-igp">pre-IGP</h2>
+<h2 id="troubleshooting-pre-config">troubleshooting pre-config</h2>
+<p>IGP：</p>
+<ol>
+<li>检查每台路由器的 router‐id，确保每台路由器的的 router‐id
+   都正确。预配置里面可能有 router‐id 乱配，漏配的现象</li>
+<li>检查所有路由器 loopback 0 接口是否都配置了 ISO 地址，地址是否正确</li>
+<li>R5 或 R6 的 ISIS 认证密码不正确，造成 ISIS 邻接关系建立不起来</li>
+<li>检查所有路由器的 group interface，是否包含了 family iso 和 family mpls，R5
+   的预配置只 包含了 family mpls</li>
+<li>检查所有的 ISIS 邻接关系都是 level 2</li>
+<li>汇聚端口需要手动打上 family iso，family mpls，family inet6</li>
+<li>
+<p>汇聚端口的物理接口下因为也配置 apply‐group interface，所有我们需要打上
+   apply‐groups‐except interface，不然的话，commit 会报错
+  
+  
+BGP：</p>
+</li>
+<li>
+<p>R2 的 BGP 配置有三个 P 邻居和两个 T 邻居，预配置中故意将一个 P 邻居移至
+   T group 下，我们需要把它移到 P group 下</p>
+</li>
+<li>R2 中 BGP group 里面配置了 passive，如果对端路由器也配置了 passive 的话，BGP
+   邻居无 法建立</li>
+<li>R3 上的 BGP group 下有个 remove‐private‐as ，需要去掉</li>
+<li>R5 或者 R6 上有 no‐client‐reflect，去掉，否则路由无法映射</li>
+<li>查看各个 RR 的 cluster 是否配置，是否正确配置</li>
+<li>R2/R3 全局下应用 apply‐group reject，去掉；有些时候 R2/R3 的 BGP
+   下也发现了直接调用 reject 的情况</li>
+<li>R5/R6 必须增加 route‐type external</li>
+<li>R2 的入方向增加了 65535:65282 即 no‐advertise，R1 的 C3 import 加入
+   65535:65281 即 no‐export，有的在 NHS
+   策略里面增加了，我们需要把这些改为其它的 community 值</li>
+</ol>
+<h2 id="device">Device</h2>
+<h3 id="device-task">Device Task</h3>
+<ol>
+<li>bind GE interface between R3 and R6,if any physical link down, the AE
+   interface must go down either.</li>
+<li>Enable Graceful restart on each core devices R1-R8</li>
+<li>R2 and DC are running ospf ,achieve sub-second convergence between them.(
+   enable BFD on ospf )</li>
+</ol>
+<p>NOTE: check the group ‘interface”’s configuration, make sure enable” mpls/iso/inet6” on the AE interface also.</p>
+<ol>
+<li>
+<p>Task 1: 3 points Interfaces facing T routers must discard and log to syslog
+   all traffic that comes from the T routers when the incoming packet has an
+   IPv4 or IPv6 source address of 10.200.0.0/16 or 2011:0301::/32 respectively,
+   which are the ranges used internally.</p>
+</li>
+<li>
+<p>Task 2: 3 points Ensure that all configuration changes on R1 are backed up
+   to a server when you commit the changes. The server’s details are shown in
+   this section's exhibit.</p>
+</li>
+</ol>
 <h3 id="configtransfer-on-commit">config:transfer-on-commit</h3>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# show system archival                                                       
-configuration {
-    transfer-on-commit;
-    archive-sites {
-        "ftp://test:test@172.25.84.169/transfer-on-commit/";
-        "scp://Ping:Juniper1%40@172.25.84.169/transfer-on-commit/";   #&lt;------doesn't work
-    }
-}
+<pre><code>set system archival configuration transfer-on-commit
+set system archival configuration archive-sites "ftp://test:test@172.25.84.169/transfer-on-commit/";
+#only work for junos, not for linux, don't know why yet
+set system archival configuration archive-sites "scp://test:test123@172.25.88.12/var/home/test/"
+        #doesn't work on a cygwin/linux server
+        "scp://Ping:Juniper1%40@172.25.84.169/transfer-on-commit/";
 </code></pre>
-<h3 id="verifytransfer-on-commit">verify:transfer-on-commit</h3>
-<pre><code>lab@MX80-NGGWR-02# run show log messages | match transfer 
-Aug 11 15:26:03  MX80-NGGWR-02 logger: transfer-file: Transferred /var/transfer/config/MX80-NGGWR-02_juniper.conf.gz_20130811_152551
-
-[edit]
-lab@abc# run show system configuration archival
-
-/var/transfer/config/:
-total blocks: 8
-total files: 0
-</code></pre>
-<h3 id="question-important-scp-doesnt-work">QUESTION: IMPORTANT: scp doesn't work</h3>
-<p>this looks succeed, but actually not working (no file a/v in the server)</p>
-<pre><code>[edit]
-lab@MX80-NGGWR-01# save scp://Ping@172.25.84.169:transfer-on-commit/abc.txt    
-Ping@172.25.84.169's password:  
-tempfile 0%    0 tempfile     100%  163KB 162.7KB/s   00:00    
-Wrote 5444 lines of configuration to 'scp://Ping@172.25.84.169:transfer-on-commit/abc.txt'
-</code></pre>
-<h3 id="configfirewall-filter">config:firewall filter</h3>
+<h3 id="configfirewall-filter-on-r23">config:firewall filter on R2/3</h3>
 <p>the target should be: block traffic coming from outside AS(like T/P), but
 sourcing from IP that is same as internal networks (10.100.x).</p>
 <pre><code>set logical-systems r2 firewall family inet filter filter-block-ipv4 term 1 from destination-address 192.168.100.0/24
@@ -412,8 +451,6 @@ set logical-systems r2 firewall family inet6 filter filter-block-ipv6 term 2 the
 set logical-systems r2 interfaces ge-1/2/1 unit 210 family inet filter input filter-block-ipv4
 set logical-systems r2 interfaces ge-1/2/1 unit 210 family inet6 filter input filter-block-ipv6
 </code></pre>
-<h3 id="tips-firewall-filter-dont-forget-the-last-term-of-then-accept">TIPS: firewall filter: don't forget the last term of <code>then accept</code></h3>
-<p>sam "deny all" rule as cisco</p>
 <h3 id="config-lag">config LAG</h3>
 <pre><code>set interfaces ge-1/2/3 apply-groups interface-group
 set interfaces ge-1/2/3 gigether-options 802.3ad ae10
@@ -447,6 +484,24 @@ set logical-systems r6 routing-options graceful-restart
 set logical-systems r7 routing-options graceful-restart    
 set logical-systems r8 routing-options graceful-restart
 </code></pre>
+<h3 id="config-bfd">config BFD</h3>
+<pre><code>set logical-systems r3 protocols isis interface ae10.0 bfd-liveness-detection minimum-interval 300 
+set logical-systems r6 protocols isis interface ae11.0 bfd-liveness-detection minimum-interval 300 
+set logical-systems r2 protocols ospf area 0 interface ge-1/2/1.210 bfd-liveness-detection minimum-interval 300
+</code></pre>
+<h3 id="verifytransfer-on-commit">verify:transfer-on-commit</h3>
+<pre><code>lab@MX80-NGGWR-02# run show log messages | match transfer 
+Aug 11 15:26:03  MX80-NGGWR-02 logger: transfer-file: Transferred /var/transfer/config/MX80-NGGWR-02_juniper.conf.gz_20130811_152551
+
+[edit]
+lab@abc# run show system configuration archival
+
+/var/transfer/config/:
+total blocks: 8
+total files: 0
+</code></pre>
+<h3 id="tips-firewall-filter-dont-forget-the-last-term-of-then-accept">TIPS: firewall filter: don't forget the last term of <code>then accept</code></h3>
+<p>sam "deny all" rule as cisco</p>
 <h3 id="verify-gr">verify: GR</h3>
 <pre><code>lab@MX80-NGGWR-02# run show route summary logical-system r3 
 Autonomous system number: 4012345678
@@ -490,11 +545,6 @@ Restart Complete
 </code></pre>
 <h3 id="question-gres-nsr-gr">QUESTION: GRES, NSR, GR</h3>
 <p>conceptual difference. need read more.</p>
-<h3 id="config-bfd">config BFD</h3>
-<pre><code>set logical-systems r3 protocols isis interface ae10.0 bfd-liveness-detection minimum-interval 300 
-set logical-systems r6 protocols isis interface ae11.0 bfd-liveness-detection minimum-interval 300 
-set logical-systems r2 protocols ospf area 0 interface ge-1/2/1.210 bfd-liveness-detection minimum-interval 300
-</code></pre>
 <h3 id="verify-bfd">verify BFD</h3>
 <pre><code>lab@MX80-NGGWR-02# run show bfd session  
                                                   Detect   Transmit
@@ -621,6 +671,14 @@ lo0) has the required family:</p>
 iso
 mpls
 </code></pre>
+<h3 id="question-important-scp-doesnt-work">QUESTION: IMPORTANT: scp doesn't work</h3>
+<p>this looks succeed, but actually not working (no file a/v in the server)</p>
+<pre><code>[edit]
+lab@MX80-NGGWR-01# save scp://Ping@172.25.84.169:transfer-on-commit/abc.txt    
+Ping@172.25.84.169's password:  
+tempfile 0%    0 tempfile     100%  163KB 162.7KB/s   00:00    
+Wrote 5444 lines of configuration to 'scp://Ping@172.25.84.169:transfer-on-commit/abc.txt'
+</code></pre>
 <h3 id="questionresolved-about-apply-group-except">QUESTION(resolved): about <code>apply-group-except</code></h3>
 <p>in this lab, under which condition this is required?</p>
 <p>A: like in vpls part, need this to exclude other family and only keep vpls
@@ -678,30 +736,82 @@ ae12.0           Up    INET  10.10.36.1
                        MPLS  enabled
 </code></pre>
 <h2 id="igp">IGP</h2>
+<h3 id="igp-task">IGP task</h3>
+<ol>
+<li>check isis adjacency, only level 2 neighbor will be allowed</li>
+<li>R2 and DC are running ospf, on R2, </li>
+<li>reject prefix: 172.16.0.0/24~172.16.7.0/24 which learned from DC ,and </li>
+<li>redistribute Ospf routes into ISIS with only 2 routes </li>
+<li>R2 will send 10.200/16 to DC and </li>
+<li>send an default route only when R2 has active BGP routes. </li>
+<li>disable ipv6 routing on ISIS</li>
+<li>
+<p>adjust the GE’s metric to 5 </p>
+</li>
+<li>
+<p>Task 1: 6 points Ensure that all internal IPv4 networks are reachable and
+   are visible as IS-IS routes on every internal router. Ensure that all
+   internal links participate in IS-IS at Level 2 only. This task will require
+   IS-IS troubleshooting. You can assume that interface IP addresses are
+   correct and that physical connectivity is established.
+   (make basic isis l2 work)</p>
+</li>
+<li>Task 2: 4 points The routes in this section’s exhibit are being received
+   from the data center via OSPF. Ensure that unacceptable prefixes do not
+   appear in the routing table of any internal router.
+   Ensure that R2 announces the acceptable range of prefixes using IS-IS to all
+   internal routers. Advertise the two best summary routes possible and
+   suppress the announcement of the more specific routes.
+   (R2:ospf import: suppress some routes)
+   (R2:isis export: summarize with 2 and adv)</li>
+<li>Task 3: 2 points Announce the 10.200.0.0/16 prefix to the data center. Also
+   announce a default route to the data center only when BGP routes are present
+   on R2.
+   (R2:ospf exp: adv only summariazed)
+   (R2:ospf exp: adv conditional def)</li>
+<li>Task 4: 1 point Ensure that IS-IS link metrics are automatically calculated
+   so that a 1-Gbps interface has a metric of 5.
+   (isis:ref-bw)</li>
+<li>
+<p>Task 5: 1 point Ensure that no IPv6 addresses can appear as IS-IS routes.
+   (isis: no-ipv6)</p>
+<pre><code>.ACCEPTABLE PREFIXES
+|=============================================================
+|172.16.8/24    |172.16.11/24   |172.16.14/24   |172.16.17/24
+|172.16.9/24    |172.16.12/24   |172.16.15/24   |172.16.18/24
+|172.16.10/24   |172.16.13/24   |172.16.16/24   |172.16.19/24
+|=============================================================
+
+.UNACCEPTABLE PREFIXES
+|=================================================
+|172.16.0/24    |172.16.3/24    |172.16.6/24
+|172.16.1/24    |172.16.4/24    |172.16.7/24
+|172.16.2/24    |172.16.5/24    |
+|=================================================
+</code></pre>
+</li>
+</ol>
 <h3 id="configigp-policy">config:IGP policy</h3>
-<pre><code>#ospf import policy: reject some type5 : routes like 172.16.0/24~172.16.7/24 or longer prefix
-set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
-set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from route-filter 172.16.0.0/21 orlonger
-set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 then reject
-set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 2 then accept
-set logical-systems r2 protocols ospf import imp-ospf-rej-longer
-
-#isis export policy: summarize 172.16.8~19/24
-set logical-systems r2 routing-options aggregate route 172.16.8.0/21
-set logical-systems r2 routing-options aggregate route 172.16.16.0/22
-set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggregate
-set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.8.0/21 exact
-set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.16.0/22 exact
-set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 then accept
-set logical-systems r2 protocols isis export exp-isis-from-ospf
-
-#ospf exprt policy: summarize internal as 10.200/16 and adv a default route to DC
-set logical-systems r2 routing-options aggregate route 10.200.0.0/16
-
-set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
+<p>#ospf import policy: reject some type5 : routes like 172.16.0/24~172.16.7/24 or longer prefix
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from route-filter 172.16.0.0/21 orlonger
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 then reject
+    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 2 then accept
+    set logical-systems r2 protocols ospf import imp-ospf-rej-longer</p>
+<p>#isis export policy: summarize 172.16.8~19/24
+    set logical-systems r2 routing-options aggregate route 172.16.8.0/21
+    set logical-systems r2 routing-options aggregate route 172.16.16.0/22
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggregate
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.8.0/21 exact
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.16.0/22 exact
+    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 then accept
+    set logical-systems r2 protocols isis export exp-isis-from-ospf</p>
+<p>#ospf exprt policy: summarize internal as 10.200/16 and adv a default route to DC
+    set logical-systems r2 routing-options aggregate route 10.200.0.0/16</p>
+<pre><code>set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from route-filter 0.0.0.0/0 prefix-length-range /0-/32
 set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 then accept
-set logical-systems r2 policy-options policy-statement only-if-from-bgp term 2 then reject
+set logical-systems r2 policy-options policy-statement only-if-from-bgp term 2 then reject  #&lt;------
 set logical-systems r2 routing-options generate route 0.0.0.0/0 policy only-if-from-bgp
 
 set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 1 from protocol aggregate
@@ -713,6 +823,26 @@ set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2
 set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2 then accept
 
 set logical-systems r2 protocols ospf export exp-ospf-from-isis
+</code></pre>
+<h3 id="configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</h3>
+<pre><code>set logical-systems r1 protocols isis no-ipv6-routing  
+set logical-systems r2 protocols isis no-ipv6-routing  
+set logical-systems r3 protocols isis no-ipv6-routing  
+set logical-systems r4 protocols isis no-ipv6-routing  
+set logical-systems r5 protocols isis no-ipv6-routing  
+set logical-systems r6 protocols isis no-ipv6-routing  
+set logical-systems r7 protocols isis no-ipv6-routing  
+set logical-systems r8 protocols isis no-ipv6-routing
+</code></pre>
+<h3 id="config-isis-metric">config: isis metric</h3>
+<pre><code>set logical-systems r1 protocols isis reference-bandwidth 5g
+set logical-systems r2 protocols isis reference-bandwidth 5g
+set logical-systems r3 protocols isis reference-bandwidth 5g
+set logical-systems r4 protocols isis reference-bandwidth 5g
+set logical-systems r5 protocols isis reference-bandwidth 5g
+set logical-systems r6 protocols isis reference-bandwidth 5g
+set logical-systems r7 protocols isis reference-bandwidth 5g
+set logical-systems r8 protocols isis reference-bandwidth 5g
 </code></pre>
 <h3 id="verify-igp-policy">verify IGP policy</h3>
 <h4 id="dc-r2-all-rs">DC =&gt; R2 =&gt; all Rs</h4>
@@ -852,16 +982,6 @@ test@MX80-NGGWR-02# run show route logical-system lr2 0.0.0.0/0 exact
 inet.0: 57 destinations, 59 routes (56 active, 0 holddown, 1 hidden)
 Restart Complete
 </code></pre>
-<h3 id="configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</h3>
-<pre><code>set logical-systems r1 protocols isis no-ipv6-routing  
-set logical-systems r2 protocols isis no-ipv6-routing  
-set logical-systems r3 protocols isis no-ipv6-routing  
-set logical-systems r4 protocols isis no-ipv6-routing  
-set logical-systems r5 protocols isis no-ipv6-routing  
-set logical-systems r6 protocols isis no-ipv6-routing  
-set logical-systems r7 protocols isis no-ipv6-routing  
-set logical-systems r8 protocols isis no-ipv6-routing
-</code></pre>
 <h3 id="verifyigp-policy">verify:IGP policy</h3>
 <pre><code>lab@MX80-NGGWR-02# run show isis route logical-system r1         
  IS-IS routing table             Current version: L1: 1 L2: 100
@@ -895,16 +1015,6 @@ Prefix             L Version   Metric Type Interface       NH   Via
 172.16.8.0/21      2     100       15 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2   
 172.16.16.0/22     2     100       15 int  ge-1/2/1.102    IPV4 MX80-NGGWR-02-r2
 </code></pre>
-<h3 id="config-isis-metric">config: isis metric</h3>
-<pre><code>set logical-systems r1 protocols isis reference-bandwidth 5g
-set logical-systems r2 protocols isis reference-bandwidth 5g
-set logical-systems r3 protocols isis reference-bandwidth 5g
-set logical-systems r4 protocols isis reference-bandwidth 5g
-set logical-systems r5 protocols isis reference-bandwidth 5g
-set logical-systems r6 protocols isis reference-bandwidth 5g
-set logical-systems r7 protocols isis reference-bandwidth 5g
-set logical-systems r8 protocols isis reference-bandwidth 5g
-</code></pre>
 <h3 id="verifyisis-metric">verify:isis metric</h3>
 <pre><code>lab@MX80-NGGWR-02# run show isis interface logical-system r1 
 IS-IS interface database:
@@ -914,8 +1024,91 @@ ge-1/2/1.103          2   0x1 Disabled          MX80-NGGWR-02-r3.03      5/5
 lo0.1                 0   0x1 Passive           Passive                 0/0
 </code></pre>
 <h3 id="tips-conditional-routes">TIPS: conditional routes</h3>
-<p>the conditional routes can be either normal aggregation routes or generate route</p>
+<p>which is right in this case? I think <code>generate route</code></p>
+<p>manual:</p>
+<p>Generated routes are used as the route of last resort. A packet is forwarded to
+the route of last resort when the routing tables have no information about how
+to reach that packet’s destination. One use of route generation is to generate
+a default route to use if the routing table contains a route from a peer on a
+neighboring backbone.</p>
+<p>some web research:</p>
+<ul>
+<li>A <code>static route</code> is the most obvious. You need to be able to reach a certain
+  prefix and you specify the next-hop. This is useful when you are not running
+  dynamic routing protocols and/or when you want to override what a dynamic
+  protocol dictates (since the protocol-preference for a static-route is lower
+  -preferred- than that of any dynamic RP).</li>
+<li>An <code>aggregate route</code> is a route you define but which is not used for forwarding
+  traffic (next-hop is discard or reject). It is purely used to advertise this
+  router's connectivity which is why it needs at least one contributing route
+  (a route which belongs to the advertised subnet but with a longer mask -
+  these are the ones used to forward the traffic). Typically, the aggregate
+  route would be advertised into BGP (if it is active thanks to contributing
+  routes) - BGP does not like dealing with routes which are too specific - it
+  prefers aggregates.</li>
+<li>A <code>generated route</code> is technically an aggregate route but which can be used to
+  forward traffic. Traffic which matches the generated route (and not more
+  specific routes) will be forwarded using the same next-hop as the first
+  contributing route. A generated-route is typically combined with a policy to
+  match which routes we want to be contributing and thus used as NHs. The
+  generated-route is typically the default 0/0 with a policy matching to
+  upstream routes - ie: provide connectivity if certain upstream routes exist.</li>
+</ul>
 <h2 id="mpls">MPLS</h2>
+<h3 id="mpls-task">MPLS task</h3>
+<ol>
+<li>check each router’s LSP, make sure ALL-LSP are up .</li>
+<li>you can’t enable LDP on R2/R3, can’t enable RSVP on R7/R8, find a way to
+   exchange label between R1/R4and R7/R8.</li>
+<li>the LSP r2-r5 must transit on two paths, the primary path transit r4 and r6,
+   the secondary path transit r3, both paths must be UP simultaneously.</li>
+<li>set up the secondary path for lsp r4-r3,2nd path must remain up and the
+   reservation bandwidth is 600m, 2 paths’s first hop must be R2.</li>
+<li>LSP r3-r5 can’t pass through the link between r3-r5, achieve this without
+   using ERO.</li>
+<li>LSP r1-r6 shall be preempted by other LSP</li>
+<li>IPV6’s traffic must be tunneled in MPLS </li>
+<li>R5/R6 shall not has label “0”</li>
+<li>configure LSP r3-r4 , the reservation bandwidth will be 600m and ensure the
+   traffics will not exceed 600m either, r3-r4 will not use r3-r2’s link , ERO
+   was forbidden</li>
+<li>
+<p>on R6, configure the load balance based on the ip layer 3 AND MPLS
+    first-label information</p>
+</li>
+<li>
+<p>Task 1: 2 points Ensure that R2 and R3 do not use LDP for performing MPLS
+   functions.
+   (R2/3 RSVP only)</p>
+</li>
+<li>Task 2: 3 points Ensure that R7 and R8 do not use RSVP for signaling LSPs in
+   the network.  Ensure that R1 can exchange label information with both R7 and
+   R8. Ensure that the failure of any single router does not prevent this
+   communication.
+   (R7/8: LDP only)
+   (R1 LDPoRSVP to R7/8, no single link failure)</li>
+<li>
+<p>Task 3: 3 points LSPs have been preconfigured, as shown in this section’s
+   exhibit, and are currently operational in the network. (Functionality of
+   these LSPs is dependent on completion of previous sections.) Ensure that the
+   r2-to-r5 LSP follows the paths as specified in this section’s exhibit.
+   Ensure that the r5-to-r2 LSP follows the path as specified in this section’s
+   exhibit.</p>
+</li>
+<li>
+<p>Task 4: 2 points Using the existing admin groups, ensure that the r2-to-r5
+   LSP avoids the R2–R3 link.</p>
+</li>
+<li>Task 5: 3 points Configure the r3-to-r4 LSP to reserve 600Mbps of bandwidth
+   across the network. Ensure this LSP can be preempted by all other
+   RSVP-signaled LSPs in the network.</li>
+<li>Task 6: 3 points Use a bypass LSP to improve convergence time for the
+   r2-to-r5 LSP in the event of an R6-R5 link failure.</li>
+<li>Task 7: 3 points Configure the network so that all IPv6 traffic will be
+   tunneled through MPLS LSPs.</li>
+<li>Task 8: 1 point Ensure that R5 does not allocate a label value of 0 to any
+   IBGP, RSVP or LDP neighbors.</li>
+</ol>
 <h3 id="configmpls-interfaces">config:MPLS interfaces</h3>
 <pre><code>set logical-systems r1 protocols mpls interface ge-1/2/1.102
 set logical-systems r1 protocols mpls interface ge-1/2/1.103
@@ -4211,167 +4404,6 @@ error: configuration check-out failed
      Only the VPLS family is allowed on VPLS interfaces
 error: configuration check-out failed
 </code></pre>
-<h2 id="vpls-old">VPLS (old)</h2>
-<h3 id="config">config</h3>
-<pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
-set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
-set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
-set logical-systems r1 routing-instances vpls interface ge-1/2/3.100
-set logical-systems r1 routing-instances vpls route-distinguisher 1.1.1.1:1
-set logical-systems r1 routing-instances vpls vrf-target target:6500:1
-set logical-systems r1 routing-instances vpls protocols vpls site-range 10
-set logical-systems r1 routing-instances vpls protocols vpls interface-mac-limit 500
-set logical-systems r1 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r1 routing-instances vpls protocols vpls site r1 site-identifier 1
-set logical-systems r1 routing-instances vpls protocols vpls site r1 active-interface any
-set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.121
-set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.122
-
-set logical-systems r7 routing-instances vpls instance-type vpls
-set logical-systems r7 routing-instances vpls interface ge-1/2/1.678
-set logical-systems r7 routing-instances vpls route-distinguisher 2.2.2.2:1
-set logical-systems r7 routing-instances vpls vrf-target target:6500:1
-set logical-systems r7 routing-instances vpls protocols vpls site-range 10
-set logical-systems r7 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r7 routing-instances vpls protocols vpls site r7 site-identifier 7
-set logical-systems r7 routing-instances vpls protocols vpls site r7 multi-homing
-set logical-systems r7 routing-instances vpls protocols vpls site r7 site-preference 150
-set logical-systems r7 routing-instances vpls protocols vpls site r7 active-interface any
-set logical-systems r7 routing-instances vpls protocols vpls site r7 interface ge-1/2/1.678
-
-set logical-systems r8 routing-instances vpls instance-type vpls
-set logical-systems r8 routing-instances vpls interface ge-1/2/1.687
-set logical-systems r8 routing-instances vpls interface ge-1/2/5.100
-set logical-systems r8 routing-instances vpls route-distinguisher 2.2.2.2:1
-set logical-systems r8 routing-instances vpls vrf-target target:6500:1
-set logical-systems r8 routing-instances vpls protocols vpls site-range 10
-set logical-systems r8 routing-instances vpls protocols vpls no-tunnel-services
-set logical-systems r8 routing-instances vpls protocols vpls site r8 site-identifier 7
-set logical-systems r8 routing-instances vpls protocols vpls site r8 multi-homing
-set logical-systems r8 routing-instances vpls protocols vpls site r8 site-preference 200
-set logical-systems r8 routing-instances vpls protocols vpls site r8 active-interface any
-set logical-systems r8 routing-instances vpls protocols vpls site r8 interface ge-1/2/1.687
-</code></pre>
-<h3 id="show-vpls-connection">show vpls connection</h3>
-<pre><code>lab@MX80-NGGWR-01# run show vpls connections logical-system r1 extensive          
-Layer-2 VPN connections:
-
-Legend for connection status (St)   
-EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
-EM -- encapsulation mismatch     WE -- interface and instance encaps not same
-VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
-CM -- control-word mismatch      -&gt; -- only outbound connection is up
-CN -- circuit not provisioned    &lt;- -- only inbound connection is up
-OR -- out of range               Up -- operational
-OL -- no outgoing label          Dn -- down                      
-LD -- local site signaled down   CF -- call admission control failure      
-RD -- remote site signaled down  SC -- local and remote site ID collision
-LN -- local site not designated  LM -- local site ID not minimum designated
-RN -- remote site not designated RM -- remote site ID not minimum designated
-XX -- unknown connection status  IL -- no incoming label
-MM -- MTU mismatch               MI -- Mesh-Group ID not available
-BK -- Backup connection          ST -- Standby connection
-PF -- Profile parse failure      PB -- Profile busy
-RS -- remote site standby        SN -- Static Neighbor
-VM -- VLAN ID mismatch
-
-Legend for interface status 
-Up -- operational           
-Dn -- down
-
-Instance: vpls
-  Local site: r1 (1)
-    Number of local interfaces: 2
-    Number of local interfaces up: 1
-    IRB interface present: no
-    ge-1/2/1.121       
-    ge-1/2/1.122       
-        Interface flags: VC-Down
-    vt-1/2/10.235929600 7         Intf - vpls vpls local site 1 remote site 7
-    Label-base        Offset     Size  Range     Preference
-    800000            1          8      8         100   
-    connection-site           Type  St     Time last up          # Up trans
-    7                         rmt   Up     Aug  7 01:29:36 2013           1
-      Remote PE: 10.10.1.8, Negotiated control-word: No
-      Incoming label: 800006, Outgoing label: 800000
-      Local interface: vt-1/2/10.235929600, Status: Up, Encapsulation: VPLS
-        Description: Intf - vpls vpls local site 1 remote site 7
-    Connection History:
-        Aug  7 01:29:36 2013  status update timer  
-        Aug  7 01:29:36 2013  loc intf up           vt-1/2/10.235929600
-        Aug  7 01:29:36 2013  PE route changed     
-        Aug  7 01:29:36 2013  Out lbl Update                    800000
-        Aug  7 01:29:36 2013  In lbl Update                     800006
-        Aug  7 01:29:36 2013  loc intf down
-</code></pre>
-<h3 id="show-route-forwarding-table">show route forwarding-table</h3>
-<h4 id="with-tunne-service">with tunne-service</h4>
-<pre><code>lab@MX80-NGGWR-01# run show route forwarding-table | find vpls.vpls
-Logical system: r1
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   728     1
-vt-1/2/10.235929600 intf     0                   indr 1048693     4
-                              10.10.12.2        Push 800000, Push 299808, Push 299792(top)  3007     2 ge-1/2/1.12
-0x3000b/51         user     0                    comp  3016     2
-f8:c0:01:18:93:92/48 user     0                  ucst  1986     5 ge-1/2/1.121      #&lt;------
-ge-1/2/1.121       intf     0                    ucst  1986     5 ge-1/2/1.121
-0x3000a/51         user     0                    comp  1997     2
-0x30007/51         user     0                    comp  1994     2
-
-Logical system: r8
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   716     1
-vt-1/2/10.202375168 intf     0                   indr 1048659     5
-                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
-0x3000c/51         user     0                    comp  3061     2
-f8:c0:01:18:93:92/48 user     0                  indr 1048659     5         #&lt;------
-                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
-ge-1/2/1.687       intf     0                    ucst  1973     4 ge-1/2/1.687
-0x30009/51         user     0                    comp  1983     2
-0x30006/51         user     0                    comp  1980     2
-</code></pre>
-<p>turn off tunnel service:</p>
-<pre><code>lab@MX80-NGGWR-01# show | compare  
-[edit logical-systems r1 routing-instances vpls protocols vpls]
-+      no-tunnel-services;
-[edit logical-systems r8 routing-instances vpls protocols vpls]
-+      no-tunnel-services;
-</code></pre>
-<h4 id="without-tunnel-service">without tunnel service</h4>
-<pre><code>Logical system: r1
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd   728     1
-lsi.235929600      intf     0                    indr 1048699     4
-                              10.10.12.2        Push 262145, Push 299808, Push 299792(top)  3014     2 ge-1/2/1.12
-0x3000a/51         user     0                    comp  3062     2
-f8:c0:01:18:93:92/48 user     0                  ucst   716     5 ge-1/2/1.121      #&lt;------
-ge-1/2/1.121       intf     0                    ucst   716     5 ge-1/2/1.121
-0x30006/51         user     0                    comp  1998     2
-0x30007/51         user     0                    comp  1995     2
-
-Logical system: r8
-Routing table: vpls.vpls
-VPLS:
-Destination        Type RtRef Next hop           Type Index NhRef Netif
-default            perm     0                    dscd  1986     1
-lsi.202375168      intf     0                    indr 1048698     5
-                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
-0x3000d/51         user     0                    comp  1984     2
-f8:c0:01:18:93:92/48 user     0                  indr 1048698     5         #&lt;------
-                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
-ge-1/2/1.687       intf     0                    ucst  1980     4 ge-1/2/1.687
-0x3000b/51         user     0                    comp  3146     2
-0x30008/51         user     0                    comp  3143     2
-
-ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
-ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
-</code></pre>
 <h2 id="vpn-part-b">VPN (PART B)</h2>
 <h3 id="vpn-internet-access-task">VPN internet access task</h3>
 <p>VPN must have internet access, and 
@@ -6394,6 +6426,8 @@ set class-of-service classifiers inet-precedence class-ippre forwarding-class as
 set class-of-service interfaces ge-1/2/2 unit 35 classifiers inet-precedence class-ippre
 </code></pre>
 <h2 id="misc-notestips">misc notes/tips</h2>
+<h3 id="clear-commit-history">clear commit history</h3>
+<p>echo "" &gt; /var/db/commits</p>
 <h3 id="ipv6">ipv6</h3>
 <h4 id="p1p3-got-all-ipv6-routes">p1/p3 got all ipv6 routes</h4>
 <pre><code>lab@MX80-NGGWR-01# run show route protocol bgp logical-system lptc table p1.inet6.0
@@ -7699,7 +7733,7 @@ run clear bgp neighbor soft logical-system lr6
 </code></pre>
 <p>this solution does not look great. no extra benefit also.</p>
 <h4 id="solution-4-rib-rib-group">solution 4: rib + rib-group</h4>
-<h5 id="config_1">config</h5>
+<h5 id="config">config</h5>
 <pre><code>#R5/6: advertise R2/3/7/8 lo0 via BGP:
 
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.10.1.2/32 exact  
@@ -8384,7 +8418,7 @@ Restart Complete
                 Localpref: 100
                 Router ID: 10.10.1.6
 </code></pre>
-<h4 id="config_2">config</h4>
+<h4 id="config_1">config</h4>
 <pre><code>set logical-systems lr2 policy-options community rtbh members [ 65412:100 target:4012345678L:2000 ] 
 set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0/0 prefix-length-range /32-/32
 set logical-systems lr2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard                                                                        
@@ -9014,4 +9048,165 @@ green-ce1.inet.0: 16 destinations, 17 routes (16 active, 0 holddown, 0 hidden)
                     &gt; to 20.20.19.2 via ge-1/2/2.691
 224.0.0.5/32       *[OSPF/10] 3d 14:49:51, metric 1
                       MultiRecv
+</code></pre>
+<h3 id="vpls-old">VPLS (old)</h3>
+<h4 id="config_2">config</h4>
+<pre><code>set logical-systems r1 routing-instances vpls instance-type vpls
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls interface ge-1/2/1.122
+set logical-systems r1 routing-instances vpls interface ge-1/2/3.100
+set logical-systems r1 routing-instances vpls route-distinguisher 1.1.1.1:1
+set logical-systems r1 routing-instances vpls vrf-target target:6500:1
+set logical-systems r1 routing-instances vpls protocols vpls site-range 10
+set logical-systems r1 routing-instances vpls protocols vpls interface-mac-limit 500
+set logical-systems r1 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r1 routing-instances vpls protocols vpls site r1 site-identifier 1
+set logical-systems r1 routing-instances vpls protocols vpls site r1 active-interface any
+set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.121
+set logical-systems r1 routing-instances vpls protocols vpls site r1 interface ge-1/2/1.122
+
+set logical-systems r7 routing-instances vpls instance-type vpls
+set logical-systems r7 routing-instances vpls interface ge-1/2/1.678
+set logical-systems r7 routing-instances vpls route-distinguisher 2.2.2.2:1
+set logical-systems r7 routing-instances vpls vrf-target target:6500:1
+set logical-systems r7 routing-instances vpls protocols vpls site-range 10
+set logical-systems r7 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r7 routing-instances vpls protocols vpls site r7 site-identifier 7
+set logical-systems r7 routing-instances vpls protocols vpls site r7 multi-homing
+set logical-systems r7 routing-instances vpls protocols vpls site r7 site-preference 150
+set logical-systems r7 routing-instances vpls protocols vpls site r7 active-interface any
+set logical-systems r7 routing-instances vpls protocols vpls site r7 interface ge-1/2/1.678
+
+set logical-systems r8 routing-instances vpls instance-type vpls
+set logical-systems r8 routing-instances vpls interface ge-1/2/1.687
+set logical-systems r8 routing-instances vpls interface ge-1/2/5.100
+set logical-systems r8 routing-instances vpls route-distinguisher 2.2.2.2:1
+set logical-systems r8 routing-instances vpls vrf-target target:6500:1
+set logical-systems r8 routing-instances vpls protocols vpls site-range 10
+set logical-systems r8 routing-instances vpls protocols vpls no-tunnel-services
+set logical-systems r8 routing-instances vpls protocols vpls site r8 site-identifier 7
+set logical-systems r8 routing-instances vpls protocols vpls site r8 multi-homing
+set logical-systems r8 routing-instances vpls protocols vpls site r8 site-preference 200
+set logical-systems r8 routing-instances vpls protocols vpls site r8 active-interface any
+set logical-systems r8 routing-instances vpls protocols vpls site r8 interface ge-1/2/1.687
+</code></pre>
+<h4 id="show-vpls-connection">show vpls connection</h4>
+<pre><code>lab@MX80-NGGWR-01# run show vpls connections logical-system r1 extensive          
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -&gt; -- only outbound connection is up
+CN -- circuit not provisioned    &lt;- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+VM -- VLAN ID mismatch
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: vpls
+  Local site: r1 (1)
+    Number of local interfaces: 2
+    Number of local interfaces up: 1
+    IRB interface present: no
+    ge-1/2/1.121       
+    ge-1/2/1.122       
+        Interface flags: VC-Down
+    vt-1/2/10.235929600 7         Intf - vpls vpls local site 1 remote site 7
+    Label-base        Offset     Size  Range     Preference
+    800000            1          8      8         100   
+    connection-site           Type  St     Time last up          # Up trans
+    7                         rmt   Up     Aug  7 01:29:36 2013           1
+      Remote PE: 10.10.1.8, Negotiated control-word: No
+      Incoming label: 800006, Outgoing label: 800000
+      Local interface: vt-1/2/10.235929600, Status: Up, Encapsulation: VPLS
+        Description: Intf - vpls vpls local site 1 remote site 7
+    Connection History:
+        Aug  7 01:29:36 2013  status update timer  
+        Aug  7 01:29:36 2013  loc intf up           vt-1/2/10.235929600
+        Aug  7 01:29:36 2013  PE route changed     
+        Aug  7 01:29:36 2013  Out lbl Update                    800000
+        Aug  7 01:29:36 2013  In lbl Update                     800006
+        Aug  7 01:29:36 2013  loc intf down
+</code></pre>
+<h4 id="show-route-forwarding-table">show route forwarding-table</h4>
+<h5 id="with-tunne-service">with tunne-service</h5>
+<pre><code>lab@MX80-NGGWR-01# run show route forwarding-table | find vpls.vpls
+Logical system: r1
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   728     1
+vt-1/2/10.235929600 intf     0                   indr 1048693     4
+                              10.10.12.2        Push 800000, Push 299808, Push 299792(top)  3007     2 ge-1/2/1.12
+0x3000b/51         user     0                    comp  3016     2
+f8:c0:01:18:93:92/48 user     0                  ucst  1986     5 ge-1/2/1.121      #&lt;------
+ge-1/2/1.121       intf     0                    ucst  1986     5 ge-1/2/1.121
+0x3000a/51         user     0                    comp  1997     2
+0x30007/51         user     0                    comp  1994     2
+
+Logical system: r8
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   716     1
+vt-1/2/10.202375168 intf     0                   indr 1048659     5
+                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
+0x3000c/51         user     0                    comp  3061     2
+f8:c0:01:18:93:92/48 user     0                  indr 1048659     5         #&lt;------
+                              10.10.68.1        Push 800006, Push 299872(top)  3052     2 ge-1/2/2.68
+ge-1/2/1.687       intf     0                    ucst  1973     4 ge-1/2/1.687
+0x30009/51         user     0                    comp  1983     2
+0x30006/51         user     0                    comp  1980     2
+</code></pre>
+<p>turn off tunnel service:</p>
+<pre><code>lab@MX80-NGGWR-01# show | compare  
+[edit logical-systems r1 routing-instances vpls protocols vpls]
++      no-tunnel-services;
+[edit logical-systems r8 routing-instances vpls protocols vpls]
++      no-tunnel-services;
+</code></pre>
+<h5 id="without-tunnel-service">without tunnel service</h5>
+<pre><code>Logical system: r1
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd   728     1
+lsi.235929600      intf     0                    indr 1048699     4
+                              10.10.12.2        Push 262145, Push 299808, Push 299792(top)  3014     2 ge-1/2/1.12
+0x3000a/51         user     0                    comp  3062     2
+f8:c0:01:18:93:92/48 user     0                  ucst   716     5 ge-1/2/1.121      #&lt;------
+ge-1/2/1.121       intf     0                    ucst   716     5 ge-1/2/1.121
+0x30006/51         user     0                    comp  1998     2
+0x30007/51         user     0                    comp  1995     2
+
+Logical system: r8
+Routing table: vpls.vpls
+VPLS:
+Destination        Type RtRef Next hop           Type Index NhRef Netif
+default            perm     0                    dscd  1986     1
+lsi.202375168      intf     0                    indr 1048698     5
+                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
+0x3000d/51         user     0                    comp  1984     2
+f8:c0:01:18:93:92/48 user     0                  indr 1048698     5         #&lt;------
+                              10.10.68.1        Push 262151, Push 299872(top)  3005     2 ge-1/2/2.68
+ge-1/2/1.687       intf     0                    ucst  1980     4 ge-1/2/1.687
+0x3000b/51         user     0                    comp  3146     2
+0x30008/51         user     0                    comp  3143     2
+
+ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
+ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
 </code></pre>
