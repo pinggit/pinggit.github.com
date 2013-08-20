@@ -541,23 +541,26 @@ set logical-systems r8 protocols isis interface all level 1 disable
 set logical-systems r8 protocols isis interface fxp0.0 disable
 </code></pre>
 <h3 id="configigp-policy">config:IGP policy</h3>
-<p>#ospf import policy: reject some type5 : routes like 172.16.0/24~172.16.7/24 or longer prefix
-    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
-    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from route-filter 172.16.0.0/21 orlonger
-    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 then reject
-    set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 2 then accept
-    set logical-systems r2 protocols ospf import imp-ospf-rej-longer</p>
-<p>#isis export policy: summarize 172.16.8~19/24
-    set logical-systems r2 routing-options aggregate route 172.16.8.0/21
-    set logical-systems r2 routing-options aggregate route 172.16.16.0/22
-    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggregate
-    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.8.0/21 exact
-    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.16.0/22 exact
-    set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 then accept
-    set logical-systems r2 protocols isis export exp-isis-from-ospf</p>
-<p>#ospf exprt policy: summarize internal as 10.200/16 and adv a default route to DC
-    set logical-systems r2 routing-options aggregate route 10.200.0.0/16</p>
-<pre><code>set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
+<pre><code>#ospf import policy: reject some type5 : routes like 172.16.0/24~172.16.7/24 or longer prefix
+set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
+set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 from route-filter 172.16.0.0/21 orlonger
+set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 1 then reject
+set logical-systems r2 policy-options policy-statement imp-ospf-rej-longer term 2 then accept
+set logical-systems r2 protocols ospf import imp-ospf-rej-longer
+
+#isis export policy: summarize 172.16.8~19/24
+set logical-systems r2 routing-options aggregate route 172.16.8.0/21
+set logical-systems r2 routing-options aggregate route 172.16.16.0/22
+set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggregate
+set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.8.0/21 exact
+set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 from route-filter 172.16.16.0/22 exact
+set logical-systems r2 policy-options policy-statement exp-isis-from-ospf term 1 then accept
+set logical-systems r2 protocols isis export exp-isis-from-ospf
+
+#ospf exprt policy: summarize internal as 10.200/16 and adv a default route to DC
+set logical-systems r2 routing-options aggregate route 10.200.0.0/16
+
+set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 from route-filter 0.0.0.0/0 prefix-length-range /0-/32
 set logical-systems r2 policy-options policy-statement only-if-from-bgp term 1 then accept
 set logical-systems r2 policy-options policy-statement only-if-from-bgp term 2 then reject  #&lt;------
