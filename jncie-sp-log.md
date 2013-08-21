@@ -45,7 +45,8 @@
 <li><a href="#config6pepe-ce">config:6PE:PE-CE</a></li>
 <li><a href="#config6pepe-pe-solution4">config:6PE:PE-PE (solution4)</a></li>
 <li><a href="#config-ipv6-routes-aggregation">config: IPv6 routes aggregation</a></li>
-<li><a href="#config-rtbh">config: RTBH</a></li>
+<li><a href="#configrtbhimpnh-discard">config:RTBH:imp:NH discard</a></li>
+<li><a href="#configrtbhexpfix-nh-for-c-routes">config:RTBH:exp:fix NH for C routes</a></li>
 </ul>
 </li>
 <li><a href="#interas-vpn">InterAS VPN</a><ul>
@@ -69,7 +70,7 @@
 <li><a href="#config-vpn-policy">config: VPN policy</a></li>
 <li><a href="#config-shamlink">config: shamlink</a></li>
 <li><a href="#config-vpn-inetaccess-1">config: VPN InetAccess 1</a></li>
-<li><a href="#config-vpn-inetaccess-2">config: VPN InetAccess 2</a></li>
+<li><a href="#config-vpn-inetaccess-2-inet0-static2rib-group">config: VPN InetAccess 2: inet.0 static+2rib-group</a></li>
 <li><a href="#config-vpn-lsp-map">config vpn LSP map</a></li>
 </ul>
 </li>
@@ -197,8 +198,8 @@
 <li><a href="#2-commit-errors">2 commit errors</a></li>
 </ul>
 </li>
-<li><a href="#vpn-part-b">VPN (PART B)</a><ul>
-<li><a href="#vpn-internet-access-task">VPN internet access task</a></li>
+<li><a href="#5ce-vpn_1">5CE VPN</a><ul>
+<li><a href="#v0_1">v0</a></li>
 <li><a href="#verify-bgpospf-connections">verify bgp/ospf connections</a></li>
 <li><a href="#verify-vpn-table">verify: VPN table</a><ul>
 <li><a href="#vrf-r1">VRF: R1</a></li>
@@ -398,6 +399,8 @@
 </li>
 </ul>
 </li>
+<li><a href="#step-12">step 1/2</a></li>
+<li><a href="#step-34">step 3/4</a></li>
 </ul>
 </div>
 <hr />
@@ -1046,6 +1049,7 @@ set logical-systems r7 protocols bgp group to-rr family inet6 labeled-unicast ex
 <p>R2/3/7/(8) &amp; R5/6:</p>
 <pre><code>set logical-systems r2 protocols bgp group to-rr family inet labeled-unicast rib inet.3
 set logical-systems r3 protocols bgp group to-rr family inet labeled-unicast rib inet.3
+set logical-systems r4 protocols bgp group to-rr family inet labeled-unicast rib inet.3     #&lt;--for VPN
 set logical-systems r5 protocols bgp group rr family inet labeled-unicast rib inet.3
 set logical-systems r6 protocols bgp group rr family inet labeled-unicast rib inet.3
 set logical-systems r7 protocols bgp group to-rr family inet labeled-unicast rib inet.3
@@ -1055,7 +1059,6 @@ set logical-systems r8 protocols bgp group to-rr family inet labeled-unicast rib
 <pre><code>set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.2/32 exact
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.3/32 exact
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.7/32 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.8/32 exact
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
 
 set logical-systems r5 protocols bgp group rr export exp-bgp-adv-2378
@@ -1063,7 +1066,7 @@ set logical-systems r5 protocols bgp group rr export exp-bgp-adv-2378
 set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.2/32 exact
 set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.3/32 exact
 set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.7/32 exact
-set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.8/32 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 from route-filter 10.200.1.8/32 exact #&lt;--MUST
 set logical-systems r6 policy-options policy-statement exp-bgp-adv-2378 term 1 then accept
 
 set logical-systems r6 protocols bgp group rr export exp-bgp-adv-2378
@@ -1084,8 +1087,7 @@ set logical-systems r[[8]] routing-options rib-groups inet.3-to-inet6.3 import-r
 set logical-systems r8 protocols bgp group to-rr family inet labeled-unicast rib-group inet.3-to-inet6.3
 </code></pre>
 <h3 id="config-ipv6-routes-aggregation">config: IPv6 routes aggregation</h3>
-<p>R1-R8: adv IPv6 lo0</p>
-<p>R5-R6: adv aggr.ed IPv4&amp;IPv6 routes</p>
+<p>R1/2/3/4/7/8: adv IPv6 lo0</p>
 <pre><code>set logical-systems r1 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::1/128 exact
 set logical-systems r1 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
 set logical-systems r1 protocols bgp group to-rr export exp-bgp-lo0-v6
@@ -1102,28 +1104,6 @@ set logical-systems r4 policy-options policy-statement exp-bgp-lo0-v6 term 1 fro
 set logical-systems r4 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
 set logical-systems r4 protocols bgp group to-rr export exp-bgp-lo0-v6
 
-set logical-systems r5 routing-options aggregate route 10.200.0.0/16
-set logical-systems r5 routing-options rib inet6.0 aggregate route 2011:0310::/32
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 10.200.0.0/16 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 from route-filter 2011:0310:1020::5/128 exact
-set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 then accept
-set logical-systems r5 protocols bgp group to-rr export exp-bgp-lo0-v6
-set logical-systems r5 protocols bgp group to-r6 export exp-bgp-lo0-v6
-
-set logical-systems r6 routing-options aggregate route 10.200.0.0/16
-set logical-systems r6 routing-options rib inet6.0 aggregate route 2011:0310::/32
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 10.200.0.0/16 exact
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 3 from route-filter 2011:0310:1020::6/128 exact
-set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 3 then accept
-set logical-systems r6 protocols bgp group to-rr export exp-bgp-lo0-v6
-set logical-systems r6 protocols bgp group to-r5 export exp-bgp-lo0-v6
-
 set logical-systems r7 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::7/128 exact
 set logical-systems r7 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
 set logical-systems r7 protocols bgp group to-rr export exp-bgp-lo0-v6
@@ -1132,8 +1112,32 @@ set logical-systems r8 policy-options policy-statement exp-bgp-lo0-v6 term 1 fro
 set logical-systems r8 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
 set logical-systems r8 protocols bgp group to-rr export exp-bgp-lo0-v6
 </code></pre>
-<p>to P: reject some too pecific routes</p>
-<pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+<p>R5-R6: adv IPv6 lo0 &amp; aggr.ed IPv4&amp;IPv6 routes</p>
+<pre><code>set logical-systems r5 routing-options aggregate route 10.200.0.0/16
+set logical-systems r5 routing-options rib inet6.0 aggregate route 2011:0310::/32
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::5/128 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 from route-filter 10.200.0.0/16 exact
+set logical-systems r5 policy-options policy-statement exp-bgp-lo0-v6 term 3 then accept
+set logical-systems r5 protocols bgp group to-rr export exp-bgp-lo0-v6
+set logical-systems r5 protocols bgp group to-r6 export exp-bgp-lo0-v6
+
+set logical-systems r6 routing-options aggregate route 10.200.0.0/16
+set logical-systems r6 routing-options rib inet6.0 aggregate route 2011:0310::/32
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 2011:0310:1020::6/128 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 from route-filter 2011:0310::/32 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 2 then accept
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 from route-filter 10.200.0.0/16 exact
+set logical-systems r6 policy-options policy-statement exp-bgp-lo0-v6 term 1 then accept
+set logical-systems r6 protocols bgp group to-rr export exp-bgp-lo0-v6
+set logical-systems r6 protocols bgp group to-r5 export exp-bgp-lo0-v6
+</code></pre>
+<p>R2/3/5: change existing policy P:p-out reject pecific</p>
+<pre><code>#R2/5 extra:  need to re-adv agg IPv4 routes on p-out (and t-out for R2) policy, because BGP routes inactive
+set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
@@ -1142,18 +1146,6 @@ set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 from
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 from route-filter 10.200.0.0/16 exact   #&lt;------MUST
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 4 then accept                             #&lt;------MUST
-set logical-systems r2 protocols bgp group to-p-v4 export exp-bgp-p-out
-set logical-systems r2 protocols bgp group to-p-v6 export exp-bgp-p-out
-
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 then reject
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 then reject     #&lt;------
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128     #&lt;------
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
-set logical-systems r3 protocols bgp group to-p-v4 export exp-bgp-p-out
-set logical-systems r3 protocols bgp group to-p-v6 export exp-bgp-p-out
 
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
@@ -1168,70 +1160,107 @@ set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 4 then
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 from protocol aggregate         #&lt;------
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 from route-filter 2011:310::/32 exact   #&lt;------
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 5 then accept
-set logical-systems r5 protocols bgp group to-p-v4 export exp-bgp-p-out
-set logical-systems r5 protocols bgp group to-p-v6 export exp-bgp-p-out
+
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 2 from route-filter 10.200/16 exact 
+set logical-systems r2 policy-options policy-statement exp-bgp-t-out term 2 then accept
+
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 then reject
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 from route-filter 0.0.0.0/0 prefix-length-range /21-/32         #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 2 then reject     #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 from route-filter ::/0 prefix-length-range /49-/128     #&lt;------
+set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 3 then reject     #&lt;------
 </code></pre>
-<h3 id="config-rtbh">config: RTBH</h3>
-<pre><code>set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then accept
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+<h3 id="configrtbhimpnh-discard">config:RTBH:imp:NH discard</h3>
+<p>NOTE: </p>
+<pre><code>set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp 
+community rtbh 
+route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard accept
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 1 then accept      #&lt;------MUST
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp 
+community rtbh 
+route-filter ::/0 prefix-length-range /128-/128
 set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 then accept
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 2 then accept      #&lt;------MUST
+set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh
 set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
-set logical-systems r2 policy-options policy-statement imp-bgp-rtbh term 3 then accept
 set logical-systems r2 policy-options community rtbh members 65412:100
 set logical-systems r2 policy-options community rtbh members target:4012345678L:2000
 set logical-systems r2 protocols bgp group to-rr import imp-bgp-rtbh
-
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+  
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0.0.0.0/0 prefix-length-range /32-/32
 set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 then accept
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 1 then accept      #&lt;------MUST
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::/0 prefix-length-range /128-/128
 set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 then accept
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
-set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 2 then accept      #&lt;------MUST
+set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh
 set logical-systems r3 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
 set logical-systems r3 policy-options community rtbh members 65412:100
 set logical-systems r3 policy-options community rtbh members target:4012345678L:2000
 set logical-systems r2 protocols bgp group to-rr import imp-bgp-rtbh
 
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from community rtbh
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 from protocol bgp community rtbh route-filter 0.0.0.0/0 prefix-length-range /32-/32
 set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 then next-hop discard
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 then accept
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from community rtbh
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from route-filter ::/0 prefix-length-range /128-/128
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 1 then accept      #&lt;------
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 from protocol bgp community rtbh route-filter ::/0 prefix-length-range /128-/128
 set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 then next-hop discard
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 then accept
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp
-set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 from community rtbh
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 2 then accept      #&lt;------
+set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 from protocol bgp community rtbh
 set logical-systems r5 policy-options policy-statement imp-bgp-rtbh term 3 then community delete rtbh
 set logical-systems r5 policy-options community rtbh members 65412:100
 set logical-systems r5 policy-options community rtbh members target:4012345678L:2000
 set logical-systems r5 protocols bgp group rr import imp-bgp-rtbh
+set logical-systems r5 protocols bgp group to-r6 import imp-bgp-rtbh
+</code></pre>
+<h3 id="configrtbhexpfix-nh-for-c-routes">config:RTBH:exp:fix NH for C routes</h3>
+<pre><code>set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 1 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 1 from neighbor 10.200.1.1
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 1 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 1 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 1 then next-hop 10.200.1.1
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 2 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 2 from neighbor 10.200.1.1
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 2 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 2 from route-filter ::0/0 prefix-length-range /128-/128
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 2 then next-hop ::ffff:10.200.1.1
+
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 3 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 3 from neighbor 10.200.1.4
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 3 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 3 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 3 then next-hop 10.200.1.4
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 4 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 4 from neighbor 10.200.1.4
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 4 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 4 from route-filter ::0/0 prefix-length-range /128-/128
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 4 then next-hop ::ffff:10.200.1.4
+
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 5 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 5 from neighbor 10.200.1.7
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 5 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 5 from route-filter 0.0.0.0/0 prefix-length-range /32-/32
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 5 then next-hop 10.200.1.7
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 6 from protocol bgp
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 6 from neighbor 10.200.1.7
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 6 from community rtbh
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 6 from route-filter ::0/0 prefix-length-range /128-/128
+set logical-systems r5 policy-options policy-statement exp-bgp-fix-nh-rtbh term 6 then next-hop ::ffff:10.200.1.7
+
+set logical-systems r5 protocols bgp group rr export exp-bgp-fix-nh-rtbh         
+set logical-systems r5 protocols bgp group to-r6 export exp-bgp-fix-nh-rtbh
 </code></pre>
 <h2 id="interas-vpn">InterAS VPN</h2>
 <h3 id="config-interas-vpn">config: InterAS VPN</h3>
-<p>R5: 
-    #to both RR and ASBR, config: family inet unicast+labeled unicast rib inet.3 
-    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet unicast
-    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet labeled-unicast rib inet.3
-    set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 peer-as 2</p>
-<pre><code>set logical-systems r5 protocols bgp group rr family inet unicast
+<p>R5: </p>
+<pre><code>#to both RR and ASBR, config: family inet unicast+labeled unicast rib inet.3 
+set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet unicast
+set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 family inet labeled-unicast rib inet.3
+set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 peer-as 2
+
+set logical-systems r5 protocols bgp group rr family inet unicast
 set logical-systems r5 protocols bgp group rr family inet labeled-unicast rib inet.3
 
 #adv. R1 lo0 both as inet (from def rib.0), and labeled-inet (from rib inet.3)
@@ -1241,17 +1270,17 @@ set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 1 then
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from rib inet.3
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 from route-filter 10.200.1.1/32 exact
 set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 2 then accept
+set logical-systems r5 policy-options policy-statement exp-bgp-adv-1 term 3 then reject
 
 set logical-systems r5 protocols bgp group to-asbr neighbor 100.5.22.2 export exp-bgp-adv-1
 </code></pre>
 <p>R1:</p>
 <pre><code>#config MH-MP-EBGP to remote PE; 
-#to both end enable inet unicast+labeled-unicast; to remote PE also enable inet-vpn
+#to ASBR enable inet unicast+labeled-unicast; 
+#to remote PE also enable inet-vpn
 set logical-systems r1 protocols bgp group to-rr family inet unicast
 set logical-systems r1 protocols bgp group to-rr family inet labeled-unicast rib inet.3
 set logical-systems r1 protocols bgp group to-pe multihop
-set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet unicast
-set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet labeled-unicast rib inet.3
 set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 family inet-vpn unicast
 set logical-systems r1 protocols bgp group to-pe neighbor 10.10.10.10 peer-as 2
 </code></pre>
@@ -1353,7 +1382,8 @@ set logical-systems r8 routing-instances GOLD protocols vpls site 8 interface ge
 </code></pre>
 <p>optional: tunnel-service</p>
 <h3 id="config-vpls-firewall-policer">config: vpls firewall policer</h3>
-<pre><code>set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m
+<pre><code>#A burst-size limit should not be set lower than 10 times the MTU
+set logical-systems r1 firewall policer 5m if-exceeding bandwidth-limit 5m
 set logical-systems r1 firewall policer 5m if-exceeding burst-size-limit 15k
 set logical-systems r1 firewall policer 5m then discard
 
@@ -1368,18 +1398,11 @@ set logical-systems r1 interfaces ge-1/2/5 unit 100 encapsulation vlan-vpls
 set logical-systems r1 interfaces ge-1/2/5 unit 100 family vpls filter input vpls
 </code></pre>
 <h2 id="5ce-vpn">5CE VPN</h2>
+<p>NOTE: 
+* must fully verify . anything works indicate sth wrong in previous parts</p>
 <h3 id="config-basic-vpn">config: basic VPN</h3>
 <h4 id="r1">R1:</h4>
-<pre><code>set logical-systems r1 routing-instances GREEN instance-type vrf
-set logical-systems r1 routing-instances GREEN interface ge-1/2/1.611
-set logical-systems r1 routing-instances GREEN interface lo0.111
-set logical-systems r1 routing-instances GREEN route-distinguisher 10.200.1.1:1
-set logical-systems r1 routing-instances GREEN vrf-import vrf-imp
-set logical-systems r1 routing-instances GREEN vrf-export vrf-exp
-set logical-systems r1 routing-instances GREEN vrf-table-label
-set logical-systems r1 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.611
-
-set logical-systems r1 policy-options policy-statement vrf-imp term 1 from protocol bgp
+<pre><code>set logical-systems r1 policy-options policy-statement vrf-imp term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement vrf-imp term 1 from community GREEN
 set logical-systems r1 policy-options policy-statement vrf-imp term 1 then accept
 
@@ -1390,22 +1413,19 @@ set logical-systems r1 policy-options policy-statement vrf-exp term 2 from proto
 set logical-systems r1 policy-options policy-statement vrf-exp term 2 then community add GREEN
 set logical-systems r1 policy-options policy-statement vrf-exp term 2 then accept
 set logical-systems r1 policy-options community GREEN members target:2:65000
+
+set logical-systems r1 routing-instances GREEN instance-type vrf
+set logical-systems r1 routing-instances GREEN interface ge-1/2/1.611
+set logical-systems r1 routing-instances GREEN interface lo0.111
+set logical-systems r1 routing-instances GREEN route-distinguisher 10.200.1.1:1
+set logical-systems r1 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r1 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r1 routing-instances GREEN vrf-table-label
+
+set logical-systems r1 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.611
 </code></pre>
 <h4 id="r4">R4:</h4>
-<pre><code>set logical-systems r4 routing-instances GREEN instance-type vrf
-set logical-systems r4 routing-instances GREEN interface ge-1/2/1.642
-set logical-systems r4 routing-instances GREEN interface ge-1/2/1.643
-set logical-systems r4 routing-instances GREEN interface lo0.444
-set logical-systems r4 routing-instances GREEN route-distinguisher 10.200.1.4:1
-set logical-systems r4 routing-instances GREEN vrf-import vrf-imp
-set logical-systems r4 routing-instances GREEN vrf-export vrf-exp
-set logical-systems r4 routing-instances GREEN vrf-table-label
-set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 family inet unicast
-set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 peer-as 65000
-set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 as-override
-set logical-systems r4 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.642
-
-set logical-systems r4 policy-options policy-statement vrf-imp term 1 from protocol bgp
+<pre><code>set logical-systems r4 policy-options policy-statement vrf-imp term 1 from protocol bgp
 set logical-systems r4 policy-options policy-statement vrf-imp term 1 from community GREEN
 set logical-systems r4 policy-options policy-statement vrf-imp term 1 then accept
 
@@ -1433,22 +1453,24 @@ set logical-systems r4 policy-options policy-statement vrf-exp term 5 then commu
 set logical-systems r4 policy-options policy-statement vrf-exp term 5 then community add ce2
 set logical-systems r4 policy-options policy-statement vrf-exp term 5 then accept
 set logical-systems r4 policy-options community GREEN members target:2:65000
+set logical-systems r4 policy-options community community ce2 members target:65000:2;
+set logical-systems r4 policy-options community community ce3 members target:65000:3;
+
+set logical-systems r4 routing-instances GREEN instance-type vrf
+set logical-systems r4 routing-instances GREEN interface ge-1/2/1.642
+set logical-systems r4 routing-instances GREEN interface ge-1/2/1.643
+set logical-systems r4 routing-instances GREEN interface lo0.444
+set logical-systems r4 routing-instances GREEN route-distinguisher 10.200.1.4:1
+set logical-systems r4 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r4 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r4 routing-instances GREEN vrf-table-label
+
+set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 peer-as 65000
+set logical-systems r4 routing-instances GREEN protocols bgp group to-ce3 neighbor 200.6.43.2 as-override
+set logical-systems r4 routing-instances GREEN protocols ospf area 0.0.0.0 interface ge-1/2/1.642
 </code></pre>
 <h4 id="r8">R8:</h4>
-<pre><code>set logical-systems r8 routing-instances GREEN instance-type vrf
-set logical-systems r8 routing-instances GREEN interface ge-1/2/1.684
-set logical-systems r8 routing-instances GREEN interface ge-1/2/1.685
-set logical-systems r8 routing-instances GREEN interface lo0.888
-set logical-systems r8 routing-instances GREEN route-distinguisher 10.200.1.8:1
-set logical-systems r8 routing-instances GREEN vrf-import vrf-imp
-set logical-systems r8 routing-instances GREEN vrf-export vrf-exp
-set logical-systems r8 routing-instances GREEN vrf-table-label
-set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 type external
-set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 family inet unicast
-set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 peer-as 65000
-set logical-systems r8 routing-instances GREEN protocols bgp group to-ce4-ce5 as-override
-
-set logical-systems r8 policy-options policy-statement vrf-imp term 1 from protocol bgp
+<pre><code>set logical-systems r8 policy-options policy-statement vrf-imp term 1 from protocol bgp
 set logical-systems r8 policy-options policy-statement vrf-imp term 1 from community GREEN
 set logical-systems r8 policy-options policy-statement vrf-imp term 1 then accept
 
@@ -1459,26 +1481,40 @@ set logical-systems r8 policy-options policy-statement vrf-exp term 2 from proto
 set logical-systems r8 policy-options policy-statement vrf-exp term 2 then community add GREEN
 set logical-systems r8 policy-options policy-statement vrf-exp term 2 then accept
 set logical-systems r8 policy-options community GREEN members target:2:65000
+
+set logical-systems r8 routing-instances GREEN instance-type vrf
+set logical-systems r8 routing-instances GREEN interface ge-1/2/1.684
+set logical-systems r8 routing-instances GREEN interface ge-1/2/1.685
+set logical-systems r8 routing-instances GREEN interface lo0.888
+set logical-systems r8 routing-instances GREEN route-distinguisher 10.200.1.8:1
+set logical-systems r8 routing-instances GREEN vrf-import vrf-imp
+set logical-systems r8 routing-instances GREEN vrf-export vrf-exp
+set logical-systems r8 routing-instances GREEN vrf-table-label
+
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce neighbor 200.6.84.2 peer-as 65000
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce neighbor 200.6.84.2 as-override
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce neighbor 200.6.85.2 peer-as 65000
+set logical-systems r8 routing-instances GREEN protocols bgp group to-ce neighbor 200.6.85.2 as-override
 </code></pre>
 <h3 id="config-vpn-policy">config: VPN policy</h3>
-<pre><code>set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from protocol bgp
-set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from community GREEN    #&lt;------optional
-set logical-systems r1 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 then accept
-set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-from-bgp
+<pre><code>set logical-systems r1 policy-options policy-statement vrf-exp-ospfterm 1 from protocol bgp
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf term 1 from community GREEN    #&lt;------optional
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf term 1 then accept
+set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf
 
-set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 1 from protocol ospf
-set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 1 then accept
-set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 from protocol direct
-set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 from route-filter 200.6.42.0/24 exact
-set logical-systems r4 policy-options policy-statement vrf-exp-bgp-from-ospf term 2 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf term 1 from protocol bgp
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf term 1 from community GREEN
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf term 1 then accept     
+set logical-systems r4 policy-options policy-statement vrf-exp-ospf term 2 then reject      #&lt;------optional
 
-set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from protocol bgp
-set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 from community GREEN    #&lt;------optional
-set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 1 then accept     
-set logical-systems r4 policy-options policy-statement vrf-exp-ospf-from-bgp term 2 then reject
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp term 1 from protocol ospf
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp term 1 then accept
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp term 2 from protocol direct
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp term 2 from route-filter 200.6.42.0/24 exact
+set logical-systems r4 policy-options policy-statement vrf-exp-bgp term 2 then accept
 
-set logical-systems r4 routing-instances GREEN protocols bgp export vrf-exp-bgp-from-ospf
-set logical-systems r4 routing-instances GREEN protocols ospf export vrf-exp-ospf-from-bgp
+set logical-systems r4 routing-instances GREEN protocols bgp export vrf-exp-bgp
+set logical-systems r4 routing-instances GREEN protocols ospf export vrf-exp-ospf
 </code></pre>
 <h3 id="config-shamlink">config: shamlink</h3>
 <pre><code>set logical-systems r1 routing-instances GREEN protocols ospf sham-link local 1.1.1.1
@@ -1488,24 +1524,56 @@ set logical-systems r4 routing-instances GREEN protocols ospf sham-link local 4.
 set logical-systems r4 routing-instances GREEN protocols ospf area 0.0.0.0 sham-link-remote 1.1.1.1
 </code></pre>
 <h3 id="config-vpn-inetaccess-1">config: VPN InetAccess 1</h3>
-<pre><code>set logical-systems r1 routing-options static route 20.20/16 next-table GREEN.inet.0 
-set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 from protocol static route-filter 20.20/16 exact  
-set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then next-hop self                                          
-set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then accept           
-set logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-routes  
-set logical-systems r1 protocols bgp group to-c3 export exp-bgp-vpn-routes  
-set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [inet.0 GREEN.inet.0]  
+<p>solution 1: inet.0 static + vrf aggr def + inet.0 rib-group</p>
+<p>(downward: from Internet to VPN)</p>
+<ol>
+<li>
+<p>Inet=&gt;R1: R1-global: suck all downward  traffic to R1-global</p>
+<ul>
+<li>adv VPN routes via BGP</li>
+</ul>
+</li>
+<li>
+<p>R1=&gt;R1-vrf=&gt;all VPN: R1-global: direct sucked traffic into VRF, (hence dispatching to all VPN site). downward done.</p>
+<ul>
+<li>config static route to VPN aggr. routes via next-table GREEN.inet.0</li>
+</ul>
+</li>
+</ol>
+<p>(upward: from VPN to Internet)</p>
+<ol>
+<li>all-VPN=&gt;R1-vrf: suck all upward traffic to local R1-VRF<ul>
+<li>vrf adv default(aggr.) routes to all VPN sites</li>
+</ul>
+</li>
+<li>
+<p>R1-vrf=&gt;Inet: R1-global: leak full Internet table into R1-vrf, upward done.</p>
+<ul>
+<li>rib-group, copy inet.0 into GREEN.inet.0</li>
+</ul>
+<h1 id="step-12">step 1/2</h1>
+<p>set logical-systems r1 routing-options static route 20.20/16 next-table GREEN.inet.0 </p>
+<p>set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 from protocol static route-filter 20.20/16 exact<br />
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then next-hop self                                        <br />
+set logical-systems r1 policy-options policy-statement exp-bgp-vpn-routes term 1 then accept         <br />
+set logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-routes<br />
+set logical-systems r1 protocols bgp group to-c3 export exp-bgp-vpn-routes<br />
+</p>
+<h1 id="step-34">step 3/4</h1>
+<p>set logical-systems r1 routing-instances GREEN routing-options aggregate route 0/0  <br />
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 from instance GREEN protocol aggregate route-filter 0/0 exact                 <br />
+set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 then accept                                                    <br />
+set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-default<br />
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol aggregate route-filter 0/0 exact                <br />
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN      #&lt;------don't forget
+set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept               <br />
+</p>
+<p>set logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf import-rib [inet.0 GREEN.inet.0]<br />
 set logical-systems r1 protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf 
-set logical-systems r1 protocols bgp group to-c3 family inet unicast rib-group imp-inet.0-to-vrf 
-set logical-systems r1 routing-instances GREEN routing-options aggregate route 0/0    
-set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 from instance GREEN protocol aggregate route-filter 0/0 exact                   
-set logical-systems r1 policy-options policy-statement vrf-exp-ospf-default term 1 then accept                                                      
-set logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-default  
-set logical-systems r1 policy-options policy-statement vrf-exp term 3 from protocol aggregate route-filter 0/0 exact                  
-set logical-systems r1 policy-options policy-statement vrf-exp term 3 then community add GREEN                          
-set logical-systems r1 policy-options policy-statement vrf-exp term 3 then accept
-</code></pre>
-<h3 id="config-vpn-inetaccess-2">config: VPN InetAccess 2</h3>
+set logical-systems r1 protocols bgp group to-c3 family inet unicast rib-group imp-inet.0-to-vrf    #&lt;------don't forget</p>
+</li>
+</ol>
+<h3 id="config-vpn-inetaccess-2-inet0-static2rib-group">config: VPN InetAccess 2: inet.0 static+2rib-group</h3>
 <pre><code>#R1:VRF -&gt; Internet: R1 config static def pointing to R2/3; then rib-group it to vrf
 #this original solution doesn't work for c3
 #set logical-systems r1 routing-options static route 0/0 next-hop [ 100.0.12.2 100.0.13.2 ]
@@ -1553,7 +1621,6 @@ set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 fr
 set logical-systems r1 policy-options policy-statement exp-fwd-lsp-map term 2 then install-nexthop lsp r1-r4-blue   #&lt;------
 
 set logical-systems r1 routing-options forwarding-table export exp-fwd-lsp-map
-set logical-systems r1 routing-options forwarding-table export exp-fwd-fix-vpn-nh
 </code></pre>
 <h2 id="cos">COS</h2>
 <h3 id="config-cos">config COS</h3>
@@ -1582,14 +1649,15 @@ set logical-systems r1 firewall policer 10m then discard
 #map: IPrec =&gt; fwd-class; 
 #(router will then rewrite MPLS EXP per fwd-class =&gt; exp rewrite rule) 
 #apply policers under firewall filter
-set logical-systems r1 firewall filter J-Classifier term 1 from precedence 7
+set logical-systems r1 firewall filter J-Classifier term 1 from destination-address 211/8 precedence 7
 set logical-systems r1 firewall filter J-Classifier term 1 then policer 5m
 set logical-systems r1 firewall filter J-Classifier term 1 then forwarding-class expedited-forwarding
 set logical-systems r1 firewall filter J-Classifier term 1 then accept
-set logical-systems r1 firewall filter J-Classifier term 2 from precedence 6
+set logical-systems r1 firewall filter J-Classifier term 1 from destination-address 211/8 precedence 6
 set logical-systems r1 firewall filter J-Classifier term 2 then policer 10m
 set logical-systems r1 firewall filter J-Classifier term 2 then forwarding-class assured-forwarding
 set logical-systems r1 firewall filter J-Classifier term 2 then accept
+set logical-systems r1 firewall filter J-Classifier term 3 from destination-address 211/8   #&lt;-check the exam requirement
 set logical-systems r1 firewall filter J-Classifier term 3 then policer 7m
 set logical-systems r1 firewall filter J-Classifier term 3 then forwarding-class best-effort
 set logical-systems r1 firewall filter J-Classifier term 3 then accept
@@ -2451,7 +2519,7 @@ http://www.juniper.net/techpubs/en_US/junos12.1/topics/reference/configuration-s
 </li>
 <li>
 <p>You can’t change the interface’s address setting on R1/R4/R7, only one NLRI
-   are allowed under BGP family stanza.Every Core Router has an IPV6 loopback
+   are allowed under BGP family stanza. Every Core Router has an IPV6 loopback
    address,connect all the IPV6 traffic between C/P/T devices according to
    following rules:</p>
 <ul>
@@ -2515,6 +2583,51 @@ and addresses you may use to test reachability.</p>
    =&gt; block P from T-routes; (not mentioning block T from P-routes)
    =&gt; reject specific routes to P
    =&gt; adv def is now allowed</p>
+<p>B:</p>
+<p>NOTE: Your network is transitioning to a 4-byte AS number, which is shown on
+the diagram. Most of your EBGP peers are already peering to the 4-byte AS
+number; you need to adjust your network to accommodate these peerings.</p>
+<p>See this section’s exhibit for information about the aggregates each AS will
+send, and addresses you may use to test reachability.</p>
+<ol>
+<li>Task 1: 4 points Ensure that R5 and R6 are route reflectors for only IPv4
+   and IPv6 routes. Ensure that R2 and R3 are route reflectors for only VPN
+   routes. The necessary sessions have been preconfigured for you. You may
+   modify the attributes of these sessions, but you may not establish any new
+   IBGP sessions.</li>
+<li>Task 2: 9 points Ensure that all BGP sessions are up. Ensure that C3 and C4
+   can reach all IPv4 destinations. You may not advertise a default route to C3
+   or C4. Ensure that all IPv4 routes you receive from C3 and C4 are advertised
+   to all T routers. Ensure that traffic follows the optimal path within your
+   AS.</li>
+<li>Task 3: 3 points Ensure that the network uses the AS number shown on the
+   diagram. Ensure that the customer BGP session attached to R1 is established.
+   This customer’s router does not support 4-byte ASs, but the session was
+   previously established with R1 using a local AS of 65513. Ensure that no
+   extra ASs appear in the AS path.</li>
+<li>Task 4: 5 points C3 and C5 are both sending IPv6 aggregates as shown in this
+   section’s exhibit. Ensure that these aggregates are advertised to all
+   transit providers. Ensure that C3 and C5 can reach all IPv6 destinations.
+   You may not advertise a default route to C3 or C5. Note: The session to C5
+   is not preconfigured.</li>
+<li>Task 5: 7 points You have agreed to help your customers respond to
+   denial-of-service (DoS) attacks aimed at one of their hosts. You will do
+   this by blocking traffic destined for one of their hosts when the customer
+   sends you a specific BGP announcement for that host. If a C router sends a
+   /32 IPv4 or /128 IPv6 route with the community target:4012345678:2000 or
+   23456:2000, ensure that traffic with that destination address is not allowed
+   to enter your network from transit providers or peers. Strip any of these
+   communities if they exist on non-host routes or if they are sent from T
+   routers or P routers.</li>
+</ol>
+<p>=&gt; if from C &amp;&amp; host route &amp;&amp; communties 
+            next-hop discard
+      elseif (from any) non-host route
+            delete communities
+      elseif from P/T &amp;&amp; community      #&lt;------?
+            delete communities 
+      else
+            do nothing</p>
 <h4 id="v1ipv4-task">v1:IPv4 task</h4>
 <blockquote>
 <p>C 可以达到 C,P,T。P 之间可以互访，T 之间可以互访，P 与 T 之间不能互
@@ -3871,7 +3984,47 @@ initial C3 routes from R1</p>
 <ul>
 <li>
 <p>non-host routes also with 2 communities, need to delete</p>
-<p>[edit]
+<p>test@MX80-NGGWR-01# run show route logical-system r2 community-name rtbh            <br />
+</p>
+<p>inet.0: 84 destinations, 102 routes (83 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both</p>
+<p>3.3.3.0/24          [BGP/170] 12:45:23, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.12.1 via ge-1/2/2.102, label-switched-path r2-to-r1
+33.33.0.0/16        [BGP/170] 12:45:23, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.12.1 via ge-1/2/2.102, label-switched-path r2-to-r1
+33.33.33.33/32     *[BGP/170] 00:01:42, localpref 100, from 10.200.1.5
+                      AS path: 300 I
+                    &gt; to 100.0.25.2 via ge-1/2/1.205, label-switched-path r2-to-r5
+                    [BGP/170] 00:01:41, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.25.2 via ge-1/2/1.205, label-switched-path r2-to-r5</p>
+<p>inet.3: 7 destinations, 11 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>iso.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>mpls.0: 29 destinations, 29 routes (29 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>inet6.0: 47 destinations, 71 routes (47 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both</p>
+<p>::3.3.3.0/120       [BGP/170] 12:45:23, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.12.1 via ge-1/2/2.102, label-switched-path r2-to-r1
+::33.33.33.33/128  *[BGP/170] 00:01:42, localpref 100, from 10.200.1.5
+                      AS path: 300 I
+                    &gt; to 100.0.25.2 via ge-1/2/1.205, label-switched-path r2-to-r5
+                    [BGP/170] 12:45:23, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.12.1 via ge-1/2/2.102, label-switched-path r2-to-r1
+3333:3333:3333::/48 [BGP/170] 12:45:23, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                    &gt; to 100.0.12.1 via ge-1/2/2.102, label-switched-path r2-to-r1</p>
+<p>inet6.3: 7 destinations, 11 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete
+[edit]
 lab@MX80-NGGWR-02# run show route protocol bgp logical-system r5 receive-protocol bgp 10.200.1.1 table inet.0 detail<br />
 </p>
 <p>inet.0: 50 destinations, 64 routes (50 active, 0 holddown, 0 hidden)
@@ -3917,6 +4070,34 @@ Restart Complete
 <li>host routes: keep the 2 communities</li>
 <li>
 <p>host routes: next-hop set to discard</p>
+<p>[edit]
+test@MX80-NGGWR-01# run show route logical-system r2 community-name rtbh </p>
+<p>inet.0: 84 destinations, 102 routes (83 active, 0 holddown, 3 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both</p>
+<p>33.33.33.33/32     *[BGP/170] 00:00:41, localpref 100, from 10.200.1.5
+                      AS path: 300 I
+                      Discard
+                    [BGP/170] 00:00:40, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                      Discard</p>
+<p>inet.3: 7 destinations, 11 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>iso.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>mpls.0: 29 destinations, 29 routes (29 active, 0 holddown, 0 hidden)
+Restart Complete</p>
+<p>inet6.0: 47 destinations, 71 routes (47 active, 0 holddown, 0 hidden)
+Restart Complete
++ = Active Route, - = Last Active, * = Both</p>
+<p>::33.33.33.33/128  *[BGP/170] 00:00:41, localpref 100, from 10.200.1.5
+                      AS path: 300 I
+                      Discard
+                    [BGP/170] 12:44:22, localpref 100, from 10.200.1.6
+                      AS path: 300 I
+                      Discard</p>
+<p>inet6.3: 7 destinations, 11 routes (7 active, 0 holddown, 0 hidden)
+Restart Complete</p>
 <p>[edit]
 lab@MX80-NGGWR-02# run show route protocol bgp logical-system r5 3.3.3.0/24 detail<br />
 </p>
@@ -4871,41 +5052,57 @@ error: configuration check-out failed
      Only the VPLS family is allowed on VPLS interfaces
 error: configuration check-out failed
 </code></pre>
-<h2 id="vpn-part-b">VPN (PART B)</h2>
-<h3 id="vpn-internet-access-task">VPN internet access task</h3>
-<p>VPN must have internet access, and 
-<em> the internet gateway is R1, 
-</em> you can’t define any static route in VRF instance, 
-<em> you can only define 1 static route on PE，
-</em> rib-group not allowed under VRF.</p>
-<p>solution 1:</p>
-<ul>
+<h2 id="5ce-vpn_1">5CE VPN</h2>
+<ol>
 <li>
-<p>R1-global: suck all downward (from Internet to VPN) traffic to R1-global</p>
-<ul>
-<li>aggr. VPN routes</li>
-<li>adv aggr.ed VPN routes via BGP</li>
-</ul>
+<p>Task 1: 5 points Create a Layer 3 VPN called GREEN, including the following
+   sites: GREEN-CE1, GREEN-CE2, GREEN-CE3, GREEN-CE4 and GREEN-CE5. CE3, CE4
+   and CE5 will peer using BGP. CE1 and CE2 are using OSPF Area 0. All CE
+   routers must receive the routes announced from all other CEs.
+   =&gt; basic VPN</p>
 </li>
 <li>
-<p>R1-global: direct sucked traffic into VRF, who already knows how to reach all VPN site. downward done.</p>
-<ul>
-<li>static route to VPN aggr. routes via next-table GREEN.inet.0</li>
-</ul>
+<p>Task 2: 5 points GREEN-CE1 and GREEN-CE2 share a backdoor connection. Ensure
+   that CE1 and CE2 prefer to send traffic through the Layer 3 VPN. See this
+   section's exhibit for additional details.
+   =&gt; VPN sham link</p>
 </li>
 <li>
-<p>R1-vrf: suck all upward (to Internet) traffic to local R1-VRF</p>
-<ul>
-<li>vrf adv default routes to all VPN sites</li>
-</ul>
+<p>Task 3: 3 point For the GREEN VPN, ensure that all CE routers can ping
+   directly connected hosts on remote PE-CE links.
+   =&gt; basic VPN adv direct link</p>
 </li>
 <li>
-<p>R1-global: leak full Internet table into R1-vrf, making R1-VRF knows how to reach Internet, upward done.</p>
-<ul>
-<li>rib-group, copy inet.0 into GREEN.inet.0</li>
+<p>Task 4: 5 points Ensure that the GREEN VPN has Internet access through the
+   R1 router. You may configure 1 static route in inet.0 to accomplish this
+   task.
+   =&gt; VPN Internet access. 1 static in inet.0</p>
+</li>
+<li>
+<p>Task 5: 5 points On R1, ensure that GREEN VPN traffic to CE2 uses the
+   r1-to-r4-blue LSP.  On R1, ensure that GREEN VPN traffic to CE3 uses the
+   r1-to-r4-green LSP.
+   =&gt; VPN LSP map</p>
+</li>
+</ol>
+<h3 id="v0_1">v0</h3>
+<ol>
+<li>VPN1,VPN2 running ospf with PE, VPN3,VPN4,VPN5 running BGP with PE, AS
+   number: 65000</li>
+<li>Each PE can only have one instance defined, and the name is:green</li>
+<li>VPN1 and VPN2 has a backdoor ospf link, do not use this link until the MPLS
+   VPN broke down.</li>
+<li>R1 has two LSP named blue and green, for VPN2 , use LSP green, for VPN3, use
+   LSP BLUE</li>
+<li>Each VPN must have the access to others, including the link addresses.</li>
+<li>VPN must have internet access, and <ul>
+<li>the internet gateway is R1, </li>
+<li>you can’t define any static route in VRF instance, </li>
+<li>you can only define 1 static route on PE，</li>
+<li>rib-group not allowed under VRF.</li>
 </ul>
 </li>
-</ul>
+</ol>
 <h3 id="verify-bgpospf-connections">verify bgp/ospf connections</h3>
 <p>core MP-BGP: from RR: R2/3: all neighbor established, with correct family</p>
 <pre><code>[edit]
@@ -6085,22 +6282,23 @@ GREEN.inet.0: 22 destinations, 43 routes (22 active, 0 holddown, 3 hidden)
 delete logical-systems r1 routing-options static route 20.20.0.0/16
 
 #then adv to all internet via bgp
-delete logical-systems r1 policy-options policy-statement exp-bgp-vpn-agg
+delete logical-systems r1 policy-options policy-statement exp-bgp-adv-vpn
 
-delete logical-systems r1 protocols bgp group to-rr export exp-bgp-vpn-agg
-delete logical-systems r1 protocols bgp group c3 export exp-bgp-vpn-agg
+delete logical-systems r1 protocols bgp group to-rr export exp-bgp-adv-vpn
+delete logical-systems r1 protocols bgp group to-c3 export exp-bgp-adv-vpn
 
 #R1 vrf adv a default route to CE1 
 delete logical-systems r1 routing-instances GREEN routing-options aggregate route 0.0.0.0/0
-delete logical-systems r1 policy-options policy-statement exp-ospf-default
-delete logical-systems r1 routing-instances GREEN protocols ospf export exp-ospf-default
+delete logical-systems r1 policy-options policy-statement vrf-exp-ospf-def
+delete logical-systems r1 routing-instances GREEN protocols ospf export vrf-exp-ospf-def
 
 #R1 also need to adv the default route to all other CE sites
 delete logical-systems r1 policy-options policy-statement vrf-exp term 3
 
 #R1 leak the Internet table(only bgp part in this case, so under BGP) to vrf
-delete logical-systems r1 routing-options rib-groups imp-inet.0-to-vrf
-delete logical-systems r1 protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf
+delete logical-systems r1 routing-options rib-groups inet.0-to-vrf
+delete logical-systems r1 protocols bgp group to-rr family inet unicast rib-group inet.0-to-vrf
+delete logical-systems r1 protocols bgp group to-c3 family inet unicast rib-group
 </code></pre>
 <h4 id="solution2-config">solution2 config</h4>
 <pre><code>#config R1 static default to R2/3, then copy to vrf
