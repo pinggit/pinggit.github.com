@@ -54,7 +54,11 @@
 </ul>
 </li>
 <li><a href="#5ce-vpn">5CE VPN</a><ul>
-<li><a href="#config-basic-vpn">config: basic VPN</a></li>
+<li><a href="#vpn">VPN</a><ul>
+<li><a href="#basic-framework-and-vrf-impexp">basic framework and vrf-imp/exp</a></li>
+<li><a href="#vrf-ce-policy">VRF-CE policy</a></li>
+</ul>
+</li>
 <li><a href="#shamlink">shamlink</a></li>
 <li><a href="#vpn-inetaccess-1">VPN InetAccess 1</a></li>
 <li><a href="#vpn-inetaccess-2">VPN InetAccess 2</a></li>
@@ -122,7 +126,7 @@
 </ul>
 </li>
 <li><a href="#5ce-vpn_1">5CE VPN</a><ul>
-<li><a href="#config-basic-vpn_1">config: basic VPN</a><ul>
+<li><a href="#config-basic-vpn">config: basic VPN</a><ul>
 <li><a href="#r1">R1:</a></li>
 <li><a href="#r4">R4:</a></li>
 <li><a href="#r8">R8:</a></li>
@@ -1195,7 +1199,8 @@ set interfaces ge-1/2/5 unit 100 family vpls filter input vpls
 <h2 id="5ce-vpn">5CE VPN</h2>
 <p>NOTE: 
 * must fully verify . anything not working indicate sth wrong in previous parts</p>
-<h3 id="config-basic-vpn">config: basic VPN</h3>
+<h3 id="vpn">VPN</h3>
+<h4 id="basic-framework-and-vrf-impexp">basic framework and vrf-imp/exp</h4>
 <pre><code>#R1
 set policy-options policy-statement vrf-imp term 1 from protocol bgp
 set policy-options policy-statement vrf-imp term 1 from community GREEN
@@ -1288,20 +1293,20 @@ set routing-instances GREEN vrf-table-label
 set routing-instances GREEN protocols bgp group to-ce neighbor 200.6.84.2 peer-as 65000 as-override
 set routing-instances GREEN protocols bgp group to-ce neighbor 200.6.85.2 peer-as 65000 as-override
 </code></pre>
-<p>3) policy</p>
+<h4 id="vrf-ce-policy">VRF-CE policy</h4>
 <pre><code>#R1
 set policy-options policy-statement vrf-exp-ospf term 1 from protocol bgp
 set policy-options policy-statement vrf-exp-ospf term 1 from community GREEN    #&lt;------optional
 set policy-options policy-statement vrf-exp-ospf term 1 then accept
 set routing-instances GREEN protocols ospf export vrf-exp-ospf
 
-#R4
+#R4---(OSPF)---CE2
 set policy-options policy-statement vrf-exp-ospf term 1 from protocol bgp
 set policy-options policy-statement vrf-exp-ospf term 1 from community GREEN
 set policy-options policy-statement vrf-exp-ospf term 1 then accept     
 （r4:set policy-options policy-statement vrf-exp-ospf term 2 then reject ）#&lt;------optional
 
-#R8
+#R4---(BGP)---CE3
 set policy-options policy-statement vrf-exp-bgp term 1 from protocol ospf
 set policy-options policy-statement vrf-exp-bgp term 1 then accept
 set policy-options policy-statement vrf-exp-bgp term 2 from protocol direct
@@ -1321,7 +1326,13 @@ set routing-instances GREEN protocols ospf sham-link local 4.4.4.4
 set routing-instances GREEN protocols ospf area 0.0.0.0 sham-link-remote 1.1.1.1
 </code></pre>
 <h3 id="vpn-inetaccess-1">VPN InetAccess 1</h3>
-<p>solution 1: inet.0 static (next-table) + vrf aggr def + inet.0 rib-group</p>
+<ul>
+<li>1 inet.0 static (next-table) to vpn routes + <br />
+</li>
+<li>1 vrf aggr def under vrf + <br />
+</li>
+<li>1 inet.0 rib-group(leaking Internet into vrf)</li>
+</ul>
 <p>(downward: from Internet to VPN)</p>
 <ol>
 <li>
@@ -1362,11 +1373,14 @@ set protocols bgp group to-rr export exp-bgp-vpn-routes
 set protocols bgp group to-c3 export exp-bgp-vpn-routes
 </code></pre>
 <p>2) VPN =&gt; Internet</p>
-<pre><code>set routing-instances GREEN routing-options aggregate route 0/0    
+<pre><code>set routing-instances GREEN routing-options aggregate route 0/0
+
 set policy-options policy-statement vrf-exp-ospf-default term 1 from
-    instance GREEN protocol aggregate route-filter 0/0 exact                   
-set policy-options policy-statement vrf-exp-ospf-default term 1 then accept                                                      
-set routing-instances GREEN protocols ospf export vrf-exp-ospf-default  
+        instance GREEN protocol aggregate route-filter 0/0 exact                   
+set policy-options policy-statement vrf-exp-ospf-default term 1 then accept
+
+set routing-instances GREEN protocols ospf export vrf-exp-ospf-default
+
 set policy-options policy-statement vrf-exp term 3 from protocol aggregate route-filter 0/0 exact                  
 set policy-options policy-statement vrf-exp term 3 then community add GREEN      #&lt;------don't forget
 set policy-options policy-statement vrf-exp term 3 then accept
@@ -1376,7 +1390,15 @@ set protocols bgp group to-rr family inet unicast rib-group imp-inet.0-to-vrf
 set protocols bgp group to-c3 family inet unicast rib-group imp-inet.0-to-vrf    #&lt;------don't forget
 </code></pre>
 <h3 id="vpn-inetaccess-2">VPN InetAccess 2</h3>
-<p>inet.0 static next-hop R2/3 + 2rib-group</p>
+<ul>
+<li>1 inet.0 static def route next-hop R2/3 + rib-group (copy into vpn)<br />
+</li>
+<li>1 aggr. route to vpn + rib-group(copy some vpn contri. route into inet.0)<br />
+</li>
+<li>1 fwd-table policy (change NH)<br />
+</li>
+<li>no full Internet table leaking into VPN</li>
+</ul>
 <p>1) R1:VRF -&gt; Internet: <br />
    R1 config static def pointing to R2/3; then rib-group it to vrf</p>
 <pre><code>#set routing-options static route 0/0 next-hop [ 100.0.12.2 100.0.13.2 ]
@@ -1398,9 +1420,10 @@ set policy-options policy-statement vrf-exp-ospf-default term 1 then accept
 set routing-instances GREEN protocols ospf export vrf-exp-ospf-default
 </code></pre>
 <p>3) Internet -&gt; R1:<br />
-   config aggr vpn route; then adv to RR/C3 
-       not active: rib-group some vrf routes (from vrf ospf) into R1
-       NH discard: fwd-table policy to change to next-table</p>
+   config aggr vpn route; then adv to RR/C3 <br />
+       not active: rib-group some vrf routes (from vrf ospf) into R1 <br />
+       NH discard: fwd-table policy to change to next-table <br />
+</p>
 <pre><code>#a) config aggr and adv. to RR/C3
 set logical-systems r1 routing-options aggregate route 20.20/16
 
@@ -1435,6 +1458,7 @@ set routing-options forwarding-table export exp-fwd-lsp-map
 fwd-class        EF          AF              BE
 </code></pre>
 <p>1) R1: FW policer-&gt;FW filter-&gt;i/f family</p>
+<p>R1:</p>
 <pre><code>#define policers:5m/7m/10[[m]]
 set firewall policer 5m if-exceeding bandwidth-limit 5m
 set firewall policer 5m if-exceeding burst-size-limit 15k
@@ -1465,7 +1489,10 @@ set firewall filter J-Classifier term 3 then accept
 #apply firewall filter under i/f
 set interfaces ge-1/2/1 unit 133 family inet filter input J-Classifier
 </code></pre>
-<p>2) R5:</p>
+<p>2) R2: </p>
+<pre><code>set protocol mpls explicit-null
+</code></pre>
+<p>3) R5:</p>
 <pre><code>#define map: DSCP code(IP prec) =&gt; fwd-class
 set class-of-service classifiers inet-precedence class-inetprec import default  
 set class-of-service classifiers inet-precedence class-inetprec forwarding-class expedited-forwarding loss-priority low code-points 111 
@@ -2438,7 +2465,7 @@ set logical-systems r1 interfaces ge-1/2/5 unit 100 family vpls filter input vpl
 <h2 id="5ce-vpn_1">5CE VPN</h2>
 <p>NOTE: 
 * must fully verify . anything works indicate sth wrong in previous parts</p>
-<h3 id="config-basic-vpn_1">config: basic VPN</h3>
+<h3 id="config-basic-vpn">config: basic VPN</h3>
 <h4 id="r1">R1:</h4>
 <pre><code>set logical-systems r1 policy-options policy-statement vrf-imp term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement vrf-imp term 1 from community GREEN
