@@ -6,7 +6,7 @@
 <li><a href="#configuration">configuration (供记忆，未完）</a><ul>
 <li><a href="#devices">devices</a><ul>
 <li><a href="#configtransfer-on-commit">config:transfer-on-commit</a></li>
-<li><a href="#configfirewall-filter-on-r23">config:firewall filter on R2/3</a></li>
+<li><a href="#configfirewall-filter-on-r2">config:firewall filter on R2</a></li>
 <li><a href="#config-lag">config LAG</a></li>
 <li><a href="#config-graceful-restart">config graceful restart</a></li>
 <li><a href="#config-bfd">config BFD</a></li>
@@ -14,34 +14,28 @@
 </li>
 <li><a href="#igp">IGP</a><ul>
 <li><a href="#preconfig-basic-isis">(pre)config basic ISIS</a></li>
-<li><a href="#configigp-policy-r2">config:IGP policy (R2)</a></li>
-<li><a href="#configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</a></li>
-<li><a href="#config-isis-metric">config: isis metric</a></li>
+<li><a href="#igp-policy-r2">IGP policy (R2)</a></li>
+<li><a href="#r">所有R的通用配置</a></li>
 </ul>
 </li>
 <li><a href="#mpls">MPLS</a><ul>
-<li><a href="#configmpls-interfaces">config:MPLS interfaces</a></li>
-<li><a href="#preconfig-mpls-lsps">(pre)config mpls lsps</a></li>
-<li><a href="#configrsvp">config:RSVP</a></li>
-<li><a href="#configldp">config:LDP</a></li>
-<li><a href="#configr1456-ldporsvp-tunnel">config:R1/4/5/6 LDPoRSVP tunnel</a></li>
-<li><a href="#configr2primarybackup-with-ero">config:R2:primary/backup with ERO</a></li>
-<li><a href="#configr2link-protection-bypass-lsp">config:R2:link-protection (bypass LSP)</a></li>
-<li><a href="#configr4secondary-path">config:R4:secondary path</a></li>
-<li><a href="#configr3-link-coloring">config:R3: link coloring</a></li>
-<li><a href="#configlsp-preemption">config:LSP preemption</a></li>
-<li><a href="#config-ipv6-tunnel">config: Ipv6 tunnel</a></li>
-<li><a href="#config-r5-no-explicit-nulllabel-0">config: R5: no explicit-null(label 0)</a></li>
-<li><a href="#configlsp-policer">config:LSP policer</a></li>
-<li><a href="#configicmp-tunneling-not-required">config:icmp-tunneling (not required)</a></li>
-<li><a href="#configr3-load-balance">config:R3: Load balance</a></li>
+<li><a href="#mpls-interfaces">MPLS interfaces</a></li>
+<li><a href="#full-mesh-lspldprsvpup">预配的full mesh LSP,LDP,RSVP,要保证全up</a></li>
+<li><a href="#r1456-ldporsvp-tunnel">R1/4/5/6 LDPoRSVP tunnel</a></li>
+<li><a href="#r2primarybackup-with-ero">R2:primary/backup with ERO</a></li>
+<li><a href="#r2link-protection-bypass-lsp">R2:link-protection (bypass LSP)</a></li>
+<li><a href="#r4secondary-path">R4:secondary path</a></li>
+<li><a href="#r3-link-coloring-admin-group">R3: link coloring （admin-group)</a></li>
+<li><a href="#r1-lsp-preemption">R1 :LSP preemption</a></li>
+<li><a href="#r5-no-explicit-null">R5: no explicit-null</a></li>
+<li><a href="#r3-r3-r6-lsp-policer">R3: R3-R6: LSP policer</a></li>
+<li><a href="#r3-load-balance">R3: Load balance</a></li>
 </ul>
 </li>
 <li><a href="#bgp">BGP</a><ul>
-<li><a href="#configas-migration">config:AS migration</a></li>
-<li><a href="#config-troubleshooting-pre-config">config: troubleshooting pre-config</a></li>
-<li><a href="#config-pt-block-step1-all-cpt-facing-r-import-tag-routes">config P/T block step1: all C/P/T facing R: import : tag routes</a></li>
-<li><a href="#config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes">config P/T block step2: all P/T facing R: export: reject P(T) routes</a></li>
+<li><a href="#as-migration">AS migration</a></li>
+<li><a href="#troubleshooting-pre-config_1">troubleshooting pre-config</a></li>
+<li><a href="#block-pt">block P/T</a></li>
 <li><a href="#config6pepe-ce">config:6PE:PE-CE</a></li>
 <li><a href="#config6pepe-pe-solution4">config:6PE:PE-PE (solution4)</a></li>
 <li><a href="#config-ipv6-routes-aggregation">config: IPv6 routes aggregation</a></li>
@@ -83,7 +77,7 @@
 <li><a href="#configuration_1">configuration(全部真实配置)</a><ul>
 <li><a href="#devices_1">devices</a><ul>
 <li><a href="#configtransfer-on-commit_1">config:transfer-on-commit</a></li>
-<li><a href="#configfirewall-filter-on-r23_1">config:firewall filter on R2/3</a></li>
+<li><a href="#configfirewall-filter-on-r23">config:firewall filter on R2/3</a></li>
 <li><a href="#config-lag_1">config LAG</a></li>
 <li><a href="#config-graceful-restart_1">config graceful restart</a></li>
 <li><a href="#config-bfd_1">config BFD</a></li>
@@ -92,33 +86,33 @@
 <li><a href="#igp_1">IGP</a><ul>
 <li><a href="#preconfig-basic-isis_1">(pre)config basic ISIS</a></li>
 <li><a href="#configigp-policy">config:IGP policy</a></li>
-<li><a href="#configno-ipv6-routes-allowed-in-isis_1">config:no IPv6 routes allowed in ISIS</a></li>
-<li><a href="#config-isis-metric_1">config: isis metric</a></li>
+<li><a href="#configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</a></li>
+<li><a href="#config-isis-metric">config: isis metric</a></li>
 </ul>
 </li>
 <li><a href="#mpls_1">MPLS</a><ul>
-<li><a href="#configmpls-interfaces_1">config:MPLS interfaces</a></li>
-<li><a href="#preconfig-mpls-lsps_1">(pre)config mpls lsps</a></li>
-<li><a href="#configrsvp_1">config:RSVP</a></li>
-<li><a href="#configldp_1">config:LDP</a></li>
-<li><a href="#configr1456-ldporsvp-tunnel_1">config:R1/4/5/6 LDPoRSVP tunnel</a></li>
-<li><a href="#configr2primarybackup-with-ero_1">config:R2:primary/backup with ERO</a></li>
-<li><a href="#configr2link-protection-bypass-lsp_1">config:R2:link-protection (bypass LSP)</a></li>
-<li><a href="#configr4secondary-path_1">config:R4:secondary path</a></li>
-<li><a href="#configr3-link-coloring_1">config:R3: link coloring</a></li>
-<li><a href="#configlsp-preemption_1">config:LSP preemption</a></li>
-<li><a href="#config-ipv6-tunnel_1">config: Ipv6 tunnel</a></li>
-<li><a href="#config-r5-no-explicit-nulllabel-0_1">config: R5: no explicit-null(label 0)</a></li>
-<li><a href="#configlsp-policer_1">config:LSP policer</a></li>
-<li><a href="#configicmp-tunneling-not-required_1">config:icmp-tunneling (not required)</a></li>
-<li><a href="#configr3-load-balance_1">config:R3: Load balance</a></li>
+<li><a href="#configmpls-interfaces">config:MPLS interfaces</a></li>
+<li><a href="#preconfig-mpls-lsps">(pre)config mpls lsps</a></li>
+<li><a href="#configrsvp">config:RSVP</a></li>
+<li><a href="#configldp">config:LDP</a></li>
+<li><a href="#configr1456-ldporsvp-tunnel">config:R1/4/5/6 LDPoRSVP tunnel</a></li>
+<li><a href="#configr2primarybackup-with-ero">config:R2:primary/backup with ERO</a></li>
+<li><a href="#configr2link-protection-bypass-lsp">config:R2:link-protection (bypass LSP)</a></li>
+<li><a href="#configr4secondary-path">config:R4:secondary path</a></li>
+<li><a href="#configr3-link-coloring">config:R3: link coloring</a></li>
+<li><a href="#configlsp-preemption">config:LSP preemption</a></li>
+<li><a href="#config-ipv6-tunnel">config: Ipv6 tunnel</a></li>
+<li><a href="#config-r5-no-explicit-nulllabel-0">config: R5: no explicit-null(label 0)</a></li>
+<li><a href="#configlsp-policer">config:LSP policer</a></li>
+<li><a href="#configicmp-tunneling-not-required">config:icmp-tunneling (not required)</a></li>
+<li><a href="#configr3-load-balance">config:R3: Load balance</a></li>
 </ul>
 </li>
 <li><a href="#bgp_1">BGP</a><ul>
-<li><a href="#configas-migration_1">config:AS migration</a></li>
-<li><a href="#config-troubleshooting-pre-config_1">config: troubleshooting pre-config</a></li>
-<li><a href="#config-pt-block-step1-all-cpt-facing-r-import-tag-routes_1">config P/T block step1: all C/P/T facing R: import : tag routes</a></li>
-<li><a href="#config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes_1">config P/T block step2: all P/T facing R: export: reject P(T) routes</a></li>
+<li><a href="#configas-migration">config:AS migration</a></li>
+<li><a href="#config-troubleshooting-pre-config">config: troubleshooting pre-config</a></li>
+<li><a href="#config-pt-block-step1-all-cpt-facing-r-import-tag-routes">config P/T block step1: all C/P/T facing R: import : tag routes</a></li>
+<li><a href="#config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes">config P/T block step2: all P/T facing R: export: reject P(T) routes</a></li>
 <li><a href="#config6pepe-ce_1">config:6PE:PE-CE</a></li>
 <li><a href="#config6pepe-pe-solution4_1">config:6PE:PE-PE (solution4)</a></li>
 <li><a href="#config-ipv6-routes-aggregation_1">config: IPv6 routes aggregation</a></li>
@@ -527,7 +521,7 @@ set system archival configuration archive-sites "scp://test:test123@172.25.88.12
         #doesn't work on a cygwin/linux server
         "scp://Ping:Juniper1%40@172.25.84.169/transfer-on-commit/";
 </code></pre>
-<h3 id="configfirewall-filter-on-r23">config:firewall filter on R2/3</h3>
+<h3 id="configfirewall-filter-on-r2">config:firewall filter on R2</h3>
 <p>the target should be: block traffic coming from outside AS(like T/P), but
 sourcing from IP that is same as internal networks (10.100.x):</p>
 <pre><code>(outside AS)--------R2-------(inside AS)
@@ -580,28 +574,27 @@ set protocols isis level 2 authentication-key "$9$ZpDHmz39O1hfT1hSr8LGDi"
 set protocols isis interface all level 1 disable
 set protocols isis interface fxp0.0 disable
 </code></pre>
-<h3 id="configigp-policy-r2">config:IGP policy (R2)</h3>
+<h3 id="igp-policy-r2">IGP policy (R2)</h3>
 <pre><code>172.16.0/24 ~~~~~   172.16.7/24|172.16.8/24     ~~~~~       172.16.15/24|172.16.16/24 ~~ 172.16.19/24
 -------------------------------|----------------------------------------|----------------------------
 172.16/21                      |172.16.8/21                             |172.16.16/22
    A
    |
 (remove)
-</code></pre>
-<p>R2:
-入方向：</p>
-<pre><code>   DC &lt;=== R2 &lt;==== local AS 
+
+   DC &lt;=== R2 &lt;==== local AS 
       OSPF    ISIS
    DC ===&gt; R2 ====&gt; local AS
-
-#OSPF imp policy: R2 接受OSPF时候去掉172.16/21
+</code></pre>
+<p>R2 入方向：</p>
+<pre><code>#OSPF 从外import接收时，去掉172.16/21或更细这段
 set policy-options policy-statement imp-ospf-rej-longer term 1 from protocol ospf
                                                         term 1 from route-filter 172.16.0.0/21 orlonger
                                                         term 1 then reject
 
 set protocols ospf import imp-ospf-rej-longer
 
-#向ISIS发布时，配两条aggr 概括剩余的，exp policy发布到ISIS 内网
+#向内ISIS export发布时，将剩余的（8-19)汇聚为两条aggr 
 set routing-options aggregate route 172.16.8.0/21
 set routing-options aggregate route 172.16.16.0/22
 
@@ -610,288 +603,146 @@ set policy-options policy-statement exp-isis-from-ospf term 1 from protocol aggr
                                                        term 1 from route-filter 172.16.16.0/22 exact
                                                        term 1 then accept
 </code></pre>
-<p>R2 出方向：</p>
-<pre><code>set protocols isis export exp-isis-from-ospf
+<p>R2 出方向：发布两条路由</p>
+<pre><code>1) 一条是内网的汇聚路由 set routing-options aggregate route 10.200.0.0/16
 
-set routing-options aggregate route 10.200.0.0/16
-
+2) 另一条是“条件default route” （仅当来自bgp时才通告）
 set policy-options policy-statement only-if-from-bgp term 1 from protocol bgp
 set policy-options policy-statement only-if-from-bgp term 1 from route-filter 0.0.0.0/0 prefix-length-range /0-/32
 set policy-options policy-statement only-if-from-bgp term 1 then accept
 set policy-options policy-statement only-if-from-bgp term 2 then reject  #&lt;------MUST
 
 set routing-options generate route 0.0.0.0/0 policy only-if-from-bgp
+                                                    ^^^^^^^^^^^^^^^
+3) 发布这两条路由到ospf
+set policy-options policy-statement exp-ospf-def-aggr term 1 from protocol aggregate
+set policy-options policy-statement exp-ospf-def-aggr term 1 from route-filter 10.200.0.0/16 exact
+set policy-options policy-statement exp-ospf-def-aggr term 1 then accept
 
-set policy-options policy-statement exp-ospf-from-isis term 1 from protocol aggregate
-set policy-options policy-statement exp-ospf-from-isis term 1 from route-filter 10.200.0.0/16 exact
-set policy-options policy-statement exp-ospf-from-isis term 1 then accept
-
-set policy-options policy-statement exp-ospf-from-isis term 2 from protocol aggregate
-set policy-options policy-statement exp-ospf-from-isis term 2 from route-filter 0.0.0.0/0 exact
-set policy-options policy-statement exp-ospf-from-isis term 2 then accept
+set policy-options policy-statement exp-ospf-def-aggr term 2 from protocol generate
+set policy-options policy-statement exp-ospf-def-aggr term 2 from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement exp-ospf-def-aggr term 2 then accept
 
 set protocols ospf export exp-ospf-from-isis
 </code></pre>
-<h3 id="configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</h3>
-<pre><code>set logical-systems r1 protocols isis no-ipv6-routing  
-set logical-systems r2 protocols isis no-ipv6-routing  
-set logical-systems r3 protocols isis no-ipv6-routing  
-set logical-systems r4 protocols isis no-ipv6-routing  
-set logical-systems r5 protocols isis no-ipv6-routing  
-set logical-systems r6 protocols isis no-ipv6-routing  
-set logical-systems r7 protocols isis no-ipv6-routing  
-set logical-systems r8 protocols isis no-ipv6-routing
+<h3 id="r">所有R的通用配置</h3>
+<pre><code>不允许isis IGP携带v6 （=&gt;只允许用BGP运载，为6PE铺垫）; ref-bw 5g
 </code></pre>
-<h3 id="config-isis-metric">config: isis metric</h3>
-<pre><code>set logical-systems r1 protocols isis reference-bandwidth 5g
-set logical-systems r2 protocols isis reference-bandwidth 5g
-set logical-systems r3 protocols isis reference-bandwidth 5g
-set logical-systems r4 protocols isis reference-bandwidth 5g
-set logical-systems r5 protocols isis reference-bandwidth 5g
-set logical-systems r6 protocols isis reference-bandwidth 5g
-set logical-systems r7 protocols isis reference-bandwidth 5g
-set logical-systems r8 protocols isis reference-bandwidth 5g
+<p>所有R:</p>
+<pre><code>set protocols isis no-ipv6-routing  
+set protocols isis reference-bandwidth 5g
+set protocols mpls ipv6-tunneling
+set protocols mpls icmp-tunneling
 </code></pre>
 <h2 id="mpls">MPLS</h2>
-<h3 id="configmpls-interfaces">config:MPLS interfaces</h3>
-<pre><code>set logical-systems r1 protocols mpls interface ge-1/2/1.102
-set logical-systems r1 protocols mpls interface ge-1/2/1.103
-
-set logical-systems r2 protocols mpls interface ge-1/2/2.102
-set logical-systems r2 protocols mpls interface ge-1/2/1.203
-set logical-systems r2 protocols mpls interface ge-1/2/1.204
-set logical-systems r2 protocols mpls interface ge-1/2/1.205
-set logical-systems r2 protocols mpls interface ge-1/2/1.206
-
-set logical-systems r3 protocols mpls interface ge-1/2/2.103
-set logical-systems r3 protocols mpls interface ge-1/2/2.203
-set logical-systems r3 protocols mpls interface ge-1/2/1.305
-set logical-systems r3 protocols mpls interface ge-1/2/1.306
-
-set logical-systems r4 protocols mpls interface ge-1/2/2.204
-set logical-systems r4 protocols mpls interface ge-1/2/1.406
-
-set logical-systems r5 protocols mpls interface ge-1/2/2.305
-set logical-systems r5 protocols mpls interface ge-1/2/2.205
-set logical-systems r5 protocols mpls interface ge-1/2/1.506
-set logical-systems r5 protocols mpls interface ge-1/2/1.507
-set logical-systems r5 protocols mpls interface ge-1/2/1.522
-
-set logical-systems r6 protocols mpls interface ge-1/2/2.506
-set logical-systems r6 protocols mpls interface ge-1/2/2.306
-set logical-systems r6 protocols mpls interface ge-1/2/2.206
-set logical-systems r6 protocols mpls interface ge-1/2/2.406
-set logical-systems r6 protocols mpls interface ge-1/2/1.608
-
-set logical-systems r7 protocols mpls interface ge-1/2/1.708
-set logical-systems r7 protocols mpls interface ge-1/2/2.507
-
-set logical-systems r8 protocols mpls interface ge-1/2/2.608
-set logical-systems r8 protocols mpls interface ge-1/2/2.708
+<h3 id="mpls-interfaces">MPLS interfaces</h3>
+<pre><code>set protocols mpls interface ge-x/y/z.N
+或者用all （应该是预先已配置）
+set protocols mpls interface all
+set protocols mpls interface fxp0.0 disable
 </code></pre>
-<p>or:</p>
-<pre><code>set logical-systems r1 protocols mpls interface all
-set logical-systems r1 protocols mpls interface fxp0.0 disable
-set logical-systems r2 protocols mpls interface all
-set logical-systems r2 protocols mpls interface fxp0.0 disable
-set logical-systems r3 protocols mpls interface all
-set logical-systems r3 protocols mpls interface fxp0.0 disable
-set logical-systems r4 protocols mpls interface all
-set logical-systems r4 protocols mpls interface fxp0.0 disable
-set logical-systems r5 protocols mpls interface all
-set logical-systems r5 protocols mpls interface fxp0.0 disable
-set logical-systems r6 protocols mpls interface all
-set logical-systems r6 protocols mpls interface fxp0.0 disable
-set logical-systems r7 protocols mpls interface all
-set logical-systems r7 protocols mpls interface fxp0.0 disable
-set logical-systems r8 protocols mpls interface all
-set logical-systems r8 protocols mpls interface fxp0.0 disable
-</code></pre>
-<h3 id="preconfig-mpls-lsps">(pre)config mpls lsps</h3>
+<h3 id="full-mesh-lspldprsvpup">预配的full mesh LSP,LDP,RSVP,要保证全up</h3>
+<p>full mesh LSP R1 － R8</p>
 <pre><code>set logical-systems r1 protocols mpls label-switched-path r1-to-r2 to 10.200.1.2
 set logical-systems r1 protocols mpls label-switched-path r1-to-r3 to 10.200.1.3
 set logical-systems r1 protocols mpls label-switched-path r1-to-r4-blue to 10.200.1.4
 set logical-systems r1 protocols mpls label-switched-path r1-to-r4-green to 10.200.1.4
 set logical-systems r1 protocols mpls label-switched-path r1-to-r5 to 10.200.1.5
 set logical-systems r1 protocols mpls label-switched-path r1-to-r6 to 10.200.1.6
-
-set logical-systems r2 protocols mpls label-switched-path r2-to-r1 to 10.200.1.2
-set logical-systems r2 protocols mpls label-switched-path r2-to-r3 to 10.200.1.3
-set logical-systems r2 protocols mpls label-switched-path r2-to-r4 to 10.200.1.4
-set logical-systems r2 protocols mpls label-switched-path r2-to-r5 to 10.200.1.5
-set logical-systems r2 protocols mpls label-switched-path r2-to-r6 to 10.200.1.6
-
-set logical-systems r3 protocols mpls label-switched-path r3-to-r1 to 10.200.1.1
-set logical-systems r3 protocols mpls label-switched-path r3-to-r2 to 10.200.1.2
-set logical-systems r3 protocols mpls label-switched-path r3-to-r4 to 10.200.1.4
-set logical-systems r3 protocols mpls label-switched-path r3-to-r5 to 10.200.1.5
-set logical-systems r3 protocols mpls label-switched-path r3-to-r6 to 10.200.1.6
-
-set logical-systems r4 protocols mpls label-switched-path r4-to-r1 to 10.200.1.1
-set logical-systems r4 protocols mpls label-switched-path r4-to-r2 to 10.200.1.2
-set logical-systems r4 protocols mpls label-switched-path r4-to-r3 to 10.200.1.3
-set logical-systems r4 protocols mpls label-switched-path r4-to-r5 to 10.200.1.5
-set logical-systems r4 protocols mpls label-switched-path r4-to-r6 to 10.200.1.6
-
-set logical-systems r5 protocols mpls label-switched-path r5-to-r1 to 10.200.1.1
-set logical-systems r5 protocols mpls label-switched-path r5-to-r2 to 10.200.1.2
-set logical-systems r5 protocols mpls label-switched-path r5-to-r3 to 10.200.1.3
-set logical-systems r5 protocols mpls label-switched-path r5-to-r4 to 10.200.1.4
-set logical-systems r5 protocols mpls label-switched-path r5-to-r6 to 10.200.1.6
-
-set logical-systems r6 protocols mpls label-switched-path r6-to-r1 to 10.200.1.1
-set logical-systems r6 protocols mpls label-switched-path r6-to-r2 to 10.200.1.2
-set logical-systems r6 protocols mpls label-switched-path r6-to-r3 to 10.200.1.3
-set logical-systems r6 protocols mpls label-switched-path r6-to-r5 to 10.200.1.5
-set logical-systems r6 protocols mpls label-switched-path r6-to-r6 to 10.200.1.6
 </code></pre>
-<h3 id="configrsvp">config:RSVP</h3>
+<p>R1/2/3/4/6</p>
 <pre><code>set logical-systems r1 protocols rsvp interface ge-1/2/1.102
 set logical-systems r1 protocols rsvp interface ge-1/2/1.103
-
-set logical-systems r2 protocols rsvp interface ge-1/2/2.102
-set logical-systems r2 protocols rsvp interface ge-1/2/1.203
-set logical-systems r2 protocols rsvp interface ge-1/2/1.204
-set logical-systems r2 protocols rsvp interface ge-1/2/1.205
-set logical-systems r2 protocols rsvp interface ge-1/2/1.206
-
-set logical-systems r3 protocols rsvp interface ge-1/2/2.103
-set logical-systems r3 protocols rsvp interface ge-1/2/2.203
-set logical-systems r3 protocols rsvp interface ge-1/2/1.305
-set logical-systems r3 protocols rsvp interface ge-1/2/1.306
-
-set logical-systems r4 protocols rsvp interface ge-1/2/2.204
-set logical-systems r4 protocols rsvp interface ge-1/2/1.406
-
-set logical-systems r5 protocols rsvp interface ge-1/2/2.305
-set logical-systems r5 protocols rsvp interface ge-1/2/2.205
-set logical-systems r5 protocols rsvp interface ge-1/2/1.506
-
-set logical-systems r6 protocols rsvp interface ge-1/2/2.206
-set logical-systems r6 protocols rsvp interface ge-1/2/2.306
-set logical-systems r6 protocols rsvp interface ge-1/2/2.406
-set logical-systems r6 protocols rsvp interface ge-1/2/2.506
 </code></pre>
-<h3 id="configldp">config:LDP</h3>
+<p>R5/6/7/8</p>
 <pre><code>set logical-systems r5 protocols ldp interface lo0.5
 set logical-systems r5 protocols ldp interface ge-1/2/1.506
 set logical-systems r5 protocols ldp interface ge-1/2/1.507
-
-set logical-systems r6 protocols ldp interface lo0.6
-set logical-systems r6 protocols ldp interface ge-1/2/1.608
-set logical-systems r6 protocols ldp interface ge-1/2/2.506
-
-set logical-systems r7 protocols ldp interface ge-1/2/1.708
-set logical-systems r7 protocols ldp interface ge-1/2/2.507
-set logical-systems r7 protocols ldp interface lo0.7
-
-set logical-systems r8 protocols ldp interface ge-1/2/2.608
-set logical-systems r8 protocols ldp interface ge-1/2/2.708
-set logical-systems r8 protocols ldp interface lo0.8
 </code></pre>
-<h3 id="configr1456-ldporsvp-tunnel">config:R1/4/5/6 LDPoRSVP tunnel</h3>
-<pre><code>set logical-systems r1 protocols ldp interface lo0.1
-set logical-systems r4 protocols ldp interface lo0.4
-set logical-systems r5 protocols ldp interface lo0.5
-set logical-systems r6 protocols ldp interface lo0.6
+<h3 id="r1456-ldporsvp-tunnel">R1/4/5/6 LDPoRSVP tunnel</h3>
+<p>就是两句：ldp启用lo0; LSP上<code>ldp-tunneling</code></p>
+<p>R1/4 &lt;==&gt; R5/6 双向full mesh</p>
+<p>R1/4/5/6:</p>
+<pre><code>set protocols ldp interface lo0.1
 
 set logical-systems r1 protocols mpls label-switched-path r1-r5 ldp-tunneling
 set logical-systems r1 protocols mpls label-switched-path r1-r6 ldp-tunneling
-set logical-systems r4 protocols mpls label-switched-path r4-r5 ldp-tunneling
-set logical-systems r4 protocols mpls label-switched-path r4-r6 ldp-tunneling
-set logical-systems r5 protocols mpls label-switched-path r5-r1 ldp-tunneling
-set logical-systems r5 protocols mpls label-switched-path r5-r4 ldp-tunneling
-set logical-systems r6 protocols mpls label-switched-path r6-r1 ldp-tunneling
-set logical-systems r6 protocols mpls label-switched-path r6-r4 ldp-tunneling
 </code></pre>
-<h3 id="configr2primarybackup-with-ero">config:R2:primary/backup with ERO</h3>
-<pre><code>set logical-systems r2 protocols mpls label-switched-path r2-r5 to 10.200.1.5
-set logical-systems r2 protocols mpls label-switched-path r2-r5 primary via-r4-r6
-set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.4 loose
-set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.6 loose
+<h3 id="r2primarybackup-with-ero">R2:primary/backup with ERO</h3>
+<pre><code>set protocols mpls label-switched-path r2-r5 to 10.200.1.5
+                                             primary via-r4-r6
+
+set protocols mpls path via-r4-r6 10.200.1.4 loose
+                                  10.200.1.6 loose
 </code></pre>
-<h3 id="configr2link-protection-bypass-lsp">config:R2:link-protection (bypass LSP)</h3>
-<pre><code>set logical-systems r2 protocols mpls label-switched-path r2-r6 link-protection
-set logical-systems r2 protocols rsvp interface ge-1/2/1.206 link-protection
-set logical-systems r6 protocols rsvp interface ge-1/2/2.206 link-protection
+<h3 id="r2link-protection-bypass-lsp">R2:link-protection (bypass LSP)</h3>
+<pre><code>set protocols mpls label-switched-path r2-r6 link-protection
+set protocols rsvp interface ge-1/2/1.206 link-protection
+
+R6: 
+set protocols rsvp interface ge-1/2/2.206 link-protection  #&lt;--（没必要配）
 </code></pre>
-<h3 id="configr4secondary-path">config:R4:secondary path</h3>
+<p>查看： show rsvp session 生成Bypass lsp</p>
+<h3 id="r4secondary-path">R4:secondary path</h3>
 <blockquote>
 <p>set up the secondary path for lsp r4-r3,2nd path must remain up and the
 reservation bandwidth is 600m, 2 paths’s first hop must be R2.</p>
 </blockquote>
-<pre><code>set logical-systems r4 protocols mpls label-switched-path r4-r3 to 10.200.1.3
-set logical-systems r4 protocols mpls label-switched-path r4-r3 bandwidth 600m
-set logical-systems r4 protocols mpls label-switched-path r4-r3 adaptive    #&lt;--SE
-set logical-systems r4 protocols mpls label-switched-path r4-r3 primary via-r2
-set logical-systems r4 protocols mpls label-switched-path r4-r3 secondary via-r2-r5 standby #&lt;-- always "up", pre-established
+<pre><code>set protocols mpls label-switched-path r4-r3 to 10.200.1.3
+set protocols mpls label-switched-path r4-r3 bandwidth 600m
+set protocols mpls label-switched-path r4-r3 adaptive    #&lt;--SE
+set protocols mpls label-switched-path r4-r3 primary via-r2
+set protocols mpls label-switched-path r4-r3 secondary via-r2-r5 standby #&lt;-- always "up", pre-established
 
-set logical-systems r4 protocols mpls path via-r2 10.200.1.2 strict
-set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.2 strict      #&lt;--1st hop must be R2
-set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.5 loose
+set protocols mpls path via-r2 10.200.1.2 strict
+set protocols mpls path via-r2-r5 10.200.1.2 strict      #&lt;--1st hop must be R2
+set protocols mpls path via-r2-r5 10.200.1.5 loose
 </code></pre>
-<h3 id="configr3-link-coloring">config:R3: link coloring</h3>
+<h3 id="r3-link-coloring-admin-group">R3: link coloring （admin-group)</h3>
 <blockquote>
 <p>LSP r3-r5 can’t pass through the link between r3-r5, achieve this without
 using ERO</p>
 </blockquote>
-<pre><code>#define admin-groups
+<p>三步，全在protocol mpls 下配置</p>
+<pre><code>1) 在admin-groups 下定义 颜色
 set logical-systems r3 protocols mpls admin-groups blue 4
 set logical-systems r5 protocols mpls admin-groups blue 4
 
-#assign admin-group to a link 
+2) 将颜色赋予接口
 set logical-systems r3 protocols mpls interface ge-1/2/1.305 admin-group blue
 set logical-systems r5 protocols mpls interface ge-1/2/2.305 admin-group blue
 
-#config LSP to "exclude" the admin-group
+3) 在LSP 下指定exclude 某个颜色
 set logical-systems r3 protocols mpls label-switched-path r3-r5 admin-group exclude blue
 </code></pre>
-<h3 id="configlsp-preemption">config:LSP preemption</h3>
+<h3 id="r1-lsp-preemption">R1 :LSP preemption</h3>
 <blockquote>
 <p>LSP r1-r6 shall be preempted by other LSP</p>
 </blockquote>
 <pre><code>set logical-systems r1 protocols mpls label-switched-path r1-r6 priority 7 7
 </code></pre>
-<h3 id="config-ipv6-tunnel">config: Ipv6 tunnel</h3>
-<pre><code>set logical-systems r1 protocols mpls ipv6-tunneling
-set logical-systems r2 protocols mpls ipv6-tunneling
-set logical-systems r3 protocols mpls ipv6-tunneling
-set logical-systems r4 protocols mpls ipv6-tunneling
-set logical-systems r5 protocols mpls ipv6-tunneling
-set logical-systems r6 protocols mpls ipv6-tunneling
-set logical-systems r7 protocols mpls ipv6-tunneling
-set logical-systems r8 protocols mpls ipv6-tunneling
-</code></pre>
-<h3 id="config-r5-no-explicit-nulllabel-0">config: R5: no explicit-null(label 0)</h3>
-<p>check and delete "explicit-null"</p>
-<h3 id="configlsp-policer">config:LSP policer</h3>
-<pre><code>set logical-systems r3 firewall policer 60m if-exceeding bandwidth-limit 60m
-set logical-systems r3 firewall policer 60m if-exceeding burst-size-limit 15k
-set logical-systems r3 firewall policer 60m then discard
+<h3 id="r5-no-explicit-null">R5: no explicit-null</h3>
+<p>(不允许用label 0, 强迫用缺省的PHP, 为COS铺垫）
+check and make sure no "explicit-null"</p>
+<h3 id="r3-r3-r6-lsp-policer">R3: R3-R6: LSP policer</h3>
+<p>firewall policer P-&gt; firewall filter -&gt; LSP <code>policing filter X</code></p>
+<pre><code>set firewall policer 60m if-exceeding bandwidth-limit 60m
+                         if-exceeding burst-size-limit 15k
+                         then discard
 
-set logical-systems r3 firewall family any filter lsp-60m term 1 then policer 60m
-set logical-systems r3 firewall family any filter lsp-60m term 1 then count 60m
+set firewall family any filter lsp-60m term 1 then policer 60m
+                               lsp-60m term 1 then count 60m
 
-set logical-systems r3 protocols mpls label-switched-path r3-r6 to 10.200.1.6
-set logical-systems r3 protocols mpls label-switched-path r3-r6 policing filter lsp-60m
+set protocols mpls label-switched-path r3-r6 policing filter lsp-60m
 </code></pre>
 <p>or use auto-policing:</p>
-<pre><code>set logical-systems r3 protocols mpls auto-policing class all drop
+<pre><code>set protocols mpls label-switched-path r4-r3 bandwidth 60m
+set protocols mpls auto-policing class all drop
 </code></pre>
-<h3 id="configicmp-tunneling-not-required">config:icmp-tunneling (not required)</h3>
-<pre><code>set logical-systems r1 protocols mpls icmp-tunneling
-set logical-systems r2 protocols mpls icmp-tunneling
-set logical-systems r3 protocols mpls icmp-tunneling
-set logical-systems r4 protocols mpls icmp-tunneling
-set logical-systems r5 protocols mpls icmp-tunneling
-set logical-systems r6 protocols mpls icmp-tunneling
-set logical-systems r7 protocols mpls icmp-tunneling
-set logical-systems r8 protocols mpls icmp-tunneling
-</code></pre>
-<h3 id="configr3-load-balance">config:R3: Load balance</h3>
+<h3 id="r3-load-balance">R3: Load balance</h3>
 <pre><code>#policy: per-packet (for AE bundle)
-set logical-systems r3 policy-options policy-statement load-balance then load-balance per-packet
-set logical-systems r3 policy-options policy-statement load-balance then accept
+set policy-options policy-statement load-balance then load-balance per-packet
+set policy-options policy-statement load-balance then accept
 
 #apply policy into fwd-table
 set logical-systems r3 routing-options forwarding-table export load-balance
@@ -904,114 +755,39 @@ set forwarding-options hash-key family mpls label-2
 set forwarding-options hash-key family mpls payload ip layer-3-only
 </code></pre>
 <h2 id="bgp">BGP</h2>
-<h3 id="configas-migration">config:AS migration</h3>
+<h3 id="as-migration">AS migration</h3>
 <blockquote>
 <p>r1-r8 use AS 4012345678, but appears 65513 to C3, hide 65513 to the core</p>
 </blockquote>
-<pre><code>set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as 65513
-set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as private
-</code></pre>
 <p>initial config is all 65513 in core, need to change to 4012345678 in all R</p>
-<h3 id="config-troubleshooting-pre-config">config: troubleshooting pre-config</h3>
-<pre><code>#correct NHS policy in all R
-set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r1 protocols bgp group to-rr export exp-bgp-nhs
+<p>R1: "local-as 65513 private"</p>
+<pre><code>set protocols bgp group to-c3 neighbor 100.1.33.2 local-as 65513 private
+</code></pre>
+<h3 id="troubleshooting-pre-config_1">troubleshooting pre-config</h3>
+<pre><code>1) 所有R上更正NHS policy ：external =&gt; route-type external
+2) R2/3 删掉reject 这个apply-groups
 
-set logical-systems r2 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r2 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r2 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r2 protocols bgp group to-rr export exp-bgp-nhs
+set policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
+set policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
+set policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
 
-set logical-systems r3 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r3 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r3 protocols bgp group to-rr export exp-bgp-nhs
-
-set logical-systems r4 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r4 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r4 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r4 protocols bgp group to-rr export exp-bgp-nhs
-
-set logical-systems r5 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r5 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r5 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r5 protocols bgp group rr export exp-bgp-nhs
-
-set logical-systems r6 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r6 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r6 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r6 protocols bgp group rr export exp-bgp-nhs
-
-set logical-systems r7 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r7 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r7 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r7 protocols bgp group to-rr export exp-bgp-nhs
-
-set logical-systems r8 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
-set logical-systems r8 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
-set logical-systems r8 policy-options policy-statement exp-bgp-nhs term 1 then next-hop self
-set logical-systems r8 protocols bgp group to-rr export exp-bgp-nhs
-
-#delete existing `reject` group
 delete logical-systems r2 apply-groups reject
 delete logical-systems r3 apply-groups reject
 </code></pre>
-<h3 id="config-pt-block-step1-all-cpt-facing-r-import-tag-routes">config P/T block step1: all C/P/T facing R: import : tag routes</h3>
-<pre><code>set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
-set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
-set logical-systems r1 policy-options community c-route members 65513:100
-set logical-systems r1 policy-options community p-route members 65513:200
-set logical-systems r1 policy-options community t-route members 65513:300
-set logical-systems r1 protocols bgp group to-c3 import imp-bgp-tag-c
+<h3 id="block-pt">block P/T</h3>
+<p>在面向C(R1/4/7)/P(R2/3/5)/T(R2/3)的R上各自做tag:</p>
+<p>R1/4/7:</p>
+<pre><code>set policy-options community c-route members 65513:100
+set policy-options community p-route members 65513:200
+set policy-options community t-route members 65513:300
 
-set logical-systems r2 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
-set logical-systems r2 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
-set logical-systems r2 policy-options policy-statement imp-bgp-tag-t term 1 from protocol bgp
-set logical-systems r2 policy-options policy-statement imp-bgp-tag-t term 1 then community add t-route
-set logical-systems r2 policy-options community c-route members 65513:100
-set logical-systems r2 policy-options community p-route members 65513:200
-set logical-systems r2 policy-options community t-route members 65513:300
-set logical-systems r2 protocols bgp group to-p-v4 import imp-bgp-tag-p
-set logical-systems r2 protocols bgp group to-p-v6 import imp-bgp-tag-p
-set logical-systems r2 protocols bgp group to-t-v4 import imp-bgp-tag-t
-set logical-systems r2 protocols bgp group to-t-v6 import imp-bgp-tag-t
+set policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
+set policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
 
-set logical-systems r3 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
-set logical-systems r3 policy-options policy-statement imp-bgp-tag-t term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement imp-bgp-tag-t term 1 then community add t-route
-set logical-systems r3 policy-options community c-route members 65513:100
-set logical-systems r3 policy-options community p-route members 65513:200
-set logical-systems r3 policy-options community t-route members 65513:300
-set logical-systems r3 protocols bgp group to-p-v4 import imp-bgp-tag-p
-set logical-systems r3 protocols bgp group to-p-v6 import imp-bgp-tag-p
-set logical-systems r3 protocols bgp group to-t-v4 import imp-bgp-tag-t
-set logical-systems r3 protocols bgp group to-t-v6 import imp-bgp-tag-t
-
-set logical-systems r4 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
-set logical-systems r4 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
-set logical-systems r4 policy-options community c-route members 65513:100
-set logical-systems r4 policy-options community p-route members 65513:200
-set logical-systems r4 policy-options community t-route members 65513:300
-set logical-systems r4 protocols bgp group to-c5 import imp-bgp-tag-c
-
-set logical-systems r5 policy-options policy-statement imp-bgp-tag-p term 1 from protocol bgp
-set logical-systems r5 policy-options policy-statement imp-bgp-tag-p term 1 then community add p-route
-set logical-systems r5 policy-options community c-route members 65513:100
-set logical-systems r5 policy-options community p-route members 65513:200
-set logical-systems r5 policy-options community t-route members 65513:300
-set logical-systems r5 protocols bgp group to-p-v4 import imp-bgp-tag-p
-
-set logical-systems r7 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
-set logical-systems r7 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
-set logical-systems r7 policy-options community c-route members 65513:100
-set logical-systems r7 policy-options community p-route members 65513:200
-set logical-systems r7 policy-options community t-route members 65513:300
-set logical-systems r7 protocols bgp group to-c4 import imp-bgp-tag-c
+set protocols bgp group to-c3(4/5) import imp-bgp-tag-c
 </code></pre>
-<h3 id="config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes">config P/T block step2: all P/T facing R: export: reject P(T) routes</h3>
+<p>在面向P/T的路由器上封杀对方路由</p>
+<p>R2/3:</p>
 <pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
@@ -1024,21 +800,9 @@ set logical-systems r2 protocols bgp group to-p-v4 export exp-bgp-p-out
 set logical-systems r2 protocols bgp group to-p-v6 export exp-bgp-p-out    
 set logical-systems r2 protocols bgp group to-t-v4 export exp-bgp-t-out         
 set logical-systems r2 protocols bgp group to-t-v6 export exp-bgp-t-out
-
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
-set logical-systems r3 policy-options policy-statement exp-bgp-p-out term 1 then reject
-
-set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 from protocol bgp
-set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 from community p-route
-set logical-systems r3 policy-options policy-statement exp-bgp-t-out term 1 then reject
-
-set logical-systems r3 protocols bgp group to-p-v4 export exp-bgp-p-out 
-set logical-systems r3 protocols bgp group to-p-v6 export exp-bgp-p-out    
-set logical-systems r3 protocols bgp group to-t-v4 export exp-bgp-t-out      
-set logical-systems r3 protocols bgp group to-t-v6 export exp-bgp-t-out
-
-set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
+</code></pre>
+<p>R5:</p>
+<pre><code>set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
 set logical-systems r5 policy-options policy-statement exp-bgp-p-out term 1 then reject
 
@@ -1738,7 +1502,7 @@ set system archival configuration archive-sites "scp://test:test123@172.25.88.12
         #doesn't work on a cygwin/linux server
         "scp://Ping:Juniper1%40@172.25.84.169/transfer-on-commit/";
 </code></pre>
-<h3 id="configfirewall-filter-on-r23_1">config:firewall filter on R2/3</h3>
+<h3 id="configfirewall-filter-on-r23">config:firewall filter on R2/3</h3>
 <p>the target should be: block traffic coming from outside AS(like T/P), but
 sourcing from IP that is same as internal networks (10.100.x).</p>
 <pre><code>set logical-systems r2 firewall family inet filter filter-block-ipv4 term 1 from destination-address 192.168.100.0/24
@@ -1870,7 +1634,7 @@ set logical-systems r2 policy-options policy-statement exp-ospf-from-isis term 2
 
 set logical-systems r2 protocols ospf export exp-ospf-from-isis
 </code></pre>
-<h3 id="configno-ipv6-routes-allowed-in-isis_1">config:no IPv6 routes allowed in ISIS</h3>
+<h3 id="configno-ipv6-routes-allowed-in-isis">config:no IPv6 routes allowed in ISIS</h3>
 <pre><code>set logical-systems r1 protocols isis no-ipv6-routing  
 set logical-systems r2 protocols isis no-ipv6-routing  
 set logical-systems r3 protocols isis no-ipv6-routing  
@@ -1880,7 +1644,7 @@ set logical-systems r6 protocols isis no-ipv6-routing
 set logical-systems r7 protocols isis no-ipv6-routing  
 set logical-systems r8 protocols isis no-ipv6-routing
 </code></pre>
-<h3 id="config-isis-metric_1">config: isis metric</h3>
+<h3 id="config-isis-metric">config: isis metric</h3>
 <pre><code>set logical-systems r1 protocols isis reference-bandwidth 5g
 set logical-systems r2 protocols isis reference-bandwidth 5g
 set logical-systems r3 protocols isis reference-bandwidth 5g
@@ -1891,7 +1655,7 @@ set logical-systems r7 protocols isis reference-bandwidth 5g
 set logical-systems r8 protocols isis reference-bandwidth 5g
 </code></pre>
 <h2 id="mpls_1">MPLS</h2>
-<h3 id="configmpls-interfaces_1">config:MPLS interfaces</h3>
+<h3 id="configmpls-interfaces">config:MPLS interfaces</h3>
 <pre><code>set logical-systems r1 protocols mpls interface ge-1/2/1.102
 set logical-systems r1 protocols mpls interface ge-1/2/1.103
 
@@ -1945,7 +1709,7 @@ set logical-systems r7 protocols mpls interface fxp0.0 disable
 set logical-systems r8 protocols mpls interface all
 set logical-systems r8 protocols mpls interface fxp0.0 disable
 </code></pre>
-<h3 id="preconfig-mpls-lsps_1">(pre)config mpls lsps</h3>
+<h3 id="preconfig-mpls-lsps">(pre)config mpls lsps</h3>
 <pre><code>set logical-systems r1 protocols mpls label-switched-path r1-to-r2 to 10.200.1.2
 set logical-systems r1 protocols mpls label-switched-path r1-to-r3 to 10.200.1.3
 set logical-systems r1 protocols mpls label-switched-path r1-to-r4-blue to 10.200.1.4
@@ -1983,7 +1747,7 @@ set logical-systems r6 protocols mpls label-switched-path r6-to-r3 to 10.200.1.3
 set logical-systems r6 protocols mpls label-switched-path r6-to-r5 to 10.200.1.5
 set logical-systems r6 protocols mpls label-switched-path r6-to-r6 to 10.200.1.6
 </code></pre>
-<h3 id="configrsvp_1">config:RSVP</h3>
+<h3 id="configrsvp">config:RSVP</h3>
 <pre><code>set logical-systems r1 protocols rsvp interface ge-1/2/1.102
 set logical-systems r1 protocols rsvp interface ge-1/2/1.103
 
@@ -2010,7 +1774,7 @@ set logical-systems r6 protocols rsvp interface ge-1/2/2.306
 set logical-systems r6 protocols rsvp interface ge-1/2/2.406
 set logical-systems r6 protocols rsvp interface ge-1/2/2.506
 </code></pre>
-<h3 id="configldp_1">config:LDP</h3>
+<h3 id="configldp">config:LDP</h3>
 <pre><code>set logical-systems r5 protocols ldp interface lo0.5
 set logical-systems r5 protocols ldp interface ge-1/2/1.506
 set logical-systems r5 protocols ldp interface ge-1/2/1.507
@@ -2027,7 +1791,7 @@ set logical-systems r8 protocols ldp interface ge-1/2/2.608
 set logical-systems r8 protocols ldp interface ge-1/2/2.708
 set logical-systems r8 protocols ldp interface lo0.8
 </code></pre>
-<h3 id="configr1456-ldporsvp-tunnel_1">config:R1/4/5/6 LDPoRSVP tunnel</h3>
+<h3 id="configr1456-ldporsvp-tunnel">config:R1/4/5/6 LDPoRSVP tunnel</h3>
 <pre><code>set logical-systems r1 protocols ldp interface lo0.1
 set logical-systems r4 protocols ldp interface lo0.4
 set logical-systems r5 protocols ldp interface lo0.5
@@ -2042,18 +1806,18 @@ set logical-systems r5 protocols mpls label-switched-path r5-r4 ldp-tunneling
 set logical-systems r6 protocols mpls label-switched-path r6-r1 ldp-tunneling
 set logical-systems r6 protocols mpls label-switched-path r6-r4 ldp-tunneling
 </code></pre>
-<h3 id="configr2primarybackup-with-ero_1">config:R2:primary/backup with ERO</h3>
+<h3 id="configr2primarybackup-with-ero">config:R2:primary/backup with ERO</h3>
 <pre><code>set logical-systems r2 protocols mpls label-switched-path r2-r5 to 10.200.1.5
 set logical-systems r2 protocols mpls label-switched-path r2-r5 primary via-r4-r6
 set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.4 loose
 set logical-systems r2 protocols mpls path via-r4-r6 10.200.1.6 loose
 </code></pre>
-<h3 id="configr2link-protection-bypass-lsp_1">config:R2:link-protection (bypass LSP)</h3>
+<h3 id="configr2link-protection-bypass-lsp">config:R2:link-protection (bypass LSP)</h3>
 <pre><code>set logical-systems r2 protocols mpls label-switched-path r2-r6 link-protection
 set logical-systems r2 protocols rsvp interface ge-1/2/1.206 link-protection
 set logical-systems r6 protocols rsvp interface ge-1/2/2.206 link-protection
 </code></pre>
-<h3 id="configr4secondary-path_1">config:R4:secondary path</h3>
+<h3 id="configr4secondary-path">config:R4:secondary path</h3>
 <blockquote>
 <p>set up the secondary path for lsp r4-r3,2nd path must remain up and the
 reservation bandwidth is 600m, 2 paths’s first hop must be R2.</p>
@@ -2068,7 +1832,7 @@ set logical-systems r4 protocols mpls path via-r2 10.200.1.2 strict
 set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.2 strict      #&lt;--1st hop must be R2
 set logical-systems r4 protocols mpls path via-r2-r5 10.200.1.5 loose
 </code></pre>
-<h3 id="configr3-link-coloring_1">config:R3: link coloring</h3>
+<h3 id="configr3-link-coloring">config:R3: link coloring</h3>
 <blockquote>
 <p>LSP r3-r5 can’t pass through the link between r3-r5, achieve this without
 using ERO</p>
@@ -2084,13 +1848,13 @@ set logical-systems r5 protocols mpls interface ge-1/2/2.305 admin-group blue
 #config LSP to "exclude" the admin-group
 set logical-systems r3 protocols mpls label-switched-path r3-r5 admin-group exclude blue
 </code></pre>
-<h3 id="configlsp-preemption_1">config:LSP preemption</h3>
+<h3 id="configlsp-preemption">config:LSP preemption</h3>
 <blockquote>
 <p>LSP r1-r6 shall be preempted by other LSP</p>
 </blockquote>
 <pre><code>set logical-systems r1 protocols mpls label-switched-path r1-r6 priority 7 7
 </code></pre>
-<h3 id="config-ipv6-tunnel_1">config: Ipv6 tunnel</h3>
+<h3 id="config-ipv6-tunnel">config: Ipv6 tunnel</h3>
 <pre><code>set logical-systems r1 protocols mpls ipv6-tunneling
 set logical-systems r2 protocols mpls ipv6-tunneling
 set logical-systems r3 protocols mpls ipv6-tunneling
@@ -2100,9 +1864,9 @@ set logical-systems r6 protocols mpls ipv6-tunneling
 set logical-systems r7 protocols mpls ipv6-tunneling
 set logical-systems r8 protocols mpls ipv6-tunneling
 </code></pre>
-<h3 id="config-r5-no-explicit-nulllabel-0_1">config: R5: no explicit-null(label 0)</h3>
+<h3 id="config-r5-no-explicit-nulllabel-0">config: R5: no explicit-null(label 0)</h3>
 <p>check and delete "explicit-null"</p>
-<h3 id="configlsp-policer_1">config:LSP policer</h3>
+<h3 id="configlsp-policer">config:LSP policer</h3>
 <pre><code>set logical-systems r3 firewall policer 60m if-exceeding bandwidth-limit 60m
 set logical-systems r3 firewall policer 60m if-exceeding burst-size-limit 15k
 set logical-systems r3 firewall policer 60m then discard
@@ -2116,7 +1880,7 @@ set logical-systems r3 protocols mpls label-switched-path r3-r6 policing filter 
 <p>or use auto-policing:</p>
 <pre><code>set logical-systems r3 protocols mpls auto-policing class all drop
 </code></pre>
-<h3 id="configicmp-tunneling-not-required_1">config:icmp-tunneling (not required)</h3>
+<h3 id="configicmp-tunneling-not-required">config:icmp-tunneling (not required)</h3>
 <pre><code>set logical-systems r1 protocols mpls icmp-tunneling
 set logical-systems r2 protocols mpls icmp-tunneling
 set logical-systems r3 protocols mpls icmp-tunneling
@@ -2126,7 +1890,7 @@ set logical-systems r6 protocols mpls icmp-tunneling
 set logical-systems r7 protocols mpls icmp-tunneling
 set logical-systems r8 protocols mpls icmp-tunneling
 </code></pre>
-<h3 id="configr3-load-balance_1">config:R3: Load balance</h3>
+<h3 id="configr3-load-balance">config:R3: Load balance</h3>
 <pre><code>#policy: per-packet (for AE bundle)
 set logical-systems r3 policy-options policy-statement load-balance then load-balance per-packet
 set logical-systems r3 policy-options policy-statement load-balance then accept
@@ -2142,7 +1906,7 @@ set forwarding-options hash-key family mpls label-2
 set forwarding-options hash-key family mpls payload ip layer-3-only
 </code></pre>
 <h2 id="bgp_1">BGP</h2>
-<h3 id="configas-migration_1">config:AS migration</h3>
+<h3 id="configas-migration">config:AS migration</h3>
 <blockquote>
 <p>r1-r8 use AS 4012345678, but appears 65513 to C3, hide 65513 to the core</p>
 </blockquote>
@@ -2150,7 +1914,7 @@ set forwarding-options hash-key family mpls payload ip layer-3-only
 set logical-systems r1 protocols bgp group to-c3 neighbor 100.1.33.2 local-as private
 </code></pre>
 <p>initial config is all 65513 in core, need to change to 4012345678 in all R</p>
-<h3 id="config-troubleshooting-pre-config_1">config: troubleshooting pre-config</h3>
+<h3 id="config-troubleshooting-pre-config">config: troubleshooting pre-config</h3>
 <pre><code>#correct NHS policy in all R
 set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement exp-bgp-nhs term 1 from route-type external  #&lt;------(not `external`)
@@ -2196,7 +1960,7 @@ set logical-systems r8 protocols bgp group to-rr export exp-bgp-nhs
 delete logical-systems r2 apply-groups reject
 delete logical-systems r3 apply-groups reject
 </code></pre>
-<h3 id="config-pt-block-step1-all-cpt-facing-r-import-tag-routes_1">config P/T block step1: all C/P/T facing R: import : tag routes</h3>
+<h3 id="config-pt-block-step1-all-cpt-facing-r-import-tag-routes">config P/T block step1: all C/P/T facing R: import : tag routes</h3>
 <pre><code>set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 from protocol bgp
 set logical-systems r1 policy-options policy-statement imp-bgp-tag-c term 1 then community add c-route
 set logical-systems r1 policy-options community c-route members 65513:100
@@ -2249,7 +2013,7 @@ set logical-systems r7 policy-options community p-route members 65513:200
 set logical-systems r7 policy-options community t-route members 65513:300
 set logical-systems r7 protocols bgp group to-c4 import imp-bgp-tag-c
 </code></pre>
-<h3 id="config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes_1">config P/T block step2: all P/T facing R: export: reject P(T) routes</h3>
+<h3 id="config-pt-block-step2-all-pt-facing-r-export-reject-pt-routes">config P/T block step2: all P/T facing R: export: reject P(T) routes</h3>
 <pre><code>set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from protocol bgp
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 from community t-route
 set logical-systems r2 policy-options policy-statement exp-bgp-p-out term 1 then reject
