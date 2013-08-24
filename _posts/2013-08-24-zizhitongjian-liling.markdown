@@ -3,8 +3,8 @@ layout: post
 title: "资治通鉴 悲壮的李陵（李广之子）"
 published: true
 created:  2013 Aug 24 12:15:13 AM
-tags: [life]
-categories: [tech]
+tags: [资治通鉴]
+categories: [reading]
 ---
 
 > 初，李广有孙陵，为侍中，善骑射，爱人下士。帝以为有广之风，拜骑都尉，使将丹阳
