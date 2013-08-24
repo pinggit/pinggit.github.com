@@ -2,8 +2,7 @@
 layout: post
 title: "david copperfield"
 description: ""
-category: 
-    - reading
+category: [reading]
 tags: [david copperfield]
 ---
 
