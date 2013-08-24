@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "old-song-yishengsuoai"
-published: false
+title: "老歌： 一生所爱"
+published: true
 created:  2013 Aug 24 01:26:37 PM
 tags: [老歌]
 categories: [life]
@@ -30,3 +30,7 @@ categories: [life]
                             一生所爱隐约　〔守候〕
                               在白云外　〔期待〕
 
+的确韵味无穷。
+
+看网上大家对这首歌的评价，会觉得，虽然每个人平时的言行性情虽然大不相同，但人内
+心确实有一些共通的地方。
