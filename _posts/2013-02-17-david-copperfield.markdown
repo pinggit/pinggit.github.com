@@ -2,7 +2,7 @@
 layout: post
 title: "david copperfield"
 tags: [david copperfield]
-category: [reading]
+categories: [reading]
 ---
 
     I was born at Blunderstone, in Suffolk,  or 	我出生在萨福克的布兰德斯通，或
