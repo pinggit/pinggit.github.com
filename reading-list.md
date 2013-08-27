@@ -12,6 +12,9 @@ markdown: maruku
 
 # 寻找一个好的哲学书目
 
+* 纯粹理性批判
+* 金刚经
+  
  
 # to read:
 
@@ -28,10 +31,10 @@ markdown: maruku
 # current focused reading list: (last update@2013-06-04) 
  
 1. bible:  下面是我制作的版式
-    * [old(cn)](/docs/bible-old-cn.html)
-    * [old(en cn)](/docs/bible-old-en-cn.html)
-    * [old(en cn toc2)](/docs/bible-old-en-cn\(toc2\).html)
-    * [old(en cn xhtml)](/docs/The_Old_Testament-my/index.html)
+    * [old(cn)](/docs/bible/bible-old-cn.html)
+    * [old(en cn)](/docs/bible/bible-old-en-cn.html)
+    * [old(en cn toc2)](/docs/bible/bible-old-en-cn\(toc2\).html)
+    * [old(en cn xhtml)](/docs/bible/The_Old_Testament-my/index.html)
     * [jiapu1](/images/bible/jiapu1.jpg) [jiapu2](/images/bible/jiapu2.jpg)
     * (2013-06-22) 创世纪基本读完，暂时停滞
      
