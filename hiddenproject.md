@@ -2,6 +2,7 @@
 layout: page
 title: other projects
 header: Pages
+publish: false
 group: navigation
 markdown: maruku
 ---
