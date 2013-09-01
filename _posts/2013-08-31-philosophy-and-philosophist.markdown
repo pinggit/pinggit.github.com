@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Philosophy and Philosophist"
+title: "纯粹理性批判：一本本着玩弄语法和句式的病态乐趣为原则而写的，完全由故弄玄虚的呓语所堆砌的，实质内容及其简单空洞的书"
 published: true
 created:  2013 Aug 31 08:32:17 PM
-tags: [纯粹理性批判：一本本着玩弄语法和句式的病态乐趣为原则而写的，完全由故弄玄虚的呓语所堆砌的，实质内容及其简单空洞的书]
+tags: [纯粹理性批判]
 categories: [reading]
 ---
 
