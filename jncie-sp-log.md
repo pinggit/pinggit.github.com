@@ -6,6 +6,40 @@ TABLE OF CONTENT
 
   - - -
 
+
+# real exam
+* On R2, the connection to the data center requires rapid convergence. Configure sub-second hellos across this link. 
+  - 考察bfd，没有ospf参数可配
+  - 这里show bfd session看到detect time是1.5s之类。正常，因为bfd 两端协商取最差。
+   
+* Configure aggregated Ethernet using interface ae10 between R3 and R6. 
+  Ensure that if a single member in the bundle goes down, the bundle is considered down. 
+  - `minimum-link` is under `interface ae` - "aggregated-ether-options"
+  - 有个全局 group的继承 ，导致commit时候报错，但简单show又没看到问题。解决方法：
+    物理端口下apply-group-except
+    ae 接口手工配置family
+  
+    set chassis aggregated-devices ethernet device-count 20
+    #all memeber link                                                              
+    set interfaces ge-1/2/3 apply-groups-except interface-group                    
+    set interfaces ge-1/2/3 gigether-options 802.3ad ae10                          
+    #ae i/f                                                                        
+    set interfaces ae10 aggregated-ether-options minimum-links 2        #<------   
+    set interfaces ae10 unit 0 family inet address 10.100.36.1/30                  
+    set interfaces ae10 unit 0 family iso                                          
+    set interfaces ae10 unit 0 family inet6                                        
+    set interfaces ae10 unit 0 family mpls                                        
+
+* IGP
+  - one router has no neighbor, wrong pass, copy password from other router and paste
+  - 全局level-1 disable即可。
+
+* MPLS
+  - 没有load balance
+
+* BGP
+  - 6PE solution1 "install" 的方法，注意不要把ldp egress-policy 写成export
+
 # troubleshooting pre-config
 
 IGP：
@@ -85,12 +119,13 @@ R3/6:
     #all memeber link
     set interfaces ge-1/2/3 apply-groups-except interface-group
     set interfaces ge-1/2/3 gigether-options 802.3ad ae10
-
+    
     #ae i/f
-    set logical-systems r3 interfaces ae10 unit 0 family inet address 10.100.36.1/30
-    set logical-systems r3 interfaces ae10 unit 0 family iso
-    set logical-systems r3 interfaces ae10 unit 0 family inet6
-    set logical-systems r3 interfaces ae10 unit 0 family mpls
+    set interfaces ae10 aggregated-ether-options minimum-links 2        #<------
+    set interfaces ae10 unit 0 family inet address 10.100.36.1/30
+    set interfaces ae10 unit 0 family iso
+    set interfaces ae10 unit 0 family inet6
+    set interfaces ae10 unit 0 family mpls
 
 ### config graceful restart
 
@@ -750,11 +785,11 @@ R1 VRF:
     r7: set interfaces ge-1/3/0 vlan-tagging encapsulation flexible-ethernet-services
     r8: set interfaces ge-1/3/2 vlan-tagging encapsulation flexible-ethernet-services
 
-    r1: set interfaces ge-1/2/3 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+    r1: set interfaces ge-1/2/3 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface family vpls
                                                                    ^^^^^^^^^
-    r1: set interfaces ge-1/2/5 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
-    r7: set interfaces ge-1/3/0 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
-    r8: set interfaces ge-1/3/2 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface
+    r1: set interfaces ge-1/2/5 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface family vpls
+    r7: set interfaces ge-1/3/0 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface family vpls
+    r8: set interfaces ge-1/3/2 unit 100 vlan-id 100 encapsulation vlan-vpls apply-groups-except interface family vpls
 
 2) R1/7/8/2/3 BGP family L2vpn signaling:
 
@@ -10869,3 +10904,62 @@ turn off tunnel service:
     ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
     ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
   
+# NewHeadline
+
+This is the default behavior, as BGP doesn't allocate a VPN label to a network
+for which it doesn't have a learned next hop via any means (statically or via
+    any protocol).
+
+In an L3VPN setup, when the directly connected interface towards the CE is a
+broadcast type interface (i.e. Ethernet ), on certain conditions, BGP does not
+advertise the directly connected interface network to the peer PE router .    
+
+
+    [edit]
+    lab@MCR1# show logical-systems xo routing-instances                                                                      
+    vrf001 {
+        instance-type vrf;
+        interface ge-1/2/2.3001;
+        route-distinguisher 65.106.7.95:1001;
+        vrf-target target:2828:1001;
+    }
+    
+    [edit]
+    lab@MCR1# run show route advertising-protocol bgp 65.106.7.156 200.1.1/24 logical-system xo extensive    
+
+    vrf001.inet.0: 3 destinations, 3 routes (3 active, 0 holddown, 0 hidden)
+    * 200.1.1.0/24 (1 entry, 1 announced)
+     BGP group VRR type Internal
+         Route Distinguisher: 65.106.7.95:1001
+         BGP label allocation failure: Need a nexthop address on LAN
+         Nexthop: Not advertised
+         Flags: Nexthop Change
+         Localpref: 100
+         AS path: [65500] I
+         Communities: target:2828:1001
+         
+junos有个原则： 第一在一个设备上只能查表一次
+[11:00:42 PM] ping: 恩
+[11:00:58 PM] Kevin Wang: 拿现在的场景来说
+[11:01:30 PM] Kevin Wang: vpn的这个label发送出去之后，junos是希望能直接有outgoing interface的
+[11:01:49 PM] Kevin Wang: 但是没有从ce学来路由，也就是没有下一跳，会导致直连路由也无法分label出去
+[11:02:32 PM] ping: 就是说，这个原则就针对vrf本地接口？因为从ce学到的，有吓一跳？
+[11:02:41 PM] Kevin Wang: 此时：如果从ce学来一条bgp路由，那么直连路由会发送出去，但是如果从远端ping这个直连地址，会走一个奇怪的路径即remote-pe-->PE-->CE-->PE
+[11:02:55 PM] ping: 哦
+[11:02:56 PM] Kevin Wang: 可以这样理解
+[11:02:58 PM] ping: http://kb.juniper.net/InfoCenter/index?page=content&id=KB12430
+[11:08:05 PM] Kevin Wang: 恩，其实junos是希望查一次表就直接找到出接口，我觉得这个是architecture的限制，其实vpls中为什么需要vt接口，是同样的道理
+[11:08:14 PM] Kevin Wang: 就是只能查表一次
+[11:08:19 PM] ping: 哦。
+[11:08:28 PM] ping: 有可能。
+[11:08:36 PM] ping: 硬件设计的限制。
+[11:08:38 PM] Kevin Wang: 这个是junos比较土的一点
+[11:08:53 PM] ping: 或者说，是快速转发性能的要求，所以需要统一规则，不能有啥例外
+[11:09:00 PM] ping: 例外就得走到service pic
+[11:09:04 PM] Kevin Wang: 可能是为了效率的原因，或者其他我们不了解的东西，反正现在的设计就是这样
+[11:09:11 PM] Kevin Wang: 恩
+[11:09:57 PM] Kevin Wang: vpls的原因的是查了一次mpls.0之后，还需要查mac地址表，所以查完mpls .0后送给vt，然后再loop回来，再查mac，找到出接口，然后送出去
+[11:10:37 PM] Kevin Wang: 效率明显低下了啊，而且受限于vt的性能，现在现在说MX都是随板支持tunne service，但是也受性能限制啊
+[11:10:59 PM] Kevin Wang: 可能这个不好改，所以一直到mx，junos都是沿用这个规则         
+
+
