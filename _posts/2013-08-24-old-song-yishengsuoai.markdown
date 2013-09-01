@@ -8,6 +8,8 @@ categories: [life]
 ---
 
 <iframe width="640" height="360" src="http://www.youtube.com/embed/QYUWLOcBTE0?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/1S6pNlVNkJ0?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/ull58YWDots?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
                               一生所爱 - 卢冠廷
                                    词：唐书琛
