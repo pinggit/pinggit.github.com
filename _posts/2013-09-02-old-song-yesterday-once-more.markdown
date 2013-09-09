@@ -8,7 +8,7 @@ categories: [life]
 ---
 
 <iframe width="640" height="360" src="http://www.youtube.com/embed/YTaWayUE5XA?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
-<iframe width="640" height="360" src="/images/YTaWayUE5XA.flv" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="/images/YTaWayUE5XA.flv?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
                     When I was young I'd listen to the radio
                          Waitin' for my favorite songs
