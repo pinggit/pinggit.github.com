@@ -10,6 +10,8 @@ categories: [life]
 <iframe width="640" height="360" src="http://www.youtube.com/embed/YTaWayUE5XA?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 <iframe width="640" height="360" src="/images/YTaWayUE5XA.flv?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
+大学时代的记忆索引之一。淡淡的忧伤和懵懂少年的无奈无聊，但仍是值得回忆的短暂青春时光。
+
                     When I was young I'd listen to the radio
                          Waitin' for my favorite songs
                When they played I'd sing along, it made me smile
