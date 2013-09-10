@@ -5,6 +5,7 @@ published: true
 created:  2013 Sep 01 04:44:07 PM
 tags: [金刚经]
 categories: [reading]
+
 ---
 
 >凡所有相，皆是虚妄。若见诸相非相，即见如来。  
