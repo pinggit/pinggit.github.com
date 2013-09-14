@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "王菲"
+title: "定风波"
 published: true
 created:  2013 Sep 14 02:10:06 PM
-tags: [life]
-categories: [life]
+tags: [诗词]
+categories: [reading]
 ---
 
 昨日手机新闻看到头条消息王菲李亚鹏离婚。
