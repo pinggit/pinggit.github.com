@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "学习笔记：金融股票术语"
+title: "金融股票术语"
 published: true
 created:  2013 Jun 01 04:53:54 PM
 tags: [stock, learning notes]
