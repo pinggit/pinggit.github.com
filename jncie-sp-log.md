@@ -10904,7 +10904,7 @@ turn off tunnel service:
     ge-1/2/1: Current address: f8:c0:01:18:93:91, Hardware address: f8:c0:01:18:93:91
     ge-1/2/2: Current address: f8:c0:01:18:93:92, Hardware address: f8:c0:01:18:93:92
   
-# NewHeadline
+# vrf-table-label
 
 This is the default behavior, as BGP doesn't allocate a VPN label to a network
 for which it doesn't have a learned next hop via any means (statically or via
@@ -10938,28 +10938,28 @@ advertise the directly connected interface network to the peer PE router .
          AS path: [65500] I
          Communities: target:2828:1001
          
-junos有个原则： 第一在一个设备上只能查表一次
-[11:00:42 PM] ping: 恩
-[11:00:58 PM] Kevin Wang: 拿现在的场景来说
-[11:01:30 PM] Kevin Wang: vpn的这个label发送出去之后，junos是希望能直接有outgoing interface的
-[11:01:49 PM] Kevin Wang: 但是没有从ce学来路由，也就是没有下一跳，会导致直连路由也无法分label出去
-[11:02:32 PM] ping: 就是说，这个原则就针对vrf本地接口？因为从ce学到的，有吓一跳？
-[11:02:41 PM] Kevin Wang: 此时：如果从ce学来一条bgp路由，那么直连路由会发送出去，但是如果从远端ping这个直连地址，会走一个奇怪的路径即remote-pe-->PE-->CE-->PE
-[11:02:55 PM] ping: 哦
-[11:02:56 PM] Kevin Wang: 可以这样理解
-[11:02:58 PM] ping: http://kb.juniper.net/InfoCenter/index?page=content&id=KB12430
-[11:08:05 PM] Kevin Wang: 恩，其实junos是希望查一次表就直接找到出接口，我觉得这个是architecture的限制，其实vpls中为什么需要vt接口，是同样的道理
-[11:08:14 PM] Kevin Wang: 就是只能查表一次
-[11:08:19 PM] ping: 哦。
-[11:08:28 PM] ping: 有可能。
-[11:08:36 PM] ping: 硬件设计的限制。
-[11:08:38 PM] Kevin Wang: 这个是junos比较土的一点
-[11:08:53 PM] ping: 或者说，是快速转发性能的要求，所以需要统一规则，不能有啥例外
-[11:09:00 PM] ping: 例外就得走到service pic
-[11:09:04 PM] Kevin Wang: 可能是为了效率的原因，或者其他我们不了解的东西，反正现在的设计就是这样
-[11:09:11 PM] Kevin Wang: 恩
-[11:09:57 PM] Kevin Wang: vpls的原因的是查了一次mpls.0之后，还需要查mac地址表，所以查完mpls .0后送给vt，然后再loop回来，再查mac，找到出接口，然后送出去
-[11:10:37 PM] Kevin Wang: 效率明显低下了啊，而且受限于vt的性能，现在现在说MX都是随板支持tunne service，但是也受性能限制啊
-[11:10:59 PM] Kevin Wang: 可能这个不好改，所以一直到mx，junos都是沿用这个规则         
+    junos有个原则： 第一在一个设备上只能查表一次
+    [11:00:42 PM] ping: 恩
+    [11:00:58 PM] Kevin Wang: 拿现在的场景来说
+    [11:01:30 PM] Kevin Wang: vpn的这个label发送出去之后，junos是希望能直接有outgoing interface的
+    [11:01:49 PM] Kevin Wang: 但是没有从ce学来路由，也就是没有下一跳，会导致直连路由也无法分label出去
+    [11:02:32 PM] ping: 就是说，这个原则就针对vrf本地接口？因为从ce学到的，有吓一跳？
+    [11:02:41 PM] Kevin Wang: 此时：如果从ce学来一条bgp路由，那么直连路由会发送出去，但是如果从远端ping这个直连地址，会走一个奇怪的路径即remote-pe-->PE-->CE-->PE
+    [11:02:55 PM] ping: 哦
+    [11:02:56 PM] Kevin Wang: 可以这样理解
+    [11:02:58 PM] ping: http://kb.juniper.net/InfoCenter/index?page=content&id=KB12430
+    [11:08:05 PM] Kevin Wang: 恩，其实junos是希望查一次表就直接找到出接口，我觉得这个是architecture的限制，其实vpls中为什么需要vt接口，是同样的道理
+    [11:08:14 PM] Kevin Wang: 就是只能查表一次
+    [11:08:19 PM] ping: 哦。
+    [11:08:28 PM] ping: 有可能。
+    [11:08:36 PM] ping: 硬件设计的限制。
+    [11:08:38 PM] Kevin Wang: 这个是junos比较土的一点
+    [11:08:53 PM] ping: 或者说，是快速转发性能的要求，所以需要统一规则，不能有啥例外
+    [11:09:00 PM] ping: 例外就得走到service pic
+    [11:09:04 PM] Kevin Wang: 可能是为了效率的原因，或者其他我们不了解的东西，反正现在的设计就是这样
+    [11:09:11 PM] Kevin Wang: 恩
+    [11:09:57 PM] Kevin Wang: vpls的原因的是查了一次mpls.0之后，还需要查mac地址表，所以查完mpls .0后送给vt，然后再loop回来，再查mac，找到出接口，然后送出去
+    [11:10:37 PM] Kevin Wang: 效率明显低下了啊，而且受限于vt的性能，现在现在说MX都是随板支持tunne service，但是也受性能限制啊
+    [11:10:59 PM] Kevin Wang: 可能这个不好改，所以一直到mx，junos都是沿用这个规则         
 
 

@@ -5,6 +5,7 @@ published: true
 created:  2013 Jun 01 04:53:54 PM
 tags: [stock]
 categories: [economics]
+
 ---
 
 * [SP500](http://baike.baidu.com/view/877427.htm)
