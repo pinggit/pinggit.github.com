@@ -9,7 +9,7 @@ categories: [tech]
 
 apple product is fashion, fancy, sharp, and beautiful!
 
-windows sucks ..
+windows relatively sucks ..
 
 linux is really a crab ..
 
@@ -19,7 +19,7 @@ I wish I can ...
 
 buy a best apple monitor ..
 
-and connect it with my windows PC ..
+and have it connected with my windows PC ..
 
 then ssh into my linux machine ..
 
