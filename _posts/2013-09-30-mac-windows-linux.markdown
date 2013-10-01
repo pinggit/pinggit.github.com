@@ -13,7 +13,7 @@ windows relatively sucks ..
 
 linux is really a crab ..
 
-so? 
+I think I can't disagree...so? 
 
 I wish I can ... 
 
