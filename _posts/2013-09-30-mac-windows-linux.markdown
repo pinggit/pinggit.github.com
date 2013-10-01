@@ -7,7 +7,7 @@ tags: [mac, windows, linux]
 categories: [tech]
 ---
 
-apple product is fation, fancy, sharp, and beautiful!
+apple product is fashion, fancy, sharp, and beautiful!
 
 windows sucks ..
 
