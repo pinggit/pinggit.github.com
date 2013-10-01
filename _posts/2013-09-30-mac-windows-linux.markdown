@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "mac windows linux"
+title: "another os battles: mac windows linux"
 published: true
 created:  2013 Sep 30 10:53:09 PM
 tags: [mac, windows, linux]
