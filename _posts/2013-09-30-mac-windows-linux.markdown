@@ -7,7 +7,7 @@ tags: [mac, windows, linux]
 categories: [tech]
 ---
 
-apple product is fashion, fancy, sharp, and beautiful!
+apple product is fashion, fancy, sharp!
 
 windows relatively sucks ..
 
@@ -23,6 +23,6 @@ and have it connected with my windows PC ..
 
 then ssh into my linux machine ..
 
-now I can get my work done from there ..
+now I can get my work done from there , sharply ..
 
 
