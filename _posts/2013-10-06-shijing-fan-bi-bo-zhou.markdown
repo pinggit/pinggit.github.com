@@ -3,7 +3,7 @@ layout: post
 title: "诗经：汎彼柏舟"
 published: true
 created:  2013 Oct 06 11:46:15 PM
-tags: [实景]
+tags: [诗经]
 categories: [reading]
 ---
 
