@@ -14,4 +14,4 @@ categories: [reading]
 驾彼四牡，四牡骙(kuí)骙。君子所依，小人所腓(féi)。 四牡翼翼，象弭(mǐ)鱼服。岂不日戒？玁狁孔棘！  
 昔我往矣，杨柳依依。今我来思，雨（yù）雪霏霏。 行道迟迟，载渴载饥。我心伤悲，莫知我哀！  
 
-[详细阅读](http://baike.baidu.com/view/135346.htm)
+[详细赏析](http://baike.baidu.com/view/135346.htm)
