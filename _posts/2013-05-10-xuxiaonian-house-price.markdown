@@ -3,8 +3,8 @@ layout: post
 title: "许小年谈房价的走势"
 published: true
 created:  2013 May 10 12:19:32 PM
-tags: [转载, 经济]
-categories: [life]
+tags: [转载, 房价]
+categories: [economics]
 ---
 
 【许小年谈房价的走势】
