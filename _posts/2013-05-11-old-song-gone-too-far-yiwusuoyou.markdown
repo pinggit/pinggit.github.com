@@ -3,7 +3,7 @@ layout: post
 title: "老歌：是否我真的一无所有(中粤英）"
 published: true
 created:  2013 May 11 09:45:32 AM
-tags: [老歌, 歌词]
+tags: [老歌]
 categories: [life]
 ---
 <iframe width="640" height="360" src="http://www.youtube.com/embed/BxsS2wZb1B8?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
