@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "禅道，静心，冥想，其它"
+title: "佛法，禅道，静心，冥想，其它"
 published: true
 created:  2013 Oct 12 10:37:06 PM
 tags: [mind]
 categories: [mind]
 ---
 
-
 [禅者的初心](http://book.douban.com/review/5293175/)
+
+
+<iframe width="640" height="360" src="//www.youtube.com/embed/EbZJ80m53AY?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
 
