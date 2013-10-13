@@ -12,4 +12,6 @@ categories: [mind]
 
 <iframe width="640" height="360" src="//www.youtube.com/embed/EbZJ80m53AY?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 
+<iframe width="640" height="360" src="//www.youtube.com/embed/tGHHxyHjY_0?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+
 
