@@ -7,6 +7,7 @@ tags: [english]
 categories: 
     - life
     - mind
+    - english
 ---
 
 </style>
