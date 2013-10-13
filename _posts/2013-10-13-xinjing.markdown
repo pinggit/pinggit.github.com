@@ -4,7 +4,7 @@ title: "心经"
 published: true
 created:  2013 Oct 13 01:15:51 PM
 tags: [心经]
-categories: [reading]
+categories: [reading, mind]
 ---
 
 观自在菩萨，行深般若波罗蜜多时，照见五蕴皆空，度一切苦厄。舍利子，色不异空，空不异色，色即是空，空即是色，受想行识，
