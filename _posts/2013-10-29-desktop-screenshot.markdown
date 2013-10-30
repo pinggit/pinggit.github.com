@@ -7,8 +7,9 @@ tags: [photo, screenshot]
 categories: [tech]
 ---
 
-
-![desktop](/images/screen-capture/desktop 1_152.png                       )
+<!--
+![desktop](/images/screen-capture/desktop 1_152.png)
+-->
 ![desktop](/images/screen-capture/screen-capture-20131024232356.png)
 ![desktop](/images/screen-capture/Selection_016.png)
 ![desktop](/images/screen-capture/Selection_038.png)
