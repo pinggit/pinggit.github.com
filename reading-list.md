@@ -4,6 +4,7 @@ title: Resources
 header: Pages
 group: navigation
 markdown: maruku
+
 ---
 
 {% include JB/setup %}
@@ -16,19 +17,8 @@ markdown: maruku
 * 金刚经
   
  
-# to read:
 
-1. [许小年](http://xuxiaonian163.blog.163.com/)
-1. 高晓松
-1. 曼昆经济学（宏观）第五版
-1. 国史大纲
-   * 打印了300页
-   * 需找个高清版本（地图）
- 
-1. 读通鉴论
- 
-
-# current focused reading list: (last update@2013-06-04) 
+# current focused reading list 精读: (last update@2013-06-04) 
  
 1. bible:  下面是我制作的版式
     * [old(cn)](/docs/bible/bible-old-cn.html)
@@ -61,6 +51,8 @@ markdown: maruku
     * (2013-06-27) CH9 国际贸易
     * (2013-07-04) CH11 公共物品和公共资源
      
+1. 诗经
+
 1. [gitpro](http://git-scm.com/book) (start@2013-05-24)  
     * (2013-06-04) CH2
     * (2013-06-10) CH2.2.6
@@ -80,20 +72,33 @@ markdown: maruku
 1. [W3schools HTML](http://www.w3schools.com/html/) (start@2013-05-29)
     * (2013-06-04) CH11
 
-# current listening list: (2013-06-18) 
+# current read for fun list:翻翻 (2013-06-18) 
+
+* 中国史学名著 钱穆
+  大致翻过，讲稿录音整理性质。
+ 
+* 纯粹理性批判
+
+# to read 想读:
+
+1. [许小年](http://xuxiaonian163.blog.163.com/)
+1. 高晓松
+1. 曼昆经济学（宏观）第五版
+1. 国史大纲
+   * 打印了300页
+   * 需找个高清版本（地图）
+ 
+1. 读通鉴论
+ 
+# current listening list 听听: (2013-06-18) 
 
 1. 王立群读史记
     * (2013-06-27) 李广难封
     * (2013-07-04) 琴挑文君
     * (2013-08-25) 汉史听完
  
-# current read for fun list: (2013-06-18) 
 
-* 中国史学名著 钱穆
-  大致翻过，讲稿录音整理性质。
- 
-
-# current pending list: (2013-06-18)  
+# current pending list 搁置: (2013-06-18)  
 
 1. [david copperfield](/docs/david-copperfield.txt)
     pending
@@ -103,10 +108,10 @@ markdown: maruku
 1. 我的奋斗
 
  
-## 极好资源
+# 极好资源
 
 <http://www.gushiwen.org/> 收集的经典很全面，便于在线看，但可惜不能下载打印
 
-## misc
+# misc
  
 [abc](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](/hiddenproject.html)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)[.](http://www.google.com)
