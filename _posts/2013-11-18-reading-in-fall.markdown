@@ -7,6 +7,7 @@ tags: [日志]
 categories: [reading]
 ---
 
+又回来了。又开始了。
 [美丽的秋天的落叶和微风。](
 http://d.pcs.baidu.com/thumbnail/1e2fb556f1f2b816295c7a9ceaf3d9f7?fid=775252125-250528-996929977&time=1384803089&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-sUsKwzm7Q2wPDNMNJ6MoYuVrkjo%3D&rt=sh&expires=8h&sharesign=unknown&r=125505118&size=c710_u500&quality=100)
 阳光下拿几本书看。
