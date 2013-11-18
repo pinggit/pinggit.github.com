@@ -7,9 +7,10 @@ tags: [日志]
 categories: [reading]
 ---
 
-美丽的秋天的落叶和微风。
-阳光下拿基本书看。
-心里烦躁压抑的很，只有这时刻心里才觉得微微的平静一点。
+[美丽的秋天的落叶和微风。](
+http://d.pcs.baidu.com/thumbnail/1e2fb556f1f2b816295c7a9ceaf3d9f7?fid=775252125-250528-996929977&time=1384803089&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-sUsKwzm7Q2wPDNMNJ6MoYuVrkjo%3D&rt=sh&expires=8h&sharesign=unknown&r=125505118&size=c710_u500&quality=100)
+阳光下拿几本书看。
+心里常常烦躁压抑的很，只有读书时刻才会觉得微微的平静一点。
 
 读《正信的佛教》 是很好的答疑书，可匡正对佛教的一些基本框架认识。很有趣味，总体框架勾勒得很严整清晰。
 
