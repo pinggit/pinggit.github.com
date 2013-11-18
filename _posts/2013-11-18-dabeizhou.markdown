@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "dabeizhou"
-published: false
+title: "大悲咒"
+published: true
 created:  2013 Nov 18 06:22:38 PM
-tags: [life]
-categories: [tech]
+tags: [佛学：大悲咒]
+categories: [reading]
 ---
 
 
