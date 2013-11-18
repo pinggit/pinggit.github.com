@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "佛学：大悲咒"
+title: "大悲咒"
 published: true
 created:  2013 Nov 18 06:22:38 PM
-tags: [大悲咒]
+tags: [大悲咒, 佛学]
 categories: [reading]
 ---
 
