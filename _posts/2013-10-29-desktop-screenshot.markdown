@@ -38,14 +38,17 @@ better ones (from JNCIE SG):
 this one was even "converted" [into real
 pictures](http://pinggit.github.io/tech/2013/04/29/ascii-art-shaape/):
 
-CCIE lab cabling:
 
 ![desktop](/images/screen-capture/Selection_087.png)
 
-some more screenshot of VIM/VOom notes in asciidoc syntax highlight:
+CCIE lab cabling:
 
 ![desktop](/images/screen-capture/Selection_119.png)
 ![desktop](/images/screen-capture/Selection_168.png)
+
+some more screenshot of VIM/VOom notes in asciidoc syntax highlight:
+
+![desktop](/images/screen-capture/Selection_233.png)
 
 one good thing of writing text notes in asciidoc format is, that I can later
 use the notes as input, and generate a lot of other type of document with more
@@ -53,23 +56,22 @@ decent formats , for example (all kinds of) webpage(s), pdf, or even MS word.
 
 text in asciidoc format:
 
-![desktop](/images/screen-capture/Selection_233.png)
+![desktop](/images/screen-capture/Selection_239.png)
 
 generated web page:
 
-![desktop](/images/screen-capture/Selection_239.png)
+![desktop](/images/screen-capture/Selection_240.png)
 
 blog posts source files, in [GNU ranger](http://ranger.nongnu.org/):
 
-![desktop](/images/screen-capture/Selection_240.png)
+![desktop](/images/screen-capture/Selection_244.png)
 
 some foldings when working on a file:
 
-![desktop](/images/screen-capture/Selection_244.png)
+![desktop](/images/screen-capture/Selection_245.png)
 
 more network topologies:
 
-![desktop](/images/screen-capture/Selection_245.png)
 ![desktop](/images/screen-capture/Selection_247.png)
 
 when working in telnet/ssh sessions within VIM (via conqshell plugin):
