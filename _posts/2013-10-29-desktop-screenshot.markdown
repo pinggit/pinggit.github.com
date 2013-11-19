@@ -44,10 +44,10 @@ pictures](http://pinggit.github.io/tech/2013/04/29/ascii-art-shaape/):
 CCIE lab cabling:
 
 ![desktop](/images/screen-capture/Selection_119.png)
+
+some more screenshots of VIM/VOom notes in asciidoc syntax highlight:
+
 ![desktop](/images/screen-capture/Selection_168.png)
-
-some more screenshot of VIM/VOom notes in asciidoc syntax highlight:
-
 ![desktop](/images/screen-capture/Selection_233.png)
 
 one good thing of writing text notes in asciidoc format is, that I can later
