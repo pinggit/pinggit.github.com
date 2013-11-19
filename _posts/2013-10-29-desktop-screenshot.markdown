@@ -13,10 +13,20 @@ categories: [tech]
 pure text work related notes.  all notes are taken with VIM, plus VOom
 plugin, highlighted with format of asciidoc syntax, from inside a GNU screen,
 running over a SSH session to work PC from home: 
+
 ![desktop](/images/screen-capture/screen-capture-20131024232356.png)
 
+comparison of 2 files with vimdiff:
+
 ![desktop](/images/screen-capture/Selection_016.png)
+
+a very old "ascii art" topology (2009 JNCIP learning?). I didn't know of any
+ascii art tools (e.g. drawit,etc) at that time:
+
 ![desktop](/images/screen-capture/Selection_038.png)
+
+some ascii arts of network topology draw by VIM drawit plugin:
+
 ![desktop](/images/screen-capture/Selection_051.png)
 ![desktop](/images/screen-capture/Selection_059.png)
 ![desktop](/images/screen-capture/Selection_075.png)
