@@ -59,7 +59,7 @@ generated web page:
 
 ![desktop](/images/screen-capture/Selection_239.png)
 
-blog files, in [GNU ranger](http://ranger.nongnu.org/):
+blog posts source files, in [GNU ranger](http://ranger.nongnu.org/):
 
 ![desktop](/images/screen-capture/Selection_240.png)
 
