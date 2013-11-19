@@ -3,7 +3,7 @@ layout: post
 title: "佛法，禅道，静心，冥想，其它"
 published: true
 created:  2013 Oct 12 10:37:06 PM
-tags: [mind]
+tags: [mind, 佛学]
 categories: [mind]
 ---
 
