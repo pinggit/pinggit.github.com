@@ -7,4 +7,5 @@ tags: [百年孤独]
 categories: [reading]
 ---
 
+![100 years solitude](/images/100-years-solitude.png)
 
