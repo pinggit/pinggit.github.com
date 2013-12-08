@@ -11,4 +11,5 @@ reading this book last night and keep reading today...
 a good book. not as hard as I thought, actually quite interesting.
 
 ![100 years solitude](/images/100-years-solitude.png)
+![100 years solitude](/images/100-years.JPG)
 
