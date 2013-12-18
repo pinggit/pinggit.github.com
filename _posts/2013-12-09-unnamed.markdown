@@ -1,0 +1,31 @@
+---
+layout: post
+title: "unnamed"
+published: false
+created:  2013 Dec 09 06:13:39 PM
+tags: [life]
+categories: [tech]
+---
+
+
+---
+layout: page
+title: ping's juniper blog
+tagline: nothing serious here
+---
+{% include JB/setup %}
+
+ping's posts:
+
+[old home page](http://www-in.juniper.net/~pings/index2.html)
+
+- - -
+
+blogs:
+
+<ul class="posts">
+  {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+
