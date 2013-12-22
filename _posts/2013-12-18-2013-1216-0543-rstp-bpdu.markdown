@@ -1,0 +1,857 @@
+---
+layout: post
+title: "2013-1216-0543 rstp bpdu"
+published: true
+created:  2013 Dec 18 08:01:51 PM
+tags: [rstp, attlab, junos, mx]
+categories: [tech]
+
+---
+
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
+# issue
+
+ae30,ae40 and xe-1/2/0 are configured as RSTP edge ports... when we send BPDU's
+from testset to these port's , ports go to disabled mode as expected... but
+upon RE failover only xe-1/2/0 stays disabled (blocking mode), ae30 and ae40
+come back up (forwarding).
+expectation is all ports stays diabled as we are continously sending BPDU's from test set...
+
+    st115e@van4pe6-re1> show spanning-tree interface    
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS  
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT 
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  BLK    DIS (Bpdu-Incon)
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  BLK    DIS (Bpdu-Incon)
+
+xe-1/2/0, ae30 and ae40 are disabled as we are sending bpdu's from spirent over
+these ports. so once bpdu is detected these links are Blocked as expected
+                         
+After RE switchover, expectation is all these links stay down... but only
+xe-1/2/0 stays down, other ae30 and ae40 come back up(these should be blocked)
+
+AFter RE switchover:
+
+    st115e@van4pe6-re0> show spanning-tree interface 
+
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS  
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT 
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  FWD    DESG 
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  FWD    DESG 
+
+But traceoptions log shows ae30 and ae40 are disabled...
+
+From Traceoptions during RE switchover
+
+    st115e@van4pe6-re0> show log rstplog | match ae30 
+    Dec 13 16:23:10.891234 BDSM: Port ae30.0: Bridge Detection State Machine Called with Event: BEGIN, State: NOT_EDGE 
+    Dec 13 16:23:10.891246 BDSM: Port ae30.0: Moved to state OPER EDGE 
+    Dec 13 16:23:10.891253 RTSM: Port ae30.0: Port Role Set to -> DISABLED
+
+    {master}
+    st115e@van4pe6-re0> show log rstplog | match ae40    
+    Dec 13 16:23:10.891261 BDSM: Port ae40.0: Bridge Detection State Machine Called with Event: BEGIN, State: NOT_EDGE 
+    Dec 13 16:23:10.891266 BDSM: Port ae40.0: Moved to state OPER EDGE 
+    Dec 13 16:23:10.891272 RTSM: Port ae40.0: Port Role Set to -> DISABLED
+
+    Dec 13 16:07:17.592974 BDSM: Port xe-1/2/0.0: Bridge Detection State Machine Called with Event: PORT_DISABLED, State: NOT_EDGE 
+    Dec 13 16:07:17.592990 BDSM: Port xe-1/2/0.0: Moved to state OPER EDGE 
+    Dec 13 16:07:17.594437 STP stop periodic xmit to interface xe-1/2/0.0, VLAN 0 
+    Dec 13 16:23:10.888243 BDSM: Port xe-1/2/0.0: Bridge Detection State Machine Called with Event: BEGIN, State: NOT_EDGE 
+    Dec 13 16:23:10.888255 BDSM: Port xe-1/2/0.0: Moved to state OPER EDGE 
+    Dec 13 16:23:10.888263 RTSM: Port xe-1/2/0.0: Port Role Set to -> DISABLED
+
+    st115e@van4pe6-re0> show ppm transmissions 
+    IFL-index 386 VLAN: 0                     STP         2000         
+    IFL-index 387 VLAN: 0                     STP         2000      
+
+    st115e@van4pe6-re0> show interfaces ae30 | match Index
+      Logical interface ae30.0 (Index 386) 
+    st115e@van4pe6-re0> show interfaces ae40 | match Index    
+      Logical interface ae40.0 (Index 387) 
+
+
+# rstp config
+
+    jtac@van4pe6-re0> show configuration protocols rstp    
+    bridge-priority 0;
+    traceoptions {
+        file rstplog size 10m files 10;
+        flag bpdu;
+        flag bridge-detection-state-machine;
+    }
+    interface xe-0/2/0;
+    interface xe-1/2/0 {
+        edge;
+    }
+    interface ae2;
+    interface ae30 {
+        edge;
+    }
+    interface ae40 {
+        edge;
+    }
+    bpdu-block-on-edge;
+
+    {master}
+    jtac@van4pe6-re0>  
+
+    jtac@van4pe6-re0> show configuration protocols layer2-control    
+    bpdu-block {
+        disable-timeout 30;
+    }
+     
+    {master}
+    jtac@van4pe6-re0>  
+
+# log snippet
+
+    Dec 13 16:05:53  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is UP: BPDU error Cleared
+    Dec 13 16:05:55  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is DOWN: BPDU error detected       #<------
+    Dec 13 16:06:14  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:06:15  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:06:25  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is UP: BPDU error Cleared
+    Dec 13 16:06:27  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is DOWN: BPDU error detected       #<------
+    Dec 13 16:06:45  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:06:46  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:06:57  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is UP: BPDU error Cleared
+    Dec 13 16:06:59  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is DOWN: BPDU error detected       #<------
+    Dec 13 16:07:16  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:07:17  van4pe6-re0 l2cpd[4237]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:07:20  van4pe6-re0 mgd[4305]: %DAEMON-4-UI_MASTERSHIP_EVENT: Toggle routing engine mastership by 'st115e'
+    Dec 13 16:07:20  van4pe6-re0 /kernel: %KERN-5: mastership: routing engine 0 relinquishing as master: voluntarily requested
+    Dec 13 16:07:20  van4pe6-re0 /kernel: %KERN-5: mastership: sent other RE mastership loss signal
+    Dec 13 16:07:22  van4pe6-re0 init: %AUTH-6: periodic-packet-services (PID 3636) sending signal hup: due to "proto-mastership": 0x2
+    Dec 13 16:07:22  van4pe6-re0 init: %AUTH-6: neighbor-liveness (PID 3637) sending signal hup: due to "proto-mastership": 0x2
+    Dec 13 16:07:22  van4pe6-re0 init: %AUTH-6: event-processing (PID 1209) sending signal hup: due to "chas-mastership": 0x0
+    Dec 13 16:07:22  van4pe6-re0 init: %AUTH-6: clksyncd-service (PID 3638) sending signal hup: due to "proto-mastership": 0x2
+    Dec 13 16:07:22  van4pe6-re0 init: %AUTH-6: lacp (PID 3639) sending signal usr1: due to "proto-mastership": 0x2
+    Dec 13 16:23:04  van4pe6-re0 /kernel: %KERN-5: mastership: sent other RE mastership loss signal
+    Dec 13 16:23:04  van4pe6-re0 /kernel: %KERN-5: mastership: routing engine 0 becoming master         #<------RE switchover
+    Dec 13 16:23:04  van4pe6-re0 /kernel: %KERN-5: mastership: routing engine 0 became master
+    Dec 13 16:23:06  van4pe6-re0 init: %AUTH-6: periodic-packet-services (PID 4420) sending signal hup: due to "proto-mastership": 0x1
+    Dec 13 16:23:06  van4pe6-re0 init: %AUTH-6: neighbor-liveness (PID 4419) sending signal hup: due to "proto-mastership": 0x1
+    Dec 13 16:23:06  van4pe6-re0 init: %AUTH-6: event-processing (PID 1209) sending signal hup: due to "chas-mastership": 0x1
+    Dec 13 16:23:06  van4pe6-re0 init: %AUTH-6: clksyncd-service (PID 4418) sending signal hup: due to "proto-mastership": 0x1
+    Dec 13 16:23:06  van4pe6-re0 init: %AUTH-6: lacp (PID 4417) sending signal usr1: due to "proto-mastership": 0x1
+    Dec 13 16:23:06  van4pe6-re0 rpd[4892]: %DAEMON-5: L2CKT acquiring mastership for primary
+    Dec 13 16:23:06  van4pe6-re0 rpd[4892]: %DAEMON-5: L2VPN acquiring mastership for primary
+    Dec 13 16:23:10  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-2/0/0 is UP: BPDU error Cleared
+    Dec 13 16:23:10  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface ge-3/0/0 is UP: BPDU error Cleared
+    Dec 13 16:23:40  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:23:40  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface ae30 is UP: BPDU error Cleared
+    Dec 13 16:23:40  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface ae40 is UP: BPDU error Cleared
+    Dec 13 16:23:41  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:24:11  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:24:12  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:24:42  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:24:56  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:25:26  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:25:27  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+    Dec 13 16:25:57  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is UP: BPDU error Cleared
+    Dec 13 16:25:59  van4pe6-re0 l2cpd[4913]: %DAEMON-3-BPDU_PROTECT: Interface xe-1/2/0 is DOWN: BPDU error detected
+
+# topo
+
+
+               +--------+
+               | MX960  |                                    <=========
+               |        |                                    sending BPDU packets
+               |        +=================================\
+               |        |ae30 (xe-2/0/0)                   \ +---------+
+         ======|        |                                   \|         |
+           ae2 |        |                                    | testers |
+               |        +====================================|         |
+               |        |ae40 (xe-3/0/0)                     +---------+
+               |        |                                  /
+               |        |                                 /
+               |        +--------------------------------/
+               |        |xe-1/2/0
+               |        |
+               +--------+
+
+
+# log files:
+
+<http://www-in.juniper.net/~pings/casedata/2013-1216-0543/messages-from-dec13-16pm.txt>
+
+# environment:
+
+    jtac@van4pe6-re0> show version  
+    Hostname: van4pe6-re0
+    Model: mx960
+    JUNOS Base OS boot [12.3X30-D20]
+    JUNOS Base OS Software Suite [12.3X30-D20]
+    JUNOS 64-bit Kernel Software Suite [12.3X30-D20]
+    JUNOS Crypto Software Suite [12.3X30-D20]
+    JUNOS Packet Forwarding Engine Support (M/T/EX Common) [12.3X30-D20]
+    JUNOS Packet Forwarding Engine Support (MX Common) [12.3X30-D20]
+    JUNOS Online Documentation [12.3X30-D20]
+    JUNOS Services AACL Container package [12.3X30-D20]
+    JUNOS Services Application Level Gateways [12.3X30-D20]
+    JUNOS AppId Services [12.3X30-D20]
+    JUNOS Border Gateway Function package [12.3X30-D20]
+    JUNOS Services Captive Portal and Content Delivery Container package [12.3X30-D20]
+    JUNOS Services HTTP Content Management package [12.3X30-D20]
+    JUNOS IDP Services [12.3X30-D20]
+    JUNOS Services LL-PDF Container package [12.3X30-D20]
+    JUNOS Services NAT [12.3X30-D20]
+    JUNOS Services PTSP Container package [12.3X30-D20]
+    JUNOS Services RPM [12.3X30-D20]
+    JUNOS Services Stateful Firewall [12.3X30-D20]
+    JUNOS Voice Services Container package [12.3X30-D20]
+    JUNOS Services Example Container package [12.3X30-D20]
+    JUNOS Services SSL [12.3X30-D20]
+    JUNOS Services Crypto [12.3X30-D20]
+    JUNOS Services IPSec [12.3X30-D20]
+    JUNOS Runtime Software Suite [12.3X30-D20]
+    JUNOS platform Software Suite [12.3X30-D20]
+    JUNOS Routing Software Suite [12.3X30-D20]
+
+    jtac@van4pe6-re0# run show chassis hardware detail  
+    Hardware inventory:
+    Item             Version  Part number  Serial number     Description
+    Chassis                                JN11C3BECAFA      MX960
+    Midplane         REV 03   710-013698   ABAC0843          MX960 Backplane
+    Fan Extender     REV 02   710-018051   YB3230            Extended Cable Manager
+    FPM Board        REV 03   710-014974   ABBH9650          Front Panel Display
+    PDM              Rev 03   740-013110   QCS15035076       Power Distribution Module
+    PEM 0            Rev 10   740-013683   QCS150570MS       DC Power Entry Module
+    PEM 1            Rev 10   740-013683   QCS150570N4       DC Power Entry Module
+    PEM 2            Rev 10   740-013683   QCS15057016       DC Power Entry Module
+    PEM 3            Rev 10   740-013683   QCS1505709W       DC Power Entry Module
+    Routing Engine 0 REV 08   740-031116   9009134381        RE-S-1800x4
+      ad0    3831 MB  UGB30SFA4000T2       SFA4000T2 000001FD Compact Flash
+      ad1   30533 MB  UGB94BPH32H0S1-KCI   11000062700       Disk 1 
+      usb0 (addr 1)  EHCI root hub 0       Intel             uhub0
+      usb0 (addr 2)  product 0x0020 32     vendor 0x8087     uhub1
+      DIMM 0         SGU04G72H1BD2SA-BB DIE REV-52 PCB REV-54 MFR ID-ce80
+      DIMM 1         SGU04G72H1BD2SA-BB DIE REV-52 PCB REV-54 MFR ID-ce80
+      DIMM 2         SGU04G72H1BD2SA-BB DIE REV-52 PCB REV-54 MFR ID-ce80
+      DIMM 3         SGU04G72H1BD2SA-BB DIE REV-52 PCB REV-54 MFR ID-ce80
+    Routing Engine 1 REV 08   740-031116   9009135353        RE-S-1800x4
+      ad0    3831 MB  UGB30SFA4000T2       SFA4000T2 000006FC Compact Flash
+      ad1   30533 MB  UGB94BPH32H0S1-KCI   11000062901       Disk 1 
+    CB 0             REV 09   710-021523   ABBL3312          MX SCB
+    CB 1             REV 09   710-021523   ABBL3270          MX SCB
+    CB 2             REV 09   710-021523   ABBL3304          MX SCB
+    FPC 0            REV 17   750-021566   ABBL3647          DPCE 4x 10GE R
+      CPU            REV 04   710-022351   ABBH3237          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L04321         XFP-10G-LR
+      PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   14T670101696      XFP-10G-LR
+      PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L04320         XFP-10G-LR
+      PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L04354         XFP-10G-LR
+    FPC 1            REV 18   750-021566   ABBJ2093          DPCE 4x 10GE R
+      CPU            REV 04   710-022351   ABBJ1918          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   14T670101859      XFP-10G-LR
+      PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   14T670100890      XFP-10G-LR
+      PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L03913         XFP-10G-LR
+      PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   14T670101861      XFP-10G-LR
+    FPC 2            REV 17   750-021566   ABBE0684          DPCE 4x 10GE R
+      CPU            REV 04   710-022351   ABBE0866          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 02   740-014279   T10D62595         XFP-10G-LR
+      PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 02   740-014279   T10E16997         XFP-10G-LR
+      PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 02   740-014279   T10E16968         XFP-10G-LR
+      PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 02   740-014279   T09M78241         XFP-10G-LR
+    FPC 3            REV 20   750-021679   ABBG0061          DPCE 40x 1GE R
+      CPU            REV 04   710-022351   ABBG0033          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+        Xcvr 0       REV 01   740-031850   C11A05539         SFP-LX10
+        Xcvr 1       REV 01   740-031850   C11A06007         SFP-LX10
+        Xcvr 2       REV 01   740-031850   C11A05579         SFP-LX10
+        Xcvr 3       REV 01   740-031850   C11A06615         SFP-LX10
+        Xcvr 4       REV 01   740-031850   C11A05302         SFP-LX10
+        Xcvr 5       REV 01   740-031850   C11A05618         SFP-LX10
+        Xcvr 6       REV 01   740-031850   C11A06150         SFP-LX10
+        Xcvr 7       REV 01   740-031850   C11A06711         SFP-LX10
+        Xcvr 8       REV 01   740-031850   C11A06000         SFP-LX10
+        Xcvr 9       REV 01   740-031850   C11A06140         SFP-LX10
+      PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+        Xcvr 0       REV 01   740-031850   C11A06710         SFP-LX10
+        Xcvr 1       REV 01   740-031850   C11A05103         SFP-LX10
+      PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+        Xcvr 0       REV 01   740-031850   C11A06125         SFP-LX10
+        Xcvr 1       REV 01   740-031850   C11A06121         SFP-LX10
+        Xcvr 2       REV 01   740-031850   C11A05037         SFP-LX10
+        Xcvr 3       REV 01   740-031850   C11A05559         SFP-LX10
+        Xcvr 4       REV 01   740-031850   C11A06503         SFP-LX10
+        Xcvr 5       REV 01   740-031850   C11A06145         SFP-LX10
+        Xcvr 6       REV 01   740-031850   C11A05078         SFP-LX10
+        Xcvr 7       REV 01   740-031850   C11A05465         SFP-LX10
+        Xcvr 8       REV 01   740-031850   C11A06779         SFP-LX10
+        Xcvr 9       REV 01   740-031850   C11A05375         SFP-LX10
+      PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    FPC 10           REV 17   750-021566   ABBH5011          DPCE 4x 10GE R
+      CPU            REV 04   710-022351   ABBH4458          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10K71921         XFP-10G-LR
+      PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10K71919         XFP-10G-LR
+      PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L01460         XFP-10G-LR
+      PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) 
+        Xcvr 0       REV 01   740-031833   T10K71922         XFP-10G-LR
+    FPC 11           REV 17   750-021566   ABBL3621          DPCE 4x 10GE R
+      CPU            REV 04   710-022351   ABBK3135          DPC PMB
+      PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L04351         XFP-10G-LR
+      PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L03942         XFP-10G-LR
+      PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+      PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+        Xcvr 0       REV 01   740-031833   T10L01490         XFP-10G-LR
+    Fan Tray 0       REV 05   740-014971   VT4416            Fan Tray
+    Fan Tray 1       REV 05   740-014971   VS6421            Fan Tray
+
+    {master}[edit]
+
+# reproduction
+
+## rstp i/f status
+
+    jtac@van4pe6-re0# run show spanning-tree interface  
+     
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS  
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT 
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  BLK    DIS (Bpdu-Incon)
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  BLK    DIS (Bpdu-Incon)
+
+    {master}[edit]
+    jtac@van4pe6-re0# run show interfaces xe2/0/0  
+    error: device xe2/0/0 not found
+
+## ae i/f down
+
+    {master}[edit]
+    jtac@van4pe6-re0# run show interfaces ae30 detail  
+    Physical interface: ae30, Enabled, Physical link is Down    #<------
+      Interface index: 158, SNMP ifIndex: 655, Generation: 161
+      Link-level type: Ethernet-VPLS, MTU: 9168, Speed: Unspecified, BPDU Error: Detected, MAC-REWRITE Error: None, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled,
+      Minimum links needed: 1, Minimum bandwidth needed: 0
+      Device flags   : Present Running
+      Interface flags: Hardware-Down SNMP-Traps Internal: 0x20004000
+      Current address: 5e:5e:ab:b6:b9:47, Hardware address: 5e:5e:ab:b6:b9:47
+      Last flapped   : 2013-12-19 14:12:20 EST (00:04:30 ago)
+      Statistics last cleared: Never
+      Traffic statistics:
+       Input  bytes  :                  272                    0 bps
+       Output bytes  :             60496370                    0 bps
+       Input  packets:                    4                    0 pps
+       Output packets:               737569                    0 pps
+       IPv6 transit statistics:
+        Input  bytes  :                   0
+        Output bytes  :                   0
+        Input  packets:                   0
+        Output packets:                   0
+      Egress queues: 8 supported, 8 in use
+      Queue counters:       Queued packets  Transmitted packets      Dropped packets
+        0 DEFAULT                   597461               597461                    0
+        1 REALTIME                       0                    0                    0
+        2 PRIVATE                        0                    0                    0
+        3 CONTROL                  1111213              1111213                    0
+        4 CLASS_B_OUTP                   0                    0                    0
+        5 CLASS_C_OUTP                   0                    0                    0
+        6 CLASS_V_OUTP                   0                    0                    0
+        7 GETS                           6                    6                    0
+      Queue number:         Mapped forwarding classes
+        0                   DEFAULT
+        1                   REALTIME
+        2                   PRIVATE
+        3                   CONTROL
+        4                   CLASS_B_OUTPUT
+        5                   CLASS_C_OUTPUT
+        6                   CLASS_V_OUTPUT
+        7                   GETS
+
+      Logical interface ae30.0 (Index 386) (SNMP ifIndex 1241) (Generation 195)
+        Flags: Device-Down SNMP-Traps 0x24004000 VLAN-Tag [  ] In(push-push 0x0000.400 0x0000.400) Out(pop-pop)  Encapsulation: Ethernet-Bridge
+        Statistics        Packets        pps         Bytes          bps
+        Bundle:
+            Input :             4          0           272            0
+            Output:        759191          0      69531880            0
+        Link:
+          xe-2/0/0.0 <-- down                                   #<------
+            Input :             4          0           272            0
+            Output:        759191          0      69531880            0
+        LACP info:        Role     System             System      Port    Port  Port 
+                                 priority          identifier  priority  number   key 
+          xe-2/0/0.0     Actor        127  5c:5e:ab:b6:bf:c0       127       7    31
+          xe-2/0/0.0   Partner          1  00:00:00:00:00:01         1       7     1
+        LACP Statistics:       LACP Rx     LACP Tx   Unknown Rx   Illegal Rx 
+          xe-2/0/0.0            305383       34173            0            0
+        Marker Statistics:   Marker Rx     Resp Tx   Unknown Rx   Illegal Rx
+          xe-2/0/0.0                 0           0            0            0
+        Protocol bridge, MTU: 9168, Generation: 291, Route table: 3
+          Flags: Is-Primary
+
+## rstp log
+
+    Dec 19 12:33:23.723881 BPDU:....
+      1 80 c2  0  0  0 5c 5e ab b6 bf d0  0 27 42 42 
+      3  0  0  2  2 3e  0  0 28 c0 da f8 97 d0  0  0 
+      3 e8  0  0 5c 5e ab b6 bf d0 82  1  1  0 14  0 
+      2  0  f  0  0
+
+    Dec 19 12:33:23.724384 STP programmed periodic xmit on IFL 386, VLAN 0 interval 2 0
+    Dec 19 12:33:23.727607 STP programmed periodic xmit on IFL 386, VLAN 0 interval 2 0
+    Dec 19 12:33:23.793622 BDSM: Port ae30.0: Bridge Detection State Machine Called with Event: PORT_DISABLED, State: NOT_EDGE
+    Dec 19 12:33:23.793638 BDSM: Port ae30.0: Moved to state OPER EDGE
+    Dec 19 12:33:23.796241 STP stop periodic xmit to interface ae30.0, VLAN 0
+    Dec 19 12:33:23.871865 MSG: Receiving BPDU ...
+
+## enable traceoption for dcd/ppmd/l2cpd
+
+        {master}[edit]
+        jtac@van4pe6-re0# show | compare  
+        [edit interfaces]
+        +   traceoptions {
+        +       file dcd-ping size 10m files 10;
+        +       flag all;
+        +   }
+        [edit routing-options]
+        +   ppm {
+        +       traceoptions {
+        +           file ppm-ping size 10m files 10;
+        +           flag all;
+        +       }
+        +   }
+        [edit protocols layer2-control]
+        +    traceoptions {
+        +        file l2cpd size 10m files 10;
+        +        flag all;
+        +    }
+
+
+
+## after RE switchover
+
+    {master}
+    jtac@van4pe6-re1> show spanning-tree interface  
+     
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS  
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT 
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  FWD    DESG 
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  FWD    DESG 
+
+## ae i/f up, no traffic?
+
+
+    {master}
+    jtac@van4pe6-re1> show interfaces ae30              
+    Physical interface: ae30, Enabled, Physical link is Up
+      Interface index: 158, SNMP ifIndex: 655
+      Link-level type: Ethernet-VPLS, MTU: 9168, Speed: 10Gbps, BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled,
+      Minimum links needed: 1, Minimum bandwidth needed: 0
+      Device flags   : Present Running
+      Interface flags: SNMP-Traps Internal: 0x20004000
+      Current address: 5e:5e:ab:b6:b9:47, Hardware address: 5e:5e:ab:b6:b9:47
+      Last flapped   : 2013-12-19 14:46:44 EST (00:13:27 ago)
+      Input rate     : 0 bps (0 pps)
+      Output rate    : 1880 bps (2 pps)
+     
+      Logical interface ae30.0 (Index 386) (SNMP ifIndex 1241)
+        Flags: SNMP-Traps 0x24004000 VLAN-Tag [  ] In(push-push 0x0000.400 0x0000.400) Out(pop-pop)  Encapsulation: Ethernet-Bridge
+        Statistics        Packets        pps         Bytes          bps
+        Bundle:
+            Input :             4          0           272            0         #<------
+            Output:        630552          2      53621412         1608
+        Protocol bridge, MTU: 9168
+          Flags: Is-Primary
+
+    {master}
+    jtac@van4pe6-re1> show interfaces ae30 extensive    
+    Physical interface: ae30, Enabled, Physical link is Up
+      Interface index: 158, SNMP ifIndex: 655, Generation: 161
+      Link-level type: Ethernet-VPLS, MTU: 9168, Speed: 10Gbps, BPDU Error: None, MAC-REWRITE Error: None, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled,
+      Minimum links needed: 1, Minimum bandwidth needed: 0
+      Device flags   : Present Running
+      Interface flags: SNMP-Traps Internal: 0x20004000
+      Current address: 5e:5e:ab:b6:b9:47, Hardware address: 5e:5e:ab:b6:b9:47
+      Last flapped   : 2013-12-19 14:46:44 EST (00:12:22 ago)
+      Statistics last cleared: Never
+      Traffic statistics:
+       Input  bytes  :                  272                    0 bps
+       Output bytes  :             60668000                 1720 bps
+       Input  packets:                    4                    0 pps    #<------
+       Output packets:               739660                    2 pps
+       IPv6 transit statistics:
+        Input  bytes  :                   0
+        Output bytes  :                   0
+        Input  packets:                   0
+        Output packets:                   0
+      Dropped traffic statistics due to STP State:
+       Input  bytes  :                    0
+       Output bytes  :                    0
+       Input  packets:                    0
+       Output packets:                  162
+      Input errors:
+        Errors: 0, Drops: 0, Framing errors: 0, Runts: 0, Giants: 0, Policed discards: 0, Resource errors: 0
+      Output errors:
+        Carrier transitions: 0, Errors: 0, Drops: 0, MTU errors: 0, Resource errors: 0
+      Egress queues: 8 supported, 8 in use
+      Queue counters:       Queued packets  Transmitted packets      Dropped packets
+        0 DEFAULT                   599142               599142                    0
+        1 REALTIME                       0                    0                    0
+        2 PRIVATE                        0                    0                    0
+        3 CONTROL                  1111816              1111816                    0
+        4 CLASS_B_OUTP                   0                    0                    0
+        5 CLASS_C_OUTP                   0                    0                    0
+        6 CLASS_V_OUTP                   0                    0                    0
+        7 GETS                           6                    6                    0
+      Queue number:         Mapped forwarding classes
+        0                   DEFAULT
+        1                   REALTIME
+        2                   PRIVATE
+        3                   CONTROL
+        4                   CLASS_B_OUTPUT
+        5                   CLASS_C_OUTPUT
+        6                   CLASS_V_OUTPUT
+        7                   GETS
+
+      Logical interface ae30.0 (Index 386) (SNMP ifIndex 1241) (Generation 195)
+        Flags: SNMP-Traps 0x24004000 VLAN-Tag [  ] In(push-push 0x0000.400 0x0000.400) Out(pop-pop)  Encapsulation: Ethernet-Bridge
+        Statistics        Packets        pps         Bytes          bps
+        Bundle:
+            Input :             4          0           272            0
+            Output:        630373          2      53604888         1448
+        Link:
+          xe-2/0/0.0
+            Input :             4          0           272            0         #<------
+            Output:        630373          2      53604888         1448
+        LACP info:        Role     System             System      Port    Port  Port 
+                                 priority          identifier  priority  number   key 
+          xe-2/0/0.0     Actor        127  5c:5e:ab:b6:bf:c0       127       7    31
+          xe-2/0/0.0   Partner          1  00:00:00:00:00:01         1       2     1
+        LACP Statistics:       LACP Rx     LACP Tx   Unknown Rx   Illegal Rx 
+          xe-2/0/0.0               741          29            0            0
+        Marker Statistics:   Marker Rx     Resp Tx   Unknown Rx   Illegal Rx
+          xe-2/0/0.0                 0           0            0            0
+        Protocol bridge, MTU: 9168, Generation: 291, Route table: 3
+          Flags: Is-Primary
+
+## member link is up, no traffic
+
+    {master}
+    jtac@van4pe6-re1> show interfaces xe-2/0/0 detail  
+    Physical interface: xe-2/0/0, Enabled, Physical link is Up
+      Interface index: 636, SNMP ifIndex: 726, Generation: 639
+      Link-level type: Ethernet-Bridge, MTU: 9168, LAN-PHY mode, Speed: 10Gbps, BPDU Error: None, Loopback: None, Source filtering: Disabled, Flow control: Disabled
+      Device flags   : Present Running
+      Interface flags: SNMP-Traps Internal: 0x20004000
+      Link flags     : None
+      CoS queues     : 8 supported, 8 maximum usable queues
+      Hold-times     : Up 0 ms, Down 0 ms
+      Current address: 5e:5e:ab:b6:b9:47, Hardware address: 5c:5e:ab:b6:b9:4a
+      Last flapped   : 2013-12-19 14:46:42 EST (00:14:16 ago)
+      Statistics last cleared: Never
+      Traffic statistics:
+       Input  bytes  :                  272                    0 bps    #<------
+       Output bytes  :             60693491                 1640 bps
+       Input  packets:                    4                    0 pps    #<------
+       Output packets:               739971                    2 pps
+       IPv6 transit statistics:
+        Input  bytes  :                   0
+        Output bytes  :                   0
+        Input  packets:                   0
+        Output packets:                   0
+      Egress queues: 8 supported, 8 in use
+      Queue counters:       Queued packets  Transmitted packets      Dropped packets
+        0 DEFAULT                   599396               599396                    0
+        1 REALTIME                       0                    0                    0
+        2 PRIVATE                        0                    0                    0
+        3 CONTROL                  1111879              1111879                    0
+        4 CLASS_B_OUTP                   0                    0                    0
+        5 CLASS_C_OUTP                   0                    0                    0
+        6 CLASS_V_OUTP                   0                    0                    0
+        7 GETS                           6                    6                    0
+      Queue number:         Mapped forwarding classes
+        0                   DEFAULT
+        1                   REALTIME
+        2                   PRIVATE
+        3                   CONTROL
+        4                   CLASS_B_OUTPUT
+        5                   CLASS_C_OUTPUT
+        6                   CLASS_V_OUTPUT
+        7                   GETS
+      Active alarms  : None
+      Active defects : None
+      PCS statistics                      Seconds
+        Bit errors                             4
+        Errored blocks                         4
+      Interface transmit statistics: Disabled
+
+      Logical interface xe-2/0/0.0 (Index 423) (SNMP ifIndex 727) (Generation 256)
+        Flags: SNMP-Traps 0x24004000 VLAN-Tag [  ] In(push-push 0x8100.400 0x8100.400) Out(pop-pop)  Encapsulation: Ethernet-Bridge
+        Traffic statistics:
+         Input  bytes  :                 1008
+         Output bytes  :             51075717
+         Input  packets:                   12
+         Output packets:               600600
+        Local statistics:
+         Input  bytes  :                  736
+         Output bytes  :                56147
+         Input  packets:                    8
+         Output packets:                  455
+        Transit statistics:
+         Input  bytes  :                  272                    0 bps
+         Output bytes  :             51019570                 1368 bps
+         Input  packets:                    4                    0 pps
+         Output packets:               600145                    2 pps
+        Protocol aenet, AE bundle: ae30.0, Generation: 389, Route table: 0
+
+## rstp log
+
+    {master}
+    jtac@van4pe6-re1> show log rstplog | match "Dec 19" | match ae30  
+    Dec 19 14:46:41.512974 BDSM: Port ae30.0: Bridge Detection State Machine Called with Event: BEGIN, State: NOT_EDGE
+    Dec 19 14:46:41.512980 BDSM: Port ae30.0: Moved to state OPER EDGE
+    Dec 19 14:46:41.512987 RTSM: Port ae30.0: Port Role Set to -> DISABLED
+
+## tcpdump
+
+out no in
+
+    jtac@van4pe6-re1> monitor traffic interface ae30    
+    verbose output suppressed, use <detail> or <extensive> for full protocol decode
+    Address resolution is ON. Use <no-resolve> to avoid any reverse lookup delay.
+    Address resolution timeout is 4s.
+    Listening on ae30, capture size 96 bytes
+
+    16:18:52.366446 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:18:54.289208 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:18:56.190930 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+
+    jtac@van4pe6-re1> monitor traffic interface xe-2/0/0    
+    verbose output suppressed, use <detail> or <extensive> for full protocol decode
+    Address resolution is ON. Use <no-resolve> to avoid any reverse lookup delay.
+    Address resolution timeout is 4s.
+    Listening on xe-2/0/0, capture size 96 bytes
+
+    16:19:15.231345 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:17.157098 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:18.978846 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:20.899575 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:22.870352 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:24.780050 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:26.718226 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:28.702521 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    16:19:30.613297 Out STP 802.1w, Rapid STP, Flags [Learn, Forward], bridge-id 0000.5c:5e:ab:b6:bf:d0.8201, length 36
+    ^C
+    9 packets received by filter
+
+## restart ae30 resolved
+
+    {master}[edit]
+    jtac@van4pe6-re1# run show spanning-tree interface    
+     
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS  
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT 
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  BLK    DIS (Bpdu-Incon)
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  FWD    DESG 
+
+# deeper dive
+
+I captured rtsock messages below on both RE's while doing a GRES. The messages relevant to ae30 are shown below
+
+On old master:
+--------------
+
+    % cat rtsockmon_re1.out | grep ae30
+    [16:00:47:646.692] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:00:49:414.152] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:19:415.941] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:22:600.579] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:52:602.709] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:53:996.609] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+
+    SWITCHOVER HAPPENS HERE (approx timestamp is 16:02:00) 
+
+    [16:02:03:432.616] kernel     P    stp        change  if ae30 instance 65535 STP idx=32, state=0, action=0, epoch=15, latest clear epoch=14 HW-lrn=1tc-generation=0stp-peer-ip=0
+    [16:03:21:210.768] rpd        P    r
+
+On new master:
+--------------
+
+    % cat /var/log/rtsockmon_re0.out | grep ae30
+    [16:00:15:611.585] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:00:17:626.261] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:00:47:627.169] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:00:49:414.434] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:19:415.645] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:22:600.886] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:52:603.471] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:01:53:998.329] ksyncd     P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c001 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+
+
+SWITCHOVER HAPPENS HERE (approx timestamp is 16:02:00) 
+
+    [16:02:05:313.816] unknown    P    iflogical  change  ae30.0 flags=0x2400c000 idx=323, gen=415 lr=0, pifd=158, uidx=0, privf=0x0 snmpid=1241, iflsetidx=0
+    [16:02:10:884.886] lacpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c000 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:02:10:884.919] lacpd      P    iflogical  change  ae30.0 flags=0x2400c000 idx=323, gen=415 lr=0, pifd=158, uidx=0, privf=0x0 snmpid=1241, iflsetidx=0
+    [16:02:10:888.562] lacpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c000 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:02:10:888.590] lacpd      P    iflogical  change  ae30.0 flags=0x2400c000 idx=323, gen=415 lr=0, pifd=158, uidx=0, privf=0x0 snmpid=1241, iflsetidx=0
+    [16:02:11:356.993] l2cpd      P    stp        change  if ae30 instance 65535 STP idx=32, state=2, action=0, epoch=15, latest clear epoch=14 HW-lrn=1tc-generation=0stp-peer-ip=0
+    [16:02:30:868.639] dcd        P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c000 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+    [16:02:30:871.835] dcd        P    ifdev      change  ae300 mtu=1514 dflags=0x3 flags=0xc001 idx=428, gen=431, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1053
+    [16:02:30:873.868] dcd        P    ifdev      change  ae301 mtu=1514 dflags=0x3 flags=0xc001 idx=429, gen=432, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1054
+    [16:02:30:878.542] dcd        P    ifdev      change  ae302 mtu=1514 dflags=0x3 flags=0xc001 idx=430, gen=433, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1055
+    [16:02:30:880.481] dcd        P    ifdev      change  ae303 mtu=1514 dflags=0x3 flags=0xc001 idx=431, gen=434, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1056
+    [16:02:30:882.498] dcd        P    ifdev      change  ae304 mtu=1514 dflags=0x3 flags=0xc001 idx=432, gen=435, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1057
+    [16:02:30:884.442] dcd        P    ifdev      change  ae305 mtu=1514 dflags=0x3 flags=0xc001 idx=433, gen=436, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1058
+    [16:02:30:888.581] dcd        P    ifdev      change  ae306 mtu=1514 dflags=0x3 flags=0xc001 idx=434, gen=437, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1059
+    [16:02:30:890.680] dcd        P    ifdev      change  ae307 mtu=1514 dflags=0x3 flags=0xc001 idx=435, gen=438, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1060
+    [16:02:30:893.244] dcd        P    ifdev      change  ae308 mtu=1514 dflags=0x3 flags=0xc001 idx=436, gen=439, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1061
+    [16:02:30:899.319] dcd        P    ifdev      change  ae309 mtu=1514 dflags=0x3 flags=0xc001 idx=437, gen=440, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=1062
+    [16:02:37:469.946] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c000 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655
+
+As seen from the rtsock messages on the new master, when lacp comes up, it sets
+the member link of ae30 to CD and hence ae30 comes up( notice the flag change
+from 0x2000c001 to 0x2000c000 at timestamp `16:02:10:884.886`
+
+l2cpd however does not block ae30 later as it used to before switchover(See old
+master rtsock messages above).
+
+    [16:02:37:469.946] l2cpd      P    ifdev      change  ae30 mtu=9168 dflags=0x3 flags=0x2000c000 idx=158, gen=161, i2c-id=0, ifm-hw-qs=8, ifm-use-max-qs=8, ifm-flags=128, linkflags 0 snmpid=655    <<<<<< flags remain as 0x2000c000 
+
+So, ae30 remains up as shown below:
+
+    jtac@van4pe6-re0> show lacp interfaces ae30 Aggregated interface: ae30
+        LACP state:       Role   Exp   Def  Dist  Col  Syn  Aggr  Timeout  Activity
+          xe-2/0/0       Actor    No    No   Yes  Yes  Yes   Yes     Fast    Active
+          xe-2/0/0     Partner    No    No   Yes  Yes  Yes   Yes     Slow    Active
+        LACP protocol:        Receive State  Transmit State          Mux State
+          xe-2/0/0                  Current   Slow periodic Collecting distributing
+
+    {master}
+    jtac@van4pe6-re0> show interfaces ae30 terse
+    Interface               Admin Link Proto    Local                 Remote
+    ae30                    up    up
+    ae30.0                  up    up   bridge
+
+    {master}
+    jtac@van4pe6-re0> show stp
+                           ^
+    syntax error, expecting <command>.
+    jtac@van4pe6-re0> show spanning-tree interface
+
+    Spanning tree interface parameters for instance 0
+
+    Interface    Port ID    Designated      Designated         Port    State  Role
+                             port ID        bridge ID          Cost
+    xe-0/2/0        128:21       128:21      0.5c5eabb6bfd0      2000  BLK    DIS
+    xe-1/2/0        128:61       128:61      0.5c5eabb6bfd0      2000  BLK    DIS (Bpdu-Incon)
+    ae2            128:485      128:485      0.28c0daf897d0      1000  FWD    ROOT
+    ae30           128:513      128:513      0.5c5eabb6bfd0      1000  FWD    DESG
+    ae40           128:523      128:523      0.5c5eabb6bfd0     10000  FWD    DESG
+
+Now, l2cpd probably does not set ae30 to blocked because it does not see any
+BPDU error packets on ae30 or it's member links. We need an investigation from
+l2cpd on why these specific packets are not seen, while other packets are
+exchanged on ae30. 
+
+It is to be noted that there are RSTP hello packets sent out on ae30 but ther's
+nothing coming in. 
+
+I looked at the NH info in RE and PFE and these look okay. So, this does not
+seem to be an AE load-balancing issue or a case of PFE discarding the
+packets("show pfe statistics traffic" did not show a fabric drop/normal
+discards increase)
+
+NHDB for AE unicast NH on ae30:
+
+    Weight Info:  Current Weight = 1
+       ID  Balance  Orig-Balance Weight  Orig-Weight  State     Install      Flags
+    -----  -------  --------- ------  -----------  --------  -----------  -----
+     9117        0        0       1            1    Active    Installed  0x00
+
+    ADPC3(van4pe6-re0 vty)# exit
+
+
+    % nhinfo -di 9114
+
+    Interface:     ae30.0
+    Nexthop is: public
+    full length of message in bytes: 1276, version: 109 message type: nexthop message id: kernel message op: get message sequence number: 2 address family: vpls next hop type: [0x2] "ucst"
+    next hop index: 9114, associated interface index: 323 logical system id: 0 next hop flags: [0x0] next hop kernel flags: [0x2328] next hop forwarding flags: [0x0] next hop user flags: [0x0] device type: [0x3] ethernet/802.3 routing-table id: 0 reference count: 4 filter index: 0 device link level procedures: 41 length of next hop sockaddr: 0 local address length: 0 rewrite header length: 0 associated random information length: 0 hardware token: 0000000000 generation no : 5152316
+
+    Child-nexthop  CIFL-Index  Device
+    ---------------------------------
+    9117           65575       xe-2/0/0.0
+    Number of child nexthops : 1
+    nh adders bitmask: 0x0000008004000000
+    nh adders name: l2ald cfmd clksyncd faboamd nh oam session id : 0
+
+    tokens len: 0
+
+    NHDB in PFE for ae30:
+
+    ADPC0(van4pe6-re0 vty)# show topology nhdb id 9114
+    Topology: nh(Aggreg.,9114)
+      Flavor: nexthop (8), Refcount 2, Flags 0x1
+      Addr: 0x53d96ce0, Next: 0x0, Context 0x53d96cc8
+        Link 0: 00000000:142dbb01, Offset -1, Next: 00000000:00000000
+        Link 1: 00000000:1b1afb01, Offset -1, Next: 00000000:00000000
+        Link 2: 00000000:3319eb01, Offset -1, Next: 00000000:00000000
+        Link 3: 00000000:82cd0301, Offset -1, Next: 00000000:00000000
+
+    Topology Neighbors:
+         nh(Compst,1589)-> nh(Aggreg.,9114)
+      00004    00001    00074/51-+
+
+
+    Constituent next hops (total 1) topo info :
+
+    # 0, NH-id 9117: Unicast
+    Topology: nh(Aggreg.,9114)
+      Flavor: nexthop (8), Refcount 0, Flags 0x1
+      Addr: 0x4bd84098, Next: 0x4b2ce5e8, Context 0x53d96cc8
+        Link 0: 00000000:00000000, Offset -1, Next: 00000000:43efc70a
+        Link 1: 00000000:00000000, Offset -1, Next: 00000000:6bedc70a
+        Link 2: 00000000:00000000, Offset -1, Next: 00000000:3496e70a
+        Link 3: 00000000:00000000, Offset -1, Next: 00000000:5cdb7f0a
+
+    Topology Neighbors:
+      [none]-> nh(Aggreg.,9114)-> nh(Unicast,9117)-> oh-iff(xe-2/0/0.0)-> o-root(Multi-service)
+
