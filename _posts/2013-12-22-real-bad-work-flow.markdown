@@ -77,7 +77,7 @@ working on the 2nd keystroke -- sheet (I'm a polite person)..
 
 googling and researching again, how come it worked before but not now? I
 remember I even had a [jekyll blog
-post](http://www-in.juniper.net/~pings/myblog/2013/02/26/a-shortcut-quick-way-to-write-a-complicated-map-without-bothering-function-call/)
+post](http://pinggit.github.io/tech/2013/02/26/quick-complicated-vim-map-without-function-call/)
 mentioning how convenient it is to have
 a complicted map without boring a funciton call.. after quickly checking that
 post, it was initially working and I later expanded it a couple of more lines
