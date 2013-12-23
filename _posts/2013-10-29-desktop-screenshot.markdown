@@ -84,6 +84,6 @@ work on some code ( taglist and voom )
 
 vim 7.4 faster syntax highlight, in a big file (over 200k+ lines):
 
-![desktop](/images/screen-capture/vim74-fast-syntax.png)
+![desktop](/images/screen-capture/vim74-fast-syntax.jpg)
 
 
