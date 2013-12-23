@@ -97,7 +97,7 @@ function toggleFold(objID)
 <span class="FoldColumn">  </span><span class="lnr">  45 </span><span class="Comment">#</span>
 <span class="FoldColumn">  </span><span class="lnr">  46 </span><span class="Comment">#</span>
 <span class="FoldColumn">  </span><span class="lnr">  47 </span><span class="Comment">#more time is needed to rewrite with cleaner codes...</span>
-<span class="FoldColumn">  </span><span class="lnr">  48 </span><span class="Comment">#            pings@juniper.net </span>
+<span class="FoldColumn">  </span><span class="lnr">  48 </span><span class="Comment">#            </span>
 <span class="FoldColumn">  </span><span class="lnr">  49 </span><span class="Comment">#</span>
 <span class="FoldColumn">  </span><span class="lnr">  50 </span><span class="Comment">#            Sun Mar 13 16:31:55 EDT 2011</span>
 <span class="FoldColumn">  </span><span class="lnr">  51 </span><span class="Comment">#</span>
@@ -177,7 +177,7 @@ function toggleFold(objID)
 <span class="FoldColumn">  </span><span class="lnr"> 125 </span><span class="Comment">    #   otherwise some error will be catched, email get sent smoothly though</span>
 <span class="FoldColumn">  </span><span class="lnr"> 126 </span><span class="Comment">    #use catch to catch/skip the error and continue</span>
 <span class="FoldColumn">  </span><span class="lnr"> 127 </span><span class="Comment">#procedure with default value,simpler than varible-length params precedure</span>
-<span class="FoldColumn">  </span><span class="lnr"> 128 </span><span class="Statement">proc</span> sendanemail {caseid <span class="Statement">file</span> emailto {emailcc <span class="Constant">&quot;pings@juniper.net&quot;</span>}} {
+<span class="FoldColumn">  </span><span class="lnr"> 128 </span><span class="Statement">proc</span> sendanemail {caseid <span class="Statement">file</span> emailto {emailcc <span class="Constant">&quot;pings@.net&quot;</span>}} {
 <span class="FoldColumn">  </span><span class="lnr"> 129 </span>
 <span class="FoldColumn">  </span><span class="lnr"> 130 </span>    <span class="Statement">global</span> DEBUG
 <span class="FoldColumn">  </span><span class="lnr"> 131 </span>    <span class="Statement">global</span> zip
@@ -195,8 +195,8 @@ function toggleFold(objID)
 <span class="FoldColumn">  </span><span class="lnr"> 143 </span><span class="Comment">            #looks only 1 file is support at a time with uuencode</span>
 <span class="FoldColumn">  </span><span class="lnr"> 144 </span><span class="Comment">            #this broke after upgrading to 12.04LTS</span>
 <span class="FoldColumn">  </span><span class="lnr"> 145 </span><span class="Comment">            #set execcmd &quot;uuencode [glob $file] $attachname | mail -s \&quot;log of case:$caseid\&quot; -c $emailcc $emailto&quot;</span>
-<span class="FoldColumn">  </span><span class="lnr"> 146 </span><span class="Comment">            #set execcmd &quot;sendemail -s pod51010.outlook.com:587 -f pings@juniper.net -t pings@juniper.net -u \&quot;log of case:$caseid\&quot; -m \&quot;this is the log file: $file\&quot; -xu pings@juniper.net -xp \&quot;EMAILPASSWORD\&quot; -o tls=auto -a [glob $file]&quot;</span>
-<span class="FoldColumn">  </span><span class="lnr"> 147 </span>            <span class="Statement">set</span> execcmd <span class="Constant">&quot;sendthisfile.sh </span>[<span class="Statement">glob</span> <span class="Identifier">$file</span>]<span class="Constant"> pings@juniper.net </span><span class="Special">\&quot;</span><span class="Constant">log of case:</span><span class="Identifier">$caseid</span><span class="Special">\&quot;</span><span class="Constant"> &quot;</span>
+<span class="FoldColumn">  </span><span class="lnr"> 146 </span><span class="Comment">            #set execcmd &quot;sendemail -s pod51010.outlook.com:587 -f pings@.net -t pings@.net -u \&quot;log of case:$caseid\&quot; -m \&quot;this is the log file: $file\&quot; -xu pings@.net -xp \&quot;EMAILPASSWORD\&quot; -o tls=auto -a [glob $file]&quot;</span>
+<span class="FoldColumn">  </span><span class="lnr"> 147 </span>            <span class="Statement">set</span> execcmd <span class="Constant">&quot;sendthisfile.sh </span>[<span class="Statement">glob</span> <span class="Identifier">$file</span>]<span class="Constant"> pings@.net </span><span class="Special">\&quot;</span><span class="Constant">log of case:</span><span class="Identifier">$caseid</span><span class="Special">\&quot;</span><span class="Constant"> &quot;</span>
 <span class="FoldColumn">  </span><span class="lnr"> 148 </span>        }
 <span class="FoldColumn">  </span><span class="lnr"> 149 </span>
 <span class="FoldColumn">  </span><span class="lnr"> 150 </span><span class="Comment">        #funny tcl rule, non-matching {} in comments seems also hit an error</span>
@@ -759,7 +759,7 @@ function toggleFold(objID)
 <span class="FoldColumn">  </span><span class="lnr"> 707 </span><span class="Constant">    type !i for currently available cmds, !h for most frequently used cmds, and !T for a mini tutorial</span>
 <span class="FoldColumn">  </span><span class="lnr"> 708 </span><span class="Constant">    enjoy it!</span>
 <span class="FoldColumn">  </span><span class="lnr"> 709 </span>
-<span class="FoldColumn">  </span><span class="lnr"> 710 </span>                                                              -v0<span class="Constant">.2</span>     ping@juniper.net<span class="Constant">&quot;</span>
+<span class="FoldColumn">  </span><span class="lnr"> 710 </span>                                                              -v0<span class="Constant">.2</span>     ping@.net<span class="Constant">&quot;</span>
 <span class="FoldColumn">  </span><span class="lnr"> 711 </span><span class="Constant">    }</span>
 <span class="FoldColumn">  </span><span class="lnr"> 712 </span>
 <span class="FoldColumn">  </span><span class="lnr"> 713 </span><span class="Comment">    #start currlog_file value from initlog_file, which, was acquired in the very beginning</span>
