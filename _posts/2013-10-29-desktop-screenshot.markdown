@@ -77,3 +77,13 @@ more network topologies:
 when working in telnet/ssh sessions within VIM (via conqshell plugin):
 
 ![desktop](/images/screen-capture/Selection_257.png)
+
+work on some code ( taglist and voom )
+
+![desktop](/images/screen-capture/vim-voom-taglist.png)
+
+vim 7.4 faster syntax highlight, in a big file (over 200k+ lines):
+
+![desktop](/images/screen-capture/vim74-fast-syntax.png)
+
+
