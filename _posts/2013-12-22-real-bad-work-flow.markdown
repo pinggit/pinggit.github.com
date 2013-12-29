@@ -16,14 +16,15 @@ simple like that , right?
 OK. now the war started...
 
 oh that's an issue of my linux locale , so I need to :
+
 * just remove the chinese chars , manually, and update PR. done. and fix the
   generic linux locale issue later on.
 * why don't correct my linux locale issue (`issue#1`)? that's sth brought
   troubles from time to time...
 
-without thinking, picked 2).
+without thinking, I picked 2).
 
-that's still fine, maybe good choice .... --- only if it can be fixed in
+that's still fine, maybe good .... --- only if it can be fixed in
 not-long-time...
 
 how to fix issue#1 then?
@@ -128,7 +129,9 @@ Jesus, sima-guang, dickens , García Márquez , Salinger and Yasunari Kawabata?
 how come I ended up with 7 more issues to work on ? the worst part is, I've
 been crazily worked for a while and what's the done job?
 
-this is a full 瞎折腾. I really need to stop this kind of `hell of
-troubleshooting circle`. focus on one issue a time , prioritize, get the
-initial issue#0 resloved and don't go too far beyond at one time.  that's it.
+this is a full 瞎折腾. I think I wasted a lot of my time/life on these kind of
+circle in my work and really need to stop this type of `hell of troubleshooting
+circle`. better prioritize prior the work, just focus on one issue a time , get
+the initial issue#0 resloved and don't go too far beyond at go.  that's
+it.
 
