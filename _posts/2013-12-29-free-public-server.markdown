@@ -37,10 +37,10 @@ basically you and can create and run some virtual instance(ubuntu, redhat,
 suse,windows,etc) in the cloud and get the full control, and good thing is your
 servers are assigned with a public IP. 
 
-and it is [free][] , for [a year][]. enough to decide proceed or terminate?
+and it is [free][] , for [a year][ec2]. enough to decide proceed or terminate?
 
 
-[amazon aws service]:   http://aws.amazon.com
+[*amazon aws service*]:   http://aws.amazon.com
 [free]:                 https://aws.amazon.com/cn/free/
 [ec2]:                  https://aws.amazon.com/cn/ec2/
 
