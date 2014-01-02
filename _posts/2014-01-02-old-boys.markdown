@@ -8,6 +8,10 @@ categories: [mind]
 
 ---
 
+
+Thu Jan  2 00:53:43 EST 2014
+新年了，第一天，深夜，凌晨。
+
 <http://v.youku.com/v_show/id_XMjE4MDU1MDE2.html>
 
 <embed src="http://player.youku.com/player.php/sid/XMjE4MDU1MDE2/v.swf"
