@@ -1,0 +1,197 @@
+---
+layout: post
+title: "web automation iMacro"
+created:  2014 Jan 18 11:29:10 AM
+tags: [imarco, script]
+published: false
+---
+
+
+----
+ /*
+ this script is used to check the JNCIE seat booking website on the available seats, in an endless loop
+ and once detected it will (hopefully):
+ 1) try to "click" the first available seats 
+    (it may fail due to technical reason, but anyway it will leave the page there)
+ 2) send an email notification 
+    (open a new tab, login gmail and send an email notification, then close the tab)
+ 
+ pending issue:
+    no known way yet to make sure the seats get "clicked"
+ 
+ 	ping Sat Oct 15 16:01:20 EDT 2011
+ 	pings@suniper.net
+ 
+ updates:
+ 1) Sun Oct 16 23:06:35 EDT 2011
+ 	add dynamic startdate, enddate use fix date
+ 	add random number
+  */
+ 
+ 
+ var macro;
+ var keyword; 
+  //get current date
+ var d=new Date();
+ var startdate = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+ var enddate = (d.getMonth()+1) + "/" + (d.getDate()-1) + "/" + (d.getFullYear()+1);
+  //get a random number
+ var random=Math.floor(Math.random()*11)
+ 
+  //login to seat booking website
+ macro = "CODE:";
+ macro += "VERSION BUILD=7400919 RECORDER=FX" + "\n";
+ macro += "TAB T=1" + "\n";
+ macro += "URL GOTO=https://juniper.my-certifications.com/Sites/Candidate/Default.aspx" + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclLogIn_btnLogIn" + "\n";
+ 
+  //acceptances
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_A1" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_AcceptCancellation" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_acceptCandidate" + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_btnAccept" + "\n";
+ 
+  //region info
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n"; 
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i1_cbRegion" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i2_cbRegion" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i3_cbRegion" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+ 
+  //country info
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i1_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i2_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i3_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i4_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i5_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i6_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i7_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i8_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i9_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i10_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i11_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i12_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i13_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i14_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i15_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i16_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i17_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i18_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i19_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_Arrow" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+ 
+  //exam type
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_i3_cbExam" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_Arrow" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+ 
+  //start & end date
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpStartDate_dateInput_text CONTENT=" + startdate + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpEndDate_dateInput_text CONTENT=" + enddate + "\n";
+ 
+  //hit "get available dates" button to refresh the seats
+ macro += "TAG POS=1 TYPE=INPUT:BUTTON FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_btnGetAvailableDates" + " \n ";
+  //wait for 20s for it to be fully loaded
+ macro += "WAIT SECONDS=20" + " \n ";
+ 
+ iret = iimPlay(macro);
+ 
+ 
+ macro = "CODE:";
+ macro += "VERSION BUILD=7400919 RECORDER=FX" + "\n"; 
+ macro += "TAB T=1" + " \n ";
+ macro += "SET !TIMEOUT 1" + "\n"
+ 
+ 
+ /*
+ 'this won't work, don't know why, the right entry was "located" as blue, but no "click"
+ 'TAG POS=1 TYPE=DIV ATTR=TXT:Wait<SP>List
+ 'this was from record, it works, don't know why it's 6th...
+ 'TAG POS=6 TYPE=DIV ATTR=TXT:Wait<SP>List
+ 'TAG POS=1 TYPE=H2 ATTR=TXT:October<SP>17<SP>-<SP>October<SP>16
+ 'TAG POS=72 TYPE=DIV ATTR=TXT:
+  */
+ 
+  //execute the above actions
+ iret = iimPlay(macro);
+ 
+ /* here comes the loop */
+ /* running as long as the keyword is not found*/
+ var loopcounter = 0;
+ 
+  //search for desired keyword in the extracted webpage
+ while ( iimGetLastExtract().search("Select Date") == -1 )
+ {
+    loopcounter ++;
+    //update start date in every loop before checking the seat
+    d=new Date();
+    startdate = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+    iimDisplay("we are now in Loop #" + loopcounter);
+    macro = "CODE:";
+    macro +=  "SET !TIMEOUT_TAG 1" + "\n";
+    macro +=  "FRAME F=0" + " \n ";
+    
+    //fill the new dates
+    macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpStartDate_dateInput_text CONTENT=" + startdate + "\n";
+ 
+    //click the "available date" button to refresh the seat info
+    macro += "TAG POS=1 TYPE=INPUT:BUTTON FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_btnGetAvailableDates" + " \n ";
+    
+    //and then wait for some time between 20s ~ 30s
+    random=Math.floor(Math.random()*11)
+    macro += "WAIT SECONDS=" + (20+random) + " \n ";
+ 
+    //for test only
+    //macro += "URL GOTO=file:///Users/Shared/Dropbox/scrapbook/data/20110727173623/index.html" + " \n ";
+ 
+    //extract all text info in the whole new webpage
+    macro += "TAG POS=1 TYPE=HTML ATTR=* EXTRACT=TXT" + " \n ";
+  //       macro +=  "TAG POS=R1 TYPE=DIV ATTR=ALIGN:left&&TXT:iMacros<SP>is<SP>the* EXTRACT=TXT" + " \n ";
+    iret = iimPlay(macro)   
+ }
+ 
+  //once "Select Date" (means new seats) got detected, click it
+ 
+ macro = "CODE:TAG POS=1 TYPE=DIV ATTR=TXT:Select<SP>Date" + " \n ";
+ 
+  //for test only, let me look if the entry was marked or clicked
+  //macro += "WAIT SECONDS=10" + "\n";
+ 
+ iret = iimPlay(macro)   
+ 
+  //open a new tab and send an email
+ macro = "CODE:";
+ macro += "VERSION BUILD=7401004 RECORDER=FX" + " \n ";
+ macro += "TAB OPEN" + " \n ";
+ macro += "TAB T=2" + " \n ";
+ macro += "URL GOTO=http://www.google.com/search?q=gmail&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a" + " \n ";
+ macro += "TAG POS=1 TYPE=A ATTR=TXT:Gmail:<SP>Email<SP>from<SP>Google" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://accounts.google.com/ServiceLoginAuth ATTR=ID:Email CONTENT=songpingemail@gmail.com" + " \n ";
+ macro += "SET !ENCRYPTION NO" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:https://accounts.google.com/ServiceLoginAuth ATTR=ID:Passwd CONTENT=Songping1#" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:gaia_loginform ATTR=ID:signIn" + " \n ";
+ 
+  //this is the key here, use "basic HTML view" instead of the default view
+  //iMacros has problem to automate default gmail view,as confirmed in their support site
+ macro += "URL GOTO=http://mail.google.com/mail/?ui=html&zy=d" + " \n ";
+ 
+ macro += "TAG POS=1 TYPE=A ATTR=TXT:Compose<SP>Mail" + " \n ";
+ macro += "TAG POS=1 TYPE=TEXTAREA FORM=NAME:f ATTR=ID:to CONTENT=songpingemail@gmail.com" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:f ATTR=NAME:subject CONTENT=!!!NewSeatsAreAvailableCheckItASAP!!!" + " \n ";
+ macro += "TAG POS=1 TYPE=TEXTAREA FORM=NAME:f ATTR=NAME:body CONTENT=NewSeatsAreAvailableCheckItASAP" + " \n ";
+ macro += "TAG POS=2 TYPE=INPUT:SUBMIT FORM=NAME:f ATTR=NAME:nvp_bu_send&&VALUE:Send" + " \n ";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:gb_71" + " \n ";
+ 
+  //close email tab and go back to the seat tab, so I can see the page when seats are a/v
+ macro += "TAB CLOSE" + " \n "; 
+ macro += "TAB T=1" + " \n ";
+ 
+ 
+ iret = iimPlay(macro)   
+ 
+----

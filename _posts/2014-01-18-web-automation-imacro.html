@@ -1,0 +1,851 @@
+---
+layout: post
+title: "web automation iMacro"
+created:  2014 Jan 18 11:29:28 AM
+tags: [imarco, script]
+categories: [tech]
+published: true
+---
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title></title>
+<style type="text/css">
+/*
+ * AsciiDoc 'volnitsky' theme for xhtml11 and html5 backends.
+ * Based on css from http://volnitsky.com, which was in turn based on default
+ * theme from AsciiDoc
+ *
+ * FIXME: The styling is still a bit rough in places.
+ *
+ */
+
+/* Default font. */
+body {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Candara,Arial,sans-serif;
+}
+
+
+#toc a {
+    border-bottom: 1px dotted #999999;
+    color: #3A3A4D !important;
+    text-decoration: none !important;
+}
+#toc a:hover {
+    border-bottom: 1px solid #6D4100;
+    color: #6D4100 !important;
+    text-decoration: none !important;
+}
+a { color: #666688; text-decoration: none; border-bottom: 1px dotted #666688; }
+a:visited { color: #615FA0; border-bottom: 1px dotted #615FA0; }
+a:hover { color: #6D4100; border-bottom: 1px solid #6D4100; }
+
+em {
+  font-style: italic;
+  color: #444466;
+}
+
+strong {
+  font-weight: bold;
+  color: #444466;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #666688;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+  letter-spacing:+0.15em;
+}
+
+h1, h2, h3 { border-bottom: 2px solid #ccd; }
+h2 { padding-top: 0.5em; }
+h3 { float: left; }
+h3 + * { clear: left; }
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid #444466;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #444466;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #444466;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.verseblock > pre.content {
+  font-family: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #444466;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: #444466;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #444466;
+}
+thead {
+  font-weight: bold;
+  color: #444466;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: #444466;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toctitle {
+  color: #666688;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 { margin-top: 0; margin-bottom: 0; }
+div.toclevel1 { margin-top: 0.3em; margin-left: 0; font-size: 1.0em; }
+div.toclevel2 { margin-top: 0.25em; margin-left: 2em; font-size: 0.9em; }
+div.toclevel3 { margin-left: 4em; font-size: 0.8em; }
+div.toclevel4 { margin-left: 6em; font-size: 0.8em; }
+
+body {
+  margin: 1em 5%;
+  max-width:  55em;
+  padding-left: 0;
+
+}
+
+.monospaced, tt, div.listingblock > div.content {
+  font-family:  Consolas, "Andale Mono", "Courier New", monospace;
+  color: #004400;
+  background: #f4f4f4;
+  max-width: 80em;
+  line-height: 1.2em;
+}
+
+.paragraph p  {
+  line-height: 1.5em;
+  margin-top: 1em;
+}
+
+.paragraph p, li, dd, .content { max-width: 45em; }
+.admonitionblock               { max-width: 35em; }
+
+div.sectionbody div.ulist > ul > li {
+  list-style-type: square;
+  color: #aaa;
+}
+  div.sectionbody div.ulist >  ul > li > * {
+    color: black;
+    /*font-size: 50%;*/
+  }
+
+
+div.sectionbody div.ulist > ul > li div.ulist > ul > li {
+  color: #ccd ;
+}
+  div.sectionbody div.ulist > ul > li div.ulist > ul > li > * {
+    color: black ;
+  }
+
+em {
+  font-style: normal ! important;
+  font-weight: bold ! important;
+  color: #662222   ! important;
+  letter-spacing:+0.08em ! important;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #666688;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #444466;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #444466;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="book" style="max-width:85em">
+<div id="header">
+</div>
+<div id="content">
+<div class="listingblock">
+<div class="content">
+<pre><code> /*
+ this script is used to check the JNCIE seat booking website on the available seats, in an endless loop
+ and once detected it will (hopefully):
+ 1) try to "click" the first available seats
+    (it may fail due to technical reason, but anyway it will leave the page there)
+ 2) send an email notification
+    (open a new tab, login gmail and send an email notification, then close the tab)
+
+ pending issue:
+    no known way yet to make sure the seats get "clicked"
+
+        ping Sat Oct 15 16:01:20 EDT 2011
+        pings@suniper.net
+
+ updates:
+ 1) Sun Oct 16 23:06:35 EDT 2011
+        add dynamic startdate, enddate use fix date
+        add random number
+  */
+
+
+ var macro;
+ var keyword;
+  //get current date
+ var d=new Date();
+ var startdate = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+ var enddate = (d.getMonth()+1) + "/" + (d.getDate()-1) + "/" + (d.getFullYear()+1);
+  //get a random number
+ var random=Math.floor(Math.random()*11)
+
+  //login to seat booking website
+ macro = "CODE:";
+ macro += "VERSION BUILD=7400919 RECORDER=FX" + "\n";
+ macro += "TAB T=1" + "\n";
+ macro += "URL GOTO=https://juniper.my-certifications.com/Sites/Candidate/Default.aspx" + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclLogIn_btnLogIn" + "\n";
+
+  //acceptances
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_A1" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_AcceptCancellation" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_acceptCandidate" + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_btnAccept" + "\n";
+
+  //region info
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i1_cbRegion" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i2_cbRegion" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbRegions_i3_cbRegion" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+
+  //country info
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i1_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i2_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i3_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i4_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i5_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i6_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i7_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i8_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i9_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i10_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i11_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i12_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i13_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i14_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i15_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i16_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i17_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i18_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_i19_cbCountry" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbCountries_Arrow" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+
+  //exam type
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_Arrow" + "\n";
+ macro += "TAG POS=1 TYPE=LABEL ATTR=ID:_rfdSkinnedctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_i3_cbExam" + "\n";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_cbExams_Arrow" + "\n";
+ macro += "WAIT SECONDS=5" + "\n";
+
+  //start &amp; end date
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpStartDate_dateInput_text CONTENT=" + startdate + "\n";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpEndDate_dateInput_text CONTENT=" + enddate + "\n";
+
+  //hit "get available dates" button to refresh the seats
+ macro += "TAG POS=1 TYPE=INPUT:BUTTON FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_btnGetAvailableDates" + " \n ";
+  //wait for 20s for it to be fully loaded
+ macro += "WAIT SECONDS=20" + " \n ";
+
+ iret = iimPlay(macro);
+
+
+ macro = "CODE:";
+ macro += "VERSION BUILD=7400919 RECORDER=FX" + "\n";
+ macro += "TAB T=1" + " \n ";
+ macro += "SET !TIMEOUT 1" + "\n"
+
+
+ /*
+ 'this won't work, don't know why, the right entry was "located" as blue, but no "click"
+ 'TAG POS=1 TYPE=DIV ATTR=TXT:Wait&lt;SP&gt;List
+ 'this was from record, it works, don't know why it's 6th...
+ 'TAG POS=6 TYPE=DIV ATTR=TXT:Wait&lt;SP&gt;List
+ 'TAG POS=1 TYPE=H2 ATTR=TXT:October&lt;SP&gt;17&lt;SP&gt;-&lt;SP&gt;October&lt;SP&gt;16
+ 'TAG POS=72 TYPE=DIV ATTR=TXT:
+  */
+
+  //execute the above actions
+ iret = iimPlay(macro);
+
+ /* here comes the loop */
+ /* running as long as the keyword is not found*/
+ var loopcounter = 0;
+
+  //search for desired keyword in the extracted webpage
+ while ( iimGetLastExtract().search("Select Date") == -1 )
+ {
+    loopcounter ++;
+    //update start date in every loop before checking the seat
+    d=new Date();
+    startdate = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+    iimDisplay("we are now in Loop #" + loopcounter);
+    macro = "CODE:";
+    macro +=  "SET !TIMEOUT_TAG 1" + "\n";
+    macro +=  "FRAME F=0" + " \n ";
+
+    //fill the new dates
+    macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:FindanExam.aspx ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_dpStartDate_dateInput_text CONTENT=" + startdate + "\n";
+
+    //click the "available date" button to refresh the seat info
+    macro += "TAG POS=1 TYPE=INPUT:BUTTON FORM=ID:aspnetForm ATTR=ID:ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_uclExamRegistration_btnGetAvailableDates" + " \n ";
+
+    //and then wait for some time between 20s ~ 30s
+    random=Math.floor(Math.random()*11)
+    macro += "WAIT SECONDS=" + (20+random) + " \n ";
+
+    //for test only
+    //macro += "URL GOTO=file:///Users/Shared/Dropbox/scrapbook/data/20110727173623/index.html" + " \n ";
+
+    //extract all text info in the whole new webpage
+    macro += "TAG POS=1 TYPE=HTML ATTR=* EXTRACT=TXT" + " \n ";
+  //       macro +=  "TAG POS=R1 TYPE=DIV ATTR=ALIGN:left&amp;&amp;TXT:iMacros&lt;SP&gt;is&lt;SP&gt;the* EXTRACT=TXT" + " \n ";
+    iret = iimPlay(macro)
+ }
+
+  //once "Select Date" (means new seats) got detected, click it
+
+ macro = "CODE:TAG POS=1 TYPE=DIV ATTR=TXT:Select&lt;SP&gt;Date" + " \n ";
+
+  //for test only, let me look if the entry was marked or clicked
+  //macro += "WAIT SECONDS=10" + "\n";
+
+ iret = iimPlay(macro)
+
+  //open a new tab and send an email
+ macro = "CODE:";
+ macro += "VERSION BUILD=7401004 RECORDER=FX" + " \n ";
+ macro += "TAB OPEN" + " \n ";
+ macro += "TAB T=2" + " \n ";
+ macro += "URL GOTO=http://www.google.com/search?q=gmail&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=org.mozilla:en-US:official&amp;client=firefox-a" + " \n ";
+ macro += "TAG POS=1 TYPE=A ATTR=TXT:Gmail:&lt;SP&gt;Email&lt;SP&gt;from&lt;SP&gt;Google" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=ACTION:https://accounts.google.com/ServiceLoginAuth ATTR=ID:Email CONTENT=songpingemail@gmail.com" + " \n ";
+ macro += "SET !ENCRYPTION NO" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:PASSWORD FORM=ACTION:https://accounts.google.com/ServiceLoginAuth ATTR=ID:Passwd CONTENT=Songping1#" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:SUBMIT FORM=ID:gaia_loginform ATTR=ID:signIn" + " \n ";
+
+  //this is the key here, use "basic HTML view" instead of the default view
+  //iMacros has problem to automate default gmail view,as confirmed in their support site
+ macro += "URL GOTO=http://mail.google.com/mail/?ui=html&amp;zy=d" + " \n ";
+
+ macro += "TAG POS=1 TYPE=A ATTR=TXT:Compose&lt;SP&gt;Mail" + " \n ";
+ macro += "TAG POS=1 TYPE=TEXTAREA FORM=NAME:f ATTR=ID:to CONTENT=songpingemail@gmail.com" + " \n ";
+ macro += "TAG POS=1 TYPE=INPUT:TEXT FORM=NAME:f ATTR=NAME:subject CONTENT=!!!NewSeatsAreAvailableCheckItASAP!!!" + " \n ";
+ macro += "TAG POS=1 TYPE=TEXTAREA FORM=NAME:f ATTR=NAME:body CONTENT=NewSeatsAreAvailableCheckItASAP" + " \n ";
+ macro += "TAG POS=2 TYPE=INPUT:SUBMIT FORM=NAME:f ATTR=NAME:nvp_bu_send&amp;&amp;VALUE:Send" + " \n ";
+ macro += "TAG POS=1 TYPE=A ATTR=ID:gb_71" + " \n ";
+
+  //close email tab and go back to the seat tab, so I can see the page when seats are a/v
+ macro += "TAB CLOSE" + " \n ";
+ macro += "TAB T=1" + " \n ";
+
+
+ iret = iimPlay(macro)</code></pre>
+</div></div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-01-18 11:28:31 EST
+</div>
+</div>
+</body>
+</html>
