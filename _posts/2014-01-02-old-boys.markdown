@@ -100,9 +100,12 @@ allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
                   Are you still beautiful and lovely, as the girl in my memory
                                  Have you realized your dreams
                                Maybe we'll let bygones be bygones
-                       However hard I may try, I cannot find my true self
-            A million stars are twinkling in the sky, and I try to find out the one
-                   That used to stay by me, oh my dear companion of yesterday
+                       However hard I may try, 
+                       I cannot find my true self
+            A million stars are twinkling in the sky, 
+            and I try to find out the one
+                   That used to stay by me, 
+                   oh my dear companion of yesterday
                        Do you still remember the time we shared together
                        Life, like a sculptor's graver, cold and ruthless
                                      has changed our shape
@@ -117,8 +120,10 @@ allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
                                  Have you realized your dreams
                                Maybe we'll let bygones be bygones
                        However hard I may try, I cannot find my true self
-            A million stars are twinkling in the sky, and I try to find out the one
-                   That used to stay by me, oh my dear companion of yesterday
+            A million stars are twinkling in the sky, 
+            and I try to find out the one
+                   That used to stay by me, 
+                   oh my dear companion of yesterday
                         Do you still remember the happening here before
              If tomorrow ever comes, I'll send my best wishes to you, my dear girl
 
