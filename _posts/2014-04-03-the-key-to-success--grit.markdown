@@ -43,7 +43,12 @@ teachers are still going to be here in teaching by the end of the school year,
 and of those, who will be the most effective at improving learning outcomes for
 their students?  We partnered with private companies, asking, which of these
 salespeople is going to keep their jobs?  And who's going to earn the most
-money?  In all those very different contexts, one characteristic emerged as a
+money?  
+
+    *[kә'det]
+    n. 军官学校学生
+
+In all those very different contexts, one characteristic emerged as a
 significant predictor of success.  And it wasn't social intelligence.  It
 wasn't good looks, physical health, and it wasn't I.Q.  It was grit.  Grit is
 passion and perseverance for very long-term goals.  Grit is having stamina.
