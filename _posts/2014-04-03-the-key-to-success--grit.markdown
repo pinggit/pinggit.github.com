@@ -58,7 +58,12 @@ just for the month, but for years, and working really hard to make that future
 a reality.  Grit is living life like it's a marathon, not a sprint.  A few
 years ago, I started studying grit in the Chicago public schools.  I asked
 thousands of high school juniors to take grit questionnaires, and then waited
-around more than a year to see who would graduate.  Turns out that grittier
+around more than a year to see who would graduate.  
+
+    *['stæminә]
+    n. 精力, 活力, 耐力, 雄蕊
+
+Turns out that grittier
 kids were significantly more likely to graduate, even when I matched them on
 every characteristic I could measure, things like family income, standardized
 achievement test scores, even how safe kids felt when they were at school.  So
