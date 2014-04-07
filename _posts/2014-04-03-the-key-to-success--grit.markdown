@@ -32,22 +32,22 @@ but what if doing well in school and in life depends on much more than your
 ability to learn quickly and easily?  So I left the classroom, and I went to
 graduate school to become a psychologist.  I started studying kids and adults
 in all kinds of super challenging settings, and in every study my question was,
-who is successful here and why?  My research team and I went to West Point
-Military Academy.  We tried to predict which cadets would stay in military
-training and which would drop out.  We went to the National Spelling Bee and
-tried to predict which children would advance farthest in competition.  We
-studied rookie teachers working in really tough neighborhoods, asking which
-teachers are still going to be here in teaching by the end of the school year,
-and of those, who will be the most effective at improving learning outcomes for
-their students?  We partnered with private companies, asking, which of these
-salespeople is going to keep their jobs?  And who's going to earn the most
-money?  
+who is successful here and why?  
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/H14bBuluwB8" frameborder="0" allowfullscreen></iframe>
+
+My research team and I went to West Point Military Academy.  We tried to
+predict which cadets would stay in military training and which would drop out.
+We went to the National Spelling Bee and tried to predict which children would
+advance farthest in competition.  We studied rookie teachers working in really
+tough neighborhoods, asking which teachers are still going to be here in
+teaching by the end of the school year, and of those, who will be the most
+effective at improving learning outcomes for their students?  We partnered with
+private companies, asking, which of these salespeople is going to keep their
+jobs?  And who's going to earn the most money?  
 
     *[kә'det]
     n. 军官学校学生
-
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/H14bBuluwB8" frameborder="0" allowfullscreen></iframe>
 
 In all those very different contexts, one characteristic emerged as a
 significant predictor of success.  And it wasn't social intelligence.  It
