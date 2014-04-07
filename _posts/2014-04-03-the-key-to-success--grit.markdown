@@ -60,24 +60,23 @@ years ago, I started studying grit in the Chicago public schools.  I asked
 thousands of high school juniors to take grit questionnaires, and then waited
 around more than a year to see who would graduate.  
 
-    *['stæminә]
-    n. 精力, 活力, 耐力, 雄蕊
-
-Turns out that grittier
-kids were significantly more likely to graduate, even when I matched them on
-every characteristic I could measure, things like family income, standardized
-achievement test scores, even how safe kids felt when they were at school.  So
-it's not just at West Point or the National Spelling Bee that grit matters.
-It's also in school, especially for kids at risk for dropping out.  To me, the
-most shocking thing about grit is how little we know, how little science knows,
-about building it.  Every day, parents and teachers ask me, "How do I build
-grit in kids?  What do I do to teach kids a solid work ethic?  How do I keep
-them motivated for the long run?" The honest answer is, I don't know.
-(Laughter) What I do know is that talent doesn't make you gritty.  Our data
-show very clearly that there are many talented individuals who simply do not
-follow through on their commitments.  In fact, in our data, grit is usually
-unrelated or even inversely related to measures of talent.  So far, the best
-idea I've heard about building grit in kids is something called "growth
+    *['stæminә]                         *['mærәθәn]
+    n. 精力, 活力, 耐力, 雄蕊           n. 马拉松, 耐力的考验
+    
+Turns out that grittier kids were significantly more likely to graduate, even
+when I matched them on every characteristic I could measure, things like family
+income, standardized achievement test scores, even how safe kids felt when they
+were at school.  So it's not just at West Point or the National Spelling Bee
+that grit matters.  It's also in school, especially for kids at risk for
+dropping out.  To me, the most shocking thing about grit is how little we know,
+how little science knows, about building it.  Every day, parents and teachers
+ask me, "How do I build grit in kids?  What do I do to teach kids a solid work
+ethic?  How do I keep them motivated for the long run?" The honest answer is, I
+don't know.  (Laughter) What I do know is that talent doesn't make you gritty.
+Our data show very clearly that there are many talented individuals who simply
+do not follow through on their commitments.  In fact, in our data, grit is
+usually unrelated or even inversely related to measures of talent.  So far, the
+best idea I've heard about building grit in kids is something called "growth
 mindset." This is an idea developed at Stanford University by Carol Dweck, and
 it is the belief that the ability to learn is not fixed, that it can change
 with your effort.  Dr. Dweck has shown that when kids read and learn about the
