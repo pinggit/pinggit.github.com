@@ -19,7 +19,12 @@ between my best and my worst students.  Some of my strongest performers did not
 have stratospheric I.Q. scores.  Some of my smartest kids weren't doing so
 well.  And that got me thinking.  The kinds of things you need to learn in
 seventh grade math, sure, they're hard: ratios, decimals, the area of a
-parallelogram.  But these concepts are not impossible, and I was firmly
+parallelogram.  
+
+    *[,strætәu'sferik]  *[,pærә'lelәgræm]
+    a. 同温层的         n. 平行四边形
+
+But these concepts are not impossible, and I was firmly
 convinced that every one of my students could learn the material if they worked
 hard and long enough.  After several more years of teaching, I came to the
 conclusion that what we need in education is a much better understanding of
