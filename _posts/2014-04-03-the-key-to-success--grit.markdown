@@ -8,8 +8,6 @@ categories: [mind,english]
 
 ---
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/H14bBuluwB8" frameborder="0" allowfullscreen></iframe>
-
 When I was 27 years old, I left a very demanding job in management consulting
 for a job that was even more demanding: teaching.  I went to teach seventh
 graders math in the New York City public schools.  And like any teacher, I made
@@ -47,6 +45,9 @@ money?
 
     *[kә'det]
     n. 军官学校学生
+
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/H14bBuluwB8" frameborder="0" allowfullscreen></iframe>
 
 In all those very different contexts, one characteristic emerged as a
 significant predictor of success.  And it wasn't social intelligence.  It
