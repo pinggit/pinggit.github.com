@@ -60,9 +60,9 @@ years ago, I started studying grit in the Chicago public schools.  I asked
 thousands of high school juniors to take grit questionnaires, and then waited
 around more than a year to see who would graduate.  
 
-    *['stæminә]                         *['mærәθәn]
-    n. 精力, 活力, 耐力, 雄蕊           n. 马拉松, 耐力的考验
-    
+    *['stæminә]                *['mærәθәn]              sprint [sprɪnt]
+    n. 精力, 活力, 耐力, 雄蕊  n. 马拉松, 耐力的考验    n. 冲刺；短跑 vt. 全速奔跑
+
 Turns out that grittier kids were significantly more likely to graduate, even
 when I matched them on every characteristic I could measure, things like family
 income, standardized achievement test scores, even how safe kids felt when they
