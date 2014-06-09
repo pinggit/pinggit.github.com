@@ -15,7 +15,7 @@ categories: [life]
 
 ## 结果
 
-![robster](/images/robster.JPG "robster")
+![lobster](/images/lobster.JPG "lobster")
 
 ## 做法总结
 
