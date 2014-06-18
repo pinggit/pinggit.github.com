@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "rou-chao-suan-tai"
-published: false
+published: true
 created:  2014 Jun 18 12:10:10 AM
-tags: [life]
-categories: [tech]
+tags: [菜谱]
+categories: [life]
 
 ---
 
