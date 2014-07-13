@@ -17,4 +17,4 @@ categories: [tech]
 
 # 结果
 
-![土豆烧茄子](/images/tudou-qiezi.JPG "土豆烧茄子")
+![土豆烧茄子](/images/caipu-recipe/tudou-qiezi.jpg "土豆烧茄子")

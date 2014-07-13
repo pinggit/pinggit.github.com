@@ -9,4 +9,4 @@ categories: [tech]
 ---
 
 
-![kaochi](/images/kaochi-chicken-wings.JPG "kaochi")
+![kaochi](/images/caipu-recipe/kaochi-chicken-wings.jpg "kaochi")

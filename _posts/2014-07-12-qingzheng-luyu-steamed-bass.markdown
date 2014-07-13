@@ -12,6 +12,6 @@ categories: [life]
 
 # 结果
 
-![steamed-bass](/images/steamed-bass-qingzheng-luyu.JPG "steamed-bass")
-![steamed-bass](/images/alldone.JPG "alldone")
+![steamed-bass](/images/caipu-recipe/steamed-bass-qingzheng-luyu.jpg "steamed-bass")
+![steamed-bass](/images/caipu-recipe/alldone.jpg "alldone")
 

@@ -8,5 +8,4 @@ categories: [tech]
 
 ---
 
-![tudou-doujiao-paigu](/images/tudou-doujiao-paigu.JPG "tudou-doujiao-paigu")
-
+![tudou-doujiao-paigu](/images/caipu-recipe/tudou-doujiao-paigu.jpg "tudou-doujiao-paigu")

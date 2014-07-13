@@ -9,4 +9,4 @@ categories: [tech]
 ---
 
 
-![hongshao-zhuti-pig-feet-in-soy-sauce](/images/hongshao-zhuti-pig-feet-in-soy-sauce.JPG "hongshao-zhuti-pig-feet-in-soy-sauce")
+![hongshao-zhuti-pig-feet-in-soy-sauce](/images/caipu-recipe/hongshao-zhuti-pig-feet-in-soy-sauce.jpg "hongshao-zhuti-pig-feet-in-soy-sauce")

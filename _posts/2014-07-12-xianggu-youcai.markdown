@@ -19,4 +19,4 @@ categories: [tech]
 
 # 结果
 
-![xianggu-youcai](/images/xianggu-youcai.JPG "xianggu-youcai")
+![xianggu-youcai](/images/caipu-recipe/xianggu-youcai.jpg "xianggu-youcai")

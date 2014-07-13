@@ -9,4 +9,4 @@ categories: [tech]
 ---
 
 
-![pig tongue](/images/luzhushe-pig-tongue.JPG "pig tongue")
+![pig tongue](/images/caipu-recipe/luzhushe-pig-tongue.jpg "pig tongue")

@@ -11,5 +11,5 @@ categories: [tech]
 
 # (2014-06-21):
 
-![hongshao-luyu-bass-in-soy-sauce](/images/hongshao-luyu-bass-in-soy-sauce.jpg "hongshao-luyu-bass-in-soy-sauce.jpg")
+![hongshao-luyu-bass-in-soy-sauce](/images/caipu-recipe/hongshao-luyu-bass-in-soy-sauce.jpg "hongshao-luyu-bass-in-soy-sauce.jpg")
 

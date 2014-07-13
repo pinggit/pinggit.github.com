@@ -8,5 +8,4 @@ categories: [tech]
 
 ---
 
-![jiyu-doufu-tang](/images/jiyu-doufu-tang.JPG "jiyu-doufu-tang")
-
+![jiyu-doufu-tang](/images/caipu-recipe/jiyu-doufu-tang.jpg "jiyu-doufu-tang")
