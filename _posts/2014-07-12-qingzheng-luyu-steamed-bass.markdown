@@ -13,3 +13,5 @@ categories: [life]
 # 结果
 
 ![steamed-bass](/images/steamed-bass-qingzheng-luyu.JPG "steamed-bass")
+![steamed-bass](/images/alldone.JPG "alldone")
+

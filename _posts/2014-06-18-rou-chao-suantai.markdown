@@ -21,3 +21,8 @@ categories: [life]
 ![rou-chao-suan-tai](/images/suantai.JPG "suantai")
 
 
+(2014-06-26):
+
+![suantai-garlic-sprout-2](/images/suantai-garlic-sprout-2.JPG "suantai")
+
+
