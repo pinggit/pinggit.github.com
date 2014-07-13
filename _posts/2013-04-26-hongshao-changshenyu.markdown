@@ -8,12 +8,12 @@ categories: [life]
 
 ---
 
-![hongshao-changshenyu](/images/hongshao-changshenyu-1024x768.JPG "hongshao-changshenyu")
-![hongshao-pompano](/images/hongshao-pompano-1024x768.JPG "hongshao-pompano")
+![hongshao-changshenyu](/images/caipu-recipe/hongshao-changshenyu-1024x768.JPG "hongshao-changshenyu")
+![hongshao-pompano](/images/caipu-recipe/hongshao-pompano-1024x768.JPG "hongshao-pompano")
 
 # (2014-06-22):
 
-![hongshao-pompano](/images/hongshao-changshenyu-pompano-in-soy-sauce-2.jpg "hongshao-changshenyu-pompano-in-soy-sauce-2.jpg")
+![hongshao-pompano](/images/caipu-recipe/hongshao-changshenyu-pompano-in-soy-sauce-2.jpg "hongshao-changshenyu-pompano-in-soy-sauce-2.jpg")
 
 
 # (2014-07-4): 

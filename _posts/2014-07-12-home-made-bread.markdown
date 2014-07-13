@@ -9,4 +9,4 @@ categories: [tech]
 ---
 
 
-![home-made-bread](/images/home-made-bread.JPG "home-made-bread")
+![home-made-bread](/images/caipu-recipe/home-made-bread.JPG "home-made-bread")

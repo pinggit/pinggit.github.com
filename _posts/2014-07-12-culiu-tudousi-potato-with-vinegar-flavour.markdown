@@ -9,5 +9,5 @@ categories: [tech]
 ---
 
 
-![culiu-tudousi-potato-with-vinegar-flavour](/images/culiu-tudousi-potato-with-vinegar-flavour.jpg "culiu-tudousi-potato-with-vinegar-flavour")
+![culiu-tudousi-potato-with-vinegar-flavour](/images/caipu-recipe/culiu-tudousi-potato-with-vinegar-flavour.jpg "culiu-tudousi-potato-with-vinegar-flavour")
 
