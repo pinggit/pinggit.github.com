@@ -1,5 +1,15 @@
 ---
 layout: post
+title: "hongshao-zhuti-pig-feet-in-soy-sauce"
+published: false
+created:  2014 Jul 12 10:57:18 PM
+tags: [life]
+categories: [tech]
+
+---
+
+---
+layout: post
 title: "清蒸大龙虾"
 published: true
 created:  2014 Jun 08 08:48:46 PM
@@ -39,4 +49,12 @@ categories: [life]
 * 龙虾美味，感觉比饭馆吃过的好多了。吃完后，盘内的汤汁味道更鲜，我用来又下了一
   碗白饭还有余。
 * 一只新鲜活的大龙虾才不到10块，天天吃貌似也不贵 － 只要吃不腻/吐。
+
+## (2014-07-12) 
+
+好运来买来的母大龙虾，规格比之前的更大，但吃起来却并不更香（虽然也很好吃）
+总结起来，还是常规大小的母虾好吃。
+
+![lobster](/images/steamed-lobster-qingzheng-dalongxia-1.JPG "lobster")
+![lobster](/images/steamed-lobster-qingzheng-dalongxia-2.JPG "lobster")
 
