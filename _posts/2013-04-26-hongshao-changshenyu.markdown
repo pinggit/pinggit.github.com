@@ -23,6 +23,5 @@ categories: [life]
 3. 煮滚后调小火焖煮15分钟，中间鱼翻转一面。 
 4. 调中火收汁，淋香油即可出锅
 
-![hongshao-pompano](/images/caipu-recipe/hongshao-changshenyu-pompano-in-soy-sauce-2.jpg "hongshao-changshenyu-pompano-in-soy-sauce-3.jpg")
-
+![hongshao-pompano](/images/caipu-recipe/hongshao-changshenyu-pompano-in-soy-sauce-3.jpg "hongshao-changshenyu-pompano-in-soy-sauce-3.jpg")
 
