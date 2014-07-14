@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "culiu-tudousi-potato-with-vinegar-flavour"
+title: "醋溜土豆丝potato-with-vinegar-flavour"
 published: true
 created:  2014 Jun 22
 tags: [菜谱]
