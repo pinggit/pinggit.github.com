@@ -8,5 +8,5 @@ categories: [life]
 
 ---
 
-![baicai-doufu-tang-chinese-cabbage-tofu-soup](/images/caipu-recipe/baicai-doufu-tang-chinese-cabbage-tofu-soup.jpg "baicai-doufu-tang-chinese-cabbage-tofu-soup")
+![baicai-doufu-tang-chinese-cabbage-tofu-soup](/images/caipu-recipe/baicai-doufu-tang-chinese-cabbage-tofu-soup-1.jpg "baicai-doufu-tang-chinese-cabbage-tofu-soup")
 ![baicai-doufu-tang-chinese-cabbage-tofu-soup](/images/caipu-recipe/baicai-doufu-tang-chinese-cabbage-tofu-soup-2.jpg "baicai-doufu-tang-chinese-cabbage-tofu-soup")
