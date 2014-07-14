@@ -48,4 +48,3 @@ categories: [life]
 ![lobster](/images/caipu-recipe/steamed-lobster-qingzheng-dalongxia-0.JPG "lobster")
 ![lobster](/images/caipu-recipe/steamed-lobster-qingzheng-dalongxia-1.JPG "lobster")
 ![lobster](/images/caipu-recipe/steamed-lobster-qingzheng-dalongxia-2.JPG "lobster")
-
