@@ -1,15 +1,5 @@
 ---
 layout: post
-title: "hongshao-zhuti-pig-feet-in-soy-sauce"
-published: false
-created:  2014 Jul 12 10:57:18 PM
-tags: [life]
-categories: [tech]
-
----
-
----
-layout: post
 title: "清蒸大龙虾"
 published: true
 created:  2014 Jun 08 08:48:46 PM
