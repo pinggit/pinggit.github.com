@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "hongshao-luyu-bass-in-soy-sauce"
-published: false
+title: "红烧鲈鱼"
+published: true
 created:  2014 Jun 21 10:01:02 PM
-tags: [life]
+tags: [菜谱]
 categories: [tech]
 
 ---
