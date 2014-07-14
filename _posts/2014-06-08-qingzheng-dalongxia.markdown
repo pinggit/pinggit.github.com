@@ -45,6 +45,6 @@ categories: [life]
 好运来买来的母大龙虾，规格比之前的更大，但吃起来却并不更香（虽然也很好吃）
 总结起来，还是常规大小的母虾好吃。
 
-![lobster](/images/steamed-lobster-qingzheng-dalongxia-1.JPG "lobster")
-![lobster](/images/steamed-lobster-qingzheng-dalongxia-2.JPG "lobster")
+![lobster](/images/caipu-recipe/steamed-lobster-qingzheng-dalongxia-1.JPG "lobster")
+![lobster](/images/caipu-recipe/steamed-lobster-qingzheng-dalongxia-2.JPG "lobster")
 
