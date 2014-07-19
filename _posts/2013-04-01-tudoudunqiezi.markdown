@@ -3,7 +3,7 @@ layout: post
 title: "土豆炖茄子"
 published: true
 created:  2013 Apr 01 01:43:39 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

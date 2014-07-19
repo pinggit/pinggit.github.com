@@ -3,7 +3,7 @@ layout: post
 title: "白菜豆腐汤 baicai-doufu-tang-chinese-cabbage-tofu-soup"
 published: true
 created:  2013 Jun 22
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

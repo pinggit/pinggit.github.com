@@ -3,7 +3,7 @@ layout: post
 title: "红烧罗非鱼"
 published: true
 created:  2013 Apr 26 04:15:24 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

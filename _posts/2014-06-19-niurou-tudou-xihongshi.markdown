@@ -3,7 +3,7 @@ layout: post
 title: "牛肉土豆西红柿"
 published: true
 created:  2014 Jun 19
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

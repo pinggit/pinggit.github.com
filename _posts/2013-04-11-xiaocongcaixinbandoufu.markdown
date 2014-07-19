@@ -3,7 +3,7 @@ layout: post
 title: "小葱菜心拌豆腐"
 published: true
 created:  2013 Apr 11 03:49:53 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

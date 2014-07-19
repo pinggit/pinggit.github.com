@@ -3,7 +3,7 @@ layout: post
 title: "火爆腰花"
 published: true
 created:  2013 Mar 29 05:53:31 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

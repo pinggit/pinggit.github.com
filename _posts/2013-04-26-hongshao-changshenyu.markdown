@@ -3,7 +3,7 @@ layout: post
 title: "红烧鲳参鱼(pampano)"
 published: true
 created:  2013 Apr 26 04:10:31 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

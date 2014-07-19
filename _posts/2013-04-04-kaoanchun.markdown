@@ -3,7 +3,7 @@ layout: post
 title: "烤鹌鹑"
 published: true
 created:  2013 Apr 04 07:02:38 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

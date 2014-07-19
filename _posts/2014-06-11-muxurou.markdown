@@ -3,7 +3,7 @@ layout: post
 title: "苜蓿肉"
 published: true
 created:  2014 Jun 11 10:59:56 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

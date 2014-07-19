@@ -3,7 +3,7 @@ layout: post
 title: "烧茄子"
 published: true
 created:  2013 Apr 03 09:47:55 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "鸡汤"
 published: true
 created:  2013 Apr 05 08:48:01 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

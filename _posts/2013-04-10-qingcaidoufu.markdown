@@ -3,7 +3,7 @@ layout: post
 title: "青菜豆腐"
 published: true
 created:  2013 Apr 10 10:07:24 AM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

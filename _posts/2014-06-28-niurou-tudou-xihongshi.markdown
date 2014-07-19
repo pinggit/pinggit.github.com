@@ -3,7 +3,7 @@ layout: post
 title: "卤猪舌Marinated Pig Tongue"
 published: true
 created:  2014 Jul 12 10:34:21 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [tech]
 
 ---
@@ -17,7 +17,7 @@ categories: [tech]
 3. 快煲电压力锅完成程序后，会响一下提示。我一般再等15分钟，放气减压打开盖（图E
    ），捞出煮好的猪舌头，趁热剥去外面白膜，冰箱冷藏几个小时后再切片食用
 
-其实也不用找什么菜谱。就是去水， 清洗干净，放调料煮熟而已。
+其实也不用找什么caipu-recipe。就是去水， 清洗干净，放调料煮熟而已。
 另外，lotte 的猪舍处理的很干净 （舌苔已去掉），比好运来的好。
 
 ![pig tongue](/images/caipu-recipe/luzhushe-pig-tongue.jpg "pig tongue")

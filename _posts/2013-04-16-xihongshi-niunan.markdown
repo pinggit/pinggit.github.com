@@ -3,7 +3,7 @@ layout: post
 title: "西红柿炖牛腩"
 published: true
 created:  2013 Apr 15 10:59:58 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

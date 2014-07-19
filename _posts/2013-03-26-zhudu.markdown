@@ -3,7 +3,7 @@ layout: post
 title: "猪肚"
 published: true
 created:  2013 Mar 26 11:34:34 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

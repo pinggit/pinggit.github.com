@@ -3,7 +3,7 @@ layout: post
 title: "青椒土豆丝"
 published: true
 created:  2013 Apr 03 09:26:54 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

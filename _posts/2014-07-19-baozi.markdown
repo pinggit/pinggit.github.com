@@ -1,0 +1,11 @@
+---
+layout: post
+title: "包子 steamed stuffed bun"
+published: true
+created:  2014 Jul 19 01:59:39 PM
+tags: [caipu-recipe]
+categories: [life]
+
+---
+
+![baozi](/images/caipu-recipe/baozi-steamed-stuffed-bun.JPG "baozi")

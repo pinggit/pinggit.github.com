@@ -3,14 +3,14 @@ layout: post
 title: "八宝粥"
 published: true
 created:  2013 Mar 29 02:58:50 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 
 
 # 八宝粥
 
-## 网上菜谱
+## 网上caipu-recipe
 
 http://www.xinshipu.com/%E5%85%AB%E5%AE%9D%E7%B2%A5-74580.htm
 

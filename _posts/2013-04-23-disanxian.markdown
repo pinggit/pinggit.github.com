@@ -3,7 +3,7 @@ layout: post
 title: "地三鲜"
 published: true
 created:  2013 Apr 23 10:37:42 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

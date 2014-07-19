@@ -3,7 +3,7 @@ layout: post
 title: "啤酒焖土豆排骨"
 published: true
 created:  2013 Apr 14 01:00:42 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

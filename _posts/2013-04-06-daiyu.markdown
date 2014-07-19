@@ -3,7 +3,7 @@ layout: post
 title: "煎带鱼"
 published: true
 created:  2013 Apr 06 12:55:01 AM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

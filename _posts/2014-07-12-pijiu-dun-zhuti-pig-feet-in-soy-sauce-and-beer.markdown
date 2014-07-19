@@ -3,7 +3,7 @@ layout: post
 title: "啤酒炖猪蹄pig-feet-in-soy-sauce-and-beer"
 published: true
 created:  2014 Jul 12 10:57:29 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [tech]
 
 ---

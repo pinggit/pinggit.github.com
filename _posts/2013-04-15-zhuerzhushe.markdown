@@ -3,7 +3,7 @@ layout: post
 title: "凉拌耳丝口条"
 published: true
 created:  2013 Apr 15 09:45:49 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

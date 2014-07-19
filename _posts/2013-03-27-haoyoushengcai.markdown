@@ -3,7 +3,7 @@ layout: post
 title: 蚝油生菜
 published: true
 created:  2013 Mar 27 12:35:41 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

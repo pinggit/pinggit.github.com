@@ -3,7 +3,7 @@ layout: post
 title: "罗非鱼汤"
 published: true
 created:  2013 Apr 23 05:45:46 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

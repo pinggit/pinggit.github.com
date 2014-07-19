@@ -2,7 +2,7 @@
 layout: post
 title: "凉拌菠菜"
 created:  2013 Apr 14 11:37:10 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 published: true
 ---

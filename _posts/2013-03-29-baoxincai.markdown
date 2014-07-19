@@ -3,7 +3,7 @@ layout: post
 title: "手撕包心菜"
 published: true
 created:  2013 Mar 29 10:53:03 PM
-tags: [菜谱, photo]
+tags: [caipu-recipe, photo]
 categories: [life]
 ---
 

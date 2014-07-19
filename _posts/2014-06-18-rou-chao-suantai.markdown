@@ -3,7 +3,7 @@ layout: post
 title: "五花肉抄蒜薹"
 published: true
 created:  2014 Jun 18 12:10:10 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "凉拌菜叶"
 published: true
 created:  2013 Apr 14 01:19:09 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

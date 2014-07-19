@@ -3,7 +3,7 @@ layout: post
 title: "酸辣土豆丝"
 published: true
 created:  2013 Mar 27 12:22:52 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

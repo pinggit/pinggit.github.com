@@ -3,7 +3,7 @@ layout: post
 title: "大骨汤"
 published: true
 created:  2013 Mar 31 12:36:36 AM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 ---
 

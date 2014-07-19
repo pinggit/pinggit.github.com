@@ -3,7 +3,7 @@ layout: post
 title: "清蒸大龙虾"
 published: true
 created:  2014 Jun 08 08:48:46 PM
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---

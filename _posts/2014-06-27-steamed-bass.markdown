@@ -3,7 +3,7 @@ layout: post
 title: "清蒸鲈鱼"
 published: true
 created:  2014 Jun 27
-tags: [菜谱]
+tags: [caipu-recipe]
 categories: [life]
 
 ---
