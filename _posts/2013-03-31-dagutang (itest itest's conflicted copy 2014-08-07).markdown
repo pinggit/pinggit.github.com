@@ -1,0 +1,10 @@
+---
+layout: post
+title: "大骨汤"
+published: true
+created:  2013 Mar 31 12:36:36 AM
+tags: [菜谱]
+categories: [life]
+---
+
+![dagutang](/images/dagutang-1024x768.JPG "dagutang")
