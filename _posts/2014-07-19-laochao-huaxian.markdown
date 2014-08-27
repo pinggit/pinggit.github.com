@@ -4,7 +4,7 @@ title: "laochao-huaxian"
 published: true
 created:  2014 Jul 19 02:29:10 PM
 tags: [caipu-recipe]
-categories: [tech]
+categories: [life]
 
 ---
 

@@ -4,7 +4,7 @@ title: "土豆烧茄子Potatoes roasted eggplant"
 published: true
 created:  2014 Jul 12 10:23:59 PM
 tags: [caipu-recipe]
-categories: [tech]
+categories: [life]
 
 ---
 

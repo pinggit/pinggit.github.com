@@ -3,8 +3,8 @@ layout: post
 title: "xianggu-youcai"
 published: false
 created:  2014 Jul 12 10:39:56 PM
-tags: [life]
-categories: [tech]
+tags: [caipu-recipe]
+categories: [life]
 
 ---
 

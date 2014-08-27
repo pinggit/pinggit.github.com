@@ -4,7 +4,7 @@ title: "卤猪舌Marinated Pig Tongue"
 published: true
 created:  2014 Jul 12 10:34:21 PM
 tags: [caipu-recipe]
-categories: [tech]
+categories: [life]
 
 ---
 

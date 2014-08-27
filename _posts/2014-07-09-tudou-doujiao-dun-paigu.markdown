@@ -4,7 +4,7 @@ title: "土豆豆角炖排骨"
 published: true
 created:  2014 Jul 12 10:44:35 PM
 tags: [caipu-recipe]
-categories: [tech]
+categories: [life]
 
 ---
 
