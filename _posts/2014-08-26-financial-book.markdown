@@ -4,7 +4,7 @@ title: "金融入门书"
 published: true
 created:  2014 Aug 26 02:29:26 PM
 tags: [金融, 股票, 经济]
-categories: [economy]
+categories: [economics]
 
 ---
 
@@ -32,6 +32,8 @@ categories: [economy]
 1. 货币乘数、货币数量论
 2. 中央银行视野下的货币政策（公开市场操作、存款准备金等等）
 3. IS-LM模型
+
+<http://d.119g.com/f/2A1AE9126E8F6129_wt.html>
 
 本书的视角依旧是偏政治决策者视角的。理解起来同样没有什么困难。
 

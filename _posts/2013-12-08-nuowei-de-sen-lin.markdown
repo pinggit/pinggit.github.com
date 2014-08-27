@@ -4,7 +4,7 @@ title: "挪威的森林"
 published: true
 created:  2013 Dec 08 05:09:06 PM
 tags: [挪威的森林]
-categories: [reaing]
+categories: [reading]
 ---
 
 最近连续三天，重读了整本《挪威的森林》。这本书自80年代出版曾风靡一时。我忘记自
