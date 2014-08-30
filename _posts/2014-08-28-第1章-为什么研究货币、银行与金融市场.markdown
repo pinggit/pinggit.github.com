@@ -23,12 +23,16 @@ categories: [economics, reading]
 * financial intermediaries金融中介
   比如银行，保险公司，财务公司，各种基金，投资银行...
 
-* interest rate利率
-  借款成本， 100美元年利息/100美元
+* gross domestic product(GDP)国内生产总值
+  一国"当年内"所有"最终"产品服务总值: 去年不算,中间消耗掉的产品不算
 
-* business cycle 经济周期
-* recessions 经济衰退
+    * naming GDP名义GDP 价格面上的GDP,未考虑通胀
+      
+    * actual GDP实际GDP, 扣除通胀后的GDP
 
+      方法为折算回2000年的物价水平来计算的GDP
+
+* aggregate income总收入
 * aggregate price level物价（总）水平
   商品和服务的平均价格
 
@@ -37,16 +41,17 @@ categories: [economics, reading]
 
         naming GDP/actual GDP=2010名义GDP/2000名义GDP=10万亿/9万亿=1.11=11%
 
-   若2000年名义GDP为100,则上值可表示为111: "2010年GDP平减指数为111"
+    若2000年名义GDP为100,则上值可表示为111: "2010年GDP平减指数为111"
 
    * personal consumption expenditure (PCE) deflator 个人消费支出平减指标:
 
         naming /actual PCE
 
    * Consumer price index (PCI) 居民消费价格指数
-   [wiki](http://zh.wikipedia.org/wiki/%E6%B6%88%E8%B2%BB%E8%80%85%E7%89%A9%E5%83%B9%E6%8C%87%E6%95%B8)有趣信息.
-   测量的是随着时间的变化，包括多种（常有几百种）商品和服务零售价格的平均变化值
-   wiki:超过3％为通货膨胀，超过5％就是比较严重 ..
+
+     [wiki](http://zh.wikipedia.org/wiki/%E6%B6%88%E8%B2%BB%E8%80%85%E7%89%A9%E5%83%B9%E6%8C%87%E6%95%B8)有趣信息.
+     测量的是随着时间的变化，包括多种（常有几百种）商品和服务零售价格的平均变化值
+     wiki:超过3％为通货膨胀，超过5％就是比较严重 ..
 
 * inflation (rate)通货膨胀(率)
   物价水平持续上涨
@@ -57,6 +62,12 @@ categories: [economics, reading]
 * monetary policy
 * central bank 中央银行
   美国为FRS:Federal Reserve System 美联储(the Fed)
+
+* interest rate利率
+  借款成本， 100美元年利息/100美元
+
+* business cycle 经济周期
+* recessions 经济衰退
 
 * fiscal policy 财政政策
 * budget deficit预算赤字
@@ -73,13 +84,6 @@ categories: [economics, reading]
     * 本国人买外货更便宜
     * 企业出口变少=>失业率增加
 
-* gross domestic product(GDP)国内生产总值
-  一国"当年内"所有"最终"产品服务总值: 去年不算,中间消耗掉的产品不算
-* aggregate income总收入
-* naming GDP名义GDP 价格面上的GDP,未考虑通胀
-  
-* actual GDP实际GDP, 扣除通胀后的GDP
-  方法为折算回2000年的物价水平来计算的GDP
 
 
 网上找不到现成的笔记可以方便copy paste,手敲太慢.尤其vim中英文和insert normal切换起来比较别扭...
