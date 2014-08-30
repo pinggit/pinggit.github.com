@@ -8,4 +8,65 @@ categories: [economics, reading]
 
 ---
 
+* direct finance
 
+    贷款者 --> 购买证券(债券, 股票) --> 借款者 
+
+    * liability 负债
+    * capital 资本
+
+ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向需要的一方
+
+融资两种方式: 债券+股票
+
+* 债券
+    * maturity
+    * 好处是比股权优先得到还款，（亏损）风险较低
+    * 缺点为不享有未来收益
+     
+
+* equity股权
+    * 缺点为：仅为“剩余”利润索取权 － 利润需先支付债权人
+
+美国债券工具总额大于股权总额
+
+两级市场：
+
+* 一级市场:证券最初的购买者: 
+    * 投行: 承销(underwriting)证券
+* 二级市场:纽交所,nasdaq,外汇,期货,期权市场..
+    * broker
+    * dealer
+    * exchange交易所: 纽交所,芝加哥商品交易所
+    * Over-The-Counter(OTC) market场外市场: 分处各地的交易商
+
+
+有趣的事实:
+* **二级市场的交易没有给公司带来新的资金!!**
+* **公司仅在一级市场IPO时获得资金!**
+* 对二级市场价格预期的高低,决定了公司卖给一级市场时的价格
+
+
+* money market货币市场
+  交易短期(<1年)证券
+
+  * Treasury bills国库券
+
+    * 无息,但折价发行,按票面价支付.
+    * 无风险: 政府可随时增印,或者征税
+    
+  * negotiable bank certificates of deposit 可转让存单(大额)
+  * commercial paper 商业票据
+  * fed funds联邦基金
+  * 证券回购协议repurchase agreement
+
+* capital market资本市场
+  交易长期(>1年)证券的市场
+  
+  * 股票
+  * 抵押贷款
+
+  * 企业债券
+
+
+* position头寸 指投资者拥有或借用的资金数量
