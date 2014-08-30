@@ -9,6 +9,7 @@ categories: [economics, reading]
 ---
 
 引出一些基本概念。但一句带过而没有详细直白的解释。
+好在有wiki和其他资料可以查阅
 
 * security 证券
   未来收益索取权
@@ -31,12 +32,24 @@ categories: [economics, reading]
   三个指标:
   * GDP deflator GDP平减指标:
 
-      naming GDP/actual GDP=2010名义GDP/2000名义GDP=10万亿/9万亿=1.11=11%
+        naming GDP/actual GDP=2010名义GDP/2000名义GDP=10万亿/9万亿=1.11=11%
 
    若2000年名义GDP为100,则上值可表示为111: "2010年GDP平减指数为111"
 
+   * personal consumption expenditure (PCE) deflator 个人消费支出平减指标:
+
+        naming /actual PCE
+
+   * Consumer price index (PCI) 居民消费价格指数
+   [wiki](http://zh.wikipedia.org/wiki/%E6%B6%88%E8%B2%BB%E8%80%85%E7%89%A9%E5%83%B9%E6%8C%87%E6%95%B8)有趣信息.
+   测量的是随着时间的变化，包括多种（常有几百种）商品和服务零售价格的平均变化值
+   wiki:超过3％为通货膨胀，超过5％就是比较严重 ..
+
 * inflation (rate)通货膨胀(率)
   物价水平持续上涨
+  计算方法:
+
+        物价总水平的增长率 = (当年GDP - 去年GDP) / 去年GDP * 100 = ( X(t)-X(t-1) )/X(t-1) * 100
 
 * monetary policy
 * central bank 中央银行
@@ -66,6 +79,7 @@ categories: [economics, reading]
   方法为折算回2000年的物价水平来计算的GDP
 
 
+网上找不到现成的笔记可以方便copy paste,手敲太慢.尤其vim中英文和insert normal切换起来比较别扭...
 
 to be continue...
 
