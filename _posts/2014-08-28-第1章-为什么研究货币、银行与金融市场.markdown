@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "第1章 为什么研究货币、银行与金融市场"
-published: false
+published: true
 created:  2014 Aug 28 10:42:33 PM
 tags: [货币金融学]
 categories: [economics, reading]
@@ -11,6 +11,62 @@ categories: [economics, reading]
 引出一些基本概念。但一句带过而没有详细直白的解释。
 
 * security 证券
+  未来收益索取权
+* bond 债券
+  承诺某时段内定期支付
+* interest rate利率
+  借款成本， 100美元年利息/100美元
+
+* common stock 股票（普通股）
+
+* financial intermediaries金融中介
+  比如银行，保险公司，财务公司，各种基金，投资银行...
+
+* business cycle 经济周期
+* recessions 经济衰退
+
+* aggregate price level物价（总）水平
+  商品和服务的平均价格
+
+  三个指标:
+  * GDP deflator GDP平减指标:
+
+      naming GDP/actual GDP=2010名义GDP/2000名义GDP=10万亿/9万亿=1.11=11%
+
+   若2000年名义GDP为100,则上值可表示为111: "2010年GDP平减指数为111"
+
+* inflation (rate)通货膨胀(率)
+  物价水平持续上涨
+
+* monetary policy
+* central bank 中央银行
+  美国为FRS:Federal Reserve System 美联储(the Fed)
+
+* fiscal policy 财政政策
+* budget deficit预算赤字
+* budget surplus预算盈余
+
+* foreign exchange market外汇市场
+  决定汇率之处
+
+* foreign exchange rate 汇率
+  * 贬值 => 美元变"便宜" => 外货以美元购买变贵 => 刺激本国消费
+    * 本国人买外货变贵,本地货更便宜
+    * 本地企业更有活力
+  * 升值 => 美元变"贵" => 外国人买美货更贵 => 抑制出口,增加进口 => 
+    * 本国人买外货更便宜
+    * 企业出口变少=>失业率增加
+
+* gross domestic product(GDP)国内生产总值
+  一国"当年内"所有"最终"产品服务总值: 去年不算,中间消耗掉的产品不算
+* aggregate income总收入
+* naming GDP名义GDP 价格面上的GDP,未考虑通胀
+  
+* actual GDP实际GDP, 扣除通胀后的GDP
+  方法为折算回2000年的物价水平来计算的GDP
+
+
 
 to be continue...
+
 
