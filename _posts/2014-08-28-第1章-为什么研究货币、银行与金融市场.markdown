@@ -11,17 +11,20 @@ categories: [economics, reading]
 引出一些基本概念。但一句带过而没有详细直白的解释。
 好在有wiki和其他资料可以查阅
 
-* security 证券
-  未来收益索取权
-* bond 债券
-  承诺某时段内定期支付
-* interest rate利率
-  借款成本， 100美元年利息/100美元
+* 金融市场: 股票,债券市场
 
-* common stock 股票（普通股）
+    * security 证券
+      未来收益索取权
+        * common stock 股票（普通股）
+
+    * bond 债券
+      承诺某时段内定期支付
 
 * financial intermediaries金融中介
   比如银行，保险公司，财务公司，各种基金，投资银行...
+
+* interest rate利率
+  借款成本， 100美元年利息/100美元
 
 * business cycle 经济周期
 * recessions 经济衰退
