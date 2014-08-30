@@ -1,0 +1,16 @@
+---
+layout: post
+title: "第1章 为什么研究货币、银行与金融市场"
+published: false
+created:  2014 Aug 28 10:42:33 PM
+tags: [货币金融学]
+categories: [economics, reading]
+
+---
+
+引出一些基本概念。但一句带过而没有详细直白的解释。
+
+* security 证券
+
+to be continue...
+
