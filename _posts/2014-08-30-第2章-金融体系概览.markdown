@@ -8,7 +8,16 @@ categories: [economics, reading]
 
 ---
 
-* direct finance
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
+
+
+# direct finance
 
     贷款者 --> 购买证券(债券, 股票) --> 借款者 
 
@@ -17,7 +26,7 @@ categories: [economics, reading]
 
 ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向需要的一方
 
-融资两种方式: 债券+股票
+## 融资两种方式: 债券+股票
 
 * 债券
     * maturity
@@ -30,7 +39,7 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 
 美国债券工具总额大于股权总额
 
-两级市场：
+## 两级市场：
 
 * 一级市场:证券最初的购买者: 
     * 投行: 承销(underwriting)证券
@@ -42,31 +51,66 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 
 
 有趣的事实:
+
 * **二级市场的交易没有给公司带来新的资金!!**
 * **公司仅在一级市场IPO时获得资金!**
 * 对二级市场价格预期的高低,决定了公司卖给一级市场时的价格
 
 
-* money market货币市场
-  交易短期(<1年)证券
+## money market货币市场
 
-  * Treasury bills国库券
+交易短期(小于1年)的证券
 
-    * 无息,但折价发行,按票面价支付.
-    * 无风险: 政府可随时增印,或者征税
-    
-  * negotiable bank certificates of deposit 可转让存单(大额)
-  * commercial paper 商业票据
-  * fed funds联邦基金
-  * 证券回购协议repurchase agreement
+* Treasury bills国库券
 
-* capital market资本市场
-  交易长期(>1年)证券的市场
-  
-  * 股票
-  * 抵押贷款
+* 无息,但折价发行,按票面价支付.
+* 无风险: 政府可随时增印,或者征税
 
-  * 企业债券
+* negotiable bank certificates of deposit 可转让存单(大额)
+* commercial paper 商业票据
+* fed funds联邦基金
+* 证券回购协议repurchase agreement
+
+## capital market资本市场
+
+交易长期(小于1年)证券的市场
+
+  * stock股票
+  * mortgages抵押贷款
+    * 最大的债务市场, 三家独大为抵押贷款提供资金
+    * 房利美 federal national mortgages association (FNMA, fannie Mae)
+    * 房地美 federal Home Loan mortgages association (FHLMC, Freddie Mac)
+    * 吉利美
+
+  * 企业债券 corporate bonds
+    高信用企业发行,年付两次利息,到期按票面结清
+    普通债券:
+    可转换债券:到期前可转为一定数量股票.
+
+  * 美国政府证券US. government securities
+
+    财政部为补赤字发行,美国交易最大的债券, 流动性最好的资本市场工具
+
+  * 政府机构证券government agency securities
+    类似政府证券,由政府担保
+
+  * 州和地方政府债券(市政债券municipal bonds)
+    为建学校,公路等大型项目
+    利息收入免税,所以搞税率者(商业银行,富人为最大持有者)
+
+  * 消费者贷款和银行商业贷款(consumer and bank commercial loans)
+
+### 报纸常见资本市场工具的利率:
+
+* 30-years mortgage 30年抵押贷款,低于41.7w刀
+* jumbo mortgage, 对优质客户发放的金额超过41.7w的30年固定利率贷款
+* ARMs (5-years adjustable mortgage)5年可调整利率抵押贷款: 对优质客户,5年内固定利率,5年后可调整利率
+* new-car loan:新车4年期固定贷款利率
+* 10-year Treasury 10年期国债
+
+# indirect finance间接融资(金融中介)
 
 
+
+# 其他
 * position头寸 指投资者拥有或借用的资金数量
