@@ -127,6 +127,8 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 
 ## 信息不对称(asynmatric information) 导致问题的解决
 
+金融机构更有能力解决下列问题:
+
 * 交易之前:逆向选择(adverse selection)
   最可能制造高风险的借贷者,是最积极的借款人,因此更可能获得借款.
   (为避免这种情况),借贷人决定不发贷款给任何人
@@ -134,6 +136,29 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 * 交易之后:道德风险(moral hazard)
   一旦贷款发出,难以控制借贷人的行为,造成高风险
 
+
+## 金融机构分类
+
+### 存款机构
+
+* commercial banks商业银行
+
+最大的金融中介机构
+
+* savings and loan associations, S&L 储蓄盒贷款协会 和 mutual savings banks 互
+  助储蓄银行
+
+跟银行的界限变得模糊
+
+* credit unions信用社
+
+### 契约性储蓄机构
+
+* 保险公司
+
+* pension funds and government retirement funds 养老基金和政府退休基金
+
+### 投资中介机构
 
 # 其他
 * position头寸 指投资者拥有或借用的资金数量
