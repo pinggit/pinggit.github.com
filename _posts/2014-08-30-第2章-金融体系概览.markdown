@@ -17,12 +17,12 @@ TABLE OF CONTENT
 
 
 
-# direct finance
+# direct finance: 证券市场
 
     贷款者 --> 购买证券(债券, 股票) --> 借款者 
 
-    * liability 负债
-    * capital 资本
+* liability 负债
+* capital 资本
 
 ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向需要的一方
 
@@ -37,11 +37,13 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 * equity股权
     * 缺点为：仅为“剩余”利润索取权 － 利润需先支付债权人
 
-美国债券工具总额大于股权总额
+* 美国债券工具总额10倍于股权总额
+* 法国意大利相反:股票市场融资远大于债券市场
 
-## 两级市场：
+## 证券的两级市场：一级二级
 
 * 一级市场:证券最初的购买者: 
+    B
     * 投行: 承销(underwriting)证券
 * 二级市场:纽交所,nasdaq,外汇,期货,期权市场..
     * broker
@@ -56,8 +58,9 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 * **公司仅在一级市场IPO时获得资金!**
 * 对二级市场价格预期的高低,决定了公司卖给一级市场时的价格
 
+## 证券市场交易期限分类:货币和资本
 
-## money market货币市场
+### money market货币市场
 
 交易短期(小于1年)的证券
 
@@ -71,7 +74,7 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 * fed funds联邦基金
 * 证券回购协议repurchase agreement
 
-## capital market资本市场
+### capital market资本市场
 
 交易长期(小于1年)证券的市场
 
@@ -100,7 +103,7 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 
   * 消费者贷款和银行商业贷款(consumer and bank commercial loans)
 
-### 报纸常见资本市场工具的利率:
+#### 报纸常见资本市场工具的利率:
 
 * 30-years mortgage 30年抵押贷款,低于41.7w刀
 * jumbo mortgage, 对优质客户发放的金额超过41.7w的30年固定利率贷款
@@ -108,8 +111,28 @@ ping: 金融市场威力在于:有助于合理配置资本, 限制资本流向�
 * new-car loan:新车4年期固定贷款利率
 * 10-year Treasury 10年期国债
 
-# indirect finance间接融资(金融中介)
+# indirect finance: 间接融资(金融中介)
 
+成功的两个主要的原因
+
+## transaction cost交易成本的降低
+
+* economies of scale 规模经济
+  大规模(众多用户)降低了交易成本:如律师起草一份合同适用所有人
+* liquidity services 流动性服务: 提供支票账户,方便用户支付
+* risk sharing 风险分担:销售低风险产品,资金用于投资高风险
+* asset transformation资产转换:上述过程
+* diversification 多样化:
+* portfolio资产组合:不将鸡蛋全放入一个篮子
+
+## 信息不对称(asynmatric information) 导致问题的解决
+
+* 交易之前:逆向选择(adverse selection)
+  最可能制造高风险的借贷者,是最积极的借款人,因此更可能获得借款.
+  (为避免这种情况),借贷人决定不发贷款给任何人
+
+* 交易之后:道德风险(moral hazard)
+  一旦贷款发出,难以控制借贷人的行为,造成高风险
 
 
 # 其他
