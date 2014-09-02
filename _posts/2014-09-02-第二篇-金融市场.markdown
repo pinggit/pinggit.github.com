@@ -1,0 +1,11 @@
+---
+layout: post
+title: "第二篇 金融市场"
+published: true
+created:  2014 Sep 02 10:41:04 AM
+tags: [货币金融学]
+categories: [economics, reading]
+
+---
+
+
