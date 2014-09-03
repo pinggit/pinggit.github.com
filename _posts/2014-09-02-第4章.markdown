@@ -8,6 +8,10 @@ categories: [economics, reading]
 
 ---
 
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 # 利率的计量
 
 * 现值 present value, present discounted value
@@ -44,6 +48,8 @@ categories: [economics, reading]
 
 # 到期收益率yeld to maturity
 
-<a href="http://www.codecogs.com/eqnedit.php?latex=\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103&plus;26390k)}{(k!)^4396^{4k}}" target="_blank"><img src="http://latex.codecogs.com/pdf.latex?\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103&plus;26390k)}{(k!)^4396^{4k}}" title="\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}" /></a>
-
-<img src="http://latex.codecogs.com/pdf.latex?\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103&plus;26390k)}{(k!)^4396^{4k}}" title="\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}" />
+\begin{aligned}
+\dot{x} & = \sigma(y-x) \\
+\dot{y} & = \rho x - y - xz \\
+\dot{z} & = -\beta z + xy
+\end{aligned}
