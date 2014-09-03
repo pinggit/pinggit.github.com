@@ -11,18 +11,37 @@ categories: [economics, reading]
 # 利率的计量
 
 * 现值 present value, present discounted value
+
+  未来(2年)的某一笔收入(250$)相对应的今天的价值(189.04) -> 
+  因为有利率因素, 现在的价值将来会提升 ->
+  反过来说, 未来的收入折合回到现在的价值(现值)通常会有折扣 -> 
+  所以这个计算过程又称为: 对未来的贴现 (discounting the future)
+
 * simple loan普通贷款
   * principal本金
   * maturity date到期日
   * simple interest rate单利率
-  利息/贷款额
 
+          =利息/贷款额
+
+          PVx(1+10%)x(1+10%)x...=CF     =>
           PV=CF/(1+i)^n
           现值=将来价值/（1+利率）^ 年数
+
+          250/(1+10%)^2=189.04
 
 # 四种类型的信用市场工具
 
 * 普通贷款
 * 固定支付贷款fixed-payment loan, fully amortized loan分期贷款
-* 
+* 息票债券coupon bond 
+  到期前每年支付定额利息(息票利息),到期时偿还面值(face value, par value) 事先规定的最终金额
+  * 息票利率 (每年支付的戏票利息占面值的百分比)
+  * 例如:美国政府发行的长期国债,中期国债,企业债券
+* 贴现发行债券discount bond, zero-coupon bond
+  以低于票面值(如1000)的价格(如900)发行, 但无息, 发行人需偿还债券面值(1000).
+  * 如联邦政府国库券,储蓄债券,长期零息债券
 
+# 到期收益率yeld to maturity
+
+<a href="http://www.codecogs.com/eqnedit.php?latex=\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103&plus;26390k)}{(k!)^4396^{4k}}" target="_blank"><img src="http://latex.codecogs.com/pdf.latex?\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103&plus;26390k)}{(k!)^4396^{4k}}" title="\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}" /></a>
