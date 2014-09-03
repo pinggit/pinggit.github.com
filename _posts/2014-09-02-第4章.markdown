@@ -12,6 +12,14 @@ categories: [economics, reading]
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
+
 # 利率的计量
 
 * 现值 present value, present discounted value

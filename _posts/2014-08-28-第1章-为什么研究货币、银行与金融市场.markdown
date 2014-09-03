@@ -8,6 +8,15 @@ categories: [economics, reading]
 
 ---
 
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
+
+
 引出一些基本概念。但一句带过而没有详细直白的解释。
 好在有wiki和其他资料可以查阅
 

@@ -8,6 +8,14 @@ categories: [economics, reading]
 
 ---
 
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
+
 本章相关:同时在读另外一本通俗读物:
 货币金融学漫话 浅说
 
