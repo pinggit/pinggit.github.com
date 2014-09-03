@@ -7,7 +7,6 @@ tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---
-{% include mathjs %}
 
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -49,6 +48,6 @@ categories: [economics, reading]
 
 # 到期收益率yeld to maturity
 
-\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}
+<div>\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}</div>
 
 x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}.
