@@ -3,7 +3,7 @@ layout: post
 title: "第3章 什么是货币"
 published: true
 created:  2014 Aug 31 10:29:33 AM
-tags: [货币金融学]
+tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---

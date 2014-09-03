@@ -3,7 +3,7 @@ layout: post
 title: "金融入门书"
 published: true
 created:  2014 Aug 26 02:29:26 PM
-tags: [金融, 股票, 经济]
+tags: [金融, 股票, 经济, 投资]
 categories: [economics]
 
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "第1章 为什么研究货币、银行与金融市场"
 published: true
 created:  2014 Aug 28 10:42:33 PM
-tags: [货币金融学]
+tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---
