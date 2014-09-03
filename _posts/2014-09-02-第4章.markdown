@@ -7,6 +7,7 @@ tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---
+{% include mathjs %}
 
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
