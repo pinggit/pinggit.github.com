@@ -1,11 +1,28 @@
 ---
 layout: post
-title: "第二篇 金融市场"
+title: "第四章 理解利率"
 published: true
 created:  2014 Sep 02 10:41:04 AM
-tags: [货币金融学]
+tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---
 
+# 利率的计量
+
+* 现值 present value, present discounted value
+* simple loan普通贷款
+  * principal本金
+  * maturity date到期日
+  * simple interest rate单利率
+  利息/贷款额
+
+          PV=CF/(1+i)^n
+          现值=将来价值/（1+利率）^ 年数
+
+# 四种类型的信用市场工具
+
+* 普通贷款
+* 固定支付贷款fixed-payment loan, fully amortized loan分期贷款
+* 
 
