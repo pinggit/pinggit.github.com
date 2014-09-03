@@ -1,0 +1,12 @@
+---
+layout: post
+title: "投行101"
+published: true
+created:  2014 Sep 02 11:33:03 PM
+tags: [投行]
+categories: [economics, reading]
+
+---
+
+<http://mp.weixin.qq.com/s?__biz=MjM5MDU3NjM0NQ==&mid=200555885&idx=1&sn=a3d7043b6c03f8f91049710296d6ce1c&scene=2&from=timeline&isappinstalled=0#rd>
+
