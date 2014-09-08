@@ -62,22 +62,22 @@ CF: 未来价值
 
 ## 普通贷款
 
-    $$
-    \begin{aligned}
-    PV=\frac {CF} {(1+i)^n}     \Rightarrow\\
-    \end{aligned}
-    $$
+   $$
+   \begin{aligned}
+   PV=\frac {CF} {(1+i)^n}     \Rightarrow\\
+   \end{aligned}
+   $$
 
 ## 分期付款 (固定支付贷款)
 
-    $$
-    \begin{aligned}
-    LV=\underbrace{\frac{FP} {(1+i)}}_{第一年产生将来收益FP的现值部分}+
-       \underbrace{\frac{FP} {(1+i)^2}}_{第二年产生将来收益FP的现值部分}+\cdots+
-       \underbrace{\frac{FP} {(1+i)^n}}_{第n年产生将来收益FP的现值部分}     \Rightarrow\\
-    LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}                              \Rightarrow\\
-    i=?
-    \end{aligned}
-    $$
+   $$
+   \begin{aligned}
+   LV=\underbrace{\frac{FP} {(1+i)}}_{第一年产生将来收益FP的现值部分}+
+      \underbrace{\frac{FP} {(1+i)^2}}_{第二年产生将来收益FP的现值部分}+\cdots+
+      \underbrace{\frac{FP} {(1+i)^n}}_{第n年产生将来收益FP的现值部分}     \Rightarrow\\
+   LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}                              \Rightarrow\\
+   i=?
+   \end{aligned}
+   $$
 
 
