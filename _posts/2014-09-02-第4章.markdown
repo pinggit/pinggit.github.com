@@ -64,10 +64,12 @@ CF: 未来价值
 
 $$
 \begin{aligned}
-PV=\frac CF (1+i)^n
+PV=\frac {CF} {(1+i)^n}     \Rightarrow\\
 \end{aligned}
 $$
 
-## 分期付款
+## 分期付款 (固定支付贷款)
+
+$$LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}$$
 
 
