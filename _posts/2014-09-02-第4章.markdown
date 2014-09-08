@@ -8,10 +8,6 @@ categories: [economics, reading]
 
 ---
 
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 TABLE OF CONTENT
 
 * auto-gen TOC:
@@ -33,6 +29,15 @@ TABLE OF CONTENT
   * principal本金
   * maturity date到期日
   * simple interest rate单利率
+
+`\[
+\begin{aligned}
+\dot{x} & = \sigma(y-x) \\
+\dot{y} & = \rho x - y - xz \\
+\dot{z} & = -\beta z + xy
+\end{aligned}
+\label{aabb}
+`\]
 
           =利息/贷款额
 
@@ -59,12 +64,5 @@ TABLE OF CONTENT
 ## 普通贷款
 
 ## 分期付款
-
-
-$$\frac{1}{\pi}=\frac{2\sqrt{2}}{9801}\sum_{k=0}^\infty\frac{(4k)!(1103+26390k)}{(k!)^4396^{4k}}$$
-
-$$x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b}$$
-
-$$a^2 + b^2 = c^2$$
 
 
