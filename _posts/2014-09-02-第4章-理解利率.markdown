@@ -101,7 +101,7 @@ LV: Loan Value当前贷款额, 即现值CV
 债券回报率:
 
 $$
-R=\frac{C+P_{t+1}-P_t}{P_t} \Rightarrow
+\underline R_ {债券回报率}=\frac{C+P_{t+1}-P_t}{P_t} \Rightarrow
     \left.
         \begin{aligned}
             R=\frac C P_t+\frac{P_{t+1}-P_t}{P_t}\\
@@ -110,7 +110,7 @@ R=\frac{C+P_{t+1}-P_t}{P_t} \Rightarrow
         \end{aligned}
     \right\}
         \Rightarrow
-            R=i_c+g
+            \underline R_ {债券回报率}=i_c+g
 $$
 
     R: return
@@ -120,16 +120,28 @@ $$
 
 ping: 很通俗的概念：回报率是你总共赚的钱(利息+票面差额）和本金的比例。
 
-# 名义利率和实际利率
+## 利率风险
+由于利率引起的资产回报率的变动 - 主要是长期债券的风险。
+
+## 名义利率和实际利率
 
 名义利率是不考虑通胀的.
 实际利率(real interest)因为考虑了通胀,所以也称为"事前ex ante 实际利率"
 
-# 费雪方程式
+名义回报率和实际回报率:
+由于通胀，名义回报率虽然高，实际回报率可能很低，或者为负数！
+
+
+## 费雪方程式
 
 $$\underline{i}_ {名义利率}=\underline{i_r}_ {实际利率}+\underline{\pi^\varepsilon}_ {通货膨胀率}$$
 
 因此:
 
 $$\underline{i_r}_ {名义利率}=\underline{i}_ {实际利率}-\underbrace{\pi^\varepsilon}_ {通货膨胀率}$$
+
+不变价 real terms：
+资金相当于所能购买的实际产品和服务 - ping：即扣除了通货膨胀的影响后真实的资产水平
+
+
 
