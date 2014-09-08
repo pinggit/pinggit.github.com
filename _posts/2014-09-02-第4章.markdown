@@ -78,9 +78,9 @@ CF: 未来价值
 
    $$
    \begin{aligned}
-   LV=\underbrace{\frac{FP} {(1+i)}}_{产生将来第一年收益FP的现值部分}+
-      \underbrace{\frac{FP} {(1+i)^2}}_{产生将来第二年收益FP的现值部分}+\cdots+
-      \underbrace{\frac{FP} {(1+i)^n}}_{产生将来第n年收益FP的现值部分}     \Rightarrow\\
+   LV=\underbrace{\frac{FP} {(1+i)}}_ {产生将来第一年收益FP的现值部分}+
+      \underbrace{\frac{FP} {(1+i)^2}}_ {产生将来第二年收益FP的现值部分}+\cdots+
+      \underbrace{\frac{FP} {(1+i)^n}}_ {产生将来第n年收益FP的现值部分}     \Rightarrow\\
    LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}                              \Rightarrow\\
    i=?
    \end{aligned}
@@ -115,5 +115,5 @@ $P_t+1$: Price of time @ t+1
 
 # 费雪方程式
 
-$$i=i_r+\pi^\varepsilon$$
+$$\underbrace{i}_ {名义利率}=\underbrace{i_r}_ {实际利率}+\underbrace{\pi^\varepsilon}_ {通货膨胀率}$$
 
