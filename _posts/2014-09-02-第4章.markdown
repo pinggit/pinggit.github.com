@@ -31,12 +31,16 @@ TABLE OF CONTENT
   * simple interest rate单利率
 
       $$利率=\frac{利息}{贷款额}$$
+$$
+\begin{equation}
+\left.
+\begin{aligned}
+      PV (1+10%) (1+10%) \cdots=CF      \Rightarrow
+      PV=\frac{CF}{(1+i)}^n             \Rightarrow
+      现值=\frac{将来价值}{(1+利率)^{年数}}
+$$
 
-          PVx(1+10%)x(1+10%)x...=CF     =>
-          PV=CF/(1+i)^n
-          现值=将来价值/（1+利率）^ 年数
-
-          250/(1+10%)^2=189.04
+      250/(1+10%)^2=189.04
 
 # 四种类型的信用市场工具
 
