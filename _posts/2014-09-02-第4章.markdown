@@ -30,40 +30,40 @@ TABLE OF CONTENT
   * maturity date到期日
   * simple interest rate单利率
 
-      $$利率=\frac{利息}{贷款额}$$
+    $$利率=\frac{利息}{贷款额}$$
 
-$$
-\begin{equation*}
-\left.
-\begin{aligned}
-\alpha & \leq |\alpha|\\
-\beta & \leq |\beta|\\
-\end{aligned}
-\right\}\Rightarrow
-\begin{aligned}
-&\\
-& \left.
-\begin{array}{cc}
-\alpha +\beta &\leq |\alpha|+|\beta|\\
-\alpha^{2}+\beta^{2 }& \leq  |\alpha|+|\beta|\\
-\end{array}
-\right\}
-\Rightarrow 
-\alpha +\beta &\leq 1
-\end{aligned}
-\end{equation*}
-$$
+    $$
+    \begin{equation*}
+    \left.
+    \begin{aligned}
+    PV (1+10%) (1+10%) \cdots=CF      \Rightarrow
+    PV=\frac{CF}{(1+i)}^n             \Rightarrow
+    现值=\frac{将来价值}{(1+利率)^{年数}}
+    \end{aligned}
+    \end{equation*}
+    $$
 
-$$
-\begin{equation*}
-\left.
-\begin{aligned}
-PV (1+10%) (1+10%) \cdots=CF      \Rightarrow
-PV=\frac{CF}{(1+i)}^n             \Rightarrow
-现值=\frac{将来价值}{(1+利率)^{年数}}
-\end{aligned}
-\end{equation*}
-$$
+    $$
+    \begin{equation*}
+    \left.
+    \begin{aligned}
+    \alpha & \leq |\alpha|\\
+    \beta & \leq |\beta|\\
+    \end{aligned}
+    \right\}\Rightarrow
+    \begin{aligned}
+    &\\
+    & \left.
+    \begin{array}{cc}
+    \alpha +\beta &\leq |\alpha|+|\beta|\\
+    \alpha^{2}+\beta^{2 }& \leq  |\alpha|+|\beta|\\
+    \end{array}
+    \right\}
+    \Rightarrow 
+    \alpha +\beta &\leq 1
+    \end{aligned}
+    \end{equation*}
+    $$
 
       250/(1+10%)^2=189.04
 
