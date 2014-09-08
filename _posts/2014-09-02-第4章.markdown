@@ -33,8 +33,10 @@ TABLE OF CONTENT
     $$利率=\frac{利息}{贷款额}$$
 
     $$
+    \begin{equation*}
     PV (1+10\%) (1+10\%) \cdots=CF      \Rightarrow \\
     PV=\frac{CF}{ {(1+i)}^n}             \Rightarrow \\
+    \end{equation*}
     $$
 
       250/(1+10%)^2=189.04
