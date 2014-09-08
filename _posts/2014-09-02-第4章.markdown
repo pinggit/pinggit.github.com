@@ -25,6 +25,12 @@ TABLE OF CONTENT
   反过来说, 未来的收入折合回到现在的价值(现值)通常会有折扣 -> 
   所以这个计算过程又称为: 对未来的贴现 (discounting the future)
 
+重要概念: 未来1美元不如今天1美元值钱!
+
+$$n年后的一美元=\frac 1(今天的一美元) {(1+i)^n}$$
+
+
+
 * simple loan普通贷款
   * principal本金
   * maturity date到期日
@@ -72,12 +78,24 @@ CF: 未来价值
 
    $$
    \begin{aligned}
-   LV=\underbrace{\frac{FP} {(1+i)}}_{第一年产生将来收益FP的现值部分}+
-      \underbrace{\frac{FP} {(1+i)^2}}_{第二年产生将来收益FP的现值部分}+\cdots+
-      \underbrace{\frac{FP} {(1+i)^n}}_{第n年产生将来收益FP的现值部分}     \Rightarrow\\
+   LV=\underbrace{\frac{FP} {(1+i)}}_{产生将来第一年收益FP的现值部分}+
+      \underbrace{\frac{FP} {(1+i)^2}}_{产生将来第二年收益FP的现值部分}+\cdots+
+      \underbrace{\frac{FP} {(1+i)^n}}_{产生将来第n年收益FP的现值部分}     \Rightarrow\\
    LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}                              \Rightarrow\\
    i=?
    \end{aligned}
    $$
 
+LV: Loan Value当前贷款额, 即现值CV
+
+
+## 息票债券
+
+当期收益率: 息票价格除以证券价格
+
+## 贴现发行债券
+
+
+
+# NewHeadline
 
