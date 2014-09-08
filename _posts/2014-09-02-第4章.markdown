@@ -116,4 +116,5 @@ $P_t+1$: Price of time @ t+1
 # 费雪方程式
 
 $$\underbrace{i}_ {名义利率}=\underbrace{i_r}_ {实际利率}+\underbrace{\pi^\varepsilon}_ {通货膨胀率}$$
+$$\underbrace{i_r}_ {名义利率}=\underbrace{i}_ {实际利率}-\underbrace{\pi^\varepsilon}_ {通货膨胀率}$$
 
