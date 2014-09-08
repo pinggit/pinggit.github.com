@@ -105,23 +105,20 @@ R=\frac{C+P_{t+1}-P_t}{P_t} \Rightarrow
     \left.
         \begin{aligned}
             R=\frac C P_t+\frac{P_{t+1}-P_t}{P_t}\\
-            \frac C P_t=i_c\\
-            \frac{P_{t+1}-P_t}P_t=g
+            \frac C P_t=\underline{i_c}_ {当期收益率}\\
+            \frac{P_{t+1}-P_t}P_t=\underline{g}_ {资本利得率}
         \end{aligned}
     \right\}
         \Rightarrow
             R=i_c+g
 $$
 
-R: return
-C: 息票利息
-$P_t$: Price of time @ t
-$P_t+1$: Price of time @ t+1
+    R: return
+    C: 息票利息
+    $P_t$: Price of time @ t
+    $P_t+1$: Price of time @ t+1
 
 ping: 很通俗的概念：回报率是你总共赚的钱(利息+票面差额）和本金的比例。
-
-
-
 
 # 名义利率和实际利率
 
