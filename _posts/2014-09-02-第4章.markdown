@@ -18,7 +18,7 @@ TABLE OF CONTENT
 
 # 利率的计量
 
-* 现值 present value, present discounted value
+## 现值 present value, present discounted value
 
   未来(2年)的某一笔收入(250$)相对应的今天的价值(189.04) -> 
   因为有利率因素, 现在的价值将来会提升 ->
@@ -27,11 +27,11 @@ TABLE OF CONTENT
 
 重要概念: 未来1美元不如今天1美元值钱!
 
-$$n年后的一美元 = \frac 1 {(1+i)^n}美元$$
+$$n年后的一美元 = 今天的 \frac 1 {(1+i)^n}美元$$
 
 
 
-* simple loan普通贷款
+## simple loan普通贷款
   * principal本金
   * maturity date到期日
   * simple interest rate单利率
@@ -97,5 +97,9 @@ LV: Loan Value当前贷款额, 即现值CV
 
 
 
-# NewHeadline
+# 回报率return
+
+债券回报率:
+
+$$R=\frac{C+P_{t+1}-P_t}P_t$$
 
