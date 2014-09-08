@@ -103,6 +103,7 @@ LV: Loan Value当前贷款额, 即现值CV
 
 $$R=\frac{C+P_{t+1}-P_t}{P_t}$$
 
-R:: return
-C:: 息票利息
-$P_t$::
+R: return
+C: 息票利息
+$P_t$: Price of time @ t
+$P_t+1$: Price of time @ t+1
