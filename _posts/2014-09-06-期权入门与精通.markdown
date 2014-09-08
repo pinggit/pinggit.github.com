@@ -7,6 +7,13 @@ tags: [期权入门与精通, 投资]
 categories: [economics, reading]
 
 ---
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
 
 # buy call
 
