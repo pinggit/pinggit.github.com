@@ -107,3 +107,12 @@ R: return
 C: 息票利息
 $P_t$: Price of time @ t
 $P_t+1$: Price of time @ t+1
+
+# 名义利率和实际利率
+
+名义利率是不考虑通胀的.
+实际利率(real interest)因为考虑了通胀,所以也称为"事前ex ante 实际利率"
+
+# 费雪方程式
+
+$$i=i_r+\pi^e$$
