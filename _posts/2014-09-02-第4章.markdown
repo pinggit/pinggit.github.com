@@ -32,6 +32,26 @@ TABLE OF CONTENT
 
       $$利率=\frac{利息}{贷款额}$$
 
+\begin{equation*}
+\left.
+\begin{aligned}
+\alpha & \leq |\alpha|\\
+\beta & \leq |\beta|\\
+\end{aligned}
+\right\}\Rightarrow
+\begin{aligned}
+&\\
+& \left.
+\begin{array}{cc}
+\alpha +\beta &\leq |\alpha|+|\beta|\\
+\alpha^{2}+\beta^{2 }& \leq  |\alpha|+|\beta|\\
+\end{array}
+\right\}
+\Rightarrow 
+\alpha +\beta &\leq 1
+\end{aligned}
+\end{equation*}
+
 $$
 \begin{equation}
 \left.
