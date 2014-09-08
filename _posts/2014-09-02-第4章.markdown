@@ -31,7 +31,7 @@ TABLE OF CONTENT
   * simple interest rate单利率
 
       $$利率=\frac{利息}{贷款额}$$
-
+$$
 \begin{equation*}
 \left.
 \begin{aligned}
@@ -51,6 +51,7 @@ TABLE OF CONTENT
 \alpha +\beta &\leq 1
 \end{aligned}
 \end{equation*}
+$$
 
 $$
 \begin{equation}
