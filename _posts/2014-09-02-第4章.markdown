@@ -30,16 +30,7 @@ TABLE OF CONTENT
   * maturity date到期日
   * simple interest rate单利率
 
-`\[
-\begin{aligned}
-\dot{x} & = \sigma(y-x) \\
-\dot{y} & = \rho x - y - xz \\
-\dot{z} & = -\beta z + xy
-\end{aligned}
-\label{aabb}
-`\]
-
-          =利息/贷款额
+      $$利率=\frac{利息}{贷款额}$$
 
           PVx(1+10%)x(1+10%)x...=CF     =>
           PV=CF/(1+i)^n
