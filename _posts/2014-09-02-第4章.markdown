@@ -115,4 +115,5 @@ $P_t+1$: Price of time @ t+1
 
 # 费雪方程式
 
-$$i=i_r+\pi^e$$
+$$i=i_r+\pi^\varepsilon$$
+
