@@ -101,5 +101,8 @@ LV: Loan Value当前贷款额, 即现值CV
 
 债券回报率:
 
-$$R=\frac{C+P_{t+1}-P_t}P_t$$
+$$R=\frac{C+P_{t+1}-P_t}{P_t}$$
 
+R:: return
+C:: 息票利息
+$P_t$::
