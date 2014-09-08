@@ -70,6 +70,9 @@ $$
 
 ## 分期付款 (固定支付贷款)
 
-$$LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}$$
+$$
+LV=\frac{FP} {(1+i)}+\frac{FP} {(1+i)^2}+\cdots+\frac{FP} {(1+i)^n}     \Rightarrow\\
+LV=\sum_{n=1}^{25} \frac{FP} {(1+i)^n}
+$$
 
 
