@@ -43,7 +43,8 @@ TABLE OF CONTENT
     \end{equation}
     $$
 
-
+PV: 现值
+CF: 未来价值
 
 # 四种类型的信用市场工具
 
@@ -57,9 +58,15 @@ TABLE OF CONTENT
   以低于票面值(如1000)的价格(如900)发行, 但无息, 发行人需偿还债券面值(1000).
   * 如联邦政府国库券,储蓄债券,长期零息债券
 
-# 到期收益率yeld to maturity
+# 计算利率的方法: 到期收益率yeld to maturity
 
 ## 普通贷款
+
+$$
+\begin{aligned}
+PV=\frac CF (1+i)^n
+\end{aligned}
+$$
 
 ## 分期付款
 
