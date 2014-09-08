@@ -101,12 +101,28 @@ LV: Loan Value当前贷款额, 即现值CV
 
 债券回报率:
 
-$$R=\frac{C+P_{t+1}-P_t}{P_t}$$
+$$
+R=\frac{C+P_{t+1}-P_t}{P_t} \Rightarrow
+    \left.
+        \begin{aligned}
+            R=\frac C P_t+\frac{P_{t+1}-P_t}{P_t}\\
+            \frac C P_t=i_c\\
+            \frac{P_{t+1}-P_t}P_t=g
+        \end{aligned}
+    \right\}
+        \Rightarrow
+            R=i_c+g
+$$
 
 R: return
 C: 息票利息
 $P_t$: Price of time @ t
 $P_t+1$: Price of time @ t+1
+
+ping: 很通俗的概念：回报率是你总共赚的钱(利息+票面差额）和本金的比例。
+
+
+
 
 # 名义利率和实际利率
 
@@ -116,6 +132,8 @@ $P_t+1$: Price of time @ t+1
 # 费雪方程式
 
 $$\underline{i}_ {名义利率}=\underline{i_r}_ {实际利率}+\underline{\pi^\varepsilon}_ {通货膨胀率}$$
+
 因此:
-$$\underline{i_r}_ {名义利率}=\underline{i}_ {实际利率}-\underline{\pi^\varepsilon}_ {通货膨胀率}$$
+
+$$\underline{i_r}_ {名义利率}=\underline{i}_ {实际利率}-\underbrace{\pi^\varepsilon}_ {通货膨胀率}$$
 
