@@ -7,6 +7,13 @@ tags: [货币金融学, 投资]
 categories: [economics, reading]
 
 ---
+TABLE OF CONTENT
+
+* auto-gen TOC:
+{:toc}
+
+- - -
+
 
 第四章中发现数学公式推导不少,所以花了几天研究在博客中(用latex)写公式的方法耽,现已搞定.
 话说$\TeX{}$是个好东西啊...继续...
@@ -37,10 +44,14 @@ ping: 貌似这些经济学观点从字面上都比较直白容易理解.
 
 贴现发行债券:
 
+$$a=\frac b c$$
+
 $$
 \underline i_{利率}=\underline {R^e}_ {预期回报率}=\frac{\underline F_{面值}-P_{购买价格}}\underline P_{购买价格}
 $$
 
+
+均衡价格 , 市场出清价格
 
 
 
