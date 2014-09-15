@@ -31,4 +31,12 @@ categories: [economics, reading]
 
 住宅 vs 国库券
 
+ping: 貌似这些经济学观点从字面上都比较直白容易理解.
+
+# 债券市场的供给与需求
+
+贴现发行债券:
+
+$$\underline i_{利率}=\underline {R^e}_ {预期回报率}=\frac{\underline F_{面值}-P_{购买价格}}\underline P_{购买价格}$$
+
 
