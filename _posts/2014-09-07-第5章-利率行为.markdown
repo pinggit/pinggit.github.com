@@ -53,7 +53,7 @@ ping: 貌似这些经济学观点从字面上都比较直白容易理解.
 $$a=\frac b c$$
 
 $$
-\underline i_{利率}=\underline {R^e}_ {预期回报率}=\frac{a}{b}
+\underline i_{利率}=\underline {R^e}_ {预期回报率}=\frac{\underline F_{面值}-\underline P_{购买价格}}\underline P_{购买价格}
 $$
 
 $$
