@@ -58,7 +58,10 @@ $$
 $$
 
 $$
-\underline i_{利率}=\underline {R^e}_ {预期回报率}=\frac{\underline F_{面值}-\underline P_{购买价格}}{\underline P_{购买价格}}
+\underline i_{利率}=
+\underline {R^e}_ {预期回报率}=
+\frac {\underline F_{面值}-\underline P_{购买价格}} 
+      {\underline P_{购买价格}}
 $$
 
 
