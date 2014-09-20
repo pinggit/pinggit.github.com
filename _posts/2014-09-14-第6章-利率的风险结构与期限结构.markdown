@@ -1,0 +1,11 @@
+---
+layout: post
+title: "第6章 利率的风险结构与期限结构"
+published: true
+created:  2014 Sep 14 11:48:09 PM
+tags: [货币金融学, 投资]
+categories: [economics, reading]
+
+---
+
+最近比较忙...只能见缝插针的看一点
