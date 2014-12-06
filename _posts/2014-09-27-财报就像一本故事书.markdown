@@ -1,0 +1,87 @@
+---
+layout: post
+title: "财报就像一本故事书"
+published: false
+created:  2014 Sep 27 11:08:22 PM
+tags: [life]
+categories: [tech]
+
+---
+
+我们不能担保经营的成果，但不论你们在何时成为股东，你们财富的变动会与我们一致（
+因为巴菲特99％的财富集中于伯克希尔-哈撒韦的股票）。当我作了愚蠢的决策，我希望股
+东们能因为我的财务损失比你们惨重，而得到一定的安慰。
+
+存量stock 当前的财务资源。
+流量flow 特定时间内财务的变化
+
+
+# 资产负债表 balance sheet
+
+$$资产asset=负债liabilities+所有者权益shareholders' equity$$
+
+## 资产assets
+
+* 货币资金， 可得利息
+* 存货，可销售获利
+* 投资性房地产，可得租金
+* 设备，可制造货品
+
+* 预付房租
+* 保险费
+
+员工非资产，因为不可出售
+
+
+## 负债 
+
+* 应付款项
+* 职工薪酬
+* 长期借款
+
+$$\frac{负债}{所有者权益}=财务结构
+
+
+## 所有者（股东）权益
+
+资产扣除负债后的，股东享有的：剩余权益，净资产，或者 账面净值
+
+## 复式记账法
+
+合并资产负债表consolidated balance sheet
+
+
+
+## 流动资产current assets
+
+一年内能转换成现金的资产。
+
+* 货币资金 cash and cash equivalent
+
+  * 银行存款
+  * 几天内可到顾客信用卡消费
+  * 3月到期短期投资
+  * 。。。
+
+* 应收账款 receivables
+  * 超过7天才收到的货款
+  * 与其他供货商往来的应收账款
+  * 坏账准备 allowance for uncollectible accounts
+
+* 存货 inventory
+
+
+## 
+
+# 利润表 statement of income
+
+  * net loss
+  * net income
+
+* 现金流量表 statement of cash flows
+
+* 所有者权益（股东权益）变动表 statement of stockholders‘ equity
+
+
+
+

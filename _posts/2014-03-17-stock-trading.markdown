@@ -474,11 +474,16 @@ JD等了几天没有看到跌的机会,反而不断上涨了.
 因止损及时,所以总体没有大亏. 但经历大牛市也没有盈利,目前还微亏.
 
 
-# 选股池
+# 选股池:A股
 
 9/x:  梁宏 `伊利`
 9/11: 辛巴以17.5元建仓`吉林敖东`
 9/12: 辛巴: 以18.85元建仓`棕榈园林`，以13.6元建仓`江西铜业`。
+
+(2014-09-18) 
+我对这类自来水，污水处理，垃圾焚烧发电，这类跟水和环保有关的公司越来越有兴趣了。
+今天加仓了重庆水务，观察仓买入兴蓉投资，观察仓买入中山公用。
+跟从格隆推荐买入中国水务和绿色动力
 
 zangyn : 大连控股 6.53
  
@@ -500,3 +505,46 @@ A股开盘大涨,但结果又没赚到. 多数股票在跳水.
 多少次印证,我难道真没有财运?
 
 # (2014-09-19) baba
+
+
+# 雷明顿
+
+GOMO no bounce
+DDD  down and up a little bit, but will down in a couple of days since no strong support
+TSLA tsla     Dustin  Tibbitts: for the short term I think now is a
+good spot. I think TSLA is now at a point where many trades can be made rather
+than buy and hold
+
+JD    Dustin  Tibbitts: well its very close to support so I think pepole will buy it tomorrow for a short term bounce
+bidu     Dustin  Tibbitts: maybe a little but there is strong support there so tomorow may be up but its hard to say after that since there are no strategies triggering there
+true    23:04:12 Dustin  Tibbitts: i would wait until 15.50's to add if you want - there is strong support there
+JD,qihu 短期小反弹
+
+WUBA，EJ，短期走势都会走低
+TOUR，他有一个比较完美的向下趋势，没到他突破最近的趋势，我都不认为他会走高
+
+    vrtx     [23:20:03] Dustin  Tibbitts: if its for a quick trade then it should be fine.. its not really  that extended so i would take your profits quick if you get them
+    rig     [23:20:35] Dustin  Tibbitts: YES - I like the oil companies and gold miners here for abounce
+    [23:20:51] Dustin  Tibbitts: we will add a trade on RIG tomorrow in the live trading room
+    RIG，是的，我喜欢油公司，金矿等，希望有一个反弹，我们会加一个RIG的交易，在明天的实盘交易室
+    lmt     [23:21:31] Dustin  Tibbitts: it may bouce a little but I would wait for trend support
+    LMT，会有一个小反弹，不过我会等待趋势延续
+    pbr     [23:24:12] Dustin  Tibbitts: given the high volatility on PBR I would suggest adding a short put to your position to add $ to you profits
+    [23:24:13] Dustin  Tibbitts: nice job
+    PBR，做得很好！基于他的活跃度，我会建议你的仓位增加一个卖出看跌期权，增加你的收益
+    ilmn     [23:25:52] Dustin  Tibbitts: I think it stays in this large range for a while so try to buy at the low end of the range
+
+# 辛巴换股 (Mon 27 Oct 2014 11:03:50 PM EDT) 
+
+光大证券 9.72  重仓
+国元证券 13.8  轻仓补入
+江中药业 
+安琪酵母 17.6 
+
+
+# 辛巴换股 
+
+南山铝业 7.15   7.13
+光大银行 3.12   3
+
+
