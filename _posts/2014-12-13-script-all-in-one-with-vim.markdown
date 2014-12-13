@@ -9,8 +9,8 @@ categories: [tech]
 ---
 
 I recently wrote a script, that makes it easy to automate interactions to
-remote hosts in shell script...but I'm not going to say anything about that in
-here...
+remote hosts in shell script...but I'm not going to say anything about
+[that](https://github.com/pinggit/crtc) in here...
 
 I found it interesting to put everything in one file. source code, config file
 template, even help docs.
