@@ -16,7 +16,7 @@ TABLE OF CONTENT
 - - -
 
 info in this blog was obsolete since the crtc script has been updated,
-documented in [another doc ](http://www-in.juniper.net/~pings/myblog/docs/scripts/crtc.html).
+documented in [another doc](https://github.com/pinggit/crtc).
 
 # introduction
 
