@@ -3,7 +3,7 @@ layout: post
 title: "script all in one with vim"
 published: true
 created:  2014 Dec 13 04:26:12 PM
-tags: [scripting, vim]
+tags: [script, vim]
 categories: [tech]
 
 ---
