@@ -32,13 +32,11 @@ here is how the problems of "one-file" method can be worked-around:
     problem to get a highlevel overview to the whole file.
   * you can jump back and forth between different points of a work flow
     quickly, without getting lost.
-
-![code](/images/crtc-4.gif "code")
-
 * when you want to write the doc, change the tree from "code tree" to a "doc
   tree"
   * now the document structure will be displayed in the tree, other things like
     the source code will be ignored.
   * you can jump in the doc structure the same way as you do in the source code.
 
-![doc](/images/crtc-3.gif "doc")
+![code](/images/crtc-4.gif "code")
+
