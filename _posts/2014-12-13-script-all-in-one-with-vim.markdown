@@ -33,7 +33,7 @@ here is how the problems of "one-file" method can be worked-around:
   * you can jump back and forth between different points of a work flow
     quickly, without getting lost.
 
-![code](/images/crtc-2.gif "code")
+![code](/images/crtc-4.gif "code")
 
 * when you want to write the doc, change the tree from "code tree" to a "doc
   tree"
