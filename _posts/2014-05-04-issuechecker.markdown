@@ -143,7 +143,7 @@ class: center, middle, inverse
 #issuechecker.tcl
 -- a generic-purpose expect script, for issue replication and network monitoring
 
-JTAC:Ping Song <pings@juniper.net>  2014
+May 2014
 
 .footnote[Go to [my blog](http://www-in.juniper.net/~pings/myblog/tech/2014/02/11/scripts/)]
 [Tcl]: http://en.wikipedia.org/wiki/Tcl
