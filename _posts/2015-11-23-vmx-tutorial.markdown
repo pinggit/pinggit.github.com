@@ -21,4 +21,4 @@ KVM related features, etc.
 * html [vmx-tutorial]({{ site.BASE_PATH }}/docs/vmx-tutorial.html) 
 * pdf [vmx-tutorial]({{ site.BASE_PATH }}/docs/vmx-tutorial.pdf) 
 
-github repo is here: https://github.com/pinggit/vmx-tutorial
+github repo is here: <https://github.com/pinggit/vmx-tutorial>
