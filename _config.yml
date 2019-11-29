@@ -8,7 +8,7 @@ auto: true
 markdown: kramdown
 #markdown: redcarpet
 #pygments: true
-
+theme: minima
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
@@ -18,10 +18,10 @@ title : 珍惜生命，远离技术
 tagline: simplerlife
 author :
   description: ""
-  name : try
-  email : 794707553@qq.com
+  name : ping
+  email : songpingemail@gmail.com
   github : pinggit
-  twitter : NA
+  twitter : pingsong_
   feedburner : NA
 
 # The production_url is only used when full-domain names are needed
