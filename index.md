@@ -11,6 +11,7 @@ tagline: -- my collection of tips of life, tech, thought , everything ...
 
 ## [tags and categories](/tags-and-categories.html):
 
+## [my book list](/pingsbooklist.html)
 ## [my reading list](/reading-list.html)
 
 ## other sites/resources:
