@@ -44,15 +44,14 @@
 
 ### 无障碍读经典
 
+论语孟子韩非子老子庄子礼记 大学.中庸 6册
+
 #### 庄子
 
 #### 老子
 
 #### 论语 (待寻）
 
-#### 论语孟子韩非子老子庄子礼记 大学.中庸 6册
-
-无障碍读经典 第一部 [交易快照]
 
 #### 礼记
 
@@ -242,9 +241,6 @@
 
 ### 幸福的方法
 
-### 
-
-
 ### 从异教徒到基督徒（林语堂）
 
 ### 卡耐基：
@@ -287,16 +283,16 @@
 
 ## 编程 网络
 
-### python core programming
+### python core programming (二手）
 
-### vim user guide
+### vim user guide (打印版)
 
-### exploring expect
+### exploring expect （及打印版）
+
+### git pro (打印版）
+
 
 ### kvm qemu
-
-### git pro
-
 
 # 待购书单
 
